@@ -15,13 +15,11 @@ public class LayoutButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
-		Debug.Log ("OnPointerExit:" + index);
 		GameLogic.Instance.dropVector = nopeVec;
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-		Debug.Log ("OnPointerEnter:" + index);
 		GameLogic.Instance.dropVector = index;
 	}
 }
