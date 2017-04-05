@@ -22,9 +22,16 @@ public class GuiContoler : MonoBehaviour {
 	void Update () {
 		
 	}
-    public void CreateReport()
+    public void CreateReport(bool won)
     {
         string reportText = "";
+        if (won)
+        {
+            reportText = "You won the fight!\n";
+        }else
+        {
+            reportText = "You lost the fight :'(\n";
+        }
         foreach(GameObject player in players)
         {
             Bird script = player.GetComponent<Bird>();
@@ -70,6 +77,7 @@ public class GuiContoler : MonoBehaviour {
             {
                 bird.GetComponent<Bird>().confidence+= Var.confLoseAll;
             }
+            CreateReport(true);
         }
         else
         {
@@ -78,8 +86,9 @@ public class GuiContoler : MonoBehaviour {
             {
                 bird.GetComponent<Bird>().confidence+= Var.confLoseAll;
             }
+            CreateReport(false);
         }
-        CreateReport();
+        
         Reset();
     }
 
