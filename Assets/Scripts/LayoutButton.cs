@@ -15,13 +15,11 @@ public class LayoutButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
 	public void OnPointerUp(PointerEventData eventData)
 	{
-		Debug.Log ("Check Up");
 	}
 
 	public void OnPointerDown(PointerEventData eventData)
 	{
 		GameLogic.Instance.ReDragBird (index,transform);
-		Debug.Log ("Check down");
 	}
 
 	public void OnPointerExit(PointerEventData eventData)

@@ -7,7 +7,10 @@ public class GameLogic : MonoBehaviour {
 
 	public GameObject birdPlaygroundHolder;
 	public Button FightButton;
-		
+
+	public GameObject friendlyBoost;
+	public Transform boostHolder;
+
 	[HideInInspector]
 	public Vector2 dropVector = new Vector2(-1,-1);
 	[HideInInspector]
@@ -17,6 +20,7 @@ public class GameLogic : MonoBehaviour {
 	private Vector3 mouseOffset;
 	private Vector3 screenPosition = Vector3.zero;
     
+	public List<GameObject> battleResultHolders = new List<GameObject> ();
 
 	public GameObject dragImage = null;
 
@@ -82,6 +86,188 @@ public class GameLogic : MonoBehaviour {
 
 		// Check the fight scene!
 		CanWeFight ();
+
+		// Show some feedback about the birds?
+		OnShowFeedback_Enenmy(dropVector);
+	}
+
+	void OnShowFeedback_Enenmy(Vector2 index)
+	{
+		int lineY = (int)index.y;
+
+		// What is the enemy?
+		Bird enemy = Var.enemies[lineY];
+		Bird user = Var.playerPos [(int)index.x, (int)index.y];
+
+		bool userBirdWin = Bird1Win (user, enemy);
+		bool enemyBirdWin = Bird1Win (enemy, user);
+
+		// Hide all icons
+
+		for (int i = 0; i < battleResultHolders[lineY].transform.childCount; i++)
+			battleResultHolders[lineY].transform.GetChild (i).gameObject.SetActive(false);
+
+		string iconStr = "";
+
+		if(userBirdWin == enemyBirdWin)
+			iconStr = "Coin";
+		else if(userBirdWin && !enemyBirdWin)
+			iconStr = "Win";
+		else
+			iconStr = "Lose";
+
+		// Show the real icon
+		battleResultHolders [lineY].transform.Find(iconStr).gameObject.SetActive(true);
+
+		GameObject iconToShow = battleResultHolders [lineY];
+		iconToShow.transform.localScale = Vector3.zero;
+
+		LeanTween.scale (iconToShow, Vector3.one, 0.25f)
+			.setEase(LeanTweenType.easeOutBack);
+
+		OnShowFeedback_Bird (index);
+	}
+
+	public class ExtraPower
+	{
+		public GameObject obj;
+		public Vector2 indexA;
+		public Vector2 indexB;
+		public int extraFriendly = 0;
+	}
+
+	public List<ExtraPower> extraPowerList = new List<ExtraPower>();
+
+	// Check who will make our bird frienlyer?!
+	List<ExtraPower> GetFriendlyBirds(int x,int y)
+	{
+		List<ExtraPower> birdList = new List<ExtraPower> ();
+		ExtraPower dummy = null;
+
+		int maxY = Var.playerPos.GetLength(1)-1;
+
+		if (y + 1 <= maxY && Var.playerPos [x, y + 1] != null) {
+			dummy = new ExtraPower ();
+			dummy.extraFriendly = 2;
+			dummy.indexA = new Vector2 (x,y+1);
+			dummy.obj = OnGetArrayVisualHolder (new Vector2 (x, y + 1));
+			birdList.Add (dummy);
+		}
+		if (y - 1 >= 0 && Var.playerPos [x, y - 1] != null) {
+			dummy = new ExtraPower ();
+			dummy.extraFriendly = 2;
+			dummy.indexA = new Vector2 (x,y-1);
+			dummy.obj = OnGetArrayVisualHolder (new Vector2 (x, y - 1));
+			birdList.Add (dummy);
+		}
+
+		// The Sides
+		int maxX = Var.playerPos.GetLength(0)-1;
+
+		if (x + 1 <= maxX && y + 1 <= maxY && Var.playerPos [x + 1, y + 1] != null) {
+			dummy = new ExtraPower ();
+			dummy.extraFriendly = 1;
+			dummy.indexA = new Vector2 (x + 1,y + 1);
+			dummy.obj = OnGetArrayVisualHolder (new Vector2 (x + 1, y + 1));
+			birdList.Add (dummy);
+		}
+		if (x - 1 >= 0 && y + 1 <= maxY && Var.playerPos [x - 1, y + 1] != null) {
+			dummy = new ExtraPower ();
+			dummy.extraFriendly = 1;
+			dummy.indexA = new Vector2 (x - 1,y + 1);
+			dummy.obj = OnGetArrayVisualHolder (new Vector2 (x - 1, y + 1));
+			birdList.Add (dummy);
+		}
+		if (x + 1 <= maxX && y - 1 >= 0 && Var.playerPos [x + 1, y - 1] != null) {
+			dummy = new ExtraPower ();
+			dummy.extraFriendly = 1;
+			dummy.indexA = new Vector2 (x + 1,y - 1);
+			dummy.obj = OnGetArrayVisualHolder (new Vector2 (x + 1, y - 1));
+			birdList.Add (dummy);
+		}
+		if (x - 1 >= 0 && y - 1 >= 0 && Var.playerPos [x - 1, y - 1] != null) {
+			dummy = new ExtraPower ();
+			dummy.extraFriendly = 1;
+			dummy.indexA = new Vector2 (x - 1,y - 1);
+			dummy.obj = OnGetArrayVisualHolder (new Vector2 (x - 1, y - 1));
+			birdList.Add (dummy);
+		}
+
+		return birdList;
+	}
+
+	private float AngleBetweenVector2(Vector2 vec1, Vector2 vec2)
+	{
+		Vector2 diference = vec2 - vec1;
+		float sign = (vec2.y < vec1.y)? -1.0f : 1.0f;
+		return Vector2.Angle(Vector2.right, diference) * sign;
+	}
+
+	void OnShowFeedback_Bird(Vector2 index)
+	{
+		// Check what we can check
+		int extraFriendly = Helpers.Instance.Findfirendlieness((int)index.x, (int)index.y);
+		GameObject centerObj = OnGetArrayVisualHolder (index);
+
+//		Debug.Log ("extraFriendly:" + extraFriendly);
+
+		if (extraFriendly >= 0) {
+			// We have something to show!
+			List<ExtraPower> listOfObj = GetFriendlyBirds((int)index.x,(int)index.y);
+
+			// Now show what we will show!
+			foreach(var birdAround in listOfObj){
+
+				if (birdAround == null)
+					continue;
+
+				// Find the middle position between points!
+				Vector3 centrPos = Vector3.Lerp(centerObj.transform.position, birdAround.obj.transform.position,0.5f);
+				GameObject bonus = Instantiate (friendlyBoost, boostHolder, false);
+				bonus.transform.position = centrPos;
+				bonus.transform.localScale = Vector3.zero;
+
+				// Whats the extra value!
+				if (birdAround.extraFriendly == 1)
+					bonus.GetComponent<Image> ().color = new Color (0, 255, 74);
+				else
+					bonus.GetComponent<Image> ().color = new Color(255,0,206);
+				
+				float angle = AngleBetweenVector2 (birdAround.indexA, index);
+
+				bonus.transform.eulerAngles = new Vector3 (0, 0, -angle);
+
+				bonus.SetActive (true);
+
+				// And add number how much did we get from bird around!
+//				bonus.GetComponentInChildren<Text>(true).text = "+"+extraFriendly;
+
+				// Show it up!
+				LeanTween.scale(bonus,Vector3.one,0.25f)
+					.setEase(LeanTweenType.easeOutBack);
+
+				ExtraPower dummyExtra = new ExtraPower ();
+				dummyExtra.extraFriendly = birdAround.extraFriendly;
+				dummyExtra.indexA = birdAround.indexA;
+				dummyExtra.indexB = index;
+				dummyExtra.obj = bonus;
+
+				// Check if we dont have such info already?
+
+
+				// Add it to the list
+				extraPowerList.Add (dummyExtra);
+			}
+		}
+	}
+
+	void OnHideFeedback_Enemy(int index)
+	{
+		GameObject iconToShow = battleResultHolders [index];
+		LeanTween.cancel (iconToShow);
+
+		LeanTween.scale (iconToShow, Vector3.zero, 0.25f)
+			.setEase (LeanTweenType.easeInBack);
 	}
 	
 	// Update is called once per frame
@@ -172,6 +358,18 @@ public class GameLogic : MonoBehaviour {
 		}
 
 		CanWeFight ();
+
+		// Hide all holders!
+		for(int i = 0;i<5;i++){
+			OnHideFeedback_Enemy (i);
+		}
+
+		for(int i=0;i<extraPowerList.Count;i++){
+
+			Destroy (extraPowerList [i].obj);
+			extraPowerList.RemoveAt (i);
+			i--;
+		}
 	}
 
 
@@ -351,6 +549,18 @@ public class GameLogic : MonoBehaviour {
 
 		if (!birdToMove)
 			return;
+
+		// Clear feedback!
+		OnHideFeedback_Enemy((int)index.y);
+
+		// Clear extras
+		for(int i=0;i<extraPowerList.Count;i++){
+			if (extraPowerList [i].indexA == index || extraPowerList [i].indexB == index) {
+				Destroy (extraPowerList [i].obj);
+				extraPowerList.RemoveAt (i);
+				i--;
+			}
+		}
 
 		birdsPlaced--;
 
