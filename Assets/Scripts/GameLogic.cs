@@ -69,7 +69,9 @@ public class GameLogic : MonoBehaviour {
 		Var.playerPos [(int)dropVector.x, (int)dropVector.y] = draggedBird;
 
 		GameObject birdPlace = Instantiate (draggedBird.birdPrefab, currentTile.transform, false);
-		birdPlace.transform.position = dragImage.transform.position;
+		birdPlace.transform.position = dragImage.transform.GetChild(0).position;
+
+		// Check bird offset when move to final position?
 
 		// Move the bird to the spot and when done - show the actual
 		LeanTween.moveLocal (birdPlace, Vector3.zero, 0.25f)
@@ -358,15 +360,18 @@ public class GameLogic : MonoBehaviour {
 		// If we fail - we drop it back!
 		dropVector = index;
 
+		// The usual stuff
+		GameObject def = Instantiate(birdToMove.birdPrefab,dragImage.transform,false);
+		def.transform.localPosition = Vector3.zero;
+
 		// Remove the holder from holder :D
 		Destroy(holder.GetChild(0).gameObject);
 
-		// The usual stuff
-		Instantiate(birdToMove.birdPrefab,dragImage.transform,false);
+		dragImage.transform.position = holder.position;
 
 		// Little helper
-		screenPosition = Camera.main.WorldToScreenPoint(holder.position);
-		mouseOffset = holder.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPosition.z));
+		screenPosition = Camera.main.WorldToScreenPoint(dragImage.transform.position);
+		mouseOffset = dragImage.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPosition.z));
 
 		// Our active stuff
 		draggedBird = birdToMove;
@@ -381,6 +386,6 @@ public class GameLogic : MonoBehaviour {
 		dragImage.SetActive (true);
 
 		// Show stats of this bird?
-		birdToMove.showText();
+//		birdToMove.showText();
 	}
 }
