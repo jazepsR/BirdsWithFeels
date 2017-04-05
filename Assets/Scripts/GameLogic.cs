@@ -15,8 +15,20 @@ public class GameLogic : MonoBehaviour {
 	private Vector3 dragPosition;
 	private Vector3 mouseOffset;
 
-	public Image dragImage = null;
-	private bool dragingBird = false;
+	public GameObject dragImage = null;
+
+	private bool _dragingBird;
+	[HideInInspector]
+	public bool dragingBird
+	{
+		set
+		{
+			dragImage.SetActive(value);
+			_dragingBird = value;
+		}
+
+		get { return _dragingBird; }
+	}
 
     [HideInInspector]
     public Image currentTileImg = null;
@@ -53,35 +65,54 @@ void Awake()
 				dragImage.transform.position = dragPosition;
 			}
 		} else if (Input.GetMouseButtonUp (0)) {
-			if (dropVector.x != -1) {
-				// Drop bird on tile
-				Var.playerPos[(int)dropVector.x,(int)dropVector.y] = draggedBird;
-                if (currentTileImg != null)
-                    currentTileImg.sprite = draggedBird.src.sprite;
-                draggedBird.src.enabled =false;
-                Debug.Log(Var.playerPos[(int)dropVector.x, (int)dropVector.y].ToString());
-			} else {
 
-                // Cancel action
-                draggedBird = null;
-				dragImage.sprite = null;
+			if (dragingBird) {
+				if (dropVector.x != -1) {
+					// Drop bird on tile
+					Var.playerPos[(int)dropVector.x,(int)dropVector.y] = draggedBird;
+
+					if (currentTileImg != null)
+						currentTileImg.sprite = draggedBird.src.sprite;
+				} else {
+					// Place bird back to the button?
+					draggedBird.gameObject.SetActive (true);
+
+					// Cancel action
+					draggedBird = null;
+				}
+
+				dragingBird = false;
 			}
-
-			dragingBird = false;
 		}
 	}
 
 	// For now!
 	public void OnDragBird(Bird info)
 	{
+		// This will change to prefab?
+		dragImage.GetComponent<Image>().sprite = info.src.sprite;
+
+		// Little helper
+		mouseOffset = new Vector3(0,0,10f);
+
+		// Our active stuff
+		draggedBird = info;
+
 		// Dont start this if finger not moved a bit up !
 		dragingBird = true;
-        draggedBird = info;
-		dragImage.sprite = info.src.sprite;
-		mouseOffset = new Vector3(0,0,10f);
+
+		// Disable the gameobject
+		draggedBird.gameObject.SetActive (false);
 	}
 
+	// Quick restart feature
+	public List<GameObject> birdButtons = new List<GameObject>();
 
+	public void OnRestartGame()
+	{
+		foreach (var but in birdButtons)
+			but.SetActive (true);
+	}
 
 
 

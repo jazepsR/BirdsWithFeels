@@ -97,6 +97,9 @@ public class GuiContoler : MonoBehaviour {
         {
             img.sprite = null;
         }
+
+		// Main battle field button quick restart?
+		GameLogic.Instance.OnRestartGame ();
     }
 
 }
