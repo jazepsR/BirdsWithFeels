@@ -16,6 +16,7 @@ public class GameLogic : MonoBehaviour {
 	private Vector3 dragPosition;
 	private Vector3 mouseOffset;
 	private Vector3 screenPosition = Vector3.zero;
+    
 
 	public GameObject dragImage = null;
 
