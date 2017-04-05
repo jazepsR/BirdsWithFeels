@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GuiContoler : MonoBehaviour {
+    public static GuiContoler Instance { get; private set; }
     public Text infoText;
     public GameObject[] players;
     public GameObject[] enemies;
@@ -13,7 +14,7 @@ public class GuiContoler : MonoBehaviour {
     public Image[] hearts;
     public GameObject loseBanner;
     public GameObject winBanner;
-
+    public GameObject[] portraits;
     int roundLength = 3;
     Var.Em currentMapArea;
     Var.Em nextMapArea;
@@ -78,6 +79,21 @@ public class GuiContoler : MonoBehaviour {
         report.SetActive(true);
         Debug.Log(reportString);
     }
+
+    public void PoitraitControl(int portNr)
+    {
+        for (int i = 0; i < portraits.Length; i++)
+        {
+            if (i == portNr)
+            {
+                portraits[i].SetActive(true);
+            }else
+            {
+                portraits[i].SetActive(false);
+            }
+        }
+    }
+
     public void Fight()
     {
 

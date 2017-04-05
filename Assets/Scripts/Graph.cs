@@ -11,20 +11,21 @@ public class Graph : MonoBehaviour {
     public int graphSize = 220;
     int multiplier;
     public Material mat;
-	// Use this for initialization
-	void Start () {
-        multiplier = graphSize / 15;        
-        PlotFull(3, 4, -5, -6);
+    public static Graph Instance { get; private set; }
+    // Use this for initialization
+    void Start()
+    {
+        multiplier = graphSize / 15;
+        PlotFull(3, 4, -5, -6,heart);        
+    }
 
-	}
 
 
-
-     public void PlotFull(int prevX, int prevY,int currX,int currY)
+     public void PlotFull(int prevX, int prevY,int currX,int currY,Image port)
     {
 
         Image preHeart = PlotPoint(prevX, prevY, prevHeart);
-        Image tempHeart = PlotPoint(currX, currY, heart);
+        Image tempHeart = PlotPoint(currX, currY, port);
         LineRenderer lr =preHeart.transform.gameObject.AddComponent<LineRenderer>();
         lr.SetPosition(0, preHeart.rectTransform.transform.position);
         lr.SetPosition(1, tempHeart.rectTransform.transform.position);
