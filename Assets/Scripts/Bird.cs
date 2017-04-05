@@ -21,6 +21,9 @@ public class Bird : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         GameLogic.Instance.OnDragBird(this);
+
+		// Update text!
+		showText ();
     }
 
     public Bird(string name,int confidence =0,int friendliness = 0)
@@ -115,4 +118,6 @@ public class Bird : MonoBehaviour, IPointerDownHandler
         if(ToString()!=null)
         Var.birdInfo.text = ToString();
     }
+
+
 }
