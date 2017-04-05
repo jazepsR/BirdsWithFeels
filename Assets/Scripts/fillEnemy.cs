@@ -17,10 +17,24 @@ public class fillEnemy : MonoBehaviour {
     }
 
         // Use this for initialization
-        void Start () {
-        List<int> usedPos = new List<int>();
-        try
+    void Start ()
+    {
+        createEnemies();
+		
+	} 
+    public void createEnemies()
+    {
+        foreach(GameObject enemy in Enemies)
         {
+
+            enemy.GetComponent<Bird>().enabled = false;
+            enemy.GetComponent<Image>().color = Color.white;
+            enemy.GetComponent<Image>().sprite = null;
+        }
+
+
+        List<int> usedPos = new List<int>();
+        
             for (int i = 0; i < 3; i++)
             {
                 int enemyPos = 0;
@@ -41,19 +55,13 @@ public class fillEnemy : MonoBehaviour {
                 Enemies[enemyPos].GetComponent<Image>().color = Color.white;
                 Var.enemies[enemyPos] = Enemies[enemyPos].GetComponent<Bird>();
                 Enemies[enemyPos].GetComponent<Image>().sprite = Var.spriteDict[enemy.emotion.ToString()];
-                
+
 
 
             }
-        }catch
-        {
-            int j = 0;
-        }
-        int k = 0;
-		
-	}
-	
-
+        
+        
+    }
 	// Update is called once per frame
 	void Update () {
 		

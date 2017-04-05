@@ -7,6 +7,7 @@ public class GuiContoler : MonoBehaviour {
     public Text infoText;
     public GameObject[] players;
     public GameObject[] enemies;
+    public Image[] tiles;
 
     void Awake()
     {
@@ -29,52 +30,45 @@ public class GuiContoler : MonoBehaviour {
         int result = 0;
         Bird playerBird = null;
 
-        /*for (int i = 0; i < Var.enemies.Length; i++)
-        {//
-            for (int j = 0; j < 3; j++)
-            {
-                Debug.Log(i + " " + j + " " +(Var.playerPos[j,i] == null));
+     
+       
 
-            }
-        }*/
-        for (int i = 0; i < Var.enemies.Length; i++)
+       for (int i = 0; i <Var.enemies.Length; i++)
        {
-            Debug.Log(i + " " + " " + (Var.enemies[i] == null));
-        }
+            if (enemies[i].GetComponent<Bird>().enabled)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (Var.playerPos[j, i] != null)
+                    {
+                        playerBird = Var.playerPos[j, i];
+                        playerBird.friendliness += Helpers.Instance.Findfirendlieness(j, i);
+                        break;
+                    }
 
-               for (int i = 0; i <3; i++)
-       {//try
-           {
-               
-                   for (int j = 0; j < 3; j++)
-                   {
-                       if (Var.playerPos[j, i] != null)
-                       {
-                           playerBird = Var.playerPos[j, i];
-                       }
-
-                   }
-
-
-                   result += GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
-               
-               
-           }
-           /*catch
-           {
-               Debug.Log("Catch");
-           }*/
+                }
+                result += GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
+                
+            }
 
     }
         if (result > 0)
         {
             Debug.Log("Player won!");
+            foreach(GameObject bird in players)
+            {
+                bird.GetComponent<Bird>().confidence+= Var.confLoseAll;
+            }
         }
         else
         {
             Debug.Log("Enemy won");
+            foreach (GameObject bird in players)
+            {
+                bird.GetComponent<Bird>().confidence+= Var.confLoseAll;
+            }
         }
-
+        Reset();
     }
 
     public void Reset()
@@ -84,11 +78,12 @@ public class GuiContoler : MonoBehaviour {
         foreach(GameObject bird in players)
         {
             bird.GetComponent<Bird>().SetEmotion();
+            bird.GetComponent<Bird>().src.enabled = true;
         }
-        foreach(GameObject evilBird in enemies)
+        GetComponent<fillEnemy>().createEnemies();
+        foreach(Image img in tiles)
         {
-            
-            
+            img.sprite = null;
         }
     }
 

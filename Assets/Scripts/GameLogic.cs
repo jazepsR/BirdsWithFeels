@@ -58,7 +58,7 @@ void Awake()
 				Var.playerPos[(int)dropVector.x,(int)dropVector.y] = draggedBird;
                 if (currentTileImg != null)
                     currentTileImg.sprite = draggedBird.src.sprite;
-                draggedBird.src.sprite = null;
+                draggedBird.src.enabled =false;
                 Debug.Log(Var.playerPos[(int)dropVector.x, (int)dropVector.y].ToString());
 			} else {
 
@@ -78,7 +78,6 @@ void Awake()
 		dragingBird = true;
         draggedBird = info;
 		dragImage.sprite = info.src.sprite;
-
 		mouseOffset = new Vector3(0,0,10f);
 	}
 

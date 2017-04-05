@@ -28,7 +28,13 @@ public class Bird : MonoBehaviour, IPointerDownHandler
     }
 	public override string ToString()
     {
-        return "Name: " + charName + " friendly: " + friendliness + " confidence: " + confidence + " type: " + emotion.ToString();
+        if (enabled)
+        {
+            return "Name: " + charName + " friendly: " + friendliness + " confidence: " + confidence + " type: " + emotion.ToString();
+        }else
+        {
+            return null;
+        }
 
     }
 	public void SetEmotion()
@@ -90,7 +96,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler
         }
         try
         {
-            GetComponent<Image>().sprite = Var.spriteDict[emotion.ToString()];
+            src.sprite = Var.spriteDict[emotion.ToString()];
         }
         catch
         {
@@ -100,6 +106,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler
 	
 	public void showText()
     {
+        if(ToString()!=null)
         Var.birdInfo.text = ToString();
     }
 }
