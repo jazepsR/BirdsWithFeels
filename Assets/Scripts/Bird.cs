@@ -1,13 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Bird : MonoBehaviour {
+public class Bird : MonoBehaviour, IPointerDownHandler
+{
     public int confidence=0;
     public int friendliness = 0;
     public Var.Em emotion;
     public string charName;
+    public Image src;
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        GameLogic.Instance.OnDragBird(this);
+    }
 
     public Bird(string name,int confidence =0,int friendliness = 0)
     {

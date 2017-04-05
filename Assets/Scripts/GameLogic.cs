@@ -5,34 +5,39 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour {
 
-	// What is the class of birds?
-	public class BirdExampleClass
-		for(int i =0; i<4; i++)
-        {
-            Bird a = new Bird("Alice",(int)Random.Range(-15, 15), (int)Random.Range(-15, 15));
-            Bird b = new Bird("Bob", (int)Random.Range(-15, 15), (int)Random.Range(-15, 15));
-            Debug.Log(Fight(a, b).charName + " won!");
-        }
+
+		
 	[HideInInspector]
 	public Vector2 dropVector;
 	[HideInInspector]
 	public Vector3 touchStartPosition;
-
+    private Bird draggedBird = null;
 	private Vector3 dragPosition;
 	private Vector3 mouseOffset;
 
 	public Image dragImage = null;
 	private bool dragingBird = false;
 
-	[HideInInspector]
-	public int[,] board = new int[5, 3];
+    [HideInInspector]
+    public Image currentTileImg = null;
 
-	void Awake()
+public static GameLogic Instance { get; private set; }
+
+void Awake()
 	{
 		Instance = this;
 
 		// Just some random stuff
 		Application.targetFrameRate = 60;
+	}
+	void Start()
+	{
+		/*for (int i = 0; i < 4; i++)
+		{
+			Bird a = new Bird("Alice", (int)Random.Range(-15, 15), (int)Random.Range(-15, 15));
+			Bird b = new Bird("Bob", (int)Random.Range(-15, 15), (int)Random.Range(-15, 15));
+			Debug.Log(Fight(a, b).charName + " won!");
+		}*/
 	}
 	
 	// Update is called once per frame
@@ -49,11 +54,16 @@ public class GameLogic : MonoBehaviour {
 			}
 		} else if (Input.GetMouseButtonUp (0)) {
 			if (dropVector.x != -1) {
-				// Can we drop the bird here?
-				board[(int)dropVector.y,(int)dropVector.x] = 1;	// Put bird id here?
+				// Drop bird on tile
+				Var.playerPos[(int)dropVector.x,(int)dropVector.y] = draggedBird;
+                if (currentTileImg != null)
+                    currentTileImg.sprite = draggedBird.src.sprite;
+                draggedBird.src.sprite = null;
+                Debug.Log(Var.playerPos[(int)dropVector.x, (int)dropVector.y].ToString());
 			} else {
-				
-				// Cancel action
+
+                // Cancel action
+                draggedBird = null;
 				dragImage.sprite = null;
 			}
 
@@ -62,11 +72,11 @@ public class GameLogic : MonoBehaviour {
 	}
 
 	// For now!
-	public void OnDragBird(BirdButton info)
+	public void OnDragBird(Bird info)
 	{
 		// Dont start this if finger not moved a bit up !
 		dragingBird = true;
-
+        draggedBird = info;
 		dragImage.sprite = info.src.sprite;
 
 		mouseOffset = new Vector3(0,0,10f);
@@ -76,72 +86,78 @@ public class GameLogic : MonoBehaviour {
 
 
 
-    Bird Fight(Bird playerBird, Bird enemyBird)
-    {
-        if (Bird1Win(playerBird, enemyBird))
-        {
-            return playerBird;
-        }
-        if (Bird1Win(enemyBird, playerBird))
-        {
-            return enemyBird;
-        }
-        if (Random.Range(0, 1) > 0.5f)
-        {
-            return playerBird;
-        }else
-        {
-            return enemyBird;
-        }
+	public int Fight(Bird playerBird, Bird enemyBird)
+	{
+		if (Bird1Win(playerBird, enemyBird))
+		{
+            playerBird.confidence += Var.confWinFight;
+            return +1;
+            
+		}
+		if (Bird1Win(enemyBird, playerBird))
+		{
+            playerBird.confidence -= Var.confLoseFight;
+			return -1;
+		}
+        float val = Random.Range(0f, 1f);
+        if (val > 0.5f)
+		{
+            playerBird.confidence += Var.confLoseFight;
+            return +1;
+		}else
+		{
+            playerBird.confidence -= Var.confLoseFight;
+            return -1;
+		}
 
-    }
+	}
 
-    bool Bird1Win(Bird Bird1, Bird Bird2)
-    {
-        Var.Em em1 = Bird1.emotion;
-        Var.Em em2 = Bird2.emotion;
-
-
-        if (em1 == Var.Em.Friendly && em2 == Var.Em.Confident)
-            return true;
-        if (em1 == Var.Em.Confident && em2 == Var.Em.Lonely)
-            return true;
-        if (em1 == Var.Em.Lonely && em2 == Var.Em.Scared)
-            return true;
-        if (em1 == Var.Em.Scared && em2 == Var.Em.Friendly)
-            return true;
-
-        if (em1 == Var.Em.SuperFriendly && em2 == Var.Em.Confident)
-            return true;
-        if (em1 == Var.Em.SuperConfident && em2 == Var.Em.Lonely)
-            return true;
-        if (em1 == Var.Em.SuperLonely && em2 == Var.Em.Scared)
-            return true;
-        if (em1 == Var.Em.SuperScared && em2 == Var.Em.Friendly)
-            return true;
-
-        if (em1 == Var.Em.SuperFriendly && em2 == Var.Em.SuperConfident)
-            return true;
-        if (em1 == Var.Em.SuperConfident && em2 == Var.Em.SuperLonely)
-            return true;
-        if (em1 == Var.Em.SuperLonely && em2 == Var.Em.SuperScared)
-            return true;
-        if (em1 == Var.Em.SuperScared && em2 == Var.Em.SuperFriendly)
-            return true;
-
-        if (em1 == Var.Em.SuperConfident && em2 == Var.Em.Scared)
-            return true;
-        if (em1 == Var.Em.SuperLonely && em2 == Var.Em.Friendly)
-            return true;
-        if (em1 == Var.Em.SuperScared && em2 == Var.Em.Confident)
-            return true;
-        if (em1 == Var.Em.SuperFriendly && em2 == Var.Em.Lonely)
-            return true;
+	bool Bird1Win(Bird Bird1, Bird Bird2)
+	{
+		Var.Em em1 = Bird1.emotion;
+		Var.Em em2 = Bird2.emotion;
 
 
+		if (em1 == Var.Em.Friendly && em2 == Var.Em.Confident)
+			return true;
+		if (em1 == Var.Em.Confident && em2 == Var.Em.Lonely)
+			return true;
+		if (em1 == Var.Em.Lonely && em2 == Var.Em.Scared)
+			return true;
+		if (em1 == Var.Em.Scared && em2 == Var.Em.Friendly)
+			return true;
+
+		if (em1 == Var.Em.SuperFriendly && em2 == Var.Em.Confident)
+			return true;
+		if (em1 == Var.Em.SuperConfident && em2 == Var.Em.Lonely)
+			return true;
+		if (em1 == Var.Em.SuperLonely && em2 == Var.Em.Scared)
+			return true;
+		if (em1 == Var.Em.SuperScared && em2 == Var.Em.Friendly)
+			return true;
+
+		if (em1 == Var.Em.SuperFriendly && em2 == Var.Em.SuperConfident)
+			return true;
+		if (em1 == Var.Em.SuperConfident && em2 == Var.Em.SuperLonely)
+			return true;
+		if (em1 == Var.Em.SuperLonely && em2 == Var.Em.SuperScared)
+			return true;
+		if (em1 == Var.Em.SuperScared && em2 == Var.Em.SuperFriendly)
+			return true;
+
+		if (em1 == Var.Em.SuperConfident && em2 == Var.Em.Scared)
+			return true;
+		if (em1 == Var.Em.SuperLonely && em2 == Var.Em.Friendly)
+			return true;
+		if (em1 == Var.Em.SuperScared && em2 == Var.Em.Confident)
+			return true;
+		if (em1 == Var.Em.SuperFriendly && em2 == Var.Em.Lonely)
+			return true;
 
 
 
-        return false;
-    }
+
+
+		return false;
+	}
 }
