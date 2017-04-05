@@ -8,7 +8,8 @@ public class GuiContoler : MonoBehaviour {
     public GameObject[] players;
     public GameObject[] enemies;
     public Image[] tiles;
-
+    public Text reportText;
+    public GameObject report;
     void Awake()
     {
         Var.birdInfo = infoText;
@@ -17,29 +18,34 @@ public class GuiContoler : MonoBehaviour {
 	void Start () {
 		
 	}
-	
+	public void CloseReport()
+    {
+        report.SetActive(false);
+    }
 	// Update is called once per frame
 	void Update () {
 		
 	}
     public void CreateReport(bool won)
     {
-        string reportText = "";
+        string reportString = "";
         if (won)
         {
-            reportText = "You won the fight!\n";
+            reportString = "You won the fight!\n";
         }else
         {
-            reportText = "You lost the fight :'(\n";
+            reportString = "You lost the fight :'(\n";
         }
         foreach(GameObject player in players)
         {
             Bird script = player.GetComponent<Bird>();
-            reportText += script.charName + "\n";
-            reportText += "friendliness: " + script.prevFriend + " -> " + script.friendliness;
-            reportText += "confidence: " + script.prevConf + " -> " + script.confidence +"\n"; 
+            reportString += script.charName + "\n";
+            reportString += "friendliness: " + script.prevFriend + " -> " + script.friendliness;
+            reportString += "\nconfidence: " + script.prevConf + " -> " + script.confidence +"\n"; 
         }
-        Debug.Log(reportText);
+        reportText.text = reportString;
+        report.SetActive(true);
+        Debug.Log(reportString);
     }
     public void Fight()
     {
