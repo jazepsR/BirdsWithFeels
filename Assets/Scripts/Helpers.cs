@@ -14,6 +14,26 @@ public class Helpers : MonoBehaviour {
     {
         Instance = this;
     }
+
+    public Color GetEmotionColor(Var.Em emotion)
+    {
+        switch (emotion)
+        {
+            case Var.Em.Neutral:
+                return neutral;
+            case Var.Em.Friendly:
+                return friendly;
+            case Var.Em.Lonely:
+                return lonely;
+            case Var.Em.Confident:
+                return brave;
+            case Var.Em.Scared:
+                return scared;
+            default:
+                return neutral;
+        }
+    }
+
     public int Findfirendlieness(int x,int y)
     {
         int sizeY = Var.playerPos.GetLength(1)-1;

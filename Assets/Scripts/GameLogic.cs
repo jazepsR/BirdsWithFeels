@@ -540,6 +540,7 @@ public class GameLogic : MonoBehaviour {
 			return;
 
 		birdToMove.showText ();
+        GuiContoler.Instance.PortraitControl(birdToMove.portraitOrder,birdToMove.emotion);
 	}
 
 	public void ReDragBird(Vector2 index, Transform holder)

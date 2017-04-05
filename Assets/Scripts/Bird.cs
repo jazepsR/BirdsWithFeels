@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
 {
+    public int portraitOrder=0;
     public int confidence=0;
     [HideInInspector]
     public int prevConf = 0;
@@ -26,14 +27,16 @@ public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
 			GameLogic.Instance.OnDragBird(this);
 			// Update text!
 			showText ();
-		}
+            GuiContoler.Instance.PortraitControl(portraitOrder,emotion);
+        }
     }
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		if (birdPrefab != null) {
 			showText ();
-		}
+            GuiContoler.Instance.PortraitControl(portraitOrder,emotion);
+        }
 	}
    
     public Bird(string name,int confidence =0,int friendliness = 0)

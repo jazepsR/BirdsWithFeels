@@ -20,7 +20,7 @@ public class GuiContoler : MonoBehaviour {
     Var.Em nextMapArea;
     int posInMapRound = 0;
     int mapPos = 0;
-
+    public GameObject graph;
 
     void Awake()
     {
@@ -33,6 +33,7 @@ public class GuiContoler : MonoBehaviour {
             Var.map.Add(new BattleData(Var.Em.Friendly));            
         }
         setMapLocation(0);
+        Instance = this;
     }
 	// Use this for initialization
 	void Start () {
@@ -50,43 +51,67 @@ public class GuiContoler : MonoBehaviour {
             hearts[i].enabled = i < health;
         }
     }
-    public void CreateReport(bool won)
+
+    public void CloseGraph()
     {
-        string reportString = "";
-        if (won)
+
+        graph.SetActive(false);
+        foreach (Transform child in graph.transform.Find("ReportGraph").transform)
         {
-            reportString = "You won the fight!\n";
-        }else
-        {
-            reportString = "You lost the fight :'(\n";
+            Destroy(child.gameObject);
         }
-        foreach(GameObject player in players)
-        {
-            Bird script = player.GetComponent<Bird>();
-            reportString += script.charName + ": ";
-            if ((script.confidence - script.prevConf) > 0)
-                reportString += "Won\n";
-            else
-                reportString += "Lost\n";
-            reportString += "friendliness: " + script.prevFriend + " -> " + script.friendliness +" (" +(script.friendliness - script.prevFriend) + ")";
-            reportString += "\nconfidence: " + script.prevConf + " -> " + script.confidence + " (" + (script.confidence - script.prevConf) + ")\n"; 
-        }
-        if (currentMapArea != nextMapArea)
-        {
-            reportString += "Current area: " + currentMapArea + " next map area: " + nextMapArea + " in " + (roundLength - posInMapRound);
-        }
-        reportText.text = reportString;
-        report.SetActive(true);
-        Debug.Log(reportString);
     }
 
-    public void PoitraitControl(int portNr)
+    public void CreateReport(bool won)
+    {
+        graph.SetActive(true);
+        foreach (GameObject player in players)
+        {
+            Bird script = player.GetComponent<Bird>();
+            GameObject portrait = script.portrait;            
+            GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
+            colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(script.emotion);
+            Graph.Instance.PlotFull(script.prevFriend, script.prevConf, script.friendliness, script.confidence,portrait);
+            
+
+        }
+            /*string reportString = "";
+            if (won)
+            {
+                reportString = "You won the fight!\n";
+            }else
+            {
+                reportString = "You lost the fight :'(\n";
+            }
+            foreach(GameObject player in players)
+            {
+                Bird script = player.GetComponent<Bird>();
+                reportString += script.charName + ": ";
+                if ((script.confidence - script.prevConf) > 0)
+                    reportString += "Won\n";
+                else
+                    reportString += "Lost\n";
+                reportString += "friendliness: " + script.prevFriend + " -> " + script.friendliness +" (" +(script.friendliness - script.prevFriend) + ")";
+                reportString += "\nconfidence: " + script.prevConf + " -> " + script.confidence + " (" + (script.confidence - script.prevConf) + ")\n"; 
+            }
+            if (currentMapArea != nextMapArea)
+            {
+                reportString += "Current area: " + currentMapArea + " next map area: " + nextMapArea + " in " + (roundLength - posInMapRound);
+            }
+            reportText.text = reportString;
+            report.SetActive(true);
+            Debug.Log(reportString);*/
+        }
+
+    public void PortraitControl(int portNr,Var.Em color)
     {
         for (int i = 0; i < portraits.Length; i++)
         {
             if (i == portNr)
             {
                 portraits[i].SetActive(true);
+                GameObject colorObj= portraits[i].gameObject.transform.Find("bird_color").gameObject;
+                colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(color);
             }else
             {
                 portraits[i].SetActive(false);
