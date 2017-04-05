@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Var  {
     public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared};
@@ -16,5 +17,5 @@ public static class Var  {
     public static Bird[] enemies = new Bird[5];
     public static Bird[,] playerPos = new Bird[3,5];
     public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
-	
+    public static Text birdInfo;
 }

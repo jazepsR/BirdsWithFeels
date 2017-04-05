@@ -8,7 +8,7 @@ public class GameLogic : MonoBehaviour {
 
 		
 	[HideInInspector]
-	public Vector2 dropVector;
+	public Vector2 dropVector = new Vector2(-1,-1);
 	[HideInInspector]
 	public Vector3 touchStartPosition;
     private Bird draggedBird = null;

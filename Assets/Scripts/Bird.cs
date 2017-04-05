@@ -11,6 +11,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler
     public Var.Em emotion;
     public string charName;
     public Image src;
+    public bool inUse = true;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -25,12 +26,12 @@ public class Bird : MonoBehaviour, IPointerDownHandler
         SetEmotion();
         Debug.Log(ToString());
     }
-	public string ToString()
+	public override string ToString()
     {
         return "Name: " + charName + " friendly: " + friendliness + " confidence: " + confidence + " type: " + emotion.ToString();
 
     }
-	void SetEmotion()
+	public void SetEmotion()
     {
 
         
@@ -87,10 +88,18 @@ public class Bird : MonoBehaviour, IPointerDownHandler
             }
 
         }
+        try
+        {
+            GetComponent<Image>().sprite = Var.spriteDict[emotion.ToString()];
+        }
+        catch
+        {
+
+        }
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	public void showText()
+    {
+        Var.birdInfo.text = ToString();
+    }
 }

@@ -1,9 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GuiContoler : MonoBehaviour {
+    public Text infoText;
+    public GameObject[] players;
+    public GameObject[] enemies;
 
+    void Awake()
+    {
+        Var.birdInfo = infoText;
+    }
 	// Use this for initialization
 	void Start () {
 		
@@ -67,6 +75,21 @@ public class GuiContoler : MonoBehaviour {
             Debug.Log("Enemy won");
         }
 
+    }
+
+    public void Reset()
+    {
+        Var.playerPos = new Bird[3, 5];
+        Var.enemies = new Bird[5];
+        foreach(GameObject bird in players)
+        {
+            bird.GetComponent<Bird>().SetEmotion();
+        }
+        foreach(GameObject evilBird in enemies)
+        {
+            
+            
+        }
     }
 
 }

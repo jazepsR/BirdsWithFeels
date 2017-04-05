@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 
 public class fillEnemy : MonoBehaviour {
-    public Image[] Enemies;      
+    public GameObject[] Enemies;      
 
     void Awake()
     {
@@ -18,23 +18,30 @@ public class fillEnemy : MonoBehaviour {
 
         // Use this for initialization
         void Start () {
+        List<int> usedPos = new List<int>();
         try
         {
             for (int i = 0; i < 3; i++)
             {
                 int enemyPos = 0;
-                /*while (true)
+                while (true)
                 {
-                    enemyPos = Random.Range(0, 4);
-                    if (Var.enemies[enemyPos] == null)
+                    enemyPos = Random.Range(0, Var.enemies.Length);
+                    if (!usedPos.Contains(enemyPos))
                     {
                         break;
                     }
-                }*/
-                Bird enemy = new Bird("Enemy", (int)Random.Range(-6, 6), (int)Random.Range(-6, 6));
-                Var.enemies[i] = enemy;
-                Enemies[i].sprite = Var.spriteDict[enemy.emotion.ToString()];
-                Enemies[i].color = Color.white;
+                }
+                usedPos.Add(enemyPos);
+                Bird enemy = Enemies[enemyPos].GetComponent<Bird>();
+                enemy.confidence = (int)Random.Range(-6, 6);
+                enemy.friendliness = (int)Random.Range(-6, 6);
+                enemy.SetEmotion();
+                enemy.enabled = true;
+                Enemies[enemyPos].GetComponent<Image>().color = Color.white;
+                Var.enemies[enemyPos] = Enemies[enemyPos].GetComponent<Bird>();
+                Enemies[enemyPos].GetComponent<Image>().sprite = Var.spriteDict[enemy.emotion.ToString()];
+                
 
 
             }
@@ -46,6 +53,7 @@ public class fillEnemy : MonoBehaviour {
 		
 	}
 	
+
 	// Update is called once per frame
 	void Update () {
 		
