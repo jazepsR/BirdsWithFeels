@@ -17,7 +17,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler
     public Image src;
     public bool inUse = true;
 	public GameObject birdPrefab;
-
+    public SpriteRenderer colorRenderer;
     public void OnPointerDown(PointerEventData eventData)
     {
 		if (birdPrefab != null) {
@@ -39,15 +39,19 @@ public class Bird : MonoBehaviour, IPointerDownHandler
     {
         if (enabled)
         {
-            return "Name: " + charName + " friendly: " + friendliness + " confidence: " + confidence + " type: " + emotion.ToString();
+            return "Name: " + charName + "\nfriendly: " + friendliness + "\nconfidence: " + confidence + "\ntype: " + emotion.ToString();
         }else
         {
             return null;
         }
 
     }
-	public void SetEmotion()
+    void Start()
     {
+        SetEmotion();
+    }
+	public void SetEmotion()
+    {       
         prevConf = confidence;
         prevFriend = friendliness;
         
@@ -55,6 +59,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler
         {
             //No type
             emotion = Var.Em.Neutral;
+            colorRenderer.color = Helpers.Instance.neutral;
             return;
         }
         
@@ -63,6 +68,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler
             // Confident or sad
             if (confidence > 0)
             {
+                colorRenderer.color = Helpers.Instance.brave;
                 //Confident
                 if (confidence >= Var.lvl1)
                     emotion = Var.Em.Confident;
@@ -73,6 +79,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler
             else
             {
                 //Scared
+                colorRenderer.color = Helpers.Instance.scared;
                 if (confidence <= -Var.lvl1)
                     emotion = Var.Em.Scared;
                 //SuperScared
@@ -86,7 +93,9 @@ public class Bird : MonoBehaviour, IPointerDownHandler
             //Friendly or lonely
             if (friendliness > 0)
             {
+
                 //friendly
+                colorRenderer.color = Helpers.Instance.friendly;
                 if (friendliness >= Var.lvl1)
                     emotion = Var.Em.Friendly;
                 //SuperFriendly
@@ -96,6 +105,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler
             else
             {
                 //Lonely
+                colorRenderer.color = Helpers.Instance.lonely;
                 if (friendliness <= -Var.lvl1)
                     emotion = Var.Em.Lonely;
                 //SuperLonely
@@ -104,14 +114,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler
             }
 
         }
-        try
-        {
-            src.sprite = Var.spriteDict[emotion.ToString()];
-        }
-        catch
-        {
-
-        }
+      
     }
 	
 	public void showText()

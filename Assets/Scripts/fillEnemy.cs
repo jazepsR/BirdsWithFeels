@@ -24,12 +24,13 @@ public class fillEnemy : MonoBehaviour {
 	} 
     public void createEnemies()
     {
+        int index = 0;
         foreach(GameObject enemy in Enemies)
         {
-
-            enemy.GetComponent<Bird>().enabled = false;
-            enemy.GetComponent<Image>().color = Color.white;
-            enemy.GetComponent<Image>().sprite = null;
+            Var.enemies[index] = enemy.GetComponent<Bird>();
+            enemy.GetComponent<Bird>().inUse = false;
+            enemy.SetActive(false);
+            index++;
         }
 
 
@@ -51,13 +52,9 @@ public class fillEnemy : MonoBehaviour {
                 enemy.confidence = (int)Random.Range(-6, 6);
                 enemy.friendliness = (int)Random.Range(-6, 6);
                 enemy.SetEmotion();
-                enemy.enabled = true;
-                Enemies[enemyPos].GetComponent<Image>().color = Color.white;
-                Var.enemies[enemyPos] = Enemies[enemyPos].GetComponent<Bird>();
-                Enemies[enemyPos].GetComponent<Image>().sprite = Var.spriteDict[enemy.emotion.ToString()];
-
-
-
+                Enemies[enemyPos].SetActive(true);
+                enemy.inUse = true;
+                
             }
         
         
