@@ -14,10 +14,12 @@ public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
     public int friendliness = 0;
     public Var.Em emotion;
     public string charName;
-    public Image src;
+    public Image src;    
     public bool inUse = true;
 	public GameObject birdPrefab;
     public SpriteRenderer colorRenderer;
+    public GameObject portrait;
+    public Image portraitColor;
     public void OnPointerDown(PointerEventData eventData)
     {
 		if (birdPrefab != null) {
@@ -33,7 +35,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
 			showText ();
 		}
 	}
-
+   
     public Bird(string name,int confidence =0,int friendliness = 0)
     {
         this.confidence = confidence;
