@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Helpers : MonoBehaviour {
     public static Helpers Instance { get; private set; }
+    public Color neutral;
+    public Color brave;
+    public Color scared;
+    public Color friendly;
+    public Color lonely;
 
     public void Awake()
     {

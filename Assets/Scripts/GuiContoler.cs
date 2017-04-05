@@ -39,9 +39,13 @@ public class GuiContoler : MonoBehaviour {
         foreach(GameObject player in players)
         {
             Bird script = player.GetComponent<Bird>();
-            reportString += script.charName + "\n";
-            reportString += "friendliness: " + script.prevFriend + " -> " + script.friendliness;
-            reportString += "\nconfidence: " + script.prevConf + " -> " + script.confidence +"\n"; 
+            reportString += script.charName + ": ";
+            if ((script.confidence - script.prevConf) > 0)
+                reportString += "Won\n";
+            else
+                reportString += "Lost\n";
+            reportString += "friendliness: " + script.prevFriend + " -> " + script.friendliness +" (" +(script.friendliness - script.prevFriend) + ")";
+            reportString += "\nconfidence: " + script.prevConf + " -> " + script.confidence + " (" + (script.confidence - script.prevConf) + ")\n"; 
         }
         reportText.text = reportString;
         report.SetActive(true);
@@ -59,7 +63,7 @@ public class GuiContoler : MonoBehaviour {
 
        for (int i = 0; i <Var.enemies.Length; i++)
        {
-            if (enemies[i].GetComponent<Bird>().enabled)
+            if (enemies[i].GetComponent<Bird>().inUse)
             {
                 for (int j = 0; j < 3; j++)
                 {
@@ -81,7 +85,7 @@ public class GuiContoler : MonoBehaviour {
             Debug.Log("Player won!");
             foreach(GameObject bird in players)
             {
-                bird.GetComponent<Bird>().confidence+= Var.confLoseAll;
+                bird.GetComponent<Bird>().confidence+= Var.confWinAll;
             }
             CreateReport(true);
         }

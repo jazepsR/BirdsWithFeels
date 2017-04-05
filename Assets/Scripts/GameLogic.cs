@@ -183,17 +183,17 @@ public class GameLogic : MonoBehaviour {
 		}
 		if (Bird1Win(enemyBird, playerBird))
 		{
-            playerBird.confidence -= Var.confLoseFight;
+            playerBird.confidence += Var.confLoseFight;
 			return -1;
 		}
         float val = Random.Range(0f, 1f);
         if (val > 0.5f)
 		{
-            playerBird.confidence += Var.confLoseFight;
+            playerBird.confidence += Var.confWinFight;
             return +1;
 		}else
 		{
-            playerBird.confidence -= Var.confLoseFight;
+            playerBird.confidence += Var.confLoseFight;
             return -1;
 		}
 
