@@ -9,20 +9,20 @@ public class fillEnemy : MonoBehaviour {
 
     void Awake()
     {
-        Var.spriteDict.Add("Neutral",Resources.Load<Sprite>("Sprites/neutral"));
+        /*Var.spriteDict.Add("Neutral",Resources.Load<Sprite>("Sprites/neutral"));
         Var.spriteDict.Add("Confident",Resources.Load<Sprite>("Sprites/confident"));
         Var.spriteDict.Add("Scared",Resources.Load<Sprite>("Sprites/scared"));
         Var.spriteDict.Add("Lonely",Resources.Load<Sprite>("Sprites/lonely"));
-        Var.spriteDict.Add("Friendly", Resources.Load<Sprite>("Sprites/friendly"));
+        Var.spriteDict.Add("Friendly", Resources.Load<Sprite>("Sprites/friendly"));*/
     }
 
         // Use this for initialization
     void Start ()
     {
         createEnemies();
-		
-	} 
-    public void createEnemies()
+        
+    } 
+    public void createEnemies(float minConf=-5, float maxConf=5, float minFriend=-5, float maxFriend=5)
     {
         int index = 0;
         foreach(GameObject enemy in Enemies)
@@ -49,8 +49,8 @@ public class fillEnemy : MonoBehaviour {
                 }
                 usedPos.Add(enemyPos);
                 Bird enemy = Enemies[enemyPos].GetComponent<Bird>();
-                enemy.confidence = (int)Random.Range(-6, 6);
-                enemy.friendliness = (int)Random.Range(-6, 6);
+                enemy.confidence = (int)Random.Range(minConf, maxConf);
+                enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
                 enemy.SetEmotion();
                 Enemies[enemyPos].SetActive(true);
                 enemy.inUse = true;
@@ -59,8 +59,8 @@ public class fillEnemy : MonoBehaviour {
         
         
     }
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Update is called once per frame
+    void Update () {
+        
+    }
 }

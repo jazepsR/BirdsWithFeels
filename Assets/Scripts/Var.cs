@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public static class Var  {
-    public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared};
+    public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared,finish};
     public static int lvl1 = 4;
     public  static int lvl2 = 10;
     public static int confLoseFight = -3;
@@ -18,4 +18,6 @@ public static class Var  {
     public static Bird[,] playerPos = new Bird[3,5];
     public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
     public static Text birdInfo;
+    public static int health = 113;
+    public static List<BattleData> map = new List<BattleData>();
 }

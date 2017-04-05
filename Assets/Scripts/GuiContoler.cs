@@ -10,9 +10,28 @@ public class GuiContoler : MonoBehaviour {
     public Image[] tiles;
     public Text reportText;
     public GameObject report;
+    public Image[] hearts;
+    public GameObject loseBanner;
+    public GameObject winBanner;
+
+    int roundLength = 3;
+    Var.Em currentMapArea;
+    Var.Em nextMapArea;
+    int posInMapRound = 0;
+    int mapPos = 0;
+
+
     void Awake()
     {
         Var.birdInfo = infoText;
+        if (Var.map.Count < 1)
+        {
+            Var.map.Add(new BattleData(Var.Em.Neutral));
+            Var.map.Add(new BattleData(Var.Em.Neutral));
+            Var.map.Add(new BattleData(Var.Em.Lonely));
+            Var.map.Add(new BattleData(Var.Em.Friendly));            
+        }
+        setMapLocation(0);
     }
 	// Use this for initialization
 	void Start () {
@@ -22,10 +41,14 @@ public class GuiContoler : MonoBehaviour {
     {
         report.SetActive(false);
     }
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	void UpdateHearts(int health)
+    {
+        Debug.Log("Health: " + health);
+        for(int i=0;i< hearts.Length; i++)
+        {
+            hearts[i].enabled = i < health;
+        }
+    }
     public void CreateReport(bool won)
     {
         string reportString = "";
@@ -46,6 +69,10 @@ public class GuiContoler : MonoBehaviour {
                 reportString += "Lost\n";
             reportString += "friendliness: " + script.prevFriend + " -> " + script.friendliness +" (" +(script.friendliness - script.prevFriend) + ")";
             reportString += "\nconfidence: " + script.prevConf + " -> " + script.confidence + " (" + (script.confidence - script.prevConf) + ")\n"; 
+        }
+        if (currentMapArea != nextMapArea)
+        {
+            reportString += "Current area: " + currentMapArea + " next map area: " + nextMapArea + " in " + (roundLength - posInMapRound);
         }
         reportText.text = reportString;
         report.SetActive(true);
@@ -87,6 +114,7 @@ public class GuiContoler : MonoBehaviour {
             {
                 bird.GetComponent<Bird>().confidence+= Var.confWinAll;
             }
+            moveInMap();
             CreateReport(true);
         }
         else
@@ -96,7 +124,18 @@ public class GuiContoler : MonoBehaviour {
             {
                 bird.GetComponent<Bird>().confidence+= Var.confLoseAll;
             }
-            CreateReport(false);
+            Var.health--;
+            UpdateHearts(Var.health);
+            if (Var.health <= 0)
+            {
+                loseBanner.SetActive(true);
+            }
+            else
+            {
+                moveInMap();
+                CreateReport(false);
+            }
+            
         }
         
         Reset();
@@ -110,14 +149,48 @@ public class GuiContoler : MonoBehaviour {
         {
             bird.GetComponent<Bird>().SetEmotion();
         }
-        GetComponent<fillEnemy>().createEnemies();
+        BattleData Area = Var.map[mapPos];
+        GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend);
         foreach(Image img in tiles)
         {
             img.sprite = null;
         }
-
+        
 		// Main battle field button quick restart?
 		GameLogic.Instance.OnRestartGame ();
+    }
+    void setMapLocation(int index)
+    {
+        currentMapArea = Var.map[index].type;
+        try
+        {
+            nextMapArea = Var.map[index + 1].type;
+        }
+        catch
+        {
+            nextMapArea = Var.Em.finish;
+        }
+    }
+
+    void moveInMap()
+    {
+        posInMapRound++;
+        if (posInMapRound == roundLength)
+        {
+            if(nextMapArea== Var.Em.finish)
+            {
+                winBanner.SetActive(true);
+            }
+            posInMapRound = 0;
+            mapPos++;
+            setMapLocation(mapPos);
+        }
+    }
+    
+    public void ResetScene()
+    {
+        Reset();
+        Application.LoadLevel(Application.loadedLevel);
     }
 
 }
