@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Bird : MonoBehaviour, IPointerDownHandler
+public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
 {
     public int confidence=0;
     [HideInInspector]
@@ -26,6 +26,13 @@ public class Bird : MonoBehaviour, IPointerDownHandler
 			showText ();
 		}
     }
+
+	public void OnPointerEnter(PointerEventData eventData)
+	{
+		if (birdPrefab != null) {
+			showText ();
+		}
+	}
 
     public Bird(string name,int confidence =0,int friendliness = 0)
     {

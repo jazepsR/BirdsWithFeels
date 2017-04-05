@@ -288,7 +288,6 @@ public class GameLogic : MonoBehaviour {
 		Bird returnHome = Var.playerPos [(int)index.x, (int)dropVector.y];
 
 		if (returnHome) {
-
 			// How do we know where was this bird? - Or drop to the replacement bird?
 			// Create the pref and move it to button - when complete the move - show the button and destroy the pref
 			GameObject pre = Instantiate(returnHome.birdPrefab,birdPlaygroundHolder.transform,false);
@@ -330,5 +329,57 @@ public class GameLogic : MonoBehaviour {
 			return true;
 		
 		return false;
+	}
+
+	public void ShowStatsOnHover(Vector2 index)
+	{
+		Bird birdToMove = Var.playerPos [(int)index.x, (int)dropVector.y];
+
+		if (!birdToMove)
+			return;
+
+		birdToMove.showText ();
+	}
+
+	public void ReDragBird(Vector2 index, Transform holder)
+	{
+		// Do we have any bird here?
+		Bird birdToMove = Var.playerPos [(int)index.x, (int)dropVector.y];
+
+		if (!birdToMove)
+			return;
+
+		birdsPlaced--;
+
+		// Clear the stuff
+		Var.playerPos [(int)index.x, (int)dropVector.y] = null;
+
+		// If we fail - we drop it back!
+		dropVector = index;
+
+		// Remove the holder from holder :D
+		Destroy(holder.GetChild(0).gameObject);
+
+		// The usual stuff
+		Instantiate(birdToMove.birdPrefab,dragImage.transform,false);
+
+		// Little helper
+		screenPosition = Camera.main.WorldToScreenPoint(holder.position);
+		mouseOffset = holder.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPosition.z));
+
+		// Our active stuff
+		draggedBird = birdToMove;
+
+		// Dont start this if finger not moved a bit up !
+		dragingBird = true;
+
+		// Disable the gameobject
+		draggedBird.gameObject.SetActive (false);
+
+		// Show the actual drag image
+		dragImage.SetActive (true);
+
+		// Show stats of this bird?
+		birdToMove.showText();
 	}
 }

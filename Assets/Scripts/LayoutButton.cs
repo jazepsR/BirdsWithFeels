@@ -20,7 +20,7 @@ public class LayoutButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
 	public void OnPointerDown(PointerEventData eventData)
 	{
-//		GameLogic.Instance.ReDragBird ();
+		GameLogic.Instance.ReDragBird (index,transform);
 		Debug.Log ("Check down");
 	}
 
@@ -35,5 +35,8 @@ public class LayoutButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	{
 		GameLogic.Instance.dropVector = index;
 		GameLogic.Instance.currentTile = gameObject;
+
+		// Show some stats of the bird!
+		GameLogic.Instance.ShowStatsOnHover(index);
 	}
 }
