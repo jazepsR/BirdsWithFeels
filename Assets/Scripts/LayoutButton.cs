@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-public class LayoutButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler 
+public class LayoutButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
 	public Vector2 index = new Vector2(0,0);
 	private Vector2 nopeVec = new Vector2 (-1, -1);
@@ -11,6 +11,17 @@ public class LayoutButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	// Use this for initialization
 	void Start () {
 		
+	}
+
+	public void OnPointerUp(PointerEventData eventData)
+	{
+		Debug.Log ("Check Up");
+	}
+
+	public void OnPointerDown(PointerEventData eventData)
+	{
+//		GameLogic.Instance.ReDragBird ();
+		Debug.Log ("Check down");
 	}
 
 	public void OnPointerExit(PointerEventData eventData)

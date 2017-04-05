@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameLogic : MonoBehaviour {
 
 	public GameObject birdPlaygroundHolder;
+	public Button FightButton;
 		
 	[HideInInspector]
 	public Vector2 dropVector = new Vector2(-1,-1);
@@ -14,27 +15,19 @@ public class GameLogic : MonoBehaviour {
     private Bird draggedBird = null;
 	private Vector3 dragPosition;
 	private Vector3 mouseOffset;
+	private Vector3 screenPosition = Vector3.zero;
 
 	public GameObject dragImage = null;
 
-	private bool _dragingBird;
-	[HideInInspector]
-	public bool dragingBird
+	private bool dragingBird;
+
+	void OnClearDragObject()
 	{
-		set
-		{
-			dragImage.SetActive(value);
+		dragImage.SetActive (false);
 
-			if (value == false) {
-				if (dragImage.transform.childCount > 0) {
-					Destroy(dragImage.transform.GetChild(0).gameObject);
-				}
-			}
-
-			_dragingBird = value;
+		if (dragImage.transform.childCount > 0) {
+			Destroy(dragImage.transform.GetChild(0).gameObject);
 		}
-
-		get { return _dragingBird; }
 	}
 
     [HideInInspector]
@@ -42,7 +35,7 @@ public class GameLogic : MonoBehaviour {
 
 	public static GameLogic Instance { get; private set; }
 
-void Awake()
+	void Awake()
 	{
 		Instance = this;
 
@@ -53,12 +46,39 @@ void Awake()
 	}
 	void Start()
 	{
-		/*for (int i = 0; i < 4; i++)
-		{
-			Bird a = new Bird("Alice", (int)Random.Range(-15, 15), (int)Random.Range(-15, 15));
-			Bird b = new Bird("Bob", (int)Random.Range(-15, 15), (int)Random.Range(-15, 15));
-			Debug.Log(Fight(a, b).charName + " won!");
-		}*/
+		CanWeFight ();
+	}
+
+	void OnCancelDrag()
+	{
+		// Place bird back to the button?
+		LeanTween.move(dragImage,draggedBird.transform.position,0.25f)
+			.setEase(LeanTweenType.easeOutSine)
+			.setOnComplete(OnClearDragObject);
+
+		LeanTween.delayedCall (0.25f, () => {
+			draggedBird.gameObject.SetActive (true);	
+			draggedBird = null;
+		});
+	}
+
+	void OnDropDrag()
+	{
+		// Drop bird on tile
+		Var.playerPos [(int)dropVector.x, (int)dropVector.y] = draggedBird;
+
+		GameObject birdPlace = Instantiate (draggedBird.birdPrefab, currentTile.transform, false);
+		birdPlace.transform.position = dragImage.transform.position;
+
+		// Move the bird to the spot and when done - show the actual
+		LeanTween.moveLocal (birdPlace, Vector3.zero, 0.25f)
+			.setEase (LeanTweenType.easeOutSine);
+
+		OnClearDragObject ();
+		draggedBird = null;
+
+		// Check the fight scene!
+		CanWeFight ();
 	}
 	
 	// Update is called once per frame
@@ -67,7 +87,7 @@ void Awake()
 		if (Input.GetMouseButton (0)) {
 			if (dragingBird) {
 				// We drag the action point!
-				Vector3 currentScreenSpace = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 10f);
+				Vector3 currentScreenSpace = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenPosition.z);
 				//convert screen position to world position with offset changes.
 				dragPosition = Camera.main.ScreenToWorldPoint (currentScreenSpace) + mouseOffset;
 
@@ -77,23 +97,24 @@ void Awake()
 
 			if (dragingBird) {
 				if (dropVector.x != -1) {
-					// Drop bird on tile
-					Var.playerPos[(int)dropVector.x,(int)dropVector.y] = draggedBird;
-//
-//					if (currentTileImg != null)
-//						currentTileImg.sprite = draggedBird.src.sprite;
 
-					Instantiate (draggedBird.birdPrefab, currentTile.transform, false);
+					// Can we place the bird here?
+					if (CanWePlaceBird (dropVector)) {
+						birdsPlaced += 1;
+						OnDropDrag ();
+					} else {
+
+						// Should we replace it?
+						if (MakeBirdSwitch (dropVector)) {
+							// Check the fight scene!
+							OnDropDrag();
+						} else {
+							OnCancelDrag ();
+						}
+					}
 
 				} else {
-					// Place bird back to the button?
-					draggedBird.gameObject.SetActive (true);
-
-					// Cancel action
-					draggedBird = null;
-
-					// Clear the created prefab
-
+					OnCancelDrag ();
 				}
 
 				dragingBird = false;
@@ -104,12 +125,17 @@ void Awake()
 	// For now!
 	public void OnDragBird(Bird info)
 	{
-		// This will change to prefab?
-//		dragImage.GetComponent<Image>().sprite = info.src.sprite;
+		if (draggedBird != null)
+			return;
+
+		// Reset values?
+		dropVector = new Vector2 (-1, -1);
+
 		Instantiate(info.birdPrefab,dragImage.transform,false);
 
 		// Little helper
-		mouseOffset = new Vector3(0,0,10f);
+		screenPosition = Camera.main.WorldToScreenPoint(info.gameObject.transform.position);
+		mouseOffset = info.gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPosition.z));
 
 		// Our active stuff
 		draggedBird = info;
@@ -119,6 +145,9 @@ void Awake()
 
 		// Disable the gameobject
 		draggedBird.gameObject.SetActive (false);
+
+		// Show the actual drag image
+		dragImage.SetActive (true);
 	}
 
 	// Quick restart feature
@@ -127,16 +156,19 @@ void Awake()
 
 	public void OnRestartGame()
 	{
+		// Reset the rulles
+		birdsPlaced = 0;
+
 		foreach (var but in birdButtons)
 			but.SetActive (true);
 
 		foreach (var bird in playgroundBirds) {
 			if (bird.transform.childCount > 0) {
-				Debug.Log ("bird.transform.childCount:" + bird.transform.childCount);
 				Destroy(bird.transform.GetChild(0).gameObject);
 			}
-				
 		}
+
+		CanWeFight ();
 	}
 
 
@@ -213,6 +245,90 @@ void Awake()
 
 
 
+		return false;
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// Check the rulles
+
+	int birdsPlaced = 0;
+
+	void CanWeFight()
+	{
+		// Do we complete all the rulles?
+		if (birdsPlaced >= 3) {
+			FightButton.interactable = true;
+		} else {
+			FightButton.interactable = false;
+		}
+	}
+
+	GameObject OnGetArrayVisualHolder(Vector2 index)
+	{
+		foreach (var holder in playgroundBirds) {
+			if (holder.GetComponent<LayoutButton> ().index == index)
+				return holder;
+		}
+
+		return null;
+	}
+
+	GameObject OnGetBirdButton(Bird info)
+	{
+		foreach (var button in birdButtons) {
+			if (button.GetComponent<Bird> () == info)
+				return button;
+		}
+
+		return null;
+	}
+
+	bool MakeBirdSwitch(Vector2 index)
+	{
+		Bird returnHome = Var.playerPos [(int)index.x, (int)dropVector.y];
+
+		if (returnHome) {
+
+			// How do we know where was this bird? - Or drop to the replacement bird?
+			// Create the pref and move it to button - when complete the move - show the button and destroy the pref
+			GameObject pre = Instantiate(returnHome.birdPrefab,birdPlaygroundHolder.transform,false);
+			GameObject theHolder = OnGetArrayVisualHolder (index);
+			pre.transform.position = theHolder.transform.position;
+
+			// Remove
+			Destroy(theHolder.transform.GetChild (0).gameObject);
+
+			// To what position should the bird fly?
+			GameObject buttonHolder = OnGetBirdButton(returnHome);
+			LeanTween.move (pre, buttonHolder.transform.position, 0.25f)
+				.setEase (LeanTweenType.easeOutSine)
+				.setOnComplete(()=>{
+					buttonHolder.SetActive(true);
+					Destroy(pre);
+				});
+
+			return true;
+		}
+
+		return false;
+	}
+
+	bool CanWePlaceBird(Vector2 index)
+	{
+		// Check if no other bird is in this row!
+		for(int x=0;x<3;x++){
+			if (Var.playerPos [x, (int)dropVector.y] != null) {
+				return false;
+			}
+		}
+
+		// Do we have any oppenent in the opposite direction
+		if (Var.enemies [(int)dropVector.y] == null)
+			return false;
+
+		if (Var.playerPos [(int)index.x, (int)dropVector.y] == null)
+			return true;
+		
 		return false;
 	}
 }
