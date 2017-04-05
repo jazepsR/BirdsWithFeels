@@ -323,7 +323,7 @@ public class GameLogic : MonoBehaviour {
 		}
 
 		// Do we have any oppenent in the opposite direction
-		if (Var.enemies [(int)dropVector.y] == null)
+		if (!Var.enemies [(int)dropVector.y].inUse)
 			return false;
 
 		if (Var.playerPos [(int)index.x, (int)dropVector.y] == null)
