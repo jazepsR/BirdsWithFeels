@@ -7,6 +7,10 @@ using UnityEngine.EventSystems;
 public class Bird : MonoBehaviour, IPointerDownHandler
 {
     public int confidence=0;
+    [HideInInspector]
+    public int prevConf = 0;
+    [HideInInspector]
+    public int prevFriend = 0;
     public int friendliness = 0;
     public Var.Em emotion;
     public string charName;
@@ -39,7 +43,8 @@ public class Bird : MonoBehaviour, IPointerDownHandler
     }
 	public void SetEmotion()
     {
-
+        prevConf = confidence;
+        prevFriend = friendliness;
         
         if(Mathf.Abs((float)confidence)<Var.lvl1 && Mathf.Abs((float)friendliness) < Var.lvl1)
         {

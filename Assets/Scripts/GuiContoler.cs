@@ -22,7 +22,18 @@ public class GuiContoler : MonoBehaviour {
 	void Update () {
 		
 	}
-
+    public void CreateReport()
+    {
+        string reportText = "";
+        foreach(GameObject player in players)
+        {
+            Bird script = player.GetComponent<Bird>();
+            reportText += script.charName + "\n";
+            reportText += "friendliness: " + script.prevFriend + " -> " + script.friendliness;
+            reportText += "confidence: " + script.prevConf + " -> " + script.confidence +"\n"; 
+        }
+        Debug.Log(reportText);
+    }
     public void Fight()
     {
 
@@ -68,6 +79,7 @@ public class GuiContoler : MonoBehaviour {
                 bird.GetComponent<Bird>().confidence+= Var.confLoseAll;
             }
         }
+        CreateReport();
         Reset();
     }
 
