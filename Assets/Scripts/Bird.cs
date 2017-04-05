@@ -12,6 +12,7 @@ public class Bird : MonoBehaviour, IPointerDownHandler
     public string charName;
     public Image src;
     public bool inUse = true;
+	public GameObject birdPrefab;
 
     public void OnPointerDown(PointerEventData eventData)
     {

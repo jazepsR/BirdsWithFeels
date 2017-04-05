@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour {
 
-
+	public GameObject birdPlaygroundHolder;
 		
 	[HideInInspector]
 	public Vector2 dropVector = new Vector2(-1,-1);
@@ -24,6 +24,13 @@ public class GameLogic : MonoBehaviour {
 		set
 		{
 			dragImage.SetActive(value);
+
+			if (value == false) {
+				if (dragImage.transform.childCount > 0) {
+					Destroy(dragImage.transform.GetChild(0).gameObject);
+				}
+			}
+
 			_dragingBird = value;
 		}
 
@@ -31,9 +38,9 @@ public class GameLogic : MonoBehaviour {
 	}
 
     [HideInInspector]
-    public Image currentTileImg = null;
+	public GameObject currentTile = null;
 
-public static GameLogic Instance { get; private set; }
+	public static GameLogic Instance { get; private set; }
 
 void Awake()
 	{
@@ -41,6 +48,8 @@ void Awake()
 
 		// Just some random stuff
 		Application.targetFrameRate = 60;
+
+		// Do some dynamci stuff
 	}
 	void Start()
 	{
@@ -70,15 +79,21 @@ void Awake()
 				if (dropVector.x != -1) {
 					// Drop bird on tile
 					Var.playerPos[(int)dropVector.x,(int)dropVector.y] = draggedBird;
+//
+//					if (currentTileImg != null)
+//						currentTileImg.sprite = draggedBird.src.sprite;
 
-					if (currentTileImg != null)
-						currentTileImg.sprite = draggedBird.src.sprite;
+					Instantiate (draggedBird.birdPrefab, currentTile.transform, false);
+
 				} else {
 					// Place bird back to the button?
 					draggedBird.gameObject.SetActive (true);
 
 					// Cancel action
 					draggedBird = null;
+
+					// Clear the created prefab
+
 				}
 
 				dragingBird = false;
@@ -90,7 +105,8 @@ void Awake()
 	public void OnDragBird(Bird info)
 	{
 		// This will change to prefab?
-		dragImage.GetComponent<Image>().sprite = info.src.sprite;
+//		dragImage.GetComponent<Image>().sprite = info.src.sprite;
+		Instantiate(info.birdPrefab,dragImage.transform,false);
 
 		// Little helper
 		mouseOffset = new Vector3(0,0,10f);
@@ -107,11 +123,20 @@ void Awake()
 
 	// Quick restart feature
 	public List<GameObject> birdButtons = new List<GameObject>();
+	public List<GameObject> playgroundBirds = new List<GameObject> ();
 
 	public void OnRestartGame()
 	{
 		foreach (var but in birdButtons)
 			but.SetActive (true);
+
+		foreach (var bird in playgroundBirds) {
+			if (bird.transform.childCount > 0) {
+				Debug.Log ("bird.transform.childCount:" + bird.transform.childCount);
+				Destroy(bird.transform.GetChild(0).gameObject);
+			}
+				
+		}
 	}
 
 

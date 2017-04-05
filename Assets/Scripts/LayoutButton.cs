@@ -16,13 +16,13 @@ public class LayoutButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 	public void OnPointerExit(PointerEventData eventData)
 	{
 		GameLogic.Instance.dropVector = nopeVec;
-        GameLogic.Instance.currentTileImg = null;
+		GameLogic.Instance.currentTile = null;
 
     }
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		GameLogic.Instance.dropVector = index;
-        GameLogic.Instance.currentTileImg = GetComponent<Image>();
+		GameLogic.Instance.currentTile = gameObject;
 	}
 }

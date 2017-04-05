@@ -78,7 +78,6 @@ public class GuiContoler : MonoBehaviour {
         foreach(GameObject bird in players)
         {
             bird.GetComponent<Bird>().SetEmotion();
-            bird.GetComponent<Bird>().src.enabled = true;
         }
         GetComponent<fillEnemy>().createEnemies();
         foreach(Image img in tiles)
