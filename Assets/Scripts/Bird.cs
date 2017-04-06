@@ -85,18 +85,18 @@ public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
                 if (confidence >= Var.lvl1)
                     emotion = Var.Em.Confident;
                 //Superconfident
-                if (confidence >= Var.lvl2)
-                    emotion = Var.Em.SuperConfident;
+               /* if (confidence >= Var.lvl2)
+                    emotion = Var.Em.SuperConfident;*/
             }
             else
             {
                 //Scared
                 colorRenderer.color = Helpers.Instance.scared;
-                if (confidence <= -Var.lvl1)
+               if (confidence <= -Var.lvl1)
                     emotion = Var.Em.Scared;
                 //SuperScared
-                if (confidence <= -Var.lvl2)
-                    emotion = Var.Em.SuperScared;
+                /*if (confidence <= -Var.lvl2)
+                    emotion = Var.Em.SuperScared;*/
             }
 
         }
@@ -111,8 +111,8 @@ public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
                 if (friendliness >= Var.lvl1)
                     emotion = Var.Em.Friendly;
                 //SuperFriendly
-                if (friendliness >= Var.lvl2)
-                    emotion = Var.Em.SuperFriendly;
+               /* if (friendliness >= Var.lvl2)
+                    emotion = Var.Em.SuperFriendly;*/
             }
             else
             {
@@ -121,8 +121,8 @@ public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
                 if (friendliness <= -Var.lvl1)
                     emotion = Var.Em.Lonely;
                 //SuperLonely
-                if (friendliness <= -Var.lvl2)
-                    emotion = Var.Em.SuperLonely;
+               /* if (friendliness <= -Var.lvl2)
+                    emotion = Var.Em.SuperLonely;*/
             }
 
         }
