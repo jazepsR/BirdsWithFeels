@@ -411,8 +411,16 @@ public class GameLogic : MonoBehaviour {
 		Var.Em em1 = Bird1.emotion;
 		Var.Em em2 = Bird2.emotion;
 
+        if (em1 == Var.Em.Friendly && em2 == Var.Em.Neutral)
+            return true;
+        if (em1 == Var.Em.Confident && em2 == Var.Em.Neutral)
+            return true;
+        if (em1 == Var.Em.Lonely && em2 == Var.Em.Neutral)
+            return true;
+        if (em1 == Var.Em.Scared && em2 == Var.Em.Neutral)
+            return true;
 
-		if (em1 == Var.Em.Friendly && em2 == Var.Em.Confident)
+        if (em1 == Var.Em.Friendly && em2 == Var.Em.Confident)
 			return true;
 		if (em1 == Var.Em.Confident && em2 == Var.Em.Lonely)
 			return true;
