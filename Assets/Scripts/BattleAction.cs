@@ -246,6 +246,8 @@ public class BattleAction : MonoBehaviour
 
 	void OnStartBirdFight()
 	{
+		SoundManager.Instance.PlaySoundFX ("fightFX");
+
 		floatingCloud dummySimpleEnt = new floatingCloud();
 
 		dummySimpleEnt.entity = activeBird;
@@ -308,6 +310,8 @@ public class BattleAction : MonoBehaviour
 		activeBird.eulerAngles = Vector3.zero;
 
 		if (didBirdWin) {
+//			SoundManager.Instance.PlaySoundFX ("fightFX");
+
 			activeBird.GetComponent<Animator> ().SetBool ("victory", true);
 			LeanTween.scale (activeEnemy.gameObject, Vector3.zero, 0.25f)
 				.setEase (LeanTweenType.easeInBack);
@@ -319,7 +323,7 @@ public class BattleAction : MonoBehaviour
 			LeanTween.delayedCall (0.25f, OnStartBattle);
 		} else {
 			// Show the battle screen!
-			LeanTween.delayedCall(1.25f,OnClearStuff);
+			LeanTween.delayedCall(1.7f,OnClearStuff);
 		}
 	}
 
