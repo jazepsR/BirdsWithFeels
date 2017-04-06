@@ -12,11 +12,13 @@ public class Graph : MonoBehaviour {
     int multiplier;
     public Material mat;
     public static Graph Instance { get; private set; }
+    
     // Use this for initialization
     void Start()
     {
         Instance = this;
         multiplier = graphSize / 15;
+        
          
     }
 
@@ -30,9 +32,8 @@ public class Graph : MonoBehaviour {
         LineRenderer lr =preHeart.transform.gameObject.AddComponent<LineRenderer>();
 		lr.SetPosition(0, new Vector3(preHeart.transform.position.x,preHeart.transform.position.y,0));
 		lr.SetPosition(1, new Vector3(tempHeart.transform.position.x,tempHeart.transform.position.y,0));
-        lr.SetWidth(0.05f, 0.05f);
-
-		lr.textureMode = LineTextureMode.Tile;
+        lr.SetWidth(0.045f, 0.045f);     
+        lr.textureMode = LineTextureMode.Tile;
 		lr.widthMultiplier = 3f;
 
         lr.material = mat;     
@@ -48,9 +49,11 @@ public class Graph : MonoBehaviour {
         Vector2 offset = graphArea.rectTransform.offsetMax;
         GameObject heartt =Instantiate(obj,graphArea.transform);
         heartt.transform.localScale = new Vector3(0.65f, 0.65f, 0.65f);
-        heartt.transform.localPosition = new Vector3(-x*18, y*18, 0);
+        heartt.transform.localPosition = new Vector3(-x*21, y*21, 0);
 
-		Canvas dummy = heartt.AddComponent<Canvas> ();
+        
+
+        Canvas dummy = heartt.AddComponent<Canvas> ();
 		dummy.overrideSorting = true;
 		dummy.sortingOrder = 11;
 
