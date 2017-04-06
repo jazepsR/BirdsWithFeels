@@ -229,11 +229,11 @@ public class GameLogic : MonoBehaviour {
 
 				// Whats the extra value!
 				if (birdAround.extraFriendly == 1)
-					bonus.GetComponent<Image> ().color = new Color (0, 255, 74);
-				else
-					bonus.GetComponent<Image> ().color = new Color(255,0,206);
-				
-				float angle = AngleBetweenVector2 (birdAround.indexA, index);
+					bonus.GetComponent<Image> ().color = new Color (108, 140, 214);
+                else
+                    bonus.GetComponent<Image>().color = new Color(55, 183, 184);//super friendly
+
+                float angle = AngleBetweenVector2 (birdAround.indexA, index);
 
 				bonus.transform.eulerAngles = new Vector3 (0, 0, -angle);
 
