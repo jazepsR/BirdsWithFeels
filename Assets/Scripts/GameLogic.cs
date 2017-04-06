@@ -359,6 +359,12 @@ public class GameLogic : MonoBehaviour {
 
 		CanWeFight ();
 
+		// NobodyGetsHurt!
+		OnClearFeedbackQuick ();
+	}
+
+	public void OnClearFeedbackQuick()
+	{
 		// Hide all holders!
 		for(int i = 0;i<5;i++){
 			OnHideFeedback_Enemy (i);
@@ -464,11 +470,15 @@ public class GameLogic : MonoBehaviour {
 		}
 	}
 
-	GameObject OnGetArrayVisualHolder(Vector2 index)
+	public GameObject OnGetArrayVisualHolder(Vector2 index,bool birdObj = false)
 	{
 		foreach (var holder in playgroundBirds) {
-			if (holder.GetComponent<LayoutButton> ().index == index)
-				return holder;
+			if (holder.GetComponent<LayoutButton> ().index == index) {
+				if (birdObj)
+					return holder.transform.GetChild (0).gameObject;
+				else
+					return holder;
+			}
 		}
 
 		return null;

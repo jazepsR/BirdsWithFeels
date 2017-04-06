@@ -171,6 +171,45 @@ public class GuiContoler : MonoBehaviour {
         }
     }
 
+	private int finalResult = 0;
+
+	public void OnCompletedBattleVisual()
+	{
+		if (finalResult > 0)
+		{
+			Debug.Log("Player won!");
+			foreach(GameObject bird in players)
+			{
+				bird.GetComponent<Bird>().confidence+= Var.confWinAll;
+			}
+			moveInMap();
+			CreateReport(finalResult);
+		}
+		else
+		{
+			Debug.Log("Enemy won");
+			foreach (GameObject bird in players)
+			{
+				bird.GetComponent<Bird>().confidence+= Var.confLoseAll;
+			}
+			Var.health--;
+			UpdateHearts(Var.health);
+			if (Var.health <= 0)
+			{
+                mapPos = 0;
+				loseBanner.SetActive(true);
+			}
+			else
+			{
+				moveInMap();
+				CreateReport(finalResult);
+			}
+
+		}
+
+		Reset();
+	}
+
     public void Fight()
     {
 
@@ -178,7 +217,8 @@ public class GuiContoler : MonoBehaviour {
         int result = 0;
         Bird playerBird = null;
 
-     
+		int lineY = 0;
+		GameObject birdObj = null;
        
 
        for (int i = 0; i <Var.enemies.Length; i++)
@@ -191,48 +231,33 @@ public class GuiContoler : MonoBehaviour {
                     {
                         playerBird = Var.playerPos[j, i];
                         playerBird.friendliness += Helpers.Instance.Findfirendlieness(j, i);
+
+						birdObj = GameLogic.Instance.OnGetArrayVisualHolder (new Vector2(j,i),true);
+						lineY = i;
+
                         break;
                     }
 
                 }
+
+				int resultOfBattle = GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
+
+				// They will fight!
+				BattleAction.Instance.AddBattleInfo (birdObj,Var.enemies[i].transform.gameObject,resultOfBattle,lineY);
+
                 result += GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
                 
             }
 
     }
-        if (result > 0)
-        {
-            Debug.Log("Player won!");
-            foreach(GameObject bird in players)
-            {
-                bird.GetComponent<Bird>().confidence+= Var.confWinAll;
-            }
-            moveInMap();
-            CreateReport(result);
-        }
-        else
-        {
-            Debug.Log("Enemy won");
-            foreach (GameObject bird in players)
-            {
-                bird.GetComponent<Bird>().confidence+= Var.confLoseAll;
-            }
-            Var.health--;
-            UpdateHearts(Var.health);
-            if (Var.health <= 0)
-            {
-                mapPos = 0;
-                loseBanner.SetActive(true);
-            }
-            else
-            {
-                moveInMap();
-                CreateReport(result);
-            }
-            
-        }
-        
-        Reset();
+
+		// We continue after battle visualisation
+
+		// Clear the lines from screen!
+		GameLogic.Instance.OnClearFeedbackQuick();
+
+		BattleAction.Instance.OnStartBattle();
+		finalResult = result;
     }
 
     public void Reset()
