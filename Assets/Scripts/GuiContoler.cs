@@ -63,6 +63,7 @@ public class GuiContoler : MonoBehaviour {
 
         graph.SetActive(false);
         battlePanel.SetActive(true);
+        mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound);
         foreach (Transform child in graph.transform.Find("ReportGraph").transform)
         {
             Destroy(child.gameObject);
@@ -260,7 +261,7 @@ public class GuiContoler : MonoBehaviour {
             mapPos++;
             setMapLocation(mapPos);
         }
-        mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound);
+        
     }
     
     public void ResetScene()
