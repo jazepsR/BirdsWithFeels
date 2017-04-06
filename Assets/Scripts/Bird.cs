@@ -145,7 +145,9 @@ public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
         if (ToString() != null)
         {
             Var.birdInfo.text = ToString();
-            Var.birdInfoHeading.text = GetHeading();
+            Var.birdInfoHeading.text = charName;
+            Var.birdInfoFeeling.text = emotion.ToString();
+            Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
         }
     }
    

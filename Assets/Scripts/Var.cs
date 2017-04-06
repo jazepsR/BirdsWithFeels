@@ -19,6 +19,7 @@ public static class Var  {
     public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
     public static Text birdInfo;
     public static Text birdInfoHeading;
+    public static Text birdInfoFeeling;
     public static int health = 3;
     public static List<BattleData> map = new List<BattleData>();
 }

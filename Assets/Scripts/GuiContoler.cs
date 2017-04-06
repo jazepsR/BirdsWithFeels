@@ -7,6 +7,7 @@ public class GuiContoler : MonoBehaviour {
     public static GuiContoler Instance { get; private set; }
     public Text infoText;
     public Text infoHeading;
+    public Text infoFeeling;
     public GameObject[] players;
     public GameObject[] enemies;
     public Image[] tiles;
@@ -33,6 +34,7 @@ public class GuiContoler : MonoBehaviour {
     {
         Var.birdInfo = infoText;
         Var.birdInfoHeading = infoHeading;
+        Var.birdInfoFeeling = infoFeeling;
         if (Var.map.Count < 1)
         {
             Var.map.Add(new BattleData(Var.Em.Neutral));
