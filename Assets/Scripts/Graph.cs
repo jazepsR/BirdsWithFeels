@@ -48,7 +48,7 @@ public class Graph : MonoBehaviour {
         Vector2 max = graphArea.rectTransform.anchorMax;
         Vector2 offset = graphArea.rectTransform.offsetMax;
         GameObject heartt =Instantiate(obj,graphArea.transform);
-        heartt.transform.localScale = new Vector3(0.65f, 0.65f, 0.65f);
+        heartt.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
         heartt.transform.localPosition = new Vector3(-x*21, y*21, 0);
 
         
