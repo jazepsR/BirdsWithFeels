@@ -307,8 +307,11 @@ public class BattleAction : MonoBehaviour
 		activeEnemy.eulerAngles = Vector3.zero;
 		activeBird.eulerAngles = Vector3.zero;
 
-		if(didBirdWin)
+		if (didBirdWin) {
 			activeBird.GetComponent<Animator> ().SetBool ("victory", true);
+			LeanTween.scale (activeEnemy.gameObject, Vector3.zero, 0.25f)
+				.setEase (LeanTweenType.easeInBack);
+		}
 		else
 			activeBird.GetComponent<Animator> ().SetBool ("lose", true);
 
