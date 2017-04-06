@@ -18,6 +18,7 @@ public static class Var  {
     public static Bird[,] playerPos = new Bird[3,5];
     public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
     public static Text birdInfo;
-    public static int health = 113;
+    public static Text birdInfoHeading;
+    public static int health = 3;
     public static List<BattleData> map = new List<BattleData>();
 }

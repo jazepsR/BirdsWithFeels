@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GuiContoler : MonoBehaviour {
     public static GuiContoler Instance { get; private set; }
     public Text infoText;
+    public Text infoHeading;
     public GameObject[] players;
     public GameObject[] enemies;
     public Image[] tiles;
@@ -31,6 +32,7 @@ public class GuiContoler : MonoBehaviour {
     void Awake()
     {
         Var.birdInfo = infoText;
+        Var.birdInfoHeading = infoHeading;
         if (Var.map.Count < 1)
         {
             Var.map.Add(new BattleData(Var.Em.Neutral));
@@ -81,17 +83,37 @@ public class GuiContoler : MonoBehaviour {
         graph.SetActive(true);
         foreach (GameObject player in players)
         {
+            
+
+
             Bird script = player.GetComponent<Bird>();
-            GameObject portrait = script.portrait;            
+
+            //Normalize bird stats
+            if (script.confidence > 12)
+                script.confidence = 12;
+            if (script.confidence < -12)
+                script.confidence = -12;
+            if (script.friendliness > 12)
+                script.friendliness = 12;
+            if (script.friendliness < -12)
+                script.friendliness = -12;
+
+
+            GameObject portrait = script.portrait;
             GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
             colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(script.emotion);
-            Graph.Instance.PlotFull(script.prevFriend, script.prevConf, script.friendliness, script.confidence,portrait);
+            Graph.Instance.PlotFull(script.prevFriend, script.prevConf, script.friendliness, script.confidence, portrait);
 
+        }
             string feedBackString = "";
             if (currentMapArea != nextMapArea)
             {
                 feedBackString += nextMapArea + " birds coming in " + (roundLength - posInMapRound) + " battles!"; 
             }
+            if(nextMapArea == Var.Em.finish)
+        {
+            feedBackString = "Victory in " + (roundLength - posInMapRound) + " battles!";
+        }
             feedbackText.text = feedBackString;
 
             string winString = "You won!";
@@ -107,7 +129,7 @@ public class GuiContoler : MonoBehaviour {
             winDetails.text = winDetString;
 
 
-        }
+        
             /*string reportString = "";
             if (won)
             {
@@ -174,6 +196,7 @@ public class GuiContoler : MonoBehaviour {
 			UpdateHearts(Var.health);
 			if (Var.health <= 0)
 			{
+                mapPos = 0;
 				loseBanner.SetActive(true);
 			}
 			else
@@ -281,6 +304,7 @@ public class GuiContoler : MonoBehaviour {
             if(nextMapArea== Var.Em.finish)
             {
                 winBanner.SetActive(true);
+                mapPos = 0;
             }
             posInMapRound = 0;
             mapPos++;
