@@ -247,7 +247,7 @@ public class GuiContoler : MonoBehaviour {
 				// They will fight!
 				BattleAction.Instance.AddBattleInfo (birdObj,Var.enemies[i].transform.gameObject,resultOfBattle,lineY);
 
-                result += GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
+                result += resultOfBattle;
                 
             }
 
