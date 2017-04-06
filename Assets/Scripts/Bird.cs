@@ -51,12 +51,23 @@ public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
     {
         if (enabled)
         {
-            return "Name: " + charName + "\nfriendly: " + friendliness + "\nconfidence: " + confidence + "\ntype: " + emotion.ToString();
+            return "friendliness: " + friendliness + "\nbravery: "+ confidence;
         }else
         {
             return null;
         }
 
+    }
+    public string GetHeading()
+    {
+        if (enabled)
+        {
+            return charName + "\n" +emotion.ToString();
+        }
+        else
+        {
+            return null;
+        }
     }
     void Start()
     {
@@ -131,9 +142,13 @@ public class Bird : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
 	
 	public void showText()
     {
-        if(ToString()!=null)
-        Var.birdInfo.text = ToString();
+        if (ToString() != null)
+        {
+            Var.birdInfo.text = ToString();
+            Var.birdInfoHeading.text = GetHeading();
+        }
     }
+   
 
 
 }
