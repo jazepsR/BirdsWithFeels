@@ -60,6 +60,8 @@ public class BattleAction : MonoBehaviour
 
 	public List<floatingCloud> birdsFloat = new List<floatingCloud>();
 
+	private bool didBirdWin = false;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -177,6 +179,8 @@ public class BattleAction : MonoBehaviour
 
 	public void OnStartBattle()
 	{
+		didBirdWin = false;
+
 		// Clear stuff!!!
 		birdsFloat = new List<floatingCloud> ();
 
@@ -187,22 +191,26 @@ public class BattleAction : MonoBehaviour
 		activeBird = activeBattle.bird.transform;
 		activeEnemy = activeBattle.enemy.transform;
 
+		didBirdWin = activeBattle.birdWin;
+
 		// Move the bird in
 		Vector3 birdPosition = new Vector3 (
-			                       battleCenterPoints [activeBattle.lineY].x - 20f,
+			                       battleCenterPoints [activeBattle.lineY].x - 40f,
 			                       battleCenterPoints [activeBattle.lineY].y,
 			                       battleCenterPoints [activeBattle.lineY].z);
 		
-		LeanTween.moveLocal (activeBattle.bird, birdPosition, 0.5f)
+		LeanTween.moveLocal (activeBattle.bird, birdPosition, 0.75f)
 			.setOnComplete(OnShowClouds);
+
+		activeBird.GetComponent<Animator> ().SetBool ("isWalking", true);
 
 		// Move the enemy in
 		Vector3 enemyPosition = new Vector3 (
-			battleCenterPoints [activeBattle.lineY].x + 20f,
+			battleCenterPoints [activeBattle.lineY].x + 40f,
 			battleCenterPoints [activeBattle.lineY].y,
 			battleCenterPoints [activeBattle.lineY].z);
 		
-		LeanTween.moveLocal (activeBattle.enemy, enemyPosition, 0.5f);
+		LeanTween.moveLocal (activeBattle.enemy, enemyPosition, 0.75f);
 
 		// Center clouds where should they be!
 		cloudHolder.localPosition = new Vector3(
@@ -299,13 +307,16 @@ public class BattleAction : MonoBehaviour
 		activeEnemy.eulerAngles = Vector3.zero;
 		activeBird.eulerAngles = Vector3.zero;
 
-
+		if(didBirdWin)
+			activeBird.GetComponent<Animator> ().SetBool ("victory", true);
+		else
+			activeBird.GetComponent<Animator> ().SetBool ("lose", true);
 
 		if (battleList.Count > 0) {
 			LeanTween.delayedCall (0.25f, OnStartBattle);
 		} else {
 			// Show the battle screen!
-			LeanTween.delayedCall(0.5f,OnClearStuff);
+			LeanTween.delayedCall(1.25f,OnClearStuff);
 		}
 	}
 
