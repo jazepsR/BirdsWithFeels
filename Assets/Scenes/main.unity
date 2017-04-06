@@ -5517,6 +5517,25 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 597499182}
+--- !u!223 &597499186
+Canvas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 597499182}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: -10
+  m_TargetDisplay: 0
 --- !u!1001 &628687560
 Prefab:
   m_ObjectHideFlags: 0
@@ -5565,25 +5584,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 358e9ce7dd7f08c41a6640ec1ecdd027, type: 2}
   m_IsPrefabParent: 0
---- !u!223 &597499186
-Canvas:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 597499182}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 1
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: -10
-  m_TargetDisplay: 0
 --- !u!1 &634873341
 GameObject:
   m_ObjectHideFlags: 0
@@ -11271,7 +11271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1507816506
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11293,6 +11293,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1507816507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1507816505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13200dc28edf6497ebc65f01e41730b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CloudA: {fileID: 282354445}
+  CloudB: {fileID: 597499182}
+  CloudC: {fileID: 283299419}
+  birdHolder: {fileID: 2040221688}
+  enemyHolder: {fileID: 1729485874}
+  cloudHolder: {fileID: 1286477906}
+  particleA: {fileID: 277244167}
+  particleB: {fileID: 1468138969}
+  battleCenterPoints:
+  - {x: 254, y: 184, z: 0}
+  - {x: 265, y: 102, z: 0}
+  - {x: 282, y: 17, z: 0}
+  - {x: 300, y: -63, z: 0}
+  - {x: 324, y: -151, z: 0}
 --- !u!1 &1510265276
 GameObject:
   m_ObjectHideFlags: 0
@@ -11365,31 +11390,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1510265276}
---- !u!114 &1507816507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1507816505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13200dc28edf6497ebc65f01e41730b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CloudA: {fileID: 282354445}
-  CloudB: {fileID: 597499182}
-  CloudC: {fileID: 283299419}
-  birdHolder: {fileID: 2040221688}
-  enemyHolder: {fileID: 1729485874}
-  cloudHolder: {fileID: 1286477906}
-  particleA: {fileID: 277244167}
-  particleB: {fileID: 1468138969}
-  battleCenterPoints:
-  - {x: -81, y: 222, z: 0}
-  - {x: -81, y: 148, z: 0}
-  - {x: -81, y: 57, z: 0}
-  - {x: -81, y: -29, z: 0}
-  - {x: -81, y: -115, z: 0}
 --- !u!1 &1545855414
 GameObject:
   m_ObjectHideFlags: 0
