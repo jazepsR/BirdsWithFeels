@@ -319,7 +319,7 @@ public class BattleAction : MonoBehaviour
 			LeanTween.delayedCall (0.25f, OnStartBattle);
 		} else {
 			// Show the battle screen!
-			LeanTween.delayedCall(1.25f,OnClearStuff);
+			LeanTween.delayedCall(1.7f,OnClearStuff);
 		}
 	}
 
