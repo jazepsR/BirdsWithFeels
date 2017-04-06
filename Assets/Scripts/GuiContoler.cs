@@ -20,7 +20,13 @@ public class GuiContoler : MonoBehaviour {
     Var.Em nextMapArea;
     int posInMapRound = 0;
     int mapPos = 0;
+
     public GameObject graph;
+    public Text winText;
+    public Text winDetails;
+    public Text feedbackText;
+    public GameObject battlePanel;
+    public GuiMap mapBirdScript;
 
     void Awake()
     {
@@ -56,14 +62,21 @@ public class GuiContoler : MonoBehaviour {
     {
 
         graph.SetActive(false);
+        battlePanel.SetActive(true);
         foreach (Transform child in graph.transform.Find("ReportGraph").transform)
         {
             Destroy(child.gameObject);
         }
     }
 
-    public void CreateReport(bool won)
+    public void CreateReport(int winCount)
     {
+        battlePanel.SetActive(false);
+        /*foreach (GameObject bird in players)
+        {
+            bird.GetComponent<Bird>().SetEmotion();
+        }*/
+
         graph.SetActive(true);
         foreach (GameObject player in players)
         {
@@ -72,7 +85,26 @@ public class GuiContoler : MonoBehaviour {
             GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
             colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(script.emotion);
             Graph.Instance.PlotFull(script.prevFriend, script.prevConf, script.friendliness, script.confidence,portrait);
-            
+
+            string feedBackString = "";
+            if (currentMapArea != nextMapArea)
+            {
+                feedBackString += nextMapArea + " birds coming in " + (roundLength - posInMapRound) + " battles!"; 
+            }
+            feedbackText.text = feedBackString;
+
+            string winString = "You won!";
+            if (winCount<0)
+            {
+                winString = "You lost :'(";
+            }
+            winText.text = winString;
+
+            int winNo = (winCount-1)/2+2;
+
+            string winDetString = winNo + " / 3 Battles won!";
+            winDetails.text = winDetString;
+
 
         }
             /*string reportString = "";
@@ -92,12 +124,9 @@ public class GuiContoler : MonoBehaviour {
                 else
                     reportString += "Lost\n";
                 reportString += "friendliness: " + script.prevFriend + " -> " + script.friendliness +" (" +(script.friendliness - script.prevFriend) + ")";
-                reportString += "\nconfidence: " + script.prevConf + " -> " + script.confidence + " (" + (script.confidence - script.prevConf) + ")\n"; 
+                reportString += "\nconfidence: " + script.prevConf + " -> " + script.confidence + " (" +  + ")\n"; 
             }
-            if (currentMapArea != nextMapArea)
-            {
-                reportString += "Current area: " + currentMapArea + " next map area: " + nextMapArea + " in " + (roundLength - posInMapRound);
-            }
+            
             reportText.text = reportString;
             report.SetActive(true);
             Debug.Log(reportString);*/
@@ -156,7 +185,7 @@ public class GuiContoler : MonoBehaviour {
                 bird.GetComponent<Bird>().confidence+= Var.confWinAll;
             }
             moveInMap();
-            CreateReport(true);
+            CreateReport(result);
         }
         else
         {
@@ -174,7 +203,7 @@ public class GuiContoler : MonoBehaviour {
             else
             {
                 moveInMap();
-                CreateReport(false);
+                CreateReport(result);
             }
             
         }
@@ -202,7 +231,11 @@ public class GuiContoler : MonoBehaviour {
     }
     void setMapLocation(int index)
     {
-        currentMapArea = Var.map[index].type;
+        try
+        {
+            currentMapArea = Var.map[index].type;
+        }
+        catch { }
         try
         {
             nextMapArea = Var.map[index + 1].type;
@@ -211,6 +244,7 @@ public class GuiContoler : MonoBehaviour {
         {
             nextMapArea = Var.Em.finish;
         }
+        
     }
 
     void moveInMap()
@@ -226,6 +260,7 @@ public class GuiContoler : MonoBehaviour {
             mapPos++;
             setMapLocation(mapPos);
         }
+        mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound);
     }
     
     public void ResetScene()

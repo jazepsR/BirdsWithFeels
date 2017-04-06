@@ -12,6 +12,7 @@ public class Graph : MonoBehaviour {
     int multiplier;
     public Material mat;
     public static Graph Instance { get; private set; }
+    
     // Use this for initialization
     void Start()
     {
@@ -30,7 +31,7 @@ public class Graph : MonoBehaviour {
         LineRenderer lr =preHeart.transform.gameObject.AddComponent<LineRenderer>();
 		lr.SetPosition(0, new Vector3(preHeart.transform.position.x,preHeart.transform.position.y,0));
 		lr.SetPosition(1, new Vector3(tempHeart.transform.position.x,tempHeart.transform.position.y,0));
-        lr.SetWidth(0.05f, 0.05f);
+        lr.SetWidth(0.045f, 0.045f);
 
 		lr.textureMode = LineTextureMode.Tile;
 		lr.widthMultiplier = 3f;
