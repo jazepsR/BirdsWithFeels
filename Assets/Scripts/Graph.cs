@@ -28,9 +28,13 @@ public class Graph : MonoBehaviour {
         GameObject preHeart = PlotPoint(prevX, prevY, prevHeart);
         GameObject tempHeart = PlotPoint(currX, currY, port);
         LineRenderer lr =preHeart.transform.gameObject.AddComponent<LineRenderer>();
-        lr.SetPosition(0, preHeart.transform.position);
-        lr.SetPosition(1, tempHeart.transform.position);
+		lr.SetPosition(0, new Vector3(preHeart.transform.position.x,preHeart.transform.position.y,0));
+		lr.SetPosition(1, new Vector3(tempHeart.transform.position.x,tempHeart.transform.position.y,0));
         lr.SetWidth(0.05f, 0.05f);
+
+		lr.textureMode = LineTextureMode.Tile;
+		lr.widthMultiplier = 3f;
+
         lr.material = mat;     
 
 
@@ -45,7 +49,11 @@ public class Graph : MonoBehaviour {
         GameObject heartt =Instantiate(obj,graphArea.transform);
         heartt.transform.localScale = new Vector3(0.65f, 0.65f, 0.65f);
         heartt.transform.localPosition = new Vector3(-x*18, y*18, 0);
-        
+
+		Canvas dummy = heartt.AddComponent<Canvas> ();
+		dummy.overrideSorting = true;
+		dummy.sortingOrder = 11;
+
         return heartt;     
     }
 	// Update is called once per frame
