@@ -14,7 +14,7 @@ public class Helpers : MonoBehaviour {
     {
         Instance = this;
     }
-
+    
     public Color GetEmotionColor(Var.Em emotion)
     {
         switch (emotion)

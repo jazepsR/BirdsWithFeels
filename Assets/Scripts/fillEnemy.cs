@@ -7,15 +7,6 @@ using UnityEngine.UI;
 public class fillEnemy : MonoBehaviour {
     public GameObject[] Enemies;      
 
-    void Awake()
-    {
-        /*Var.spriteDict.Add("Neutral",Resources.Load<Sprite>("Sprites/neutral"));
-        Var.spriteDict.Add("Confident",Resources.Load<Sprite>("Sprites/confident"));
-        Var.spriteDict.Add("Scared",Resources.Load<Sprite>("Sprites/scared"));
-        Var.spriteDict.Add("Lonely",Resources.Load<Sprite>("Sprites/lonely"));
-        Var.spriteDict.Add("Friendly", Resources.Load<Sprite>("Sprites/friendly"));*/
-    }
-
         // Use this for initialization
     void Start ()
     {

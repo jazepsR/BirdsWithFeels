@@ -14,12 +14,13 @@ public static class Var  {
     public static int friendStraightGain = 2;
     public static int friendDiagGain = 1;
     public static int[] friendTable = new int[] { -2, 0, 2, 4, 6 };
-    public static Bird[] enemies = new Bird[5];
-    public static Bird[,] playerPos = new Bird[3,5];
+    public static Bird[] enemies = new Bird[4];
+    public static Bird[,] playerPos = new Bird[4,4];
     public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
     public static Text birdInfo;
     public static Text birdInfoHeading;
     public static Text birdInfoFeeling;
     public static int health = 3;
     public static List<BattleData> map = new List<BattleData>();
+    public static GameObject selectedBird;
 }
