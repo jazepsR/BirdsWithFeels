@@ -14,9 +14,9 @@ public class battleAnim :MonoBehaviour {
         Instance = this;
     }
 
-    public void AddData(Bird player, Bird enemy, int result, int line)
+    public void AddData(Bird player, Bird enemy, int result)
     {
-        battles.Add(new battleData(player, enemy, result, line));    
+        battles.Add(new battleData(player, enemy, result));    
     }
 
     public void Battle()
@@ -26,10 +26,10 @@ public class battleAnim :MonoBehaviour {
     }
 
 
-	void StartBattle(Bird player, int line)
+	void StartBattle(Bird player,Bird enemy)
     {
         
-        LeanTween.move(player.transform.gameObject, GuiContoler.Instance.battleTrag[line], 0.7f).setEase(LeanTweenType.easeInBack); 
+        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position), 0.7f).setEase(LeanTweenType.easeInBack); 
         
 
     }
@@ -39,7 +39,7 @@ public class battleAnim :MonoBehaviour {
         foreach (battleData battle in battles)
         {
 
-            StartBattle(battle.player, battle.line);
+            StartBattle(battle.player,battle.enemy);
             StartCoroutine(ShowResult(battle, 0.85f));
             yield return new WaitForSeconds(waitTime);
         }
@@ -81,14 +81,12 @@ class battleData
 {
     public Bird player;
     public Bird enemy;
-    public int result;
-    public int line;
+    public int result;    
 
-    public battleData(Bird player, Bird enemy, int result, int line)
+    public battleData(Bird player, Bird enemy, int result)
     {
         this.player = player;
         this.enemy = enemy;
-        this.result = result;
-        this.line = line;
+        this.result = result;      
     }
 }

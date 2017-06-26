@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class GameLogic : MonoBehaviour {
 
 	public Button FightButton;
-
-	public GameObject friendlyBoost;
+    int DiceSize = 10;
+    public GameObject friendlyBoost;
 	public Transform boostHolder;
 	private Vector3 screenPosition = Vector3.zero;
 	public List<GameObject> battleResultHolders = new List<GameObject> ();   
@@ -109,17 +109,6 @@ public class GameLogic : MonoBehaviour {
 		LeanTween.scale (iconToShow, Vector3.zero, 0.25f)
 			.setEase (LeanTweenType.easeInBack);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-
-
-	}
-
-
-
-
-
 
 
 	public void OnClearFeedbackQuick()
@@ -137,31 +126,48 @@ public class GameLogic : MonoBehaviour {
 		}
 	}
 
+    public float GetBonus(Bird playerBird, Bird enemyBird)
+    {
+        float winBonus = 0.0f;
+        winBonus = winBonus + playerBird.getBonus() - enemyBird.getBonus();
 
+
+        if (Bird1Win(playerBird, enemyBird))
+            winBonus += 4;
+
+        if (Bird1Win(enemyBird, playerBird))
+            winBonus -= 4;
+        return winBonus;
+    }
 
 	public int Fight(Bird playerBird, Bird enemyBird)
 	{
-		if (Bird1Win(playerBird, enemyBird))
-		{
+        float winBonus = GetBonus(playerBird, enemyBird);
+        int playerRoll = Random.Range(0, DiceSize) + (int)winBonus;
+        int enemyroll = Random.Range(0, DiceSize);
+
+
+
+        if (playerRoll> enemyroll)
+        {
+            //Win
             playerBird.confidence += Var.confWinFight;
             return +1;
-            
-		}
-		if (Bird1Win(enemyBird, playerBird))
-		{
-            playerBird.confidence += Var.confLoseFight;
-			return -1;
-		}
-        float val = Random.Range(0f, 1f);
-        if (val > 0.5f)
-		{
-            playerBird.confidence += Var.confWinFight;
-            return +1;
-		}else
-		{
-            playerBird.confidence += Var.confLoseFight;
-            return -1;
-		}
+        }else
+        {
+            if(playerRoll < enemyroll)
+            {
+                //lose
+                playerBird.confidence += Var.confLoseFight;
+                return -1;
+            }else
+            {
+                //tie
+               return Fight(playerBird, enemyBird);
+            }
+        }
+
+        //Add confidence!!
 
 	}
 

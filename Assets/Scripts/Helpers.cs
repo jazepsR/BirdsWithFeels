@@ -34,6 +34,23 @@ public class Helpers : MonoBehaviour {
         }
     }
 
+    public Vector3 dirToVector(Bird.dir dir)
+    {
+        float increment = 0.7f;
+        switch (dir)
+        {
+            case Bird.dir.front:
+                return new Vector3(increment, 0);
+            case Bird.dir.bottom:
+                return new Vector3(0, -increment);
+            case Bird.dir.top:
+                return new Vector3(0, increment);
+            default:
+                return new Vector3(0, 0, 0);
+        }
+    }
+
+
     public int Findfirendlieness(int x,int y)
     {
         int sizeY = Var.playerPos.GetLength(1)-1;

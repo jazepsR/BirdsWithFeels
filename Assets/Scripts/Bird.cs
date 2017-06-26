@@ -13,7 +13,9 @@ public class Bird : MonoBehaviour
 	[HideInInspector]
 	public int prevFriend = 0;
 	public int friendliness = 0;
-	public Var.Em emotion;
+    int x = -1;
+    int y = -1;
+    public Var.Em emotion;
 	public string charName;
 	public Image src;    
 	public bool inUse = true;
@@ -25,44 +27,79 @@ public class Bird : MonoBehaviour
 	public Vector3 target;
 	public Vector3 home;
 	bool dragged = false;
-    [HideInInspector]
-    public firendLine lines;    
+	[HideInInspector]
+	public firendLine lines;
+	bool needsReset = false; 
+	public enum dir { top,front,bottom};
+	public dir position;
+	List<Bird> activeEnemies;
 	void Start()
 	{
-        lines = GetComponent<firendLine>();
+		activeEnemies = new List<Bird>();
+		lines = GetComponent<firendLine>();
 		home = transform.position;
 		target = transform.position;
 		SetEmotion();
 	}
-	/*  public void OnPointerDown(PointerEventData eventData)
-	  {
-		  if (birdPrefab != null) {
-			  GameLogic.Instance.OnDragBird(this);
-			  // Update text!
-			  showText ();
-			  GuiContoler.Instance.PortraitControl(portraitOrder,emotion);
-		  }
-	  }
+	
 
-	  public void OnPointerEnter(PointerEventData eventData)
-	  {
-		  if (birdPrefab != null) {
-			  showText ();
-			  GuiContoler.Instance.PortraitControl(portraitOrder,emotion);
-		  }
-	  }*/
+	public float getBonus()
+	{
+		return 0.0f;
+	}
 
 	void OnMouseOver()
 	{
+        
 		if (Input.GetMouseButtonDown(0))
 		{
-		   // Debug.Log("Bird Grabbed!");
+			for(int i = 0; i < Var.playerPos.GetLength(0); i++)
+			{
+				for(int j =0; j< Var.playerPos.GetLength(1); j++)
+				{
+
+					if(Var.playerPos[i,j] == this)
+					{						
+						Var.playerPos[i, j] = null;                     
+						break;
+					}
+				}
+			}            
+			target = home;
 			dragged = true;
 			Var.selectedBird = gameObject;
-            lines.RemoveLines();
+			lines.RemoveLines();
+			if (activeEnemies.Count > 0)
+			{
+				foreach (Bird enemy in activeEnemies)
+				{
+					enemy.GetComponent<feedBack>().HideFeedBack();
+				}
+				activeEnemies = new List<Bird>();
+			}
+
+            RemoveAllFeedBack();
+            x = -1;
+            y = -1;
 		}
+		// 1 frame delay
+		if (Input.GetMouseButtonUp(0))
+			needsReset = true;
+
+		if (needsReset)
+		{
+			needsReset = false;
+			Var.selectedBird = null;
+			dragged = false;
+			LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
+		}
+
 		showText();
 	}
+
+
+
+
 
 
 
@@ -188,12 +225,119 @@ public class Bird : MonoBehaviour
 		
 	}
 
-    public void ReleseBird(int x, int y)
+	public void ReleseBird(int x, int y)
+	{
+		Var.selectedBird = null;
+		dragged = false;
+		lines.DrawLines(x, y);
+		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
+		checkFeedback(x,y,x, Bird.dir.top);
+		checkFeedback(x, y, y + 4, dir.front);
+		checkFeedback(x, y, x + 8, dir.bottom);
+	   
+
+	}
+	public void checkFeedback(int x, int y,int pos, dir Dir)
+	{
+		Bird enemy = Var.enemies[pos];
+        this.x = x;
+        this.y = y;
+		if (enemy.inUse)
+		{
+			for(int i = 0; i< 4; i++)
+			{
+				if (Dir == dir.top)
+				{
+					if (i < y && Var.playerPos[x, i] != null)
+						return;
+				}
+				if (Dir == dir.front)
+				{
+					if (i > x && Var.playerPos[i, y]!= null)
+						return;
+
+				}
+				if(Dir == dir.bottom)
+				{
+					if (i > y && Var.playerPos[x, i] != null)
+						return;
+				}
+				
+			}
+
+            setFeedback(enemy);
+			activeEnemies.Add(enemy);
+		}
+	}
+
+    public void setFeedback(Bird enemy)
     {
-        Var.selectedBird = null;
-        dragged = false;
-        lines.DrawLines(x, y);
-        LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
+        float feedBack = GameLogic.Instance.GetBonus(this, enemy);
+        enemy.GetComponent<feedBack>().ShowFeedback(feedBack);
+    }
+
+    public void RemoveAllFeedBack()
+    {
+        if (x != -1)
+        {
+            RemoveFeedback(x, Bird.dir.top);
+            RemoveFeedback(y + 4, dir.front);
+            RemoveFeedback(x + 8, dir.bottom);
+        }
+
+    }
+	public void RemoveFeedback(int pos, dir Dir)
+    {
+        bool birdInfront = false;
+        //Check forward -> dont touch feedback
+        for (int i = 0; i < 4; i++)
+        {
+            if (Dir == dir.top && i < y && Var.playerPos[x, i] != null && Var.enemies[pos].inUse)
+            {                
+                    birdInfront = true;
+            }
+            if (Dir == dir.front && i > x && Var.playerPos[i, y] != null && Var.enemies[pos].inUse)
+            {
+                    birdInfront = true;
+            }
+            if (Dir == dir.bottom && i > y && Var.playerPos[x, i] != null && Var.enemies[pos].inUse)
+            {
+                    birdInfront = true;
+            }
+        }
+        //Check backward -> that sets feedback
+        for (int i = 0; i < 4; i++)
+        {
+            if (Dir == dir.top)
+            {
+                if (i > y && Var.playerPos[x,  i] != null && Var.enemies[pos].inUse)
+                {
+                    Var.playerPos[x, i].setFeedback(Var.enemies[pos]);
+                    return;
+                }
+            }
+            if (Dir == dir.front)
+            {
+                if ( i < x && Var.playerPos[i, y] != null && Var.enemies[pos].inUse)
+                {
+                    Var.playerPos[i,y].setFeedback(Var.enemies[pos]);
+                    return;
+                }
+            }
+            if (Dir == dir.bottom)
+            {
+                if (i < y && Var.playerPos[x, i] != null && Var.enemies[pos].inUse)
+                {
+                    Var.playerPos[x, i].setFeedback(Var.enemies[pos]);
+                    return;
+                }
+            }
+        }
+        // none in line, hide feedback
+        if (!birdInfront)
+        {
+            Var.enemies[pos].GetComponent<feedBack>().HideFeedBack();
+        }
     }
 
 

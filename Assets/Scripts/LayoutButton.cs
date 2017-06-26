@@ -21,41 +21,50 @@ public class LayoutButton : MonoBehaviour
     }
     void BirdEnter(Collider2D other)
     {
-        if (other.tag == "feet") {
+        if (other.tag == "feet" &&  Input.GetMouseButtonUp(0))
+        {
             Bird birdObj = other.transform.parent.GetComponent<Bird>();            
                 
-                /*if (currentBird != null)
+                if (currentBird != null && currentBird != birdObj)
                 {
-                    currentBird.target = currentBird.home;
-                }*/
+                    currentBird.target = birdObj.target;
+                   /* Vector3 tempHome = currentBird.home;
+                    currentBird.home = birdObj.home;
+                    birdObj.home = tempHome;*/
+                    LeanTween.move(currentBird.gameObject, new Vector3(currentBird.target.x, currentBird.target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
+                }
 
                 birdObj.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
-                currentBird = birdObj;               
-                Debug.Log("etered)");
-            }
+                currentBird = birdObj;
+                Var.playerPos[(int)index.x, (int)index.y] = currentBird;
+                currentBird.ReleseBird((int)index.x, (int)index.y);
+                GameLogic.Instance.CanWeFight();            
+        }
         
     }
-
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "feet")
-        {
-            Bird birdObj = other.transform.parent.GetComponent<Bird>();
-            birdObj.target = birdObj.home;
-            if (currentBird != null)
-            {
-                Var.playerPos[(int)index.y, (int)index.x] = null;
-            }
-            currentBird = null;          
-            Debug.Log("Exited");       
-        }
-    }
+        currentBird = null;
+    }       /* void OnTriggerExit2D(Collider2D other)
+         {
+             if (other.tag == "feet")
+             {
+                 Bird birdObj = other.transform.parent.GetComponent<Bird>();
+                 birdObj.target = birdObj.home;
+                 if (currentBird != null)
+                 {
+                     Var.playerPos[(int)index.y, (int)index.x] = null;
+                 }
+                 currentBird = null;          
+                 Debug.Log("Exited");       
+             }
+         }*/
 
 
-    void Update()
+        void Update()
     {
         hasBird = (currentBird != null);
-        if (Input.GetMouseButtonUp(0) && currentBird != null)
+       /* if (Input.GetMouseButtonUp(0) && currentBird != null)
         {
             Var.playerPos[(int)index.y, (int)index.x] = currentBird;
             if (currentBird.gameObject == Var.selectedBird)
@@ -63,7 +72,7 @@ public class LayoutButton : MonoBehaviour
                 currentBird.ReleseBird((int)index.y, (int)index.x);
                 GameLogic.Instance.CanWeFight();
             }
-        }
+        }*/
      
     }
 }

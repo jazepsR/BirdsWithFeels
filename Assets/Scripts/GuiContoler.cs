@@ -8,7 +8,6 @@ public class GuiContoler : MonoBehaviour {
 	public Text infoText;
 	public Text infoHeading;
 	public Text infoFeeling;
-	public GameObject[] enemies;
 	public Image[] tiles;
 	public Text reportText;
 	public GameObject report;
@@ -16,20 +15,20 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject loseBanner;
 	public GameObject winBanner;
 	public GameObject[] portraits;
-    public Transform[] battleTrag;
-    int roundLength = 3;
+	public Transform[] battleTrag;
+	int roundLength = 3;
 	Var.Em currentMapArea;
 	Var.Em nextMapArea;
 	int posInMapRound = 1;
 	int mapPos = 0;
-    private int finalResult = 0;
-    public GameObject graph;
+	private int finalResult = 0;
+	public GameObject graph;
 	public Text winText;
 	public Text winDetails;
 	public Text feedbackText;
 	public GameObject battlePanel;
 	public GuiMap mapBirdScript;
-    List<Bird> players = new List<Bird>();
+	List<Bird> players = new List<Bird>();
 	void Awake()
 	{
 		Var.birdInfo = infoText;
@@ -69,7 +68,7 @@ public class GuiContoler : MonoBehaviour {
 		{
 			Destroy(child.gameObject);
 		}
-        Reset();
+		Reset();
 	}
 
 	public void CreateReport()
@@ -87,7 +86,7 @@ public class GuiContoler : MonoBehaviour {
 
 			//Normalize bird stats
 			if (bird.confidence > 12)
-                bird.confidence = 12;
+				bird.confidence = 12;
 			if (bird.confidence < -12)
 				bird.confidence = -12;
 			if (bird.friendliness > 12)
@@ -104,11 +103,11 @@ public class GuiContoler : MonoBehaviour {
 		}
 
 
-        if (finalResult < 0)
-        {
-            UpdateHearts(--Var.health);
-        }
-        string feedBackString = "";
+		if (finalResult < 0)
+		{
+			UpdateHearts(--Var.health);
+		}
+		string feedBackString = "";
 			if (currentMapArea != nextMapArea)
 			{
 				feedBackString += nextMapArea + " birds coming in " + (roundLength - posInMapRound) + " battles!"; 
@@ -147,7 +146,7 @@ public class GuiContoler : MonoBehaviour {
 			}
 		}
 	}
-    
+	
 	public void Fight()
 	{
 
@@ -155,80 +154,112 @@ public class GuiContoler : MonoBehaviour {
 		int result = 0;
 		Bird playerBird = null;
 
-		int lineY = 0;
+	
 	   
 
 	   for (int i = 0; i <Var.enemies.Length; i++)
 	   {
-			if (enemies[i].GetComponent<Bird>().inUse)
+			if (Var.enemies[i].inUse)
 			{
 				for (int j = 0; j < 4; j++)
 				{
-					if (Var.playerPos[j, i] != null)
-					{
-						playerBird = Var.playerPos[j, i];
-                        players.Add(playerBird);
-						playerBird.friendliness += Helpers.Instance.Findfirendlieness(j, i);					
-						lineY = i;
 
-						break;
-					}
+                    if (Var.enemies[i].position == Bird.dir.front)
+                    {
+                        if (Var.playerPos[3-j, i%4] != null)
+                        {
+                            playerBird = Var.playerPos[3-j, i%4];
+                            if (!players.Contains(playerBird))
+                            {
+                                players.Add(playerBird);
+                                playerBird.friendliness += Helpers.Instance.Findfirendlieness(3-j,i%4);
+                            }
+                            break;
+                        }
+                    }
+                    if (Var.enemies[i].position == Bird.dir.top)
+                    {
+                        if (Var.playerPos[i%4, j] != null)
+                        {
+                            playerBird = Var.playerPos[i%4, j];
+                            if (!players.Contains(playerBird))
+                            {
+                                players.Add(playerBird);
+                                playerBird.friendliness += Helpers.Instance.Findfirendlieness( i%4, j);
+                            }                           
 
-				}
+                            break;
+                        }
+
+                    }
+                    if (Var.enemies[i].position == Bird.dir.bottom)
+                    {
+                        if (Var.playerPos[i % 4, 3 - j] != null)
+                        {
+                            playerBird = Var.playerPos[i % 4, 3 - j];
+                            if (!players.Contains(playerBird))
+                            {
+                                players.Add(playerBird);
+                                playerBird.friendliness += Helpers.Instance.Findfirendlieness(i % 4, 3 - j);
+                            }
+
+                            break;
+                        }
+
+                    }
+
+                }
 
 				int resultOfBattle = GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
 
-                // Fight Logic
-                battleAnim.Instance.AddData(playerBird, Var.enemies[i], resultOfBattle, lineY);
+				// Fight Logic
+				battleAnim.Instance.AddData(playerBird, Var.enemies[i], resultOfBattle);
 				result += resultOfBattle;
 
 
-            }
+			}
 
-	    }
+		}
+	   foreach(Bird bird in players)
+		{
+			bird.gameObject.GetComponent<firendLine>().RemoveLines();
+		}
 
-        battleAnim.Instance.Battle();
 
 
-
-		// We continue after battle visualisation
-
-		// Clear the lines from screen!
-		//GameLogic.Instance.OnClearFeedbackQuick();
-
-		//BattleAction.Instance.OnStartBattle();
+		battleAnim.Instance.Battle();        
 		finalResult = result;
-        
-        
+		
+		
 
-    }
-    
-    public void Reset()
+	}
+	
+	public void Reset()
 	{
 		Var.playerPos = new Bird[4, 4];
 		Var.enemies = new Bird[4];
-        foreach (Bird bird in players)
-        {
-            bird.SetEmotion();
-        }
-        foreach (Bird bird in players)
-        {
-            bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
-            bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
-            bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
-            bird.target = bird.home;
-            bird.transform.position = bird.home;
-        }
+		foreach (Bird bird in players)
+		{
+			bird.SetEmotion();
+		}
+		foreach (Bird bird in players)
+		{
+			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
+			bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
+			bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
+			bird.target = bird.home;
+			bird.transform.position = bird.home;
+		}
 
 
-        finalResult = 0;
-        players = new List<Bird>();
+		finalResult = 0;
+		players = new List<Bird>();
 
 
-        moveInMap();
-        BattleData Area = Var.map[mapPos];
+		moveInMap();
+		BattleData Area = Var.map[mapPos];
 		GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend);
-        GameLogic.Instance.CanWeFight();
+		GameLogic.Instance.CanWeFight();
 		
 		
 
