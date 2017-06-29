@@ -29,7 +29,7 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject battlePanel;
 	public GuiMap mapBirdScript;
 	List<Bird> players = new List<Bird>();
-	void Awake()
+	void Start()
 	{
 		Var.birdInfo = infoText;
 		Var.birdInfoHeading = infoHeading;
@@ -37,17 +37,15 @@ public class GuiContoler : MonoBehaviour {
 		if (Var.map.Count < 1)
 		{
 			Var.map.Add(new BattleData(Var.Em.Neutral));
-			Var.map.Add(new BattleData(Var.Em.Neutral));
+			//Var.map.Add(new BattleData(Var.Em.Neutral));
 			Var.map.Add(new BattleData(Var.Em.Lonely));
 			Var.map.Add(new BattleData(Var.Em.Friendly));            
 		}
+        GuiMap.Instance.CreateMap();
 		setMapLocation(0);
 		Instance = this;
 	}
-	// Use this for initialization
-	void Start () {
-		
-	}
+
 
 	void UpdateHearts(int health)
 	{

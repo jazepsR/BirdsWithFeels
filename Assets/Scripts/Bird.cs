@@ -29,6 +29,7 @@ public class Bird : MonoBehaviour
 	bool dragged = false;
 	[HideInInspector]
 	public firendLine lines;
+    public float level = 1;
 	bool needsReset = false; 
 	public enum dir { top,front,bottom};
 	public dir position;
@@ -45,7 +46,7 @@ public class Bird : MonoBehaviour
 
 	public float getBonus()
 	{
-		return 0.0f;
+        return level - 1;
 	}
 
 	void OnMouseOver()
