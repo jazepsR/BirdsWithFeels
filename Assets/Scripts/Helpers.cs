@@ -51,6 +51,16 @@ public class Helpers : MonoBehaviour {
     }
 
 
+
+    public float RandGaussian(float stdDev, float mean)
+    {
+        float u1 = Random.Range(0.0f, 1.0f);
+        float u2 = Random.Range(0.0f, 1.0f);
+        float randStdNormal = Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Sin(2.0f * Mathf.PI * u2);
+        return  mean + stdDev * randStdNormal;
+    }
+
+
     public int Findfirendlieness(int x,int y)
     {
         int sizeY = Var.playerPos.GetLength(1)-1;

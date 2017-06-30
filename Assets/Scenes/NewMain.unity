@@ -424,10 +424,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: -3.8, y: 3.6, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 0
+  isEnemy: 1
 --- !u!114 &74870158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,8 +705,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -318}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 0, y: -338}
+  m_SizeDelta: {x: 160, y: 57}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &149872832
 MonoBehaviour:
@@ -747,7 +748,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 373818711}
-        m_MethodName: ResetScene
+        m_MethodName: ReturnToMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1235,7 +1236,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start over
+  m_Text: To adventure map
 --- !u!222 &230648597
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1867,10 +1868,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: 6.67, y: 1.23, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 2
+  isEnemy: 1
 --- !u!114 &337799188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2230,6 +2232,7 @@ MonoBehaviour:
   lines: {fileID: 0}
   level: 0
   position: 0
+  isEnemy: 0
 --- !u!114 &374855093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2658,10 +2661,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: -7.18, y: 3.64, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 0
+  isEnemy: 1
 --- !u!114 &447389851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3045,10 +3049,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: 3.6, y: 3.5, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 0
+  isEnemy: 1
 --- !u!114 &528858649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3262,7 +3267,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: You managed to manipulate your squad to victory!
+  m_Text: You have completed this stage!
 --- !u!222 &578568452
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4192,10 +4197,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: -1.2, y: 3.64, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 1
+  isEnemy: 1
 --- !u!95 &740823788
 Animator:
   serializedVersion: 3
@@ -5116,10 +5122,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: -0.03, y: 1.18, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 2
+  isEnemy: 1
 --- !u!114 &844413167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7070,6 +7077,7 @@ MonoBehaviour:
   lines: {fileID: 0}
   level: 0
   position: 0
+  isEnemy: 0
 --- !u!114 &1230363284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9014,10 +9022,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: 0, y: 3.43, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 0
+  isEnemy: 1
 --- !u!114 &1660394610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9315,10 +9324,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: 10.53, y: 1.21, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 2
+  isEnemy: 1
 --- !u!114 &1676613503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9829,10 +9839,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: 3.14, y: 1.2, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 2
+  isEnemy: 1
 --- !u!114 &1699966607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10915,10 +10926,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: -0.2, y: -2.2, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 1
+  isEnemy: 1
 --- !u!95 &1862539792
 Animator:
   serializedVersion: 3
@@ -11005,10 +11017,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: -1, y: 0.47, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 1
+  isEnemy: 1
 --- !u!95 &1873808335
 Animator:
   serializedVersion: 3
@@ -11590,10 +11603,11 @@ MonoBehaviour:
   portrait: {fileID: 0}
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
-  home: {x: 0, y: 0, z: 0}
+  home: {x: 0.4, y: -5.64, z: 0}
   lines: {fileID: 0}
   level: 0
   position: 1
+  isEnemy: 1
 --- !u!95 &1996505567
 Animator:
   serializedVersion: 3
@@ -12217,6 +12231,7 @@ MonoBehaviour:
   lines: {fileID: 0}
   level: 0
   position: 0
+  isEnemy: 0
 --- !u!114 &2101874053
 MonoBehaviour:
   m_ObjectHideFlags: 0

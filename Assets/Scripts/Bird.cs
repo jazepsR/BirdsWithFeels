@@ -34,11 +34,15 @@ public class Bird : MonoBehaviour
 	public enum dir { top,front,bottom};
 	public dir position;
 	List<Bird> activeEnemies;
+    public bool isEnemy = true;
 	void Start()
 	{
 		activeEnemies = new List<Bird>();
 		lines = GetComponent<firendLine>();
-		home = transform.position;
+        if (isEnemy)
+            home = transform.localPosition;
+        else
+            home = transform.position;
 		target = transform.position;
 		SetEmotion();
 	}

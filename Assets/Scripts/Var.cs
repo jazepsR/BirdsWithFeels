@@ -22,5 +22,22 @@ public static class Var  {
     public static Text birdInfoFeeling;
     public static int health = 3;
     public static List<BattleData> map = new List<BattleData>();
-    public static GameObject selectedBird;
+    public static List<MapSaveData>mapSaveData = new List<MapSaveData>();
+    public static GameObject selectedBird;    
+    public static int currentStageID = -1;
+}
+
+public class MapSaveData
+{
+    public int ID;
+    public List<int> targets;
+    public bool completed;
+    public bool available;
+    public MapSaveData(bool completed, bool available, int ID, List<int> targets)
+    { 
+        this.completed = completed;
+        this.available = available;
+        this.ID = ID;
+        this.targets = targets;
+    }
 }

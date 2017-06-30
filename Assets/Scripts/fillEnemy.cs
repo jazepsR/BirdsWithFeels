@@ -48,6 +48,7 @@ public class fillEnemy : MonoBehaviour {
             }
                 usedPos.Add(enemyPos);
                 Bird enemy = Enemies[enemyPos].GetComponent<Bird>();
+               
                 if (enemy.position == Bird.dir.front)
                     frontBirds++;
                 enemy.confidence = (int)Random.Range(minConf, maxConf);
@@ -55,8 +56,8 @@ public class fillEnemy : MonoBehaviour {
                 enemy.SetEmotion();
                 Enemies[enemyPos].SetActive(true);
                 enemy.inUse = true;
-                
-            }
+                enemy.transform.localPosition = enemy.home;
+        }
         
         
     } 

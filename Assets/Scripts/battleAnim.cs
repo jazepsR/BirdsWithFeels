@@ -43,10 +43,8 @@ public class battleAnim :MonoBehaviour {
             StartCoroutine(ShowResult(battle, 0.85f));
             yield return new WaitForSeconds(waitTime);
         }
-        battles = new List<battleData>();
-
+        battles = new List<battleData>();      
         yield return new WaitForSeconds(0.85f);
-
         GuiContoler.Instance.CreateReport();
     }
 

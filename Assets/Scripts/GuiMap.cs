@@ -15,6 +15,11 @@ public class GuiMap : MonoBehaviour {
     {
         
         Instance = this;
+        if (Var.map.Count == 0)
+        {
+            Var.map.Add(new BattleData(Var.Em.Neutral));
+            Var.map.Add(new BattleData(Var.Em.finish));
+        }
     }
 
     public void MoveMapBird(int pos)
@@ -27,13 +32,14 @@ public class GuiMap : MonoBehaviour {
 
     public void CreateMap()
     {
-        dist = Mathf.Abs(start.position.x - finish.position.x)/(Var.map.Count*3);
+        dist = Mathf.Abs(start.position.x - finish.position.x)/((Var.map.Count-1)*3);
         foreach (BattleData part in Var.map)
         {
-            DrawCircles(part.type);
+            if(part.type!= Var.Em.finish)
+                DrawCircles(part.type);
         }
         Instantiate(cup, finish.position,Quaternion.identity);
-        MoveMapBird(2);
+       
     }
 
     void DrawCircles(Var.Em emotion)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
@@ -19,7 +20,7 @@ public class GuiContoler : MonoBehaviour {
 	int roundLength = 3;
 	Var.Em currentMapArea;
 	Var.Em nextMapArea;
-	int posInMapRound = 1;
+	int posInMapRound = 0;
 	int mapPos = 0;
 	private int finalResult = 0;
 	public GameObject graph;
@@ -33,18 +34,11 @@ public class GuiContoler : MonoBehaviour {
 	{
 		Var.birdInfo = infoText;
 		Var.birdInfoHeading = infoHeading;
-		Var.birdInfoFeeling = infoFeeling;
-		if (Var.map.Count < 1)
-		{
-			Var.map.Add(new BattleData(Var.Em.Neutral));
-			//Var.map.Add(new BattleData(Var.Em.Neutral));
-			Var.map.Add(new BattleData(Var.Em.Lonely));
-			Var.map.Add(new BattleData(Var.Em.Friendly));            
-		}
+		Var.birdInfoFeeling = infoFeeling;		
         GuiMap.Instance.CreateMap();
 		setMapLocation(0);
-		Instance = this;
-	}
+		Instance = this;        
+    }
 
 
 	void UpdateHearts(int health)
@@ -61,7 +55,7 @@ public class GuiContoler : MonoBehaviour {
 
 		graph.SetActive(false);
 		battlePanel.SetActive(true);
-		mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound);
+		mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound+1);
 		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
 		{
 			Destroy(child.gameObject);
@@ -112,7 +106,7 @@ public class GuiContoler : MonoBehaviour {
 			}
 			if(nextMapArea == Var.Em.finish)
 		{
-			feedBackString = "Victory in " + (roundLength - posInMapRound) + " battles!";
+			feedBackString = "Victory in " + (roundLength - posInMapRound-1) + " battles!";
 		}
 			feedbackText.text = feedBackString;
 
@@ -147,8 +141,12 @@ public class GuiContoler : MonoBehaviour {
 	
 	public void Fight()
 	{
-
-		Debug.Log("Fight selected");
+        feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
+        foreach (feedBack fb in feedBackObj)
+        {
+            fb.HideFeedBack();
+        }
+        Debug.Log("Fight selected");
 		int result = 0;
 		Bird playerBird = null;
 
@@ -231,11 +229,37 @@ public class GuiContoler : MonoBehaviour {
 		
 
 	}
-	
+	public void ReturnToMap()
+    {
+        if(Var.currentStageID != -1)
+        {
+            foreach(MapSaveData data in Var.mapSaveData)
+            {
+                if(data.ID == Var.currentStageID)
+                {
+                    data.completed = true;
+                    foreach(int id in data.targets)
+                    {
+                        foreach(MapSaveData targ in Var.mapSaveData)
+                        {
+                            if(targ.ID == id)
+                            {
+                                targ.available = true;
+                                break;
+                            }
+                        }
+                        
+                    }
+                    break;
+                }
+            }
+        }
+        SceneManager.LoadScene("Map");
+    }
 	public void Reset()
 	{
 		Var.playerPos = new Bird[4, 4];
-		Var.enemies = new Bird[4];
+		Var.enemies = new Bird[12];
 		foreach (Bird bird in players)
 		{
 			bird.SetEmotion();
