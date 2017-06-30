@@ -23,22 +23,24 @@ public class LayoutButton : MonoBehaviour
     {
         if (other.tag == "feet" &&  Input.GetMouseButtonUp(0))
         {
-            Bird birdObj = other.transform.parent.GetComponent<Bird>();            
-                
+            Bird birdObj = other.transform.parent.GetComponent<Bird>();
+            if (birdObj.gameObject == Var.selectedBird)
+            {
                 if (currentBird != null && currentBird != birdObj)
                 {
                     currentBird.target = birdObj.target;
-                   /* Vector3 tempHome = currentBird.home;
-                    currentBird.home = birdObj.home;
-                    birdObj.home = tempHome;*/
+                    /* Vector3 tempHome = currentBird.home;
+                     currentBird.home = birdObj.home;
+                     birdObj.home = tempHome;*/
                     LeanTween.move(currentBird.gameObject, new Vector3(currentBird.target.x, currentBird.target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
                 }
-
+                Debug.Log("CollisionDetected!");
                 birdObj.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
                 currentBird = birdObj;
                 Var.playerPos[(int)index.x, (int)index.y] = currentBird;
                 currentBird.ReleseBird((int)index.x, (int)index.y);
-                GameLogic.Instance.CanWeFight();            
+                GameLogic.Instance.CanWeFight();
+            }         
         }
         
     }
