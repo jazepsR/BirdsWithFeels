@@ -23,7 +23,8 @@ public static class Var  {
     public static int health = 3;
     public static List<BattleData> map = new List<BattleData>();
     public static List<MapSaveData>mapSaveData = new List<MapSaveData>();
-    public static GameObject selectedBird;    
+    public static GameObject selectedBird;
+    public static List<Bird> activeBirds = new List<Bird>();
     public static int currentStageID = -1;
 }
 

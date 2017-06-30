@@ -21,7 +21,7 @@ public class GuiContoler : MonoBehaviour {
 	Var.Em currentMapArea;
 	Var.Em nextMapArea;
 	int posInMapRound = 0;
-	int mapPos = 0;
+	public static int mapPos = 0;
 	private int finalResult = 0;
 	public GameObject graph;
 	public Text winText;
@@ -282,8 +282,9 @@ public class GuiContoler : MonoBehaviour {
 		BattleData Area = Var.map[mapPos];
 		GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend);
 		GameLogic.Instance.CanWeFight();
-		
-		
+
+        ObstacleGenerator.Instance.clearObstacles();
+        ObstacleGenerator.Instance.GenerateObstacles();
 
 	}
 	void setMapLocation(int index)
@@ -320,11 +321,6 @@ public class GuiContoler : MonoBehaviour {
 		}
 		
 	}
-	
-	public void ResetScene()
-	{
-		Reset();
-		Application.LoadLevel(Application.loadedLevel);
-	}
+		
 
 }

@@ -12,6 +12,7 @@ public class MapIcon : MonoBehaviour {
     public MapIcon[] targets;
     LineRenderer lr;
     public bool completed = false;
+    public bool hasObstacles;
     public bool available;
     Image sr;
     public int ID;
@@ -87,7 +88,7 @@ public class MapIcon : MonoBehaviour {
             {
                 AddStageToLevel(type);              
             }
-            Var.map.Add(new BattleData(Var.Em.finish));
+            Var.map.Add(new BattleData(Var.Em.finish,hasObstacles));
             Var.currentStageID = ID;
             SceneManager.LoadScene("NewMain");
         }
@@ -100,10 +101,10 @@ public class MapIcon : MonoBehaviour {
         emotions.Remove(emotion);
         if (Random.Range(0f, 1f) < 0.7f)
         {
-            Var.map.Add(new BattleData(emotion));
+            Var.map.Add(new BattleData(emotion,hasObstacles));
         }else
         {
-            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)]));
+            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)],hasObstacles));
         }
     }
 }

@@ -37,12 +37,18 @@ public class Bird : MonoBehaviour
     public bool isEnemy = true;
 	void Start()
 	{
+
 		activeEnemies = new List<Bird>();
 		lines = GetComponent<firendLine>();
         if (isEnemy)
+        {
             home = transform.localPosition;
+        }
         else
+        {
             home = transform.position;
+            LoadStats();
+        }
 		target = transform.position;
 		SetEmotion();
 	}
@@ -52,6 +58,32 @@ public class Bird : MonoBehaviour
 	{
         return level - 1;
 	}
+    void LoadStats()
+    {
+        bool SaveDataCreated = false;
+        Bird savedData = null;
+        foreach (Bird data in Var.activeBirds)
+        {
+            if (data.charName == charName)
+            {
+                SaveDataCreated = true;
+                savedData = data;
+                break;
+            }
+        }
+
+
+        if (!SaveDataCreated)
+        {
+            Var.activeBirds.Add(this);            
+        }
+        else
+        {
+            confidence = savedData.confidence;
+            friendliness = savedData.friendliness;
+        }
+    }
+        
 
 	void OnMouseOver()
 	{
@@ -203,6 +235,17 @@ public class Bird : MonoBehaviour
 			}
 
 		}
+        if (!isEnemy)
+        {
+            for(int i =0;i<Var.activeBirds.Count;i++)
+            {
+                if(Var.activeBirds[i].charName == charName)
+                {
+                    Var.activeBirds[i] = this;
+                    break;
+                }
+            }
+        }
 	  
 	}
 	

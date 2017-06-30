@@ -17,8 +17,8 @@ public class GuiMap : MonoBehaviour {
         Instance = this;
         if (Var.map.Count == 0)
         {
-            Var.map.Add(new BattleData(Var.Em.Neutral));
-            Var.map.Add(new BattleData(Var.Em.finish));
+            Var.map.Add(new BattleData(Var.Em.Neutral,true));
+            Var.map.Add(new BattleData(Var.Em.finish,false));
         }
     }
 

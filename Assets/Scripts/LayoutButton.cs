@@ -8,16 +8,19 @@ public class LayoutButton : MonoBehaviour
     public Vector2 index = new Vector2(0, 0);  
     Bird currentBird = null;
     public bool hasBird;
-
+    [HideInInspector]
+    public bool isActive = true;
     void OnTriggerEnter2D(Collider2D other)
     {
-        BirdEnter(other);
+        if(isActive)
+            BirdEnter(other);
     }
  
 
     void OnTriggerStay2D(Collider2D other)
     {
-        BirdEnter(other);
+        if (isActive)
+            BirdEnter(other);
     }
     void BirdEnter(Collider2D other)
     {
