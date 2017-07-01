@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//using System.Linq;
 using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
@@ -166,8 +167,7 @@ public class GuiContoler : MonoBehaviour {
                         {
                             playerBird = Var.playerPos[3-j, i%4];
                             if (!players.Contains(playerBird))
-                            {
-                                players.Add(playerBird);
+                            {                                
                                 playerBird.friendliness += Helpers.Instance.Findfirendlieness(3-j,i%4);
                             }
                             break;
@@ -179,8 +179,7 @@ public class GuiContoler : MonoBehaviour {
                         {
                             playerBird = Var.playerPos[i%4, j];
                             if (!players.Contains(playerBird))
-                            {
-                                players.Add(playerBird);
+                            {                                
                                 playerBird.friendliness += Helpers.Instance.Findfirendlieness( i%4, j);
                             }                           
 
@@ -195,7 +194,6 @@ public class GuiContoler : MonoBehaviour {
                             playerBird = Var.playerPos[i % 4, 3 - j];
                             if (!players.Contains(playerBird))
                             {
-                                players.Add(playerBird);
                                 playerBird.friendliness += Helpers.Instance.Findfirendlieness(i % 4, 3 - j);
                             }
 
@@ -216,6 +214,12 @@ public class GuiContoler : MonoBehaviour {
 			}
 
 		}
+        Bird[] birds = FindObjectsOfType(typeof(Bird)) as Bird[];
+        foreach(Bird bird in birds)
+        {
+            if (!bird.isEnemy)
+                players.Add(bird);
+        }
 	   foreach(Bird bird in players)
 		{
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();

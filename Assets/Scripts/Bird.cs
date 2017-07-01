@@ -35,6 +35,10 @@ public class Bird : MonoBehaviour
 	public dir position;
 	List<Bird> activeEnemies;
     public bool isEnemy = true;
+   // [HideInInspector]
+    public int friendBoost = 0;
+   // [HideInInspector]
+    public int confBoos = 0;
 	void Start()
 	{
 
@@ -103,6 +107,8 @@ public class Bird : MonoBehaviour
 				}
 			}            
 			target = home;
+            confBoos = 0;
+            friendBoost = 0;
 			dragged = true;
 			Var.selectedBird = gameObject;
 			lines.RemoveLines();
@@ -175,7 +181,14 @@ public class Bird : MonoBehaviour
 	{       
 		prevConf = confidence;
 		prevFriend = friendliness;
-		
+        if (confBoos != 0)
+        {
+            int i = 0;
+        }
+        friendliness += friendBoost;
+        confidence += confBoos;
+        confBoos = 0;
+        friendBoost = 0;
 		if(Mathf.Abs((float)confidence)<Var.lvl1 && Mathf.Abs((float)friendliness) < Var.lvl1)
 		{
 			//No type
@@ -246,6 +259,7 @@ public class Bird : MonoBehaviour
                 }
             }
         }
+        
 	  
 	}
 	

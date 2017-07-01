@@ -12,10 +12,15 @@ public class MapIcon : MonoBehaviour {
     public MapIcon[] targets;
     LineRenderer lr;
     public bool completed = false;
-    public bool hasObstacles;
+    
     public bool available;
     Image sr;
     public int ID;
+    public bool hasObstacles;
+    public bool hasScaredPowerUps;
+    public bool hasFirendlyPowerUps;
+    public bool hasConfidentPowerUps;
+    public bool hasLonelyPwerUps;
     MapSaveData mySaveData;
     // Use this for initialization
     void Start() {
@@ -88,7 +93,7 @@ public class MapIcon : MonoBehaviour {
             {
                 AddStageToLevel(type);              
             }
-            Var.map.Add(new BattleData(Var.Em.finish,hasObstacles));
+            Var.map.Add(new BattleData(Var.Em.finish,hasObstacles,new List<Var.Em>() ));
             Var.currentStageID = ID;
             SceneManager.LoadScene("NewMain");
         }
@@ -99,12 +104,25 @@ public class MapIcon : MonoBehaviour {
     {
         List<Var.Em> emotions = new List<Var.Em> { Var.Em.Confident, Var.Em.Friendly, Var.Em.Lonely, Var.Em.Scared, Var.Em.Neutral };
         emotions.Remove(emotion);
-        if (Random.Range(0f, 1f) < 0.7f)
+        if (Random.Range(0f, 1f) < 0.8f)
         {
-            Var.map.Add(new BattleData(emotion,hasObstacles));
+            Var.map.Add(new BattleData(emotion,hasObstacles,PowerTileList()));
         }else
         {
-            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)],hasObstacles));
+            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)],hasObstacles,PowerTileList()));
         }
+    }
+    List<Var.Em> PowerTileList()
+    {
+        List<Var.Em> list = new List<Var.Em>();
+        if (hasFirendlyPowerUps)
+            list.Add(Var.Em.Friendly);
+        if (hasConfidentPowerUps)
+            list.Add(Var.Em.Lonely);
+        if (hasLonelyPwerUps)
+            list.Add(Var.Em.Lonely);
+        if (hasScaredPowerUps)
+            list.Add(Var.Em.Scared);
+        return list;
     }
 }
