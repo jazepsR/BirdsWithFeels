@@ -20,6 +20,7 @@ public class fillEnemy : MonoBehaviour {
         foreach(GameObject enemy in Enemies)
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
+            enemy.GetComponent<feedBack>().myIndex = index % 4;
             enemy.GetComponent<Bird>().inUse = false;
             enemy.SetActive(false);
             index++;

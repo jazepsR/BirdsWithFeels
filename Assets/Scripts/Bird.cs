@@ -32,17 +32,16 @@ public class Bird : MonoBehaviour
     public float level = 1;
 	bool needsReset = false; 
 	public enum dir { top,front,bottom};
-	public dir position;
-	List<Bird> activeEnemies;
+	public dir position;	
     public bool isEnemy = true;
-   // [HideInInspector]
+    [HideInInspector]
     public int friendBoost = 0;
-   // [HideInInspector]
+    [HideInInspector]
     public int confBoos = 0;
 	void Start()
 	{
 
-		activeEnemies = new List<Bird>();
+		
 		lines = GetComponent<firendLine>();
         if (isEnemy)
         {
@@ -112,16 +111,9 @@ public class Bird : MonoBehaviour
 			dragged = true;
 			Var.selectedBird = gameObject;
 			lines.RemoveLines();
-			if (activeEnemies.Count > 0)
-			{
-				foreach (Bird enemy in activeEnemies)
-				{
-					enemy.GetComponent<feedBack>().HideFeedBack();
-				}
-				activeEnemies = new List<Bird>();
-			}
+            GameLogic.Instance.UpdateFeedback();
 
-            RemoveAllFeedBack();
+           // RemoveAllFeedBack();
             x = -1;
             y = -1;
 		}
@@ -293,114 +285,12 @@ public class Bird : MonoBehaviour
 		dragged = false;
 		lines.DrawLines(x, y);
 		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
-		checkFeedback(x,y,x, Bird.dir.top);
-		checkFeedback(x, y, y + 4, dir.front);
-		checkFeedback(x, y, x + 8, dir.bottom);
+        GameLogic.Instance.UpdateFeedback();
+		
 	   
 
 	}
-	public void checkFeedback(int x, int y,int pos, dir Dir)
-	{
-		Bird enemy = Var.enemies[pos];
-        this.x = x;
-        this.y = y;
-		if (enemy.inUse)
-		{
-			for(int i = 0; i< 4; i++)
-			{
-				if (Dir == dir.top)
-				{
-					if (i < y && Var.playerPos[x, i] != null)
-						return;
-				}
-				if (Dir == dir.front)
-				{
-					if (i > x && Var.playerPos[i, y]!= null)
-						return;
-
-				}
-				if(Dir == dir.bottom)
-				{
-					if (i > y && Var.playerPos[x, i] != null)
-						return;
-				}
-				
-			}
-
-            setFeedback(enemy);
-			activeEnemies.Add(enemy);
-		}
-	}
-
-    public void setFeedback(Bird enemy)
-    {
-        float feedBack = GameLogic.Instance.GetBonus(this, enemy);
-        enemy.GetComponent<feedBack>().ShowFeedback(feedBack);
-    }
-
-    public void RemoveAllFeedBack()
-    {
-        if (x != -1)
-        {
-            RemoveFeedback(x, Bird.dir.top);
-            RemoveFeedback(y + 4, dir.front);
-            RemoveFeedback(x + 8, dir.bottom);
-        }
-
-    }
-	public void RemoveFeedback(int pos, dir Dir)
-    {
-        bool birdInfront = false;
-        //Check forward -> dont touch feedback
-        for (int i = 0; i < 4; i++)
-        {
-            if (Dir == dir.top && i < y && Var.playerPos[x, i] != null && Var.enemies[pos].inUse)
-            {                
-                    birdInfront = true;
-            }
-            if (Dir == dir.front && i > x && Var.playerPos[i, y] != null && Var.enemies[pos].inUse)
-            {
-                    birdInfront = true;
-            }
-            if (Dir == dir.bottom && i > y && Var.playerPos[x, i] != null && Var.enemies[pos].inUse)
-            {
-                    birdInfront = true;
-            }
-        }
-        //Check backward -> that sets feedback
-        for (int i = 0; i < 4; i++)
-        {
-            if (Dir == dir.top)
-            {
-                if (i > y && Var.playerPos[x,  i] != null && Var.enemies[pos].inUse)
-                {
-                    Var.playerPos[x, i].setFeedback(Var.enemies[pos]);
-                    return;
-                }
-            }
-            if (Dir == dir.front)
-            {
-                if ( i < x && Var.playerPos[i, y] != null && Var.enemies[pos].inUse)
-                {
-                    Var.playerPos[i,y].setFeedback(Var.enemies[pos]);
-                    return;
-                }
-            }
-            if (Dir == dir.bottom)
-            {
-                if (i < y && Var.playerPos[x, i] != null && Var.enemies[pos].inUse)
-                {
-                    Var.playerPos[x, i].setFeedback(Var.enemies[pos]);
-                    return;
-                }
-            }
-        }
-        // none in line, hide feedback
-        if (!birdInfront)
-        {
-            Var.enemies[pos].GetComponent<feedBack>().HideFeedBack();
-        }
-    }
+    
 
 
 }
