@@ -187,7 +187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &22388340
 RectTransform:
   m_ObjectHideFlags: 0
@@ -415,6 +415,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: 0
+  health: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -429,6 +430,8 @@ MonoBehaviour:
   level: 0
   position: 0
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &74870158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,6 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 790715879}
+  myIndex: 0
 --- !u!1 &78363051
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +625,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 8dd38aa92e39f9345996bdd9274ce23f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1923,6 +1927,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: -5
+  health: 0
   emotion: 1
   charName: Enemy
   src: {fileID: 0}
@@ -1937,6 +1942,8 @@ MonoBehaviour:
   level: 0
   position: 2
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &337799188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1949,6 +1956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 19181706}
+  myIndex: 0
 --- !u!4 &338566999 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4167882051172850, guid: 0d0c9d675d268854191357e0077af9c8,
@@ -2314,6 +2322,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: -1
+  health: 3
   emotion: 0
   charName: Jess
   src: {fileID: 0}
@@ -2326,9 +2335,11 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 0, z: 0}
   lines: {fileID: 0}
-  level: 0
+  level: 1
   position: 0
   isEnemy: 0
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &374855093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2635,6 +2646,7 @@ MonoBehaviour:
   index: {x: 3, y: 0}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &445814915
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2749,6 +2761,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: -2
+  health: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -2763,6 +2776,8 @@ MonoBehaviour:
   level: 0
   position: 0
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &447389851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2775,6 +2790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 2022420447}
+  myIndex: 0
 --- !u!4 &475692105 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4167882051172850, guid: 0d0c9d675d268854191357e0077af9c8,
@@ -2931,6 +2947,7 @@ MonoBehaviour:
   index: {x: 0, y: 3}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!1 &503109366
 GameObject:
   m_ObjectHideFlags: 0
@@ -3138,6 +3155,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: 3
+  health: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -3152,6 +3170,8 @@ MonoBehaviour:
   level: 0
   position: 0
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &528858649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3164,6 +3184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 1733507766}
+  myIndex: 0
 --- !u!1 &530049604
 GameObject:
   m_ObjectHideFlags: 0
@@ -3606,6 +3627,7 @@ MonoBehaviour:
   index: {x: 3, y: 1}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &634873344
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4079,7 +4101,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 80959d829dea51942bec9467df1bbb36, type: 3}
   m_Color: {r: 0.072988756, g: 0.5514706, b: 0.19508404, a: 1}
   m_FlipX: 0
@@ -4366,6 +4388,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: -2
+  health: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -4380,6 +4403,8 @@ MonoBehaviour:
   level: 0
   position: 1
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!95 &740823788
 Animator:
   serializedVersion: 3
@@ -4409,6 +4434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 707766856}
+  myIndex: 0
 --- !u!1 &742526309
 GameObject:
   m_ObjectHideFlags: 0
@@ -4617,6 +4643,7 @@ MonoBehaviour:
   index: {x: 3, y: 3}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!1001 &757100211
 Prefab:
   m_ObjectHideFlags: 0
@@ -4975,6 +5002,7 @@ MonoBehaviour:
   index: {x: 2, y: 3}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!4 &809060254 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4167882051172850, guid: 0d0c9d675d268854191357e0077af9c8,
@@ -5293,6 +5321,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: -2
+  health: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -5307,6 +5336,8 @@ MonoBehaviour:
   level: 0
   position: 2
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &844413167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5319,6 +5350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 904890546}
+  myIndex: 0
 --- !u!1 &845078827
 GameObject:
   m_ObjectHideFlags: 0
@@ -7160,6 +7192,7 @@ MonoBehaviour:
   index: {x: 2, y: 0}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &1214092661
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7244,6 +7277,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: 2
+  health: 3
   emotion: 0
   charName: Kim
   src: {fileID: 0}
@@ -7256,9 +7290,11 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 0, z: 0}
   lines: {fileID: 0}
-  level: 0
+  level: 1
   position: 0
   isEnemy: 0
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &1230363284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7926,6 +7962,7 @@ MonoBehaviour:
   index: {x: 1, y: 2}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &1425378352
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8200,6 +8237,7 @@ MonoBehaviour:
   index: {x: 0, y: 2}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &1545855417
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8683,6 +8721,7 @@ MonoBehaviour:
   index: {x: 2, y: 2}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &1629740605
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9197,6 +9236,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: -5
+  health: 0
   emotion: 1
   charName: Enemy
   src: {fileID: 0}
@@ -9211,6 +9251,8 @@ MonoBehaviour:
   level: 0
   position: 0
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &1660394610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9223,6 +9265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 743087177}
+  myIndex: 0
 --- !u!1 &1662019423
 GameObject:
   m_ObjectHideFlags: 0
@@ -9386,6 +9429,7 @@ MonoBehaviour:
   index: {x: 1, y: 0}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &1668163214
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9500,6 +9544,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: 3
+  health: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -9514,6 +9559,8 @@ MonoBehaviour:
   level: 0
   position: 2
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &1676613503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9526,6 +9573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 2128994777}
+  myIndex: 0
 --- !u!1 &1681188620
 GameObject:
   m_ObjectHideFlags: 0
@@ -10015,6 +10063,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: 0
+  health: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -10029,6 +10078,8 @@ MonoBehaviour:
   level: 0
   position: 2
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &1699966607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10041,6 +10092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 2125181632}
+  myIndex: 0
 --- !u!1 &1712172364
 GameObject:
   m_ObjectHideFlags: 0
@@ -10158,6 +10210,7 @@ MonoBehaviour:
   index: {x: 2, y: 1}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &1723473571
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10559,6 +10612,7 @@ MonoBehaviour:
   index: {x: 3, y: 2}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &1769142051
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10685,6 +10739,7 @@ MonoBehaviour:
   index: {x: 0, y: 0}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &1790903775
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10954,6 +11009,7 @@ MonoBehaviour:
   index: {x: 1, y: 3}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!1 &1846596680
 GameObject:
   m_ObjectHideFlags: 0
@@ -11106,6 +11162,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: -5
+  health: 0
   emotion: 1
   charName: Enemy
   src: {fileID: 0}
@@ -11120,6 +11177,8 @@ MonoBehaviour:
   level: 0
   position: 1
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!95 &1862539792
 Animator:
   serializedVersion: 3
@@ -11149,6 +11208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 1079079011}
+  myIndex: 0
 --- !u!1 &1873808332
 GameObject:
   m_ObjectHideFlags: 0
@@ -11197,6 +11257,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: 0
+  health: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -11211,6 +11272,8 @@ MonoBehaviour:
   level: 0
   position: 1
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!95 &1873808335
 Animator:
   serializedVersion: 3
@@ -11240,6 +11303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 1665926297}
+  myIndex: 0
 --- !u!1 &1905735760
 GameObject:
   m_ObjectHideFlags: 0
@@ -11378,6 +11442,7 @@ MonoBehaviour:
   index: {x: 1, y: 1}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &1913638255
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11784,6 +11849,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: 3
+  health: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -11798,6 +11864,8 @@ MonoBehaviour:
   level: 0
   position: 1
   isEnemy: 1
+  friendBoost: 0
+  confBoos: 0
 --- !u!95 &1996505567
 Animator:
   serializedVersion: 3
@@ -11827,6 +11895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedBackText: {fileID: 1691692165}
+  myIndex: 0
 --- !u!1 &2002520837
 GameObject:
   m_ObjectHideFlags: 0
@@ -11939,6 +12008,7 @@ MonoBehaviour:
   index: {x: 0, y: 1}
   hasBird: 0
   isActive: 1
+  power: {fileID: 0}
 --- !u!212 &2009402043
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12408,6 +12478,7 @@ MonoBehaviour:
   prevConf: 0
   prevFriend: 0
   friendliness: 3
+  health: 3
   emotion: 0
   charName: Terry
   src: {fileID: 0}
@@ -12420,9 +12491,11 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 0, z: 0}
   lines: {fileID: 0}
-  level: 0
+  level: 1
   position: 0
   isEnemy: 0
+  friendBoost: 0
+  confBoos: 0
 --- !u!114 &2101874053
 MonoBehaviour:
   m_ObjectHideFlags: 0

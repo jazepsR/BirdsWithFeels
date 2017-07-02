@@ -284,7 +284,7 @@ public class GuiContoler : MonoBehaviour {
 
 		moveInMap();
 		BattleData Area = Var.map[mapPos];
-		GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend);
+		GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend,Area.birdLVL);
 		GameLogic.Instance.CanWeFight();
 
         ObstacleGenerator.Instance.clearObstacles();

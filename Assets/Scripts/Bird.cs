@@ -13,6 +13,7 @@ public class Bird : MonoBehaviour
 	[HideInInspector]
 	public int prevFriend = 0;
 	public int friendliness = 0;
+    public int health = 3;
     int x = -1;
     int y = -1;
     public Var.Em emotion;
@@ -146,11 +147,21 @@ public class Bird : MonoBehaviour
 		SetEmotion();
 		Debug.Log(ToString());
 	}
+
+
+    public void LoseHealth(int dmg)
+    {
+        health = health - dmg;
+        if (health <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 	public override string ToString()
 	{
 		if (enabled)
 		{
-			return "friendliness: " + friendliness + "\nbravery: "+ confidence;
+            return "friendliness: " + friendliness + "\nbravery: " + confidence + "\nlevel: " + level+"\nhealth: "+health;
 		}else
 		{
 			return null;

@@ -63,9 +63,9 @@ public class feedBack : MonoBehaviour {
             case Bird.dir.front:
                 for (int i = 0; i < 4; i++)
                 {
-                    if (Var.playerPos[i, myIndex] != null)
+                    if (Var.playerPos[3-i, myIndex] != null)
                     {
-                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[i, myIndex], birdScript));
+                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3-i, myIndex], birdScript));
                         break;
                     }
 

@@ -106,10 +106,10 @@ public class MapIcon : MonoBehaviour {
         emotions.Remove(emotion);
         if (Random.Range(0f, 1f) < 0.8f)
         {
-            Var.map.Add(new BattleData(emotion,hasObstacles,PowerTileList()));
+            Var.map.Add(new BattleData(emotion,hasObstacles,PowerTileList(),birdLVL));
         }else
         {
-            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)],hasObstacles,PowerTileList()));
+            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)],hasObstacles,PowerTileList(),birdLVL));
         }
     }
     List<Var.Em> PowerTileList()

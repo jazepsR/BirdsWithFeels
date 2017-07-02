@@ -13,7 +13,7 @@ public class fillEnemy : MonoBehaviour {
         createEnemies();
         
     } 
-    public void createEnemies(float minConf=-5, float maxConf=5, float minFriend=-5, float maxFriend=5)
+    public void createEnemies(float minConf=-5, float maxConf=5, float minFriend=-5, float maxFriend=5,int birdLVL = 1)
     {
         int index = 0;
         int frontBirds = 0;
@@ -21,6 +21,7 @@ public class fillEnemy : MonoBehaviour {
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
             enemy.GetComponent<feedBack>().myIndex = index % 4;
+            enemy.GetComponent<Bird>().level = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL));
             enemy.GetComponent<Bird>().inUse = false;
             enemy.SetActive(false);
             index++;

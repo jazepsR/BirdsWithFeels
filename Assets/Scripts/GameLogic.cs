@@ -166,7 +166,7 @@ public class GameLogic : MonoBehaviour {
             if(playerRoll < enemyroll)
             {
                 //lose
-                playerBird.confidence += Var.confLoseFight;
+                playerBird.confidence += Var.confLoseFight;               
                 return -1;
             }else
             {

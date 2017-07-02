@@ -67,7 +67,8 @@ public class battleAnim :MonoBehaviour {
         else
         {
             battle.player.GetComponent<Animator>().SetBool("lose", true);
-           // enemy.GetComponent<Animator>().SetBool("victory", true);
+            battle.player.LoseHealth(1);
+            // enemy.GetComponent<Animator>().SetBool("victory", true);
 
         }
     }

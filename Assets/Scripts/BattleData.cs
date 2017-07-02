@@ -7,6 +7,7 @@ public class BattleData {
     public Var.Em type;
     public bool hasRocks;
     public List<Var.Em> powerUps;
+    public int birdLVL;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,14 +17,14 @@ public class BattleData {
         this.minConf = minConf;
         this.maxConf = maxConf;
         this.minFriend = minFriend;
-        this.maxFriend = maxFriend;
-        this.hasRocks = hasRocks;
+        this.maxFriend = maxFriend;        
     }
-    public BattleData(Var.Em type,bool hasRocks,List<Var.Em> powerUps)
+    public BattleData(Var.Em type,bool hasRocks,List<Var.Em> powerUps,int birdLVL=1)
     {
         this.type = type;
         this.powerUps = powerUps;
         this.hasRocks = hasRocks;
+        this.birdLVL = birdLVL;
         switch (type)
         {
             case Var.Em.Neutral:
