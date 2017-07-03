@@ -43,8 +43,7 @@ public class LayoutButton : MonoBehaviour
                 Debug.Log("CollisionDetected!");
                 birdObj.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
                 currentBird = birdObj;
-                Var.playerPos[(int)index.x, (int)index.y] = currentBird;
-                currentBird.ReleseBird((int)index.x, (int)index.y);
+                Var.playerPos[(int)index.x, (int)index.y] = currentBird;                
                 if (!inMap)
                 {
                     GameLogic.Instance.CanWeFight();
@@ -63,6 +62,7 @@ public class LayoutButton : MonoBehaviour
                 {
                     MapControler.Instance.CanLoadBattle();
                 }
+                currentBird.ReleseBird((int)index.x, (int)index.y);
             }         
         }
         

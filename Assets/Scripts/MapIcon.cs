@@ -23,7 +23,8 @@ public class MapIcon : MonoBehaviour {
     public bool hasFirendlyPowerUps;
     public bool hasConfidentPowerUps;
     public bool hasLonelyPwerUps;
-
+    public bool hasHealthPowerUps;
+    public bool hasDMGPowerUps;
     [HideInInspector]
     public MapIcon[] targets;
     MapSaveData mySaveData;
@@ -128,10 +129,11 @@ public class MapIcon : MonoBehaviour {
 
         if (Random.Range(0f, 1f) < 0.8f)
         {
-            Var.map.Add(new BattleData(emotion,hasObstacles,PowerTileList(),birdLVL,CreateDirList()));
-        }else
+            Var.map.Add(new BattleData(emotion,hasObstacles,EmPowerList(),birdLVL,CreateDirList(),PowerList()));
+        }
+        else
         {
-            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)],hasObstacles,PowerTileList(),birdLVL,CreateDirList()));
+            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)],hasObstacles,EmPowerList(),birdLVL,CreateDirList(),PowerList()));
         }
     }
 
@@ -147,7 +149,7 @@ public class MapIcon : MonoBehaviour {
         return dirList;
     }
 
-    List<Var.Em> PowerTileList()
+    List<Var.Em> EmPowerList()
     {
         List<Var.Em> list = new List<Var.Em>();
         if (hasFirendlyPowerUps)
@@ -158,6 +160,15 @@ public class MapIcon : MonoBehaviour {
             list.Add(Var.Em.Lonely);
         if (hasScaredPowerUps)
             list.Add(Var.Em.Scared);
+        return list;
+    }
+    List<Var.PowerUps> PowerList()
+    {
+        List<Var.PowerUps> list = new List<Var.PowerUps>();
+        if (hasDMGPowerUps)
+            list.Add(Var.PowerUps.dmg);
+        if (hasHealthPowerUps)
+            list.Add(Var.PowerUps.heal);
         return list;
     }
 }

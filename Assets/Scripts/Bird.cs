@@ -14,6 +14,8 @@ public class Bird : MonoBehaviour
 	public int prevFriend = 0;
 	public int friendliness = 0;
     public int health = 3;
+   // [HideInInspector]
+    int maxHealth = 3;
     int x = -1;
     int y = -1;
     public Var.Em emotion;
@@ -39,11 +41,16 @@ public class Bird : MonoBehaviour
     public int friendBoost = 0;
     [HideInInspector]
     public int confBoos = 0;
+    [HideInInspector]
+    public int healthBoost = 0;
+    [HideInInspector]
+    public int dmgBoost = 0;
     public bool inMap = false;
     [HideInInspector]
     public Sprite hatSprite;
 	void Start()
 	{
+        maxHealth = 3;
         if (!isEnemy)
         {
             try
@@ -73,7 +80,7 @@ public class Bird : MonoBehaviour
 
 	public float getBonus()
 	{
-        return level - 1;
+        return level - 1+ dmgBoost;
 	}
     void LoadStats()
     {
@@ -100,7 +107,14 @@ public class Bird : MonoBehaviour
             friendliness = savedData.friendliness;
         }
     }
-        
+    
+    void ResetBonuses()
+    {
+        confBoos = 0;
+        friendBoost = 0;
+        dmgBoost = 0;
+        healthBoost = 0;
+    }
 
 	void OnMouseOver()
 	{
@@ -120,8 +134,7 @@ public class Bird : MonoBehaviour
 				}
 			}            
 			target = home;
-            confBoos = 0;
-            friendBoost = 0;
+            ResetBonuses();
 			dragged = true;
 			Var.selectedBird = gameObject;
             if (!inMap)
@@ -200,15 +213,15 @@ public class Bird : MonoBehaviour
 	public void SetEmotion()
 	{       
 		prevConf = confidence;
-		prevFriend = friendliness;
-        if (confBoos != 0)
-        {
-            int i = 0;
-        }
+		prevFriend = friendliness;       
         friendliness += friendBoost;
         confidence += confBoos;
-        confBoos = 0;
-        friendBoost = 0;
+        if (health < maxHealth)
+        {
+            health = Mathf.Min(health + healthBoost, maxHealth);
+        }
+        ResetBonuses();
+        
 		if(Mathf.Abs((float)confidence)<Var.lvl1 && Mathf.Abs((float)friendliness) < Var.lvl1)
 		{
 			//No type

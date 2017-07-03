@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class powerTile : MonoBehaviour {
-	public SpriteRenderer sr;
+    public SpriteRenderer sr;
 	Var.Em emotion;
+    public Var.PowerUps type;
 	public Color secondColor;
 	public Color firstColor;
 	// Use this for initialization
@@ -38,20 +39,31 @@ public class powerTile : MonoBehaviour {
 	}
     public void ApplyPower(Bird bird)
     {
-        switch (emotion)
+        if (type == Var.PowerUps.emotion)
         {
-            case Var.Em.Confident:
-                bird.confBoos = 1;
-                break;
-            case Var.Em.Friendly:
-                bird.friendBoost = 1;
-                break;
-            case Var.Em.Lonely:
-                bird.friendBoost = -1;
-                break;
-            case Var.Em.Scared:
-                bird.confBoos = -1;
-                break;
+            switch (emotion)
+            {
+                case Var.Em.Confident:
+                    bird.confBoos = 1;
+                    break;
+                case Var.Em.Friendly:
+                    bird.friendBoost = 1;
+                    break;
+                case Var.Em.Lonely:
+                    bird.friendBoost = -1;
+                    break;
+                case Var.Em.Scared:
+                    bird.confBoos = -1;
+                    break;
+            }
+        }
+        if( type == Var.PowerUps.heal)
+        {
+            bird.healthBoost = 1;
+        }
+        if (type == Var.PowerUps.dmg)
+        {
+            bird.dmgBoost = 1;
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public static class Var  {
     public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared,finish};
+    public enum PowerUps { heal,dmg,emotion};
     public static int lvl1 = 4;
     public  static int lvl2 = 10;
     public static int confLoseFight = -3;
