@@ -42,7 +42,7 @@ public class MapIcon : MonoBehaviour {
             LockedIcon.SetActive(true);
         lr = GetComponent<LineRenderer>();
         int i = 0;
-        lr.numPositions = targets.Length * 2;
+        lr.positionCount = targets.Length * 2;
         if (targets.Length>0)
         {
             foreach (MapIcon pos in targets)
