@@ -92,12 +92,14 @@ public class feedBack : MonoBehaviour {
 	public void ShowFeedback(float value)
     {
         feedBackText.gameObject.SetActive(true);
-        float colorIndex = (value + 4.0f) / 8;
-
+        //float colorIndex = (value + 4.0f) / 8;
+        value = Mathf.Clamp01(value);
+        float colorIndex = value;
         Color textCol = Color.Lerp(Color.red, Color.green, colorIndex);
         LeanTween.color(feedBackText.gameObject, textCol, 0.2f);
         LeanTween.scale(feedBackText.gameObject, Vector3.one, 0.3f).setEase(LeanTweenType.easeOutBack);
-        feedBackText.text = ((int)value).ToString("+#;-#;0");
+        //feedBackText.text = ((int)(value*100)).ToString("+#;-#;0") +" %";
+        feedBackText.text =(Mathf.Ceil(value * 100)).ToString("0") + " %";
     }
     public void HideFeedBack()
     {

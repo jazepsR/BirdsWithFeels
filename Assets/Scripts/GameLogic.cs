@@ -145,34 +145,27 @@ public class GameLogic : MonoBehaviour {
 
         if (Bird1Win(enemyBird, playerBird))
             winBonus -= 4;
-        return winBonus;
+        return 0.5f +winBonus*0.1f;
     }
 
     public int Fight(Bird playerBird, Bird enemyBird)
     {
         float winBonus = GetBonus(playerBird, enemyBird);
-        int playerRoll = Random.Range(0, DiceSize) + (int)winBonus;
-        int enemyroll = Random.Range(0, DiceSize);
+       /* int playerRoll = Random.Range(0, DiceSize) + (int)winBonus;
+        int enemyroll = Random.Range(0, DiceSize);*/
 
 
 
-        if (playerRoll> enemyroll)
+        if (winBonus>Random.Range(0f,1f))
         {
             //Win
             playerBird.confidence += Var.confWinFight;
             return +1;
         }else
-        {
-            if(playerRoll < enemyroll)
-            {
-                //lose
-                playerBird.confidence += Var.confLoseFight;               
-                return -1;
-            }else
-            {
-                //tie
-               return Fight(playerBird, enemyBird);
-            }
+        {           
+            //lose
+            playerBird.confidence += Var.confLoseFight;               
+            return -1;            
         }
 
         //Add confidence!!
