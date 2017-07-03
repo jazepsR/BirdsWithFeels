@@ -12,6 +12,7 @@ public class LayoutButton : MonoBehaviour
     public bool isActive = true;
     [HideInInspector]
     public powerTile power = null;
+    public bool inMap = false;
     void OnTriggerEnter2D(Collider2D other)
     {
         if(isActive)
@@ -44,16 +45,23 @@ public class LayoutButton : MonoBehaviour
                 currentBird = birdObj;
                 Var.playerPos[(int)index.x, (int)index.y] = currentBird;
                 currentBird.ReleseBird((int)index.x, (int)index.y);
-                GameLogic.Instance.CanWeFight();
-                if(power != null)
+                if (!inMap)
                 {
-                    try{
-                        power.ApplyPower(birdObj);
-                    }
-                    catch
+                    GameLogic.Instance.CanWeFight();
+                    if (power != null)
                     {
-                        Debug.Log("failed to apply power");
+                        try
+                        {
+                            power.ApplyPower(birdObj);
+                        }
+                        catch
+                        {
+                            Debug.Log("failed to apply power");
+                        }
                     }
+                }else
+                {
+                    MapControler.Instance.CanLoadBattle();
                 }
             }         
         }

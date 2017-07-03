@@ -31,14 +31,18 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject battlePanel;
 	public GuiMap mapBirdScript;
 	List<Bird> players = new List<Bird>();
+    public bool inMap = false;
 	void Start()
 	{
 		Var.birdInfo = infoText;
 		Var.birdInfoHeading = infoHeading;
-		Var.birdInfoFeeling = infoFeeling;		
-        GuiMap.Instance.CreateMap();
-		setMapLocation(0);
-		Instance = this;        
+		Var.birdInfoFeeling = infoFeeling;		       
+		Instance = this;
+        if (!inMap)
+        {
+            GuiMap.Instance.CreateMap();
+            setMapLocation(0);
+        }
     }
 
 
@@ -267,14 +271,13 @@ public class GuiContoler : MonoBehaviour {
 		foreach (Bird bird in players)
 		{
 			bird.SetEmotion();
-		}
-		foreach (Bird bird in players)
-		{
+            UpdateBirdSave(bird);		
 			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
 			bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
 			bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
 			bird.target = bird.home;
 			bird.transform.position = bird.home;
+
 		}
 
 
@@ -284,13 +287,41 @@ public class GuiContoler : MonoBehaviour {
 
 		moveInMap();
 		BattleData Area = Var.map[mapPos];
-		GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend,Area.birdLVL);
-		GameLogic.Instance.CanWeFight();
-
-        ObstacleGenerator.Instance.clearObstacles();
-        ObstacleGenerator.Instance.GenerateObstacles();
+        if (Area.type != Var.Em.finish)
+        {
+            GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs);
+            GameLogic.Instance.CanWeFight();
+            ObstacleGenerator.Instance.clearObstacles();
+            ObstacleGenerator.Instance.GenerateObstacles();
+        }
 
 	}
+
+    void UpdateBirdSave(Bird bird)
+    {
+        for (int i = 0; i < Var.activeBirds.Count; i++)
+        {
+            if (Var.activeBirds[i].charName == bird.charName)
+            {
+                Var.activeBirds[i] = bird;
+                break;
+            }
+        }
+
+        if (Var.availableBirds.Count > 0)
+        {
+            for (int i = 0; i < Var.availableBirds.Count; i++)
+            {
+                if (Var.availableBirds[i].charName == bird.charName)
+                {
+                    Var.availableBirds[i] = bird;
+                    break;
+                }
+            }
+        }
+    }
+
+
 	void setMapLocation(int index)
 	{
 		try

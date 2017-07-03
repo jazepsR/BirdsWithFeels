@@ -39,10 +39,23 @@ public class Bird : MonoBehaviour
     public int friendBoost = 0;
     [HideInInspector]
     public int confBoos = 0;
+    public bool inMap = false;
+    [HideInInspector]
+    public Sprite hatSprite;
 	void Start()
 	{
-
-		
+        if (!isEnemy)
+        {
+            try
+            {
+                hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
+            }
+            catch
+            {
+                Debug.Log("Couldnt get hat sprite");
+            }
+            }
+           	
 		lines = GetComponent<firendLine>();
         if (isEnemy)
         {
@@ -91,8 +104,8 @@ public class Bird : MonoBehaviour
 
 	void OnMouseOver()
 	{
-        
-		if (Input.GetMouseButtonDown(0))
+        showText();
+        if (Input.GetMouseButtonDown(0))
 		{
 			for(int i = 0; i < Var.playerPos.GetLength(0); i++)
 			{
@@ -111,8 +124,11 @@ public class Bird : MonoBehaviour
             friendBoost = 0;
 			dragged = true;
 			Var.selectedBird = gameObject;
-			lines.RemoveLines();
-            GameLogic.Instance.UpdateFeedback();
+            if (!inMap)
+            {
+                lines.RemoveLines();
+                GameLogic.Instance.UpdateFeedback();
+            }
 
            // RemoveAllFeedBack();
             x = -1;
@@ -130,7 +146,7 @@ public class Bird : MonoBehaviour
 			LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		}
 
-		showText();
+		
 	}
 
 
@@ -157,6 +173,7 @@ public class Bird : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
 	public override string ToString()
 	{
 		if (enabled)
@@ -253,14 +270,8 @@ public class Bird : MonoBehaviour
 		}
         if (!isEnemy)
         {
-            for(int i =0;i<Var.activeBirds.Count;i++)
-            {
-                if(Var.activeBirds[i].charName == charName)
-                {
-                    Var.activeBirds[i] = this;
-                    break;
-                }
-            }
+           
+      
         }
         
 	  
@@ -294,9 +305,13 @@ public class Bird : MonoBehaviour
 	{
 		Var.selectedBird = null;
 		dragged = false;
-		lines.DrawLines(x, y);
-		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
-        GameLogic.Instance.UpdateFeedback();
+        if (!inMap)
+        {
+            lines.DrawLines(x, y);
+            GameLogic.Instance.UpdateFeedback();
+        }
+            LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
+        
 		
 	   
 

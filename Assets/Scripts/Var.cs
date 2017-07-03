@@ -25,6 +25,7 @@ public static class Var  {
     public static List<MapSaveData>mapSaveData = new List<MapSaveData>();
     public static GameObject selectedBird;
     public static List<Bird> activeBirds = new List<Bird>();
+    public static List<Bird> availableBirds = new List<Bird>();
     public static int currentStageID = -1;    
 }
 

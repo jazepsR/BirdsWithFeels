@@ -6,22 +6,29 @@ using UnityEngine.UI;
 
 public class MapIcon : MonoBehaviour {
     public GameObject CompleteIcon;
+    public GameObject LockedIcon;
+    public int ID;
+    public bool completed = false;
+    public bool available;
+    [Header("Level configuration")]
     public Var.Em type;
     public int birdLVL = 1;
     public int length = 1;
-    public MapIcon[] targets;
-    LineRenderer lr;
-    public bool completed = false;
-    
-    public bool available;
-    Image sr;
-    public int ID;
+    public bool hasTopEnemyRow = true;
+    public bool hasFrontEnemyRow = true;
+    public bool hasBottomEnemyRow = true;
+    [Header("Tile Configuration")]
     public bool hasObstacles;
     public bool hasScaredPowerUps;
     public bool hasFirendlyPowerUps;
     public bool hasConfidentPowerUps;
     public bool hasLonelyPwerUps;
+
+    [HideInInspector]
+    public MapIcon[] targets;
     MapSaveData mySaveData;
+    LineRenderer lr;
+    Image sr;
     // Use this for initialization
     void Start() {
         LoadSaveData();
@@ -29,6 +36,9 @@ public class MapIcon : MonoBehaviour {
         sr.color = Helpers.Instance.GetEmotionColor(type);        
         GetComponent<Button>().interactable = available;        
         CompleteIcon.SetActive(completed);
+        LockedIcon.SetActive(false);
+        if(available)
+            LockedIcon.SetActive(true);
         lr = GetComponent<LineRenderer>();
         int i = 0;
         lr.numPositions = targets.Length * 2;
@@ -47,6 +57,10 @@ public class MapIcon : MonoBehaviour {
             lr.startColor = Color.gray;
         }
     }
+    public void RemoveLock()
+    {
+        LockedIcon.SetActive(false);
+    }    
     void LoadSaveData()
     {
         bool SaveDataCreated = false;
@@ -86,7 +100,7 @@ public class MapIcon : MonoBehaviour {
     }
     public void LoadBattleScene()
     {
-        if (available)
+        if (available && MapControler.Instance.canFight)
         {
             Var.map.Clear();
             for (int i = 0; i < length; i++)
@@ -95,6 +109,13 @@ public class MapIcon : MonoBehaviour {
             }
             Var.map.Add(new BattleData(Var.Em.finish,hasObstacles,new List<Var.Em>() ));
             Var.currentStageID = ID;
+
+            Var.activeBirds = new List<Bird>();
+            for (int i = 0; i < 3; i++)
+            {
+                Var.activeBirds.Add(Var.playerPos[i, 0]);
+            }
+
             SceneManager.LoadScene("NewMain");
         }
 
@@ -104,14 +125,28 @@ public class MapIcon : MonoBehaviour {
     {
         List<Var.Em> emotions = new List<Var.Em> { Var.Em.Confident, Var.Em.Friendly, Var.Em.Lonely, Var.Em.Scared, Var.Em.Neutral };
         emotions.Remove(emotion);
+
         if (Random.Range(0f, 1f) < 0.8f)
         {
-            Var.map.Add(new BattleData(emotion,hasObstacles,PowerTileList(),birdLVL));
+            Var.map.Add(new BattleData(emotion,hasObstacles,PowerTileList(),birdLVL,CreateDirList()));
         }else
         {
-            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)],hasObstacles,PowerTileList(),birdLVL));
+            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)],hasObstacles,PowerTileList(),birdLVL,CreateDirList()));
         }
     }
+
+    List<Bird.dir> CreateDirList()
+    {
+        List<Bird.dir> dirList = new List<Bird.dir>();
+        if (hasFrontEnemyRow)
+            dirList.Add(Bird.dir.front);
+        if (hasTopEnemyRow)
+            dirList.Add(Bird.dir.top);
+        if (hasBottomEnemyRow)
+            dirList.Add(Bird.dir.bottom);
+        return dirList;
+    }
+
     List<Var.Em> PowerTileList()
     {
         List<Var.Em> list = new List<Var.Em>();

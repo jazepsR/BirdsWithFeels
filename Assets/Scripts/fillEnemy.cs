@@ -10,13 +10,16 @@ public class fillEnemy : MonoBehaviour {
         // Use this for initialization
     void Start ()
     {
-        createEnemies();
-        
+        BattleData Area = Var.map[0];
+        GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs);
+
     } 
-    public void createEnemies(float minConf=-5, float maxConf=5, float minFriend=-5, float maxFriend=5,int birdLVL = 1)
+    public void createEnemies(float minConf=-5, float maxConf=5, float minFriend=-5, float maxFriend=5,int birdLVL = 1,List<Bird.dir> dirList= null)
     {
         int index = 0;
         int frontBirds = 0;
+        if (dirList == null)
+            dirList = new List<Bird.dir>() { Bird.dir.front };
         foreach(GameObject enemy in Enemies)
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
@@ -33,7 +36,7 @@ public class fillEnemy : MonoBehaviour {
             for (int i = 0; i < enemyCount; i++)
             {
                 int enemyPos = 0;
-            if (i == 0)
+            if (i == 0 && dirList.Contains(Bird.dir.front))
             {
                 enemyPos = Random.Range(4, 8);
             }
@@ -42,7 +45,8 @@ public class fillEnemy : MonoBehaviour {
                 while (true)
                 {
                     enemyPos = Random.Range(0, Var.enemies.Length);
-                    if (!usedPos.Contains(enemyPos) && !(frontBirds >= 3 && Enemies[enemyPos].GetComponent<Bird>().position == Bird.dir.front))
+                    Bird enemyScript = Enemies[enemyPos].GetComponent<Bird>();
+                    if (!usedPos.Contains(enemyPos) && !(frontBirds >= 3 && enemyScript.position == Bird.dir.front) && dirList.Contains(enemyScript.position)) 
                     {
                         break;
                     }
