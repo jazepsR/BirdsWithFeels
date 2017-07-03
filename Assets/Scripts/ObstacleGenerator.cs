@@ -50,24 +50,31 @@ public class ObstacleGenerator : MonoBehaviour {
                 powerObj.GetComponent<powerTile>().SetColor(powerUps[Random.Range(0, powerUps.Count)]);
                 obstacles.Add(powerObj);
             }
-            if(rand>0.7f && rand < 0.8f && Var.map[GuiContoler.mapPos].powers != null && Var.map[GuiContoler.mapPos].powers.Count > 0)
+            if(rand>0.7f && rand < 0.8f && Var.map[GuiContoler.mapPos].powers != null)
             {
-                List<Var.PowerUps> pow = Var.map[GuiContoler.mapPos].powers;
-                Var.PowerUps type = pow[Random.Range(0, pow.Count)];
-                GameObject powerUp=null;
-                Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 100);
-                switch (type)
+                try
                 {
-                    case Var.PowerUps.dmg:
-                        powerUp = Instantiate(healthTile, pos, Quaternion.identity);
-                        break;
-                    case Var.PowerUps.heal:
-                        powerUp = Instantiate(dmgTile, pos, Quaternion.identity);
-                        break;                    
+                    List<Var.PowerUps> pow = Var.map[GuiContoler.mapPos].powers;
+                    Var.PowerUps type = pow[Random.Range(0, pow.Count)];
+                    GameObject powerUp = null;
+                    Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 100);
+                    switch (type)
+                    {
+                        case Var.PowerUps.dmg:
+                            powerUp = Instantiate(healthTile, pos, Quaternion.identity);
+                            break;
+                        case Var.PowerUps.heal:
+                            powerUp = Instantiate(dmgTile, pos, Quaternion.identity);
+                            break;
+                    }
+
+                    obstacles.Add(powerUp);
+                    tile.power = powerUp.GetComponent<powerTile>();
                 }
-               
-                obstacles.Add(powerUp);
-                tile.power = powerUp.GetComponent<powerTile>();
+                catch
+                {
+                    Debug.Log("failed to add powerUp");
+                }
             }
         }
     }

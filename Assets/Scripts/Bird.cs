@@ -14,6 +14,8 @@ public class Bird : MonoBehaviour
 	public int prevFriend = 0;
 	public int friendliness = 0;
     public int health = 3;
+    //[HideInInspector]
+    public bool foughtInRound = false;
    // [HideInInspector]
     int maxHealth = 3;
     int x = -1;
@@ -209,19 +211,30 @@ public class Bird : MonoBehaviour
 			return null;
 		}
 	}
-   
-	public void SetEmotion()
-	{       
-		prevConf = confidence;
-		prevFriend = friendliness;       
+    public void AddRoundBonuses()
+    {
+        prevConf = confidence;
+        prevFriend = friendliness;
         friendliness += friendBoost;
         confidence += confBoos;
+        if (!foughtInRound)
+        {
+            confidence--;
+            if (health < maxHealth)
+                health++;
+        }
+
         if (health < maxHealth)
         {
             health = Mathf.Min(health + healthBoost, maxHealth);
         }
+        foughtInRound = false;
         ResetBonuses();
-        
+    }
+	public void SetEmotion()
+	{
+
+        //AddRoundBonuses();
 		if(Mathf.Abs((float)confidence)<Var.lvl1 && Mathf.Abs((float)friendliness) < Var.lvl1)
 		{
 			//No type

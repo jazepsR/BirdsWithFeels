@@ -19,7 +19,10 @@ public class fillEnemy : MonoBehaviour {
         int index = 0;
         int frontBirds = 0;
         if (dirList == null)
-            dirList = new List<Bird.dir>() { Bird.dir.front };
+            dirList = new List<Bird.dir>() { Bird.dir.front, Bird.dir.top};
+        int max = 5;
+        if (dirList.Count == 1 && dirList.Contains(Bird.dir.front))
+            max = 4;
         foreach(GameObject enemy in Enemies)
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
@@ -32,7 +35,7 @@ public class fillEnemy : MonoBehaviour {
 
 
         List<int> usedPos = new List<int>();
-        int enemyCount = Random.Range(3, 5);
+        int enemyCount = Random.Range(3, max);
             for (int i = 0; i < enemyCount; i++)
             {
                 int enemyPos = 0;

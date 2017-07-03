@@ -23,6 +23,7 @@ public class BattleData {
     }
     public BattleData(Var.Em type,bool hasRocks,List<Var.Em> powerUps,int birdLVL=1, List<Bird.dir> dirs= null, List<Var.PowerUps> powers = null)
     {
+       
         this.powers = powers;
         this.type = type;
         this.powerUps = powerUps;

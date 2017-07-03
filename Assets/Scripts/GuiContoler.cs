@@ -207,7 +207,7 @@ public class GuiContoler : MonoBehaviour {
                     }
 
                 }
-
+                playerBird.foughtInRound = true;
 				int resultOfBattle = GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
 
 				// Fight Logic
@@ -270,6 +270,7 @@ public class GuiContoler : MonoBehaviour {
 		Var.enemies = new Bird[12];
 		foreach (Bird bird in players)
 		{
+            bird.AddRoundBonuses();
 			bird.SetEmotion();
             UpdateBirdSave(bird);		
 			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
