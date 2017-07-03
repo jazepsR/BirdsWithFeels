@@ -7,37 +7,52 @@ public class LayoutButton : MonoBehaviour
 {
     public Vector2 index = new Vector2(0, 0);  
     Bird currentBird = null;
+    Bird swapBird = null;
     public bool hasBird;
     [HideInInspector]
     public bool isActive = true;
     [HideInInspector]
     public powerTile power = null;
     public bool inMap = false;
+    SpriteRenderer sr;
+    Color defaultColor;
+    public Color highlightColor;
+
+    void Start()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        defaultColor = sr.color;
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(isActive)
-            BirdEnter(other);
+        if (isActive && other.transform.parent.GetComponent<Bird>().dragged)
+        {
+            LeanTween.color(gameObject, highlightColor, 0.3f);
+            if (currentBird == null)
+                currentBird = other.transform.parent.GetComponent<Bird>();
+            else
+                swapBird = other.transform.parent.GetComponent<Bird>();
+
+        }
     }
  
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (isActive)
-            BirdEnter(other);
+       // if (isActive)
+            //BirdEnter(other);
     }
-    void BirdEnter(Collider2D other)
+    /*void BirdEnter(Collider2D other)
     {
         if (other.tag == "feet" &&  Input.GetMouseButtonUp(0))
         {
+            LeanTween.color(gameObject, defaultColor, 0.3f);
             Bird birdObj = other.transform.parent.GetComponent<Bird>();
             if (birdObj.gameObject == Var.selectedBird)
             {
                 if (currentBird != null && currentBird != birdObj)
                 {
-                    currentBird.target = birdObj.target;
-                    /* Vector3 tempHome = currentBird.home;
-                     currentBird.home = birdObj.home;
-                     birdObj.home = tempHome;*/
+                    currentBird.target = birdObj.target;                   
                     LeanTween.move(currentBird.gameObject, new Vector3(currentBird.target.x, currentBird.target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
                 }
                 Debug.Log("CollisionDetected!");
@@ -47,29 +62,41 @@ public class LayoutButton : MonoBehaviour
                 if (!inMap)
                 {
                     GameLogic.Instance.CanWeFight();
-                    if (power != null)
-                    {
-                        try
-                        {
-                            power.ApplyPower(birdObj);
-                        }
-                        catch
-                        {
-                            Debug.Log("failed to apply power");
-                        }
-                    }
+                    applyPower(birdObj);
                 }else
                 {
                     MapControler.Instance.CanLoadBattle();
                 }
                 currentBird.ReleseBird((int)index.x, (int)index.y);
             }         
+        }        
+    }*/
+
+    void applyPower(Bird birdObj)
+    {
+        if (power != null)
+        {
+            try
+            {
+                power.ApplyPower(birdObj);
+            }
+            catch
+            {
+                Debug.Log("failed to apply power");
+            }
         }
-        
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        currentBird = null;
+        LeanTween.color(gameObject, defaultColor, 0.3f);
+        Bird tempBird = other.transform.parent.GetComponent<Bird>();
+        if (tempBird.dragged)
+        {
+            if (swapBird == null)
+                currentBird = null;
+            else
+                swapBird = null;
+        }
     }       /* void OnTriggerExit2D(Collider2D other)
          {
              if (other.tag == "feet")
@@ -86,18 +113,39 @@ public class LayoutButton : MonoBehaviour
          }*/
 
 
-        void Update()
+    void Update()
     {
         hasBird = (currentBird != null);
-       /* if (Input.GetMouseButtonUp(0) && currentBird != null)
+        
+        //hasBird = currentBird.dragged;
+        if (Input.GetMouseButtonUp(0) && currentBird != null )
         {
-            Var.playerPos[(int)index.y, (int)index.x] = currentBird;
-            if (currentBird.gameObject == Var.selectedBird)
+            if (currentBird.dragged)
             {
-                currentBird.ReleseBird((int)index.y, (int)index.x);
+                Var.playerPos[(int)index.x, (int)index.y] = currentBird;
+                LeanTween.color(gameObject, defaultColor, 0.3f);                
+                currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
+                currentBird.ReleseBird((int)index.x, (int)index.y);
+                GameLogic.Instance.CanWeFight();
+                          
+            }
+            if(swapBird != null)
+            {
+                Var.playerPos[(int)index.x, (int)index.y] = swapBird;
+                currentBird.target = swapBird.target;
+                if (swapBird.y != -1)
+                {
+                    ObstacleGenerator.Instance.tiles[swapBird.y * 4 + swapBird.x].currentBird = currentBird;
+                    Var.playerPos[swapBird.x, swapBird.y] = currentBird;
+                }
+                currentBird.ReleseBird(swapBird.x, swapBird.y);
+                currentBird = swapBird;
+                currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
+                currentBird.ReleseBird((int)index.x, (int)index.y);
                 GameLogic.Instance.CanWeFight();
             }
-        }*/
+            swapBird = null;
+        }
      
     }
 }

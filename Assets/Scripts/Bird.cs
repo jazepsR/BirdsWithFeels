@@ -18,8 +18,8 @@ public class Bird : MonoBehaviour
     public bool foughtInRound = false;
    // [HideInInspector]
     int maxHealth = 3;
-    int x = -1;
-    int y = -1;
+    public int x = -1;
+    public int y = -1;
     public Var.Em emotion;
 	public string charName;
 	public Image src;    
@@ -31,7 +31,8 @@ public class Bird : MonoBehaviour
 	[HideInInspector] 
 	public Vector3 target;
 	public Vector3 home;
-	bool dragged = false;
+    [HideInInspector]
+	public bool dragged = false;
 	[HideInInspector]
 	public firendLine lines;
     public float level = 1;
@@ -52,6 +53,8 @@ public class Bird : MonoBehaviour
     public Sprite hatSprite;
 	void Start()
 	{
+        x = -1;
+        y = -1;
         maxHealth = 3;
         if (!isEnemy)
         {
@@ -135,7 +138,7 @@ public class Bird : MonoBehaviour
 					}
 				}
 			}            
-			target = home;
+			//target = home;
             ResetBonuses();
 			dragged = true;
 			Var.selectedBird = gameObject;
@@ -146,20 +149,12 @@ public class Bird : MonoBehaviour
             }
 
            // RemoveAllFeedBack();
-            x = -1;
-            y = -1;
+          
 		}
 		// 1 frame delay
-		if (Input.GetMouseButtonUp(0))
-			needsReset = true;
+		
 
-		if (needsReset)
-		{
-			needsReset = false;
-			Var.selectedBird = null;
-			dragged = false;
-			LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
-		}
+		
 
 		
 	}
@@ -319,18 +314,30 @@ public class Bird : MonoBehaviour
 	
 	public void Update()
 	{
-
-		if (dragged)
+        if (needsReset)
+        {
+            needsReset = false;
+            Var.selectedBird = null;
+            dragged = false;
+            LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
+        }
+        if (Input.GetMouseButtonUp(0) &&dragged)
+            needsReset = true;
+        if (dragged)
 		{
 			LeanTween.move(gameObject, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0), 0.1f);
 		}
-		
-	}
+        
+
+    }
 
 	public void ReleseBird(int x, int y)
 	{
-		Var.selectedBird = null;
+        
+        Var.selectedBird = null;
 		dragged = false;
+        this.x = x;
+        this.y = y;
         if (!inMap)
         {
             lines.DrawLines(x, y);

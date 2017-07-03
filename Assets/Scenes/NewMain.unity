@@ -416,6 +416,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: 0
   health: 0
+  foughtInRound: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -426,6 +427,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: -3.8, y: 3.6, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 0
@@ -1932,6 +1934,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: -5
   health: 0
+  foughtInRound: 0
   emotion: 1
   charName: Enemy
   src: {fileID: 0}
@@ -1942,6 +1945,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 6.67, y: 1.23, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 2
@@ -2351,6 +2355,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: -1
   health: 3
+  foughtInRound: 0
   emotion: 0
   charName: Jess
   src: {fileID: 0}
@@ -2362,6 +2367,7 @@ MonoBehaviour:
     type: 2}
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 0, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 1
   position: 0
@@ -2680,6 +2686,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &445814915
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2795,6 +2802,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: -2
   health: 0
+  foughtInRound: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -2805,6 +2813,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: -7.18, y: 3.64, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 0
@@ -2986,6 +2995,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!1 &503109366
 GameObject:
   m_ObjectHideFlags: 0
@@ -3194,6 +3204,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: 3
   health: 0
+  foughtInRound: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -3204,6 +3215,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 3.6, y: 3.5, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 0
@@ -3309,6 +3321,16 @@ Prefab:
     - target: {fileID: 1298927608465232, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
       propertyPath: m_Name
       value: bird1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61434917505000786, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61434917505000786, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
@@ -3628,6 +3650,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &634873344
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4390,6 +4413,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: -2
   health: 0
+  foughtInRound: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -4400,6 +4424,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: -1.2, y: 3.64, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 1
@@ -4650,6 +4675,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!1001 &757100211
 Prefab:
   m_ObjectHideFlags: 0
@@ -5010,6 +5036,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!4 &809060254 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4167882051172850, guid: 0d0c9d675d268854191357e0077af9c8,
@@ -5329,6 +5356,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: -2
   health: 0
+  foughtInRound: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -5339,6 +5367,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: -0.03, y: 1.18, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 2
@@ -6157,7 +6186,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 0.8}
+  m_Size: {x: 0.1, y: 0.1}
 --- !u!50 &1006363590
 Rigidbody2D:
   serializedVersion: 4
@@ -6610,7 +6639,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 0.8}
+  m_Size: {x: 0.1, y: 0.1}
 --- !u!50 &1069888431
 Rigidbody2D:
   serializedVersion: 4
@@ -7205,6 +7234,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &1214092661
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7994,6 +8024,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &1425378352
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8270,6 +8301,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &1545855417
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8755,6 +8787,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &1629740605
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9270,6 +9303,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: -5
   health: 0
+  foughtInRound: 0
   emotion: 1
   charName: Enemy
   src: {fileID: 0}
@@ -9280,6 +9314,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 3.43, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 0
@@ -9468,6 +9503,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &1668163214
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9583,6 +9619,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: 3
   health: 0
+  foughtInRound: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -9593,6 +9630,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 10.53, y: 1.21, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 2
@@ -10042,6 +10080,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: 0
   health: 0
+  foughtInRound: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -10052,6 +10091,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 3.14, y: 1.2, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 2
@@ -10194,6 +10234,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &1723473571
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10677,6 +10718,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &1769142051
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10805,6 +10847,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &1790903775
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11076,6 +11119,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!1 &1846596680
 GameObject:
   m_ObjectHideFlags: 0
@@ -11229,6 +11273,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: -5
   health: 0
+  foughtInRound: 0
   emotion: 1
   charName: Enemy
   src: {fileID: 0}
@@ -11239,6 +11284,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: -0.2, y: -2.2, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 1
@@ -11328,6 +11374,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: 0
   health: 0
+  foughtInRound: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -11338,6 +11385,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: -1, y: 0.47, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 1
@@ -11518,6 +11566,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &1913638255
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11879,6 +11928,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: 3
   health: 0
+  foughtInRound: 0
   emotion: 0
   charName: Enemy
   src: {fileID: 0}
@@ -11889,6 +11939,7 @@ MonoBehaviour:
   portraitColor: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 0.4, y: -5.64, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 0
   position: 1
@@ -12043,6 +12094,7 @@ MonoBehaviour:
   isActive: 1
   power: {fileID: 0}
   inMap: 0
+  highlightColor: {r: 0.83823526, g: 0.534774, b: 0.26503026, a: 1}
 --- !u!212 &2009402043
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12508,6 +12560,7 @@ MonoBehaviour:
   prevFriend: 0
   friendliness: 3
   health: 3
+  foughtInRound: 0
   emotion: 0
   charName: Terry
   src: {fileID: 0}
@@ -12519,6 +12572,7 @@ MonoBehaviour:
     type: 2}
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 0, z: 0}
+  dragged: 0
   lines: {fileID: 0}
   level: 1
   position: 0
