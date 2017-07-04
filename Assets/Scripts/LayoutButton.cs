@@ -86,6 +86,11 @@ public class LayoutButton : MonoBehaviour
             }
         }
     }
+    public void Reset()
+    {
+        swapBird = null;
+        currentBird = null;
+    }
     void OnTriggerExit2D(Collider2D other)
     {
         LeanTween.color(gameObject, defaultColor, 0.3f);
@@ -126,8 +131,16 @@ public class LayoutButton : MonoBehaviour
                 LeanTween.color(gameObject, defaultColor, 0.3f);                
                 currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
                 currentBird.ReleseBird((int)index.x, (int)index.y);
-                GameLogic.Instance.CanWeFight();
-                          
+                if (!inMap)
+                {
+                    GameLogic.Instance.CanWeFight();
+                    applyPower(currentBird);
+                }
+                else
+                {
+                    MapControler.Instance.CanLoadBattle();
+                }
+
             }
             if(swapBird != null)
             {
@@ -142,7 +155,15 @@ public class LayoutButton : MonoBehaviour
                 currentBird = swapBird;
                 currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
                 currentBird.ReleseBird((int)index.x, (int)index.y);
-                GameLogic.Instance.CanWeFight();
+                if (!inMap)
+                {
+                    GameLogic.Instance.CanWeFight();
+                    applyPower(currentBird);
+                }
+                else
+                {
+                    MapControler.Instance.CanLoadBattle();
+                }
             }
             swapBird = null;
         }

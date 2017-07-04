@@ -224,6 +224,8 @@ public class Bird : MonoBehaviour
             health = Mathf.Min(health + healthBoost, maxHealth);
         }
         foughtInRound = false;
+        x = -1;
+        y = -1;
         ResetBonuses();
     }
 	public void SetEmotion()

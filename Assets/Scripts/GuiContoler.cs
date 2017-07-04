@@ -280,7 +280,10 @@ public class GuiContoler : MonoBehaviour {
 			bird.transform.position = bird.home;
 
 		}
-
+        foreach(LayoutButton tile in ObstacleGenerator.Instance.tiles)
+        {
+            tile.Reset();
+        }
 
 		finalResult = 0;
 		players = new List<Bird>();
