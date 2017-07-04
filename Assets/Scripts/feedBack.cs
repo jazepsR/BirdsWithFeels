@@ -54,7 +54,7 @@ public class feedBack : MonoBehaviour {
                 {
                    if( Var.playerPos[myIndex, i] != null)
                     {
-                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript));
+                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
                         break;
                     }
 
@@ -65,7 +65,7 @@ public class feedBack : MonoBehaviour {
                 {
                     if (Var.playerPos[3-i, myIndex] != null)
                     {
-                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3-i, myIndex], birdScript));
+                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3-i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
                         break;
                     }
 
@@ -76,7 +76,7 @@ public class feedBack : MonoBehaviour {
                 {
                     if (Var.playerPos[myIndex, 3-i] != null)
                     {
-                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, 3-i], birdScript));
+                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, 3-i], birdScript),Var.playerPos[myIndex, 3 - i]);
                         break;
                     }
 
@@ -85,12 +85,58 @@ public class feedBack : MonoBehaviour {
         }
     }
 
+    public bool CheckResting(Bird bird)
+    {
+        switch (dir)
+        {
+            case Bird.dir.top:
+                for (int i = 0; i < 4; i++)
+                {
+                    if (Var.playerPos[myIndex, i] != null)
+                    {
+                        if (Var.playerPos[myIndex, i] == bird)
+                            return false;
+                        else
+                            break;
+                    }
+                }
+                break;
+            case Bird.dir.front:
+                for (int i = 0; i < 4; i++)
+                {
+                    if (Var.playerPos[3 - i, myIndex] != null)
+                    {
+                        if (Var.playerPos[3 - i, myIndex] == bird)
+                            return false;
+                        else
+                            break;
+                    }
+
+                }
+                break;
+            case Bird.dir.bottom:
+                for (int i = 0; i < 4; i++)
+                {
+                    if (Var.playerPos[myIndex, 3 - i] == bird)
+                    {
+                        if (Var.playerPos[myIndex, 3 - i] == bird)
+                            return false;
+                        else
+                            break;
+                    }
+
+                }
+                break;
+        }
+        return true;
+    }
 
 
 
 	
-	public void ShowFeedback(float value)
+	public void ShowFeedback(float value,Bird bird)
     {
+        bird.fighting = true;
         feedBackText.gameObject.SetActive(true);
         //float colorIndex = (value + 4.0f) / 8;
         value = Mathf.Clamp01(value);

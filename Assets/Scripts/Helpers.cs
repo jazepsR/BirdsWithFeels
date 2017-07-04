@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Helpers : MonoBehaviour {
     public static Helpers Instance { get; private set; }
+    [Header("Colors")]
     public Color neutral;
     public Color brave;
     public Color scared;
     public Color friendly;
     public Color lonely;
-
+    [Header("Soft colors")]
+    public Color softBrave;
+    public Color softScared;
+    public Color softFriendly;
+    public Color softLonely;
     public void Awake()
     {
         Instance = this;
@@ -29,6 +34,24 @@ public class Helpers : MonoBehaviour {
                 return brave;
             case Var.Em.Scared:
                 return scared;
+            default:
+                return neutral;
+        }
+    }
+    public Color GetSoftEmotionColor(Var.Em emotion)
+    {
+        switch (emotion)
+        {
+            case Var.Em.Neutral:
+                return neutral;
+            case Var.Em.Friendly:
+                return softFriendly;
+            case Var.Em.Lonely:
+                return softLonely;
+            case Var.Em.Confident:
+                return softBrave;
+            case Var.Em.Scared:
+                return softScared;
             default:
                 return neutral;
         }
@@ -61,8 +84,25 @@ public class Helpers : MonoBehaviour {
     }
 
 
-    public int Findfirendlieness(int x,int y)
-    {
+    public int Findfirendlieness(Bird bird)
+    {        
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < Var.playerPos.GetLength(0); i++)
+        {
+            for (int j = 0; j < Var.playerPos.GetLength(1); j++)
+            {
+
+                if (Var.playerPos[i, j] == bird)
+                {
+                    x = i;
+                    y = j;
+                    break;
+                }
+            }
+        }
+
+
         int sizeY = Var.playerPos.GetLength(1)-1;
         int sizeX = Var.playerPos.GetLength(0)-1;
         int lonelyVal = 0;
@@ -74,7 +114,15 @@ public class Helpers : MonoBehaviour {
         {
             lonelyVal += 2;
         }
-        if(y+1<=sizeY && x+1<= sizeX && Var.playerPos[x+1, y + 1] != null)
+        if (x + 1 <= sizeX && Var.playerPos[x+1, y] != null)
+        {
+            lonelyVal += 2;
+        }
+        if (x - 1 >= 0 && Var.playerPos[x-1, y ] != null)
+        {
+            lonelyVal += 2;
+        }
+        if (y+1<=sizeY && x+1<= sizeX && Var.playerPos[x+1, y + 1] != null)
         {
             lonelyVal += 1;
         }

@@ -41,6 +41,9 @@ public class FillPlayer : MonoBehaviour {
         if (template.health < 1)
             target.gameObject.SetActive(false);
         target.portrait = template.portrait;
+        target.levelList = template.levelList;
+        target.startingLVL = template.startingLVL;
+        target.birdAbility = template.birdAbility;
         target.transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = template.hatSprite;
     }
 	// Update is called once per frame

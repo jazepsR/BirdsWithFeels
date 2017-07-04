@@ -434,6 +434,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: 0
   prevConf: 0
@@ -464,6 +466,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!114 &74870158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1049,6 +1056,76 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 193617687}
+--- !u!1 &202621564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 202621566}
+  - component: {fileID: 202621565}
+  m_Layer: 0
+  m_Name: rollBoost
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &202621565
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 202621564}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -3
+  m_Sprite: {fileID: 21300000, guid: 05c1333f81b50a442affc89ce7b473eb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.459}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3, y: 2.94}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+--- !u!4 &202621566
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 202621564}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.07, y: -1.31, z: 0}
+  m_LocalScale: {x: 3.25, y: 3.25, z: 2.5}
+  m_Children: []
+  m_Father: {fileID: 565114990}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &218520894
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,6 +2132,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: 5
   prevConf: 0
@@ -2085,6 +2164,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!114 &337799188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2382,6 +2466,10 @@ MonoBehaviour:
   scared: {r: 0.59607846, g: 0.20392157, b: 0.5176471, a: 1}
   friendly: {r: 0.16862746, g: 0.8392157, b: 0.09019608, a: 1}
   lonely: {r: 0.05882353, g: 0.07058824, b: 0.7019608, a: 1}
+  softBrave: {r: 0.8602941, g: 0.48695892, b: 0.42382136, a: 1}
+  softScared: {r: 0.7352941, g: 0.5244377, b: 0.6931229, a: 1}
+  softFriendly: {r: 0.16862746, g: 0.8392157, b: 0.09019608, a: 1}
+  softLonely: {r: 0.40873703, g: 0.41578656, b: 0.7941176, a: 1}
 --- !u!114 &373818713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2453,6 +2541,18 @@ GameObject:
   m_PrefabParentObject: {fileID: 1610529213597630, guid: 0d0c9d675d268854191357e0077af9c8,
     type: 2}
   m_PrefabInternal: {fileID: 861675157}
+--- !u!114 &374855090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 374855089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5d0e53e4600e041af256a1cc2a38dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Halo: {fileID: 1671391406}
 --- !u!61 &374855091
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2489,6 +2589,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 1
   confidence: 4
   prevConf: 0
@@ -2499,7 +2601,7 @@ MonoBehaviour:
   x: 0
   y: 0
   emotion: 0
-  charName: Jess
+  charName: Rebecca
   src: {fileID: 0}
   inUse: 0
   birdPrefab: {fileID: 374855089}
@@ -2520,6 +2622,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 1
+  groundMultiplier: 1
+  fighting: 0
 --- !u!114 &374855093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2835,6 +2942,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &445814915
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2964,6 +3074,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: -2
   prevConf: 0
@@ -2994,6 +3106,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!114 &447389851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3186,6 +3303,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!1 &503109366
 GameObject:
   m_ObjectHideFlags: 0
@@ -3388,6 +3508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: -1
   prevConf: 0
@@ -3418,6 +3540,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!114 &528858649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3534,6 +3661,25 @@ Prefab:
         type: 2}
       propertyPath: m_Size.y
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: startingLVL
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: confLoseOnRest
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: groundMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4146935722228368, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
@@ -3854,6 +4000,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &634873344
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4355,7 +4504,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: -4
   m_Sprite: {fileID: 21300000, guid: 96651fd131212fb49926aa754797dd01, type: 3}
   m_Color: {r: 0.072988756, g: 0.5514706, b: 0.19508404, a: 1}
   m_FlipX: 0
@@ -4655,6 +4804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: -2
   prevConf: 0
@@ -4685,6 +4836,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!95 &740823788
 Animator:
   serializedVersion: 3
@@ -4947,6 +5103,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!1001 &757100211
 Prefab:
   m_ObjectHideFlags: 0
@@ -5329,6 +5488,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!4 &809060254 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4167882051172850, guid: 0d0c9d675d268854191357e0077af9c8,
@@ -5642,6 +5804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: -2
   prevConf: 0
@@ -5672,6 +5836,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!114 &844413167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6468,7 +6637,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 795546505}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1006363589
 BoxCollider2D:
@@ -6944,7 +7113,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2079854110}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1069888430
 BoxCollider2D:
@@ -7574,6 +7743,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &1214092661
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7790,6 +7962,76 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d0c9d675d268854191357e0077af9c8, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1236370848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1236370849}
+  - component: {fileID: 1236370850}
+  m_Layer: 0
+  m_Name: rollBoost
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1236370849
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1236370848}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.07, y: -1.31, z: 0}
+  m_LocalScale: {x: 3.25, y: 3.25, z: 2.5}
+  m_Children: []
+  m_Father: {fileID: 2079854110}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1236370850
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1236370848}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -3
+  m_Sprite: {fileID: 21300000, guid: 05c1333f81b50a442affc89ce7b473eb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.459}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3, y: 2.94}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1262699223
 GameObject:
   m_ObjectHideFlags: 0
@@ -8403,6 +8645,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &1425378352
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8472,6 +8717,23 @@ PolygonCollider2D:
       - {x: -3.085483, y: 1.5209429}
       - {x: -1.5859088, y: -1.9249064}
       - {x: 3.0244684, y: -1.9109461}
+--- !u!1 &1481408941 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1298927608465232, guid: babf754960e842241bec1ccf202a8bdc,
+    type: 2}
+  m_PrefabInternal: {fileID: 565114989}
+--- !u!114 &1481408942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1481408941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5d0e53e4600e041af256a1cc2a38dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Halo: {fileID: 202621564}
 --- !u!1 &1507043345
 GameObject:
   m_ObjectHideFlags: 0
@@ -8706,6 +8968,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &1545855417
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9212,6 +9477,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &1629740605
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9765,6 +10033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: 5
   prevConf: 0
@@ -9795,6 +10065,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!114 &1660394610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9975,6 +10250,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &1668163214
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10044,6 +10322,76 @@ PolygonCollider2D:
       - {x: -3.1422272, y: 1.5551957}
       - {x: -1.6148751, y: -1.9473976}
       - {x: 3.0901277, y: -1.9334388}
+--- !u!1 &1671391406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1671391407}
+  - component: {fileID: 1671391408}
+  m_Layer: 0
+  m_Name: rollBoost
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1671391407
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1671391406}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.07, y: -1.31, z: 0}
+  m_LocalScale: {x: 3.25, y: 3.25, z: 2.5}
+  m_Children: []
+  m_Father: {fileID: 795546505}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1671391408
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1671391406}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -3
+  m_Sprite: {fileID: 21300000, guid: 05c1333f81b50a442affc89ce7b473eb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.459}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 3, y: 2.94}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1676613499
 GameObject:
   m_ObjectHideFlags: 0
@@ -10104,6 +10452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: -1
   prevConf: 0
@@ -10134,6 +10484,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!114 &1676613503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10574,6 +10929,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: 0
   prevConf: 0
@@ -10604,6 +10961,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!114 &1699966607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10737,6 +11099,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &1723473571
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11241,6 +11606,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &1769142051
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11390,6 +11758,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &1790903775
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11702,6 +12073,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!1 &1846596680
 GameObject:
   m_ObjectHideFlags: 0
@@ -11849,6 +12223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: 5
   prevConf: 0
@@ -11879,6 +12255,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!95 &1862539792
 Animator:
   serializedVersion: 3
@@ -11952,6 +12333,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: 0
   prevConf: 0
@@ -11982,6 +12365,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!95 &1873808335
 Animator:
   serializedVersion: 3
@@ -12159,6 +12547,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &1913638255
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12534,6 +12925,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 0
   confidence: -1
   prevConf: 0
@@ -12564,6 +12957,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 0
+  levelList: 
+  confLoseOnRest: 0
+  groundMultiplier: 0
+  fighting: 0
 --- !u!95 &1996505567
 Animator:
   serializedVersion: 3
@@ -12715,6 +13113,9 @@ MonoBehaviour:
   power: {fileID: 0}
   inMap: 0
   highlightColor: {r: 0.8602941, g: 0.8134465, b: 0.43014705, a: 0.3137255}
+  ConfBonus: 0
+  FriendBonus: 0
+  RollBonus: 0
 --- !u!212 &2009402043
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13202,6 +13603,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8251061, y: 2.8}
   m_EdgeRadius: 0
+--- !u!114 &2101874051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2101874049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5d0e53e4600e041af256a1cc2a38dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Halo: {fileID: 1236370848}
 --- !u!114 &2101874052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13213,6 +13626,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d347d8ed1ab54864b85b292e934b3f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdBio: 
+  birdAbility: 
   portraitOrder: 2
   confidence: 2
   prevConf: 0
@@ -13244,6 +13659,11 @@ MonoBehaviour:
   dmgBoost: 0
   inMap: 0
   hatSprite: {fileID: 0}
+  startingLVL: 4
+  levelList: 
+  confLoseOnRest: 1
+  groundMultiplier: 1
+  fighting: 0
 --- !u!114 &2101874053
 MonoBehaviour:
   m_ObjectHideFlags: 0

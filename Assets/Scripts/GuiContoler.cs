@@ -169,11 +169,7 @@ public class GuiContoler : MonoBehaviour {
                     {
                         if (Var.playerPos[3-j, i%4] != null)
                         {
-                            playerBird = Var.playerPos[3-j, i%4];
-                            if (!players.Contains(playerBird))
-                            {                                
-                                playerBird.friendliness += Helpers.Instance.Findfirendlieness(3-j,i%4);
-                            }
+                            playerBird = Var.playerPos[3-j, i%4];                          
                             break;
                         }
                     }
@@ -181,12 +177,7 @@ public class GuiContoler : MonoBehaviour {
                     {
                         if (Var.playerPos[i%4, j] != null)
                         {
-                            playerBird = Var.playerPos[i%4, j];
-                            if (!players.Contains(playerBird))
-                            {                                
-                                playerBird.friendliness += Helpers.Instance.Findfirendlieness( i%4, j);
-                            }                           
-
+                            playerBird = Var.playerPos[i%4, j];     
                             break;
                         }
 
@@ -195,12 +186,7 @@ public class GuiContoler : MonoBehaviour {
                     {
                         if (Var.playerPos[i % 4, 3 - j] != null)
                         {
-                            playerBird = Var.playerPos[i % 4, 3 - j];
-                            if (!players.Contains(playerBird))
-                            {
-                                playerBird.friendliness += Helpers.Instance.Findfirendlieness(i % 4, 3 - j);
-                            }
-
+                            playerBird = Var.playerPos[i % 4, 3 - j];   
                             break;
                         }
 
@@ -221,12 +207,18 @@ public class GuiContoler : MonoBehaviour {
         Bird[] birds = FindObjectsOfType(typeof(Bird)) as Bird[];
         foreach(Bird bird in birds)
         {
+
             if (!bird.isEnemy)
+            {
+                
                 players.Add(bird);
+            }
         }
 	   foreach(Bird bird in players)
 		{
-			bird.gameObject.GetComponent<firendLine>().RemoveLines();
+            bird.friendliness += Helpers.Instance.Findfirendlieness(bird);
+            bird.gameObject.GetComponent<firendLine>().RemoveLines();
+
 		}
 
 

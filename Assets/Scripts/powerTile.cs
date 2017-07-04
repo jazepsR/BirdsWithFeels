@@ -44,26 +44,26 @@ public class powerTile : MonoBehaviour {
             switch (emotion)
             {
                 case Var.Em.Confident:
-                    bird.confBoos = 1;
+                    bird.confBoos = 1 * bird.groundMultiplier;
                     break;
                 case Var.Em.Friendly:
-                    bird.friendBoost = 1;
+                    bird.friendBoost = 1 * bird.groundMultiplier;
                     break;
                 case Var.Em.Lonely:
-                    bird.friendBoost = -1;
+                    bird.friendBoost = -1 * bird.groundMultiplier;
                     break;
                 case Var.Em.Scared:
-                    bird.confBoos = -1;
+                    bird.confBoos = -1 * bird.groundMultiplier;
                     break;
             }
         }
         if( type == Var.PowerUps.heal)
         {
-            bird.healthBoost = 1;
+            bird.healthBoost = 1*bird.groundMultiplier;
         }
         if (type == Var.PowerUps.dmg)
         {
-            bird.dmgBoost = 1;
+            bird.dmgBoost = 1 * bird.groundMultiplier;
         }
     }
 }

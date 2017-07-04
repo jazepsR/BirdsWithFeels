@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class Bird : MonoBehaviour
 {
+    public string birdBio;
+    public string birdAbility;
 	public int portraitOrder=0;
 	public int confidence=0;
 	[HideInInspector]
@@ -40,33 +42,40 @@ public class Bird : MonoBehaviour
 	public enum dir { top,front,bottom};
 	public dir position;	
     public bool isEnemy = true;
-    [HideInInspector]
+  //  [HideInInspector]
     public int friendBoost = 0;
-    [HideInInspector]
+   // [HideInInspector]
     public int confBoos = 0;
     [HideInInspector]
     public int healthBoost = 0;
-    [HideInInspector]
+   // [HideInInspector]
     public int dmgBoost = 0;
     public bool inMap = false;
     [HideInInspector]
     public Sprite hatSprite;
+    public Levels.type startingLVL;
+    [HideInInspector]
+    public List<Levels.type> levelList;
+    //[HideInInspector]
+    public int confLoseOnRest = 1;
+    public int groundMultiplier = 1;
+    Levels levelControler;
+    //[HideInInspector]
+    public bool fighting = false;
 	void Start()
 	{
+
         x = -1;
         y = -1;
         maxHealth = 3;
         if (!isEnemy)
-        {
-            try
-            {
-                hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
-            }
-            catch
-            {
-                Debug.Log("Couldnt get hat sprite");
-            }
-            }
+        {           
+            hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
+            if (!levelList.Contains(startingLVL))
+                levelList.Add(startingLVL);
+            levelControler = GetComponent<Levels>();
+            levelControler.ApplyStartLevel(this, levelList);       
+        }
            	
 		lines = GetComponent<firendLine>();
         if (isEnemy)
@@ -85,7 +94,12 @@ public class Bird : MonoBehaviour
 
 	public float getBonus()
 	{
-        return level - 1+ dmgBoost;
+        if (y != -1)
+        {
+            ResetBonuses();
+            ObstacleGenerator.Instance.tiles[y * 4 + x].GetComponent<LayoutButton>().ApplyPower(this);
+        }
+        return level - 1 + dmgBoost;
 	}
     void LoadStats()
     {
@@ -137,20 +151,22 @@ public class Bird : MonoBehaviour
 						break;
 					}
 				}
-			}            
-			//target = home;
+			}
+            //target = home;
+            
             ResetBonuses();
 			dragged = true;
 			Var.selectedBird = gameObject;
+            
             if (!inMap)
-            {
+            {                
                 lines.RemoveLines();
-                GameLogic.Instance.UpdateFeedback();
+                UpdateFeedback();
             }
+            levelControler.ApplyLevelOnPickup(this, levelList);
+            // RemoveAllFeedBack();
 
-           // RemoveAllFeedBack();
-          
-		}
+        }
 		// 1 frame delay
 		
 
@@ -160,7 +176,22 @@ public class Bird : MonoBehaviour
 	}
 
 
-
+    void UpdateFeedback()
+    {
+        fighting = false;
+        if (levelList.Contains(Levels.type.Tova))
+        {
+            if (GameLogic.Instance.CheckIfResting(this)&&!dragged)
+            {
+                levelControler.ApplyLevelOnDrop(this, levelList);
+            }
+            else
+            {
+                levelControler.ApplyLevelOnPickup(this, levelList);
+            }
+        }
+        GameLogic.Instance.UpdateFeedback();
+    }
 
 
 
@@ -174,7 +205,10 @@ public class Bird : MonoBehaviour
 		Debug.Log(ToString());
 	}
 
-
+    public void OnLevelPickup()
+    {
+        levelControler.ApplyLevelOnPickup(this, levelList);
+    }
     public void LoseHealth(int dmg)
     {
         health = health - dmg;
@@ -188,7 +222,8 @@ public class Bird : MonoBehaviour
 	{
 		if (enabled)
 		{
-            return "friendliness: " + friendliness + "\nbravery: " + confidence + "\nlevel: " + level+"\nhealth: "+health;
+            return '\u2022'+"friendly: " + friendliness +" "+ '\u2022' + "brave: " + confidence + 
+                "\n"+ '\u2022' + "level: " + level+ " "+'\u2022' + "health: " +health +"\n" + birdAbility;
 		}else
 		{
 			return null;
@@ -210,11 +245,15 @@ public class Bird : MonoBehaviour
     {
         prevConf = confidence;
         prevFriend = friendliness;
-        friendliness += friendBoost;
+        if (friendBoost != 0)
+        {
+            int i = 0;
+        }
+        friendliness += friendBoost;       
         confidence += confBoos;
         if (!foughtInRound)
         {
-            confidence--;
+            confidence= confidence- confLoseOnRest;
             if (health < maxHealth)
                 health++;
         }
@@ -324,7 +363,8 @@ public class Bird : MonoBehaviour
             LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
         }
         if (Input.GetMouseButtonUp(0) &&dragged)
-            needsReset = true;
+            needsReset = true;        
+            
         if (dragged)
 		{
 			LeanTween.move(gameObject, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0), 0.1f);
@@ -343,7 +383,8 @@ public class Bird : MonoBehaviour
         if (!inMap)
         {
             lines.DrawLines(x, y);
-            GameLogic.Instance.UpdateFeedback();
+            levelControler.ApplyLevelOnDrop(this, levelList);
+            UpdateFeedback();          
         }
             LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
         

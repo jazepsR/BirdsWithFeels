@@ -656,22 +656,22 @@ Prefab:
     - target: {fileID: 224005025359460018, guid: c13f394998404184a94558f18be765f5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 80
+      value: 86
       objectReference: {fileID: 0}
     - target: {fileID: 224005025359460018, guid: c13f394998404184a94558f18be765f5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 57
+      value: 79
       objectReference: {fileID: 0}
     - target: {fileID: 224005025359460018, guid: c13f394998404184a94558f18be765f5,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 227.3
+      value: 227
       objectReference: {fileID: 0}
     - target: {fileID: 224005025359460018, guid: c13f394998404184a94558f18be765f5,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 139
+      value: 179
       objectReference: {fileID: 0}
     - target: {fileID: 224005025359460018, guid: c13f394998404184a94558f18be765f5,
         type: 2}
@@ -766,12 +766,12 @@ Prefab:
     - target: {fileID: 224720192548952440, guid: c13f394998404184a94558f18be765f5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -71.6
+      value: -37.75
       objectReference: {fileID: 0}
     - target: {fileID: 224720192548952440, guid: c13f394998404184a94558f18be765f5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 89.4
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 114311568948139602, guid: c13f394998404184a94558f18be765f5,
         type: 2}
@@ -877,6 +877,16 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.y
       value: 86.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 224720192548952440, guid: c13f394998404184a94558f18be765f5,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 163
+      objectReference: {fileID: 0}
+    - target: {fileID: 224720192548952440, guid: c13f394998404184a94558f18be765f5,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 103.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c13f394998404184a94558f18be765f5, type: 2}
@@ -1262,6 +1272,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1670458014247388, guid: 020fbec819ceb6e4db814084c4a5fd24,
         type: 2}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: birdAbility
+      value: All birds in the same row gain +1 scaredness
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: startingLVL
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114331376846941536, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
@@ -1494,6 +1514,10 @@ MonoBehaviour:
   scared: {r: 0.59607846, g: 0.20392157, b: 0.5176471, a: 1}
   friendly: {r: 0.16862746, g: 0.8392157, b: 0.09019608, a: 1}
   lonely: {r: 0.05882353, g: 0.07058824, b: 0.7019608, a: 1}
+  softBrave: {r: 0, g: 0, b: 0, a: 0}
+  softScared: {r: 0, g: 0, b: 0, a: 0}
+  softFriendly: {r: 0, g: 0, b: 0, a: 0}
+  softLonely: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &685676509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1782,6 +1806,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &736430416 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1298927608465232, guid: babf754960e842241bec1ccf202a8bdc,
+    type: 2}
+  m_PrefabInternal: {fileID: 545122670}
+--- !u!114 &736430419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 736430416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5d0e53e4600e041af256a1cc2a38dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Halo: {fileID: 0}
+--- !u!1 &748782880 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1298927608465232, guid: babf754960e842241bec1ccf202a8bdc,
+    type: 2}
+  m_PrefabInternal: {fileID: 1579454500}
+--- !u!114 &748782883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 748782880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5d0e53e4600e041af256a1cc2a38dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Halo: {fileID: 0}
+--- !u!1 &830874895 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1298927608465232, guid: babf754960e842241bec1ccf202a8bdc,
+    type: 2}
+  m_PrefabInternal: {fileID: 896497852}
+--- !u!114 &830874898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 830874895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5d0e53e4600e041af256a1cc2a38dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Halo: {fileID: 0}
 --- !u!1001 &844281859
 Prefab:
   m_ObjectHideFlags: 0
@@ -2007,6 +2082,31 @@ Prefab:
       propertyPath: inMap
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: charName
+      value: Toby
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: birdAbility
+      value: All birds in the same column gain +1 lonelieness
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: birdBio
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: confidence
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: friendliness
+      value: -5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114331376846941536, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
@@ -2079,6 +2179,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 910932968}
+--- !u!1 &940840521 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1298927608465232, guid: babf754960e842241bec1ccf202a8bdc,
+    type: 2}
+  m_PrefabInternal: {fileID: 2048317449}
+--- !u!114 &940840524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 940840521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5d0e53e4600e041af256a1cc2a38dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Halo: {fileID: 0}
 --- !u!1 &956467357 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1605920977072554, guid: c13f394998404184a94558f18be765f5,
@@ -2153,7 +2270,7 @@ Prefab:
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
       propertyPath: charName
-      value: Terry
+      value: Rebecca
       objectReference: {fileID: 0}
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
@@ -2177,6 +2294,21 @@ Prefab:
       value: 
       objectReference: {fileID: 1670458014247388, guid: 020fbec819ceb6e4db814084c4a5fd24,
         type: 2}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: birdBio
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: birdAbility
+      value: Lose -2 confidence when resting
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: startingLVL
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114331376846941536, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
@@ -3204,7 +3336,7 @@ Prefab:
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
       propertyPath: charName
-      value: Kim's twin
+      value: Tova
       objectReference: {fileID: 0}
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
@@ -3220,6 +3352,16 @@ Prefab:
         type: 2}
       propertyPath: inMap
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: birdAbility
+      value: If resting, all adjacent birds recieve +1 to dice rolls
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: startingLVL
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114331376846941536, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
@@ -3491,6 +3633,23 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 356171958}
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &1732718271 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1298927608465232, guid: babf754960e842241bec1ccf202a8bdc,
+    type: 2}
+  m_PrefabInternal: {fileID: 987174165}
+--- !u!114 &1732718274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1732718271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5d0e53e4600e041af256a1cc2a38dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Halo: {fileID: 0}
 --- !u!1 &1932293786
 GameObject:
   m_ObjectHideFlags: 0
@@ -3897,7 +4056,7 @@ Prefab:
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
       propertyPath: charName
-      value: Jess
+      value: Kim
       objectReference: {fileID: 0}
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
@@ -3921,6 +4080,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1292122385422564, guid: 20575a8cd7b7e4846b28c250ff939581,
         type: 2}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: birdAbility
+      value: Ground effects you twice as much
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: startingLVL
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114331376846941536, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: babf754960e842241bec1ccf202a8bdc, type: 2}

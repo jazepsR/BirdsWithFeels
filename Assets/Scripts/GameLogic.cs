@@ -64,7 +64,7 @@ public class GameLogic : MonoBehaviour {
         LeanTween.scale (iconToShow, Vector3.one, 0.25f)
             .setEase(LeanTweenType.easeOutBack);
 
-        OnShowFeedback_Bird (index);
+       // OnShowFeedback_Bird (index);
     }
 
     public class ExtraPower
@@ -86,6 +86,16 @@ public class GameLogic : MonoBehaviour {
         }
 
     }
+    public bool CheckIfResting(Bird bird)
+    {
+        feedBack[] feedBack = FindObjectsOfType<feedBack>();
+        foreach (feedBack fb in feedBack)
+        {
+            if (!fb.CheckResting(bird))
+                return false;
+        }
+        return true;
+    }
 
 
     private float AngleBetweenVector2(Vector2 vec1, Vector2 vec2)
@@ -95,7 +105,7 @@ public class GameLogic : MonoBehaviour {
         return Vector2.Angle(Vector2.right, diference) * sign;
     }
 
-    void OnShowFeedback_Bird(Vector2 index)
+  /*  void OnShowFeedback_Bird(Vector2 index)
     {
         // Check what we can check
         int extraFriendly = Helpers.Instance.Findfirendlieness((int)index.x, (int)index.y);
@@ -107,7 +117,7 @@ public class GameLogic : MonoBehaviour {
             // We have something to show!
 
         }
-    }
+    }*/
 
     void OnHideFeedback_Enemy(int index)
     {
