@@ -45,7 +45,8 @@ public class battleAnim :MonoBehaviour {
         }
         battles = new List<battleData>();      
         yield return new WaitForSeconds(0.85f);
-        GuiContoler.Instance.CreateReport();
+        GuiContoler.Instance.CreateGraph();
+        GuiContoler.Instance.CreateBattleReport();
     }
 
     IEnumerator ShowResult(battleData battle,float waitTime)

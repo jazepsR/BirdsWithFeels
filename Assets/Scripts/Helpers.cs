@@ -20,6 +20,23 @@ public class Helpers : MonoBehaviour {
         Instance = this;
     }
     
+    public bool ListContainsLevel(Levels.type level, List<LevelData> list)
+    {
+        if (list != null)
+        {
+            foreach (LevelData data in list)
+            {
+                if (data.type == level)
+                    return true;
+            }
+            return false;
+        }else
+        {
+            return false;
+        }
+    }
+
+
     public Color GetEmotionColor(Var.Em emotion)
     {
         switch (emotion)
@@ -33,6 +50,14 @@ public class Helpers : MonoBehaviour {
             case Var.Em.Confident:
                 return brave;
             case Var.Em.Scared:
+                return scared;
+            case Var.Em.SuperFriendly:
+                return friendly;
+            case Var.Em.SuperLonely:
+                return lonely;
+            case Var.Em.SuperConfident:
+                return brave;
+            case Var.Em.SuperScared:
                 return scared;
             default:
                 return neutral;
@@ -51,6 +76,14 @@ public class Helpers : MonoBehaviour {
             case Var.Em.Confident:
                 return softBrave;
             case Var.Em.Scared:
+                return softScared;
+            case Var.Em.SuperFriendly:
+                return softFriendly;
+            case Var.Em.SuperLonely:
+                return softLonely;
+            case Var.Em.SuperConfident:
+                return softBrave;
+            case Var.Em.SuperScared:
                 return softScared;
             default:
                 return neutral;

@@ -11,9 +11,16 @@ public class FillPlayer : MonoBehaviour {
        
         if (inMap && Var.availableBirds.Count>0)
         {
-            for (int i = 0; i < Var.availableBirds.Count; i++)
+            foreach (Bird bird in playerBirds)
             {
-                SetupBird(playerBirds[i], Var.availableBirds[i]);
+                foreach (Bird loadBird in Var.availableBirds)
+                {
+                    if (bird.charName == loadBird.charName)
+                    {
+                        SetupBird(bird, loadBird);
+                        break;
+                    }
+                }
             }
         }
         if (!inMap && Var.activeBirds.Count > 0)
@@ -43,6 +50,8 @@ public class FillPlayer : MonoBehaviour {
         target.portrait = template.portrait;
         target.levelList = template.levelList;
         target.startingLVL = template.startingLVL;
+        target.battleCount = template.battleCount;
+        target.lastLevel = template.lastLevel;
         target.birdAbility = template.birdAbility;
         target.transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = template.hatSprite;
     }

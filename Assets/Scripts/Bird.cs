@@ -16,9 +16,9 @@ public class Bird : MonoBehaviour
 	public int prevFriend = 0;
 	public int friendliness = 0;
     public int health = 3;
-    //[HideInInspector]
+    [HideInInspector]
     public bool foughtInRound = false;
-   // [HideInInspector]
+    [HideInInspector]
     int maxHealth = 3;
     public int x = -1;
     public int y = -1;
@@ -37,42 +37,52 @@ public class Bird : MonoBehaviour
 	public bool dragged = false;
 	[HideInInspector]
 	public firendLine lines;
-    public float level = 1;
+    public int level = 1;
 	bool needsReset = false; 
 	public enum dir { top,front,bottom};
 	public dir position;	
     public bool isEnemy = true;
-  //  [HideInInspector]
+    [HideInInspector]
     public int friendBoost = 0;
-   // [HideInInspector]
+    [HideInInspector]
     public int confBoos = 0;
     [HideInInspector]
     public int healthBoost = 0;
-   // [HideInInspector]
+    [HideInInspector]
     public int dmgBoost = 0;
     public bool inMap = false;
     [HideInInspector]
     public Sprite hatSprite;
     public Levels.type startingLVL;
     [HideInInspector]
-    public List<Levels.type> levelList;
-    //[HideInInspector]
+    public List<LevelData> levelList;
+    [HideInInspector]
     public int confLoseOnRest = 1;
     public int groundMultiplier = 1;
     Levels levelControler;
-    //[HideInInspector]
+    [HideInInspector]
+    public LevelData lastLevel;
+    public int battleCount = 0;
+    [HideInInspector]
     public bool fighting = false;
+    int battlesToNextLVL = 5;
 	void Start()
 	{
-
+        
+        
         x = -1;
         y = -1;
+        prevConf = confidence;
+        prevFriend = friendliness;
         maxHealth = 3;
         if (!isEnemy)
-        {           
+        {            
             hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
-            if (!levelList.Contains(startingLVL))
-                levelList.Add(startingLVL);
+            if (levelList == null)
+            {
+                levelList = new List<LevelData>();
+                AddLevel(new LevelData(startingLVL, Var.Em.Neutral));
+            }
             levelControler = GetComponent<Levels>();
             levelControler.ApplyStartLevel(this, levelList);       
         }
@@ -91,7 +101,14 @@ public class Bird : MonoBehaviour
 		SetEmotion();
 	}
 	
+    public void AddLevel(LevelData data)
+    {
+        lastLevel = data;
+        levelList.Add(data);
+        level = levelList.Count;
+        battlesToNextLVL = level * 5;
 
+    }
 	public float getBonus()
 	{
         if (y != -1)
@@ -134,7 +151,23 @@ public class Bird : MonoBehaviour
         dmgBoost = 0;
         healthBoost = 0;
     }
+    public void UpdateBattleCount()
+    {
+        battleCount++;
+        if (battleCount >= battlesToNextLVL)
+        {
+            CheckLevels();
+        }
 
+    }
+    public void CheckLevels()
+    {
+
+        if (level > 1)
+        {
+
+        }
+    }
 	void OnMouseOver()
 	{
         showText();
@@ -179,7 +212,7 @@ public class Bird : MonoBehaviour
     void UpdateFeedback()
     {
         fighting = false;
-        if (levelList.Contains(Levels.type.Tova))
+        if (Helpers.Instance.ListContainsLevel(Levels.type.Tova,levelList))
         {
             if (GameLogic.Instance.CheckIfResting(this)&&!dragged)
             {
@@ -289,8 +322,8 @@ public class Bird : MonoBehaviour
 				if (confidence >= Var.lvl1)
 					emotion = Var.Em.Confident;
 				//Superconfident
-			   /* if (confidence >= Var.lvl2)
-					emotion = Var.Em.SuperConfident;*/
+			    if (confidence >= Var.lvl2)
+					emotion = Var.Em.SuperConfident;
 			}
 			else
 			{
@@ -299,8 +332,8 @@ public class Bird : MonoBehaviour
 			   if (confidence <= -Var.lvl1)
 					emotion = Var.Em.Scared;
 				//SuperScared
-				/*if (confidence <= -Var.lvl2)
-					emotion = Var.Em.SuperScared;*/
+				if (confidence <= -Var.lvl2)
+					emotion = Var.Em.SuperScared;
 			}
 
 		}
@@ -315,8 +348,8 @@ public class Bird : MonoBehaviour
 				if (friendliness >= Var.lvl1)
 					emotion = Var.Em.Friendly;
 				//SuperFriendly
-			   /* if (friendliness >= Var.lvl2)
-					emotion = Var.Em.SuperFriendly;*/
+			    if (friendliness >= Var.lvl2)
+					emotion = Var.Em.SuperFriendly;
 			}
 			else
 			{
@@ -325,8 +358,8 @@ public class Bird : MonoBehaviour
 				if (friendliness <= -Var.lvl1)
 					emotion = Var.Em.Lonely;
 				//SuperLonely
-			   /* if (friendliness <= -Var.lvl2)
-					emotion = Var.Em.SuperLonely;*/
+			    if (friendliness <= -Var.lvl2)
+					emotion = Var.Em.SuperLonely;
 			}
 
 		}

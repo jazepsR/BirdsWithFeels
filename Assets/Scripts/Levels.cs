@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Levels : MonoBehaviour {
-    public enum type { Toby,Kim,Rebecca,Tova, Terry};
+    public enum type { Toby,Kim,Rebecca,Tova, Terry,Friend1,Friend2,Brave1,Brave2,Lonely1,Lonely2,Scared1,Scared2};
     Bird myBird;
-    List<type> LevelList;
+    List<LevelData> LevelList;
     public GameObject Halo;
 	// Use this for initialization
 	void Start () {        
@@ -17,9 +17,11 @@ public class Levels : MonoBehaviour {
 	void Update () {
 		
 	}
-    public void ApplyStartLevel(Bird bird, List<type> Levels)
+    public void ApplyStartLevel(Bird bird, List<LevelData> Levels)
     {
-        foreach (type level in Levels) {
+
+        foreach (LevelData data in Levels) {
+            type level = data.type;
             switch (level)
             {
                 case type.Rebecca:
@@ -36,10 +38,11 @@ public class Levels : MonoBehaviour {
         }
     }
 
-    public void ApplyLevelOnDrop(Bird bird, List<type> Levels)
+    public void ApplyLevelOnDrop(Bird bird, List<LevelData> Levels)
     {
-        foreach (type level in Levels)
+        foreach (LevelData data in Levels)
         {
+            type level = data.type;
             switch (level)
             {
                 case type.Toby:
@@ -84,10 +87,11 @@ public class Levels : MonoBehaviour {
         }
     }
 
-    public void ApplyLevelOnPickup(Bird bird, List<type> Levels)
+    public void ApplyLevelOnPickup(Bird bird, List<LevelData> Levels)
     {
-        foreach (type level in Levels)
+        foreach (LevelData data in Levels)
         {
+            type level = data.type;
             switch (level)
             {
                 case type.Toby:
@@ -132,13 +136,14 @@ public class Levels : MonoBehaviour {
         int x = myBird.x;
         int y = myBird.y;
         List<LayoutButton> list = new List<LayoutButton>();
-        for(int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             int index = y * 4 + (x + i) % 4;
             list.Add(ObstacleGenerator.Instance.tiles[index]);
         }
         return list;
     }
+
     public List<LayoutButton> GetColumn()
     {
         int x = myBird.x;
@@ -198,4 +203,20 @@ public class Levels : MonoBehaviour {
         return list;
 
     }
+
+
+}
+
+public class LevelData{
+    public Levels.type type;
+    public Var.Em emotion;
+
+   public LevelData(Levels.type type, Var.Em emotion)
+    {
+        this.emotion = emotion;
+        this.type = type;
+    }
+
+
+
 }

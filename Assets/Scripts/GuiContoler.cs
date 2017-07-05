@@ -29,9 +29,12 @@ public class GuiContoler : MonoBehaviour {
 	public Text winDetails;
 	public Text feedbackText;
 	public GameObject battlePanel;
+    public GameObject closeReportBtn;
 	public GuiMap mapBirdScript;
 	List<Bird> players = new List<Bird>();
     public bool inMap = false;
+    [HideInInspector]
+    public int activePortrait = 0;
 	void Start()
 	{
 		Var.birdInfo = infoText;
@@ -65,41 +68,57 @@ public class GuiContoler : MonoBehaviour {
 		{
 			Destroy(child.gameObject);
 		}
+        closeReportBtn.SetActive(false);
 		Reset();
 	}
+    public void CloseBirdStats()
+    {
+        graph.SetActive(false);
+        battlePanel.SetActive(true);
+        foreach (Transform child in graph.transform.Find("ReportGraph").transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 
-	public void CreateReport()
-	{
-		battlePanel.SetActive(false);
-		
-
-		graph.SetActive(true);
-		foreach (Bird bird in players)
-		{
-			
-
-
-			
-
-			//Normalize bird stats
-			if (bird.confidence > 12)
-				bird.confidence = 12;
-			if (bird.confidence < -12)
-				bird.confidence = -12;
-			if (bird.friendliness > 12)
-				bird.friendliness = 12;
-			if (bird.friendliness < -12)
-				bird.friendliness = -12;
-
-
-			GameObject portrait = bird.portrait;
-			GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
-			colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
-			Graph.Instance.PlotFull(bird.prevFriend, bird.prevConf, bird.friendliness, bird.confidence, portrait);
-
-		}
+    public void CreateGraph()
+    {
+        
+        graph.SetActive(true);        
+        
+        battlePanel.SetActive(false);
+        Graph.Instance.portraits = new List<GameObject>();
+        foreach (Bird bird in Var.activeBirds)
+        {
+            //Normalize bird stats
+            int treshold = Var.lvl2 - 1;
+            //Super starts at 10
+            if (bird.level > 1)
+            {
+                treshold = 12;
+            }
+            if (bird.confidence > treshold)
+                bird.confidence = treshold;
+            if (bird.confidence < -treshold)
+                bird.confidence = -treshold;
+            if (bird.friendliness > treshold)
+                bird.friendliness = treshold;
+            if (bird.friendliness < -treshold)
+                bird.friendliness = -treshold;
 
 
+            GameObject portrait = bird.portrait;
+            GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
+            colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);            
+            Graph.Instance.PlotFull(bird.prevFriend, bird.prevConf, bird.friendliness, bird.confidence, portrait,bird.charName);
+            feedbackText.text = "";
+            winText.text = "";
+            winDetails.text = "";
+        }
+        ProgressGUI.Instance.PortraitClick(activePortrait);
+    }
+    public void CreateBattleReport() {
+        closeReportBtn.SetActive(true);
 		if (finalResult < 0)
 		{
 			UpdateHearts(--Var.health);
@@ -128,8 +147,11 @@ public class GuiContoler : MonoBehaviour {
 			winDetails.text = winDetString;
 		}
 
+
+
 	public void PortraitControl(int portNr,Var.Em color)
 	{
+        activePortrait = portNr;
 		for (int i = 0; i < portraits.Length; i++)
 		{
 			if (i == portNr)
@@ -270,7 +292,7 @@ public class GuiContoler : MonoBehaviour {
 			bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
 			bird.target = bird.home;
 			bird.transform.position = bird.home;
-
+            bird.battleCount++;
 		}
         foreach(LayoutButton tile in ObstacleGenerator.Instance.tiles)
         {
