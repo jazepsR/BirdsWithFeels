@@ -53,7 +53,7 @@ public class Graph : MonoBehaviour {
             portraits.Add(heartt);
         }
         heartt.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
-        heartt.transform.localPosition = new Vector3(-x*21, y*21, 0);
+        heartt.transform.localPosition = new Vector3(-x*26.2f, y*26.2f, 0);
 
         
 

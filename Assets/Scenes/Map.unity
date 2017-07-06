@@ -746,7 +746,7 @@ Prefab:
     - target: {fileID: 224195842911040376, guid: c13f394998404184a94558f18be765f5,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 21
+      value: 24.6
       objectReference: {fileID: 0}
     - target: {fileID: 224195842911040376, guid: c13f394998404184a94558f18be765f5,
         type: 2}
@@ -756,7 +756,7 @@ Prefab:
     - target: {fileID: 114346996832081310, guid: c13f394998404184a94558f18be765f5,
         type: 2}
       propertyPath: m_FontData.m_FontSize
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 114346996832081310, guid: c13f394998404184a94558f18be765f5,
         type: 2}
@@ -916,7 +916,7 @@ Prefab:
     - target: {fileID: 224195842911040376, guid: c13f394998404184a94558f18be765f5,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 82.196
+      value: 89.4
       objectReference: {fileID: 0}
     - target: {fileID: 224195842911040376, guid: c13f394998404184a94558f18be765f5,
         type: 2}
@@ -1302,7 +1302,7 @@ Prefab:
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
       propertyPath: confidence
-      value: -4
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
@@ -1605,6 +1605,8 @@ MonoBehaviour:
   closeReportBtn: {fileID: 0}
   mapBirdScript: {fileID: 0}
   inMap: 1
+  messageBox: {fileID: 0}
+  messageText: {fileID: 0}
   activePortrait: 0
 --- !u!114 &685676510
 MonoBehaviour:
@@ -2331,7 +2333,7 @@ Prefab:
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
       propertyPath: confidence
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
@@ -2583,17 +2585,17 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: hasFirendlyPowerUps
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: hasConfidentPowerUps
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: hasBottomEnemyRow
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -2613,12 +2615,12 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: hasHealthPowerUps
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: hasDMGPowerUps
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -2634,6 +2636,16 @@ Prefab:
         type: 2}
       propertyPath: m_LocalScale.z
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: hasFrontEnemyRow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: hasTopEnemyRow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
@@ -2840,7 +2852,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: length
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -2875,6 +2887,11 @@ Prefab:
         type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: hasObstacles
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
@@ -3289,7 +3306,7 @@ GameObject:
   - component: {fileID: 1513960783}
   - component: {fileID: 1513960782}
   m_Layer: 0
-  m_Name: map
+  m_Name: mapBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3412,12 +3429,12 @@ Prefab:
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
       propertyPath: friendliness
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
       propertyPath: confidence
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
@@ -3433,6 +3450,11 @@ Prefab:
         type: 2}
       propertyPath: startingLVL
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
+        type: 2}
+      propertyPath: level
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114331376846941536, guid: babf754960e842241bec1ccf202a8bdc, type: 2}

@@ -170,11 +170,22 @@ public class GameLogic : MonoBehaviour {
         {
             //Win
             playerBird.confidence += Var.confWinFight;
+            playerBird.consecutiveFightsWon++;
+            playerBird.winsInOneFight++;
+            if (playerBird.wonLastBattle == 0)
+                playerBird.wonLastBattle = 2;
+            else
+                playerBird.wonLastBattle = 1;
             return +1;
         }else
         {           
             //lose
-            playerBird.confidence += Var.confLoseFight;               
+            playerBird.confidence += Var.confLoseFight;
+            playerBird.consecutiveFightsWon = 0;
+            if (playerBird.wonLastBattle == 1)
+                playerBird.wonLastBattle = 2;
+            else
+                playerBird.wonLastBattle = 0;       
             return -1;            
         }
 
@@ -186,14 +197,14 @@ public class GameLogic : MonoBehaviour {
     {
         Var.Em em1 = Bird1.emotion;
         Var.Em em2 = Bird2.emotion;
-
-        if (em1 == Var.Em.Friendly && em2 == Var.Em.Neutral)
+        //TODO: discuss super rules
+        if ((em1 == Var.Em.Friendly || em1 == Var.Em.SuperFriendly) && em2 == Var.Em.Neutral)
             return true;
-        if (em1 == Var.Em.Confident && em2 == Var.Em.Neutral)
+        if ((em1 == Var.Em.Confident || em1 == Var.Em.SuperConfident) && em2 == Var.Em.Neutral)
             return true;
-        if (em1 == Var.Em.Lonely && em2 == Var.Em.Neutral)
+        if ((em1 == Var.Em.Lonely || em1 == Var.Em.SuperLonely)&& em2 == Var.Em.Neutral)
             return true;
-        if (em1 == Var.Em.Scared && em2 == Var.Em.Neutral)
+        if ((em1 == Var.Em.Scared || em1 == Var.Em.SuperScared) && em2 == Var.Em.Neutral)
             return true;
 
         if (em1 == Var.Em.Friendly && em2 == Var.Em.Confident)
@@ -222,7 +233,7 @@ public class GameLogic : MonoBehaviour {
             return true;
         if (em1 == Var.Em.SuperScared && em2 == Var.Em.SuperFriendly)
             return true;
-
+        /* TODO: Discuss this
         if (em1 == Var.Em.SuperConfident && em2 == Var.Em.Scared)
             return true;
         if (em1 == Var.Em.SuperLonely && em2 == Var.Em.Friendly)
@@ -231,7 +242,7 @@ public class GameLogic : MonoBehaviour {
             return true;
         if (em1 == Var.Em.SuperFriendly && em2 == Var.Em.Lonely)
             return true;
-
+            */
 
 
 

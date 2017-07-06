@@ -117,7 +117,7 @@ public class feedBack : MonoBehaviour {
             case Bird.dir.bottom:
                 for (int i = 0; i < 4; i++)
                 {
-                    if (Var.playerPos[myIndex, 3 - i] == bird)
+                    if (Var.playerPos[myIndex, 3 - i] != null)
                     {
                         if (Var.playerPos[myIndex, 3 - i] == bird)
                             return false;

@@ -11,6 +11,22 @@ public class FillPlayer : MonoBehaviour {
        
         if (inMap && Var.availableBirds.Count>0)
         {
+            foreach (Bird bird in Var.availableBirds)
+            {
+                bool wasActive = false;
+                foreach (Bird ActiveBird in Var.activeBirds)
+                {
+                    if (ActiveBird.charName == bird.charName)
+                    {
+                        wasActive = true;
+                        break;
+                    }
+                }
+                if (wasActive)
+                    bird.AdventuresRested = 0;
+                else
+                    bird.AdventuresRested++;
+            }
             foreach (Bird bird in playerBirds)
             {
                 foreach (Bird loadBird in Var.availableBirds)
@@ -22,6 +38,7 @@ public class FillPlayer : MonoBehaviour {
                     }
                 }
             }
+            
         }
         if (!inMap && Var.activeBirds.Count > 0)
         {
@@ -52,7 +69,12 @@ public class FillPlayer : MonoBehaviour {
         target.startingLVL = template.startingLVL;
         target.battleCount = template.battleCount;
         target.lastLevel = template.lastLevel;
+        target.level = template.level;
         target.birdAbility = template.birdAbility;
+        target.consecutiveFightsWon = template.consecutiveFightsWon;
+        target.battlesToNextLVL = template.battlesToNextLVL;        
+        target.roundsRested = template.roundsRested;
+        target.AdventuresRested = template.AdventuresRested;
         target.transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = template.hatSprite;
     }
 	// Update is called once per frame

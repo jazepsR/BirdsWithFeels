@@ -199,11 +199,131 @@ public class Levels : MonoBehaviour {
             list.Add(tiles[(y - 1) * 4 + x - 1]);
         }
 
-        Debug.Log(list.Count);
+        //Debug.Log(list.Count);
         return list;
 
     }
 
+    public void ApplyLevel(LevelData data, string levelName)
+    {
+        if (!Helpers.Instance.ListContainsLevel(data.type, LevelList))
+        {
+            GuiContoler.Instance.ShowMessage(myBird.charName + " Reached level " + levelName);
+            myBird.AddLevel(data);
+            Debug.Log(myBird.charName + " Reached level " + levelName);
+        }
+    }
+
+    public void  CheckBrave1()
+    {
+        if (myBird.lastLevel.emotion != Var.Em.Confident && (myBird.emotion == Var.Em.Confident || myBird.emotion == Var.Em.SuperConfident))
+        {
+            if (myBird.winsInOneFight > 1  && myBird.confidence >= 7)
+            {
+                ApplyLevel(new LevelData(type.Brave2, Var.Em.Confident), "Brave 1");
+            }
+        }
+
+    }
+    public void CheckBrave2()
+    {
+        if (myBird.lastLevel.emotion != Var.Em.Confident && (myBird.emotion == Var.Em.Confident || myBird.emotion == Var.Em.SuperConfident))
+        {
+            if (myBird.consecutiveFightsWon >= 6 && myBird.confidence >= 10)
+            {
+                ApplyLevel(new LevelData(type.Brave1, Var.Em.Confident), "Brave 2");
+            }
+        }
+    }
+    public void CheckLonely1()
+    {
+        if (myBird.lastLevel.emotion != Var.Em.Lonely && (myBird.emotion == Var.Em.Lonely || myBird.emotion == Var.Em.SuperLonely))
+        {           
+            if ( myBird.friendliness <= -7 && Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.wonLastBattle>=1)
+            {
+                ApplyLevel(new LevelData(type.Lonely1, Var.Em.Lonely), "Lonely 1");
+            }            
+        }
+    }
+
+    public void CheckLonely2()
+    {
+        if (myBird.lastLevel.emotion != Var.Em.Lonely && (myBird.emotion == Var.Em.Lonely || myBird.emotion == Var.Em.SuperLonely))
+        {
+            //Fix -7 to -10
+            if (myBird.friendliness <= -10 && Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.AdventuresRested>=2)
+            {
+                ApplyLevel(new LevelData(type.Lonely2, Var.Em.Lonely),"Lonely 2");
+            }
+        }
+    }
+    
+    public void CheckFriendly1()
+    {
+        if (myBird.lastLevel.emotion != Var.Em.Friendly && (myBird.emotion == Var.Em.Friendly || myBird.emotion == Var.Em.SuperFriendly))
+        {
+            if (myBird.FriendGainedInRound >= 3  && myBird.wonLastBattle >=1 && myBird.friendliness >= 7)
+            {
+                ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly),"Friendly 1");
+            }
+        }
+
+    }
+
+    public void CheckFriendly2()
+    {
+        if (myBird.lastLevel.emotion != Var.Em.Friendly && (myBird.emotion == Var.Em.Friendly || myBird.emotion == Var.Em.SuperFriendly))
+        {
+            bool closeFriend = false;
+            foreach(Bird bird in Helpers.Instance.GetAdjacentBirds(myBird))
+            {
+                if(bird.emotion == Var.Em.Friendly || bird.emotion == Var.Em.SuperFriendly )
+                {
+                    closeFriend = true;
+                    break;
+                }
+            }
+            if (closeFriend && myBird.FriendGainedInRound >= 5 && myBird.friendliness >= 10)
+            {
+                ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly),"Friendly 2");
+            }
+        }
+
+    }
+
+    public void CheckScared1()
+    {
+        if (myBird.lastLevel.emotion != Var.Em.Scared && (myBird.emotion == Var.Em.Scared || myBird.emotion == Var.Em.SuperScared))
+        {
+            bool closeWinner = false;
+            foreach (Bird bird in Helpers.Instance.GetAdjacentBirds(myBird))
+            {
+                if (bird.wonLastBattle>=1)
+                {
+                    closeWinner = true;
+                    break;
+                }
+            }
+
+            if ((closeWinner &&myBird.wonLastBattle == 0 || closeWinner && myBird.wonLastBattle == 2) && myBird.confidence <= -7)
+            {
+                ApplyLevel(new LevelData(type.Scared1, Var.Em.Scared),"Scared 1");
+            }
+        }
+
+    }
+    public void CheckScared2()
+    {
+        if (myBird.lastLevel.emotion != Var.Em.Scared && (myBird.emotion == Var.Em.Scared || myBird.emotion == Var.Em.SuperScared))
+        {
+            
+            if (myBird.roundsRested >= 4 && myBird.confidence <= -10)
+            {
+                ApplyLevel(new LevelData(type.Scared2, Var.Em.Scared),"Scared 2");
+            }
+        }
+
+    }
 
 }
 

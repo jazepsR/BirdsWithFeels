@@ -20,6 +20,7 @@ public class fillEnemy : MonoBehaviour {
         int frontBirds = 0;
         if (dirList == null)
             dirList = new List<Bird.dir>() { Bird.dir.front, Bird.dir.top};
+        
         int max = 5;
         if (dirList.Count == 1 && dirList.Contains(Bird.dir.front))
             max = 4;

@@ -870,6 +870,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!114 &74870158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1783,7 +1791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44, y: -68}
+  m_AnchoredPosition: {x: -3, y: -52}
   m_SizeDelta: {x: 314, y: 171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &193617689
@@ -2311,7 +2319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.4, y: 1.3}
+  m_AnchoredPosition: {x: 0.39999998, y: 1.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &237392500
@@ -2960,6 +2968,128 @@ MonoBehaviour:
   level: 10
   isLocked: 0
   lockObj: {fileID: 1558765923}
+--- !u!1 &295887883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 295887884}
+  - component: {fileID: 295887887}
+  - component: {fileID: 295887886}
+  - component: {fileID: 295887885}
+  m_Layer: 5
+  m_Name: OkBtn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &295887884
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 295887883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1667223870}
+  m_Father: {fileID: 618562788}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000005722, y: -72}
+  m_SizeDelta: {x: 60, y: 60}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &295887885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 295887883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 295887886}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 373818711}
+        m_MethodName: HideMessage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &295887886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 295887883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &295887887
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 295887883}
 --- !u!212 &298977487 stripped
 SpriteRenderer:
   m_PrefabParentObject: {fileID: 212849572233947310, guid: 0d0c9d675d268854191357e0077af9c8,
@@ -3286,6 +3416,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!114 &337799188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3636,6 +3774,8 @@ MonoBehaviour:
   closeReportBtn: {fileID: 1617101168}
   mapBirdScript: {fileID: 1905915770}
   inMap: 0
+  messageBox: {fileID: 618562787}
+  messageText: {fileID: 400283075}
   activePortrait: 1
 --- !u!114 &373818712
 MonoBehaviour:
@@ -3815,6 +3955,14 @@ MonoBehaviour:
   groundMultiplier: 1
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!114 &374855093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4016,6 +4164,80 @@ MonoBehaviour:
   level: 12
   isLocked: 0
   lockObj: {fileID: 238051288}
+--- !u!1 &400283073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 400283074}
+  - component: {fileID: 400283076}
+  - component: {fileID: 400283075}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &400283074
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 400283073}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 618562788}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 32.5}
+  m_SizeDelta: {x: 370, y: 149}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &400283075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 400283073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 24
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Text
+--- !u!222 &400283076
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 400283073}
 --- !u!1 &405876399
 GameObject:
   m_ObjectHideFlags: 0
@@ -4463,6 +4685,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!114 &447389851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5039,6 +5269,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!114 &528858649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5635,6 +5873,76 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 358e9ce7dd7f08c41a6640ec1ecdd027, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &618562787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 618562788}
+  - component: {fileID: 618562790}
+  - component: {fileID: 618562789}
+  m_Layer: 5
+  m_Name: MessageBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &618562788
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 618562787}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 295887884}
+  - {fileID: 400283074}
+  m_Father: {fileID: 2034288841}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 404, y: 242}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &618562789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 618562787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &618562790
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 618562787}
 --- !u!1001 &622186421
 Prefab:
   m_ObjectHideFlags: 0
@@ -6769,6 +7077,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!95 &740823788
 Animator:
   serializedVersion: 3
@@ -7905,6 +8221,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!114 &844413167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7952,7 +8276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.8, y: -3.4}
+  m_AnchoredPosition: {x: 2.8000002, y: -3.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &845078829
@@ -8022,7 +8346,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: 0.0000038147}
+  m_AnchoredPosition: {x: 93, y: 16}
   m_SizeDelta: {x: 314, y: 171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &848490160
@@ -8765,7 +9089,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: 50.5}
+  m_AnchoredPosition: {x: 93, y: 67}
   m_SizeDelta: {x: 314, y: 171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &946120690
@@ -11098,8 +11422,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 214, y: 75}
-  m_SizeDelta: {x: 493, y: 378}
+  m_AnchoredPosition: {x: 190, y: 77}
+  m_SizeDelta: {x: 551, y: 378}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1293172061
 MonoBehaviour:
@@ -11458,7 +11782,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -101, y: 88}
+  m_AnchoredPosition: {x: -148, y: 104}
   m_SizeDelta: {x: 32, y: 31}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1350889696
@@ -12322,7 +12646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.8, y: -3.4}
+  m_AnchoredPosition: {x: 2.8000002, y: -3.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1510265278
@@ -13930,6 +14254,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!114 &1660394610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13976,7 +14308,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -101, y: 86}
+  m_AnchoredPosition: {x: -148, y: 102}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1665926295
@@ -14062,6 +14394,80 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &1667223869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1667223870}
+  - component: {fileID: 1667223872}
+  - component: {fileID: 1667223871}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1667223870
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667223869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 295887884}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1667223871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667223869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 30
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: OK
+--- !u!222 &1667223872
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667223869}
 --- !u!1 &1668163211
 GameObject:
   m_ObjectHideFlags: 0
@@ -14423,6 +14829,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!114 &1676613503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14995,6 +15409,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!114 &1699966607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15042,7 +15464,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.4, y: 1.3}
+  m_AnchoredPosition: {x: 0.39999998, y: 1.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1712172366
@@ -16260,7 +16682,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00007581711, y: 1.9}
+  m_AnchoredPosition: {x: 0.00007581711, y: 1.9000001}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1846596682
@@ -16410,6 +16832,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!95 &1862539792
 Animator:
   serializedVersion: 3
@@ -16520,6 +16950,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!95 &1873808335
 Animator:
   serializedVersion: 3
@@ -17420,6 +17858,14 @@ MonoBehaviour:
   groundMultiplier: 0
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!95 &1996505567
 Animator:
   serializedVersion: 3
@@ -17745,7 +18191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.4, y: 1.3}
+  m_AnchoredPosition: {x: 0.39999998, y: 1.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2021672986
@@ -18113,6 +18559,7 @@ RectTransform:
   - {fileID: 1276784168}
   - {fileID: 1698107304}
   - {fileID: 248335718}
+  - {fileID: 618562788}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18359,6 +18806,14 @@ MonoBehaviour:
   groundMultiplier: 1
   battleCount: 0
   fighting: 0
+  battlesToNextLVL: 0
+  consecutiveFightsWon: 0
+  winsInOneFight: 0
+  ConfGainedInRound: 0
+  FriendGainedInRound: 0
+  wonLastBattle: 0
+  roundsRested: 0
+  AdventuresRested: 0
 --- !u!114 &2101874053
 MonoBehaviour:
   m_ObjectHideFlags: 0

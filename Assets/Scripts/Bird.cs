@@ -65,7 +65,23 @@ public class Bird : MonoBehaviour
     public int battleCount = 0;
     [HideInInspector]
     public bool fighting = false;
-    int battlesToNextLVL = 5;
+    [HideInInspector]
+    public int battlesToNextLVL = 5;
+    //[HideInInspector]
+    public int consecutiveFightsWon = 0;
+    //[HideInInspector]
+    public int winsInOneFight = 0;
+    [HideInInspector]
+    public int ConfGainedInRound = 0;
+    [HideInInspector]
+    public int FriendGainedInRound = 0;
+    // -1 = no fight, 0 = lost, 1 = won, 2 = won and lost
+    [HideInInspector]
+    public int wonLastBattle = -1;
+    [HideInInspector]
+    public int roundsRested = 0;
+    //[HideInInspector]
+    public int AdventuresRested = 0;
 	void Start()
 	{
         
@@ -158,14 +174,32 @@ public class Bird : MonoBehaviour
         {
             CheckLevels();
         }
+        //Reset per battle level variables
+       
+    }
 
+    public void ResetAfterLevel()
+    {
+        winsInOneFight = 0;
+        wonLastBattle = -1;
+        x = -1;
+        y = -1;
+        levelControler.ApplyLevelOnPickup(this, levelList);
+        if (Helpers.Instance.ListContainsLevel(Levels.type.Tova, levelList))       
+            levelControler.Halo.SetActive(false);        
     }
     public void CheckLevels()
     {
-
-        if (level > 1)
+        levelControler.CheckBrave1();
+        levelControler.CheckLonely1();
+        levelControler.CheckFriendly1();
+        levelControler.CheckScared1();
+        //if (level > 1)
         {
-
+            levelControler.CheckBrave2();
+            levelControler.CheckLonely2();
+            levelControler.CheckFriendly2();
+            levelControler.CheckScared2();
         }
     }
 	void OnMouseOver()
@@ -196,7 +230,7 @@ public class Bird : MonoBehaviour
                 lines.RemoveLines();
                 UpdateFeedback();
             }
-            levelControler.ApplyLevelOnPickup(this, levelList);
+           
             // RemoveAllFeedBack();
 
         }
@@ -207,6 +241,8 @@ public class Bird : MonoBehaviour
 
 		
 	}
+
+
 
 
     void UpdateFeedback()
@@ -276,34 +312,36 @@ public class Bird : MonoBehaviour
 	}
     public void AddRoundBonuses()
     {
-        prevConf = confidence;
-        prevFriend = friendliness;
-        if (friendBoost != 0)
-        {
-            int i = 0;
-        }
-        friendliness += friendBoost;       
+
+        friendliness += friendBoost;
         confidence += confBoos;
         if (!foughtInRound)
         {
-            confidence= confidence- confLoseOnRest;
+            consecutiveFightsWon = 0;
+            roundsRested++;
+            confidence = confidence - confLoseOnRest;
             if (health < maxHealth)
                 health++;
+        }else
+        {
+            roundsRested = 0;
         }
 
         if (health < maxHealth)
         {
             health = Mathf.Min(health + healthBoost, maxHealth);
         }
-        foughtInRound = false;
-        x = -1;
-        y = -1;
+        foughtInRound = false;        
+        ConfGainedInRound = confidence - prevConf;
+        FriendGainedInRound = friendliness - prevFriend;
+        Helpers.Instance.NormalizeStats(this);
+        prevConf = confidence;
+        prevFriend = friendliness;
         ResetBonuses();
     }
 	public void SetEmotion()
 	{
 
-        //AddRoundBonuses();
 		if(Mathf.Abs((float)confidence)<Var.lvl1 && Mathf.Abs((float)friendliness) < Var.lvl1)
 		{
 			//No type
