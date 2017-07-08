@@ -39,8 +39,10 @@ public class firendLine : MonoBehaviour {
 		{
 			if (Var.playerPos[y, x] != null)
 			{
+                
 				GameObject line = Instantiate(LineObj);
 				LineRenderer lr = line.GetComponent<LineRenderer>();
+                lr.sortingOrder = -3;
                 lr.SetPosition(0, birdScript.target);
                 lr.SetPosition(1, Var.playerPos[y, x].target);
                 if (isThick)

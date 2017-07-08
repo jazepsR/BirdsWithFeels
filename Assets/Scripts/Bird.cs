@@ -433,7 +433,14 @@ public class Bird : MonoBehaviour
         }
         if(CoolDownLeft>0)
             CoolDownLeft--;
-        CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;
+        try
+        {
+            CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;
+        }
+        catch
+        {
+            Debug.Log("fix cooldown rings!");
+        }
         if (health < maxHealth)
         {
             health = Mathf.Min(health + healthBoost, maxHealth);

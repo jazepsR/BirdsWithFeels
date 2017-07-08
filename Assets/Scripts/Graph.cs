@@ -30,6 +30,7 @@ public class Graph : MonoBehaviour {
         GameObject preHeart = PlotPoint(prevX, prevY, prevHeart,false);
         GameObject tempHeart = PlotPoint(currX, currY, portrait,true,Name);
         LineRenderer lr =preHeart.transform.gameObject.AddComponent<LineRenderer>();
+        lr.sortingOrder = 20;
 		lr.SetPosition(0, new Vector3(preHeart.transform.position.x,preHeart.transform.position.y,0));
 		lr.SetPosition(1, new Vector3(tempHeart.transform.position.x,tempHeart.transform.position.y,0));
         lr.SetWidth(0.045f, 0.045f);     
