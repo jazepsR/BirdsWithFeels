@@ -5,10 +5,11 @@ using UnityEngine;
 public class FillPlayer : MonoBehaviour {
     public Bird[] playerBirds;
     public bool inMap = false;
+    public static FillPlayer Instance { get; private set; }
 	// Use this for initialization
 	void Awake ()
     {
-       
+        Instance = this;
         if (inMap && Var.availableBirds.Count>0)
         {
             foreach (Bird bird in Var.availableBirds)
@@ -40,22 +41,28 @@ public class FillPlayer : MonoBehaviour {
             }
             
         }
+        if (Var.availableBirds.Count < 1 && inMap)
+        {
+            Var.availableBirds.AddRange(playerBirds);
+
+        }
+        /*if (!inMap && Var.activeBirds.Count < 1)
+        {
+            Var.activeBirds.AddRange(playerBirds);
+        }*/
+        
         if (!inMap && Var.activeBirds.Count > 0)
         {
             for (int i = 0; i < Var.activeBirds.Count; i++)
             {
                 SetupBird(playerBirds[i], Var.activeBirds[i]);
             }
-        }
-        if (Var.availableBirds.Count < 1 && inMap)
-        {
-            Var.availableBirds.AddRange(playerBirds);
-        }
+        }        
            
     }
 		
 	
-	void SetupBird(Bird target, Bird template)
+	public static void SetupBird(Bird target, Bird template)
     {
         target.charName = template.charName;
         target.friendliness = template.friendliness;

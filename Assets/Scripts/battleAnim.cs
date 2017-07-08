@@ -44,14 +44,28 @@ public class battleAnim :MonoBehaviour {
             yield return new WaitForSeconds(waitTime);
         }
         battles = new List<battleData>();
+        bool canReroll = false;
         foreach (Bird bird in Var.activeBirds)
         {
-            bird.UpdateBattleCount();
-            bird.AddRoundBonuses();
+            if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.levelList) && bird.CoolDownLeft == 0 && !bird.foughtInRound)
+                canReroll = true;
+            
         }
-        yield return new WaitForSeconds(1.5f);        
-        GuiContoler.Instance.CreateGraph();       
-        GuiContoler.Instance.CreateBattleReport();
+        if (canReroll)
+        {
+            GuiContoler.Instance.rerollBox.SetActive(true);
+        }
+        else
+        {
+            foreach (Bird bird in Var.activeBirds)
+            {
+                bird.UpdateBattleCount();
+                bird.AddRoundBonuses();
+            }
+            yield return new WaitForSeconds(1.5f);
+            GuiContoler.Instance.CreateGraph();
+            GuiContoler.Instance.CreateBattleReport();
+        }
        
     }
 

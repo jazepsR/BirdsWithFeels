@@ -89,9 +89,10 @@ public class Bird : MonoBehaviour
     public int CoolDownLength = 3;
     public Image CooldownRing;
     public bool isHiding = false;
+    public int prevRoundHealth;
 	void Start()
 	{
-        
+        prevRoundHealth = health;
         
         x = -1;
         y = -1;
@@ -138,7 +139,16 @@ public class Bird : MonoBehaviour
                 CooldownRing.gameObject.SetActive(active);
             }else
             {
-                CooldownRing.gameObject.SetActive(false);
+                if(Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, levelList))
+                {
+                    CooldownRing.color = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
+                    CooldownRing.gameObject.SetActive(active);
+                }
+                else
+                {
+                    CooldownRing.gameObject.SetActive(false);
+                }
+                
             }
     }
     public void AddLevel(LevelData data)
@@ -337,7 +347,7 @@ public class Bird : MonoBehaviour
         {
             if (Helpers.Instance.ListContainsLevel(Levels.type.Brave2, levelList) && (emotion == Var.Em.Confident || emotion == Var.Em.SuperConfident))
             {
-                confidence = confidence - 2;
+                confBoos = confBoos - 2;
                 GameObject shield = Resources.Load("shieldEffect") as GameObject;
                 Instantiate(shield, transform);
 
@@ -425,8 +435,8 @@ public class Bird : MonoBehaviour
         FriendGainedInRound = friendliness - prevFriend;
         Helpers.Instance.NormalizeStats(this);
         levelControler.OnfightEndLevel(this, levelList);
-        ResetBonuses();
-        
+        prevRoundHealth = health;
+        ResetBonuses();                
     }
 
 	public void SetEmotion()

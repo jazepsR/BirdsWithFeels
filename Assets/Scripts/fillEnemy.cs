@@ -37,9 +37,9 @@ public class fillEnemy : MonoBehaviour {
 
         List<int> usedPos = new List<int>();
         int enemyCount = Random.Range(3, max);
-            for (int i = 0; i < enemyCount; i++)
-            {
-                int enemyPos = 0;
+        for (int i = 0; i < enemyCount; i++)
+        {
+            int enemyPos = 0;
             if (i == 0 && dirList.Contains(Bird.dir.front))
             {
                 enemyPos = Random.Range(4, 8);
@@ -56,19 +56,35 @@ public class fillEnemy : MonoBehaviour {
                     }
                 }
             }
-                usedPos.Add(enemyPos);
-                Bird enemy = Enemies[enemyPos].GetComponent<Bird>();
-               
-                if (enemy.position == Bird.dir.front)
-                    frontBirds++;
-                enemy.confidence = (int)Random.Range(minConf, maxConf);
-                enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
-                enemy.SetEmotion();
-                Enemies[enemyPos].SetActive(true);
-                enemy.inUse = true;
-                enemy.transform.localPosition = enemy.home;
+            usedPos.Add(enemyPos);
+            Bird enemy = Enemies[enemyPos].GetComponent<Bird>();               
+            if (enemy.position == Bird.dir.front)
+                frontBirds++;
+            enemy.confidence = (int)Random.Range(minConf, maxConf);
+            enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
+            enemy.SetEmotion();
+            Enemies[enemyPos].SetActive(true);
+            enemy.inUse = true;
+            enemy.transform.localPosition = enemy.home;
         }
         
         
     } 
+    public void Reset()
+    {
+       foreach(Bird enemy in Var.enemies)
+        {
+            if (enemy.inUse)
+            {
+                enemy.gameObject.SetActive(true);
+                enemy.transform.localPosition = enemy.home;
+
+
+
+
+
+            }
+
+        }
+    }
 }

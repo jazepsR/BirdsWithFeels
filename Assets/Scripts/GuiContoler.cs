@@ -20,6 +20,7 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject winBanner;
 	public GameObject[] portraits;
 	public Transform[] battleTrag;
+    public GameObject rerollBox;
 	int roundLength = 3;
 	Var.Em currentMapArea;
 	Var.Em nextMapArea;
@@ -65,7 +66,43 @@ public class GuiContoler : MonoBehaviour {
 			hearts[i].enabled = i < health;
 		}
 	}
+    public void NoReroll()
+    {
+        foreach (Bird bird in Var.activeBirds)
+        {
+            bird.UpdateBattleCount();
+            bird.AddRoundBonuses();
+        }
+        Instance.CreateGraph();
+        Instance.CreateBattleReport();
+        rerollBox.SetActive(false);
+    }
+    public void YesReroll()
+    {
+        
+        foreach (Bird bird in Var.activeBirds)
+        {
+            bird.SetEmotion();
+            bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
+            bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
+            bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
+            bird.target = bird.home;
+            bird.transform.position = bird.home;
+            bird.health = bird.prevRoundHealth;
+            if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.levelList) && bird.CoolDownLeft == 0 && !bird.foughtInRound)
+                bird.CoolDownLeft = bird.CoolDownLength;
+        }
+        for (int i = 0; i < Var.activeBirds.Count; i++)
+        {
+            FillPlayer.SetupBird(FillPlayer.Instance.playerBirds[i], Var.activeBirds[i]);
+        }
+        Var.playerPos = new Bird[4, 4];
+        GetComponent<fillEnemy>().Reset();
+        GameLogic.Instance.CanWeFight();
+        GameLogic.Instance.UpdateFeedback();
+        rerollBox.SetActive(false);
 
+    }
 	public void CloseGraph()
 	{
 
@@ -255,7 +292,7 @@ public class GuiContoler : MonoBehaviour {
 		}
 	   foreach(Bird bird in players)
 		{
-			bird.friendliness += Helpers.Instance.Findfirendlieness(bird);
+			bird.friendBoost += Helpers.Instance.Findfirendlieness(bird);
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();
 
 		}

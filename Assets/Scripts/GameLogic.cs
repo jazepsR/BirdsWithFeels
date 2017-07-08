@@ -170,7 +170,7 @@ public class GameLogic : MonoBehaviour {
         if (winBonus>Random.Range(0f,1f))
         {
             //Win
-            playerBird.confidence += Var.confWinFight;
+            playerBird.confBoos += Var.confWinFight;
             playerBird.consecutiveFightsWon++;
             playerBird.winsInOneFight++;
             if (playerBird.wonLastBattle == 0)
@@ -181,7 +181,7 @@ public class GameLogic : MonoBehaviour {
         }else
         {           
             //lose
-            playerBird.confidence += Var.confLoseFight;
+            playerBird.confBoos += Var.confLoseFight;
             playerBird.consecutiveFightsWon = 0;
             if (playerBird.wonLastBattle == 1)
                 playerBird.wonLastBattle = 2;
