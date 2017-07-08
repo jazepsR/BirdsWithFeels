@@ -38,7 +38,7 @@ public class GuiContoler : MonoBehaviour {
 	public bool inMap = false;
 	List<string> messages;
 	public GameObject messageBox;
-	public Text messageText;
+	public Text messageText;    
 	[HideInInspector]
 	public int activePortrait = 0;
 	void Start()
@@ -90,11 +90,18 @@ public class GuiContoler : MonoBehaviour {
             bird.transform.position = bird.home;
             bird.health = bird.prevRoundHealth;
             if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.levelList) && bird.CoolDownLeft == 0 && !bird.foughtInRound)
+            {
                 bird.CoolDownLeft = bird.CoolDownLength;
+                bird.CooldownRing.fillAmount = 0;
+            }
         }
         for (int i = 0; i < Var.activeBirds.Count; i++)
         {
             FillPlayer.SetupBird(FillPlayer.Instance.playerBirds[i], Var.activeBirds[i]);
+        }
+        foreach(LayoutButton tile in ObstacleGenerator.Instance.tiles)
+        {
+            tile.Reset();
         }
         Var.playerPos = new Bird[4, 4];
         GetComponent<fillEnemy>().Reset();
@@ -106,9 +113,10 @@ public class GuiContoler : MonoBehaviour {
 	public void CloseGraph()
 	{
 
-		graph.SetActive(false);
-		battlePanel.SetActive(true);
-		mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound+1);
+        //graph.SetActive(false);
+        //battlePanel.SetActive(true);
+        LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
+        mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound+1);
 		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
 		{
 			Destroy(child.gameObject);
@@ -118,9 +126,10 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CloseBirdStats()
 	{
-		graph.SetActive(false);
-		battlePanel.SetActive(true);
-		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
+		//graph.SetActive(false);
+        LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
+        //battlePanel.SetActive(true);
+        foreach (Transform child in graph.transform.Find("ReportGraph").transform)
 		{
 			Destroy(child.gameObject);
 		}
@@ -128,10 +137,10 @@ public class GuiContoler : MonoBehaviour {
 
 	public void CreateGraph()
 	{
+        LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
+		//graph.SetActive(true);        
 		
-		graph.SetActive(true);        
-		
-		battlePanel.SetActive(false);
+		//battlePanel.SetActive(false);
 		Graph.Instance.portraits = new List<GameObject>();
 		foreach (Bird bird in Var.activeBirds)
 		{

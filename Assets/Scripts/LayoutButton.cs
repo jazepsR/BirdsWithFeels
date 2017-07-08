@@ -146,6 +146,12 @@ public class LayoutButton : MonoBehaviour
         baseColor = defaultColor;
         sr.color = defaultColor;
     }
+    public void fullReset()
+    {
+        //TODO: implement full reset
+        Reset();
+
+    }
     void OnTriggerExit2D(Collider2D other)
     {
         LeanTween.color(gameObject, baseColor, 0.3f);

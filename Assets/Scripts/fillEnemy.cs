@@ -28,7 +28,7 @@ public class fillEnemy : MonoBehaviour {
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
             enemy.GetComponent<feedBack>().myIndex = index % 4;
-            enemy.GetComponent<Bird>().level = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL));
+            enemy.GetComponent<Bird>().levelRollBonus = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL));
             enemy.GetComponent<Bird>().inUse = false;
             enemy.SetActive(false);
             index++;
@@ -78,11 +78,8 @@ public class fillEnemy : MonoBehaviour {
             {
                 enemy.gameObject.SetActive(true);
                 enemy.transform.localPosition = enemy.home;
-
-
-
-
-
+                enemy.rollBonus = 0;
+                enemy.colorRenderer.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
             }
 
         }

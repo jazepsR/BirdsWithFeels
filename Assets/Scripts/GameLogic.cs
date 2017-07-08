@@ -9,8 +9,7 @@ public class GameLogic : MonoBehaviour {
     public GameObject friendlyBoost;
     public Transform boostHolder;
     private Vector3 screenPosition = Vector3.zero;
-    public List<GameObject> battleResultHolders = new List<GameObject> ();   
-    private bool dragingBird;    
+    public List<GameObject> battleResultHolders = new List<GameObject> ();       
     public static GameLogic Instance { get; private set; }
 
     void Awake()

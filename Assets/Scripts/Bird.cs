@@ -90,7 +90,8 @@ public class Bird : MonoBehaviour
     public Image CooldownRing;
     public bool isHiding = false;
     public int prevRoundHealth;
-	void Start()
+    public int levelRollBonus = 0;
+    void Start()
 	{
         prevRoundHealth = health;
         
@@ -157,6 +158,13 @@ public class Bird : MonoBehaviour
         levelList.Add(data);
         level = levelList.Count;
         battlesToNextLVL = level * 3;
+        if (data.emotion == Var.Em.Scared || data.emotion == Var.Em.Lonely)
+            levelRollBonus++;
+        if(data.emotion == Var.Em.Confident || data.emotion == Var.Em.Friendly)
+        {
+            maxHealth++;
+            health++;
+        }
 
     }
 	public float getBonus()
@@ -166,7 +174,7 @@ public class Bird : MonoBehaviour
             ResetBonuses();
             ObstacleGenerator.Instance.tiles[y * 4 + x].GetComponent<LayoutButton>().ApplyPower(this);
         }
-        return rollBonus+ dmgBoost;
+        return levelRollBonus+ rollBonus+ dmgBoost;
 	}
     void LoadStats()
     {
