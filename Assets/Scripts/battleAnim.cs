@@ -43,10 +43,16 @@ public class battleAnim :MonoBehaviour {
             StartCoroutine(ShowResult(battle, 0.85f));
             yield return new WaitForSeconds(waitTime);
         }
-        battles = new List<battleData>();      
-        yield return new WaitForSeconds(0.85f);
-        GuiContoler.Instance.CreateGraph();
+        battles = new List<battleData>();
+        foreach (Bird bird in Var.activeBirds)
+        {
+            bird.UpdateBattleCount();
+            bird.AddRoundBonuses();
+        }
+        yield return new WaitForSeconds(1.5f);        
+        GuiContoler.Instance.CreateGraph();       
         GuiContoler.Instance.CreateBattleReport();
+       
     }
 
     IEnumerator ShowResult(battleData battle,float waitTime)
@@ -68,7 +74,7 @@ public class battleAnim :MonoBehaviour {
         else
         {
             battle.player.GetComponent<Animator>().SetBool("lose", true);
-            battle.player.LoseHealth(1);
+            battle.player.ChageHealth(-1);
             // enemy.GetComponent<Animator>().SetBool("victory", true);
 
         }

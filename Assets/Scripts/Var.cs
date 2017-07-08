@@ -21,6 +21,8 @@ public static class Var  {
     public static Text birdInfo;
     public static Text birdInfoHeading;
     public static Text birdInfoFeeling;
+    public static Image powerBar;
+    public static Text powerText;
     public static int health = 3;
     public static List<BattleData> map = new List<BattleData>();
     public static List<MapSaveData>mapSaveData = new List<MapSaveData>();

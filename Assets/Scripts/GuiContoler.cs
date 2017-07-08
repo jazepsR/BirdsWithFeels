@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
-	public Text infoText;
+	public Text infoText;    
 	public Text infoHeading;
 	public Text infoFeeling;
-	public Image[] tiles;
+    public Image powerBarTemp;
+    public Text powerTextTemp;
+    public Image[] tiles;
 	public Text reportText;
 	public GameObject report;
 	public Image[] hearts;
@@ -43,7 +45,9 @@ public class GuiContoler : MonoBehaviour {
 		messages = new List<string>();
 		Var.birdInfo = infoText;
 		Var.birdInfoHeading = infoHeading;
-		Var.birdInfoFeeling = infoFeeling;		       
+		Var.birdInfoFeeling = infoFeeling;
+        Var.powerBar = powerBarTemp;
+        Var.powerText = powerTextTemp;	       
 		Instance = this;
 		if (!inMap)
 		{
@@ -195,16 +199,22 @@ public class GuiContoler : MonoBehaviour {
 					{
 						if (Var.playerPos[3-j, i%4] != null)
 						{
-							playerBird = Var.playerPos[3-j, i%4];                          
-							break;
+                            if (!Var.playerPos[3 - j, i % 4].isHiding)
+                            {
+                                playerBird = Var.playerPos[3 - j, i % 4];
+                                break;
+                            }
 						}
 					}
 					if (Var.enemies[i].position == Bird.dir.top)
 					{
 						if (Var.playerPos[i%4, j] != null)
 						{
-							playerBird = Var.playerPos[i%4, j];     
-							break;
+                            if (!Var.playerPos[i % 4, j].isHiding)
+                            {
+                                playerBird = Var.playerPos[i % 4, j];
+                                break;
+                            }
 						}
 
 					}
@@ -212,8 +222,11 @@ public class GuiContoler : MonoBehaviour {
 					{
 						if (Var.playerPos[i % 4, 3 - j] != null)
 						{
-							playerBird = Var.playerPos[i % 4, 3 - j];   
-							break;
+                            if (!Var.playerPos[i % 4, 3 - j].isHiding)
+                            {
+                                playerBird = Var.playerPos[i % 4, 3 - j];
+                                break;
+                            }
 						}
 
 					}
@@ -287,8 +300,7 @@ public class GuiContoler : MonoBehaviour {
 		
 		Var.enemies = new Bird[12];
 		foreach (Bird bird in players)
-		{
-			bird.AddRoundBonuses();
+		{			
 			bird.SetEmotion();
 			UpdateBirdSave(bird);		
 			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
@@ -296,8 +308,9 @@ public class GuiContoler : MonoBehaviour {
 			bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
 			bird.target = bird.home;
 			bird.transform.position = bird.home;
-			bird.UpdateBattleCount();
-		}
+            bird.prevConf = bird.confidence;
+            bird.prevFriend = bird.friendliness;
+        }
 		//After applying levels;
 		foreach(Bird bird in players)
 		{

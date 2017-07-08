@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class GameLogic : MonoBehaviour {
 
-    public Button FightButton;
-    int DiceSize = 10;
+    public Button FightButton;    
     public GameObject friendlyBoost;
     public Transform boostHolder;
     private Vector3 screenPosition = Vector3.zero;
@@ -64,7 +63,7 @@ public class GameLogic : MonoBehaviour {
         LeanTween.scale (iconToShow, Vector3.one, 0.25f)
             .setEase(LeanTweenType.easeOutBack);
 
-       // OnShowFeedback_Bird (index);
+       //OnShowFeedback_Bird(index);
     }
 
     public class ExtraPower
@@ -89,6 +88,8 @@ public class GameLogic : MonoBehaviour {
     public bool CheckIfResting(Bird bird)
     {
         feedBack[] feedBack = FindObjectsOfType<feedBack>();
+        if (bird.isHiding)
+            return true;
         foreach (feedBack fb in feedBack)
         {
             if (!fb.CheckResting(bird))

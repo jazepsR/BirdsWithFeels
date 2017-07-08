@@ -195,6 +195,7 @@ public class LayoutButton : MonoBehaviour
                     ObstacleGenerator.Instance.tiles[swapBird.y * 4 + swapBird.x].currentBird = currentBird;
                     Var.playerPos[swapBird.x, swapBird.y] = currentBird;
                 }
+                //TODO: add this back
                 currentBird.OnLevelPickup();
                 currentBird.ReleseBird(swapBird.x, swapBird.y);
                 currentBird = swapBird;

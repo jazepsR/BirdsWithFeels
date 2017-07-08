@@ -11,7 +11,6 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler
 	public string SkillText;
 	public string ConditionText;
 	public string LoreText;
-
 	public Text LevelNameHolder;
 	public Image SkillImageHolder;
 	public Text SkillTextHolder;

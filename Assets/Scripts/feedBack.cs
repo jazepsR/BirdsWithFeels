@@ -6,7 +6,8 @@ public class feedBack : MonoBehaviour {
     public TextMesh feedBackText;
     Bird birdScript;
     Bird.dir dir;
-
+    public float hideBonus;
+    public float hideVal = 0.3f;
     public int myIndex;
 	// Use this for initialization
 	void Start () {
@@ -25,8 +26,11 @@ public class feedBack : MonoBehaviour {
             {
                 if (Var.playerPos[i, myIndex] != null)
                 {
-                    canfight = true;
-                    break;
+                    if (!Var.playerPos[i, myIndex].isHiding)
+                    {
+                        canfight = true;
+                        break;
+                    }
                 }
             }
         }
@@ -36,17 +40,22 @@ public class feedBack : MonoBehaviour {
             {
                 if (Var.playerPos[myIndex, i] != null)
                 {
-                    canfight = true;
-                    break;
+                    if (!Var.playerPos[myIndex, i].isHiding)
+                    {
+                        canfight = true;
+                        break;
+                    }
                 }
 
             }
         }
         return canfight;
     }
+
     public void RefreshFeedback()
     {
         HideFeedBack();
+        hideBonus = 0.0f;
         switch (dir)
         {
             case Bird.dir.top:
@@ -54,8 +63,16 @@ public class feedBack : MonoBehaviour {
                 {
                    if( Var.playerPos[myIndex, i] != null)
                     {
-                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
-                        break;
+                        Bird bird = Var.playerPos[myIndex, i];
+                        if (bird.isHiding)
+                        {
+                            hideBonus = hideVal;
+                        }
+                        else
+                        {
+                            ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
+                            break;
+                        }
                     }
 
                 }
@@ -63,10 +80,19 @@ public class feedBack : MonoBehaviour {
             case Bird.dir.front:
                 for (int i = 0; i < 4; i++)
                 {
+                    
                     if (Var.playerPos[3-i, myIndex] != null)
                     {
-                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3-i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
-                        break;
+                        Bird bird = Var.playerPos[3 - i, myIndex];
+                        if (bird.isHiding)
+                        {
+                            hideBonus = hideVal;
+                        }
+                        else
+                        {
+                            ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
+                            break;
+                        }
                     }
 
                 }
@@ -76,8 +102,16 @@ public class feedBack : MonoBehaviour {
                 {
                     if (Var.playerPos[myIndex, 3-i] != null)
                     {
-                        ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, 3-i], birdScript),Var.playerPos[myIndex, 3 - i]);
-                        break;
+                        Bird bird = Var.playerPos[myIndex, 3 - i];
+                        if (bird.isHiding)
+                        {
+                            hideBonus = hideVal;
+                        }
+                        else
+                        {
+                            ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, 3 - i], birdScript), Var.playerPos[myIndex, 3 - i]);
+                            break;
+                        }
                     }
 
                 }
@@ -139,7 +173,7 @@ public class feedBack : MonoBehaviour {
         bird.fighting = true;
         feedBackText.gameObject.SetActive(true);
         //float colorIndex = (value + 4.0f) / 8;
-        value = Mathf.Clamp01(value);
+        value = Mathf.Clamp01(value+hideBonus);
         float colorIndex = value;
         Color textCol = Color.Lerp(Color.red, Color.green, colorIndex);
         LeanTween.color(feedBackText.gameObject, textCol, 0.2f);

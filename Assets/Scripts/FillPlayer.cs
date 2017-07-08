@@ -75,6 +75,8 @@ public class FillPlayer : MonoBehaviour {
         target.battlesToNextLVL = template.battlesToNextLVL;        
         target.roundsRested = template.roundsRested;
         target.AdventuresRested = template.AdventuresRested;
+        target.CoolDownLeft = template.CoolDownLeft;
+        target.CoolDownLength = template.CoolDownLength;
         target.transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = template.hatSprite;
     }
 	// Update is called once per frame

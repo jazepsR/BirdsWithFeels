@@ -7,6 +7,7 @@ public class Levels : MonoBehaviour {
     Bird myBird;
     List<LevelData> LevelList;
     public GameObject Halo;
+    public Vector2 lastSwapPos = new Vector2(-2,-2);
 	// Use this for initialization
 	void Start () {        
         myBird = GetComponent<Bird>();
@@ -59,13 +60,50 @@ public class Levels : MonoBehaviour {
 
                     }
                     break;
+                case type.Lonely1:
+                    if (myBird.x == -1)
+                        break;
+                    if (Var.enemies[myBird.y + 4].inUse)
+                    {
+                        if (!Var.enemies[myBird.y + 5].inUse)
+                        {
+                            Bird tempBird = Var.enemies[myBird.y + 4];
+                            Var.enemies[myBird.y + 4] = Var.enemies[myBird.y + 5];
+                            Var.enemies[myBird.y + 5] = tempBird;
+                            LeanTween.moveLocal(tempBird.gameObject, Var.enemies[myBird.y + 4].home, 0.4f);
+                            lastSwapPos = new Vector2(myBird.x, myBird.y);
+                            Debug.Log("swapped on some num");
+                        }                        
+                        else
+                        {
+                            if (myBird.y == 3 && !Var.enemies[6].inUse)
+                            {
+                                Bird tempBird = Var.enemies[7];
+                                Var.enemies[7] = Var.enemies[6];
+                                Var.enemies[6] = tempBird;
+                                //TODO: Get coordinates dynamically
+                                LeanTween.moveLocal(tempBird.gameObject, new Vector3(1.73f,-1.22f,0f), 0.4f);
+                                lastSwapPos = new Vector2(myBird.x, myBird.y);
+                                Debug.Log("swapped on 3");
+                            }
+                        }
+                        string bla = "";
+                        foreach (Bird birdy in Var.enemies)
+                        {
+                            bla += birdy.birdBio + " ";
+                        }
+                       //Debug.Log("Enemie ids after swap" + bla );
+                        GameLogic.Instance.UpdateFeedback();
+
+                    }
+                    break;
                 case type.Terry:
                     if (myBird.x == -1)
                         break;
                     List<LayoutButton> tileRow = GetRow();
-                    for(int i=0;i<4;i++)
+                    for(int i=0;i<tileRow.Count;i++)
                     {
-                        Color col = Helpers.Instance.GetEmotionColor(Var.Em.Scared);
+                        Color col = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
                         col = new Color(col.r, col.g, col.b, 0.3f);
                         tileRow[i].SetColor(col,true);
                         if(i!=0)
@@ -80,6 +118,26 @@ public class Levels : MonoBehaviour {
                         tile.RollBonus = 1;
                     }
                     Halo.SetActive(true);
+                    break;
+                case type.Scared1:
+                    if (myBird.x == -1)
+                        break;
+                    List<LayoutButton> tileDiag = GetDiagonals();
+                    for (int i = 0; i < tileDiag.Count; i++)
+                    {
+                        Color col = Helpers.Instance.GetEmotionColor(Var.Em.Scared);
+                        col = new Color(col.r, col.g, col.b, 0.3f);
+                        tileDiag[i].SetColor(col, true);
+                        if (i != 0)
+                            tileDiag[i].RollBonus = -1;
+                    }
+                    List<Bird> enemies = GetDiagonalEnemies();
+                    foreach(Bird enemy in enemies)
+                    {
+                        Color firstColor = enemy.colorRenderer.color;
+                        enemy.colorRenderer.color = new Color(firstColor.r - 0.3f, firstColor.g - 0.3f, firstColor.b - 0.3f);
+                        enemy.rollBonus = -1;
+                    }
                     break;
                 default:
                     break;
@@ -112,6 +170,53 @@ public class Levels : MonoBehaviour {
                         tile.ConfBonus = 0;
                     }
                     break;
+                case type.Scared1:
+                    if (myBird.x == -1)
+                        break;
+                    foreach (LayoutButton tile in GetDiagonals())
+                    {
+                        tile.ResetColor(true);
+                        tile.RollBonus = 0;
+                    }
+                    List<Bird> enemies = GetDiagonalEnemies();
+                    foreach (Bird enemy in enemies)
+                    {
+                        enemy.rollBonus = 0;
+                        enemy.SetEmotion();
+                    }
+                    break;
+                case type.Lonely1:
+                    if (myBird.x == -1 || !(new Vector2(myBird.x,myBird.y)).Equals(lastSwapPos))
+                        break;
+                    if (myBird.y == 3 && Var.enemies[6].inUse && !Var.enemies[7].inUse)
+                    {
+                        Bird tempBird = Var.enemies[6];
+                        Var.enemies[6] = Var.enemies[7];
+                        Var.enemies[7] = tempBird;
+                        LeanTween.moveLocal(tempBird.gameObject, tempBird.home, 0.4f);
+                    }
+                    else
+                    {
+
+                        if (Var.enemies[myBird.y + 5].inUse && !Var.enemies[myBird.y + 4].inUse)
+                        {
+                            Bird tempBird = Var.enemies[myBird.y + 5];
+                            Var.enemies[myBird.y + 5] = Var.enemies[myBird.y + 4];
+                            Var.enemies[myBird.y + 4] = tempBird;
+                            LeanTween.moveLocal(tempBird.gameObject, tempBird.home, 0.4f);
+
+                        }
+                    }
+                    string bla = "";
+                    foreach(Bird birdy in Var.enemies)
+                    {
+                        bla += birdy.birdBio + " ";
+                    }
+                    Debug.Log("Enemie ids after return swap"+bla  );
+                        
+                        GameLogic.Instance.UpdateFeedback();                       
+                    
+                    break;
                 case type.Tova:
                     if (myBird.x == -1)
                         break;
@@ -130,6 +235,27 @@ public class Levels : MonoBehaviour {
 
     }
 
+    public void OnfightEndLevel(Bird bird, List<LevelData> Levels)
+    {
+        lastSwapPos = new Vector2(-2, -2);
+        foreach (LevelData data in Levels)
+        {
+            type level = data.type;
+            switch (level)
+            {
+                case type.Friend1:
+                    List<Bird> adjacent = Helpers.Instance.GetAdjacentBirds(myBird);
+                    if(!bird.foughtInRound && adjacent.Count > 0)
+                    {
+                        Bird healBird = adjacent[Random.Range(0, adjacent.Count - 1)];
+                        healBird.ChageHealth(+1);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 
     public List<LayoutButton> GetRow()
     {
@@ -204,6 +330,56 @@ public class Levels : MonoBehaviour {
 
     }
 
+    public List<LayoutButton> GetDiagonals()
+    {
+        int x = myBird.x;
+        int y = myBird.y;
+        int sizeY = Var.playerPos.GetLength(1) - 1;
+        int sizeX = Var.playerPos.GetLength(0) - 1;
+        List<LayoutButton> list = new List<LayoutButton>();
+        for (int i = -3; i < 4; i++)
+        {
+            int index = (y + i) % 4 * 4 + (x+i)%4;                          
+                if( (y+i)<4 && (x+i)<4 && (x+i)>=0 && (y+i)>=0)
+                    list.Add(ObstacleGenerator.Instance.tiles[index]);           
+            index = (y + i) % 4 * 4 + (x - i)%4;            
+                if ((y + i) < 4 && (x - i) < 4 && (x - i) >= 0 && (y + i) >= 0)
+                    list.Add(ObstacleGenerator.Instance.tiles[index]);            
+        }
+        return list;
+
+    }
+
+
+    public List<Bird> GetDiagonalEnemies()
+    {
+        List<Bird> list=  new List<Bird>();
+        int x = myBird.x;
+        int y = myBird.y;
+        //top
+        if ((x - (y + 1)) >= 0)
+            list.Add(Var.enemies[x - (y + 1)]);
+        if ((x + (y+ 1)) <= 3)
+            list.Add(Var.enemies[x + (y + 1)]);
+        //front
+        if(x+y>=4)
+           list.Add(Var.enemies[x + y]);
+        if(x + y + 2 * (4 - x) <=7)
+            list.Add(Var.enemies[x+y + 2*(4-x)]);
+       
+        //Bottom
+        if(x+y+4>=8)
+            list.Add(Var.enemies[x + y+4]);
+        if(x + (4 - y)+8 > 8 && x + (4 - y)+8 <12)
+            list.Add(Var.enemies[x + y + 2 * (4 - x)]);
+        return list;
+    }
+
+
+
+
+
+    //Level triggers
     public void ApplyLevel(LevelData data, string levelName)
     {
         if (!Helpers.Instance.ListContainsLevel(data.type, LevelList))
