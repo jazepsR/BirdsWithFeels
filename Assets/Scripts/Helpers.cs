@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Helpers : MonoBehaviour {
     public static Helpers Instance { get; private set; }
@@ -21,7 +22,79 @@ public class Helpers : MonoBehaviour {
        
         Instance = this;
     }
-    
+    public bool RandomBool()
+    {
+        if (UnityEngine.Random.Range(0f, 1f) > 0.5f)
+            return true;
+        else
+            return false;
+    }
+    public string GetName(bool isMale)
+    {
+        if (isMale)
+            return Var.maleNames[UnityEngine.Random.Range(0, Var.maleNames.Length)];
+        else
+            return Var.femaleNames[UnityEngine.Random.Range(0, Var.femaleNames.Length)];
+    }
+    //Neutral means weak to all
+    public Var.Em GetWeakness(Var.Em Emotion)
+    {
+        switch (Emotion)
+        {
+            case Var.Em.Neutral:
+                return Var.Em.Neutral;
+            case Var.Em.Lonely:
+                return Var.Em.Confident;
+            case Var.Em.SuperLonely:
+                return Var.Em.Confident;
+            case Var.Em.Friendly:
+                return Var.Em.Scared;
+            case Var.Em.SuperFriendly:
+                return Var.Em.Scared;
+            case Var.Em.Confident:
+                return Var.Em.Friendly;
+            case Var.Em.SuperConfident:
+                return Var.Em.Friendly;
+            case Var.Em.Scared:
+                return Var.Em.Lonely;
+            case Var.Em.SuperScared:
+                return Var.Em.Lonely;
+            case Var.Em.finish:
+                return Var.Em.Neutral;
+            default:
+                return Var.Em.Neutral;
+        }
+    }
+
+    //Neutral means weak to all
+    public Var.Em GetStenght(Var.Em Emotion)
+    {
+        switch (Emotion)
+        {
+            case Var.Em.Neutral:
+                return Var.Em.Neutral;
+            case Var.Em.Lonely:
+                return Var.Em.Scared;
+            case Var.Em.SuperLonely:
+                return Var.Em.Scared;
+            case Var.Em.Friendly:
+                return Var.Em.Confident;
+            case Var.Em.SuperFriendly:
+                return Var.Em.Confident;
+            case Var.Em.Confident:
+                return Var.Em.Lonely;
+            case Var.Em.SuperConfident:
+                return Var.Em.Lonely;
+            case Var.Em.Scared:
+                return Var.Em.Friendly;
+            case Var.Em.SuperScared:
+                return Var.Em.Friendly;
+            case Var.Em.finish:
+                return Var.Em.Neutral;
+            default:
+                return Var.Em.Neutral;
+        }
+    }
     public List<Bird> GetAdjacentBirds(Bird bird)
     {
         int x = bird.x;
@@ -47,7 +120,13 @@ public class Helpers : MonoBehaviour {
             list.Add(Var.playerPos[x - 1, y - 1]);
         return list;
     }
-
+    public string ApplyTitle(string name, string title)
+    {
+        if (title != "")
+            return title.Replace("<name>", name);
+        else
+            return name;
+    }
 
     public bool ListContainsLevel(Levels.type level, List<LevelData> list)
     {
@@ -60,6 +139,22 @@ public class Helpers : MonoBehaviour {
             }
             return false;
         }else
+        {
+            return false;
+        }
+    }
+    public bool ListContainsEmotion(Var.Em emotion, List<LevelData> list)
+    {
+        if (list != null)
+        {
+            foreach (LevelData data in list)
+            {
+                if (data.emotion == emotion)
+                    return true;
+            }
+            return false;
+        }
+        else
         {
             return false;
         }
@@ -134,7 +229,30 @@ public class Helpers : MonoBehaviour {
                 return neutral;
         }
     }
-
+    public string GetLVLTitle(Levels.type lvl)
+    {
+        switch (lvl)
+        {
+            case Levels.type.Brave1:
+                return "<name> the protector";
+            case Levels.type.Brave2:
+                return "<name> the invicible";
+            case Levels.type.Friend1:
+                return "<name> the healer";                
+            case Levels.type.Friend2:
+                return "Doctor <name>";
+            case Levels.type.Lonely1:
+                return "Apprentice <name>";
+            case Levels.type.Lonely2:
+                return "Time lord <name>";
+            case Levels.type.Scared1:
+                return "Cunning <name>";
+            case Levels.type.Scared2:
+                return "<name> the rogue";
+            default:
+                return "";
+        }
+    }
     public Vector3 dirToVector(Bird.dir dir)
     {
         float increment = 0.7f;
@@ -155,12 +273,18 @@ public class Helpers : MonoBehaviour {
 
     public float RandGaussian(float stdDev, float mean)
     {
-        float u1 = Random.Range(0.0f, 1.0f);
-        float u2 = Random.Range(0.0f, 1.0f);
+        float u1 = UnityEngine.Random.Range(0.0f, 1.0f);
+        float u2 = UnityEngine.Random.Range(0.0f, 1.0f);
         float randStdNormal = Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Sin(2.0f * Mathf.PI * u2);
         return  mean + stdDev * randStdNormal;
     }
-
+    public bool IsSuper(Var.Em emotion)
+    {
+        if (emotion == Var.Em.SuperFriendly || emotion == Var.Em.SuperConfident || emotion == Var.Em.SuperLonely || emotion == Var.Em.SuperFriendly)
+            return true;
+        else
+            return false;
+    }
 
     public int Findfirendlieness(Bird bird)
     {        
@@ -179,8 +303,7 @@ public class Helpers : MonoBehaviour {
                 }
             }
         }
-
-
+   
         int sizeY = Var.playerPos.GetLength(1)-1;
         int sizeX = Var.playerPos.GetLength(0)-1;
         int lonelyVal = 0;
@@ -218,5 +341,44 @@ public class Helpers : MonoBehaviour {
         }
         return -2 + 2 * lonelyVal;
 
+    }
+
+
+
+    public string GetLVLInfoText(Levels.type level)
+    {
+        switch (level)
+        {
+            case Levels.type.Brave1:
+                return "Prevent a random close bird from losing health if they lose their fight. 3 turn cooldown";
+            case Levels.type.Brave2:
+                return "If feeling confident - when taking damage, -2 confidence instead of -1 heart";
+            case Levels.type.Friend1:
+                return "Once per turn, if resting, give a random close bird +1 hearts";
+            case Levels.type.Friend2:
+                return "After an adventure fully heal one bird of your choice";
+            case Levels.type.Scared1:
+                return "Backstabbing. If in stealth, bird does not fight enemies. All enemies passing by bird gains -30% chance to win. Toggle stealth by clicking bird";
+            case Levels.type.Scared2:
+                return "Give all diagonal birds - X to all dice rolls  (both friendly and enemy birds)";
+            case Levels.type.Lonely1:
+                return "not implemented yet";
+            case Levels.type.Lonely2:
+                return " if resting, reroll all battles. 3 turn cooldown";
+            case Levels.type.Toby:
+                return "All birds in the same column gain +1 loneliness";
+            case Levels.type.Kim:
+                return "Ground effects affect you twice as much";
+            case Levels.type.Rebecca:
+                return "Lose -2 confidence when resting";
+            case Levels.type.Tova:
+                return "If resting, all adjacent birds recieve 10% chance to win fights";
+            case Levels.type.Terry:
+                return "All birds in the same column gain +1 confidence";
+                
+            default:
+                return "Level not found error";
+                
+        }       
     }
 }

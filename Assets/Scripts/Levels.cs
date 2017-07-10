@@ -396,7 +396,7 @@ public class Levels : MonoBehaviour {
         {
             if (myBird.winsInOneFight > 1  && myBird.confidence >= 7)
             {
-                ApplyLevel(new LevelData(type.Brave2, Var.Em.Confident), "Brave 1");
+                ApplyLevel(new LevelData(type.Brave2, Var.Em.Confident,Resources.Load("Icons/Brave1Icon") as Sprite), "Brave 1");
             }
         }
 
@@ -405,9 +405,9 @@ public class Levels : MonoBehaviour {
     {
         if (myBird.lastLevel.emotion != Var.Em.Confident && (myBird.emotion == Var.Em.Confident || myBird.emotion == Var.Em.SuperConfident))
         {
-            if (myBird.consecutiveFightsWon >= 6 && myBird.confidence >= 10)
+            if (myBird.consecutiveFightsWon >= 6 && myBird.confidence >= 10 && Helpers.Instance.ListContainsLevel(Levels.type.Brave1,myBird.levelList))
             {
-                ApplyLevel(new LevelData(type.Brave1, Var.Em.Confident), "Brave 2");
+                ApplyLevel(new LevelData(type.Brave1, Var.Em.Confident, Resources.Load("Icons/Brave2Icon") as Sprite), "Brave 2");
             }
         }
     }
@@ -417,7 +417,7 @@ public class Levels : MonoBehaviour {
         {           
             if ( myBird.friendliness <= -7 && Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.wonLastBattle>=1)
             {
-                ApplyLevel(new LevelData(type.Lonely1, Var.Em.Lonely), "Lonely 1");
+                ApplyLevel(new LevelData(type.Lonely1, Var.Em.Lonely, Resources.Load("Icons/Lonely1Icon") as Sprite), "Lonely 1");
             }            
         }
     }
@@ -426,10 +426,10 @@ public class Levels : MonoBehaviour {
     {
         if (myBird.lastLevel.emotion != Var.Em.Lonely && (myBird.emotion == Var.Em.Lonely || myBird.emotion == Var.Em.SuperLonely))
         {
-            //Fix -7 to -10
-            if (myBird.friendliness <= -10 && Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.AdventuresRested>=2)
+            
+            if (myBird.friendliness <= -10 && Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.AdventuresRested>=2 && Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, myBird.levelList))
             {
-                ApplyLevel(new LevelData(type.Lonely2, Var.Em.Lonely),"Lonely 2");
+                ApplyLevel(new LevelData(type.Lonely2, Var.Em.Lonely, Resources.Load("Icons/Lonely2Icon") as Sprite),"Lonely 2");
             }
         }
     }
@@ -440,7 +440,7 @@ public class Levels : MonoBehaviour {
         {
             if (myBird.FriendGainedInRound >= 3  && myBird.wonLastBattle >=1 && myBird.friendliness >= 7)
             {
-                ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly),"Friendly 1");
+                ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Resources.Load("Icons/Friendly1Icon") as Sprite),"Friendly 1");
             }
         }
 
@@ -453,7 +453,7 @@ public class Levels : MonoBehaviour {
             bool closeFriend = false;
             foreach(Bird bird in Helpers.Instance.GetAdjacentBirds(myBird))
             {
-                if(bird.emotion == Var.Em.Friendly || bird.emotion == Var.Em.SuperFriendly )
+                if(bird.emotion == Var.Em.Friendly || bird.emotion == Var.Em.SuperFriendly && Helpers.Instance.ListContainsLevel(Levels.type.Friend1, myBird.levelList))
                 {
                     closeFriend = true;
                     break;
@@ -461,7 +461,7 @@ public class Levels : MonoBehaviour {
             }
             if (closeFriend && myBird.FriendGainedInRound >= 5 && myBird.friendliness >= 10)
             {
-                ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly),"Friendly 2");
+                ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Resources.Load("Icons/Friendly2Icon") as Sprite),"Friendly 2");
             }
         }
 
@@ -483,7 +483,7 @@ public class Levels : MonoBehaviour {
 
             if ((closeWinner &&myBird.wonLastBattle == 0 || closeWinner && myBird.wonLastBattle == 2) && myBird.confidence <= -7)
             {
-                ApplyLevel(new LevelData(type.Scared1, Var.Em.Scared),"Scared 1");
+                ApplyLevel(new LevelData(type.Scared1, Var.Em.Scared, Resources.Load("Icons/Scared1Icon") as Sprite),"Scared 1");
             }
         }
 
@@ -493,9 +493,9 @@ public class Levels : MonoBehaviour {
         if (myBird.lastLevel.emotion != Var.Em.Scared && (myBird.emotion == Var.Em.Scared || myBird.emotion == Var.Em.SuperScared))
         {
             
-            if (myBird.roundsRested >= 4 && myBird.confidence <= -10)
+            if (myBird.roundsRested >= 4 && myBird.confidence <= -10 && Helpers.Instance.ListContainsLevel(Levels.type.Scared2, myBird.levelList))
             {
-                ApplyLevel(new LevelData(type.Scared2, Var.Em.Scared),"Scared 2");
+                ApplyLevel(new LevelData(type.Scared2, Var.Em.Scared, Resources.Load("Icons/Scared2Icon") as Sprite),"Scared 2");
             }
         }
 
@@ -506,11 +506,17 @@ public class Levels : MonoBehaviour {
 public class LevelData{
     public Levels.type type;
     public Var.Em emotion;
+    public Sprite LVLIcon;
+    public string levelInfo;
+    public string title;
 
-   public LevelData(Levels.type type, Var.Em emotion)
+   public LevelData(Levels.type type, Var.Em emotion, Sprite icon)
     {
         this.emotion = emotion;
+        LVLIcon = icon;
         this.type = type;
+        levelInfo = Helpers.Instance.GetLVLInfoText(type);
+        title = Helpers.Instance.GetLVLTitle(type);
     }
 
 

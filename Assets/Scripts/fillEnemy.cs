@@ -27,7 +27,7 @@ public class fillEnemy : MonoBehaviour {
         foreach(GameObject enemy in Enemies)
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
-            enemy.GetComponent<feedBack>().myIndex = index % 4;
+            enemy.GetComponent<feedBack>().myIndex = index % 4;            
             enemy.GetComponent<Bird>().levelRollBonus = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL));
             enemy.GetComponent<Bird>().inUse = false;
             enemy.SetActive(false);
@@ -63,6 +63,7 @@ public class fillEnemy : MonoBehaviour {
             enemy.confidence = (int)Random.Range(minConf, maxConf);
             enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
             enemy.SetEmotion();
+            enemy.GetComponent<feedBack>().SetEnemyHoverText();
             Enemies[enemyPos].SetActive(true);
             enemy.inUse = true;
             enemy.transform.localPosition = enemy.home;

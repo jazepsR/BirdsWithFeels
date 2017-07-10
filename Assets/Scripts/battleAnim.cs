@@ -57,13 +57,13 @@ public class battleAnim :MonoBehaviour {
         }
         else
         {
-            foreach (Bird bird in Var.activeBirds)
+            foreach (Bird bird in FillPlayer.Instance.playerBirds)
             {
                 bird.UpdateBattleCount();
                 bird.AddRoundBonuses();
             }
             yield return new WaitForSeconds(1.5f);
-            GuiContoler.Instance.CreateGraph();
+            GuiContoler.Instance.InitiateGraph();
             GuiContoler.Instance.CreateBattleReport();
         }
        

@@ -13,6 +13,7 @@ public class GuiContoler : MonoBehaviour {
     public Image powerBarTemp;
     public Text powerTextTemp;
     public Image[] tiles;
+    public LVLIconScript[] lvlIcons;
 	public Text reportText;
 	public GameObject report;
 	public Image[] hearts;
@@ -41,6 +42,7 @@ public class GuiContoler : MonoBehaviour {
 	public Text messageText;    
 	[HideInInspector]
 	public int activePortrait = 0;
+    public Text tooltipText;    
 	void Start()
 	{
 		messages = new List<string>();
@@ -68,12 +70,12 @@ public class GuiContoler : MonoBehaviour {
 	}
     public void NoReroll()
     {
-        foreach (Bird bird in Var.activeBirds)
+        foreach (Bird bird in FillPlayer.Instance.playerBirds)
         {
             bird.UpdateBattleCount();
             bird.AddRoundBonuses();
         }
-        Instance.CreateGraph();
+        Instance.InitiateGraph();
         Instance.CreateBattleReport();
         rerollBox.SetActive(false);
     }
@@ -127,49 +129,55 @@ public class GuiContoler : MonoBehaviour {
 	public void CloseBirdStats()
 	{
 		//graph.SetActive(false);
-        LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
+        LeanTween.moveLocal(graph, new Vector3(-Var.MoveGraphBy, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
         //battlePanel.SetActive(true);
         foreach (Transform child in graph.transform.Find("ReportGraph").transform)
 		{
 			Destroy(child.gameObject);
 		}
 	}
+    public void CreateGraph()
+    {
+        //graph.SetActive(true);        
 
-	public void CreateGraph()
+        //battlePanel.SetActive(false);
+        Graph.Instance.portraits = new List<GameObject>();
+        foreach (Bird bird in Var.activeBirds)
+        {
+            //Normalize bird stats
+            int treshold = Var.lvl2 - 1;
+            //Super starts at 10
+            if (bird.level > 1)
+            {
+                treshold = 12;
+            }
+            if (bird.confidence > treshold)
+                bird.confidence = treshold;
+            if (bird.confidence < -treshold)
+                bird.confidence = -treshold;
+            if (bird.friendliness > treshold)
+                bird.friendliness = treshold;
+            if (bird.friendliness < -treshold)
+                bird.friendliness = -treshold;
+
+
+            GameObject portrait = bird.portrait;
+            GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
+            colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+            Graph.Instance.PlotFull(bird.prevFriend, bird.prevConf, bird.friendliness, bird.confidence, portrait, bird.charName);
+            feedbackText.text = "";
+            winText.text = "";
+            winDetails.text = "";
+        }
+        
+    }
+	public void InitiateGraph()
 	{
-        LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
-		//graph.SetActive(true);        
-		
-		//battlePanel.SetActive(false);
-		Graph.Instance.portraits = new List<GameObject>();
-		foreach (Bird bird in Var.activeBirds)
-		{
-			//Normalize bird stats
-			int treshold = Var.lvl2 - 1;
-			//Super starts at 10
-			if (bird.level > 1)
-			{
-				treshold = 12;
-			}
-			if (bird.confidence > treshold)
-				bird.confidence = treshold;
-			if (bird.confidence < -treshold)
-				bird.confidence = -treshold;
-			if (bird.friendliness > treshold)
-				bird.friendliness = treshold;
-			if (bird.friendliness < -treshold)
-				bird.friendliness = -treshold;
-
-
-			GameObject portrait = bird.portrait;
-			GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
-			colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);            
-			Graph.Instance.PlotFull(bird.prevFriend, bird.prevConf, bird.friendliness, bird.confidence, portrait,bird.charName);
-			feedbackText.text = "";
-			winText.text = "";
-			winDetails.text = "";
-		}
-		ProgressGUI.Instance.PortraitClick(activePortrait);
+        ProgressGUI.Instance.skillArea.SetActive(false);
+        ProgressGUI.Instance.Setup();
+        ProgressGUI.Instance.UpdateAllHearts();
+        ProgressGUI.Instance.UpdateAllLevels();
+        LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph);  
 	}
 	public void CreateBattleReport() {
 		closeReportBtn.SetActive(true);

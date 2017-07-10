@@ -91,6 +91,7 @@ public class Bird : MonoBehaviour
     public bool isHiding = false;
     public int prevRoundHealth;
     public int levelRollBonus = 0;
+    public Sprite startingIcon;
     void Start()
 	{
         prevRoundHealth = health;
@@ -106,7 +107,7 @@ public class Bird : MonoBehaviour
             if (levelList == null)
             {
                 levelList = new List<LevelData>();
-                AddLevel(new LevelData(startingLVL, Var.Em.Neutral));
+                AddLevel(new LevelData(startingLVL, Var.Em.Friendly,startingIcon));
             }
             levelControler = GetComponent<Levels>();
             levelControler.ApplyStartLevel(this, levelList);       
@@ -174,7 +175,10 @@ public class Bird : MonoBehaviour
             ResetBonuses();
             ObstacleGenerator.Instance.tiles[y * 4 + x].GetComponent<LayoutButton>().ApplyPower(this);
         }
-        return levelRollBonus+ rollBonus+ dmgBoost;
+        int superBonus = 0;
+        if (Helpers.Instance.IsSuper(emotion))
+            superBonus = 1;
+        return levelRollBonus + rollBonus + dmgBoost + superBonus;
 	}
     void LoadStats()
     {
@@ -211,15 +215,15 @@ public class Bird : MonoBehaviour
     }
     public void UpdateBattleCount()
     {
-        battleCount++;
+        
         if (battleCount >= battlesToNextLVL)
         {
             CheckLevels();
         }
+        battleCount++;
         //Reset per battle level variables
-       
-    }
 
+    }
     public void ResetAfterLevel()
     {
         winsInOneFight = 0;
@@ -249,6 +253,10 @@ public class Bird : MonoBehaviour
 	{
         showText();
         SetCoolDownRing(true);
+        if (isEnemy)
+        {
+            GetComponent<feedBack>().ShowEnemyHoverText();
+        }
         if (Input.GetMouseButtonUp(1))
         {
             if(!inMap && Helpers.Instance.ListContainsLevel(Levels.type.Scared2, levelList))
@@ -284,8 +292,6 @@ public class Bird : MonoBehaviour
 					}
 				}
 			}
-            //target = home;
-            
             ResetBonuses();
 			dragged = true;
 			Var.selectedBird = gameObject;
@@ -297,19 +303,17 @@ public class Bird : MonoBehaviour
             }
             levelControler.ApplyLevelOnPickup(this, levelList);
             // RemoveAllFeedBack();
-
         }
-		// 1 frame delay
-		
-
-		
-
-		
+		// 1 frame delay		
 	}
     void OnMouseExit()
     {
         if(!dragged)
-            SetCoolDownRing(false);
+            SetCoolDownRing(false);        
+        if (isEnemy)
+        {
+            GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
+        }
     }
     void UpdateFeedback()
     {
@@ -327,10 +331,6 @@ public class Bird : MonoBehaviour
         }
         GameLogic.Instance.UpdateFeedback();
     }
-
-
-
-
 	public Bird(string name,int confidence =0,int friendliness = 0)
 	{
 		this.confidence = confidence;
@@ -392,7 +392,7 @@ public class Bird : MonoBehaviour
 
 	public override string ToString()
 	{
-		if (enabled)
+		if (enabled && !isEnemy)
 		{
             return '\u2022'+"friendly: " + friendliness +" "+ '\u2022' + "brave: " + confidence + 
                 "\n"+ '\u2022' + "level: " + level+ " "+'\u2022' + "health: " +health +"\n" + birdAbility;
@@ -530,7 +530,7 @@ public class Bird : MonoBehaviour
 		if (ToString() != null)
 		{
 			Var.birdInfo.text = ToString();
-			Var.birdInfoHeading.text = charName;
+			Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(charName, lastLevel.title);
 			Var.birdInfoFeeling.text = emotion.ToString();
 			Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
 			GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
@@ -544,6 +544,21 @@ public class Bird : MonoBehaviour
                 Var.powerText.text = "Leveling available in " + (battlesToNextLVL - battleCount) + " battles!";
             }
             Var.powerBar.fillAmount = (float)battleCount / (float)battlesToNextLVL;
+            int index = 0;
+            foreach(LVLIconScript icon in GuiContoler.Instance.lvlIcons)
+            {
+                if (levelList.Count > index)
+                {
+                    icon.gameObject.SetActive(true);
+                    icon.GetComponent<Image>().sprite = levelList[index].LVLIcon;
+                    icon.textToDsiplay = levelList[index].levelInfo;                   
+                }
+                else
+                {
+                    icon.gameObject.SetActive(false);
+                }
+                index++;
+            }
 		}
 	}
 
