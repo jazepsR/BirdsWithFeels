@@ -21,14 +21,14 @@ public class fillEnemy : MonoBehaviour {
         if (dirList == null)
             dirList = new List<Bird.dir>() { Bird.dir.front, Bird.dir.top};
         
-        int max = 5;
+        int max = 0;
         if (dirList.Count == 1 && dirList.Contains(Bird.dir.front))
-            max = 4;
+            max = 0;
         foreach(GameObject enemy in Enemies)
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
             enemy.GetComponent<feedBack>().myIndex = index % 4;            
-            enemy.GetComponent<Bird>().levelRollBonus = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL));
+            enemy.GetComponent<Bird>().levelRollBonus = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL))-1;
             enemy.GetComponent<Bird>().inUse = false;
             enemy.SetActive(false);
             index++;
@@ -79,7 +79,7 @@ public class fillEnemy : MonoBehaviour {
             {
                 enemy.gameObject.SetActive(true);
                 enemy.transform.localPosition = enemy.home;
-                enemy.rollBonus = 0;
+                enemy.GroundRollBonus = 0;
                 enemy.colorRenderer.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
             }
 

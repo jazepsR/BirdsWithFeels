@@ -39,7 +39,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler
         if (!isLocked)
         {
             LevelNameHolder.text = LevelName;
-            SkillTextHolder.text = SkillText;
+            SkillTextHolder.text = Helpers.Instance.GetLVLInfoText(level);
             ConditionTextHolder.text = "Requirements:\n" + ConditionText;
             LoreTextHolder.text = LoreText;
         }

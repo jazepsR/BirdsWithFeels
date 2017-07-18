@@ -25,6 +25,7 @@ public class LayoutButton : MonoBehaviour
    // [HideInInspector]
     public int FriendBonus = 0;
     public int RollBonus = 0;
+    public int PlayerRollBonus = 0;
 
     void Start()
     {
@@ -137,7 +138,8 @@ public class LayoutButton : MonoBehaviour
         }
         birdObj.confBoos += ConfBonus;// *birdObj.groundMultiplier;
         birdObj.friendBoost += FriendBonus;// *birdObj.groundMultiplier;
-        birdObj.dmgBoost += RollBonus;
+        birdObj.GroundRollBonus += RollBonus;
+        birdObj.PlayerRollBonus += PlayerRollBonus;
     }
     public void Reset()
     {
@@ -200,12 +202,12 @@ public class LayoutButton : MonoBehaviour
                 {
                     ObstacleGenerator.Instance.tiles[swapBird.y * 4 + swapBird.x].currentBird = currentBird;
                     Var.playerPos[swapBird.x, swapBird.y] = currentBird;
-                }
-                //TODO: add this back
+                }             
                 currentBird.OnLevelPickup();
                 currentBird.ReleseBird(swapBird.x, swapBird.y);
                 currentBird = swapBird;
                 currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
+               // currentBird.res
                 ApplyPower(currentBird);
                 currentBird.ReleseBird((int)index.x, (int)index.y);
                 if (!inMap)

@@ -46,7 +46,7 @@ public class Levels : MonoBehaviour {
             type level = data.type;
             switch (level)
             {
-                case type.Toby:
+                case type.Lonely1:
                     if (myBird.x == -1)
                         break;
                     List<LayoutButton> tileCol = GetColumn();
@@ -60,7 +60,8 @@ public class Levels : MonoBehaviour {
 
                     }
                     break;
-                case type.Lonely1:
+                    //TODO: Maybe someday fix this skill
+               /* case type.Lonely1:
                     if (myBird.x == -1)
                         break;
                     if (Var.enemies[myBird.y + 4].inUse)
@@ -96,7 +97,7 @@ public class Levels : MonoBehaviour {
                         GameLogic.Instance.UpdateFeedback();
 
                     }
-                    break;
+                    break;*/
                 case type.Terry:
                     if (myBird.x == -1)
                         break;
@@ -115,7 +116,7 @@ public class Levels : MonoBehaviour {
                         break;
                     foreach (LayoutButton tile in GetAdjacent())
                     {
-                        tile.RollBonus = 1;
+                        tile.PlayerRollBonus =+ 1;
                     }
                     Halo.SetActive(true);
                     break;
@@ -128,15 +129,15 @@ public class Levels : MonoBehaviour {
                         Color col = Helpers.Instance.GetEmotionColor(Var.Em.Scared);
                         col = new Color(col.r, col.g, col.b, 0.3f);
                         tileDiag[i].SetColor(col, true);
-                        if (i != 0)
-                            tileDiag[i].RollBonus = -1;
+                        if (myBird.x != tileDiag[i].index.x && myBird.y != tileDiag[i].index.y)
+                            tileDiag[i].PlayerRollBonus = -1;
                     }
                     List<Bird> enemies = GetDiagonalEnemies();
                     foreach(Bird enemy in enemies)
                     {
                         Color firstColor = enemy.colorRenderer.color;
                         enemy.colorRenderer.color = new Color(firstColor.r - 0.3f, firstColor.g - 0.3f, firstColor.b - 0.3f);
-                        enemy.rollBonus = -1;
+                        enemy.PlayerRollBonus = -1;
                     }
                     break;
                 default:
@@ -152,7 +153,7 @@ public class Levels : MonoBehaviour {
             type level = data.type;
             switch (level)
             {
-                case type.Toby:
+                case type.Lonely1:
                     if (myBird.x == -1)
                         break;
                     foreach (LayoutButton tile in GetColumn())
@@ -176,16 +177,17 @@ public class Levels : MonoBehaviour {
                     foreach (LayoutButton tile in GetDiagonals())
                     {
                         tile.ResetColor(true);
-                        tile.RollBonus = 0;
+                        if (myBird.x != tile.index.x && myBird.y != tile.index.y)
+                            tile.PlayerRollBonus += 1;
                     }
                     List<Bird> enemies = GetDiagonalEnemies();
                     foreach (Bird enemy in enemies)
                     {
-                        enemy.rollBonus = 0;
+                        enemy.PlayerRollBonus = 0;
                         enemy.SetEmotion();
                     }
                     break;
-                case type.Lonely1:
+                /*case type.Lonely1:
                     if (myBird.x == -1 || !(new Vector2(myBird.x,myBird.y)).Equals(lastSwapPos))
                         break;
                     if (myBird.y == 3 && Var.enemies[6].inUse && !Var.enemies[7].inUse)
@@ -216,13 +218,13 @@ public class Levels : MonoBehaviour {
                         
                         GameLogic.Instance.UpdateFeedback();                       
                     
-                    break;
+                    break;*/
                 case type.Tova:
                     if (myBird.x == -1)
                         break;
                     foreach (LayoutButton tile in GetAdjacent())
                     {
-                        tile.RollBonus = 0;
+                        tile.PlayerRollBonus -= 1;
                     }
                     Halo.SetActive(false);
                     break;
@@ -241,16 +243,43 @@ public class Levels : MonoBehaviour {
         foreach (LevelData data in Levels)
         {
             type level = data.type;
+            List<Bird> adjacent = null;
             switch (level)
             {
+                case type.Toby:
+                    adjacent = Helpers.Instance.GetAdjacentBirds(myBird);
+                    if (adjacent.Count > 0)
+                    {
+                        Var.Em emotion = Var.Em.Neutral;
+                        int emStr = 0;
+                        foreach(Bird closeBird in adjacent)
+                        {
+                            int emotionStr = (int)Mathf.Max(Mathf.Abs(closeBird.confidence), Mathf.Abs(closeBird.friendliness));
+                            if (emotionStr > emStr)
+                            {
+                                emotion = closeBird.emotion;
+                                emStr = emotionStr;
+                            }
+                        }
+                        if (emotion != Var.Em.Neutral)
+                        {
+                            Vector2 newEmotions = Helpers.Instance.ApplyEmotion(new Vector2(myBird.friendBoost, myBird.confBoos), emotion);
+                            myBird.friendBoost = (int)newEmotions.x;
+                            myBird.confBoos = (int)newEmotions.y;
+                            Helpers.Instance.EmitEmotionParticles(myBird.transform, emotion);
+                        }
+                    }
+                    break;
                 case type.Friend1:
-                    List<Bird> adjacent = Helpers.Instance.GetAdjacentBirds(myBird);
+                    adjacent = Helpers.Instance.GetAdjacentBirds(myBird);
                     if(!bird.foughtInRound && adjacent.Count > 0)
                     {
                         Bird healBird = adjacent[Random.Range(0, adjacent.Count - 1)];
                         healBird.ChageHealth(+1);
                     }
                     break;
+                
+
                 default:
                     break;
             }

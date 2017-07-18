@@ -50,7 +50,7 @@ public class Bird : MonoBehaviour
     [HideInInspector]
     public int healthBoost = 0;
     [HideInInspector]
-    public int dmgBoost = 0;
+    public int GroundRollBonus = 0;
     public bool inMap = false;
     [HideInInspector]
     public Sprite hatSprite;
@@ -84,7 +84,7 @@ public class Bird : MonoBehaviour
     public int roundsRested = 0;
     [HideInInspector]
     public int AdventuresRested = 0;
-    public int rollBonus = 0;
+    public int PlayerRollBonus = 0;
     public int CoolDownLeft= 3;
     public int CoolDownLength = 3;
     public Image CooldownRing;
@@ -107,7 +107,7 @@ public class Bird : MonoBehaviour
             if (levelList == null)
             {
                 levelList = new List<LevelData>();
-                AddLevel(new LevelData(startingLVL, Var.Em.Friendly,startingIcon));
+                AddLevel(new LevelData(startingLVL, Var.Em.Neutral,startingIcon));
             }
             levelControler = GetComponent<Levels>();
             levelControler.ApplyStartLevel(this, levelList);       
@@ -178,7 +178,7 @@ public class Bird : MonoBehaviour
         int superBonus = 0;
         if (Helpers.Instance.IsSuper(emotion))
             superBonus = 1;
-        return levelRollBonus + rollBonus + dmgBoost + superBonus;
+        return levelRollBonus + PlayerRollBonus + GroundRollBonus + superBonus;
 	}
     void LoadStats()
     {
@@ -210,7 +210,8 @@ public class Bird : MonoBehaviour
     {
         confBoos = 0;
         friendBoost = 0;
-        dmgBoost = 0;
+        GroundRollBonus = 0;
+        PlayerRollBonus = 0;
         healthBoost = 0;
     }
     public void UpdateBattleCount()
@@ -249,14 +250,20 @@ public class Bird : MonoBehaviour
             levelControler.CheckScared2();
         }
     }
-	void OnMouseOver()
-	{
-        showText();
-        SetCoolDownRing(true);
+    void OnMouseEnter()
+    {
         if (isEnemy)
         {
             GetComponent<feedBack>().ShowEnemyHoverText();
         }
+    }
+	void OnMouseOver()
+	{
+        showText();
+        if (isEnemy)
+            return;
+        SetCoolDownRing(true);
+      
         if (Input.GetMouseButtonUp(1))
         {
             if(!inMap && Helpers.Instance.ListContainsLevel(Levels.type.Scared2, levelList))
@@ -450,7 +457,7 @@ public class Bird : MonoBehaviour
         FriendGainedInRound = friendliness - prevFriend;
         Helpers.Instance.NormalizeStats(this);
         levelControler.OnfightEndLevel(this, levelList);
-        prevRoundHealth = health;
+        prevRoundHealth = health;       
         ResetBonuses();                
     }
 

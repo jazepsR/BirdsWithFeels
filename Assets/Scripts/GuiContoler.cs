@@ -45,7 +45,9 @@ public class GuiContoler : MonoBehaviour {
     public Text tooltipText;    
 	void Start()
 	{
-		messages = new List<string>();
+        if(Var.emotionParticles == null)
+            Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
+        messages = new List<string>();
 		Var.birdInfo = infoText;
 		Var.birdInfoHeading = infoHeading;
 		Var.birdInfoFeeling = infoFeeling;
@@ -86,8 +88,8 @@ public class GuiContoler : MonoBehaviour {
         {
             bird.SetEmotion();
             bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
-            bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
-            bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
+           // bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
+           // bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
             bird.target = bird.home;
             bird.transform.position = bird.home;
             bird.health = bird.prevRoundHealth;
@@ -309,7 +311,14 @@ public class GuiContoler : MonoBehaviour {
 		}
 	   foreach(Bird bird in players)
 		{
-			bird.friendBoost += Helpers.Instance.Findfirendlieness(bird);
+            int friendGain = Helpers.Instance.Findfirendlieness(bird);
+            if (friendGain > 0)
+                Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Friendly);
+            if(friendGain<0)
+                Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Lonely);
+
+            bird.friendBoost += friendGain;
+            
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();
 
 		}
@@ -358,8 +367,8 @@ public class GuiContoler : MonoBehaviour {
 			bird.SetEmotion();
 			UpdateBirdSave(bird);		
 			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
-			bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
-			bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
+			//bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
+			//bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
 			bird.target = bird.home;
 			bird.transform.position = bird.home;
             bird.prevConf = bird.confidence;

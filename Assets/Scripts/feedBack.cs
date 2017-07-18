@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class feedBack : MonoBehaviour {
-	public TextMesh feedBackText;
-	Bird birdScript;
+	public TextMesh feedBackText;  
+	public Bird birdScript;
+    [HideInInspector]
+    public Bird PlayerEnemyBird = null;
 	Bird.dir dir;
 	public float hideBonus;
 	public float hideVal = 0.3f;
 	public int myIndex;
 	string toolTipText;
+    battleFeedback myBattleFeedback;
 	// Use this for initialization
 	void Awake () {
-		birdScript = GetComponent<Bird>();
+        myBattleFeedback = feedBackText.gameObject.GetComponent<battleFeedback>();
+        myBattleFeedback.fb = this;		
 		dir = birdScript.position;
 		feedBackText.transform.localScale = Vector3.zero;
+        
 		
 	}
 
@@ -58,6 +63,7 @@ public class feedBack : MonoBehaviour {
 	{
 		HideFeedBack();
 		hideBonus = 0.0f;
+        print(birdScript.charName);
 		switch (dir)
 		{
 			case Bird.dir.top:
@@ -72,7 +78,8 @@ public class feedBack : MonoBehaviour {
 						}
 						else
 						{
-							ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
+                            PlayerEnemyBird = Var.playerPos[myIndex, i];
+                            ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
 							break;
 						}
 					}
@@ -92,7 +99,8 @@ public class feedBack : MonoBehaviour {
 						}
 						else
 						{
-							ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
+                            PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
+                            ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
 							break;
 						}
 					}
@@ -111,7 +119,8 @@ public class feedBack : MonoBehaviour {
 						}
 						else
 						{
-							ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, 3 - i], birdScript), Var.playerPos[myIndex, 3 - i]);
+                            PlayerEnemyBird = Var.playerPos[myIndex, 3 - i];
+                            ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, 3 - i], birdScript), Var.playerPos[myIndex, 3 - i]);
 							break;
 						}
 					}
@@ -176,15 +185,11 @@ public class feedBack : MonoBehaviour {
 			strength = Helpers.Instance.GetStenght(birdScript.emotion).ToString();
 		if (Helpers.Instance.GetWeakness(birdScript.emotion) != Var.Em.Neutral)
 			weakness = Helpers.Instance.GetWeakness(birdScript.emotion).ToString();
-		toolTipText = name + "- " + birdScript.emotion + "\nLevel " + (birdScript.level+1).ToString() + "\n Weak to: " + weakness + "\nStrong against: " + strength; 
+		toolTipText = name + "- " + birdScript.emotion + "\nLevel " + (birdScript.levelRollBonus+1).ToString() + "\n Weak to: " + weakness + "\nStrong against: " + strength; 
 	}
 	public void ShowEnemyHoverText()
 	{
-		GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(true);
-		GuiContoler.Instance.tooltipText.text = toolTipText;
-        var screenPoint = Input.mousePosition;
-        screenPoint.z = 10.0f; //distance of the plane from the camera        
-        GuiContoler.Instance.tooltipText.transform.parent.transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
+        Helpers.Instance.ShowTooltip(toolTipText);
     }
 	
 	public void ShowFeedback(float value,Bird bird)
@@ -205,4 +210,6 @@ public class feedBack : MonoBehaviour {
 		LeanTween.scale(feedBackText.gameObject, Vector3.zero, 0.3f).setEase(LeanTweenType.easeInOutBack);
 
 	}
+
+
 }

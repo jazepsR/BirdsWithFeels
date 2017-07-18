@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class Helpers : MonoBehaviour {
     public static Helpers Instance { get; private set; }
@@ -269,6 +270,33 @@ public class Helpers : MonoBehaviour {
         }
     }
 
+    public void ShowTooltip(String text)
+    {
+        GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(true);
+        GuiContoler.Instance.tooltipText.text = text;
+        var screenPoint = Input.mousePosition;
+        screenPoint.z = 10.0f;
+        GuiContoler.Instance.tooltipText.transform.parent.transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
+
+    }
+
+
+    public void EmitEmotionParticles(Transform parent,Var.Em emotion)
+    {
+        var emParticles = Instantiate(Var.emotionParticles, parent);
+        var particleSys = emParticles.GetComponent<ParticleSystem>().colorOverLifetime;
+        Gradient grad = new Gradient();
+        Color col = GetEmotionColor(emotion);
+        grad.SetKeys(new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
+        particleSys.color = grad;
+        Text text = emParticles.transform.Find("Text").GetComponent<Text>();
+        text.text = emotion.ToString().Replace("Super","");
+        text.color = col;
+        LeanTween.moveLocalZ(text.gameObject, 55.0f, 1f);
+        LeanTween.scale(text.gameObject, Vector3.one * 2f, 1.2f);
+        LeanTween.alphaText(text.rectTransform, 0.0f, 1.2f);
+        Destroy(emParticles, 1.7f);
+    }
 
 
     public float RandGaussian(float stdDev, float mean)
@@ -343,6 +371,19 @@ public class Helpers : MonoBehaviour {
 
     }
 
+    //Used to apply stat changes based on the emotion. first number is friendliness, second number is confidence
+    public Vector2 ApplyEmotion(Vector2 currentStats, Var.Em emotion, int magnitude = 1)
+    {
+        if (emotion == Var.Em.Confident || emotion == Var.Em.SuperConfident)
+            return new Vector2(currentStats.x, currentStats.y + magnitude);
+        if (emotion == Var.Em.Scared || emotion == Var.Em.SuperScared)
+            return new Vector2(currentStats.x, currentStats.y - magnitude);
+        if (emotion == Var.Em.Friendly || emotion == Var.Em.SuperFriendly)
+            return new Vector2(currentStats.x + magnitude, currentStats.y );
+        if (emotion == Var.Em.Lonely || emotion == Var.Em.SuperLonely)
+            return new Vector2(currentStats.x - magnitude, currentStats.y);
+        return currentStats;
+    }
 
 
     public string GetLVLInfoText(Levels.type level)
@@ -362,11 +403,11 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Scared2:
                 return "Give all diagonal birds - X to all dice rolls  (both friendly and enemy birds)";
             case Levels.type.Lonely1:
-                return "not implemented yet";
+                return "All birds in the same column gain +1 loneliness";
             case Levels.type.Lonely2:
                 return " if resting, reroll all battles. 3 turn cooldown";
             case Levels.type.Toby:
-                return "All birds in the same column gain +1 loneliness";
+                return "Impressionable- bird gains +1 in the dominant feeling of an adjacent bird";                
             case Levels.type.Kim:
                 return "Ground effects affect you twice as much";
             case Levels.type.Rebecca:

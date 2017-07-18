@@ -29,18 +29,19 @@ public class battleAnim :MonoBehaviour {
 	void StartBattle(Bird player,Bird enemy)
     {
         
-        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position), 0.7f).setEase(LeanTweenType.easeInBack); 
+        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position), 0.85f).setEase(LeanTweenType.easeInBack); 
         
 
     }
 
     IEnumerator DoBattles(float waitTime)
     {
+        yield return new WaitForSeconds(1f);
         foreach (battleData battle in battles)
         {
 
             StartBattle(battle.player,battle.enemy);
-            StartCoroutine(ShowResult(battle, 0.85f));
+            StartCoroutine(ShowResult(battle, 1.15f));
             yield return new WaitForSeconds(waitTime);
         }
         battles = new List<battleData>();
@@ -81,14 +82,16 @@ public class battleAnim :MonoBehaviour {
         //Player won
         if (battle.result == 1)
         {
-            battle.player.GetComponent<Animator>().SetBool("victory", true);
+            battle.player.GetComponent<Animator>().SetTrigger("victory 0");
             battle.enemy.gameObject.SetActive(false);
+            Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Confident);
           //  enemy.GetComponent<Animator>().SetBool("lose", true);
         }
         else
         {
-            battle.player.GetComponent<Animator>().SetBool("lose", true);
+            battle.player.GetComponent<Animator>().SetTrigger("lose 0");
             battle.player.ChageHealth(-1);
+            Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Scared);
             // enemy.GetComponent<Animator>().SetBool("victory", true);
 
         }

@@ -193,7 +193,7 @@ public class GameLogic : MonoBehaviour {
 
     }
 
-    bool Bird1Win(Bird Bird1, Bird Bird2)
+    public bool Bird1Win(Bird Bird1, Bird Bird2)
     {
         Var.Em em1 = Bird1.emotion;
         Var.Em em2 = Bird2.emotion;

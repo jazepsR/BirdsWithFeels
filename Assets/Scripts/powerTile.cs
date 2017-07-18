@@ -63,7 +63,7 @@ public class powerTile : MonoBehaviour {
         }
         if (type == Var.PowerUps.dmg)
         {
-            bird.dmgBoost = 1 * bird.groundMultiplier;
+            bird.GroundRollBonus = 1 * bird.groundMultiplier;
         }
     }
 }
