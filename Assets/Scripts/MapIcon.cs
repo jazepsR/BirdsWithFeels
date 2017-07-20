@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class MapIcon : MonoBehaviour {
+public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
     public GameObject CompleteIcon;
     public GameObject LockedIcon;
     public int ID;
@@ -31,19 +33,20 @@ public class MapIcon : MonoBehaviour {
     LineRenderer lr;
     Image sr;
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         LoadSaveData();
         sr = GetComponent<Image>();
-        sr.color = Helpers.Instance.GetEmotionColor(type);        
-        GetComponent<Button>().interactable = available;        
+        sr.color = Helpers.Instance.GetEmotionColor(type);
+        GetComponent<Button>().interactable = available;
         CompleteIcon.SetActive(completed);
         LockedIcon.SetActive(false);
-        if(available)
+        if (available)
             LockedIcon.SetActive(true);
         lr = GetComponent<LineRenderer>();
         int i = 0;
         lr.positionCount = targets.Length * 2;
-        if (targets.Length>0)
+        if (targets.Length > 0)
         {
             foreach (MapIcon pos in targets)
             {
@@ -61,7 +64,7 @@ public class MapIcon : MonoBehaviour {
     public void RemoveLock()
     {
         LockedIcon.SetActive(false);
-    }    
+    }
     void LoadSaveData()
     {
         bool SaveDataCreated = false;
@@ -95,7 +98,7 @@ public class MapIcon : MonoBehaviour {
                     available = data.available;
                     break;
                 }
-                
+
             }
         }
     }
@@ -106,9 +109,9 @@ public class MapIcon : MonoBehaviour {
             Var.map.Clear();
             for (int i = 0; i < length; i++)
             {
-                AddStageToLevel(type);              
+                AddStageToLevel(type);
             }
-            Var.map.Add(new BattleData(Var.Em.finish,hasObstacles,new List<Var.Em>() ));
+            Var.map.Add(new BattleData(Var.Em.finish, hasObstacles, new List<Var.Em>()));
             Var.currentStageID = ID;
 
             Var.activeBirds = new List<Bird>();
@@ -129,11 +132,11 @@ public class MapIcon : MonoBehaviour {
 
         if (Random.Range(0f, 1f) < 0.8f)
         {
-            Var.map.Add(new BattleData(emotion,hasObstacles,EmPowerList(),birdLVL,CreateDirList(),PowerList()));
+            Var.map.Add(new BattleData(emotion, hasObstacles, EmPowerList(), birdLVL, CreateDirList(), PowerList()));
         }
         else
         {
-            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)],hasObstacles,EmPowerList(),birdLVL,CreateDirList(),PowerList()));
+            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)], hasObstacles, EmPowerList(), birdLVL, CreateDirList(), PowerList()));
         }
     }
 
@@ -171,4 +174,52 @@ public class MapIcon : MonoBehaviour {
             list.Add(Var.PowerUps.heal);
         return list;
     }
+
+
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+       
+
+
+        Helpers.Instance.ShowTooltip(ToString());
+    }
+   
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Helpers.Instance.HideTooltip();
+    }
+    public override string ToString()
+    {
+        string stageInfo = "";
+        string stageState = "not available";
+        if (completed)
+            stageState = "completed";
+        if (available)
+            stageState = "available";
+        stageInfo += "Stage " + (ID + 1) + ": " + stageState;
+        stageInfo += "\nLength " + length;
+        stageInfo += "\nMain emotion: " + type;
+        stageInfo += "\nEnemies attack form the ";
+        if (hasFrontEnemyRow)
+            stageInfo += "front ";
+        if (hasTopEnemyRow)
+            stageInfo += "top ";
+        if (hasBottomEnemyRow)
+            stageInfo += "back";
+        if (hasObstacles)
+            stageInfo += "\nHas obstacles";
+        if (hasHealthPowerUps)
+            stageInfo += "\nHas healing tiles";
+        if (hasDMGPowerUps)
+            stageInfo += "\nHas bonus damage tiles";
+        return stageInfo;
+    }
+
 }
+
+
+
+
+
+

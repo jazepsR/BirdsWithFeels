@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class LevelArea : MonoBehaviour, IPointerEnterHandler
+public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 	public string LevelName;
 	public Sprite skillImage;    
@@ -24,10 +24,11 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler
     Image myImage;
     public GameObject lockObj;
 	// Use this for initialization
-	void Awake () {
+	void Start () {
         myImage = GetComponent<Image>();
-        defaultColor = new Color(1, 1, 1, 0.4f);
-	}
+        defaultColor = Helpers.Instance.GetEmotionColor(emotion);
+        myImage.color = defaultColor;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -44,6 +45,14 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler
             LoreTextHolder.text = LoreText;
         }
 	}
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        LevelNameHolder.text = "";
+        SkillTextHolder.text = "";
+        ConditionTextHolder.text = "";
+        LoreTextHolder.text = "";
+
+    }
 
     public void Lock()
     {

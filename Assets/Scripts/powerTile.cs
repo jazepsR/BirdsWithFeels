@@ -37,6 +37,33 @@ public class powerTile : MonoBehaviour {
 		LeanTween.color(gameObject, secondColor, 1f).setEase(LeanTweenType.linear).setOnComplete(TweenToFirst);
 
 	}
+
+    void OnMouseEnter()
+    {
+        string info = "";
+        switch (type)
+        {
+            case Var.PowerUps.dmg:
+                info = "Birds on this tile recieve +10% fighting bouns";
+                break;
+            case Var.PowerUps.emotion:
+                info = "Birds on this tile recieve +1 to " + emotion.ToString();
+                break;
+            case Var.PowerUps.heal:
+                info = "Birds on this tile will heal 1 heart after the battle";
+                break;
+            
+        }
+
+        Helpers.Instance.ShowTooltip(info);
+
+    }
+
+    void OnMouseExit()
+    {
+        Helpers.Instance.HideTooltip();
+    }
+
     public void ApplyPower(Bird bird)
     {
         if (type == Var.PowerUps.emotion)

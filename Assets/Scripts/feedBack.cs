@@ -63,7 +63,7 @@ public class feedBack : MonoBehaviour {
 	{
 		HideFeedBack();
 		hideBonus = 0.0f;
-        print(birdScript.charName);
+        //print(birdScript.charName);
 		switch (dir)
 		{
 			case Bird.dir.top:

@@ -42,10 +42,14 @@ public class GuiContoler : MonoBehaviour {
 	public Text messageText;    
 	[HideInInspector]
 	public int activePortrait = 0;
-    public Text tooltipText;    
+    public Text tooltipText;
+    public SliderSwitcher confSlider;
+    public SliderSwitcher firendSlider;    
+    public Image[] BirdInfoHearts;
+    public Text levelNumberText;
 	void Start()
 	{
-        if(Var.emotionParticles == null)
+        if (Var.emotionParticles == null)
             Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
         messages = new List<string>();
 		Var.birdInfo = infoText;
@@ -76,6 +80,7 @@ public class GuiContoler : MonoBehaviour {
         {
             bird.UpdateBattleCount();
             bird.AddRoundBonuses();
+            GuiContoler.Instance.UpdateBirdSave(bird);
         }
         Instance.InitiateGraph();
         Instance.CreateBattleReport();
@@ -114,6 +119,10 @@ public class GuiContoler : MonoBehaviour {
         rerollBox.SetActive(false);
 
     }
+
+    
+
+            
 	public void CloseGraph()
 	{
 
@@ -401,7 +410,7 @@ public class GuiContoler : MonoBehaviour {
 
 	}
 
-	void UpdateBirdSave(Bird bird)
+	public void UpdateBirdSave(Bird bird)
 	{
 		for (int i = 0; i < Var.activeBirds.Count; i++)
 		{

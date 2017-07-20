@@ -62,6 +62,7 @@ public class battleAnim :MonoBehaviour {
             {
                 bird.UpdateBattleCount();
                 bird.AddRoundBonuses();
+                GuiContoler.Instance.UpdateBirdSave(bird);                
             }
             yield return new WaitForSeconds(1.5f);
             GuiContoler.Instance.InitiateGraph();

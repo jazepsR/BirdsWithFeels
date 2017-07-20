@@ -30,7 +30,7 @@ public class Graph : MonoBehaviour {
         GameObject preHeart = PlotPoint(prevX, prevY, prevHeart,false);
         GameObject tempHeart = PlotPoint(currX, currY, portrait,true,Name);
         LineRenderer lr =preHeart.transform.gameObject.AddComponent<LineRenderer>();
-       //lr.sortingOrder = 200;
+        lr.sortingOrder = 200;
         //lr.useWorldSpace = false;
 		lr.SetPosition(0, new Vector3(preHeart.transform.position.x,preHeart.transform.position.y,0));
 		lr.SetPosition(1, new Vector3(tempHeart.transform.position.x,tempHeart.transform.position.y,0));
@@ -61,7 +61,7 @@ public class Graph : MonoBehaviour {
 
         Canvas dummy = heartt.AddComponent<Canvas> ();
 		dummy.overrideSorting = true;
-		dummy.sortingOrder = 11;
+		dummy.sortingOrder = 210;
 
         return heartt;     
     }

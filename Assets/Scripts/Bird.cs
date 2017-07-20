@@ -18,8 +18,8 @@ public class Bird : MonoBehaviour
     public int health = 3;
     [HideInInspector]
     public bool foughtInRound = false;
-    [HideInInspector]
-    int maxHealth = 3;
+   // [HideInInspector]
+    public int maxHealth = 3;
     public int x = -1;
     public int y = -1;
     public Var.Em emotion;
@@ -95,7 +95,6 @@ public class Bird : MonoBehaviour
     void Start()
 	{
         prevRoundHealth = health;
-        
         x = -1;
         y = -1;
         prevConf = confidence;
@@ -157,7 +156,7 @@ public class Bird : MonoBehaviour
     {
         lastLevel = data;
         levelList.Add(data);
-        level = levelList.Count;
+        level = levelList.Count;       
         battlesToNextLVL = level * 3;
         if (data.emotion == Var.Em.Scared || data.emotion == Var.Em.Lonely)
             levelRollBonus++;
@@ -536,11 +535,12 @@ public class Bird : MonoBehaviour
 	{
 		if (ToString() != null)
 		{
-			Var.birdInfo.text = ToString();
+			//Var.birdInfo.text = ToString();
 			Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(charName, lastLevel.title);
 			Var.birdInfoFeeling.text = emotion.ToString();
 			Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
 			GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
+            //set progress to level bar
             if (battleCount >= battlesToNextLVL)
             {
                 battleCount = battlesToNextLVL;
@@ -550,8 +550,10 @@ public class Bird : MonoBehaviour
             {
                 Var.powerText.text = "Leveling available in " + (battlesToNextLVL - battleCount) + " battles!";
             }
-            Var.powerBar.fillAmount = (float)battleCount / (float)battlesToNextLVL;
+            Var.powerBar.fillAmount = (float)battleCount%3 / (float)3;
             int index = 0;
+            GuiContoler.Instance.levelNumberText.text = level.ToString();
+            ///Set level icons
             foreach(LVLIconScript icon in GuiContoler.Instance.lvlIcons)
             {
                 if (levelList.Count > index)
@@ -566,6 +568,14 @@ public class Bird : MonoBehaviour
                 }
                 index++;
             }
+        //set emotion bars
+        GuiContoler.Instance.confSlider.SetDist(confidence);
+        GuiContoler.Instance.firendSlider.SetDist(friendliness);
+        //set hearts
+       Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
+
+
+
 		}
 	}
 

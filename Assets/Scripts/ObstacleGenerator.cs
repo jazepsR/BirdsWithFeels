@@ -36,7 +36,7 @@ public class ObstacleGenerator : MonoBehaviour {
             float rand = Random.Range(0.0f, 1.0f);
             if (Var.map[GuiContoler.mapPos].hasRocks && rand > 0.9f)
             {          
-                Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y + 0.15f, 100);
+                Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y + 0.15f, -2);
                 tile.isActive = false;
                 GameObject rockObj = Instantiate(rock, pos, Quaternion.identity);
                 obstacles.Add(rockObj);              
@@ -44,7 +44,7 @@ public class ObstacleGenerator : MonoBehaviour {
             if(rand>0.8f && rand < 0.9f && Var.map[GuiContoler.mapPos].powerUps.Count>0)
             {
                 List<Var.Em> powerUps = Var.map[GuiContoler.mapPos].powerUps;
-                Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 100);
+                Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, -2);
                 GameObject powerObj = Instantiate(powerTile, pos, Quaternion.identity);
                 tile.power = powerObj.GetComponent<powerTile>();
                 powerObj.GetComponent<powerTile>().SetColor(powerUps[Random.Range(0, powerUps.Count)]);
@@ -57,7 +57,7 @@ public class ObstacleGenerator : MonoBehaviour {
                     List<Var.PowerUps> pow = Var.map[GuiContoler.mapPos].powers;
                     Var.PowerUps type = pow[Random.Range(0, pow.Count)];
                     GameObject powerUp = null;
-                    Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 100);
+                    Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, -2);
                     switch (type)
                     {
                         case Var.PowerUps.dmg:

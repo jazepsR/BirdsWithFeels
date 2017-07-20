@@ -63,16 +63,9 @@ public class ProgressGUI : MonoBehaviour {
 	}
 	public void updateHearts(Image[] hearts, int index)
 	{
-		for(int i = 0; i < hearts.Length; i++)
-		{
-			if (i < Var.activeBirds[index].health)
-			{
-				hearts[i].gameObject.SetActive(true);
-			}else
-			{
-				hearts[i].gameObject.SetActive(false);
-			}
-		}
+        Helpers.Instance.setHearts(hearts, Var.activeBirds[index].health, Var.activeBirds[index].maxHealth);
+			
+		
 	}
     public void updateLevels(LVLIconScript[] icons, int id)
     {

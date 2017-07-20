@@ -17,10 +17,14 @@ public class Helpers : MonoBehaviour {
     public Color softScared;
     public Color softFriendly;
     public Color softLonely;
-      
+    Sprite fullHeart;
+    Sprite emptyHeart;
+
     public void Awake()
     {
-       
+
+        fullHeart = Resources.Load<Sprite>("sprites/heart");
+        emptyHeart = Resources.Load<Sprite>("sprites/emptyHeart");
         Instance = this;
     }
     public bool RandomBool()
@@ -37,6 +41,32 @@ public class Helpers : MonoBehaviour {
         else
             return Var.femaleNames[UnityEngine.Random.Range(0, Var.femaleNames.Length)];
     }
+
+    public void setHearts(Image[] hearts,int currentHP, int MaxHP)
+    {
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < currentHP)
+            {
+                hearts[i].sprite = fullHeart;
+                hearts[i].gameObject.SetActive(true);
+            } else
+            {
+                if (i<MaxHP)
+                {
+                    hearts[i].sprite = emptyHeart;
+                    hearts[i].gameObject.SetActive(true);
+                }
+                else
+                {
+                    hearts[i].gameObject.SetActive(false);
+                }
+            }
+        }  
+    }
+
+
+
     //Neutral means weak to all
     public Var.Em GetWeakness(Var.Em Emotion)
     {
@@ -128,6 +158,36 @@ public class Helpers : MonoBehaviour {
         else
             return name;
     }
+
+    public string GetLevelUpText(string name, Levels.type type)
+    {
+        switch (type)
+        {
+            case Levels.type.Brave1:
+                return "<name> has grown strong, but that dosen't mean he has forgotten about his teammates! <name> has decided to protect them whenever he can!".Replace("<name>", name);
+            case Levels.type.Brave2:
+                return "There's no stopping <name> now! Nothing can hurt him! (As long as he remains sure of himself, that is)".Replace("<name>", name);
+            case Levels.type.Friend1:
+                return "<name> is really getting along with his fellow birds! <name> will now be able to help them recover from injuries!".Replace("<name>", name);
+            case Levels.type.Friend2:
+                return "<name> has found a way to help his friends even more! They will surely appreciate getting healed after adventures!".Replace("<name>", name);
+            case Levels.type.Lonely1:
+                return "<name> feels like the other birds have forgotten about him. Fine! <name> won't talk to them either! Other birds will feel more lonely near him.".Replace("<name>", name);
+            case Levels.type.Lonely2:
+                return "All this alone was a great chance for <name> to do some serious studying! <name> can't wait to try out the new skills he has learned!".Replace("<name>", name);
+            case Levels.type.Scared1:
+                return "Looks like brute force isn't the answer for <name>! But <name> has found a way to help his team by weakening the enemy!".Replace("<name>", name);
+            case Levels.type.Scared2:
+                return "Direct combat is definetelly not for <name>! He prefers to attack his enemies from behind and let his teammates finish the job!".Replace("<name>", name);
+            default:
+                return "Error in level up text";        
+        }
+
+
+
+    }
+
+
 
     public bool ListContainsLevel(Levels.type level, List<LevelData> list)
     {
@@ -276,8 +336,13 @@ public class Helpers : MonoBehaviour {
         GuiContoler.Instance.tooltipText.text = text;
         var screenPoint = Input.mousePosition;
         screenPoint.z = 10.0f;
+        screenPoint.x += 5f;
         GuiContoler.Instance.tooltipText.transform.parent.transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
 
+    }
+    public void HideTooltip()
+    {
+        GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
     }
 
 
@@ -399,9 +464,9 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Friend2:
                 return "After an adventure fully heal one bird of your choice";
             case Levels.type.Scared1:
-                return "Backstabbing. If in stealth, bird does not fight enemies. All enemies passing by bird gains -30% chance to win. Toggle stealth by clicking bird";
-            case Levels.type.Scared2:
                 return "Give all diagonal birds - X to all dice rolls  (both friendly and enemy birds)";
+            case Levels.type.Scared2:
+                return "Backstabbing. If in stealth, bird does not fight enemies. All enemies passing by bird gains -30% chance to win. Toggle stealth by clicking bird";
             case Levels.type.Lonely1:
                 return "All birds in the same column gain +1 loneliness";
             case Levels.type.Lonely2:

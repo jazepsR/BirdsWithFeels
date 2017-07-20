@@ -21,9 +21,9 @@ public class fillEnemy : MonoBehaviour {
         if (dirList == null)
             dirList = new List<Bird.dir>() { Bird.dir.front, Bird.dir.top};
         
-        int max = 0;
+        int max = 5;
         if (dirList.Count == 1 && dirList.Contains(Bird.dir.front))
-            max = 0;
+            max = 4;
         foreach(GameObject enemy in Enemies)
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
