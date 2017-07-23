@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
+    public Text BirdLVLUpText;
 	public Text infoText;    
 	public Text infoHeading;
 	public Text infoFeeling;
@@ -47,6 +48,14 @@ public class GuiContoler : MonoBehaviour {
     public SliderSwitcher firendSlider;    
     public Image[] BirdInfoHearts;
     public Text levelNumberText;
+    public GameObject pause;
+    public GameObject deathMenu;
+    public Text deathTitle;
+    public Toggle[] deadBirdToggles;
+    bool CanToggleDeathTriggers = true;
+    Bird SelectedDeathBird = null;
+    Bird DeadBird = null;
+    public Button SelectDeathBirdBtn;
 	void Start()
 	{
         if (Var.emotionParticles == null)
@@ -64,7 +73,107 @@ public class GuiContoler : MonoBehaviour {
 			setMapLocation(0);
 		}        
 	}
+    public void setPause()
+    {
+        if (pause.activeSelf)
+        {
+            pause.SetActive(false);
+            Time.timeScale = 1.0f;
+        }
+        else
+        {
+            pause.SetActive(true);
+            Time.timeScale = 0.0f;
+        }
+    }
+    public void QuitGame()
+    {
+        
+        Application.Quit();
+    }
 
+    public void QuitToMap()
+    {
+        Time.timeScale = 1.0f;
+        Var.fled = true;
+        SceneManager.LoadScene("Map");
+    }
+
+    public void ShowDeathMenu(Bird deadBird)
+    {
+        DeadBird = deadBird;
+        SelectDeathBirdBtn.interactable = false;
+        deathTitle.text = deadBird.charName + " has died! Select a bird to replace him!";        
+        for(int i=0;i<Var.availableBirds.Count;i++)
+        {
+            if (Var.availableBirds[i].charName == deadBird.charName)
+            {
+                Debug.Log("Set doude as dead");
+                Var.availableBirds[i] = deadBird;
+            }
+        }
+        deathMenu.SetActive(true);
+    }
+
+    public void DeadBirdToggle(int num)
+    {
+        if (!CanToggleDeathTriggers)
+            return;
+        CanToggleDeathTriggers = false;
+        
+        LeanTween.delayedCall(0.05f, allowCall);
+        for(int i = 0; i < deadBirdToggles.Length; i++)
+        {
+            if (num != i)
+                deadBirdToggles[i].isOn = false;
+            if(num == i)
+            {
+                SelectDeathBirdBtn.interactable = deadBirdToggles[i].isOn;
+                if (deadBirdToggles[i].isOn)                
+                    SelectedDeathBird = FillPlayer.Instance.deadBirds[num];                
+                else                
+                    SelectedDeathBird = null;                 
+            }
+        }
+    }
+    void allowCall()
+    {
+        CanToggleDeathTriggers = true;
+    }
+    public void SelectDeathBird()
+    {
+        Var.availableBirds.Remove(SelectedDeathBird);
+        FillPlayer.SetupBird(DeadBird, SelectedDeathBird);        
+        DeadBird.gameObject.SetActive(true);
+        deathMenu.SetActive(false);
+    }
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            setPause();
+        }
+
+    }
+
+
+    public void ShowLvlText(string text)
+    {
+        BirdLVLUpText.text = text;        
+        //BirdLVLUpText.transform.parent.gameObject.SetActive(true);
+        LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject,new Vector3(-30,-220,0),0.3f).setEase(LeanTweenType.easeOutBack);
+
+    }
+
+    public void HideLvlText()
+    {
+        //BirdLVLUpText.text = "";
+        LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(-340, -220, 0), 0.3f).setEase(LeanTweenType.easeInBack);
+        //BirdLVLUpText.transform.parent.gameObject.SetActive(false);
+
+    }
 
 	void UpdateHearts(int health)
 	{
@@ -80,7 +189,7 @@ public class GuiContoler : MonoBehaviour {
         {
             bird.UpdateBattleCount();
             bird.AddRoundBonuses();
-            GuiContoler.Instance.UpdateBirdSave(bird);
+            UpdateBirdSave(bird);
         }
         Instance.InitiateGraph();
         Instance.CreateBattleReport();

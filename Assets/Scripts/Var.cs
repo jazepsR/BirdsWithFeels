@@ -8,7 +8,8 @@ public static class Var  {
     public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared,finish};
     public enum PowerUps { heal,dmg,emotion};
     public static int MoveGraphBy = 1550;
-    public static int lvl1 = 5;
+    public static int lvl1 = 4;
+    public static bool fled = false;
     public  static int lvl2 = 10;
     public static int confLoseFight = -3;
     public static int confWinFight = 3;

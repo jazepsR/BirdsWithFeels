@@ -17,6 +17,10 @@ public class Helpers : MonoBehaviour {
     public Color softScared;
     public Color softFriendly;
     public Color softLonely;
+    public string BraveHexColor;
+    public string ScaredHexColor;
+    public string LonelyHexColor;
+    public string FriendlyHexColor;
     Sprite fullHeart;
     Sprite emptyHeart;
 
@@ -158,6 +162,24 @@ public class Helpers : MonoBehaviour {
         else
             return name;
     }
+    public List<Bird> GetInactiveBirds()
+    {
+        List<Bird> inactiveBirds = new List<Bird>();
+        foreach(Bird bird in Var.availableBirds)
+        {
+            bool isInactive = true;
+            foreach(Bird activeBird in Var.activeBirds)
+            {
+                if (bird.charName == activeBird.charName)
+                    isInactive = false;
+            }
+            if (isInactive)
+                inactiveBirds.Add(bird);
+        }
+        return inactiveBirds;
+    }
+
+
 
     public string GetLevelUpText(string name, Levels.type type)
     {
@@ -182,11 +204,32 @@ public class Helpers : MonoBehaviour {
             default:
                 return "Error in level up text";        
         }
-
-
+    }
+    public string GetLVLRequirements(Levels.type type)
+    {
+        switch (type)
+        {
+            case Levels.type.Brave1:
+                return "Win two fights at once";
+            case Levels.type.Brave2:
+                return "Win 6 fights in a row";
+            case Levels.type.Friend1:
+                return "Surrounded by teammates(AKA gain + 3 or more social in one turn) and win a fight";
+            case Levels.type.Friend2:
+                return "Be close to a friendly bird and gain + 5 or more social in one turn";
+            case Levels.type.Lonely1:
+                return "No teammates to be seen in all four directions + diagonally! at the same time, Win a fight";
+            case Levels.type.Lonely2:
+                return "The bird is not used for two adventures in a row. Then, spend a fight all alone";
+            case Levels.type.Scared1:
+                return "Lose a fight while being close to a friendly bird winning a fight";
+            case Levels.type.Scared2:
+                return "Rest 4 turns in a row";
+            default:
+                return "Error in level up text";
+        }
 
     }
-
 
 
     public bool ListContainsLevel(Levels.type level, List<LevelData> list)
@@ -336,7 +379,7 @@ public class Helpers : MonoBehaviour {
         GuiContoler.Instance.tooltipText.text = text;
         var screenPoint = Input.mousePosition;
         screenPoint.z = 10.0f;
-        screenPoint.x += 5f;
+        screenPoint.x += 10f;
         GuiContoler.Instance.tooltipText.transform.parent.transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
 
     }

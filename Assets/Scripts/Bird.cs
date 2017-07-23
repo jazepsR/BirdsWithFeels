@@ -82,7 +82,7 @@ public class Bird : MonoBehaviour
     public int wonLastBattle = -1;
     [HideInInspector]
     public int roundsRested = 0;
-    [HideInInspector]
+    //[HideInInspector]
     public int AdventuresRested = 0;
     public int PlayerRollBonus = 0;
     public int CoolDownLeft= 3;
@@ -92,6 +92,10 @@ public class Bird : MonoBehaviour
     public int prevRoundHealth;
     public int levelRollBonus = 0;
     public Sprite startingIcon;
+    string levelUpText;
+    Color DefaultCol;
+    Color HighlightCol;
+    public bool dead = false;
     void Start()
 	{
         prevRoundHealth = health;
@@ -158,6 +162,7 @@ public class Bird : MonoBehaviour
         levelList.Add(data);
         level = levelList.Count;       
         battlesToNextLVL = level * 3;
+        levelUpText = null;
         if (data.emotion == Var.Em.Scared || data.emotion == Var.Em.Lonely)
             levelRollBonus++;
         if(data.emotion == Var.Em.Confident || data.emotion == Var.Em.Friendly)
@@ -181,6 +186,8 @@ public class Bird : MonoBehaviour
 	}
     void LoadStats()
     {
+        if (dead)
+            return;
         bool SaveDataCreated = false;
         Bird savedData = null;
         foreach (Bird data in Var.activeBirds)
@@ -194,12 +201,14 @@ public class Bird : MonoBehaviour
         }
 
 
-        if (!SaveDataCreated)
+        if (!SaveDataCreated && (Var.activeBirds.Count<=3 || inMap))
         {
-            Var.activeBirds.Add(this);            
+            Var.activeBirds.Add(this);
+            print("created something!");       
         }
         else
         {
+            
             confidence = savedData.confidence;
             friendliness = savedData.friendliness;
         }
@@ -215,6 +224,8 @@ public class Bird : MonoBehaviour
     }
     public void UpdateBattleCount()
     {
+        if (dead)
+            return;
         
         if (battleCount >= battlesToNextLVL)
         {
@@ -226,6 +237,8 @@ public class Bird : MonoBehaviour
     }
     public void ResetAfterLevel()
     {
+        if (dead)
+            return;
         winsInOneFight = 0;
         wonLastBattle = -1;
         x = -1;
@@ -235,30 +248,53 @@ public class Bird : MonoBehaviour
             levelControler.Halo.SetActive(false);
         showText();
     }
-    public void CheckLevels()
+    public string CheckLevels(bool toApply = true)
     {
-        levelControler.CheckBrave1();
-        levelControler.CheckLonely1();
-        levelControler.CheckFriendly1();
-        levelControler.CheckScared1();
-        //if (level > 1)
-        {
-            levelControler.CheckBrave2();
-            levelControler.CheckLonely2();
-            levelControler.CheckFriendly2();
-            levelControler.CheckScared2();
-        }
+        //TODO: make this look nice
+        string st = "";
+        st= levelControler.CheckBrave1(toApply);
+        if (st != null)
+            return st;
+        st = levelControler.CheckLonely1(toApply);
+        if (st != null)
+            return st;
+        st = levelControler.CheckFriendly1(toApply);
+        if (st != null)
+            return st;
+        st = levelControler.CheckScared1(toApply);
+        if (st != null)
+            return st;
+        st = levelControler.CheckBrave2(toApply);
+        if (st != null)
+            return st;
+        st = levelControler.CheckLonely2(toApply);
+        if (st != null)
+            return st;
+        st = levelControler.CheckFriendly2(toApply);
+        if (st != null)
+            return st;
+        st = levelControler.CheckScared2(toApply);
+        if (st != null)
+            return st;
+
+        return null;
     }
     void OnMouseEnter()
     {
         if (isEnemy)
         {
             GetComponent<feedBack>().ShowEnemyHoverText();
+        }else
+        {
+            colorRenderer.color = HighlightCol;
         }
+        if (!inMap && !isEnemy && levelUpText != null && !dragged)
+            GuiContoler.Instance.ShowLvlText(levelUpText);
     }
 	void OnMouseOver()
 	{
         showText();
+        
         if (isEnemy)
             return;
         SetCoolDownRing(true);
@@ -306,6 +342,7 @@ public class Bird : MonoBehaviour
             {                
                 lines.RemoveLines();
                 UpdateFeedback();
+                GuiContoler.Instance.HideLvlText();
             }
             levelControler.ApplyLevelOnPickup(this, levelList);
             // RemoveAllFeedBack();
@@ -314,8 +351,14 @@ public class Bird : MonoBehaviour
 	}
     void OnMouseExit()
     {
-        if(!dragged)
-            SetCoolDownRing(false);        
+        
+        if (!inMap && !isEnemy)
+            GuiContoler.Instance.HideLvlText();
+        if (!dragged)
+        {
+            SetCoolDownRing(false);
+            colorRenderer.color = DefaultCol;
+        }       
         if (isEnemy)
         {
             GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
@@ -391,6 +434,7 @@ public class Bird : MonoBehaviour
         }
         if (health <= 0)
         {
+            GuiContoler.Instance.ShowDeathMenu(this);
             gameObject.SetActive(false);
         }
         
@@ -423,7 +467,8 @@ public class Bird : MonoBehaviour
 
     public void AddRoundBonuses()
     {
-
+        if (dead)
+            return;
         friendliness += friendBoost;
         confidence += confBoos;
         if (!foughtInRound)
@@ -462,13 +507,15 @@ public class Bird : MonoBehaviour
 
 	public void SetEmotion()
 	{
-
-		if(Mathf.Abs((float)confidence)<Var.lvl1 && Mathf.Abs((float)friendliness) < Var.lvl1)
+        float factor = 0.13f;
+        if (Mathf.Abs((float)confidence)<Var.lvl1 && Mathf.Abs((float)friendliness) < Var.lvl1)
 		{
 			//No type
 			emotion = Var.Em.Neutral;
 			colorRenderer.color = Helpers.Instance.neutral;
-			return;
+            DefaultCol = Helpers.Instance.GetEmotionColor(emotion);            
+            HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g + factor, DefaultCol.b + factor);
+            return;
 		}
 		
 		if (Mathf.Abs((float)confidence) > Mathf.Abs((float)friendliness))
@@ -522,14 +569,11 @@ public class Bird : MonoBehaviour
 			}
 
 		}
-        if (!isEnemy)
-        {
-           
-      
-        }
-        
-	  
-	}
+        DefaultCol = Helpers.Instance.GetEmotionColor(emotion);        
+        HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g +factor, DefaultCol.b + factor);
+
+
+    }
 	
 	public void showText()
 	{
@@ -545,12 +589,18 @@ public class Bird : MonoBehaviour
             {
                 battleCount = battlesToNextLVL;
                 Var.powerText.text = "Ready to level up!";
+                levelUpText = CheckLevels(false);
+                Var.powerBar.color = Helpers.Instance.GetSoftEmotionColor(emotion);
+                Var.powerBar.fillAmount = 1;
             }
             else
             {
+                Var.powerBar.color = Color.white;
+                Var.powerText.text = null;
                 Var.powerText.text = "Leveling available in " + (battlesToNextLVL - battleCount) + " battles!";
+                Var.powerBar.fillAmount = (float)battleCount % 3 / (float)3;
             }
-            Var.powerBar.fillAmount = (float)battleCount%3 / (float)3;
+           
             int index = 0;
             GuiContoler.Instance.levelNumberText.text = level.ToString();
             ///Set level icons

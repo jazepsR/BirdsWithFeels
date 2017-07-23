@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public Sprite Competed;
+    public Sprite Default;
 	public string LevelName;
 	public Sprite skillImage;    
 	public string SkillText;
@@ -21,7 +23,8 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [HideInInspector]
     public bool isLocked = false;
     Color defaultColor;
-    Image myImage;
+    [HideInInspector]
+    public Image myImage;
     public GameObject lockObj;
 	// Use this for initialization
 	void Start () {
@@ -41,7 +44,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         {
             LevelNameHolder.text = LevelName;
             SkillTextHolder.text = Helpers.Instance.GetLVLInfoText(level);
-            ConditionTextHolder.text = "Requirements:\n" + ConditionText;
+            ConditionTextHolder.text = "Requirements:\n" + Helpers.Instance.GetLVLRequirements(level);
             LoreTextHolder.text = LoreText;
         }
 	}
