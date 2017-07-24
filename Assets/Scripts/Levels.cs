@@ -432,80 +432,80 @@ public class Levels : MonoBehaviour {
 	public string CheckBrave1(bool tryingToApply = true)
 	{
 		if (myBird.lastLevel.emotion != Var.Em.Confident && (myBird.emotion == Var.Em.Confident || myBird.emotion == Var.Em.SuperConfident) && myBird.confidence >= 7)
-        {
-            if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Brave1, LevelList))
-            {
-                return "First "+ Helpers.Instance.BraveHexColor + "brave</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Brave1);
-            }
-            if (myBird.winsInOneFight > 1 )
+		{
+			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Brave1, LevelList))
+			{
+				return "First "+ Helpers.Instance.BraveHexColor + "brave</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Brave1);
+			}
+			if (myBird.winsInOneFight > 1 )
 			{
 				ApplyLevel(new LevelData(type.Brave1, Var.Em.Confident,Resources.Load<Sprite>("Icons/Brave1Icon")), "Brave 1");
 			}
 		}
-        return null;
+		return null;
 
 	}
 	public string CheckBrave2(bool tryingToApply = true)
 	{
 		if (myBird.lastLevel.emotion != Var.Em.Confident && (myBird.emotion == Var.Em.Confident || myBird.emotion == Var.Em.SuperConfident) && myBird.confidence >= 10)
 		{
-            if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Brave2, LevelList))
-            {
-                return "Second " + Helpers.Instance.BraveHexColor + "brave</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Brave2);
-            }
-            if (myBird.consecutiveFightsWon >= 6  && Helpers.Instance.ListContainsLevel(Levels.type.Brave1,myBird.levelList))
+			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Brave2, LevelList))
+			{
+				return "Second " + Helpers.Instance.BraveHexColor + "brave</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Brave2);
+			}
+			if (myBird.consecutiveFightsWon >= 6  && Helpers.Instance.ListContainsLevel(Levels.type.Brave1,myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Brave2, Var.Em.Confident, Resources.Load<Sprite>("Icons/Brave2Icon")), "Brave 2");
 			}
 		}
-        return null;
+		return null;
 	}
 	public string CheckLonely1(bool tryingToApply = true)
 	{
 		if (myBird.lastLevel.emotion != Var.Em.Lonely && (myBird.emotion == Var.Em.Lonely || myBird.emotion == Var.Em.SuperLonely) && myBird.friendliness <= -7 )
 		{
-            if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Lonely1, LevelList))
-            {
-                return "First " + Helpers.Instance.LonelyHexColor + "Lonely</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Lonely1);
-            }
-            if (  Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.wonLastBattle>=1)
+			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Lonely1, LevelList))
+			{
+				return "First " + Helpers.Instance.LonelyHexColor + "Lonely</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Lonely1);
+			}
+			if (  Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.wonLastBattle>=1)
 			{
 				ApplyLevel(new LevelData(type.Lonely1, Var.Em.Lonely, Resources.Load<Sprite>("Icons/Lonely1Icon")), "Lonely 1");
 			}            
 		}
-        return null;
+		return null;
 	}
 
 	public string CheckLonely2(bool tryingToApply = true)
 	{
 		if (myBird.lastLevel.emotion != Var.Em.Lonely && (myBird.emotion == Var.Em.Lonely || myBird.emotion == Var.Em.SuperLonely) && myBird.friendliness <= -10)
 		{
-            if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Lonely2, LevelList))
-            {
-                return "Second " + Helpers.Instance.LonelyHexColor + "Lonely</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Lonely2);
-            }
-            if (Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.AdventuresRested>=2 && Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, myBird.levelList))
+			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Lonely2, LevelList))
+			{
+				return "Second " + Helpers.Instance.LonelyHexColor + "Lonely</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Lonely2);
+			}
+			if (Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.AdventuresRested>=2 && Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Lonely2, Var.Em.Lonely, Resources.Load<Sprite>("Icons/Lonely2Icon")),"Lonely 2");
 			}
 		}
-        return null;
+		return null;
 	}
 	
 	public string CheckFriendly1(bool tryingToApply = true)
 	{
 		if (myBird.lastLevel.emotion != Var.Em.Friendly && (myBird.emotion == Var.Em.Friendly || myBird.emotion == Var.Em.SuperFriendly) && myBird.friendliness >= 7)
 		{
-            if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Friend1, LevelList))
-            {
-                return "First " + Helpers.Instance.FriendlyHexColor + "Friendly</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Friend1);
-            }
-            if (myBird.FriendGainedInRound >= 3  && myBird.wonLastBattle >=1 )
+			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Friend1, LevelList))
+			{
+				return "First " + Helpers.Instance.FriendlyHexColor + "Friendly</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Friend1);
+			}
+			if (myBird.FriendGainedInRound >= 3  && myBird.wonLastBattle >=1 )
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Resources.Load<Sprite>("Icons/Friendly1Icon")),"Friendly 1");
 			}
 		}
-        return null;
+		return null;
 
 	}
 
@@ -513,11 +513,11 @@ public class Levels : MonoBehaviour {
 	{
 		if (myBird.lastLevel.emotion != Var.Em.Friendly && (myBird.emotion == Var.Em.Friendly || myBird.emotion == Var.Em.SuperFriendly) && myBird.friendliness >= 10)
 		{
-            if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Friend2,LevelList))
-            {
-                return "Second "+Helpers.Instance.FriendlyHexColor +"Friendly</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Friend2);
-            }
-            bool closeFriend = false;
+			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Friend2,LevelList))
+			{
+				return "Second "+Helpers.Instance.FriendlyHexColor +"Friendly</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Friend2);
+			}
+			bool closeFriend = false;
 			foreach(Bird bird in Helpers.Instance.GetAdjacentBirds(myBird))
 			{
 				if(bird.emotion == Var.Em.Friendly || bird.emotion == Var.Em.SuperFriendly && Helpers.Instance.ListContainsLevel(Levels.type.Friend1, myBird.levelList))
@@ -531,7 +531,7 @@ public class Levels : MonoBehaviour {
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Resources.Load<Sprite>("Icons/Friendly2Icon")),"Friendly 2");
 			}
 		}
-        return null;
+		return null;
 
 	}
 
@@ -539,9 +539,9 @@ public class Levels : MonoBehaviour {
 	{
 		if (myBird.lastLevel.emotion != Var.Em.Scared && (myBird.emotion == Var.Em.Scared || myBird.emotion == Var.Em.SuperScared) && myBird.confidence <= -7)
 		{
-            if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Scared1, LevelList))
-                return "First " +Helpers.Instance.ScaredHexColor +"Scared </color>level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Scared1);
-            bool closeWinner = false;
+			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Scared1, LevelList))
+				return "First " +Helpers.Instance.ScaredHexColor +"Scared </color>level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Scared1);
+			bool closeWinner = false;
 			foreach (Bird bird in Helpers.Instance.GetAdjacentBirds(myBird))
 			{
 				if (bird.wonLastBattle>=1)
@@ -556,24 +556,24 @@ public class Levels : MonoBehaviour {
 				ApplyLevel(new LevelData(type.Scared1, Var.Em.Scared, Resources.Load<Sprite>("Icons/Scared1Icon")),"Scared 1");
 			}
 		}
-        return null;
+		return null;
 
 	}
 	public string CheckScared2(bool tryingToApply = true)
 	{
-		if (myBird.lastLevel.emotion != Var.Em.Scared && (myBird.emotion == Var.Em.Scared || myBird.emotion == Var.Em.SuperScared))
+		if (myBird.lastLevel.emotion != Var.Em.Scared && (myBird.emotion == Var.Em.Scared || myBird.emotion == Var.Em.SuperScared) && myBird.confidence <= -10)
 		{
-            if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Scared2, LevelList))
-            {
-                return "Second" +Helpers.Instance.ScaredHexColor +"Scared</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Scared2);
-            }
-			if (myBird.roundsRested >= 4 && myBird.confidence <= -10 && Helpers.Instance.ListContainsLevel(Levels.type.Scared2, myBird.levelList))
+			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Scared2, LevelList))
+			{
+				return "Second " +Helpers.Instance.ScaredHexColor +"Scared</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Scared2);
+			}
+			if (myBird.roundsRested >= 4  && Helpers.Instance.ListContainsLevel(Levels.type.Scared2, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Scared2, Var.Em.Scared, Resources.Load<Sprite>("Icons/Scared2Icon")),"Scared 2");
 			}
 		}
-        return null;
-    }
+		return null;
+	}
 
 }
 

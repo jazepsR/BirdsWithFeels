@@ -36,7 +36,7 @@ public class Bird : MonoBehaviour
 	public Vector3 home;
     [HideInInspector]
 	public bool dragged = false;
-	[HideInInspector]
+	//[HideInInspector]
 	public firendLine lines;
     public int level = 1;
 	bool needsReset = false; 

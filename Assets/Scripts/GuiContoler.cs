@@ -7,14 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
-    public Text BirdLVLUpText;
+	public Text BirdLVLUpText;
 	public Text infoText;    
 	public Text infoHeading;
 	public Text infoFeeling;
-    public Image powerBarTemp;
-    public Text powerTextTemp;
-    public Image[] tiles;
-    public LVLIconScript[] lvlIcons;
+	public Image powerBarTemp;
+	public Text powerTextTemp;
+	public Image[] tiles;
+	public LVLIconScript[] lvlIcons;
 	public Text reportText;
 	public GameObject report;
 	public Image[] hearts;
@@ -22,7 +22,7 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject winBanner;
 	public GameObject[] portraits;
 	public Transform[] battleTrag;
-    public GameObject rerollBox;
+	public GameObject rerollBox;
 	int roundLength = 3;
 	Var.Em currentMapArea;
 	Var.Em nextMapArea;
@@ -43,29 +43,29 @@ public class GuiContoler : MonoBehaviour {
 	public Text messageText;    
 	[HideInInspector]
 	public int activePortrait = 0;
-    public Text tooltipText;
-    public SliderSwitcher confSlider;
-    public SliderSwitcher firendSlider;    
-    public Image[] BirdInfoHearts;
-    public Text levelNumberText;
-    public GameObject pause;
-    public GameObject deathMenu;
-    public Text deathTitle;
-    public Toggle[] deadBirdToggles;
-    bool CanToggleDeathTriggers = true;
-    Bird SelectedDeathBird = null;
-    Bird DeadBird = null;
-    public Button SelectDeathBirdBtn;
+	public Text tooltipText;
+	public SliderSwitcher confSlider;
+	public SliderSwitcher firendSlider;    
+	public Image[] BirdInfoHearts;
+	public Text levelNumberText;
+	public GameObject pause;
+	public GameObject deathMenu;
+	public Text deathTitle;
+	public Toggle[] deadBirdToggles;
+	bool CanToggleDeathTriggers = true;
+	Bird SelectedDeathBird = null;
+	Bird DeadBird = null;
+	public Button SelectDeathBirdBtn;
 	void Start()
 	{
-        if (Var.emotionParticles == null)
-            Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
-        messages = new List<string>();
+		if (Var.emotionParticles == null)
+			Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
+		messages = new List<string>();
 		Var.birdInfo = infoText;
 		Var.birdInfoHeading = infoHeading;
 		Var.birdInfoFeeling = infoFeeling;
-        Var.powerBar = powerBarTemp;
-        Var.powerText = powerTextTemp;	       
+		Var.powerBar = powerBarTemp;
+		Var.powerText = powerTextTemp;	       
 		Instance = this;
 		if (!inMap)
 		{
@@ -73,107 +73,107 @@ public class GuiContoler : MonoBehaviour {
 			setMapLocation(0);
 		}        
 	}
-    public void setPause()
-    {
-        if (pause.activeSelf)
-        {
-            pause.SetActive(false);
-            Time.timeScale = 1.0f;
-        }
-        else
-        {
-            pause.SetActive(true);
-            Time.timeScale = 0.0f;
-        }
-    }
-    public void QuitGame()
-    {
-        
-        Application.Quit();
-    }
+	public void setPause()
+	{
+		if (pause.activeSelf)
+		{
+			pause.SetActive(false);
+			Time.timeScale = 1.0f;
+		}
+		else
+		{
+			pause.SetActive(true);
+			Time.timeScale = 0.0f;
+		}
+	}
+	public void QuitGame()
+	{
+		
+		Application.Quit();
+	}
 
-    public void QuitToMap()
-    {
-        Time.timeScale = 1.0f;
-        Var.fled = true;
-        SceneManager.LoadScene("Map");
-    }
+	public void QuitToMap()
+	{
+		Time.timeScale = 1.0f;
+		Var.fled = true;
+		SceneManager.LoadScene("Map");
+	}
 
-    public void ShowDeathMenu(Bird deadBird)
-    {
-        DeadBird = deadBird;
-        SelectDeathBirdBtn.interactable = false;
-        deathTitle.text = deadBird.charName + " has died! Select a bird to replace him!";        
-        for(int i=0;i<Var.availableBirds.Count;i++)
-        {
-            if (Var.availableBirds[i].charName == deadBird.charName)
-            {
-                Debug.Log("Set doude as dead");
-                Var.availableBirds[i] = deadBird;
-            }
-        }
-        deathMenu.SetActive(true);
-    }
+	public void ShowDeathMenu(Bird deadBird)
+	{
+		DeadBird = deadBird;
+		SelectDeathBirdBtn.interactable = false;
+		deathTitle.text = deadBird.charName + " has died! Select a bird to replace him!";        
+		for(int i=0;i<Var.availableBirds.Count;i++)
+		{
+			if (Var.availableBirds[i].charName == deadBird.charName)
+			{
+				Debug.Log("Set doude as dead");
+				Var.availableBirds[i] = deadBird;
+			}
+		}
+		deathMenu.SetActive(true);
+	}
 
-    public void DeadBirdToggle(int num)
-    {
-        if (!CanToggleDeathTriggers)
-            return;
-        CanToggleDeathTriggers = false;
-        
-        LeanTween.delayedCall(0.05f, allowCall);
-        for(int i = 0; i < deadBirdToggles.Length; i++)
-        {
-            if (num != i)
-                deadBirdToggles[i].isOn = false;
-            if(num == i)
-            {
-                SelectDeathBirdBtn.interactable = deadBirdToggles[i].isOn;
-                if (deadBirdToggles[i].isOn)                
-                    SelectedDeathBird = FillPlayer.Instance.deadBirds[num];                
-                else                
-                    SelectedDeathBird = null;                 
-            }
-        }
-    }
-    void allowCall()
-    {
-        CanToggleDeathTriggers = true;
-    }
-    public void SelectDeathBird()
-    {
-        Var.availableBirds.Remove(SelectedDeathBird);
-        FillPlayer.SetupBird(DeadBird, SelectedDeathBird);        
-        DeadBird.gameObject.SetActive(true);
-        deathMenu.SetActive(false);
-    }
-
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            setPause();
-        }
-
-    }
+	public void DeadBirdToggle(int num)
+	{
+		if (!CanToggleDeathTriggers)
+			return;
+		CanToggleDeathTriggers = false;
+		
+		LeanTween.delayedCall(0.05f, allowCall);
+		for(int i = 0; i < deadBirdToggles.Length; i++)
+		{
+			if (num != i)
+				deadBirdToggles[i].isOn = false;
+			if(num == i)
+			{
+				SelectDeathBirdBtn.interactable = deadBirdToggles[i].isOn;
+				if (deadBirdToggles[i].isOn)                
+					SelectedDeathBird = FillPlayer.Instance.deadBirds[num];                
+				else                
+					SelectedDeathBird = null;                 
+			}
+		}
+	}
+	void allowCall()
+	{
+		CanToggleDeathTriggers = true;
+	}
+	public void SelectDeathBird()
+	{
+		Var.availableBirds.Remove(SelectedDeathBird);
+		FillPlayer.SetupBird(DeadBird, SelectedDeathBird);        
+		DeadBird.gameObject.SetActive(true);
+		deathMenu.SetActive(false);
+	}
 
 
-    public void ShowLvlText(string text)
-    {
-        BirdLVLUpText.text = text;        
-        //BirdLVLUpText.transform.parent.gameObject.SetActive(true);
-        LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject,new Vector3(-30,-220,0),0.3f).setEase(LeanTweenType.easeOutBack);
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			setPause();
+		}
 
-    }
+	}
 
-    public void HideLvlText()
-    {
-        //BirdLVLUpText.text = "";
-        LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(-340, -220, 0), 0.3f).setEase(LeanTweenType.easeInBack);
-        //BirdLVLUpText.transform.parent.gameObject.SetActive(false);
 
-    }
+	public void ShowLvlText(string text)
+	{
+		BirdLVLUpText.text = text;        
+		//BirdLVLUpText.transform.parent.gameObject.SetActive(true);
+		LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject,new Vector3(-30,-220,0),0.3f).setEase(LeanTweenType.easeOutBack);
+
+	}
+
+	public void HideLvlText()
+	{
+		//BirdLVLUpText.text = "";
+		LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(-340, -220, 0), 0.3f).setEase(LeanTweenType.easeInBack);
+		//BirdLVLUpText.transform.parent.gameObject.SetActive(false);
+
+	}
 
 	void UpdateHearts(int health)
 	{
@@ -183,62 +183,62 @@ public class GuiContoler : MonoBehaviour {
 			hearts[i].enabled = i < health;
 		}
 	}
-    public void NoReroll()
-    {
-        foreach (Bird bird in FillPlayer.Instance.playerBirds)
-        {
-            bird.UpdateBattleCount();
-            bird.AddRoundBonuses();
-            UpdateBirdSave(bird);
-        }
-        Instance.InitiateGraph();
-        Instance.CreateBattleReport();
-        rerollBox.SetActive(false);
-    }
-    public void YesReroll()
-    {
-        
-        foreach (Bird bird in Var.activeBirds)
-        {
-            bird.SetEmotion();
-            bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
-           // bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
-           // bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
-            bird.target = bird.home;
-            bird.transform.position = bird.home;
-            bird.health = bird.prevRoundHealth;
-            if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.levelList) && bird.CoolDownLeft == 0 && !bird.foughtInRound)
-            {
-                bird.CoolDownLeft = bird.CoolDownLength;
-                bird.CooldownRing.fillAmount = 0;
-            }
-        }
-        for (int i = 0; i < Var.activeBirds.Count; i++)
-        {
-            FillPlayer.SetupBird(FillPlayer.Instance.playerBirds[i], Var.activeBirds[i]);
-        }
-        foreach(LayoutButton tile in ObstacleGenerator.Instance.tiles)
-        {
-            tile.Reset();
-        }
-        Var.playerPos = new Bird[4, 4];
-        GetComponent<fillEnemy>().Reset();
-        GameLogic.Instance.CanWeFight();
-        GameLogic.Instance.UpdateFeedback();
-        rerollBox.SetActive(false);
+	public void NoReroll()
+	{
+		foreach (Bird bird in FillPlayer.Instance.playerBirds)
+		{
+			bird.UpdateBattleCount();
+			bird.AddRoundBonuses();
+			UpdateBirdSave(bird);
+		}
+		Instance.InitiateGraph();
+		Instance.CreateBattleReport();
+		rerollBox.SetActive(false);
+	}
+	public void YesReroll()
+	{
+		
+		foreach (Bird bird in Var.activeBirds)
+		{
+			bird.SetEmotion();
+			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
+		   // bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
+		   // bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
+			bird.target = bird.home;
+			bird.transform.position = bird.home;
+			bird.health = bird.prevRoundHealth;
+			if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.levelList) && bird.CoolDownLeft == 0 && !bird.foughtInRound)
+			{
+				bird.CoolDownLeft = bird.CoolDownLength;
+				bird.CooldownRing.fillAmount = 0;
+			}
+		}
+		for (int i = 0; i < Var.activeBirds.Count; i++)
+		{
+			FillPlayer.SetupBird(FillPlayer.Instance.playerBirds[i], Var.activeBirds[i]);
+		}
+		foreach(LayoutButton tile in ObstacleGenerator.Instance.tiles)
+		{
+			tile.Reset();
+		}
+		Var.playerPos = new Bird[4, 4];
+		GetComponent<fillEnemy>().Reset();
+		GameLogic.Instance.CanWeFight();
+		GameLogic.Instance.UpdateFeedback();
+		rerollBox.SetActive(false);
 
-    }
+	}
 
-    
+	
 
-            
+			
 	public void CloseGraph()
 	{
 
-        //graph.SetActive(false);
-        //battlePanel.SetActive(true);
-        LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
-        mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound+1);
+		//graph.SetActive(false);
+		//battlePanel.SetActive(true);
+		LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
+		mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound+1);
 		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
 		{
 			Destroy(child.gameObject);
@@ -249,55 +249,55 @@ public class GuiContoler : MonoBehaviour {
 	public void CloseBirdStats()
 	{
 		//graph.SetActive(false);
-        LeanTween.moveLocal(graph, new Vector3(-Var.MoveGraphBy, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
-        //battlePanel.SetActive(true);
-        foreach (Transform child in graph.transform.Find("ReportGraph").transform)
+		LeanTween.moveLocal(graph, new Vector3(-Var.MoveGraphBy, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
+		//battlePanel.SetActive(true);
+		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
 		{
 			Destroy(child.gameObject);
 		}
 	}
-    public void CreateGraph()
-    {
-        //graph.SetActive(true);        
+	public void CreateGraph()
+	{
+		//graph.SetActive(true);        
 
-        //battlePanel.SetActive(false);
-        Graph.Instance.portraits = new List<GameObject>();
-        foreach (Bird bird in Var.activeBirds)
-        {
-            //Normalize bird stats
-            int treshold = Var.lvl2 - 1;
-            //Super starts at 10
-            if (bird.level > 1)
-            {
-                treshold = 12;
-            }
-            if (bird.confidence > treshold)
-                bird.confidence = treshold;
-            if (bird.confidence < -treshold)
-                bird.confidence = -treshold;
-            if (bird.friendliness > treshold)
-                bird.friendliness = treshold;
-            if (bird.friendliness < -treshold)
-                bird.friendliness = -treshold;
+		//battlePanel.SetActive(false);
+		Graph.Instance.portraits = new List<GameObject>();
+		foreach (Bird bird in Var.activeBirds)
+		{
+			//Normalize bird stats
+			int treshold = Var.lvl2 - 1;
+			//Super starts at 10
+			if (bird.level > 1)
+			{
+				treshold = 12;
+			}
+			if (bird.confidence > treshold)
+				bird.confidence = treshold;
+			if (bird.confidence < -treshold)
+				bird.confidence = -treshold;
+			if (bird.friendliness > treshold)
+				bird.friendliness = treshold;
+			if (bird.friendliness < -treshold)
+				bird.friendliness = -treshold;
 
 
-            GameObject portrait = bird.portrait;
-            GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
-            colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
-            Graph.Instance.PlotFull(bird.prevFriend, bird.prevConf, bird.friendliness, bird.confidence, portrait, bird.charName);
-            feedbackText.text = "";
-            winText.text = "";
-            winDetails.text = "";
-        }
-        
-    }
+			GameObject portrait = bird.portrait;
+			GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
+			colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+			Graph.Instance.PlotFull(bird.prevFriend, bird.prevConf, bird.friendliness, bird.confidence, portrait, bird.charName);
+			feedbackText.text = "";
+			winText.text = "";
+			winDetails.text = "";
+		}
+		
+	}
 	public void InitiateGraph()
 	{
-        ProgressGUI.Instance.skillArea.SetActive(false);
-        ProgressGUI.Instance.Setup();
-        ProgressGUI.Instance.UpdateAllHearts();
-        ProgressGUI.Instance.UpdateAllLevels();
-        LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph);  
+		ProgressGUI.Instance.skillArea.SetActive(false);
+		ProgressGUI.Instance.Setup();
+		ProgressGUI.Instance.UpdateAllHearts();
+		ProgressGUI.Instance.UpdateAllLevels();
+		LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph);  
 	}
 	public void CreateBattleReport() {
 		closeReportBtn.SetActive(true);
@@ -373,22 +373,22 @@ public class GuiContoler : MonoBehaviour {
 					{
 						if (Var.playerPos[3-j, i%4] != null)
 						{
-                            if (!Var.playerPos[3 - j, i % 4].isHiding)
-                            {
-                                playerBird = Var.playerPos[3 - j, i % 4];
-                                break;
-                            }
+							if (!Var.playerPos[3 - j, i % 4].isHiding)
+							{
+								playerBird = Var.playerPos[3 - j, i % 4];
+								break;
+							}
 						}
 					}
 					if (Var.enemies[i].position == Bird.dir.top)
 					{
 						if (Var.playerPos[i%4, j] != null)
 						{
-                            if (!Var.playerPos[i % 4, j].isHiding)
-                            {
-                                playerBird = Var.playerPos[i % 4, j];
-                                break;
-                            }
+							if (!Var.playerPos[i % 4, j].isHiding)
+							{
+								playerBird = Var.playerPos[i % 4, j];
+								break;
+							}
 						}
 
 					}
@@ -396,11 +396,11 @@ public class GuiContoler : MonoBehaviour {
 					{
 						if (Var.playerPos[i % 4, 3 - j] != null)
 						{
-                            if (!Var.playerPos[i % 4, 3 - j].isHiding)
-                            {
-                                playerBird = Var.playerPos[i % 4, 3 - j];
-                                break;
-                            }
+							if (!Var.playerPos[i % 4, 3 - j].isHiding)
+							{
+								playerBird = Var.playerPos[i % 4, 3 - j];
+								break;
+							}
 						}
 
 					}
@@ -421,7 +421,7 @@ public class GuiContoler : MonoBehaviour {
 		foreach(Bird bird in birds)
 		{
 
-			if (!bird.isEnemy)
+			if (!bird.isEnemy && !bird.dead)
 			{
 				
 				players.Add(bird);
@@ -429,14 +429,14 @@ public class GuiContoler : MonoBehaviour {
 		}
 	   foreach(Bird bird in players)
 		{
-            int friendGain = Helpers.Instance.Findfirendlieness(bird);
-            if (friendGain > 0)
-                Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Friendly);
-            if(friendGain<0)
-                Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Lonely);
+			int friendGain = Helpers.Instance.Findfirendlieness(bird);
+			if (friendGain > 0)
+				Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Friendly);
+			if(friendGain<0)
+				Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Lonely);
 
-            bird.friendBoost += friendGain;
-            
+			bird.friendBoost += friendGain;
+			
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();
 
 		}
@@ -489,16 +489,16 @@ public class GuiContoler : MonoBehaviour {
 			//bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
 			bird.target = bird.home;
 			bird.transform.position = bird.home;
-            bird.prevConf = bird.confidence;
-            bird.prevFriend = bird.friendliness;
-        }
+			bird.prevConf = bird.confidence;
+			bird.prevFriend = bird.friendliness;
+		}
 		//After applying levels;
 		foreach(Bird bird in players)
 		{
 			bird.ResetAfterLevel();
 		}
-        Var.playerPos = new Bird[4, 4];
-        foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
+		Var.playerPos = new Bird[4, 4];
+		foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
 		{
 			tile.Reset();
 		}
@@ -567,9 +567,9 @@ public class GuiContoler : MonoBehaviour {
 		posInMapRound++;
 		if (posInMapRound == roundLength)
 		{
-            posInMapRound = 0;
-            mapPos++;
-            if (nextMapArea== Var.Em.finish)
+			posInMapRound = 0;
+			mapPos++;
+			if (nextMapArea== Var.Em.finish)
 			{
 				winBanner.SetActive(true);
 				mapPos = 0;
