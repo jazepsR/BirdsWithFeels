@@ -106,6 +106,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (available && MapControler.Instance.canFight)
         {
+            Var.fled = false;
             Var.map.Clear();
             for (int i = 0; i < length; i++)
             {

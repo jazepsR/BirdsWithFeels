@@ -21,7 +21,7 @@ public class MapControler : MonoBehaviour {
         canHeal = false;
         foreach(Bird bird in Var.activeBirds)
         {
-            if(Helpers.Instance.ListContainsLevel(Levels.type.Friend2, bird.levelList))
+            if(Helpers.Instance.ListContainsLevel(Levels.type.Friend2, bird.levelList) &&!Var.fled)
             {
                 healTrail = Instantiate(Resources.Load("MouseHealParticle"), Input.mousePosition, Quaternion.identity) as GameObject;
                 canHeal = true;

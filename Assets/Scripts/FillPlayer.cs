@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class FillPlayer : MonoBehaviour {
     public Bird[] playerBirds;
+    public Bird[] deadBirds;
     public bool inMap = false;
     public static FillPlayer Instance { get; private set; }
 	// Use this for initialization
 	void Awake ()
     {
-        Instance = this;
+        Instance = this;        
         if (inMap && Var.availableBirds.Count>0)
         {
             foreach (Bird bird in Var.availableBirds)
@@ -26,18 +27,25 @@ public class FillPlayer : MonoBehaviour {
                 if (wasActive)
                     bird.AdventuresRested = 0;
                 else
-                    bird.AdventuresRested++;
+                {
+                    if(!Var.fled)
+                        bird.AdventuresRested++;
+                }
             }
             foreach (Bird bird in playerBirds)
             {
+                bool foundBird = false;
                 foreach (Bird loadBird in Var.availableBirds)
                 {
                     if (bird.charName == loadBird.charName)
                     {
                         SetupBird(bird, loadBird);
+                        foundBird = true;
                         break;
                     }
                 }
+                if (!foundBird)
+                    bird.gameObject.SetActive(false);
             }
             
         }
@@ -57,8 +65,12 @@ public class FillPlayer : MonoBehaviour {
             {
                 SetupBird(playerBirds[i], Var.activeBirds[i]);
             }
-        }        
-           
+            List<Bird> inactive = Helpers.Instance.GetInactiveBirds();
+            for(int i=0; i < inactive.Count; i++)
+            {
+                SetupBird(deadBirds[i], inactive[i]);
+            }
+        }       
     }
 		
 	
