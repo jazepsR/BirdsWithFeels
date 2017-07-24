@@ -44,6 +44,10 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (available)
             LockedIcon.SetActive(true);
         lr = GetComponent<LineRenderer>();
+       
+    }
+    void Update()
+    {
         int i = 0;
         lr.positionCount = targets.Length * 2;
         if (targets.Length > 0)
