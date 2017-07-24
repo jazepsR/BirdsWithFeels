@@ -17,9 +17,11 @@ public class Graph : MonoBehaviour {
     void Start()
     {
         Instance = this;
+        Sprite sp = Resources.Load<Sprite>("Icons/NewIcons_1");
         multiplier = graphSize / 15;
         
-         
+
+
     }
 
 

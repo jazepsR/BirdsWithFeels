@@ -27,7 +27,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public bool hasLonelyPwerUps;
     public bool hasHealthPowerUps;
     public bool hasDMGPowerUps;
-    [HideInInspector]
+   // [HideInInspector]
     public MapIcon[] targets;
     MapSaveData mySaveData;
     LineRenderer lr;
