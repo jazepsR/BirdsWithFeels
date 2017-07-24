@@ -41,6 +41,7 @@ public class ProgressGUI : MonoBehaviour {
 		bool HasSuper = (bird.level > 1);
 		foreach(LevelArea lvl in levelAreas)
 		{
+            lvl.gameObject.SetActive(true);
             lvl.myImage.sprite = lvl.Default;
 			lvl.Unlock();
 			if (Helpers.Instance.ListContainsLevel(lvl.level, bird.levelList))
