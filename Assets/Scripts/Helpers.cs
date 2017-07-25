@@ -178,7 +178,30 @@ public class Helpers : MonoBehaviour {
         }
         return inactiveBirds;
     }
-
+    public Sprite GetSkillPicture(Levels.type type)
+    {
+        switch (type)
+        {
+            case Levels.type.Brave1:
+                return Var.skillIcons[0];
+            case Levels.type.Brave2:
+                return Var.skillIcons[1];
+            case Levels.type.Friend1:
+                return Var.skillIcons[6];
+            case Levels.type.Friend2:
+                return Var.skillIcons[7];
+            case Levels.type.Lonely1:
+                return Var.skillIcons[2];
+            case Levels.type.Lonely2:
+                return Var.skillIcons[3];
+            case Levels.type.Scared1:
+                return Var.skillIcons[4];
+            case Levels.type.Scared2:
+                return Var.skillIcons[5];
+            default:
+                return null;
+        }
+    }
 
 
     public string GetLevelUpText(string name, Levels.type type)

@@ -34,6 +34,7 @@ public static class Var {
     public static List<Bird> availableBirds = new List<Bird>();
     public static int currentStageID = -1;
     public static Sprite[] lvlSprites = null;
+    public static Sprite[] skillIcons = null;
     public static GameObject emotionParticles = null;
     public static string[] maleNames = {"Noah", "Liam", "Mason", "Jacob", "William","Ethan", "James","Alexander","Michael","Benjamin","Elijah",
         "Daniel", "Aiden", "Logan", "Matthew","Lucas","Jackson","David","Oliver","Jayden","Joseph","Gabriel","Samuel","Carter","Anthony","John",

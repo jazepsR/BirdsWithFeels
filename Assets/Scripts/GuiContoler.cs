@@ -65,6 +65,7 @@ public class GuiContoler : MonoBehaviour {
     public Button HideSmallGraph;
 	void Start()
 	{
+        
 		if (Var.emotionParticles == null)
 			Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
 		messages = new List<string>();
@@ -280,6 +281,7 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CreateGraph(object o)
 	{
+        
         foreach (Transform child in graph.transform.Find("ReportGraph").transform)
         {
             Destroy(child.gameObject);
@@ -291,7 +293,14 @@ public class GuiContoler : MonoBehaviour {
         if (birdNum == -1)
             BirdsToGraph = Var.activeBirds;
         else
+        {
             BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
+            if (Var.activeBirds[birdNum].hasNewLevel)
+            {
+                levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
+                return;
+            }
+        }
 
 
 
@@ -348,9 +357,11 @@ public class GuiContoler : MonoBehaviour {
             }
         }
         ProgressGUI.Instance.PortraitClick(bird);
-        ProgressGUI.Instance.skillArea.SetActive(false);		
-		LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);       
-	}
+        ProgressGUI.Instance.skillArea.SetActive(false);
+        LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
+       
+        	
+			}
 	public void CreateBattleReport() {
 		closeReportBtn.SetActive(true);
         HideSmallGraph.gameObject.SetActive(false);

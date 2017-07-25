@@ -46,6 +46,8 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             SkillTextHolder.text = Helpers.Instance.GetLVLInfoText(level);
             ConditionTextHolder.text = "Requirements:\n" + Helpers.Instance.GetLVLRequirements(level);
             LoreTextHolder.text = LoreText;
+            SkillImageHolder.sprite = Helpers.Instance.GetSkillPicture(level);
+            SkillImageHolder.gameObject.SetActive(true);
         }
 	}
     public void OnPointerExit(PointerEventData eventData)
@@ -54,6 +56,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         SkillTextHolder.text = "";
         ConditionTextHolder.text = "";
         LoreTextHolder.text = "";
+        SkillImageHolder.gameObject.SetActive(false);
 
     }
 

@@ -14,9 +14,7 @@ public class Levels : MonoBehaviour {
 	// Use this for initialization
 	void Start () {        
 		myBird = GetComponent<Bird>();
-		if (Var.lvlSprites == null)
-			Var.lvlSprites = Resources.LoadAll<Sprite>("Icons/NewIcons");
-	 
+		
 	  
 
 
@@ -429,7 +427,7 @@ public class Levels : MonoBehaviour {
 	{
 		if (!Helpers.Instance.ListContainsLevel(data.type, LevelList))
 		{
-			GuiContoler.Instance.ShowMessage(Helpers.Instance.GetLevelUpText(myBird.charName,data.type));
+			//GuiContoler.Instance.ShowMessage(Helpers.Instance.GetLevelUpText(myBird.charName,data.type));
 			myBird.battleCount = myBird.battlesToNextLVL-1;
 			myBird.AddLevel(data);
 			Debug.Log(myBird.charName + " Reached level " + levelName);

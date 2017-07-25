@@ -91,8 +91,7 @@ public class ProgressGUI : MonoBehaviour {
 	
 	public void PortraitClick(Bird bird)
 	{
-        updateLevels(bird);
-        skillArea.SetActive(false);
+        
         NameText.text = bird.charName;
         Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth);
         bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
@@ -100,8 +99,13 @@ public class ProgressGUI : MonoBehaviour {
 		portraitFill.color = Helpers.Instance.GetEmotionColor(bird.emotion);
         portraitFill.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
         portrait.sprite = bird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
-        UpdateLevelAreas(bird);		
-	}
+        updateLevels(bird);
+        if (!bird.inMap)
+        {            
+            UpdateLevelAreas(bird);
+            skillArea.SetActive(false);
+        }
+    }
 
 
 	public void ShowAllPortraits()

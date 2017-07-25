@@ -97,6 +97,7 @@ public class Bird : MonoBehaviour
     Color HighlightCol;
     public bool dead = false;
     public int birdIndex = 0;
+    public bool hasNewLevel = false;
     void Start()
 	{
         prevRoundHealth = health;
@@ -159,6 +160,8 @@ public class Bird : MonoBehaviour
     }
     public void AddLevel(LevelData data)
     {
+        if(data.emotion != Var.Em.Neutral)
+            hasNewLevel = true;
         lastLevel = data;
         levelList.Add(data);
         level = levelList.Count;       
@@ -282,6 +285,7 @@ public class Bird : MonoBehaviour
     }
     void OnMouseEnter()
     {
+        showText();
         if (isEnemy)
         {
             GetComponent<feedBack>().ShowEnemyHoverText();
@@ -289,12 +293,14 @@ public class Bird : MonoBehaviour
         {
             colorRenderer.color = HighlightCol;
         }
+        if(inMap)
+            ProgressGUI.Instance.PortraitClick(this);
         if (!inMap && !isEnemy && levelUpText != null && !dragged)
             GuiContoler.Instance.ShowLvlText(levelUpText);
     }
 	void OnMouseOver()
 	{
-        showText();
+        
         
         if (isEnemy)
             return;
@@ -582,49 +588,52 @@ public class Bird : MonoBehaviour
 		{
             //Var.birdInfo.text = ToString();           
             GuiContoler.Instance.selectedBird = this;
-            Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(charName, lastLevel.title);
-			Var.birdInfoFeeling.text = emotion.ToString();
-			Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
-			GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
-            //set progress to level bar
-            if (battleCount >= battlesToNextLVL)
+            if (!inMap)
             {
-                battleCount = battlesToNextLVL;
-                Var.powerText.text = "Ready to level up!";
-                levelUpText = CheckLevels(false);
-                Var.powerBar.color = Helpers.Instance.GetSoftEmotionColor(emotion);
-                Var.powerBar.fillAmount = 1;
-            }
-            else
-            {
-                Var.powerBar.color = Color.white;
-                Var.powerText.text = null;
-                Var.powerText.text = "Leveling available in " + (battlesToNextLVL - battleCount) + " battles!";
-                Var.powerBar.fillAmount = (float)battleCount % 3 / (float)3;
-            }
-           
-            int index = 0;
-            GuiContoler.Instance.levelNumberText.text = level.ToString();
-            ///Set level icons
-            foreach(LVLIconScript icon in GuiContoler.Instance.lvlIcons)
-            {
-                if (levelList.Count > index)
+                Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(charName, lastLevel.title);
+                Var.birdInfoFeeling.text = emotion.ToString();
+                Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
+                GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
+                //set progress to level bar
+                if (battleCount >= battlesToNextLVL)
                 {
-                    icon.gameObject.SetActive(true);
-                    icon.GetComponent<Image>().sprite = levelList[index].LVLIcon;
-                    icon.textToDsiplay = levelList[index].levelInfo;                   
+                    battleCount = battlesToNextLVL;
+                    Var.powerText.text = "Ready to level up!";
+                    levelUpText = CheckLevels(false);
+                    Var.powerBar.color = Helpers.Instance.GetSoftEmotionColor(emotion);
+                    Var.powerBar.fillAmount = 1;
                 }
                 else
                 {
-                    icon.gameObject.SetActive(false);
+                    Var.powerBar.color = Color.white;
+                    Var.powerText.text = null;
+                    Var.powerText.text = "Leveling available in " + (battlesToNextLVL - battleCount) + " battles!";
+                    Var.powerBar.fillAmount = (float)battleCount % 3 / (float)3;
                 }
-                index++;
+
+                int index = 0;
+                GuiContoler.Instance.levelNumberText.text = level.ToString();
+                ///Set level icons
+                foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
+                {
+                    if (levelList.Count > index)
+                    {
+                        icon.gameObject.SetActive(true);
+                        icon.GetComponent<Image>().sprite = levelList[index].LVLIcon;
+                        icon.textToDsiplay = levelList[index].levelInfo;
+                    }
+                    else
+                    {
+                        icon.gameObject.SetActive(false);
+                    }
+                    index++;
+                }
             }
         //set emotion bars
         GuiContoler.Instance.confSlider.SetDist(confidence);
         GuiContoler.Instance.firendSlider.SetDist(friendliness);
         //set hearts
-       Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
+        //Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
 
 
 

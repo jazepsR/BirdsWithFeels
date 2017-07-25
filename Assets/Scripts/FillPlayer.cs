@@ -10,6 +10,10 @@ public class FillPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Awake ()
     {
+        if (Var.lvlSprites == null)
+            Var.lvlSprites = Resources.LoadAll<Sprite>("Icons/NewIcons");
+        if (Var.skillIcons == null)
+            Var.skillIcons = Resources.LoadAll<Sprite>("sprites/skill_pictures");
         Instance = this;        
         if (inMap && Var.availableBirds.Count>0)
         {
