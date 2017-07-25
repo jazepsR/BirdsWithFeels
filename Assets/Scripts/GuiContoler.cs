@@ -35,6 +35,7 @@ public class GuiContoler : MonoBehaviour {
 	public Text feedbackText;
 	public GameObject battlePanel;
 	public GameObject closeReportBtn;
+    public Button CloseBattleReport;
 	public GuiMap mapBirdScript;
 	List<Bird> players = new List<Bird>();
 	public bool inMap = false;
@@ -55,7 +56,13 @@ public class GuiContoler : MonoBehaviour {
 	bool CanToggleDeathTriggers = true;
 	Bird SelectedDeathBird = null;
 	Bird DeadBird = null;
+    [HideInInspector]
+    public Bird selectedBird;
 	public Button SelectDeathBirdBtn;
+    int currentGraph = -1;
+    public Button nextGraph;
+    public Button prevGraph;
+    public Button HideSmallGraph;
 	void Start()
 	{
 		if (Var.emotionParticles == null)
@@ -157,7 +164,21 @@ public class GuiContoler : MonoBehaviour {
 		}
 
 	}
-
+    public void ShowNextGraph()
+    {
+        currentGraph++;
+        CreateGraph(currentGraph);
+        ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+        
+        
+    }
+    public void ShowPrevGraph()
+    {
+        currentGraph--;
+        CreateGraph(currentGraph);
+        ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+        
+    }
 
 	public void ShowLvlText(string text)
 	{
@@ -191,7 +212,7 @@ public class GuiContoler : MonoBehaviour {
 			bird.AddRoundBonuses();
 			UpdateBirdSave(bird);
 		}
-		Instance.InitiateGraph();
+		Instance.InitiateGraph(Var.activeBirds[0]);       
 		Instance.CreateBattleReport();
 		rerollBox.SetActive(false);
 	}
@@ -244,6 +265,7 @@ public class GuiContoler : MonoBehaviour {
 			Destroy(child.gameObject);
 		}
 		closeReportBtn.SetActive(false);
+        HideSmallGraph.gameObject.SetActive(true);
 		Reset();
 	}
 	public void CloseBirdStats()
@@ -256,13 +278,24 @@ public class GuiContoler : MonoBehaviour {
 			Destroy(child.gameObject);
 		}
 	}
-	public void CreateGraph()
+	public void CreateGraph(object o)
 	{
-		//graph.SetActive(true);        
-
-		//battlePanel.SetActive(false);
+        foreach (Transform child in graph.transform.Find("ReportGraph").transform)
+        {
+            Destroy(child.gameObject);
+        }
+        int birdNum = (int)o;
+        currentGraph = birdNum;
 		Graph.Instance.portraits = new List<GameObject>();
-		foreach (Bird bird in Var.activeBirds)
+        List<Bird> BirdsToGraph;
+        if (birdNum == -1)
+            BirdsToGraph = Var.activeBirds;
+        else
+            BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
+
+
+
+        foreach (Bird bird in BirdsToGraph)
 		{
 			//Normalize bird stats
 			int treshold = Var.lvl2 - 1;
@@ -289,18 +322,38 @@ public class GuiContoler : MonoBehaviour {
 			winText.text = "";
 			winDetails.text = "";
 		}
-		
-	}
-	public void InitiateGraph()
+        CheckGraphNavBtns();
+    } 
+    
+    void CheckGraphNavBtns()
+    {
+        nextGraph.interactable = (currentGraph < 2);
+        prevGraph.interactable = (currentGraph > 0);
+        CloseBattleReport.interactable = (currentGraph == 2);
+    }
+    public void GraphButton()
+    {
+        InitiateGraph(selectedBird);
+    }
+
+	public void InitiateGraph(Bird bird)
 	{
-		ProgressGUI.Instance.skillArea.SetActive(false);
-		ProgressGUI.Instance.Setup();
-		ProgressGUI.Instance.UpdateAllHearts();
-		ProgressGUI.Instance.UpdateAllLevels();
-		LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph);  
+        int index = -1;
+        for(int i= 0; i < Var.activeBirds.Count; i++)
+        {
+            if(bird.charName == Var.activeBirds[i].charName)
+            {
+                index = i;
+                break;
+            }
+        }
+        ProgressGUI.Instance.PortraitClick(bird);
+        ProgressGUI.Instance.skillArea.SetActive(false);		
+		LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);       
 	}
 	public void CreateBattleReport() {
 		closeReportBtn.SetActive(true);
+        HideSmallGraph.gameObject.SetActive(false);
 		if (finalResult < 0)
 		{
 			UpdateHearts(--Var.health);

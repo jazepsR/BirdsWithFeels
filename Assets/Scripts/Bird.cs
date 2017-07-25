@@ -96,6 +96,7 @@ public class Bird : MonoBehaviour
     Color DefaultCol;
     Color HighlightCol;
     public bool dead = false;
+    public int birdIndex = 0;
     void Start()
 	{
         prevRoundHealth = health;
@@ -579,8 +580,9 @@ public class Bird : MonoBehaviour
 	{
 		if (ToString() != null)
 		{
-			//Var.birdInfo.text = ToString();
-			Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(charName, lastLevel.title);
+            //Var.birdInfo.text = ToString();           
+            GuiContoler.Instance.selectedBird = this;
+            Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(charName, lastLevel.title);
 			Var.birdInfoFeeling.text = emotion.ToString();
 			Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
 			GuiContoler.Instance.PortraitControl(portraitOrder, emotion);

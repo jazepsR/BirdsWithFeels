@@ -49,13 +49,13 @@ public class SliderSwitcher : MonoBehaviour
     {
         if (isConf)
         {
-            PositiveCol = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
-            NegativeCol = Helpers.Instance.GetEmotionColor(Var.Em.Scared);
+            NegativeCol = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
+            PositiveCol = Helpers.Instance.GetEmotionColor(Var.Em.Scared);
         }
         else
         {
-            PositiveCol = Helpers.Instance.GetEmotionColor(Var.Em.Friendly);
-            NegativeCol = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
+            NegativeCol = Helpers.Instance.GetEmotionColor(Var.Em.Friendly);
+            PositiveCol = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
         }
 
     }
@@ -64,16 +64,18 @@ public class SliderSwitcher : MonoBehaviour
     {
         try
         {
-            if (PositiveCol == null)
-        GetColor();
-    if (emotionStr > 0)
-        LeanTween.color(fill.rectTransform, PositiveCol, 0.1f);           
-    else
-        LeanTween.color(fill.rectTransform, NegativeCol, 0.1f);
+        if (PositiveCol == null)
+            GetColor();
+        emotionStr = -emotionStr;
+        if (emotionStr > 0)
+            LeanTween.color(fill.rectTransform, PositiveCol, 0.1f);           
+        else
+            LeanTween.color(fill.rectTransform, NegativeCol, 0.1f);
     
-        float currentVal = _slider.value;
-        num.text = emotionStr.ToString();
-        LeanTween.value(gameObject, SetVal, currentVal, (float)emotionStr, 0.1f);
+        float currentVal = _slider.value;        
+        LeanTween.value(gameObject, SetVal, currentVal, emotionStr, 0.1f);
+        num.text = Mathf.Abs(emotionStr).ToString();
+       
     }catch(Exception ex)
     {
             print(ex.Message);

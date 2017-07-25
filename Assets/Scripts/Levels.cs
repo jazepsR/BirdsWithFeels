@@ -9,18 +9,18 @@ public class Levels : MonoBehaviour {
 	public GameObject Halo;
 	public Vector2 lastSwapPos = new Vector2(-2,-2);
 	private bool TovaActivated = false;
-    
+	
 
 	// Use this for initialization
 	void Start () {        
 		myBird = GetComponent<Bird>();
-        if (Var.lvlSprites == null)
-            Var.lvlSprites = Resources.LoadAll<Sprite>("Icons/NewIcons");
-     
-      
+		if (Var.lvlSprites == null)
+			Var.lvlSprites = Resources.LoadAll<Sprite>("Icons/NewIcons");
+	 
+	  
 
 
-    }
+	}
 	
 	// Update is called once per frame
 	void Update () {

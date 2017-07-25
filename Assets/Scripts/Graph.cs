@@ -9,8 +9,7 @@ public class Graph : MonoBehaviour {
     public GameObject prevHeart;
     public Transform canvas;
     public int graphSize = 275;
-    int multiplier;
-    public Material mat;
+    int multiplier;   
     public static Graph Instance { get; private set; }
     public List<GameObject> portraits;
     // Use this for initialization
@@ -30,20 +29,15 @@ public class Graph : MonoBehaviour {
     {
         
         GameObject preHeart = PlotPoint(prevX, prevY, prevHeart,false);
-        GameObject tempHeart = PlotPoint(currX, currY, portrait,true,Name);
-        LineRenderer lr =preHeart.transform.gameObject.AddComponent<LineRenderer>();
-        lr.sortingOrder = 200;
-        //lr.useWorldSpace = false;
-		lr.SetPosition(0, new Vector3(preHeart.transform.position.x,preHeart.transform.position.y,0));
-		lr.SetPosition(1, new Vector3(tempHeart.transform.position.x,tempHeart.transform.position.y,0));
-        lr.SetWidth(0.045f, 0.045f);     
-        lr.textureMode = LineTextureMode.Tile;
-		lr.widthMultiplier = 3f;
-        lr.material = mat;     
+        GameObject tempHeart = PlotPoint(prevX, prevY, portrait,true,Name);        
+        GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();
+        Vector3 secondPos = new Vector3(-currX * 26.2f, currY * 26.2f, 0);
+       // new Vector3(tempHeart.transform.position.x, tempHeart.transform.position.y, 0);
+        portraitScript.StartGraph(secondPos);       
+    }
+    
 
 
-
-    } 
     GameObject PlotPoint(int x,int y, GameObject obj, bool isPortrait, string name = "" )
     {
         Vector2 corner = graphArea.rectTransform.anchoredPosition;

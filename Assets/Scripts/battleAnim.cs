@@ -65,7 +65,7 @@ public class battleAnim :MonoBehaviour {
                 GuiContoler.Instance.UpdateBirdSave(bird);                
             }
             yield return new WaitForSeconds(1.5f);
-            GuiContoler.Instance.InitiateGraph();
+            GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
             GuiContoler.Instance.CreateBattleReport();
         }
        
