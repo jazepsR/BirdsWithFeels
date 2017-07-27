@@ -399,11 +399,17 @@ public class Helpers : MonoBehaviour {
     public void ShowTooltip(String text)
     {
         GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(true);
+        GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<Image>().enabled = false;
         GuiContoler.Instance.tooltipText.text = text;
         var screenPoint = Input.mousePosition;
         screenPoint.z = 10.0f;
-        screenPoint.x += 10f;
+        //screenPoint.x += 10f;
+        GuiContoler.Instance.tooltipText.color = new Color(0, 0, 0, 0);
+
         GuiContoler.Instance.tooltipText.transform.parent.transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
+        LeanTween.delayedCall(0.05f, GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<tooltipScript>().SetPos);
+
+        
 
     }
     public void HideTooltip()

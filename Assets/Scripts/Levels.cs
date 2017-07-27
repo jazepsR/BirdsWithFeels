@@ -55,8 +55,8 @@ public class Levels : MonoBehaviour {
 			switch (level)
 			{
 				case type.Lonely1:
-					if (myBird.x == -1)
-						break;
+					if ( myBird.x == -1)
+                        break;
 					List<LayoutButton> tileCol = GetColumn();
 					for (int i = 0; i < 4; i++)
 					{
@@ -107,7 +107,7 @@ public class Levels : MonoBehaviour {
 					}
 					break;*/
 				case type.Terry:
-					if (myBird.x == -1)
+					if (myBird.x == -1 )
 						break;
 					List<LayoutButton> tileRow = GetRow();
 					for(int i=0;i<tileRow.Count;i++)
@@ -130,7 +130,7 @@ public class Levels : MonoBehaviour {
 					TovaActivated = true;
 					break;
 				case type.Scared1:
-					if (myBird.x == -1)
+					if (myBird.x == -1 )
 						break;
 					List<LayoutButton> tileDiag = GetDiagonals();
 					for (int i = 0; i < tileDiag.Count; i++)
@@ -174,7 +174,7 @@ public class Levels : MonoBehaviour {
 					}
 					break;
 				case type.Terry:
-					if (myBird.x == -1)
+					if (myBird.x == -1 )
 						break;
 					foreach (LayoutButton tile in GetRow())
 					{
@@ -183,7 +183,7 @@ public class Levels : MonoBehaviour {
 					}
 					break;
 				case type.Scared1:
-					if (myBird.x == -1)
+					if (myBird.x == -1 )
 						break;
 					foreach (LayoutButton tile in GetDiagonals())
 					{
@@ -231,7 +231,7 @@ public class Levels : MonoBehaviour {
 					
 					break;*/
 				case type.Tova:
-					if (myBird.x == -1 || !TovaActivated)
+					if (myBird.x == -1|| !TovaActivated)
 						break;
 					foreach (LayoutButton tile in GetAdjacent())
 					{

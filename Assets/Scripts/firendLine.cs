@@ -21,6 +21,8 @@ public class firendLine : MonoBehaviour {
 
 	public void DrawLines(int x, int y)
 	{
+        if (x < 0 || y < 0)
+            return;
 		DrawLine(y, x + 1,true);
 		DrawLine(y, x - 1,true);
 		DrawLine(y + 1, x + 1,false);
@@ -37,6 +39,8 @@ public class firendLine : MonoBehaviour {
 	{
 		try
 		{
+            if (x < 0 || y < 0)
+                return;
 			if (Var.playerPos[y, x] != null)
 			{
                 

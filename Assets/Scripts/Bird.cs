@@ -673,6 +673,7 @@ public class Bird : MonoBehaviour
         if (!inMap)
         {
             lines.DrawLines(x, y);
+            Debug.Log("x: " + x+ " y: " + y);
             levelControler.ApplyLevelOnDrop(this, levelList);
             UpdateFeedback();          
         }

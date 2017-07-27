@@ -141,6 +141,7 @@ public class LayoutButton : MonoBehaviour
         birdObj.GroundRollBonus += RollBonus;
         birdObj.PlayerRollBonus += PlayerRollBonus;
     }
+
     public void Reset()
     {
         swapBird = null;
@@ -160,6 +161,7 @@ public class LayoutButton : MonoBehaviour
         Bird tempBird = other.transform.parent.GetComponent<Bird>();
         if (tempBird.dragged)
         {
+            //tempBird.target = tempBird.home;
             if (swapBird == null)
             {                
                 currentBird = null;
@@ -167,6 +169,7 @@ public class LayoutButton : MonoBehaviour
             else
             {
                 swapBird = null;
+
             }
         }
     }     
@@ -174,11 +177,20 @@ public class LayoutButton : MonoBehaviour
 
     void Update()
     {
-        hasBird = (currentBird != null);        ;
+       
+        hasBird = (currentBird != null);        
         if (Input.GetMouseButtonUp(0) && currentBird != null )
         {
             if (currentBird.dragged)
             {
+                if ((int)index.x == -1)
+                {
+                    currentBird.target = currentBird.home;
+                    currentBird.ReleseBird((int)index.x, (int)index.y);
+                    currentBird = null;
+                    swapBird = null;
+                    return;
+                }
                 Var.playerPos[(int)index.x, (int)index.y] = currentBird;
                 LeanTween.color(gameObject, baseColor, 0.3f);                
                 currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
@@ -196,12 +208,17 @@ public class LayoutButton : MonoBehaviour
             }
             if(swapBird != null)
             {
-                Var.playerPos[(int)index.x, (int)index.y] = swapBird;
-                currentBird.target = swapBird.target;                
-                if (swapBird.y != -1)
+
+                Var.playerPos[(int)index.x, (int)index.y] = swapBird;               
+                if (swapBird.y != -1 )
                 {
                     ObstacleGenerator.Instance.tiles[swapBird.y * 4 + swapBird.x].currentBird = currentBird;
+                    currentBird.target = swapBird.target;                    
                     Var.playerPos[swapBird.x, swapBird.y] = currentBird;
+                }else
+                {
+                    currentBird.target = currentBird.home;
+                    print("swapped home");
                 }             
                 currentBird.OnLevelPickup();
                 currentBird.ReleseBird(swapBird.x, swapBird.y);
@@ -220,6 +237,11 @@ public class LayoutButton : MonoBehaviour
                 }
             }
             swapBird = null;
+            if (index.x == -1)
+            {
+                currentBird = null;
+                swapBird = null;
+            }
         }
      
     }

@@ -64,70 +64,74 @@ public class feedBack : MonoBehaviour {
 		HideFeedBack();
 		hideBonus = 0.0f;
         //print(birdScript.charName);
-		switch (dir)
-		{
-			case Bird.dir.top:
-				for (int i = 0; i < 4; i++)
-				{
-				   if( Var.playerPos[myIndex, i] != null)
-					{
-						Bird bird = Var.playerPos[myIndex, i];
-						if (bird.isHiding)
-						{
-							hideBonus = hideVal;
-						}
-						else
-						{
-                            PlayerEnemyBird = Var.playerPos[myIndex, i];
-                            ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
-							break;
-						}
-					}
+        
+            switch (dir)
+            {
+                case Bird.dir.top:
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (Var.playerPos[myIndex, i] != null)
+                        {
+                            Bird bird = Var.playerPos[myIndex, i];
+                            if (bird.isHiding)
+                            {
+                                hideBonus = hideVal;
+                            }
+                            else
+                            {
+                                PlayerEnemyBird = Var.playerPos[myIndex, i];
+                                ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
+                                break;
+                            }
+                        }
 
-				}
-					break;
-			case Bird.dir.front:
-				for (int i = 0; i < 4; i++)
-				{
-					
-					if (Var.playerPos[3-i, myIndex] != null)
-					{
-						Bird bird = Var.playerPos[3 - i, myIndex];
-						if (bird.isHiding)
-						{
-							hideBonus = hideVal;
-						}
-						else
-						{
-                            PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
-                            ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
-							break;
-						}
-					}
+                    }
+                    break;
+                case Bird.dir.front:
+                    for (int i = 0; i < 4; i++)
+                    {
 
-				}
-				break;
-			case Bird.dir.bottom:
-				for (int i = 0; i < 4; i++)
-				{
-					if (Var.playerPos[myIndex, 3-i] != null)
-					{
-						Bird bird = Var.playerPos[myIndex, 3 - i];
-						if (bird.isHiding)
-						{
-							hideBonus = hideVal;
-						}
-						else
-						{
-                            PlayerEnemyBird = Var.playerPos[myIndex, 3 - i];
-                            ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, 3 - i], birdScript), Var.playerPos[myIndex, 3 - i]);
-							break;
-						}
-					}
+                        if (Var.playerPos[3 - i, myIndex] != null)
+                        {
+                            Bird bird = Var.playerPos[3 - i, myIndex];
+                            if (bird.isHiding)
+                            {
+                                hideBonus = hideVal;
+                            }
+                            else
+                            {
+                                PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
+                                ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
+                                break;
+                            }
+                        }
 
-				}
-				break;
-		}
+                    }
+                    break;
+                case Bird.dir.bottom:
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (Var.playerPos[myIndex, 3 - i] != null)
+                        {
+                            Bird bird = Var.playerPos[myIndex, 3 - i];
+                            if (bird.isHiding)
+                            {
+                                hideBonus = hideVal;
+                            }
+                            else
+                            {
+                                PlayerEnemyBird = Var.playerPos[myIndex, 3 - i];
+                                ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, 3 - i], birdScript), Var.playerPos[myIndex, 3 - i]);
+                                break;
+                            }
+                        }
+
+                    }
+                    break;
+            }
+        
+        
+
 	}
 
 	public bool CheckResting(Bird bird)

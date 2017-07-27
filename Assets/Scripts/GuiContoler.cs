@@ -499,8 +499,7 @@ public class GuiContoler : MonoBehaviour {
 			if(friendGain<0)
 				Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Lonely);
 
-			bird.friendBoost += friendGain;
-			
+			bird.friendBoost += friendGain;			
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();
 
 		}
