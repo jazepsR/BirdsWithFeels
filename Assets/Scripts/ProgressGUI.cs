@@ -45,7 +45,8 @@ public class ProgressGUI : MonoBehaviour {
 			lvl.Unlock();
 			if (Helpers.Instance.ListContainsLevel(lvl.level, bird.levelList))
 			{
-                lvl.myImage.sprite = lvl.Competed;             
+                lvl.myImage.sprite = lvl.Competed;
+                break;     
 			}
 			if(bird.lastLevel.emotion == lvl.emotion)
 			{

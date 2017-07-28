@@ -31,6 +31,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         myImage = GetComponent<Image>();
         defaultColor = Helpers.Instance.GetEmotionColor(emotion);
         myImage.color = defaultColor;
+        myImage.sprite = Default;
     }
 	
 	// Update is called once per frame
@@ -43,6 +44,8 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (!isLocked)
         {
             LevelNameHolder.text = LevelName;
+            if (myImage.sprite.Equals(Competed))
+                LevelNameHolder.text += " - Completed";
             SkillTextHolder.text = Helpers.Instance.GetLVLInfoText(level);
             ConditionTextHolder.text = "Requirements:\n" + Helpers.Instance.GetLVLRequirements(level);
             LoreTextHolder.text = LoreText;

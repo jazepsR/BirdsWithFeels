@@ -5,7 +5,7 @@ using UnityEngine;
 public class battleAnim :MonoBehaviour {
     public static battleAnim Instance { get; private set; }
     List<battleData> battles = new List<battleData>();
-
+    float enemySpeed = 0.85f;
 
 
 
@@ -22,26 +22,26 @@ public class battleAnim :MonoBehaviour {
     public void Battle()
     {
 
-        StartCoroutine(DoBattles(0.5f));
+        StartCoroutine(DoBattles(1.2f));
     }
 
 
 	void StartBattle(Bird player,Bird enemy)
     {
         
-        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position), 0.85f).setEase(LeanTweenType.easeInBack); 
+        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position), enemySpeed).setEase(LeanTweenType.easeInBack); 
         
 
     }
 
     IEnumerator DoBattles(float waitTime)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.2f);
         foreach (battleData battle in battles)
         {
 
             StartBattle(battle.player,battle.enemy);
-            StartCoroutine(ShowResult(battle, 1.15f));
+            StartCoroutine(ShowResult(battle, 3.05f));
             yield return new WaitForSeconds(waitTime);
         }
         battles = new List<battleData>();
@@ -64,7 +64,7 @@ public class battleAnim :MonoBehaviour {
                 bird.AddRoundBonuses();
                 GuiContoler.Instance.UpdateBirdSave(bird);                
             }
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.7f);
             GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
             GuiContoler.Instance.CreateBattleReport();
         }
@@ -73,8 +73,9 @@ public class battleAnim :MonoBehaviour {
 
     IEnumerator ShowResult(battleData battle,float waitTime)
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(enemySpeed+0.25f);
         ShowBattleResult(battle);
+        yield return new WaitForSeconds(waitTime-(enemySpeed + 0.25f));
     }
 
     void ShowBattleResult(battleData battle)

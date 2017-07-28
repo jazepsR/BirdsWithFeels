@@ -505,7 +505,7 @@ public class Levels : MonoBehaviour {
 			{
 				return "First " + Helpers.Instance.FriendlyHexColor + "Friendly</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Friend1);
 			}
-			if (myBird.prevFriend>= 3  && myBird.wonLastBattle >=1 )
+			if (myBird.friendBoost>= 3  && myBird.wonLastBattle >=1 )
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[0]),"Friendly 1");
 			}
