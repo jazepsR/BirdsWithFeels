@@ -12,6 +12,7 @@ public class Helpers : MonoBehaviour {
     public Color scared;
     public Color friendly;
     public Color lonely;
+    public Color level;
     [Header("Soft colors")]
     public Color softBrave;
     public Color softScared;
@@ -326,6 +327,8 @@ public class Helpers : MonoBehaviour {
                 return brave;
             case Var.Em.SuperScared:
                 return scared;
+            case Var.Em.finish:
+                return level;
             default:
                 return neutral;
         }
@@ -418,7 +421,7 @@ public class Helpers : MonoBehaviour {
     }
 
 
-    public void EmitEmotionParticles(Transform parent,Var.Em emotion)
+    public void EmitEmotionParticles(Transform parent,Var.Em emotion, bool useText= true)
     {
         var emParticles = Instantiate(Var.emotionParticles, parent);
         var particleSys = emParticles.GetComponent<ParticleSystem>().colorOverLifetime;
@@ -427,7 +430,10 @@ public class Helpers : MonoBehaviour {
         grad.SetKeys(new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
         particleSys.color = grad;
         Text text = emParticles.transform.Find("Text").GetComponent<Text>();
+        text.enabled = useText;
         text.text = emotion.ToString().Replace("Super","");
+        if (text.text == "finish")
+            text.text = "Level up!";
         text.color = col;
         LeanTween.moveLocalZ(text.gameObject, 55.0f, 1f);
         LeanTween.scale(text.gameObject, Vector3.one * 2f, 1.2f);

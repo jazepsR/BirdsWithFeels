@@ -98,6 +98,8 @@ public class Bird : MonoBehaviour
     public bool dead = false;
     public int birdIndex = 0;
     public bool hasNewLevel = false;
+    [HideInInspector]
+    public Var.Em prevEmotion;
     void Start()
 	{
         prevRoundHealth = health;
@@ -160,8 +162,12 @@ public class Bird : MonoBehaviour
     }
     public void AddLevel(LevelData data)
     {
-        if(data.emotion != Var.Em.Neutral)
+        if (data.emotion != Var.Em.Neutral)
+        {
             hasNewLevel = true;
+            Helpers.Instance.EmitEmotionParticles(transform, Var.Em.finish);
+            Helpers.Instance.EmitEmotionParticles(transform, data.emotion, false);
+        }
         lastLevel = data;
         levelList.Add(data);
         level = levelList.Count;       
@@ -406,7 +412,7 @@ public class Bird : MonoBehaviour
         if (change > 0)
         {
             GameObject healObj = Instantiate(healParticle, transform);
-            Destroy(healObj, 0.8f);
+            Destroy(healObj, 1.5f);
         }else
         {
             if (Helpers.Instance.ListContainsLevel(Levels.type.Brave2, levelList) && (emotion == Var.Em.Confident || emotion == Var.Em.SuperConfident))
@@ -482,9 +488,7 @@ public class Bird : MonoBehaviour
         {
             consecutiveFightsWon = 0;
             roundsRested++;
-            confidence = confidence - confLoseOnRest;
-            if (health < maxHealth)
-                health++;
+            confidence = confidence - confLoseOnRest;            
         }else
         {
             roundsRested = 0;
@@ -499,10 +503,13 @@ public class Bird : MonoBehaviour
         {
             Debug.Log("fix cooldown rings!");
         }
+        if (!foughtInRound)
+            ChageHealth(1);
         if (health < maxHealth)
         {
             health = Mathf.Min(health + healthBoost, maxHealth);
         }
+
         foughtInRound = false;        
         ConfGainedInRound = confidence - prevConf;
         FriendGainedInRound = friendliness - prevFriend;
@@ -515,6 +522,7 @@ public class Bird : MonoBehaviour
 	public void SetEmotion()
 	{
         float factor = 0.13f;
+        prevEmotion = emotion;
         if (Mathf.Abs((float)confidence)<Var.lvl1 && Mathf.Abs((float)friendliness) < Var.lvl1)
 		{
 			//No type

@@ -101,7 +101,16 @@ public class ProgressGUI : MonoBehaviour {
         
         NameText.text = bird.charName;
         Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth);
-        bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+        if (bird.prevEmotion != bird.emotion)
+        {
+            bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
+            LeanTween.color(bird.portrait.transform.Find("bird_color").gameObject, Helpers.Instance.GetEmotionColor(bird.emotion), 1.35f);
+
+        }
+        else
+        {
+            bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+        }        
         bird.portrait.transform.Find("bird").GetComponent<Image>().color = Color.white;				
 		portraitFill.color = Helpers.Instance.GetEmotionColor(bird.emotion);
         portraitFill.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;

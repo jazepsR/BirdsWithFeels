@@ -56,7 +56,7 @@ public class Levels : MonoBehaviour {
 			{
 				case type.Lonely1:
 					if ( myBird.x == -1)
-                        break;
+						break;
 					List<LayoutButton> tileCol = GetColumn();
 					for (int i = 0; i < 4; i++)
 					{

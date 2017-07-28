@@ -550,8 +550,7 @@ public class GuiContoler : MonoBehaviour {
 		
 		Var.enemies = new Bird[12];
 		foreach (Bird bird in players)
-		{			
-			bird.SetEmotion();
+		{						
 			UpdateBirdSave(bird);		
 			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
 			//bird.gameObject.GetComponent<Animator>().SetBool("lose", false);

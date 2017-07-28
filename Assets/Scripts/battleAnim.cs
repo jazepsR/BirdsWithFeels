@@ -59,12 +59,13 @@ public class battleAnim :MonoBehaviour {
         else
         {
             foreach (Bird bird in FillPlayer.Instance.playerBirds)
-            {
+            {               
                 bird.UpdateBattleCount();
                 bird.AddRoundBonuses();
-                GuiContoler.Instance.UpdateBirdSave(bird);                
+                GuiContoler.Instance.UpdateBirdSave(bird);
+                bird.SetEmotion();
             }
-            yield return new WaitForSeconds(1.7f);
+            yield return new WaitForSeconds(2.4f);
             GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
             GuiContoler.Instance.CreateBattleReport();
         }
@@ -97,6 +98,7 @@ public class battleAnim :MonoBehaviour {
             // enemy.GetComponent<Animator>().SetBool("victory", true);
 
         }
+        
     }
 }
 
