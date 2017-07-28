@@ -63,6 +63,11 @@ public class GuiContoler : MonoBehaviour {
     public Button nextGraph;
     public Button prevGraph;
     public Button HideSmallGraph;
+
+    public float levelInfo_yvalue;
+    public float levelinfoHideXValue;
+    public float levelinfoshowXValue;
+
 	void Start()
 	{
         
@@ -183,21 +188,21 @@ public class GuiContoler : MonoBehaviour {
 
 	public void ShowLvlText(string text)
 	{
-		BirdLVLUpText.text = text;        
-		//BirdLVLUpText.transform.parent.gameObject.SetActive(true);
-		LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject,new Vector3(-30,-220,0),0.3f).setEase(LeanTweenType.easeOutBack);
+		BirdLVLUpText.text = text;
+        //BirdLVLUpText.transform.parent.gameObject.SetActive(true);30
+        LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject,new Vector3(levelinfoshowXValue,levelInfo_yvalue,0),0.3f).setEase(LeanTweenType.easeOutBack);
 
-	}
+    }
 
 	public void HideLvlText()
 	{
 		//BirdLVLUpText.text = "";
-		LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(-340, -220, 0), 0.3f).setEase(LeanTweenType.easeInBack);
-		//BirdLVLUpText.transform.parent.gameObject.SetActive(false);
+		LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoHideXValue, levelInfo_yvalue, 0), 0.3f).setEase(LeanTweenType.easeInBack);
+        //BirdLVLUpText.transform.parent.gameObject.SetActive(false);-340
 
-	}
+    }
 
-	void UpdateHearts(int health)
+    void UpdateHearts(int health)
 	{
 		Debug.Log("Health: " + health);
 		for(int i=0;i< hearts.Length; i++)
