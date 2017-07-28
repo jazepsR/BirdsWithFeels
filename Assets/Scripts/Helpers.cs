@@ -209,21 +209,21 @@ public class Helpers : MonoBehaviour {
         switch (type)
         {
             case Levels.type.Brave1:
-                return "<name> has grown strong, but that dosen't mean he has forgotten about his teammates! <name> has decided to protect them whenever he can!".Replace("<name>", name);
+                return "<name> has grown strong, but that dosen't mean <name> has forgotten about his teammates! <name> has decided to protect them whenever possible!".Replace("<name>", name);
             case Levels.type.Brave2:
-                return "There's no stopping <name> now! Nothing can hurt him! (As long as he remains sure of himself, that is)".Replace("<name>", name);
+                return "There's no stopping <name> now! Nothing can hurt this bird! (As long as <name> remains sure of this, that is)".Replace("<name>", name);
             case Levels.type.Friend1:
-                return "<name> is really getting along with his fellow birds! <name> will now be able to help them recover from injuries!".Replace("<name>", name);
+                return "<name> is really getting along with the other! <name> will now be able to help them recover from injuries!".Replace("<name>", name);
             case Levels.type.Friend2:
-                return "<name> has found a way to help his friends even more! They will surely appreciate getting healed after adventures!".Replace("<name>", name);
+                return "<name> has found a way to help all the bird friends even more! They will surely appreciate getting healed after adventures!".Replace("<name>", name);
             case Levels.type.Lonely1:
-                return "<name> feels like the other birds have forgotten about him. Fine! <name> won't talk to them either! Other birds will feel more lonely near him.".Replace("<name>", name);
+                return "<name> feels like the other birds have forgotten about him. Fine! <name> won't talk to them either! Other birds will feel more lonely near <name>.".Replace("<name>", name);
             case Levels.type.Lonely2:
-                return "All this alone was a great chance for <name> to do some serious studying! <name> can't wait to try out the new skills he has learned!".Replace("<name>", name);
+                return "All this alone was a great chance for <name> to do some serious studying! <name> can't wait to try out all these new, strange skills!".Replace("<name>", name);
             case Levels.type.Scared1:
-                return "Looks like brute force isn't the answer for <name>! But <name> has found a way to help his team by weakening the enemy!".Replace("<name>", name);
+                return "Looks like brute force isn't the answer for <name>! But <name> has found a way to help the team by weakening the enemy!".Replace("<name>", name);
             case Levels.type.Scared2:
-                return "Direct combat is definetelly not for <name>! He prefers to attack his enemies from behind and let his teammates finish the job!".Replace("<name>", name);
+                return "Direct combat is definetelly not for <name>! Rather, <name> will attack the enemies from behind and let the others finish the job!".Replace("<name>", name);
             default:
                 return "Error in level up text";        
         }
