@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Sprite Competed;
+    public Sprite Completed;
     public Sprite Default;
 	public string LevelName;
 	public Sprite skillImage;    
@@ -25,7 +25,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     Color defaultColor;
     [HideInInspector]
     public Image myImage;
-    public GameObject lockObj;
+    public bool isSmall = false;
 	// Use this for initialization
 	void Start () {
         myImage = GetComponent<Image>();
@@ -41,10 +41,10 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 	public void OnPointerEnter(PointerEventData eventData)
 	{
         ProgressGUI.Instance.skillArea.SetActive(true);
-        if (!isLocked)
+        //if (!isLocked)
         {
             LevelNameHolder.text = LevelName;
-            if (myImage.sprite.Equals(Competed))
+            if (myImage.sprite.Equals(Completed))
                 LevelNameHolder.text += " - Completed";
             SkillTextHolder.text = Helpers.Instance.GetLVLInfoText(level);
             ConditionTextHolder.text = "Requirements:\n" + Helpers.Instance.GetLVLRequirements(level);
@@ -65,16 +65,12 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void Lock()
     {
-        isLocked = true;
-        if (lockObj != null)
-            lockObj.SetActive(true);
+        isLocked = true;       
         myImage.color = Color.black;
     }
     public void Unlock()
     {
-        isLocked = false;
-        if(lockObj!= null)
-            lockObj.SetActive(false);
+        isLocked = false;       
         myImage.color = defaultColor;
     }
 }

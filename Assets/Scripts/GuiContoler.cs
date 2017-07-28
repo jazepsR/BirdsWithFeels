@@ -419,6 +419,7 @@ public class GuiContoler : MonoBehaviour {
 	
 	public void Fight()
 	{
+        GameLogic.Instance.FightButton.gameObject.SetActive(false);
 		feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
 		foreach (feedBack fb in feedBackObj)
 		{

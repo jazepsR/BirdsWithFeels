@@ -45,9 +45,15 @@ public class ProgressGUI : MonoBehaviour {
 			lvl.Unlock();
 			if (Helpers.Instance.ListContainsLevel(lvl.level, bird.levelList))
 			{
-                lvl.myImage.sprite = lvl.Competed;
-                break;     
-			}
+                lvl.myImage.sprite = lvl.Completed;
+                if(lvl.gameObject.GetComponent<LevelArea>().isSmall)
+                    lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(75, 525);
+                break;
+            }else
+            {
+                if (lvl.gameObject.GetComponent<LevelArea>().isSmall)
+                    lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 650);
+            }
 			if(bird.lastLevel.emotion == lvl.emotion)
 			{
 				lvl.gameObject.SetActive(false);
