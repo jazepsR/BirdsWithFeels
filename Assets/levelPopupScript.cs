@@ -41,13 +41,13 @@ public class levelPopupScript : MonoBehaviour {
         //First part
         if (data.emotion == Var.Em.Scared || data.emotion == Var.Em.Lonely)
         {
-            firstImage.sprite = heart;
-            firstText.text = name + " gained +1 health!";
+            firstImage.sprite = sword;
+            firstText.text = name + " gained +10% combat strength!";
         }
         else
         {
-            firstImage.sprite = sword;
-            firstText.text = name + " gained +10% combat strength!";
+            firstImage.sprite = heart;
+            firstText.text = name + " gained +1 health!";
         }
         //second part
         secondText.text = Helpers.Instance.GetLevelUpText(name, data.type);
