@@ -633,7 +633,7 @@ public class Bird : MonoBehaviour
         GuiContoler.Instance.confSlider.SetDist(confidence);
         GuiContoler.Instance.firendSlider.SetDist(friendliness);
         //set hearts
-        //Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
+        Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
 
 
 
