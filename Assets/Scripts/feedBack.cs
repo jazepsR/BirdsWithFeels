@@ -63,10 +63,10 @@ public class feedBack : MonoBehaviour {
 
 	public void RefreshFeedback()
 	{
-		HideFeedBack(false);
+		
 		hideBonus = 0.0f;
         //print(birdScript.charName);
-        
+        bool hasFeedback = false;
             switch (dir)
             {
                 case Bird.dir.top:
@@ -83,6 +83,7 @@ public class feedBack : MonoBehaviour {
                             {
                                 PlayerEnemyBird = Var.playerPos[myIndex, i];
                                 ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
+                                hasFeedback = true;
                                 break;
                             }
                         }
@@ -104,6 +105,7 @@ public class feedBack : MonoBehaviour {
                             {
                                 PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
                                 ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
+                                hasFeedback = true;
                                 break;
                             }
                         }
@@ -124,6 +126,7 @@ public class feedBack : MonoBehaviour {
                             {
                                 PlayerEnemyBird = Var.playerPos[myIndex, 3 - i];
                                 ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, 3 - i], birdScript), Var.playerPos[myIndex, 3 - i]);
+                                hasFeedback = true;
                                 break;
                             }
                         }
@@ -131,10 +134,12 @@ public class feedBack : MonoBehaviour {
                     }
                     break;
             }
-        
-        
+        if(!hasFeedback)
+            HideFeedBack(false);
 
-	}
+
+
+    }
 
 	public bool CheckResting(Bird bird)
 	{
@@ -223,6 +228,7 @@ public class feedBack : MonoBehaviour {
 		//feedBackText.text = ((int)(value*100)).ToString("+#;-#;0") +" %";
 		feedBackText.text =(Mathf.Ceil(value * 100)).ToString("0") + " %";
 	}
+    
 	public void HideFeedBack(bool forFight)
 	{
         if (forFight) {
