@@ -108,7 +108,7 @@ public class ProgressGUI : MonoBehaviour {
         NameText.text = bird.charName;
         Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth);
         portraitFill.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
-        if (bird.prevEmotion != bird.emotion)
+        if (bird.prevEmotion != bird.emotion && !bird.inMap)
         {
             LeanTween.scale(portrait.transform.parent.GetComponent<RectTransform>(), Vector3.one*1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownPortrait);
             portraitFill.color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
