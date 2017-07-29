@@ -427,7 +427,7 @@ public class GuiContoler : MonoBehaviour {
 		feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
 		foreach (feedBack fb in feedBackObj)
 		{
-			fb.HideFeedBack();
+			fb.HideFeedBack(true);
 		}
 		Debug.Log("Fight selected");
 		int result = 0;

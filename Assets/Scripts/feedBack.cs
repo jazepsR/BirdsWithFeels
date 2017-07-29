@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class feedBack : MonoBehaviour {
-	public TextMesh feedBackText;  
+	public TextMesh feedBackText;
+    public TextMesh LvlIndicatorText;
+    public SpriteRenderer BelowBirdIndicator;
 	public Bird birdScript;
     [HideInInspector]
     public Bird PlayerEnemyBird = null;
@@ -13,15 +15,15 @@ public class feedBack : MonoBehaviour {
 	public int myIndex;
 	string toolTipText;
     battleFeedback myBattleFeedback;
+    Vector3 scale;  
 	// Use this for initialization
 	void Awake () {
+        scale= BelowBirdIndicator.transform.localScale;
         myBattleFeedback = feedBackText.gameObject.GetComponent<battleFeedback>();
         myBattleFeedback.fb = this;		
 		dir = birdScript.position;
-		feedBackText.transform.localScale = Vector3.zero;
-        
-		
-	}
+		feedBackText.transform.localScale = Vector3.zero;       
+    }
 
 	//checks if the enemy has an opponent
 	public bool CheckOpponent()
@@ -55,13 +57,13 @@ public class feedBack : MonoBehaviour {
 				}
 
 			}
-		}
+		}        
 		return canfight;
 	}
 
 	public void RefreshFeedback()
 	{
-		HideFeedBack();
+		HideFeedBack(false);
 		hideBonus = 0.0f;
         //print(birdScript.charName);
         
@@ -182,15 +184,22 @@ public class feedBack : MonoBehaviour {
 
 	public void SetEnemyHoverText()
 	{
-		string name = Helpers.Instance.GetName(Helpers.Instance.RandomBool());
-		string strength = "None";
+        BelowBirdIndicator.gameObject.SetActive(true);
+        BelowBirdIndicator.color = new Color(1, 1, 1, 0.5f);        
+        string name = Helpers.Instance.GetName(Helpers.Instance.RandomBool());
+        LvlIndicatorText.text = (birdScript.levelRollBonus + 1).ToString();
+        string strength = "None";
 		string weakness = "All";
 		if (Helpers.Instance.GetStenght(birdScript.emotion) != Var.Em.Neutral)
-			strength = Helpers.Instance.GetStenght(birdScript.emotion).ToString();
-		if (Helpers.Instance.GetWeakness(birdScript.emotion) != Var.Em.Neutral)
-			weakness = Helpers.Instance.GetWeakness(birdScript.emotion).ToString();
-		toolTipText = name + "- " + birdScript.emotion + "\nLevel " + (birdScript.levelRollBonus+1).ToString() + "\n Weak to: " + weakness + "\nStrong against: " + strength; 
+			strength = Helpers.Instance.GetHexColor(Helpers.Instance.GetStenght(birdScript.emotion)) + Helpers.Instance.GetStenght(birdScript.emotion).ToString() + "</color>";
+        if (Helpers.Instance.GetWeakness(birdScript.emotion) != Var.Em.Neutral)
+            weakness = Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(birdScript.emotion)) + Helpers.Instance.GetWeakness(birdScript.emotion).ToString() + "</color>";
+		toolTipText = name + "- " + birdScript.emotion + "\nStrength " + (birdScript.levelRollBonus+1).ToString() + "\n Weak to: " + weakness + "\nStrong against: " + strength; 
 	}
+    void ScaleDownIndicator()
+    {
+        LeanTween.scale(BelowBirdIndicator.gameObject, scale, 0.2f).setEase(LeanTweenType.easeInBack);       
+    }
 	public void ShowEnemyHoverText()
 	{
         Helpers.Instance.ShowTooltip(toolTipText);
@@ -198,7 +207,12 @@ public class feedBack : MonoBehaviour {
 	
 	public void ShowFeedback(float value,Bird bird)
 	{
-		bird.fighting = true;
+        if (!BelowBirdIndicator.color.Equals(new Color(0.5f, 0, 0, 1f)))
+        {          
+            BelowBirdIndicator.color = new Color(0.5f, 0, 0, 1f);
+            LeanTween.scale(BelowBirdIndicator.gameObject, scale * 1.2f, 0.15f).setEase(LeanTweenType.easeOutCubic).setOnComplete(ScaleDownIndicator);
+        }
+        bird.fighting = true;
 		feedBackText.gameObject.SetActive(true);
 		//float colorIndex = (value + 4.0f) / 8;
 		value = Mathf.Clamp01(value+hideBonus);
@@ -209,9 +223,21 @@ public class feedBack : MonoBehaviour {
 		//feedBackText.text = ((int)(value*100)).ToString("+#;-#;0") +" %";
 		feedBackText.text =(Mathf.Ceil(value * 100)).ToString("0") + " %";
 	}
-	public void HideFeedBack()
+	public void HideFeedBack(bool forFight)
 	{
-		LeanTween.scale(feedBackText.gameObject, Vector3.zero, 0.3f).setEase(LeanTweenType.easeInOutBack);
+        if (forFight) {
+            BelowBirdIndicator.gameObject.SetActive(false);
+        } else
+        {
+            if (!BelowBirdIndicator.color.Equals(new Color(1, 1, 1, 0.5f)) )
+            {
+                             
+                BelowBirdIndicator.color = new Color(1, 1, 1, 0.5f);
+                LeanTween.scale(BelowBirdIndicator.gameObject, scale * 1.2f, 0.15f).setEase(LeanTweenType.easeOutCubic).setOnComplete(ScaleDownIndicator);
+            }
+        }
+
+        LeanTween.scale(feedBackText.gameObject, Vector3.zero, 0.3f).setEase(LeanTweenType.easeInOutBack);
 
 	}
 

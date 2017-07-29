@@ -70,7 +70,30 @@ public class Helpers : MonoBehaviour {
         }  
     }
 
-
+    public String GetHexColor(Var.Em emotion)
+    {
+        switch (emotion)
+        {
+            case Var.Em.Friendly:
+                return FriendlyHexColor;
+            case Var.Em.Lonely:
+                return LonelyHexColor;
+            case Var.Em.Confident:
+                return BraveHexColor;
+            case Var.Em.Scared:
+                return ScaredHexColor;
+            case Var.Em.SuperFriendly:
+                return FriendlyHexColor;
+            case Var.Em.SuperLonely:
+                return LonelyHexColor;
+            case Var.Em.SuperConfident:
+                return BraveHexColor;
+            case Var.Em.SuperScared:
+                return ScaredHexColor;
+            default:
+                return "<color=#FFFFFFFF>";
+        }
+    }
 
     //Neutral means weak to all
     public Var.Em GetWeakness(Var.Em Emotion)

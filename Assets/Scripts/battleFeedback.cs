@@ -35,9 +35,9 @@ public class battleFeedback : MonoBehaviour {
         if (Helpers.Instance.IsSuper(fb.PlayerEnemyBird.emotion))
             text += "Player bird has super emotion +10%\n";
         if (fb.PlayerEnemyBird.levelRollBonus >= 1)
-            text += "Player level bonus +" + (fb.PlayerEnemyBird.levelRollBonus) * 10 + "%\n";
+            text += "Player strength bonus +" + (fb.PlayerEnemyBird.levelRollBonus) * 10 + "%\n";
         if (fb.birdScript.levelRollBonus >= 1)
-            text += "Enemy level bonus -" +(fb.birdScript.levelRollBonus) * 10 + "%\n";
+            text += "Enemy strength bonus -" +(fb.birdScript.levelRollBonus) * 10 + "%\n";
         if (fb.birdScript.PlayerRollBonus != 0)
             text += "Enemy affected by player birds " + (-10*fb.birdScript.PlayerRollBonus).ToString("+#;-#;0") + "%\n";
         if (fb.PlayerEnemyBird.PlayerRollBonus != 0)
