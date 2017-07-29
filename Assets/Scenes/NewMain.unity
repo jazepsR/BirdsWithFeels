@@ -775,6 +775,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!114 &74870158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,6 +847,80 @@ Transform:
   m_Father: {fileID: 742526310}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &86211497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 86211500}
+  - component: {fileID: 86211499}
+  - component: {fileID: 86211498}
+  m_Layer: 5
+  m_Name: NewEmotionText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &86211498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86211497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 1, b: 0.21379304, a: 0}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: c28fc040b51eb6747babc25b4a24e2be, type: 3}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 5
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: New Emotion!
+--- !u!222 &86211499
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86211497}
+--- !u!224 &86211500
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 86211497}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -78.413055}
+  m_LocalScale: {x: 0.7859822, y: 0.7859822, z: 0.7859822}
+  m_Children: []
+  m_Father: {fileID: 1897043798}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0002593994, y: 0}
+  m_SizeDelta: {x: 289, y: 114}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &88078714
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,8 +1087,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 102}
-  m_SizeDelta: {x: 784, y: 1001}
+  m_AnchoredPosition: {x: 25, y: 93}
+  m_SizeDelta: {x: 625, y: 983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &98394383
 MonoBehaviour:
@@ -3565,6 +3640,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!114 &337799188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4100,7 +4176,7 @@ MonoBehaviour:
   confidence: -2
   prevConf: 0
   prevFriend: 0
-  friendliness: 10
+  friendliness: 3
   health: 2
   foughtInRound: 0
   maxHealth: 3
@@ -4155,6 +4231,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 1
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!114 &374855093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4885,6 +4962,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!114 &447389851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5383,8 +5461,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 93}
-  m_SizeDelta: {x: 784, y: 983}
+  m_AnchoredPosition: {x: 25, y: 93}
+  m_SizeDelta: {x: 625, y: 983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &508336593
 MonoBehaviour:
@@ -5613,6 +5691,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!114 &528858649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6093,7 +6172,7 @@ Prefab:
     - target: {fileID: 212184342151547402, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
       propertyPath: m_SortingOrder
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114103609833307576, guid: babf754960e842241bec1ccf202a8bdc,
         type: 2}
@@ -6101,6 +6180,14 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 3b1363d45a3c2884e8281c54ca0ee25f,
         type: 3}
+    - target: {fileID: 4720317112469764, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.468
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720317112469764, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.971
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 61434917505000786, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
     - {fileID: 114902795298895362, guid: babf754960e842241bec1ccf202a8bdc, type: 2}
@@ -6501,6 +6588,7 @@ MonoBehaviour:
   dead: 1
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!95 &586281147
 Animator:
   serializedVersion: 3
@@ -6571,7 +6659,7 @@ Prefab:
     - target: {fileID: 212666934569472274, guid: 358e9ce7dd7f08c41a6640ec1ecdd027,
         type: 2}
       propertyPath: m_SortingOrder
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 358e9ce7dd7f08c41a6640ec1ecdd027, type: 2}
@@ -6916,7 +7004,7 @@ Prefab:
     - target: {fileID: 212666934569472274, guid: 358e9ce7dd7f08c41a6640ec1ecdd027,
         type: 2}
       propertyPath: m_SortingOrder
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 358e9ce7dd7f08c41a6640ec1ecdd027, type: 2}
@@ -8233,6 +8321,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!95 &740823788
 Animator:
   serializedVersion: 3
@@ -8854,8 +8943,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 95}
-  m_SizeDelta: {x: 784, y: 986}
+  m_AnchoredPosition: {x: 25, y: 93}
+  m_SizeDelta: {x: 625, y: 983}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &779832951
 MonoBehaviour:
@@ -9994,6 +10083,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!114 &844413167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11192,7 +11282,7 @@ RectTransform:
   m_Children:
   - {fileID: 1207123098}
   m_Father: {fileID: 1940004867}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11384,16 +11474,16 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1017033363}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.39, y: 0.39, z: 1.3}
   m_Children: []
-  m_Father: {fileID: 1897043798}
-  m_RootOrder: 3
+  m_Father: {fileID: 1973958107}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 20, y: 104.9}
+  m_AnchoredPosition: {x: -127, y: 576.37}
   m_SizeDelta: {x: 696.2, y: 193.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1017033365
@@ -11905,6 +11995,26 @@ Prefab:
         type: 2}
       propertyPath: m_FontData.m_FontSize
       value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 224825355883547860, guid: c13f394998404184a94558f18be765f5,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -119.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 224825355883547860, guid: c13f394998404184a94558f18be765f5,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 227
+      objectReference: {fileID: 0}
+    - target: {fileID: 224825355883547860, guid: c13f394998404184a94558f18be765f5,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 130.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 224825355883547860, guid: c13f394998404184a94558f18be765f5,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 121
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c13f394998404184a94558f18be765f5, type: 2}
@@ -12854,21 +12964,21 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1081253354}
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
+  m_LocalScale: {x: 0.97500056, y: 0.97500056, z: 1.3}
   m_Children:
   - {fileID: 1515785011}
   - {fileID: 1058315195}
   - {fileID: 183983107}
   - {fileID: 470860848}
   - {fileID: 1678659536}
-  m_Father: {fileID: 1897043798}
-  m_RootOrder: 4
+  m_Father: {fileID: 1973958107}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 126.2, y: 50}
+  m_AnchoredPosition: {x: 11.060059, y: 505}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1083948813
@@ -16336,6 +16446,7 @@ MonoBehaviour:
   dead: 1
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!95 &1491584172
 Animator:
   serializedVersion: 3
@@ -18163,6 +18274,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!114 &1660394610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18760,6 +18872,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!114 &1676613503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19487,6 +19600,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!114 &1699966607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21274,6 +21388,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!95 &1862539792
 Animator:
   serializedVersion: 3
@@ -21513,6 +21628,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!95 &1873808335
 Animator:
   serializedVersion: 3
@@ -21787,6 +21903,7 @@ MonoBehaviour:
   - {fileID: 1941129590}
   - {fileID: 307894436}
   - {fileID: 1700706124}
+  newEmotion: {fileID: 86211498}
 --- !u!1 &1897043797
 GameObject:
   m_ObjectHideFlags: 0
@@ -21814,15 +21931,14 @@ RectTransform:
   m_GameObject: {fileID: 1897043797}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.3, y: 1.3, z: 1.0000001}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_Children:
   - {fileID: 953262327}
   - {fileID: 216224342}
   - {fileID: 720954091}
-  - {fileID: 1017033364}
-  - {fileID: 1081253355}
+  - {fileID: 86211500}
   m_Father: {fileID: 1973958107}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22429,8 +22545,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 761043854}
-  - {fileID: 1973958107}
   - {fileID: 991381646}
+  - {fileID: 1973958107}
   m_Father: {fileID: 310613068}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22911,7 +23027,7 @@ RectTransform:
   m_LocalScale: {x: 1.0217768, y: 1.0217768, z: 1.0217768}
   m_Children: []
   m_Father: {fileID: 1973958107}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -23088,10 +23204,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.24992, y: 1.24992, z: 1.24992}
   m_Children:
+  - {fileID: 1017033364}
   - {fileID: 1897043798}
   - {fileID: 1962559721}
+  - {fileID: 1081253355}
   m_Father: {fileID: 1940004867}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -23282,6 +23400,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 0
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!95 &1996505567
 Animator:
   serializedVersion: 3
@@ -23886,7 +24005,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 981821999}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -24638,10 +24757,10 @@ MonoBehaviour:
   birdBio: 
   birdAbility: 
   portraitOrder: 2
-  confidence: 8
+  confidence: 0
   prevConf: 0
   prevFriend: 0
-  friendliness: 2
+  friendliness: 3
   health: 3
   foughtInRound: 0
   maxHealth: 5
@@ -24696,6 +24815,7 @@ MonoBehaviour:
   dead: 0
   birdIndex: 2
   hasNewLevel: 0
+  prevEmotion: 0
 --- !u!114 &2101874053
 MonoBehaviour:
   m_ObjectHideFlags: 0

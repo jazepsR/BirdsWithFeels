@@ -14,6 +14,7 @@ public class ProgressGUI : MonoBehaviour {
 	public GameObject skillArea;
     public RectTransform lvlListParent;
     public levelElementFill[] lvlListElements;
+    public Text newEmotion;
     
 	// Use this for initialization
 	void Start () {
@@ -94,26 +95,36 @@ public class ProgressGUI : MonoBehaviour {
        
     }
 
-
+    public void scaleDownPortrait()
+    {
+        LeanTween.scale(portrait.transform.parent.GetComponent<RectTransform>(), Vector3.one*1.3f, 1f).setEase(LeanTweenType.easeInBack);
+        LeanTween.textAlpha(newEmotion.rectTransform, 0.0f, 2.5f);
+        LeanTween.scale(newEmotion.rectTransform, Vector3.one * 2.3f, 2.5f).setEase(LeanTweenType.easeInOutQuad);
+    }
 	
 	public void PortraitClick(Bird bird)
 	{
         
         NameText.text = bird.charName;
         Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth);
+        portraitFill.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
         if (bird.prevEmotion != bird.emotion)
         {
+            LeanTween.scale(portrait.transform.parent.GetComponent<RectTransform>(), Vector3.one*1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownPortrait);
+            portraitFill.color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
             bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
-            LeanTween.color(bird.portrait.transform.Find("bird_color").gameObject, Helpers.Instance.GetEmotionColor(bird.emotion), 1.35f);
+            LeanTween.color(portraitFill.rectTransform, Helpers.Instance.GetEmotionColor(bird.emotion), 2.25f);                      
+            Debug.Log("had emotional change! From: " + bird.prevEmotion.ToString()+ " to: " + bird.emotion.ToString());
+            newEmotion.color = Helpers.Instance.GetEmotionColor(bird.emotion);
+            newEmotion.rectTransform.localScale = Vector3.one;
 
         }
         else
         {
             bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+            portraitFill.color = Helpers.Instance.GetEmotionColor(bird.emotion);
         }        
-        bird.portrait.transform.Find("bird").GetComponent<Image>().color = Color.white;				
-		portraitFill.color = Helpers.Instance.GetEmotionColor(bird.emotion);
-        portraitFill.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+        bird.portrait.transform.Find("bird").GetComponent<Image>().color = Color.white;		
         portrait.sprite = bird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
         updateLevels(bird);
         if (!bird.inMap)
@@ -124,7 +135,7 @@ public class ProgressGUI : MonoBehaviour {
     }
 
 
-	public void ShowAllPortraits()
+	/*public void ShowAllPortraits()
 	{
 		skillArea.SetActive(false);
 		for (int i = 0; i < 3; i++)
@@ -139,7 +150,7 @@ public class ProgressGUI : MonoBehaviour {
 				level.gameObject.SetActive(false);
 			}
 		}      
-	}
+	}*/
  
 	
 

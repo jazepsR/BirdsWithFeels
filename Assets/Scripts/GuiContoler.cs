@@ -177,12 +177,16 @@ public class GuiContoler : MonoBehaviour {
         ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
         
         
+        
+        
     }
     public void ShowPrevGraph()
     {
         currentGraph--;
         CreateGraph(currentGraph);
         ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+        
+       
         
     }
 
@@ -330,8 +334,8 @@ public class GuiContoler : MonoBehaviour {
 
 			GameObject portrait = bird.portrait;
 			GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
-			colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
-			Graph.Instance.PlotFull(bird.prevFriend, bird.prevConf, bird.friendliness, bird.confidence, portrait, bird.charName);
+			//colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+			Graph.Instance.PlotFull(bird);
 			feedbackText.text = "";
 			winText.text = "";
 			winDetails.text = "";

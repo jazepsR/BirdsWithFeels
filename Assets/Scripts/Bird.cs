@@ -99,7 +99,7 @@ public class Bird : MonoBehaviour
     public int birdIndex = 0;
     public bool hasNewLevel = false;
     [HideInInspector]
-    public Var.Em prevEmotion;
+    public Var.Em prevEmotion=  Var.Em.finish;
     void Start()
 	{
         prevRoundHealth = health;
@@ -135,6 +135,7 @@ public class Bird : MonoBehaviour
             LoadStats();
         }
 		target = transform.position;
+        prevEmotion = Var.Em.finish;
 		SetEmotion();
         if(!isEnemy && !inMap)
             showText();
@@ -411,8 +412,11 @@ public class Bird : MonoBehaviour
     {
         if (change > 0)
         {
-            GameObject healObj = Instantiate(healParticle, transform);
-            Destroy(healObj, 1.5f);
+            if (health != maxHealth)
+            {
+                GameObject healObj = Instantiate(healParticle, transform);
+                Destroy(healObj, 1.5f);
+            }
         }else
         {
             if (Helpers.Instance.ListContainsLevel(Levels.type.Brave2, levelList) && (emotion == Var.Em.Confident || emotion == Var.Em.SuperConfident))
@@ -519,15 +523,21 @@ public class Bird : MonoBehaviour
         ResetBonuses();                
     }
 
-	public void SetEmotion()
+    public void SetEmotion()
 	{
         float factor = 0.13f;
+        float transitionTime = 1.9f;
+        if (prevEmotion.Equals( Var.Em.finish)|| isEnemy)
+        {
+            transitionTime = 0.0f;
+        }
         prevEmotion = emotion;
         if (Mathf.Abs((float)confidence)<Var.lvl1 && Mathf.Abs((float)friendliness) < Var.lvl1)
 		{
 			//No type
 			emotion = Var.Em.Neutral;
-			colorRenderer.color = Helpers.Instance.neutral;
+            LeanTween.color(colorRenderer.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
+			//colorRenderer.color = Helpers.Instance.neutral;
             DefaultCol = Helpers.Instance.GetEmotionColor(emotion);            
             HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g + factor, DefaultCol.b + factor);
             return;
@@ -538,7 +548,7 @@ public class Bird : MonoBehaviour
 			// Confident or sad
 			if (confidence > 0)
 			{
-				colorRenderer.color = Helpers.Instance.brave;
+				//colorRenderer.color = Helpers.Instance.brave;
 				//Confident
 				if (confidence >= Var.lvl1)
 					emotion = Var.Em.Confident;
@@ -549,7 +559,7 @@ public class Bird : MonoBehaviour
 			else
 			{
 				//Scared
-				colorRenderer.color = Helpers.Instance.scared;
+				//colorRenderer.color = Helpers.Instance.scared;
 			   if (confidence <= -Var.lvl1)
 					emotion = Var.Em.Scared;
 				//SuperScared
@@ -565,7 +575,7 @@ public class Bird : MonoBehaviour
 			{
 
 				//friendly
-				colorRenderer.color = Helpers.Instance.friendly;
+				//colorRenderer.color = Helpers.Instance.friendly;
 				if (friendliness >= Var.lvl1)
 					emotion = Var.Em.Friendly;
 				//SuperFriendly
@@ -575,7 +585,7 @@ public class Bird : MonoBehaviour
 			else
 			{
 				//Lonely
-				colorRenderer.color = Helpers.Instance.lonely;
+				//colorRenderer.color = Helpers.Instance.lonely;
 				if (friendliness <= -Var.lvl1)
 					emotion = Var.Em.Lonely;
 				//SuperLonely
@@ -584,6 +594,7 @@ public class Bird : MonoBehaviour
 			}
 
 		}
+        LeanTween.color(colorRenderer.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
         DefaultCol = Helpers.Instance.GetEmotionColor(emotion);        
         HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g +factor, DefaultCol.b + factor);
 

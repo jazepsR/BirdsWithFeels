@@ -25,20 +25,19 @@ public class Graph : MonoBehaviour {
 
 
 
-     public void PlotFull(int prevX, int prevY,int currX,int currY,GameObject portrait,string Name)
-    {
-        
-        GameObject preHeart = PlotPoint(prevX, prevY, prevHeart,false);
-        GameObject tempHeart = PlotPoint(prevX, prevY, portrait,true,Name);        
+     public void PlotFull(Bird bird)
+    {        
+        GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
+        GameObject tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait,true,bird);        
         GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();
-        Vector3 secondPos = new Vector3(-currX * 26.2f, currY * 26.2f, 0);
+        Vector3 secondPos = new Vector3(-bird.friendliness * 26.2f, bird.confidence * 26.2f, 0);
        // new Vector3(tempHeart.transform.position.x, tempHeart.transform.position.y, 0);
         portraitScript.StartGraph(secondPos);       
     }
     
 
 
-    GameObject PlotPoint(int x,int y, GameObject obj, bool isPortrait, string name = "" )
+    GameObject PlotPoint(int x,int y, GameObject obj, bool isPortrait, Bird bird=null )
     {
         Vector2 corner = graphArea.rectTransform.anchoredPosition;
         Rect size = graphArea.rectTransform.rect;
@@ -47,8 +46,17 @@ public class Graph : MonoBehaviour {
         GameObject heartt =Instantiate(obj,graphArea.transform);
         if (isPortrait)
         {
-            heartt.transform.Find("BirdName").GetComponent<Text>().text = name;
+            heartt.transform.Find("BirdName").GetComponent<Text>().text = bird.charName;
             portraits.Add(heartt);
+            if (bird.prevEmotion != bird.emotion)
+            {
+                heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
+                LeanTween.color(heartt.transform.Find("bird_color").GetComponent<Image>().rectTransform, Helpers.Instance.GetEmotionColor(bird.emotion), 1.35f);
+            }else
+            {
+                heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+            }
+
         }
         heartt.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
         heartt.transform.localPosition = new Vector3(-x*26.2f, y*26.2f, 0);
