@@ -99,57 +99,66 @@ public class SliderSwitcher : MonoBehaviour
     }
     void SetIndicators(Bird bird,int emotionStr)
     {
-        SetColors(FadedPosCol, FadedNegCol);
-        if (bird.battleCount >= bird.battlesToNextLVL)
+        try
         {
-            setState(EmotionBarScript.state.available);
-            bool hasPos1 = false;
-            bool hasNeg1 = false;
-            if (isConf)
+            SetColors(FadedPosCol, FadedNegCol);
+            if (bird.battleCount >= bird.battlesToNextLVL)
             {
-                hasPos1 = Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList);
-                hasNeg1 = Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.levelList);
-                
+                setState(EmotionBarScript.state.available);
+                bool hasPos1 = false;
+                bool hasNeg1 = false;
+                if (isConf)
+                {
+                    hasPos1 = Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList);
+                    hasNeg1 = Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.levelList);
+
+                }
+                else
+                {
+                    hasPos1 = Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.levelList);
+                    hasNeg1 = Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.levelList);
+                }
+
+                if (emotionStr >= 7)
+                {
+                    pos1Indicator.GetComponent<EmotionBarScript>().currentState = EmotionBarScript.state.completed;
+                }
+                if (emotionStr >= 10)
+                {
+                    pos2Indicator.GetComponent<EmotionBarScript>().currentState = EmotionBarScript.state.completed;
+                }
+                if (emotionStr <= -7)
+                {
+                    neg1Indicator.GetComponent<EmotionBarScript>().currentState = EmotionBarScript.state.completed;
+                }
+                if (emotionStr >= -10)
+                {
+                    neg2Indicator.GetComponent<EmotionBarScript>().currentState = EmotionBarScript.state.completed;
+                }
+                pos1Indicator.gameObject.SetActive(!hasPos1);
+                pos2Indicator.gameObject.SetActive(hasPos1);
+                neg1Indicator.gameObject.SetActive(!hasNeg1);
+                neg2Indicator.gameObject.SetActive(hasNeg1);
             }
             else
             {
-                hasPos1 = Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.levelList);
-                hasNeg1 = Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.levelList);
+                SetColors(FadedCol, FadedCol);
+                setState(EmotionBarScript.state.unavailable);
             }
-
-            if (emotionStr >= 7)
-            {
-                pos1Indicator.GetComponent<EmotionBarScript>().currentState = EmotionBarScript.state.completed;
-            }
-            if (emotionStr >= 10)
-            {
-                pos2Indicator.GetComponent<EmotionBarScript>().currentState = EmotionBarScript.state.completed;
-            }
-            if (emotionStr <= -7)
-            {
-                neg1Indicator.GetComponent<EmotionBarScript>().currentState = EmotionBarScript.state.completed;
-            }
-            if(emotionStr >= -10)
-            {
-                neg2Indicator.GetComponent<EmotionBarScript>().currentState = EmotionBarScript.state.completed;
-            }
-            pos1Indicator.gameObject.SetActive(!hasPos1);
-            pos2Indicator.gameObject.SetActive(hasPos1);
-            neg1Indicator.gameObject.SetActive(!hasNeg1);
-            neg2Indicator.gameObject.SetActive(hasNeg1);
-        }else
-        {
-            SetColors(FadedCol,FadedCol);
-            setState(EmotionBarScript.state.unavailable);
         }
+        catch { }
     }
 
     public void SetColors(Color posCol, Color negCol)
     {
-        pos1Indicator.color = negCol;
-        pos2Indicator.color = negCol;
-        neg1Indicator.color = posCol;
-        neg2Indicator.color = posCol;
+        try
+        {
+            pos1Indicator.color = negCol;
+            pos2Indicator.color = negCol;
+            neg1Indicator.color = posCol;
+            neg2Indicator.color = posCol;
+        }
+        catch { }
     }
 
     public void setState(EmotionBarScript.state state)
