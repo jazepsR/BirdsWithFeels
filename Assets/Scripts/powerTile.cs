@@ -54,7 +54,10 @@ public class powerTile : MonoBehaviour {
             case Var.PowerUps.heal:
                 info = "Birds on this tile will heal 1 heart after the battle";
                 break;
-            
+            case Var.PowerUps.obstacle:
+                info = "You can't place birds on this tile";
+                break;
+
         }
 
         Helpers.Instance.ShowTooltip(info);
