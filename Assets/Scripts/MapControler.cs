@@ -28,6 +28,7 @@ public class MapControler : MonoBehaviour {
                 title.text = bird.charName + " can heal one of your birds!";
             }
         }
+        //ProgressGUI.Instance.PortraitClick(Var.availableBirds[0]);
 	}
 	
 	// Update is called once per frame

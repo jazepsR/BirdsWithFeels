@@ -50,6 +50,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         int i = 0;
         lr.positionCount = targets.Length * 2;
+        lr.sortingOrder = 10;
         if (targets.Length > 0)
         {
             foreach (MapIcon pos in targets)

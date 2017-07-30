@@ -100,6 +100,7 @@ public class Bird : MonoBehaviour
     public bool hasNewLevel = false;
     [HideInInspector]
     public Var.Em prevEmotion=  Var.Em.finish;
+    bool started = false;
     void Start()
 	{
         prevRoundHealth = health;
@@ -137,9 +138,9 @@ public class Bird : MonoBehaviour
 		target = transform.position;
         prevEmotion = Var.Em.finish;
 		SetEmotion();
-        if(!isEnemy && !inMap)
-            showText();
+        
 	}
+    
 	public void SetCoolDownRing(bool active)
     {
         if (CooldownRing != null)
@@ -666,6 +667,16 @@ public class Bird : MonoBehaviour
 	
 	public void Update()
 	{
+
+        if (!isEnemy && !started)
+        {
+            try
+            {
+                OnMouseEnter();
+                started = true;
+            }
+            catch { }
+        }
         if (needsReset)
         {
             needsReset = false;

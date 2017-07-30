@@ -257,6 +257,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 25
   m_TargetDisplay: 0
+--- !u!114 &38811365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 38811362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!4 &71521696 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4037721115469246, guid: 3fe519414ab6ef245bc6c896e6493c31,
@@ -495,12 +511,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1407023817993642, guid: 652d06e33cbc52244a152a6157d1e21d, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224032362209989432, guid: 652d06e33cbc52244a152a6157d1e21d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -113
+      value: -120
       objectReference: {fileID: 0}
     - target: {fileID: 224032362209989432, guid: 652d06e33cbc52244a152a6157d1e21d,
         type: 2}
@@ -510,7 +526,7 @@ Prefab:
     - target: {fileID: 224073419705694702, guid: 652d06e33cbc52244a152a6157d1e21d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 138
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 224073419705694702, guid: 652d06e33cbc52244a152a6157d1e21d,
         type: 2}
@@ -536,6 +552,69 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 114050897502495296, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: da1f9711d32f6e04083b5ed33781d287,
+        type: 3}
+    - target: {fileID: 114538404236801268, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: da1f9711d32f6e04083b5ed33781d287,
+        type: 3}
+    - target: {fileID: 114521851747948618, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: da1f9711d32f6e04083b5ed33781d287,
+        type: 3}
+    - target: {fileID: 114655392953377088, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c28fc040b51eb6747babc25b4a24e2be,
+        type: 3}
+    - target: {fileID: 114180231822838856, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c28fc040b51eb6747babc25b4a24e2be,
+        type: 3}
+    - target: {fileID: 114749127449158514, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c28fc040b51eb6747babc25b4a24e2be,
+        type: 3}
+    - target: {fileID: 114907527257990016, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: c28fc040b51eb6747babc25b4a24e2be,
+        type: 3}
+    - target: {fileID: 114211562363437022, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: da1f9711d32f6e04083b5ed33781d287,
+        type: 3}
+    - target: {fileID: 114777205755034128, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 685676509}
+    - target: {fileID: 114777205755034128, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 114655392953377088, guid: 652d06e33cbc52244a152a6157d1e21d,
+        type: 2}
+      propertyPath: m_Text
+      value: MAIN MENU
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 652d06e33cbc52244a152a6157d1e21d, type: 2}
@@ -740,7 +819,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 1239031233}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -1795,6 +1874,8 @@ GameObject:
   - component: {fileID: 420989939}
   - component: {fileID: 420989941}
   - component: {fileID: 420989940}
+  - component: {fileID: 420989942}
+  - component: {fileID: 420989943}
   m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
@@ -1853,6 +1934,42 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 420989938}
+--- !u!223 &420989942
+Canvas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 420989938}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 9
+  m_TargetDisplay: 0
+--- !u!114 &420989943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 420989938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &427908689
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,6 +3215,7 @@ MonoBehaviour:
   winDetails: {fileID: 0}
   feedbackText: {fileID: 0}
   battlePanel: {fileID: 0}
+  battleArea: {fileID: 0}
   closeReportBtn: {fileID: 0}
   CloseBattleReport: {fileID: 0}
   mapBirdScript: {fileID: 0}

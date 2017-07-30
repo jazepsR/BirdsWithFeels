@@ -552,6 +552,12 @@ public class GuiContoler : MonoBehaviour {
 		}
 		SceneManager.LoadScene("Map");
 	}
+
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene("MainMenu");
+    }
 	public void Reset()
 	{
 		
