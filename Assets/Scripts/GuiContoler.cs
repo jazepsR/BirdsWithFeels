@@ -34,6 +34,7 @@ public class GuiContoler : MonoBehaviour {
 	public Text winDetails;
 	public Text feedbackText;
 	public GameObject battlePanel;
+    public GameObject battleArea;
 	public GameObject closeReportBtn;
     public Button CloseBattleReport;
 	public GuiMap mapBirdScript;
@@ -267,7 +268,8 @@ public class GuiContoler : MonoBehaviour {
 	{
 
 		//graph.SetActive(false);
-		//battlePanel.SetActive(true);
+		battlePanel.SetActive(true);
+        battleArea.SetActive(true);
 		LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
 		mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound+1);
 		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
@@ -290,7 +292,8 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CreateGraph(object o)
 	{
-        
+        battlePanel.SetActive(false);
+        battleArea.SetActive(false);
         foreach (Transform child in graph.transform.Find("ReportGraph").transform)
         {
             Destroy(child.gameObject);

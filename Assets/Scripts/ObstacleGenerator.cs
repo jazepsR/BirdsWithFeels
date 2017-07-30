@@ -9,6 +9,7 @@ public class ObstacleGenerator : MonoBehaviour {
     public GameObject powerTile;
     public GameObject healthTile;
     public GameObject dmgTile;
+    public GameObject BattleArea;
     public List<GameObject> obstacles = new List<GameObject>();
 	// Use this for initialization
 	void Start () {
@@ -39,6 +40,7 @@ public class ObstacleGenerator : MonoBehaviour {
                 Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y + 0.15f, -2);
                 tile.isActive = false;
                 GameObject rockObj = Instantiate(rock, pos, Quaternion.identity);
+                rockObj.transform.parent = BattleArea.transform;
                 obstacles.Add(rockObj);              
             }
             if(rand>0.8f && rand < 0.9f && Var.map[GuiContoler.mapPos].powerUps.Count>0)
@@ -46,6 +48,7 @@ public class ObstacleGenerator : MonoBehaviour {
                 List<Var.Em> powerUps = Var.map[GuiContoler.mapPos].powerUps;
                 Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, -2);
                 GameObject powerObj = Instantiate(powerTile, pos, Quaternion.identity);
+                powerObj.transform.parent = BattleArea.transform;
                 tile.power = powerObj.GetComponent<powerTile>();
                 powerObj.GetComponent<powerTile>().SetColor(powerUps[Random.Range(0, powerUps.Count)]);
                 obstacles.Add(powerObj);
@@ -67,7 +70,7 @@ public class ObstacleGenerator : MonoBehaviour {
                             powerUp = Instantiate(dmgTile, pos, Quaternion.identity);
                             break;
                     }
-
+                    powerUp.transform.parent = BattleArea.transform;
                     obstacles.Add(powerUp);
                     tile.power = powerUp.GetComponent<powerTile>();
                 }

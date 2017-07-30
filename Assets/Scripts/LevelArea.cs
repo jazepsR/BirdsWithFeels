@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class LevelArea : MonoBehaviour, IPointerEnterHandler
 {
     public Sprite Completed;
     public Sprite Default;
@@ -53,7 +53,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             SkillImageHolder.gameObject.SetActive(true);
         }
 	}
-    public void OnPointerExit(PointerEventData eventData)
+    /*public void OnPointerExit(PointerEventData eventData)
     {
         LevelNameHolder.text = "";
         SkillTextHolder.text = "";
@@ -61,8 +61,8 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         LoreTextHolder.text = "";
         SkillImageHolder.gameObject.SetActive(false);
 
-    }
-
+    }*/
+    
     public void Lock()
     {
         isLocked = true;       
