@@ -9,7 +9,7 @@ public class GraphPortraitScript : MonoBehaviour {
     Vector3 firstPos;
     void Starter () {
         lr = gameObject.AddComponent<LineRenderer>();
-        lr.sortingOrder = 200;
+        lr.sortingOrder = 120;
         lr.SetWidth(0.045f, 0.045f);
         lr.textureMode = LineTextureMode.Tile;
         lr.widthMultiplier = 3f;

@@ -215,7 +215,7 @@ public class Bird : MonoBehaviour
         if (!SaveDataCreated && (Var.activeBirds.Count<=3 || inMap))
         {
             Var.activeBirds.Add(this);
-            print("created something!");       
+           // print("created something!");       
         }
         else
         {
@@ -410,6 +410,8 @@ public class Bird : MonoBehaviour
 
     public void ChageHealth(int change)
     {
+        if (health <= 0)
+            return;
         if (change > 0)
         {
             if (health != maxHealth)
@@ -451,7 +453,7 @@ public class Bird : MonoBehaviour
         }
         if (health <= 0)
         {
-            GuiContoler.Instance.ShowDeathMenu(this);
+           // GuiContoler.Instance.ShowDeathMenu(this);
             gameObject.SetActive(false);
         }
         

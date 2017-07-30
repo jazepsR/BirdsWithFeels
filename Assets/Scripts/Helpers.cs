@@ -251,7 +251,52 @@ public class Helpers : MonoBehaviour {
             default:
                 return "Error in level up text";        
         }
+
     }
+    public string GetDeathText(Levels.type type, string name)
+    {
+        
+        string deathTxt = "";
+        switch (type)
+        {
+            case Levels.type.Brave1:
+                deathTxt = "Despite his bravery, the enemies were too much for <name>. <name> hopes they will be strong enough to make it without him. ";
+                break;
+            case Levels.type.Brave2:
+                deathTxt = "<name> was sure nothing could hurt <name>. Unfortunately, <name> realized this error too late... ";
+                break;
+            case Levels.type.Friend1:
+                deathTxt = "<name> tired to help the team, but was not able to escape the danger. Who will take care of them now? ";
+                break;
+            case Levels.type.Friend2:
+                deathTxt = "<name> was so close... If they had just made it back to base quicker, <name> would have made it all right. It's too late now. ";
+                break;
+            case Levels.type.Lonely1:
+                deathTxt = "<name> knew this was a dangerous undertaking from the start. He should have just stayed home where it is nice and safe. ";
+                break;
+            case Levels.type.Lonely2:
+                deathTxt = "Alas, it is too late for <name> to turn back time now... ";
+                break;
+            case Levels.type.Scared1:
+                deathTxt = "<name> wasn't cut out for fighting. And in the end, his clever tricks came up short. ";
+                break;
+            case Levels.type.Scared2:
+                deathTxt = "For all his attempts do avoid the battles, violence eventually found <name>. ";
+                break;
+            default:
+                deathTxt = "<name>'s young life was tragically cut short. Lets hope the rest of the team won't suffer a similar fate. ";
+                break;
+        }
+        deathTxt += "\n" + Var.deathSignoffs[UnityEngine.Random.Range(0, Var.deathSignoffs.Length)];
+        deathTxt = deathTxt.Replace("<name>", name);
+        return deathTxt;
+
+
+
+
+    }
+
+
     public string GetLVLRequirements(Levels.type type)
     {
         switch (type)
