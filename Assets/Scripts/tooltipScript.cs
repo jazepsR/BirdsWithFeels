@@ -7,7 +7,7 @@ public class tooltipScript : MonoBehaviour {
     public void SetPos()
     {
         gameObject.GetComponent<Image>().enabled = true;
-        gameObject.GetComponentInChildren<Text>().color = Color.black;
+        gameObject.GetComponentInChildren<Text>().color = Color.white;
         var pos = transform.localPosition;
         RectTransform me = gameObject.GetComponent<RectTransform>();
 
