@@ -108,10 +108,23 @@ public class GuiContoler : MonoBehaviour {
 
 	public void QuitToMap()
 	{
-        AudioControler.Instance.ClickSound();
-        Time.timeScale = 1.0f;
-		Var.fled = true;
-		SceneManager.LoadScene("Map");
+        int deadCount = 0;
+        foreach(Bird bird in Var.availableBirds)
+        {
+            if (bird.health <= 0)
+                deadCount++;
+        }
+        if (deadCount < 3)
+        {
+            AudioControler.Instance.ClickSound();
+            Time.timeScale = 1.0f;
+            Var.fled = true;
+            SceneManager.LoadScene("Map");
+        }else
+        {
+            Time.timeScale = 1.0f;
+            loseBanner.SetActive(true);
+        }
 	}
 
 	public void ShowDeathMenu(Bird deadBird)
@@ -428,6 +441,7 @@ public class GuiContoler : MonoBehaviour {
 	{
         GameLogic.Instance.FightButton.gameObject.SetActive(false);
         AudioControler.Instance.ClickSound();
+        AudioControler.Instance.setBattleVolume(0.85f);
         AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.battleStart);
         feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
 		foreach (feedBack fb in feedBackObj)

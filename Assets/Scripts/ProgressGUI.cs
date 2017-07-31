@@ -104,7 +104,7 @@ public class ProgressGUI : MonoBehaviour {
         
         NameText.text = bird.charName;
         Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth);
-        if (bird.health <= 0)
+        if (bird.health <= 0 && !bird.inMap)
         {
             deathScreen.ShowDeathMenu(bird);
             portrait.sprite = skull;
