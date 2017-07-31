@@ -5,12 +5,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject CompleteIcon;
     public GameObject LockedIcon;
     public int ID;
     public bool completed = false;
+    public string levelName;
     public bool available;
     [Header("Level configuration")]
     public Var.Em type;
@@ -32,22 +33,29 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     MapSaveData mySaveData;
     LineRenderer lr;
     Image sr;
+    bool active = false;
+    Vector3 offset;    
     // Use this for initialization
     void Start()
     {
+     
+        offset = transform.position- transform.parent.position;
         LoadSaveData();
         sr = GetComponent<Image>();
         sr.color = Helpers.Instance.GetEmotionColor(type);
-        GetComponent<Button>().interactable = available;
+        //GetComponent<Button>().interactable = available;
         CompleteIcon.SetActive(completed);
-        LockedIcon.SetActive(false);
-        if (available)
-            LockedIcon.SetActive(true);
+        LockedIcon.SetActive(!available);        
         lr = GetComponent<LineRenderer>();
        
     }
     void Update()
     {
+        if(active)
+        {
+            transform.parent.position = transform.position - offset;
+            print("active!!");
+        }
         int i = 0;
         lr.positionCount = targets.Length * 2;
         lr.sortingOrder = 10;
@@ -68,7 +76,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void RemoveLock()
     {
-        LockedIcon.SetActive(false);
+       // LockedIcon.SetActive(false);
     }
     void LoadSaveData()
     {
@@ -107,8 +115,41 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             }
         }
     }
+
+
+    public void mapBtnClick()
+    {
+        active = true;
+        MapControler.Instance.SelectedIcon = null;
+        MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
+        MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero;
+        MapControler.Instance.selectionTiles.transform.localScale = Vector3.zero;
+        MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
+        LeanTween.move(gameObject, MapControler.Instance.centerPos, 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
+    }
+
+    public void ShowAreaDetails()
+    {
+        active = false;      
+        MapControler.Instance.SelectionMenu.SetActive(true);
+        MapControler.Instance.selectionTiles.SetActive(true);
+        MapControler.Instance.SelectionTitle.text = levelName + " details";
+        MapControler.Instance.SelectionText.text = ToString();
+        LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack);
+        if (available)
+        {
+            LeanTween.scale(MapControler.Instance.selectionTiles, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack);
+            MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);
+            MapControler.Instance.SelectedIcon = this;
+            MapControler.Instance.startLvlBtn.gameObject.SetActive(true);
+        }
+    }
+
+
+
     public void LoadBattleScene()
     {
+        
         if (available && MapControler.Instance.canFight)
         {
             Var.fled = false;
@@ -183,7 +224,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 
 
-    public void OnPointerEnter(PointerEventData eventData)
+    /*public void OnPointerEnter(PointerEventData eventData)
     {
        
 
@@ -194,7 +235,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         Helpers.Instance.HideTooltip();
-    }
+    }*/
     public override string ToString()
     {
         string stageInfo = "";

@@ -11,7 +11,16 @@ public class MapControler : MonoBehaviour {
     public bool canHeal = false;
     GameObject healTrail;
     public Text title;
-	void Awake()
+    public Transform centerPos;
+    public GameObject SelectionMenu;
+    public Text SelectionText;
+    public Text SelectionTitle;
+    public GameObject selectionTiles;
+    public Button startLvlBtn;
+    public float scaleTime = 0.35f;
+    [HideInInspector]
+    public MapIcon SelectedIcon;
+    void Awake()
 	{
 		
 	}
@@ -57,9 +66,35 @@ public class MapControler : MonoBehaviour {
 			MapIcon[] icons = FindObjectsOfType<MapIcon>();
 			foreach(MapIcon icon in icons)
 			{
-				icon.LockedIcon.SetActive(false);
+				//icon.LockedIcon.SetActive(false);
 			}
 		}
+        startLvlBtn.interactable = canFight;
 		
 	}
+    public void StartLevel()
+    {
+        if (SelectedIcon != null)
+            SelectedIcon.LoadBattleScene();
+    }
+
+
+    public void HideSelectionMenu()
+    {
+        LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
+        LeanTween.scale(MapControler.Instance.selectionTiles, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
+        MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
+    }
+
+    
+    public void ScaleSelectedBirds(float time, Vector3 to)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if(Var.playerPos[i, 0]!= null)
+            {
+                LeanTween.scale(Var.playerPos[i, 0].gameObject, to, time).setEase(LeanTweenType.easeOutBack);
+            }
+        }
+    }
 }
