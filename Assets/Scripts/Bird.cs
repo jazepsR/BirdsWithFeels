@@ -166,7 +166,7 @@ public class Bird : MonoBehaviour
     {
         if (data.emotion != Var.Em.Neutral)
         {
-            hasNewLevel = true;
+            hasNewLevel = true;            
             Helpers.Instance.EmitEmotionParticles(transform, Var.Em.finish);
             Helpers.Instance.EmitEmotionParticles(transform, data.emotion, false);
         }
@@ -293,13 +293,19 @@ public class Bird : MonoBehaviour
     }
     void OnMouseEnter()
     {
+       
+       
         showText();
         if (isEnemy)
         {
             GetComponent<feedBack>().ShowEnemyHoverText();
-        }else
+            AudioControler.Instance.EnemySound();
+        }
+        else
         {
             colorRenderer.color = HighlightCol;
+            if (!dragged)
+                AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.mouseOverBird);
         }
         if(inMap)
             ProgressGUI.Instance.PortraitClick(this);
@@ -326,6 +332,7 @@ public class Bird : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
 		{
+            AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.pickupBird);
             if (inMap)
             {
                 if (MapControler.Instance.canHeal)
@@ -702,7 +709,7 @@ public class Bird : MonoBehaviour
 		dragged = false;
         this.x = x;
         this.y = y;
-
+        AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.dropBird);
         if (!inMap)
         {
             lines.DrawLines(x, y);

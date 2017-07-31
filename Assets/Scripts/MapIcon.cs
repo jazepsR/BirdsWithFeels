@@ -58,7 +58,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         }
         int i = 0;
         lr.positionCount = targets.Length * 2;
-        lr.sortingOrder = 10;
+        lr.sortingOrder = 9;
         if (targets.Length > 0)
         {
             foreach (MapIcon pos in targets)
@@ -119,6 +119,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 
     public void mapBtnClick()
     {
+        AudioControler.Instance.ClickSound();
         active = true;
         MapControler.Instance.SelectedIcon = null;
         MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
@@ -135,6 +136,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         MapControler.Instance.selectionTiles.SetActive(true);
         MapControler.Instance.SelectionTitle.text = levelName + " details";
         MapControler.Instance.SelectionText.text = ToString();
+        AudioControler.Instance.ClickSound();
         LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack);
         if (available)
         {

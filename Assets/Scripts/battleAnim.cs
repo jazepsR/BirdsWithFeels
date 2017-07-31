@@ -36,7 +36,7 @@ public class battleAnim :MonoBehaviour {
 
     IEnumerator DoBattles(float waitTime)
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(1.8f);
         foreach (battleData battle in battles)
         {
 
@@ -74,6 +74,7 @@ public class battleAnim :MonoBehaviour {
 
     IEnumerator ShowResult(battleData battle,float waitTime)
     {
+        AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.enemyMove);
         yield return new WaitForSeconds(enemySpeed+0.25f);
         ShowBattleResult(battle);
         yield return new WaitForSeconds(waitTime-(enemySpeed + 0.25f));
@@ -82,9 +83,11 @@ public class battleAnim :MonoBehaviour {
     void ShowBattleResult(battleData battle)
     {
         battle.player.GetComponent<Animator>().SetBool("iswalking", false);
+        
         //Player won
         if (battle.result == 1)
         {
+            AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.playerWin);
             battle.player.GetComponent<Animator>().SetTrigger("victory 0");
             battle.enemy.gameObject.SetActive(false);
             Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Confident);
@@ -93,6 +96,7 @@ public class battleAnim :MonoBehaviour {
         else
         {
             battle.player.GetComponent<Animator>().SetTrigger("lose 0");
+            AudioControler.Instance.EnemySound();
             battle.player.ChageHealth(-1);
             Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Scared);
             // enemy.GetComponent<Animator>().SetBool("victory", true);

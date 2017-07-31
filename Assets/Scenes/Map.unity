@@ -2068,6 +2068,57 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 373192377}
+--- !u!1001 &398744502
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.4932411
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -2.2339716
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1583182956697712, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
+      propertyPath: m_Name
+      value: Audio
+      objectReference: {fileID: 0}
+    - target: {fileID: 82049959186890140, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b3527d1a082c2647aa77cb216b66318, type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &410481951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,7 +2280,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 8
   m_TargetDisplay: 0
 --- !u!114 &420989943
 MonoBehaviour:
@@ -3609,7 +3660,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &685676508
 MonoBehaviour:
@@ -3678,7 +3729,6 @@ MonoBehaviour:
   winDetails: {fileID: 0}
   feedbackText: {fileID: 0}
   battlePanel: {fileID: 0}
-  battleArea: {fileID: 0}
   closeReportBtn: {fileID: 0}
   CloseBattleReport: {fileID: 0}
   mapBirdScript: {fileID: 0}
@@ -7431,6 +7481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0645f4b55455cfe4fa1b6aec97db6408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapSwoosh: {fileID: 8300000, guid: 62349a00f88e1e74896519bbc882a3a4, type: 3}
   mouseSensitivity: 0.04
   screenSize: {x: 1330, y: 800}
   canMove: 0

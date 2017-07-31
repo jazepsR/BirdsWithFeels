@@ -19,7 +19,7 @@ public class MapControler : MonoBehaviour {
     public Button startLvlBtn;
     public float scaleTime = 0.35f;
     [HideInInspector]
-    public MapIcon SelectedIcon;
+    public MapIcon SelectedIcon;    
     void Awake()
 	{
 		
@@ -75,7 +75,11 @@ public class MapControler : MonoBehaviour {
     public void StartLevel()
     {
         if (SelectedIcon != null)
+        {
+            AudioControler.Instance.ClickSound();
             SelectedIcon.LoadBattleScene();
+            
+        }
     }
 
 

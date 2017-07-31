@@ -33,8 +33,7 @@ public class GuiContoler : MonoBehaviour {
 	public Text winText;
 	public Text winDetails;
 	public Text feedbackText;
-	public GameObject battlePanel;
-    public GameObject battleArea;
+	public GameObject battlePanel;   
 	public GameObject closeReportBtn;
     public Button CloseBattleReport;
 	public GuiMap mapBirdScript;
@@ -89,7 +88,8 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void setPause()
 	{
-		if (pause.activeSelf)
+        AudioControler.Instance.ClickSound();
+        if (pause.activeSelf)
 		{
 			pause.SetActive(false);
 			Time.timeScale = 1.0f;
@@ -102,13 +102,14 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void QuitGame()
 	{
-		
-		Application.Quit();
+        AudioControler.Instance.ClickSound();
+        Application.Quit();
 	}
 
 	public void QuitToMap()
 	{
-		Time.timeScale = 1.0f;
+        AudioControler.Instance.ClickSound();
+        Time.timeScale = 1.0f;
 		Var.fled = true;
 		SceneManager.LoadScene("Map");
 	}
@@ -166,8 +167,8 @@ public class GuiContoler : MonoBehaviour {
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			setPause();
+		{           
+            setPause();
 		}
 
 	}
@@ -268,8 +269,7 @@ public class GuiContoler : MonoBehaviour {
 	{
 
 		//graph.SetActive(false);
-		battlePanel.SetActive(true);
-        battleArea.SetActive(true);
+		battlePanel.SetActive(true);        
 		LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
 		mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound+1);
 		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
@@ -292,8 +292,7 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CreateGraph(object o)
 	{
-        battlePanel.SetActive(false);
-        battleArea.SetActive(false);
+        battlePanel.SetActive(false);       
         foreach (Transform child in graph.transform.Find("ReportGraph").transform)
         {
             Destroy(child.gameObject);
@@ -310,6 +309,7 @@ public class GuiContoler : MonoBehaviour {
             if (Var.activeBirds[birdNum].hasNewLevel)
             {
                 levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
+                AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.applause);
                 return;
             }
         }
@@ -427,7 +427,9 @@ public class GuiContoler : MonoBehaviour {
 	public void Fight()
 	{
         GameLogic.Instance.FightButton.gameObject.SetActive(false);
-		feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
+        AudioControler.Instance.ClickSound();
+        AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.battleStart);
+        feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
 		foreach (feedBack fb in feedBackObj)
 		{
 			fb.HideFeedBack(true);
@@ -556,7 +558,9 @@ public class GuiContoler : MonoBehaviour {
     public void LoadMainMenu()
     {
         Time.timeScale = 1.0f;
+        AudioControler.Instance.ClickSound();
         SceneManager.LoadScene("MainMenu");
+
     }
 	public void Reset()
 	{
