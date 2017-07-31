@@ -22,6 +22,7 @@ public class Helpers : MonoBehaviour {
     public string ScaredHexColor;
     public string LonelyHexColor;
     public string FriendlyHexColor;
+    
     Sprite fullHeart;
     Sprite emptyHeart;
 
@@ -32,6 +33,9 @@ public class Helpers : MonoBehaviour {
         emptyHeart = Resources.Load<Sprite>("sprites/emptyHeart");
         Instance = this;
     }
+
+
+    
     public bool RandomBool()
     {
         if (UnityEngine.Random.Range(0f, 1f) > 0.5f)
@@ -471,17 +475,8 @@ public class Helpers : MonoBehaviour {
     {
         GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(true);
         GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<Image>().enabled = false;
-        GuiContoler.Instance.tooltipText.text = text;
-        var screenPoint = Input.mousePosition;
-        screenPoint.z = 10.0f;
-        //screenPoint.x += 10f;
-        GuiContoler.Instance.tooltipText.color = new Color(0, 0, 0, 0);
-
-        GuiContoler.Instance.tooltipText.transform.parent.transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
-        LeanTween.delayedCall(0.05f, GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<tooltipScript>().SetPos);
-
-        
-
+        GuiContoler.Instance.tooltipText.text = text;       
+        //LeanTween.delayedCall(0.05f, GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<tooltipScript>().SetPos);
     }
     public void HideTooltip()
     {
