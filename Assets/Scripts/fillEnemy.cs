@@ -11,19 +11,20 @@ public class fillEnemy : MonoBehaviour {
     void Start ()
     {
         BattleData Area = Var.map[0];
-        GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs);
+        createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs,Area.minEnemies,Area.maxEnemies);
 
     } 
-    public void createEnemies(float minConf=-5, float maxConf=5, float minFriend=-5, float maxFriend=5,int birdLVL = 1,List<Bird.dir> dirList= null)
+    public void createEnemies(float minConf=-5, float maxConf=5, float minFriend=-5, float maxFriend=5,int birdLVL = 1,List<Bird.dir> dirList= null,int minEnemies= 3,int maxEnemies =4)
     {
         int index = 0;
         int frontBirds = 0;
         if (dirList == null)
             dirList = new List<Bird.dir>() { Bird.dir.front, Bird.dir.top};
         
-        int max = 5;
+        int max = maxEnemies;
+        print("min: "+ minEnemies + " max: " + maxEnemies);
         if (dirList.Count == 1 && dirList.Contains(Bird.dir.front))
-            max = 4;
+            max = (int)Mathf.Min( 3f,maxEnemies);
         foreach(GameObject enemy in Enemies)
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
@@ -36,7 +37,7 @@ public class fillEnemy : MonoBehaviour {
 
 
         List<int> usedPos = new List<int>();
-        int enemyCount = Random.Range(3, max);
+        int enemyCount = Random.Range(minEnemies, max+1);
         for (int i = 0; i < enemyCount; i++)
         {
             int enemyPos = 0;

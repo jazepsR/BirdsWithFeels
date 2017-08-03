@@ -17,7 +17,7 @@ public class ProgressGUI : MonoBehaviour {
     public Text newEmotion;
     public Sprite skull;
     public deathScreenManager deathScreen;
-    
+    public Text birdBio;
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -103,6 +103,8 @@ public class ProgressGUI : MonoBehaviour {
 	{
         
         NameText.text = bird.charName;
+        if (bird.inMap)
+            birdBio.text = bird.birdBio;
         Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth);
         if (bird.health <= 0 && !bird.inMap)
         {

@@ -26,7 +26,9 @@ public class Graph : MonoBehaviour {
 
 
      public void PlotFull(Bird bird)
-    {        
+    {
+        if (bird.health <= 0)
+            return;
         GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
         GameObject tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait,true,bird);        
         GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();

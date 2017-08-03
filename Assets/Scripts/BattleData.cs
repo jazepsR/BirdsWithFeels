@@ -8,6 +8,8 @@ public class BattleData {
 	public bool hasRocks;
 	public List<Var.Em> powerUps;
 	public int birdLVL;
+    public int minEnemies=3;
+    public int maxEnemies=4;
 	public List<Bird.dir> dirs;
 	public List<Var.PowerUps> powers;
 	// Use this for initialization

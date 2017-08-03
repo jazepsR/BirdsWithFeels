@@ -17,6 +17,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public Var.Em type;
     public int birdLVL = 1;
     public int length = 1;
+    public int minEnemies = 3;
+    public int maxEnemies = 4;
     public bool hasTopEnemyRow = true;
     public bool hasFrontEnemyRow = true;
     public bool hasBottomEnemyRow = true;
@@ -178,15 +180,15 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     {
         List<Var.Em> emotions = new List<Var.Em> { Var.Em.Confident, Var.Em.Friendly, Var.Em.Lonely, Var.Em.Scared, Var.Em.Neutral };
         emotions.Remove(emotion);
-
-        if (Random.Range(0f, 1f) < 0.8f)
-        {
-            Var.map.Add(new BattleData(emotion, hasObstacles, EmPowerList(), birdLVL, CreateDirList(), PowerList()));
-        }
+        BattleData data;
+        if (Random.Range(0f, 1f) < 0.8f)        
+            data = new BattleData(emotion, hasObstacles, EmPowerList(), birdLVL, CreateDirList(), PowerList());
+          
         else
-        {
-            Var.map.Add(new BattleData(emotions[Random.Range(0, 4)], hasObstacles, EmPowerList(), birdLVL, CreateDirList(), PowerList()));
-        }
+           data = new BattleData(emotions[Random.Range(0, 4)], hasObstacles, EmPowerList(), birdLVL, CreateDirList(), PowerList());
+        data.maxEnemies = maxEnemies;
+        data.minEnemies = minEnemies;
+        Var.map.Add(data);
     }
 
     List<Bird.dir> CreateDirList()

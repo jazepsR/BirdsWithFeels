@@ -188,9 +188,15 @@ public class GuiContoler : MonoBehaviour {
     public void ShowNextGraph()
     {
         currentGraph++;
-        CreateGraph(currentGraph);
-        ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
-        
+        if (currentGraph == 3)
+        {
+            CreateGraph(-1);
+        }
+        else
+        {
+            CreateGraph(currentGraph);
+            ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+        }
         
         
         
@@ -305,13 +311,15 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CreateGraph(object o)
 	{
+        Helpers.Instance.HideTooltip();
         battlePanel.SetActive(false);       
         foreach (Transform child in graph.transform.Find("ReportGraph").transform)
         {
             Destroy(child.gameObject);
         }
         int birdNum = (int)o;
-        currentGraph = birdNum;
+        if(birdNum!=-1)
+            currentGraph = birdNum;
 		Graph.Instance.portraits = new List<GameObject>();
         List<Bird> BirdsToGraph;
         if (birdNum == -1)
@@ -361,9 +369,9 @@ public class GuiContoler : MonoBehaviour {
     
     void CheckGraphNavBtns()
     {
-        nextGraph.interactable = (currentGraph < 2);
+        nextGraph.interactable = (currentGraph < 3);
         prevGraph.interactable = (currentGraph > 0);
-        CloseBattleReport.interactable = (currentGraph == 2);
+        CloseBattleReport.interactable = (currentGraph == 3);
     }
     public void GraphButton()
     {
@@ -610,7 +618,7 @@ public class GuiContoler : MonoBehaviour {
 		BattleData Area = Var.map[mapPos];
 		if (Area.type != Var.Em.finish)
 		{
-			GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs);
+			GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs,Area.minEnemies,Area.maxEnemies);
 			GameLogic.Instance.CanWeFight();
 			ObstacleGenerator.Instance.clearObstacles();
 			ObstacleGenerator.Instance.GenerateObstacles();
