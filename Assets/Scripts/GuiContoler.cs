@@ -193,7 +193,8 @@ public class GuiContoler : MonoBehaviour {
 		}
         if (Input.GetMouseButtonDown(0))
         {
-            speechBubbleObj.SetActive(false);
+            if(speechBubbleObj!= null)
+                speechBubbleObj.SetActive(false);
         }
 	}
 

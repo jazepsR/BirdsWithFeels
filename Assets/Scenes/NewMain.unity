@@ -2101,7 +2101,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -2181,7 +2181,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -5949,6 +5949,7 @@ GameObject:
   - component: {fileID: 373818713}
   - component: {fileID: 373818714}
   - component: {fileID: 373818715}
+  - component: {fileID: 373818716}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -6192,6 +6193,17 @@ MonoBehaviour:
   - {fileID: 1491584171}
   - {fileID: 586281146}
   inMap: 0
+--- !u!114 &373818716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 373818708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8089683beae0f7d449d4b473de93ec00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &374855089 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1610529213597630, guid: 0d0c9d675d268854191357e0077af9c8,
@@ -18682,6 +18694,16 @@ Prefab:
       propertyPath: battleTracks.Array.data[4]
       value: 
       objectReference: {fileID: 8300000, guid: 9b3415a10330d184ab6cf7ed983a826e, type: 3}
+    - target: {fileID: 82049959186890140, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82504946822899816, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 2}
+      propertyPath: spreadCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 2}
   m_IsPrefabParent: 0
@@ -34023,7 +34045,7 @@ Prefab:
     - target: {fileID: 224181616036901884, guid: 03f36d854acd9714dadb899158544db5,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 71
       objectReference: {fileID: 0}
     - target: {fileID: 224181616036901884, guid: 03f36d854acd9714dadb899158544db5,
         type: 2}
@@ -34077,12 +34099,12 @@ Prefab:
     - target: {fileID: 224480490400374906, guid: 03f36d854acd9714dadb899158544db5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -35.5
       objectReference: {fileID: 0}
     - target: {fileID: 224480490400374906, guid: 03f36d854acd9714dadb899158544db5,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 224480490400374906, guid: 03f36d854acd9714dadb899158544db5,
         type: 2}
