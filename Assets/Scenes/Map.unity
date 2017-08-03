@@ -349,7 +349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 4.3}
+  m_AnchoredPosition: {x: 0, y: 4.2999997}
   m_SizeDelta: {x: 0, y: 8.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &85788488
@@ -741,7 +741,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 165253486}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.18, y: -1.09, z: 0}
+  m_LocalPosition: {x: 0.08, y: -1.21, z: 0}
   m_LocalScale: {x: 1.3004228, y: 1.3004224, z: 1.3004223}
   m_Children:
   - {fileID: 17241804}
@@ -2248,7 +2248,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 9f9fdeaf6d190d04dbeb74f6b8aed24c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a98672aa39d0e6242885299ef26b33c5, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3899,6 +3899,9 @@ MonoBehaviour:
   - {fileID: 0}
   battleTrag: []
   rerollBox: {fileID: 0}
+  roundLength: 3
+  nextMapArea: 0
+  posInMapRound: 0
   graph: {fileID: 0}
   winText: {fileID: 0}
   winDetails: {fileID: 0}
@@ -3912,6 +3915,10 @@ MonoBehaviour:
   messageText: {fileID: 0}
   activePortrait: 0
   tooltipText: {fileID: 1259036233}
+  speechBubble: {fileID: 0}
+  SpeechBubbleText: {fileID: 0}
+  SpeechBubbleReminderText: {fileID: 0}
+  speechBubbleObj: {fileID: 0}
   confSlider: {fileID: 757530980}
   firendSlider: {fileID: 1153329624}
   BirdInfoHearts:
@@ -6233,7 +6240,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: maxEnemies
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
@@ -6619,6 +6626,11 @@ Prefab:
         type: 2}
       propertyPath: levelName
       value: Friendly fields
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: minEnemies
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
@@ -9883,7 +9895,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2061843355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.62, y: -4.56, z: 0}
+  m_LocalPosition: {x: 0.52, y: -4.68, z: 0}
   m_LocalScale: {x: 0.9261795, y: 0.92617965, z: 0.92617965}
   m_Children: []
   m_Father: {fileID: 0}
