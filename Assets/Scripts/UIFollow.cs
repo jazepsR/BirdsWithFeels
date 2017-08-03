@@ -11,6 +11,9 @@ public class UIFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position =new Vector3(target.position.x,target.position.y, 0);
-	}
+        if(target!= null)
+            transform.position =new Vector3(target.position.x,target.position.y, 0);
+        else
+            transform.position = new Vector3(-10000,-10000);
+    }
 }

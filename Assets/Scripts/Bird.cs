@@ -105,7 +105,8 @@ public class Bird : MonoBehaviour
 	bool started = false;
 	void Start()
 	{
-        GuiContoler.Instance.ShowSpeechBubble(transform.position, "hi!");
+        if(!isEnemy)
+            GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi!");
 		prevRoundHealth = health;
 		x = -1;
 		y = -1;

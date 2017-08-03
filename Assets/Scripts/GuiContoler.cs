@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
+    public RectTransform canvasRect;
 	public Text BirdLVLUpText;
 	public Text infoText;    
 	public Text infoHeading;
@@ -196,11 +197,27 @@ public class GuiContoler : MonoBehaviour {
         }
 	}
 
-    public void ShowSpeechBubble(Vector3 pos,string text)
+    public void ShowSpeechBubble(Transform pos,string text)
     {
         SpeechBubbleText.text = text;
         speechBubbleObj.SetActive(true);
-        speechBubble.transform.position = new Vector3(pos.x, pos.y, 0);
+
+
+        speechBubble.GetComponent<UIFollow>().target = pos;
+       
+        /*Vector2 viewport = Camera.main.WorldToViewportPoint(pos);
+        Vector2 screenPosition = new Vector2
+        (
+            viewport.x * this.canvasRect.sizeDelta.x,
+            viewport.y * this.canvasRect.sizeDelta.y
+        );
+
+        // this is reversed because of the anchor we are using for this element
+        //screenPosition.y = -screenPosition.y;
+        speechBubble.transform.localPosition = screenPosition;
+        */
+
+        //speechBubble.transform.position = Camera.main.ScreenToWorldPoint(pos);
         /*Vector2 viewportPoint = Camera.main.WorldToScreenPoint(pos);//convert game object position to VievportPoint
        // Vector2 viewportPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, pos);
         //RectTransformUtility.
