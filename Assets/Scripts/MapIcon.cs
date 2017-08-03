@@ -265,14 +265,15 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             stageState = "available";
         stageInfo += "Stage " + (ID + 1) + ": " + stageState;
         stageInfo += "\nLength " + length;
-        stageInfo += "\nMain emotion: " + type;
-        stageInfo += "\nEnemies attack form the ";
+        stageInfo += "\nMain emotion: " +Helpers.Instance.GetHexColor(type)+ type + "</color>. Weak to: " +
+            Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(type)) + Helpers.Instance.GetWeakness(type) + "</color>.";
+        stageInfo += "\nEnemies attack from the: ";
         if (hasFrontEnemyRow)
-            stageInfo += "front ";
+            stageInfo += "\u2022Front ";
         if (hasTopEnemyRow)
-            stageInfo += "top ";
+            stageInfo += "\u2022Top ";
         if (hasBottomEnemyRow)
-            stageInfo += "back";
+            stageInfo += "\u2022Back";
         if (hasObstacles)
             stageInfo += "\nHas obstacles";
         if (hasHealthPowerUps)

@@ -23,10 +23,10 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject[] portraits;
 	public Transform[] battleTrag;
 	public GameObject rerollBox;
-	int roundLength = 3;
+	public int roundLength = 3;
 	Var.Em currentMapArea;
-	Var.Em nextMapArea;
-	int posInMapRound = 0;
+	public Var.Em nextMapArea;
+	public int posInMapRound = 0;
 	public static int mapPos = 0;
 	private int finalResult = 0;
 	public GameObject graph;
@@ -45,6 +45,10 @@ public class GuiContoler : MonoBehaviour {
 	[HideInInspector]
 	public int activePortrait = 0;
 	public Text tooltipText;
+    public GameObject speechBubble;
+    public Text SpeechBubbleText;
+    public Text SpeechBubbleReminderText;
+    public GameObject speechBubbleObj;
 	public SliderSwitcher confSlider;
 	public SliderSwitcher firendSlider;    
 	public Image[] BirdInfoHearts;
@@ -67,7 +71,10 @@ public class GuiContoler : MonoBehaviour {
     public float levelInfo_yvalue;
     public float levelinfoHideXValue;
     public float levelinfoshowXValue;
-
+    void Awake()
+    {
+        Instance = this;
+    }
 	void Start()
 	{
         
@@ -78,8 +85,7 @@ public class GuiContoler : MonoBehaviour {
 		Var.birdInfoHeading = infoHeading;
 		Var.birdInfoFeeling = infoFeeling;
 		Var.powerBar = powerBarTemp;
-		Var.powerText = powerTextTemp;	       
-		Instance = this;
+		Var.powerText = powerTextTemp;	    
 		if (!inMap)
 		{
 			GuiMap.Instance.CreateMap();
@@ -100,6 +106,7 @@ public class GuiContoler : MonoBehaviour {
 			Time.timeScale = 0.0f;
 		}
 	}
+   
 	public void QuitGame()
 	{
         AudioControler.Instance.ClickSound();
@@ -183,8 +190,29 @@ public class GuiContoler : MonoBehaviour {
 		{           
             setPause();
 		}
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            speechBubbleObj.SetActive(false);
+        }
 	}
+
+    public void ShowSpeechBubble(Vector3 pos,string text)
+    {
+        SpeechBubbleText.text = text;
+        speechBubbleObj.SetActive(true);
+        speechBubble.transform.position = new Vector3(pos.x, pos.y, 0);
+        /*Vector2 viewportPoint = Camera.main.WorldToScreenPoint(pos);//convert game object position to VievportPoint
+       // Vector2 viewportPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, pos);
+        //RectTransformUtility.
+        // set MIN and MAX Anchor values(positions) to the same position (ViewportPoint)
+       speechBubble.position= speechBubble.InverseTransformPoint(pos);
+       // speechBubble.anchorMax = viewportPoint;*/
+    }
+    void ShowSpeechBubbleReminder()
+    {
+        SpeechBubbleReminderText.gameObject.SetActive(true);
+    }
+
     public void ShowNextGraph()
     {
         currentGraph++;
@@ -215,11 +243,15 @@ public class GuiContoler : MonoBehaviour {
 	{
 		BirdLVLUpText.text = text;
         //BirdLVLUpText.transform.parent.gameObject.SetActive(true);30
-        LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject,new Vector3(levelinfoshowXValue,levelInfo_yvalue,0),0.3f).setEase(LeanTweenType.easeOutBack);
+        MoveLvlText();
+    }
+    public void MoveLvlText()
+    {
+        if(selectedBird.levelUpText != null)
+            LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoshowXValue, levelInfo_yvalue, 0), 0.3f).setEase(LeanTweenType.easeOutBack);
 
     }
-
-	public void HideLvlText()
+    public void HideLvlText()
 	{
 		//BirdLVLUpText.text = "";
 		LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoHideXValue, levelInfo_yvalue, 0), 0.3f).setEase(LeanTweenType.easeInBack);
@@ -447,7 +479,7 @@ public class GuiContoler : MonoBehaviour {
 	
 	public void Fight()
 	{
-        GameLogic.Instance.FightButton.gameObject.SetActive(false);
+        GameLogic.Instance.FightButton.interactable = false;
         AudioControler.Instance.ClickSound();
         AudioControler.Instance.setBattleVolume(0.85f);
         AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.battleStart);

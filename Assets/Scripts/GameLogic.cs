@@ -265,7 +265,8 @@ public class GameLogic : MonoBehaviour {
                 break;
             }
         }
-        FightButton.gameObject.SetActive(canFight);           
+        //FightButton.gameObject.SetActive(canFight);  
+        FightButton.interactable = canFight;         
         }
     
 }

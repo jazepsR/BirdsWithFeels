@@ -13,6 +13,8 @@ public class deathScreenManager : MonoBehaviour {
     public void ShowDeathMenu(Bird bird)
     {
         returnToMapBtn.gameObject.SetActive(true);
+        if (GuiContoler.Instance.nextMapArea == Var.Em.finish && (GuiContoler.Instance.roundLength == GuiContoler.Instance.posInMapRound+1))
+            returnToMapBtn.gameObject.SetActive(false);
         DeathMenu.SetActive(true);
         heading.text = bird.charName + " has died!";
         description.text = Helpers.Instance.GetDeathText(bird.lastLevel.type, bird.charName);
@@ -25,7 +27,7 @@ public class deathScreenManager : MonoBehaviour {
     public void HideDeathMenu()
     {
         DeathMenu.SetActive(false);
-
+        returnToMapBtn.gameObject.SetActive(false);
     }
 	// Use this for initialization
 	
