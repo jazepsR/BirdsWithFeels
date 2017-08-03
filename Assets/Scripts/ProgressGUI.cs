@@ -17,7 +17,7 @@ public class ProgressGUI : MonoBehaviour {
     public Text newEmotion;
     public Sprite skull;
     public deathScreenManager deathScreen;
-    public Text birdBio;
+    public Text birdBio;  
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -66,12 +66,7 @@ public class ProgressGUI : MonoBehaviour {
 			}
 		}
 	}
-	public void updateHearts(Image[] hearts, int index)
-	{
-        Helpers.Instance.setHearts(hearts, Var.activeBirds[index].health, Var.activeBirds[index].maxHealth);
-			
-		
-	}
+	
     public void updateLevels(Bird bird)
     {
         int index = 0;
@@ -105,7 +100,8 @@ public class ProgressGUI : MonoBehaviour {
         NameText.text = bird.charName;
         if (bird.inMap)
             birdBio.text = bird.birdBio;
-        Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth);
+        Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth,bird.prevRoundHealth);
+        print("helat: "+ bird.health+ " prev: "+ bird.prevRoundHealth);
         if (bird.health <= 0 && !bird.inMap)
         {
             deathScreen.ShowDeathMenu(bird);

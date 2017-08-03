@@ -22,13 +22,16 @@ public class Helpers : MonoBehaviour {
     public string ScaredHexColor;
     public string LonelyHexColor;
     public string FriendlyHexColor;
-    
+    GameObject heartBreak;
+    GameObject heartGain;
     Sprite fullHeart;
     Sprite emptyHeart;
+    List<Image> heartsToFill = new List<Image>();
 
     public void Awake()
     {
-
+        heartBreak = Resources.Load<GameObject>("prefabs/heartBreak");
+        heartGain = Resources.Load<GameObject>("prefabs/heartGain");
         fullHeart = Resources.Load<Sprite>("sprites/heart");
         emptyHeart = Resources.Load<Sprite>("sprites/emptyHeart");
         Instance = this;
@@ -50,18 +53,46 @@ public class Helpers : MonoBehaviour {
         else
             return Var.femaleNames[UnityEngine.Random.Range(0, Var.femaleNames.Length)];
     }
-
-    public void setHearts(Image[] hearts,int currentHP, int MaxHP)
+    void FillHearts()
+    {
+        foreach(Image heart in heartsToFill)
+        {
+            heart.sprite = fullHeart;
+        }
+        heartsToFill = new List<Image>();
+    }
+    public void setHearts(Image[] hearts,int currentHP, int MaxHP, int prevRoundHealth = -1)
     {
         for (int i = 0; i < hearts.Length; i++)
         {
             if (i < currentHP)
             {
-                hearts[i].sprite = fullHeart;
                 hearts[i].gameObject.SetActive(true);
+                if (i >= prevRoundHealth && prevRoundHealth != -1)
+                {
+                    GameObject breakObj = Instantiate(heartGain, hearts[i].transform.position, Quaternion.identity);
+                    breakObj.transform.parent = hearts[i].transform;
+                    breakObj.transform.localScale = Vector3.one;// * 0.5f;
+                    heartsToFill.Add(hearts[i]);
+                    LeanTween.delayedCall(0.46f, FillHearts);
+                    Destroy(breakObj, 0.45f);
+                }
+                else
+                {
+                    hearts[i].sprite = fullHeart;
+                    
+                }
             } else
             {
-                if (i<MaxHP)
+                if (i < prevRoundHealth && prevRoundHealth != -1)
+                {
+                    GameObject breakObj = Instantiate(heartBreak, hearts[i].transform.position, Quaternion.identity);
+                    breakObj.transform.parent = hearts[i].transform;
+                    breakObj.transform.localScale = Vector3.one * 0.5f;
+                    Destroy(breakObj, 0.45f);
+                }
+                
+                if (i < MaxHP)
                 {
                     hearts[i].sprite = emptyHeart;
                     hearts[i].gameObject.SetActive(true);
@@ -70,6 +101,7 @@ public class Helpers : MonoBehaviour {
                 {
                     hearts[i].gameObject.SetActive(false);
                 }
+                
             }
         }  
     }

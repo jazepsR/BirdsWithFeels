@@ -22,11 +22,11 @@ public class MapControler : MonoBehaviour {
     public MapIcon SelectedIcon;    
     void Awake()
 	{
-		
-	}
+        Instance = this;
+    }
 	// Use this for initialization
 	void Start () {
-		Instance = this;
+		
         canHeal = false;
         foreach(Bird bird in Var.activeBirds)
         {

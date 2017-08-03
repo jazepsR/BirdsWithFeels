@@ -30,7 +30,7 @@ public class AudioControler : MonoBehaviour {
     float musicVol;
     float battleVol;
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
        
         

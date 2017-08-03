@@ -49,6 +49,7 @@ public class Bird : MonoBehaviour
     public int confBoos = 0;
     [HideInInspector]
     public int healthBoost = 0;
+    int roundHealthChange = 0;
     [HideInInspector]
     public int GroundRollBonus = 0;
     public bool inMap = false;
@@ -451,15 +452,10 @@ public class Bird : MonoBehaviour
                 }
             }
         }
-        if (health + change > maxHealth)
-        {
-            health = maxHealth;
-        }
-        else
-        {
-            health = health + change;
-        }
-        if (health <= 0)
+       
+           roundHealthChange+= change;
+        
+        if (health+ healthBoost + roundHealthChange <= 0)
         {
            // GuiContoler.Instance.ShowDeathMenu(this);
             gameObject.SetActive(false);
@@ -494,8 +490,10 @@ public class Bird : MonoBehaviour
 
     public void AddRoundBonuses()
     {
+        print(charName + " doing round bonus. HealthGain " + roundHealthChange);
         if (dead)
             return;
+        prevRoundHealth = health;
         friendliness += friendBoost;
         confidence += confBoos;
         if (!foughtInRound)
@@ -519,17 +517,16 @@ public class Bird : MonoBehaviour
         }
         if (!foughtInRound)
             ChageHealth(1);
-        if (health < maxHealth)
-        {
-            health = Mathf.Min(health + healthBoost, maxHealth);
-        }
-
+        
+        
+        health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
+             
+        roundHealthChange = 0;
         foughtInRound = false;        
         ConfGainedInRound = confidence - prevConf;
         FriendGainedInRound = friendliness - prevFriend;
         Helpers.Instance.NormalizeStats(this);
-        levelControler.OnfightEndLevel(this, levelList);
-        prevRoundHealth = health;       
+        levelControler.OnfightEndLevel(this, levelList);           
         ResetBonuses();                
     }
 

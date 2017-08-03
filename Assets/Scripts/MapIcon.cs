@@ -49,7 +49,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         CompleteIcon.SetActive(completed);
         LockedIcon.SetActive(!available);        
         lr = GetComponent<LineRenderer>();
-       
+        if (!CheckTargetsAvailable() &&available)
+            mapBtnClick();
     }
     void Update()
     {
@@ -121,7 +122,11 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 
     public void mapBtnClick()
     {
-        AudioControler.Instance.ClickSound();
+        try
+        {
+            AudioControler.Instance.ClickSound();
+        }
+        catch { }
         active = true;
         MapControler.Instance.SelectedIcon = null;
         MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
@@ -146,9 +151,19 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);
             MapControler.Instance.SelectedIcon = this;
             MapControler.Instance.startLvlBtn.gameObject.SetActive(true);
+            
         }
     }
-
+    bool CheckTargetsAvailable()
+    {
+        bool targetAvailable = false;
+        foreach(MapIcon target in targets)
+        {
+            if (target.available)
+                targetAvailable = true;
+        }
+        return targetAvailable;
+    }
 
 
     public void LoadBattleScene()
