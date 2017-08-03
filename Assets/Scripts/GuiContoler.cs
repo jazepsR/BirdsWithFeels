@@ -668,10 +668,20 @@ public class GuiContoler : MonoBehaviour {
 		BattleData Area = Var.map[mapPos];
 		if (Area.type != Var.Em.finish)
 		{
-			GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs,Area.minEnemies,Area.maxEnemies);
-			GameLogic.Instance.CanWeFight();
-			ObstacleGenerator.Instance.clearObstacles();
-			ObstacleGenerator.Instance.GenerateObstacles();
+            if (Var.isTutorial)
+            {
+                int posInMap = posInMapRound  + mapPos * 3;
+                print("Pos: " + posInMapRound+ "mapPos"+ mapPos);
+                GetComponent<fillEnemy>().CreateTutorialEnemies(Tutorial.Instance.TutorialMap[posInMap]);
+            }
+            else
+            {
+                GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
+                ObstacleGenerator.Instance.clearObstacles();
+                ObstacleGenerator.Instance.GenerateObstacles();
+            }
+            GameLogic.Instance.CanWeFight();
+			
 		}
 
 	}

@@ -30,6 +30,8 @@ public class ObstacleGenerator : MonoBehaviour {
 	// Update is called once per frame
 	public void GenerateObstacles()
     {
+        if (Var.isTutorial)
+            return;
         //TODO: set rock probability with float
         //TODO: set max rock count
         foreach (LayoutButton tile in tiles)

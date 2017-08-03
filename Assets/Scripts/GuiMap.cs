@@ -15,10 +15,19 @@ public class GuiMap : MonoBehaviour {
     {
         
         Instance = this;
-        if (Var.map.Count == 0)
+        if (Var.isTutorial)
         {
-            Var.map.Add(new BattleData(Var.Em.Lonely,true,new List<Var.Em>() { Var.Em.Confident },1,null,new List<Var.PowerUps>() { Var.PowerUps.dmg,Var.PowerUps.heal }));
-            Var.map.Add(new BattleData(Var.Em.finish,false,new List<Var.Em>()));
+            Var.map.Add(new BattleData(Var.Em.Neutral, false, new List<Var.Em>()));
+            Var.map.Add(new BattleData(Var.Em.Neutral, false, new List<Var.Em>()));
+            Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>()));
+        }
+        else
+        {
+            if (Var.map.Count == 0)
+            {
+                Var.map.Add(new BattleData(Var.Em.Lonely, true, new List<Var.Em>() { Var.Em.Confident }, 1, null, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
+                Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>()));
+            }
         }
     }
 
@@ -32,6 +41,7 @@ public class GuiMap : MonoBehaviour {
 
     public void CreateMap()
     {
+        
         dist = Mathf.Abs(start.position.x - finish.position.x)/((Var.map.Count-1)*3);
         foreach (BattleData part in Var.map)
         {

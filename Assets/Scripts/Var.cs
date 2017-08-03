@@ -7,6 +7,7 @@ public static class Var {
     
     public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared,finish};
     public enum PowerUps { heal,dmg,emotion,obstacle};
+    public static bool isTutorial = false;
     public static int MoveGraphBy = 1550;
     public static int lvl1 = 4;
     public static bool fled = false;

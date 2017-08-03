@@ -10,10 +10,51 @@ public class fillEnemy : MonoBehaviour {
         // Use this for initialization
     void Start ()
     {
-        BattleData Area = Var.map[0];
-        createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs,Area.minEnemies,Area.maxEnemies);
 
+        if (Var.isTutorial)
+            CreateTutorialEnemies(Tutorial.Instance.TutorialMap[0]);
+        else
+        {
+            BattleData Area = Var.map[0];
+            createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
+        }
     } 
+
+    public void CreateTutorialEnemies(List<TutorialEnemy> enemies)
+    {
+        int index = 0;
+        foreach (GameObject enemy in Enemies)
+        {
+            Var.enemies[index] = enemy.GetComponent<Bird>();
+            enemy.GetComponent<feedBack>().myIndex = index % 4;
+            enemy.GetComponent<Bird>().levelRollBonus = 0;
+            enemy.GetComponent<Bird>().inUse = false;
+            enemy.SetActive(false);
+            index++;
+        }
+
+
+        index = 0;
+        foreach (TutorialEnemy en in enemies)
+        {
+            if (en != null)
+            {
+                Bird enemy = Enemies[index].GetComponent<Bird>();
+
+                enemy.confidence = en.confidence;
+                enemy.friendliness = en.firendliness;
+                enemy.SetEmotion();
+                enemy.GetComponent<feedBack>().SetEnemyHoverText();
+                Enemies[index].SetActive(true);
+                enemy.inUse = true;
+                enemy.transform.localPosition = enemy.home;
+            }
+            index++;
+        }
+    }
+
+
+
     public void createEnemies(float minConf=-5, float maxConf=5, float minFriend=-5, float maxFriend=5,int birdLVL = 1,List<Bird.dir> dirList= null,int minEnemies= 3,int maxEnemies =4)
     {
         int index = 0;
