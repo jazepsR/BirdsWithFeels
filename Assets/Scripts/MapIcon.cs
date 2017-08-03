@@ -21,6 +21,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public int maxEnemies = 4;
     public bool hasTopEnemyRow = true;
     public bool hasFrontEnemyRow = true;
+    [Range(0.0f, 1.0f)]
+    public float mainEmotionSpawnRate = 0.8f;
     public bool hasBottomEnemyRow = true;
     [Header("Tile Configuration")]
     public bool hasObstacles;
@@ -196,7 +198,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         List<Var.Em> emotions = new List<Var.Em> { Var.Em.Confident, Var.Em.Friendly, Var.Em.Lonely, Var.Em.Scared, Var.Em.Neutral };
         emotions.Remove(emotion);
         BattleData data;
-        if (Random.Range(0f, 1f) < 0.8f)        
+        if (Random.Range(0f, 1f) < mainEmotionSpawnRate)        
             data = new BattleData(emotion, hasObstacles, EmPowerList(), birdLVL, CreateDirList(), PowerList());
           
         else
