@@ -84,7 +84,7 @@ public class battleAnim :MonoBehaviour {
 
 	IEnumerator ShowResult(battleData battle,float waitTime)
 	{
-		AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.enemyMove);
+		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyMove);
 		yield return new WaitForSeconds(enemySpeed+0.25f);
 		ShowBattleResult(battle);
 		yield return new WaitForSeconds(waitTime-(enemySpeed + 0.25f));
@@ -97,7 +97,7 @@ public class battleAnim :MonoBehaviour {
 		//Player won
 		if (battle.result == 1)
 		{
-			AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.playerWin);
+			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.playerWin);
 			battle.player.GetComponent<Animator>().SetTrigger("victory 0");
             battle.enemy.GetComponent<Animator>().SetBool("dead", true);
             battle.enemy.GetComponent<Animator>().SetBool("walk", false);

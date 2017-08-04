@@ -314,7 +314,7 @@ public class Bird : MonoBehaviour
 		{
 			colorRenderer.color = HighlightCol;
 			if (!dragged)
-				AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.mouseOverBird);
+				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.mouseOverBird);
 		}
 		if(inMap)
 			ProgressGUI.Instance.PortraitClick(this);
@@ -343,7 +343,7 @@ public class Bird : MonoBehaviour
 		{
             if (Var.Infight || health<=0)
                 return;
-			AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.pickupBird);
+			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
 			if (inMap)
 			{
 				if (MapControler.Instance.canHeal)
@@ -717,7 +717,7 @@ public class Bird : MonoBehaviour
 		dragged = false;
 		this.x = x;
 		this.y = y;
-		AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.dropBird);
+		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.dropBird);
 		if (!inMap)
 		{
 			lines.DrawLines(x, y);

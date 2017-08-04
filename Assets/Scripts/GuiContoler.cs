@@ -389,7 +389,7 @@ public class GuiContoler : MonoBehaviour {
             if (Var.activeBirds[birdNum].hasNewLevel)
             {
                 levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
-                AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.applause);
+                AudioControler.Instance.PlaySound(AudioControler.Instance.applause);
                 return;
             }
         }
@@ -512,7 +512,7 @@ public class GuiContoler : MonoBehaviour {
         GameLogic.Instance.FightButton.interactable = false;
         AudioControler.Instance.ClickSound();
         AudioControler.Instance.setBattleVolume(0.85f);
-        AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.battleStart);
+        AudioControler.Instance.PlaySound(AudioControler.Instance.battleStart);
         feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
 		foreach (feedBack fb in feedBackObj)
 		{

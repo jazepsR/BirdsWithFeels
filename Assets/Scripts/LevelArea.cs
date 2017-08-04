@@ -49,7 +49,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler
         LoreTextHolder.text = LoreText;
         SkillImageHolder.sprite = Helpers.Instance.GetSkillPicture(level);
         SkillImageHolder.gameObject.SetActive(true);
-        AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.expand);
+        AudioControler.Instance.PlaySound(AudioControler.Instance.expand);
 	}
     /*public void OnPointerExit(PointerEventData eventData)
     {

@@ -29,11 +29,10 @@ public class AudioControler : MonoBehaviour {
     public AudioSource musicSource;
     float musicVol;
     float battleVol;
+    float pitch = 1;    
     // Use this for initialization
     void Awake ()
-    {
-       
-        
+    {      
         Instance = this;
         LeanTween.delayedCall(0.2f, StartSound);
         if (inBattle)
@@ -44,6 +43,17 @@ public class AudioControler : MonoBehaviour {
             battleSource.volume = 0.0f;
         }
 
+    }
+    public void PlaySoundWithPitch(AudioClip clip)
+    {
+        mainAudioSource.pitch = Random.Range(0.6f, 1.6f);
+        mainAudioSource.PlayOneShot(clip);       
+    }
+
+    public void PlaySound(AudioClip clip)
+    {
+        mainAudioSource.pitch = 1f;
+        mainAudioSource.PlayOneShot(clip);
     }
     void battleVolumeToggle(float vol)
     {
@@ -82,17 +92,17 @@ public class AudioControler : MonoBehaviour {
 	}
     public void ClickSound()
     {
-        mainAudioSource.PlayOneShot(click);
+        PlaySound(click);
     }
     public void EnemySound()
     {
         if (Helpers.Instance.RandomBool())
-            mainAudioSource.PlayOneShot(enemyMouseover1);
+            PlaySoundWithPitch(enemyMouseover1);
         else
-            mainAudioSource.PlayOneShot(enemyMouseover2);
+            PlaySoundWithPitch(enemyMouseover2);
     }
     public void PlayPaperSound()
     {
-        mainAudioSource.PlayOneShot(paperSound);
+        PlaySound(paperSound);
     }
 }
