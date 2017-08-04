@@ -25,7 +25,7 @@ public class GuiMap : MonoBehaviour {
         {
             if (Var.map.Count == 0)
             {
-                Var.map.Add(new BattleData(Var.Em.Lonely, true, new List<Var.Em>() { Var.Em.Confident }, 1, null, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
+                Var.map.Add(new BattleData(Var.Em.Lonely, true, new List<Var.Em>() { Var.Em.Confident }, 1, new List<Bird.dir>() {Bird.dir.front,Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
                 Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>()));
             }
         }

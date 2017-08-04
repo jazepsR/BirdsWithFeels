@@ -36,11 +36,12 @@ public class mainMenuScript : MonoBehaviour {
     {
         ResetGame();
         Var.isTutorial = true;
-        SceneManager.LoadScene("newMain");
+        SceneManager.LoadScene("NewMain");
     }
     public void SecretStartClick()
     {
-        //TODO: add secret scene
+        ResetGame();
+        SceneManager.LoadScene("newMainDev");
     }
     public void Quit()
     {
@@ -54,6 +55,7 @@ public class mainMenuScript : MonoBehaviour {
     Var.activeBirds = new List<Bird>();
     Var.availableBirds = new List<Bird>();
     Var.map = new List<BattleData>();
+    Var.isTutorial = false;
     ContinueBtn.interactable = false;
     }
 }
