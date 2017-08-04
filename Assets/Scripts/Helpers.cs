@@ -570,7 +570,7 @@ public class Helpers : MonoBehaviour {
                 }
             }
         }
-   
+        //TODO: Make these values global
         int sizeY = Var.playerPos.GetLength(1)-1;
         int sizeX = Var.playerPos.GetLength(0)-1;
         int lonelyVal = 0;
@@ -606,7 +606,7 @@ public class Helpers : MonoBehaviour {
         {
             lonelyVal += 1;
         }
-        return -2 + 2 * lonelyVal;
+        return -3 + 2 * lonelyVal;
 
     }
 
