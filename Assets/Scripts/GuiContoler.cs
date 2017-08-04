@@ -432,7 +432,7 @@ public class GuiContoler : MonoBehaviour {
         if (Var.isTutorial)
             maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos]-1;
         nextGraph.interactable = (currentGraph < maxGraph);
-        prevGraph.interactable = (currentGraph > maxGraph);
+        prevGraph.interactable = (currentGraph > 0);
         CloseBattleReport.interactable = (currentGraph == maxGraph);
     }
     public void GraphButton()

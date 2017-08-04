@@ -284,6 +284,15 @@ public class GameLogic : MonoBehaviour {
                 break;
             }
         }
+
+        foreach(Bird bird in FillPlayer.Instance.playerBirds)
+        {
+            if(bird.gameObject.activeSelf && bird.x <= -1)
+            {
+                canFight = false;
+                break;
+            }
+        }
         //FightButton.gameObject.SetActive(canFight);  
         FightButton.interactable = canFight;
         if (canFight && Var.isTutorial)

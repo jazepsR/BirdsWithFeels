@@ -727,11 +727,13 @@ public class Bird : MonoBehaviour
 		}
 		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		SetCoolDownRing(false);
-		
-		
-	   
+        if(inMap)
+        {
+            MapControler.Instance.CanLoadBattle();
+        }
 
-	}
+
+    }
 	
 
 

@@ -43,7 +43,7 @@ public class AudioControler : MonoBehaviour {
             battleSource.volume = 0.0f;
         }
 
-    }
+    }   
     public void PlaySoundWithPitch(AudioClip clip)
     {
         mainAudioSource.pitch = Random.Range(0.6f, 1.6f);
@@ -70,12 +70,11 @@ public class AudioControler : MonoBehaviour {
     }
     void AmbientControl()
     {
-        if (!inBattle)
+        if (!inBattle || ambientAudioSource== null)
             return;        
         ambientAudioSource.PlayOneShot(AmbientSounds[Random.Range(0, AmbientSounds.Length)]);
         if(Helpers.Instance.RandomBool())
-            ambientAudioSource.PlayOneShot(AmbientSounds[Random.Range(0, AmbientSounds.Length)]);
-        
+            ambientAudioSource.PlayOneShot(AmbientSounds[Random.Range(0, AmbientSounds.Length)]);        
         LeanTween.delayedCall(Random.Range(7, 45), AmbientControl);
     }
 

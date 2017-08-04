@@ -35,7 +35,8 @@ public class mainMenuScript : MonoBehaviour {
     public void StartClick()
     {
         ResetGame();
-        ContinueClick();
+        Var.isTutorial = true;
+        SceneManager.LoadScene("newMain");
     }
     public void SecretStartClick()
     {
