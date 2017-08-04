@@ -341,7 +341,7 @@ public class Bird : MonoBehaviour
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
-            if (Var.Infight)
+            if (Var.Infight || health<=0)
                 return;
 			AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.pickupBird);
 			if (inMap)
@@ -467,8 +467,9 @@ public class Bird : MonoBehaviour
 		
 		if (health+ healthBoost + roundHealthChange <= 0)
 		{
+            GetComponent<Animator>().SetBool("dead", true);
 		   // GuiContoler.Instance.ShowDeathMenu(this);
-			gameObject.SetActive(false);
+			//gameObject.SetActive(false);
 		}
 		
 	}

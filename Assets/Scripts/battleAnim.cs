@@ -28,7 +28,7 @@ public class battleAnim :MonoBehaviour {
 
 	void StartBattle(Bird player,Bird enemy)
 	{
-		
+        enemy.GetComponent<Animator>().SetBool("walk", true);
 		LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position), enemySpeed).setEase(LeanTweenType.easeInBack); 
 		
 
@@ -72,6 +72,7 @@ public class battleAnim :MonoBehaviour {
 			AudioControler.Instance.setBattleVolume(0f);            
 			GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
 			GuiContoler.Instance.CreateBattleReport();
+
             if(Var.isTutorial)
             {
                 yield return new WaitForSeconds(1.0f);
@@ -98,13 +99,16 @@ public class battleAnim :MonoBehaviour {
 		{
 			AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.playerWin);
 			battle.player.GetComponent<Animator>().SetTrigger("victory 0");
-			battle.enemy.gameObject.SetActive(false);
+            battle.enemy.GetComponent<Animator>().SetBool("dead", true);
+            battle.enemy.GetComponent<Animator>().SetBool("walk", false);
+           // battle.enemy.gameObject.SetActive(false);
 			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Confident);
 		  //  enemy.GetComponent<Animator>().SetBool("lose", true);
 		}
 		else
 		{
 			battle.player.GetComponent<Animator>().SetTrigger("lose 0");
+            battle.enemy.GetComponent<Animator>().SetBool("walk", false);
 			AudioControler.Instance.EnemySound();
 			battle.player.ChageHealth(-1);
 			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Scared);

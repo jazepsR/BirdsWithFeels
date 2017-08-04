@@ -40,7 +40,6 @@ public class fillEnemy : MonoBehaviour {
             if (en != null)
             {
                 Bird enemy = Enemies[index].GetComponent<Bird>();
-
                 enemy.confidence = en.confidence;
                 enemy.friendliness = en.firendliness;
                 enemy.SetEmotion();
@@ -123,6 +122,7 @@ public class fillEnemy : MonoBehaviour {
                 enemy.transform.localPosition = enemy.home;
                 enemy.GroundRollBonus = 0;
                 enemy.colorRenderer.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
+
             }
 
         }
