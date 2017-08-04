@@ -200,7 +200,8 @@ public class GuiContoler : MonoBehaviour {
                 if (speechTexts.Count == 0)
                 {
                     speechBubbleObj.SetActive(false);
-                    CloseBattleReport.interactable = true;
+                    if(Var.isTutorial)
+                        CloseBattleReport.interactable = true;
                 }
                 else
                 {
@@ -419,9 +420,9 @@ public class GuiContoler : MonoBehaviour {
 			GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
 			//colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
 			Graph.Instance.PlotFull(bird);
-			feedbackText.text = "";
+			//feedbackText.text = "";
 			winText.text = "";
-			winDetails.text = "";
+			//winDetails.text = "";
 		}
         CheckGraphNavBtns();
     } 
@@ -458,6 +459,8 @@ public class GuiContoler : MonoBehaviour {
         	
 			}
 	public void CreateBattleReport() {
+        feedbackText.gameObject.SetActive(true);
+        feedbackText.gameObject.SetActive(true);
 		closeReportBtn.SetActive(true);
         HideSmallGraph.gameObject.SetActive(false);
 		if (finalResult < 0)
