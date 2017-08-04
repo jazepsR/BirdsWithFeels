@@ -105,8 +105,12 @@ public class Bird : MonoBehaviour
 	bool started = false;
 	void Start()
 	{
-        if(!isEnemy &&!inMap)
+       /* if (!isEnemy && !inMap)
+        {
             GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi!");
+            GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi2!");
+            GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi3!");
+        }*/
 		prevRoundHealth = health;
 		x = -1;
 		y = -1;
@@ -247,7 +251,8 @@ public class Bird : MonoBehaviour
 		{
 			CheckLevels();
 		}
-		battleCount++;
+        if(!Var.isTutorial)
+		    battleCount++;
 		//Reset per battle level variables
 
 	}
@@ -318,9 +323,9 @@ public class Bird : MonoBehaviour
 	}
 	void OnMouseOver()
 	{
-		
-		
-		if (isEnemy)
+        if (Var.Infight)
+            return;
+        if (isEnemy)
 			return;
 		SetCoolDownRing(true);
 	  
@@ -336,6 +341,8 @@ public class Bird : MonoBehaviour
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
+            if (Var.Infight)
+                return;
 			AudioControler.Instance.mainAudioSource.PlayOneShot(AudioControler.Instance.pickupBird);
 			if (inMap)
 			{

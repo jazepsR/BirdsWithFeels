@@ -101,7 +101,7 @@ public class ProgressGUI : MonoBehaviour {
         if (bird.inMap)
             birdBio.text = bird.birdBio;
         Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth,bird.prevRoundHealth);
-        print("helat: "+ bird.health+ " prev: "+ bird.prevRoundHealth);
+        //print("helat: "+ bird.health+ " prev: "+ bird.prevRoundHealth);
         if (bird.health <= 0 && !bird.inMap)
         {
             deathScreen.ShowDeathMenu(bird);

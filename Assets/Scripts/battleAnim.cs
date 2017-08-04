@@ -59,16 +59,24 @@ public class battleAnim :MonoBehaviour {
 		else
 		{
 			foreach (Bird bird in FillPlayer.Instance.playerBirds)
-			{               
-				bird.UpdateBattleCount();
-				bird.AddRoundBonuses();
-				GuiContoler.Instance.UpdateBirdSave(bird);
-				bird.SetEmotion();
+			{
+                if (bird.gameObject.activeSelf)
+                {
+                    bird.UpdateBattleCount();
+                    bird.AddRoundBonuses();
+                    GuiContoler.Instance.UpdateBirdSave(bird);
+                    bird.SetEmotion();
+                }
 			}
 			yield return new WaitForSeconds(2.4f);
 			AudioControler.Instance.setBattleVolume(0f);            
 			GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
 			GuiContoler.Instance.CreateBattleReport();
+            if(Var.isTutorial)
+            {
+                yield return new WaitForSeconds(1.0f);
+                Tutorial.Instance.ShowTutorialFirstGridText(Tutorial.Instance.CurrentPos);
+            }
 		}
 	   
 	}

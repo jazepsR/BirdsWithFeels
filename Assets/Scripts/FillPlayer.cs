@@ -14,7 +14,9 @@ public class FillPlayer : MonoBehaviour {
             Var.lvlSprites = Resources.LoadAll<Sprite>("Icons/NewIcons");
         if (Var.skillIcons == null)
             Var.skillIcons = Resources.LoadAll<Sprite>("sprites/skill_pictures");
-        Instance = this;        
+        Instance = this;
+        if (Var.isTutorial && !inMap)
+            return;
         if (inMap && Var.availableBirds.Count>0)
         {
             foreach (Bird bird in Var.availableBirds)
@@ -54,7 +56,8 @@ public class FillPlayer : MonoBehaviour {
             
         }
         if (Var.availableBirds.Count < 1 && inMap)
-        {
+        {           
+
             Var.availableBirds.AddRange(playerBirds);
 
         }
@@ -76,7 +79,22 @@ public class FillPlayer : MonoBehaviour {
             }
         }       
     }
-		
+	void Start()
+    {
+        if (Var.isTutorial&& !inMap)
+        {
+            for(int i =0;i<playerBirds.Length; i++)
+            {
+                if (i < Tutorial.Instance.BirdCount[0])
+                {
+                    playerBirds[i].gameObject.SetActive(true);
+                }else
+                {
+                    playerBirds[i].gameObject.SetActive(false);
+                }
+            }
+        }
+    }
 	
 	public static void SetupBird(Bird target, Bird template)
     {

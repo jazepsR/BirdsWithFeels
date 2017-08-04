@@ -47,6 +47,8 @@ public class GuiContoler : MonoBehaviour {
 	public int activePortrait = 0;
 	public Text tooltipText;
     public GameObject speechBubble;
+    List<string> speechTexts = new List<string>();
+    List<Transform> speechPos = new List<Transform>();
     public Text SpeechBubbleText;
     public Text SpeechBubbleReminderText;
     public GameObject speechBubbleObj;
@@ -78,7 +80,7 @@ public class GuiContoler : MonoBehaviour {
     }
 	void Start()
 	{
-        
+        Var.Infight = false;
 		if (Var.emotionParticles == null)
 			Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
 		messages = new List<string>();
@@ -193,38 +195,41 @@ public class GuiContoler : MonoBehaviour {
 		}
         if (Input.GetMouseButtonDown(0))
         {
-            if(speechBubbleObj!= null)
-                speechBubbleObj.SetActive(false);
+            if (speechBubbleObj != null)
+            {
+                if (speechTexts.Count == 0)
+                {
+                    speechBubbleObj.SetActive(false);
+                    CloseBattleReport.interactable = true;
+                }
+                else
+                {
+                    SpeechBubbleText.text = speechTexts[0];                    
+                    speechBubble.GetComponent<UIFollow>().target = speechPos[0];
+                    speechPos.RemoveAt(0);
+                    speechTexts.RemoveAt(0);
+                }
+            }
         }
 	}
 
     public void ShowSpeechBubble(Transform pos,string text)
     {
-        SpeechBubbleText.text = text;
-        speechBubbleObj.SetActive(true);
-
-
-        speechBubble.GetComponent<UIFollow>().target = pos;
+        if (speechBubbleObj.activeSelf) {
+            if (Var.isTutorial)
+                CloseBattleReport.interactable = false;
+            speechTexts.Add(text);
+            speechPos.Add(pos);
+        }
+        else
+        {
+            SpeechBubbleText.text = text;
+            speechBubbleObj.SetActive(true);
+            speechBubble.GetComponent<UIFollow>().target = pos;
+           // LeanTween.delayedCall(6f, ShowSpeechBubbleReminder);
+        }
        
-        /*Vector2 viewport = Camera.main.WorldToViewportPoint(pos);
-        Vector2 screenPosition = new Vector2
-        (
-            viewport.x * this.canvasRect.sizeDelta.x,
-            viewport.y * this.canvasRect.sizeDelta.y
-        );
-
-        // this is reversed because of the anchor we are using for this element
-        //screenPosition.y = -screenPosition.y;
-        speechBubble.transform.localPosition = screenPosition;
-        */
-
-        //speechBubble.transform.position = Camera.main.ScreenToWorldPoint(pos);
-        /*Vector2 viewportPoint = Camera.main.WorldToScreenPoint(pos);//convert game object position to VievportPoint
-       // Vector2 viewportPoint = RectTransformUtility.WorldToScreenPoint(Camera.main, pos);
-        //RectTransformUtility.
-        // set MIN and MAX Anchor values(positions) to the same position (ViewportPoint)
-       speechBubble.position= speechBubble.InverseTransformPoint(pos);
-       // speechBubble.anchorMax = viewportPoint;*/
+ 
     }
     void ShowSpeechBubbleReminder()
     {
@@ -234,6 +239,10 @@ public class GuiContoler : MonoBehaviour {
     public void ShowNextGraph()
     {
         currentGraph++;
+        if (Var.isTutorial)
+        {
+            Tutorial.Instance.ShowGraphSpeech(currentGraph);
+        }
         if (currentGraph == 3)
         {
             CreateGraph(-1);
@@ -419,9 +428,12 @@ public class GuiContoler : MonoBehaviour {
     
     void CheckGraphNavBtns()
     {
-        nextGraph.interactable = (currentGraph < 3);
-        prevGraph.interactable = (currentGraph > 0);
-        CloseBattleReport.interactable = (currentGraph == 3);
+        int maxGraph = 3;
+        if (Var.isTutorial)
+            maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos]-1;
+        nextGraph.interactable = (currentGraph < maxGraph);
+        prevGraph.interactable = (currentGraph > maxGraph);
+        CloseBattleReport.interactable = (currentGraph == maxGraph);
     }
     public void GraphButton()
     {
@@ -508,6 +520,7 @@ public class GuiContoler : MonoBehaviour {
 		}
 		Debug.Log("Fight selected");
 		int result = 0;
+        Var.Infight = true;
 		Bird playerBird = null;
 
 	
@@ -638,6 +651,7 @@ public class GuiContoler : MonoBehaviour {
 	{
 		
 		Var.enemies = new Bird[12];
+        Var.Infight = false;
 		foreach (Bird bird in players)
 		{						
 			UpdateBirdSave(bird);		
@@ -665,13 +679,28 @@ public class GuiContoler : MonoBehaviour {
 
 
 		moveInMap();
+        if (Var.isTutorial)
+        {
+            for (int i = 0; i < FillPlayer.Instance.playerBirds.Length; i++)
+            {
+                if (i < Tutorial.Instance.BirdCount[posInMapRound + mapPos * 3])
+                {
+                    FillPlayer.Instance.playerBirds[i].gameObject.SetActive(true);
+                }
+                else
+                {
+                    FillPlayer.Instance.playerBirds[i].gameObject.SetActive(false);
+                }
+            }
+            Tutorial.Instance.ShowtutorialStartingText(posInMapRound + mapPos * 3);
+        }
 		BattleData Area = Var.map[mapPos];
 		if (Area.type != Var.Em.finish)
 		{
             if (Var.isTutorial)
             {
                 int posInMap = posInMapRound  + mapPos * 3;
-                print("Pos: " + posInMapRound+ "mapPos"+ mapPos);
+                Tutorial.Instance.SetCurrenPos(posInMap);
                 GetComponent<fillEnemy>().CreateTutorialEnemies(Tutorial.Instance.TutorialMap[posInMap]);
             }
             else
@@ -731,13 +760,14 @@ public class GuiContoler : MonoBehaviour {
 
 	void moveInMap()
 	{
-		posInMapRound++;
+		posInMapRound++;      
 		if (posInMapRound == roundLength)
 		{
 			posInMapRound = 0;
 			mapPos++;
 			if (nextMapArea== Var.Em.finish)
 			{
+                Var.isTutorial = false;
 				winBanner.SetActive(true);
 				mapPos = 0;
 			}

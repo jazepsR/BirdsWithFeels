@@ -60,6 +60,8 @@ public class AudioControler : MonoBehaviour {
     }
     void AmbientControl()
     {
+        if (!inBattle)
+            return;        
         ambientAudioSource.PlayOneShot(AmbientSounds[Random.Range(0, AmbientSounds.Length)]);
         if(Helpers.Instance.RandomBool())
             ambientAudioSource.PlayOneShot(AmbientSounds[Random.Range(0, AmbientSounds.Length)]);

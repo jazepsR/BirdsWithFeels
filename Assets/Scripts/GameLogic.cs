@@ -154,16 +154,35 @@ public class GameLogic : MonoBehaviour {
             winBonus += 4;
 
         if (Bird1Win(enemyBird, playerBird))
-            winBonus -= 4;
-        return 0.5f +winBonus*0.1f;
+            winBonus -= 4;      
+        
+        return 0.5f + winBonus * 0.1f;
     }
 
     public int Fight(Bird playerBird, Bird enemyBird)
     {
         float winBonus = GetBonus(playerBird, enemyBird);
-       /* int playerRoll = Random.Range(0, DiceSize) + (int)winBonus;
-        int enemyroll = Random.Range(0, DiceSize);*/
-
+        /* int playerRoll = Random.Range(0, DiceSize) + (int)winBonus;
+         int enemyroll = Random.Range(0, DiceSize);*/
+        if (Var.isTutorial)
+        {
+            if (winBonus == 0.5f && Tutorial.Instance.CurrentPos == 1)
+            {
+                winBonus = 0.0f;
+            }
+            else
+            {
+                if (winBonus >= 0.5f)
+                {
+                    winBonus = 1.1f;
+                }
+                else
+                {
+                    winBonus = 0f;
+                }
+            }
+        }
+       
 
 
         if (winBonus>Random.Range(0f,1f))
@@ -266,7 +285,9 @@ public class GameLogic : MonoBehaviour {
             }
         }
         //FightButton.gameObject.SetActive(canFight);  
-        FightButton.interactable = canFight;         
-        }
+        FightButton.interactable = canFight;
+        if (canFight && Var.isTutorial)
+            Tutorial.Instance.ShowTutorialBeforeBattleText(Tutorial.Instance.CurrentPos);     
+    }
     
 }
