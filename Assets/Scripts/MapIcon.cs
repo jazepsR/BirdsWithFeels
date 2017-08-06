@@ -51,8 +51,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         CompleteIcon.SetActive(completed);
         LockedIcon.SetActive(!available);        
         lr = GetComponent<LineRenderer>();
-        if (!CheckTargetsAvailable() &&available)
-            mapBtnClick();
+        if (!CheckTargetsAvailable() && available)
+            LeanTween.delayedCall(0.1f, mapBtnClick);
     }
     void Update()
     {

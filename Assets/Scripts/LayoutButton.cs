@@ -196,14 +196,7 @@ public class LayoutButton : MonoBehaviour
                 currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
                 ApplyPower(currentBird);
                 currentBird.ReleseBird((int)index.x, (int)index.y);
-                if (!inMap)
-                {                    
-                    GameLogic.Instance.CanWeFight();                    
-                }
-                else
-                {
-                    MapControler.Instance.CanLoadBattle();
-                }
+              
 
             }
             if(swapBird != null)
@@ -241,6 +234,14 @@ public class LayoutButton : MonoBehaviour
             {
                 currentBird = null;
                 swapBird = null;
+            }
+            if (!inMap)
+            {
+                GameLogic.Instance.CanWeFight();
+            }
+            else
+            {
+                MapControler.Instance.CanLoadBattle();
             }
         }
      

@@ -293,6 +293,8 @@ public class GameLogic : MonoBehaviour {
                 break;
             }
         }
+        if (Var.Infight)
+            canFight = false;
         //FightButton.gameObject.SetActive(canFight);  
         FightButton.interactable = canFight;
         if (canFight && Var.isTutorial)
