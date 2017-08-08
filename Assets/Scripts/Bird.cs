@@ -337,14 +337,18 @@ public class Bird : MonoBehaviour
 				isHiding = bush.activeSelf;
 				GameLogic.Instance.CanWeFight();
 				GameLogic.Instance.UpdateFeedback();
-			}
+                
+            }
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
             if (Var.Infight || health<=0)
                 return;
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
-			if (inMap)
+
+    
+
+            if (inMap)
 			{
 				if (MapControler.Instance.canHeal)
 				{
