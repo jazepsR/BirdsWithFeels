@@ -520,7 +520,7 @@ public class Helpers : MonoBehaviour {
     public void EmitEmotionParticles(Transform parent,Var.Em emotion, bool useText= true)
     {
         var emParticles = Instantiate(Var.emotionParticles, parent);
-        var particleSys = emParticles.GetComponent<ParticleSystem>().colorOverLifetime;
+        var particleSys = emParticles.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
         Gradient grad = new Gradient();
         Color col = GetEmotionColor(emotion);
         grad.SetKeys(new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
@@ -531,9 +531,9 @@ public class Helpers : MonoBehaviour {
         if (text.text == "finish")
             text.text = "Level up!";
         text.color = col;
-        LeanTween.moveLocalZ(text.gameObject, 55.0f, 1f);
-        LeanTween.scale(text.gameObject, Vector3.one * 2f, 1.2f);
-        LeanTween.alphaText(text.rectTransform, 0.0f, 1.2f);
+       // LeanTween.moveLocalZ(text.gameObject, 55.0f, 1f);
+       // LeanTween.scale(text.gameObject, Vector3.one * 2f, 1.2f);
+     //   LeanTween.alphaText(text.rectTransform, 0.0f, 1.2f);
         Destroy(emParticles, 1.7f);
     }
 
