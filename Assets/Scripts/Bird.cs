@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using System;
+[Serializable]
 public class Bird : MonoBehaviour
 {
 	public string birdBio;
@@ -323,6 +324,8 @@ public class Bird : MonoBehaviour
 	}
 	void OnMouseOver()
 	{
+        if (GuiContoler.Instance.speechBubbleObj.activeSelf)
+            return;
         if (Var.Infight)
             return;
         if (isEnemy)
@@ -340,13 +343,17 @@ public class Bird : MonoBehaviour
                 
             }
 		}
-		if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
+        {
+            GetComponent<Animator>().SetBool("lift", false);
+        }
+        if (Input.GetMouseButtonDown(0))
 		{
             if (Var.Infight || health<=0)
                 return;
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
+            GetComponent<Animator>().SetBool("lift", true);
 
-    
 
             if (inMap)
 			{
@@ -395,7 +402,8 @@ public class Bird : MonoBehaviour
 		{
 			SetCoolDownRing(false);
 			colorRenderer.color = DefaultCol;
-		}       
+            GetComponent<Animator>().SetBool("lift", false);
+        }       
 		if (isEnemy)
 		{
 			GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
@@ -435,6 +443,8 @@ public class Bird : MonoBehaviour
 	{
 		if (health <= 0)
 			return;
+        if (health + healthBoost + roundHealthChange <= 0)
+            return;
 		if (change > 0)
 		{
 			if (health != maxHealth)
@@ -708,7 +718,7 @@ public class Bird : MonoBehaviour
 			
 		if (dragged)
 		{
-			LeanTween.move(gameObject, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0), 0.1f);
+			LeanTween.move(gameObject, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x+Helpers.Instance.liftOffset.x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y+Helpers.Instance.liftOffset.y, 0), 0.02f);
 		}
 		
 
@@ -722,7 +732,8 @@ public class Bird : MonoBehaviour
 		this.x = x;
 		this.y = y;
 		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.dropBird);
-		if (!inMap)
+        GetComponent<Animator>().SetBool("lift", false);
+        if (!inMap)
 		{
 			lines.DrawLines(x, y);
 			//Debug.Log("x: " + x+ " y: " + y);

@@ -22,6 +22,7 @@ public class Helpers : MonoBehaviour {
     public string ScaredHexColor;
     public string LonelyHexColor;
     public string FriendlyHexColor;
+    public Vector2 liftOffset;
     GameObject heartBreak;
     GameObject heartGain;
     Sprite fullHeart;

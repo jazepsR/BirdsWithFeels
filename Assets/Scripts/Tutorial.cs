@@ -22,8 +22,10 @@ public class Tutorial : MonoBehaviour {
     bool shouldShowEmotionPopup = false;
     bool showedSecondBirdReportText = false;
     bool showedThirdBirdReportText = false;
+    bool[] shownMapInfos = new bool[6];
     // Use this for initialization
     void Awake () {
+        
         if (!Var.isTutorial)
             return;
         CurrentPos = 0;
@@ -83,6 +85,7 @@ public class Tutorial : MonoBehaviour {
     }
     public void ShowtutorialStartingText(int stage)
     {
+     
         switch (stage)
         {
             case 0:
@@ -116,6 +119,9 @@ public class Tutorial : MonoBehaviour {
     }
     public void ShowTutorialBeforeBattleText(int stage)
     {
+        if (shownMapInfos[stage] == true)
+            return;
+        shownMapInfos[stage] = true;
         switch (stage)
         {
             case 0:

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 public static class Var {
     
     public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared,finish};
@@ -46,12 +46,13 @@ public static class Var {
         "Elizabeth","Sofia","Evelyn","Chloe","Ella","Grace","Victoria","Aubrey","Scarlett","Zoey","Addison","Lily","Lillian","Natalie","Hannah","Aria","Layla"};
     public static string[] deathSignoffs = { "<name> will be missed.", "Memento mori.", "May <name> rest in peace." };
 
- 
+
 }
 
 
 
 
+[Serializable]
 public class MapSaveData
 {
     public int ID;

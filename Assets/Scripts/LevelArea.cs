@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class LevelArea : MonoBehaviour, IPointerEnterHandler
+public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Sprite Completed;
     public Sprite Default;
@@ -22,14 +22,15 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler
     public Levels.type level;
     [HideInInspector]
     public bool isLocked = false;
-    Color defaultColor;
+    [HideInInspector]
+    public Color defaultColor;
     [HideInInspector]
     public Image myImage;
     public bool isSmall = false;
 	// Use this for initialization
 	void Start () {
         myImage = GetComponent<Image>();
-        defaultColor = Helpers.Instance.GetEmotionColor(emotion);
+        defaultColor = Helpers.Instance.GetSoftEmotionColor(emotion);
         myImage.color = defaultColor;
         myImage.sprite = Default;
     }
@@ -40,7 +41,10 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler
 	}
 	public void OnPointerEnter(PointerEventData eventData)
 	{
+        Color col = Helpers.Instance.GetEmotionColor(emotion);
+        myImage.color = new Color(col.r,col.g,col.b,0.5f);
         Debug.Log("enterd!");
+        ProgressGUI.Instance.skillBG.color = Helpers.Instance.GetSoftEmotionColor(emotion);
         ProgressGUI.Instance.skillArea.SetActive(true);        
         LevelNameHolder.text = LevelName;
         if (myImage.sprite.Equals(Completed))
@@ -52,6 +56,10 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler
         SkillImageHolder.gameObject.SetActive(true);
         AudioControler.Instance.PlaySound(AudioControler.Instance.expand);
 	}
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        myImage.color = defaultColor;
+    }
     /*public void OnPointerExit(PointerEventData eventData)
     {
         LevelNameHolder.text = "";
@@ -61,7 +69,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler
         SkillImageHolder.gameObject.SetActive(false);
 
     }*/
-    
+
     public void Lock()
     {
         isLocked = true;       

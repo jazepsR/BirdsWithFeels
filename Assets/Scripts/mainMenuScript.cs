@@ -8,13 +8,13 @@ public class mainMenuScript : MonoBehaviour {
     public Text title;
     public Color titleColor2;
     Color titleColor;
-    public Button ContinueBtn;
+    public Button ContinueBtn;   
     void Start()
     {
         titleColor = title.color;
-        TweenForward();
-        if (Var.activeBirds.Count<1)
-            ContinueBtn.interactable = false;
+        TweenForward();       
+        
+        ContinueBtn.interactable = SaveLoad.Load();
 
     }
     void TweenForward()
@@ -51,6 +51,7 @@ public class mainMenuScript : MonoBehaviour {
 
     public void ResetGame()
     {
+    SaveLoad.DeleteSave();
     Var.mapSaveData = new List<MapSaveData>(); 
     Var.activeBirds = new List<Bird>();
     Var.availableBirds = new List<Bird>();
@@ -59,3 +60,4 @@ public class mainMenuScript : MonoBehaviour {
     ContinueBtn.interactable = false;
     }
 }
+

@@ -26,7 +26,7 @@ public class MapControler : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
-		
+        //SaveLoad.Save();
         canHeal = false;
         foreach(Bird bird in Var.activeBirds)
         {

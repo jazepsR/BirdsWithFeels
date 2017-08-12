@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
+[Serializable]
 public class Levels : MonoBehaviour {
 	public enum type { Toby,Kim,Rebecca,Tova, Terry,Friend1,Friend2,Brave1,Brave2,Lonely1,Lonely2,Scared1,Scared2};
 	Bird myBird;
@@ -286,7 +287,7 @@ public class Levels : MonoBehaviour {
 					adjacent = Helpers.Instance.GetAdjacentBirds(myBird);
 					if(!bird.foughtInRound && adjacent.Count > 0)
 					{
-						Bird healBird = adjacent[Random.Range(0, adjacent.Count - 1)];
+						Bird healBird = adjacent[UnityEngine.Random.Range(0, adjacent.Count - 1)];
 						healBird.ChageHealth(+1);
 					}
 					break;
@@ -581,7 +582,7 @@ public class Levels : MonoBehaviour {
 	}
 
 }
-
+[Serializable]
 public class LevelData{
 	public Levels.type type;
 	public Var.Em emotion;

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ProgressGUI : MonoBehaviour {
 	public Image portrait;
+    public Image skillBG;
 	public Image portraitFill;
 	public Text NameText;
 	public LevelArea[] levelAreas;
@@ -17,13 +18,15 @@ public class ProgressGUI : MonoBehaviour {
     public Text newEmotion;
     public Sprite skull;
     public deathScreenManager deathScreen;
-    public Text birdBio;  
+    public Text birdBio;
+    Color skillDefaultCol;
 	// Use this for initialization
 	void Start () {
 		Instance = this;
         try
         {
             deathScreen.HideDeathMenu();
+            skillDefaultCol = skillBG.color;
         }
         catch { }
 	}
@@ -38,6 +41,7 @@ public class ProgressGUI : MonoBehaviour {
 		bool HasSuper = (bird.level > 1);
 		foreach(LevelArea lvl in levelAreas)
 		{
+            lvl.myImage.color = lvl.defaultColor;
             lvl.gameObject.SetActive(true);
             lvl.myImage.sprite = lvl.Default;
 			lvl.Unlock();
@@ -58,13 +62,15 @@ public class ProgressGUI : MonoBehaviour {
 			}
 			if(lvl.level.ToString().Contains("2"))
 			{
+                print("two");
                 if(!HasSuper)
 				    lvl.Lock();
                 if (!Helpers.Instance.ListContainsEmotion(lvl.emotion, bird.levelList))
-                    lvl.Lock();
+                    lvl.gameObject.SetActive(false);              
 
 			}
 		}
+        skillBG.color = skillDefaultCol;
 	}
 	
     public void updateLevels(Bird bird)

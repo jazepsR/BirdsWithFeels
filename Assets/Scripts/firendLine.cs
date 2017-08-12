@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
 public class firendLine : MonoBehaviour {
 	public GameObject LineObj;
 	public List<GameObject> activeLines = new List<GameObject>();
