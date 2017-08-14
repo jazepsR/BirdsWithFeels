@@ -771,8 +771,8 @@ public class GuiContoler : MonoBehaviour {
 			if (nextMapArea== Var.Em.finish)
 			{
                 Var.isTutorial = false;
-				winBanner.SetActive(true);
-				mapPos = 0;
+				winBanner.SetActive(true);                
+                mapPos = 0;
 			}
 			
 			setMapLocation(mapPos);

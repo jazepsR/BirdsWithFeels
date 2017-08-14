@@ -26,7 +26,7 @@ public class MapControler : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
-        //SaveLoad.Save();
+        
         canHeal = false;
         foreach(Bird bird in Var.activeBirds)
         {
@@ -37,8 +37,9 @@ public class MapControler : MonoBehaviour {
                 title.text = bird.charName + " can heal one of your birds!";
             }
         }
+        SaveLoad.Save();
         //ProgressGUI.Instance.PortraitClick(Var.availableBirds[0]);
-	}
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {

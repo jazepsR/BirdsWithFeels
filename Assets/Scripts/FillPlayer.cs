@@ -14,6 +14,8 @@ public class FillPlayer : MonoBehaviour {
             Var.lvlSprites = Resources.LoadAll<Sprite>("Icons/NewIcons");
         if (Var.skillIcons == null)
             Var.skillIcons = Resources.LoadAll<Sprite>("sprites/skill_pictures");
+        if(Var.startingLvlSprites == null)
+            Var.startingLvlSprites = Resources.LoadAll<Sprite>("Icons/icons_startingabilties");
         Instance = this;
         if (Var.isTutorial && !inMap)
             return;
@@ -106,6 +108,7 @@ public class FillPlayer : MonoBehaviour {
         if (template.health < 1)
             target.gameObject.GetComponent<Animator>().SetBool("dead", true);
         target.portrait = template.portrait;
+        target.maxHealth = template.maxHealth;
         target.levelList = template.levelList;
         target.startingLVL = template.startingLVL;
         target.battleCount = template.battleCount;
@@ -118,10 +121,68 @@ public class FillPlayer : MonoBehaviour {
         target.AdventuresRested = template.AdventuresRested;
         target.CoolDownLeft = template.CoolDownLeft;
         target.CoolDownLength = template.CoolDownLength;
-        target.transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = template.hatSprite;
+       // target.transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = template.hatSprite;
     }
-	// Update is called once per frame
-	void Update () {
+
+
+    public static BirdSaveData SetupSaveBird(Bird template)
+    {
+        BirdSaveData target = new BirdSaveData();
+        target.charName = template.charName;
+        target.friendliness = template.friendliness;
+        target.confidence = template.confidence;
+        target.portraitOrder = template.portraitOrder;
+        target.health = template.health;        
+        //target.portrait = template.portrait;
+        target.levelList = template.levelList;
+        target.startingLVL = template.startingLVL;
+        target.battleCount = template.battleCount;
+        target.lastLevel = template.lastLevel;
+        target.level = template.level;
+        target.birdAbility = template.birdAbility;
+        target.consecutiveFightsWon = template.consecutiveFightsWon;
+        target.battlesToNextLVL = template.battlesToNextLVL;
+        target.roundsRested = template.roundsRested;
+        target.AdventuresRested = template.AdventuresRested;
+        target.CoolDownLeft = template.CoolDownLeft;
+        target.CoolDownLength = template.CoolDownLength;
+
+        return target;       
+    }
+    public static Bird LoadSavedBird(BirdSaveData template)
+    {
+        Bird target = new Bird("steve");
+        target.charName = template.charName;
+        target.friendliness = template.friendliness;
+        target.confidence = template.confidence;
+        target.portraitOrder = template.portraitOrder;
+        target.health = template.health;
+        //target.portrait = template.portrait;
+        target.levelList = template.levelList;
+        target.startingLVL = template.startingLVL;
+        target.battleCount = template.battleCount;
+        target.lastLevel = template.lastLevel;
+        target.level = template.level;
+        target.birdAbility = template.birdAbility;
+        target.consecutiveFightsWon = template.consecutiveFightsWon;
+        target.battlesToNextLVL = template.battlesToNextLVL;
+        target.roundsRested = template.roundsRested;
+        target.AdventuresRested = template.AdventuresRested;
+        target.CoolDownLeft = template.CoolDownLeft;
+        target.CoolDownLength = template.CoolDownLength;
+        try
+        {
+            foreach (LevelData data in target.levelList)
+            {
+                data.LVLIcon = Helpers.Instance.GetLVLSprite(data.type);
+            }
+        }
+        catch { }
+        target.portrait = Resources.Load<GameObject>("prefabs/portrait_" + target.charName);
+        return target;
+    }
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }

@@ -13,10 +13,7 @@ public class BattleData {
     public int maxEnemies=4;
 	public List<Bird.dir> dirs;
 	public List<Var.PowerUps> powers;
-	// Use this for initialization
-	void Start () {
-		
-	}
+	
 	void SetBattleData(float minConf, float maxConf, float minFriend, float maxFriend)
 	{
 		this.minConf = minConf;
@@ -56,9 +53,5 @@ public class BattleData {
 					
 
 		}
-	}
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	}	
 }

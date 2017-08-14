@@ -586,7 +586,8 @@ public class Levels : MonoBehaviour {
 public class LevelData{
 	public Levels.type type;
 	public Var.Em emotion;
-	public Sprite LVLIcon;
+    [NonSerialized]
+    public Sprite LVLIcon;
 	public string levelInfo;
 	public string title;
 

@@ -24,14 +24,14 @@ public class Bird : MonoBehaviour
 	public int x = -1;
 	public int y = -1;
 	public Var.Em emotion;
-	public string charName;
-	public Image src;    
+	public string charName;	
 	public bool inUse = true;
 	public GameObject birdPrefab;
 	public SpriteRenderer colorRenderer;
 	public GameObject bush;
-	public GameObject portrait;
-	public Image portraitColor;  
+    string portraitName;
+    [HideInInspector]
+	public GameObject portrait;	
 	[HideInInspector] 
 	public Vector3 target;
 	public Vector3 home;
@@ -92,8 +92,7 @@ public class Bird : MonoBehaviour
 	public Image CooldownRing;
 	public bool isHiding = false;
 	public int prevRoundHealth;
-	public int levelRollBonus = 0;
-	public Sprite startingIcon;
+	public int levelRollBonus = 0;	
     [HideInInspector]
 	public string levelUpText;
 	Color DefaultCol;
@@ -106,6 +105,8 @@ public class Bird : MonoBehaviour
 	bool started = false;
 	void Start()
 	{
+        if (!isEnemy && portrait == null)
+            portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
        /* if (!isEnemy && !inMap)
         {
             GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi!");
@@ -120,11 +121,12 @@ public class Bird : MonoBehaviour
 		maxHealth = 3;
 		if (!isEnemy)
 		{            
-			hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
-			if (levelList == null)
+			//hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
+			if (levelList.Count == 0)
 			{
 				levelList = new List<LevelData>();
-				AddLevel(new LevelData(startingLVL, Var.Em.Neutral,startingIcon));
+                Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);               
+				AddLevel(new LevelData(startingLVL, Var.Em.Neutral,icon));
 			}
 			levelControler = GetComponent<Levels>();
 			levelControler.ApplyStartLevel(this, levelList);       
@@ -430,8 +432,8 @@ public class Bird : MonoBehaviour
 		this.confidence = confidence;
 		this.friendliness = friendliness;
 		this.charName = name;
-		SetEmotion();
-		Debug.Log(ToString());
+		//SetEmotion();
+		//Debug.Log(ToString());
 	}
 
 	public void OnLevelPickup()

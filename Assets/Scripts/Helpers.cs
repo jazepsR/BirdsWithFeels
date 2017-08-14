@@ -464,6 +464,42 @@ public class Helpers : MonoBehaviour {
                 return neutral;
         }
     }
+
+    public Sprite GetLVLSprite(Levels.type type)
+    {
+        switch (type) {
+            case Levels.type.Kim:
+                return Var.startingLvlSprites[3];
+            case Levels.type.Rebecca:
+                return Var.startingLvlSprites[0];
+            case Levels.type.Terry:
+                return Var.startingLvlSprites[4];
+            case Levels.type.Toby:
+                return Var.startingLvlSprites[1];
+            case Levels.type.Tova:
+                return Var.startingLvlSprites[2];
+            case Levels.type.Brave1:
+                return Var.lvlSprites[1];
+            case Levels.type.Brave2:
+                return Var.lvlSprites[5];
+            case Levels.type.Friend1:
+                return Var.lvlSprites[0];
+            case Levels.type.Friend2:
+                return Var.lvlSprites[4];
+            case Levels.type.Scared1:
+                return Var.lvlSprites[2];
+            case Levels.type.Scared2:
+                return Var.lvlSprites[6];
+            case Levels.type.Lonely1:
+                return Var.lvlSprites[3];
+            case Levels.type.Lonely2:
+                return Var.lvlSprites[7];
+            default:
+                return null;
+
+
+        }       
+    }
     public string GetLVLTitle(Levels.type lvl)
     {
         switch (lvl)
