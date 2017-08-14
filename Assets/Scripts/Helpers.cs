@@ -161,7 +161,24 @@ public class Helpers : MonoBehaviour {
                 return Var.Em.Neutral;
         }
     }
-
+    public Sprite GetHatSprite(string charName)
+    {
+        switch (charName)
+        {
+            case "Kim":
+                return Var.hatSprites[1];
+            case "Tova":
+                return Var.hatSprites[0];
+            case "Terry":
+                return Var.hatSprites[2];
+            case "Rebecca":
+                return Var.hatSprites[4];
+            case "Toby":
+                return Var.hatSprites[3];
+            default:
+                return null;
+        }
+    }
     //Neutral means weak to all
     public Var.Em GetStenght(Var.Em Emotion)
     {

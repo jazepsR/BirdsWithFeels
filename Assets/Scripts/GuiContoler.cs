@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
-    public RectTransform canvasRect;
+	public RectTransform canvasRect;
 	public Text BirdLVLUpText;
 	public Text infoText;    
 	public Text infoHeading;
@@ -36,7 +36,7 @@ public class GuiContoler : MonoBehaviour {
 	public Text feedbackText;
 	public GameObject battlePanel;   
 	public GameObject closeReportBtn;
-    public Button CloseBattleReport;
+	public Button CloseBattleReport;
 	public GuiMap mapBirdScript;
 	List<Bird> players = new List<Bird>();
 	public bool inMap = false;
@@ -46,12 +46,12 @@ public class GuiContoler : MonoBehaviour {
 	[HideInInspector]
 	public int activePortrait = 0;
 	public Text tooltipText;
-    public GameObject speechBubble;
-    List<string> speechTexts = new List<string>();
-    List<Transform> speechPos = new List<Transform>();
-    public Text SpeechBubbleText;
-    public Text SpeechBubbleReminderText;
-    public GameObject speechBubbleObj;
+	public GameObject speechBubble;
+	List<string> speechTexts = new List<string>();
+	List<Transform> speechPos = new List<Transform>();
+	public Text SpeechBubbleText;
+	public Text SpeechBubbleReminderText;
+	public GameObject speechBubbleObj;
 	public SliderSwitcher confSlider;
 	public SliderSwitcher firendSlider;    
 	public Image[] BirdInfoHearts;
@@ -63,24 +63,24 @@ public class GuiContoler : MonoBehaviour {
 	bool CanToggleDeathTriggers = true;
 	Bird SelectedDeathBird = null;
 	Bird DeadBird = null;
-    [HideInInspector]
-    public Bird selectedBird;
+	[HideInInspector]
+	public Bird selectedBird;
 	public Button SelectDeathBirdBtn;
-    int currentGraph = -1;
-    public Button nextGraph;
-    public Button prevGraph;
-    public Button HideSmallGraph;
+	int currentGraph = -1;
+	public Button nextGraph;
+	public Button prevGraph;
+	public Button HideSmallGraph;
 
-    public float levelInfo_yvalue;
-    public float levelinfoHideXValue;
-    public float levelinfoshowXValue;
-    void Awake()
-    {
-        Instance = this;
-    }
+	public float levelInfo_yvalue;
+	public float levelinfoHideXValue;
+	public float levelinfoshowXValue;
+	void Awake()
+	{
+		Instance = this;
+	}
 	void Start()
 	{
-        Var.Infight = false;
+		Var.Infight = false;
 		if (Var.emotionParticles == null)
 			Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
 		messages = new List<string>();
@@ -97,8 +97,8 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void setPause()
 	{
-        AudioControler.Instance.ClickSound();
-        if (pause.activeSelf)
+		AudioControler.Instance.ClickSound();
+		if (pause.activeSelf)
 		{
 			pause.SetActive(false);
 			Time.timeScale = 1.0f;
@@ -112,29 +112,29 @@ public class GuiContoler : MonoBehaviour {
    
 	public void QuitGame()
 	{
-        AudioControler.Instance.ClickSound();
-        Application.Quit();
+		AudioControler.Instance.ClickSound();
+		Application.Quit();
 	}
 
 	public void QuitToMap()
 	{
-        int deadCount = 0;
-        foreach(Bird bird in Var.availableBirds)
-        {
-            if (bird.health <= 0)
-                deadCount++;
-        }
-        if (deadCount < 3)
-        {
-            AudioControler.Instance.ClickSound();
-            Time.timeScale = 1.0f;
-            Var.fled = true;
-            SceneManager.LoadScene("Map");
-        }else
-        {
-            Time.timeScale = 1.0f;
-            loseBanner.SetActive(true);
-        }
+		int deadCount = 0;
+		foreach(Bird bird in Var.availableBirds)
+		{
+			if (bird.health <= 0)
+				deadCount++;
+		}
+		if (deadCount < 3)
+		{
+			AudioControler.Instance.ClickSound();
+			Time.timeScale = 1.0f;
+			Var.fled = true;
+			SceneManager.LoadScene("Map");
+		}else
+		{
+			Time.timeScale = 1.0f;
+			loseBanner.SetActive(true);
+		}
 	}
 
 	public void ShowDeathMenu(Bird deadBird)
@@ -191,103 +191,105 @@ public class GuiContoler : MonoBehaviour {
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{           
-            setPause();
+			setPause();
 		}
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (speechBubbleObj != null)
-            {
-                if (speechTexts.Count == 0)
-                {
-                    speechBubbleObj.SetActive(false);
-                    if(Var.isTutorial)
-                        CloseBattleReport.interactable = true;
-                }
-                else
-                {
-                    SpeechBubbleText.text = speechTexts[0];                    
-                    speechBubble.GetComponent<UIFollow>().target = speechPos[0];
-                    speechPos.RemoveAt(0);
-                    speechTexts.RemoveAt(0);
-                }
-            }
-        }
+		if (Input.GetMouseButtonDown(0))
+		{
+			if (speechBubbleObj != null)
+			{
+				if (speechTexts.Count == 0)
+				{
+					speechBubbleObj.SetActive(false);
+					if(Var.isTutorial)
+						CloseBattleReport.interactable = true;
+				}
+				else
+				{
+					SpeechBubbleText.text = speechTexts[0];                    
+					speechBubble.GetComponent<UIFollow>().target = speechPos[0];
+					speechPos.RemoveAt(0);
+					speechTexts.RemoveAt(0);
+				}
+			}
+		}
 	}
 
-    public void ShowSpeechBubble(Transform pos,string text)
-    {
-        if (speechBubbleObj.activeSelf) {
-            if (Var.isTutorial)
-                CloseBattleReport.interactable = false;
-            speechTexts.Add(text);
-            speechPos.Add(pos);
-        }
-        else
-        {
-            SpeechBubbleText.text = text;
-            speechBubbleObj.SetActive(true);
-            speechBubble.GetComponent<UIFollow>().target = pos;
-           // LeanTween.delayedCall(6f, ShowSpeechBubbleReminder);
-        }
-       
+	public void ShowSpeechBubble(Transform pos,string text)
+	{
+		if (speechBubbleObj.activeSelf) {
+			if (Var.isTutorial)
+				CloseBattleReport.interactable = false;
+			speechTexts.Add(text);
+			speechPos.Add(pos);
+		}
+		else
+		{
+			SpeechBubbleText.text = text;
+			speechBubbleObj.SetActive(true);
+			speechBubble.GetComponent<UIFollow>().target = pos;
+		   // LeanTween.delayedCall(6f, ShowSpeechBubbleReminder);
+		}
+	   
  
-    }
-    void ShowSpeechBubbleReminder()
-    {
-        SpeechBubbleReminderText.gameObject.SetActive(true);
-    }
+	}
+	void ShowSpeechBubbleReminder()
+	{
+		SpeechBubbleReminderText.gameObject.SetActive(true);
+	}
 
-    public void ShowNextGraph()
-    {
-        currentGraph++;
-        if (Var.isTutorial)
-        {
-            Tutorial.Instance.ShowGraphSpeech(currentGraph);
-        }
-        if (currentGraph == 3)
-        {
-            CreateGraph(-1);
-        }
-        else
-        {
-            CreateGraph(currentGraph);
-            ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
-        }
-        
-        
-        
-    }
-    public void ShowPrevGraph()
-    {
-        currentGraph--;
-        CreateGraph(currentGraph);
-        ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
-        
-       
-        
-    }
+	public void ShowNextGraph()
+	{
+       // if (currentGraph == 4)
+           // CloseGraph();
+		currentGraph++;
+		if (Var.isTutorial)
+		{
+			Tutorial.Instance.ShowGraphSpeech(currentGraph);
+		}
+		if (currentGraph == 3)
+		{
+			CreateGraph(-1);
+		}
+		else
+		{
+			CreateGraph(currentGraph);
+			ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+		}
+		
+		
+		
+	}
+	public void ShowPrevGraph()
+	{
+		currentGraph--;
+		CreateGraph(currentGraph);
+		ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+		
+	   
+		
+	}
 
 	public void ShowLvlText(string text)
 	{
 		BirdLVLUpText.text = text;
-        //BirdLVLUpText.transform.parent.gameObject.SetActive(true);30
-        MoveLvlText();
-    }
-    public void MoveLvlText()
-    {
-        if(selectedBird.levelUpText != null)
-            LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoshowXValue, levelInfo_yvalue, 0), 0.3f).setEase(LeanTweenType.easeOutBack);
+		//BirdLVLUpText.transform.parent.gameObject.SetActive(true);30
+		MoveLvlText();
+	}
+	public void MoveLvlText()
+	{
+		if(selectedBird.levelUpText != null)
+			LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoshowXValue, levelInfo_yvalue, 0), 0.3f).setEase(LeanTweenType.easeOutBack);
 
-    }
-    public void HideLvlText()
+	}
+	public void HideLvlText()
 	{
 		//BirdLVLUpText.text = "";
 		LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoHideXValue, levelInfo_yvalue, 0), 0.3f).setEase(LeanTweenType.easeInBack);
-        //BirdLVLUpText.transform.parent.gameObject.SetActive(false);-340
+		//BirdLVLUpText.transform.parent.gameObject.SetActive(false);-340
 
-    }
+	}
 
-    void UpdateHearts(int health)
+	void UpdateHearts(int health)
 	{
 		Debug.Log("Health: " + health);
 		for(int i=0;i< hearts.Length; i++)
@@ -356,7 +358,7 @@ public class GuiContoler : MonoBehaviour {
 			Destroy(child.gameObject);
 		}
 		closeReportBtn.SetActive(false);
-        HideSmallGraph.gameObject.SetActive(true);
+		HideSmallGraph.gameObject.SetActive(true);
 		Reset();
 	}
 	public void CloseBirdStats()
@@ -371,33 +373,35 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CreateGraph(object o)
 	{
-        Helpers.Instance.HideTooltip();
-        battlePanel.SetActive(false);       
-        foreach (Transform child in graph.transform.Find("ReportGraph").transform)
-        {
-            Destroy(child.gameObject);
-        }
-        int birdNum = (int)o;
-        if(birdNum!=-1)
-            currentGraph = birdNum;
-		Graph.Instance.portraits = new List<GameObject>();
-        List<Bird> BirdsToGraph;
+		Helpers.Instance.HideTooltip();
+		battlePanel.SetActive(false);       
+		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
+		{
+			Destroy(child.gameObject);
+		}
+		int birdNum = (int)o;
         if (birdNum == -1)
-            BirdsToGraph = Var.activeBirds;
+            currentGraph = 4;
         else
-        {
-            BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
-            if (Var.activeBirds[birdNum].hasNewLevel)
-            {
-                levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
-                AudioControler.Instance.PlaySound(AudioControler.Instance.applause);
-                return;
-            }
-        }
+            currentGraph = birdNum;
+        Graph.Instance.portraits = new List<GameObject>();
+		List<Bird> BirdsToGraph;
+		if (birdNum == -1)
+			BirdsToGraph = Var.activeBirds;
+		else
+		{
+			BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
+			if (Var.activeBirds[birdNum].hasNewLevel)
+			{
+				levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
+				AudioControler.Instance.PlaySound(AudioControler.Instance.applause);
+				return;
+			}
+		}
 
 
 
-        foreach (Bird bird in BirdsToGraph)
+		foreach (Bird bird in BirdsToGraph)
 		{
 			//Normalize bird stats
 			int treshold = Var.lvl2 - 1;
@@ -424,45 +428,45 @@ public class GuiContoler : MonoBehaviour {
 			winText.text = "";
 			//winDetails.text = "";
 		}
-        CheckGraphNavBtns();
-    } 
-    
-    void CheckGraphNavBtns()
-    {
-        int maxGraph = 3;
-        if (Var.isTutorial)
-            maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos]-1;
-        nextGraph.interactable = (currentGraph < maxGraph);
-        prevGraph.interactable = (currentGraph > 0);
-        CloseBattleReport.interactable = (currentGraph == maxGraph);
-    }
-    public void GraphButton()
-    {
-        InitiateGraph(selectedBird);
-    }
+		CheckGraphNavBtns();
+	} 
+	
+	void CheckGraphNavBtns()
+	{
+		int maxGraph = 3;
+		if (Var.isTutorial)
+			maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos]-1;
+		nextGraph.interactable = (currentGraph < maxGraph);
+		prevGraph.interactable = (currentGraph > 0);
+		//CloseBattleReport.interactable = (currentGraph == maxGraph);
+	}
+	public void GraphButton()
+	{
+		InitiateGraph(selectedBird);
+	}
 
 	public void InitiateGraph(Bird bird)
 	{
-        int index = -1;
-        for(int i= 0; i < Var.activeBirds.Count; i++)
-        {
-            if(bird.charName == Var.activeBirds[i].charName)
-            {
-                index = i;
-                break;
-            }
-        }
-        ProgressGUI.Instance.PortraitClick(bird);
-        ProgressGUI.Instance.skillArea.SetActive(false);
-        LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
-       
-        	
+		int index = -1;
+		for(int i= 0; i < Var.activeBirds.Count; i++)
+		{
+			if(bird.charName == Var.activeBirds[i].charName)
+			{
+				index = i;
+				break;
+			}
+		}
+		ProgressGUI.Instance.PortraitClick(bird);
+		ProgressGUI.Instance.skillArea.SetActive(false);
+		LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
+	   
+			
 			}
 	public void CreateBattleReport() {
-        feedbackText.gameObject.SetActive(true);
-        feedbackText.gameObject.SetActive(true);
+		feedbackText.gameObject.SetActive(true);
+		feedbackText.gameObject.SetActive(true);
 		closeReportBtn.SetActive(true);
-        HideSmallGraph.gameObject.SetActive(false);
+		HideSmallGraph.gameObject.SetActive(false);
 		if (finalResult < 0)
 		{
 			UpdateHearts(--Var.health);
@@ -512,18 +516,18 @@ public class GuiContoler : MonoBehaviour {
 	
 	public void Fight()
 	{
-        GameLogic.Instance.FightButton.interactable = false;
-        AudioControler.Instance.ClickSound();
-        AudioControler.Instance.setBattleVolume(0.85f);
-        AudioControler.Instance.ambientAudioSource.PlayOneShot(AudioControler.Instance.battleStart);
-        feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
+		GameLogic.Instance.FightButton.interactable = false;
+		AudioControler.Instance.ClickSound();
+		AudioControler.Instance.setBattleVolume(0.85f);
+		AudioControler.Instance.ambientAudioSource.PlayOneShot(AudioControler.Instance.battleStart);
+		feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
 		foreach (feedBack fb in feedBackObj)
 		{
 			fb.HideFeedBack(true);
 		}
 		Debug.Log("Fight selected");
 		int result = 0;
-        Var.Infight = true;
+		Var.Infight = true;
 		Bird playerBird = null;
 
 	
@@ -643,18 +647,18 @@ public class GuiContoler : MonoBehaviour {
 		SceneManager.LoadScene("Map");
 	}
 
-    public void LoadMainMenu()
-    {
-        Time.timeScale = 1.0f;
-        AudioControler.Instance.ClickSound();
-        SceneManager.LoadScene("MainMenu");
+	public void LoadMainMenu()
+	{
+		Time.timeScale = 1.0f;
+		AudioControler.Instance.ClickSound();
+		SceneManager.LoadScene("MainMenu");
 
-    }
+	}
 	public void Reset()
 	{
 		
 		Var.enemies = new Bird[12];
-        Var.Infight = false;
+		Var.Infight = false;
 		foreach (Bird bird in players)
 		{						
 			UpdateBirdSave(bird);		
@@ -682,37 +686,37 @@ public class GuiContoler : MonoBehaviour {
 
 
 		moveInMap();
-        if (Var.isTutorial)
-        {
-            for (int i = 0; i < FillPlayer.Instance.playerBirds.Length; i++)
-            {
-                if (i < Tutorial.Instance.BirdCount[posInMapRound + mapPos * 3])
-                {
-                    FillPlayer.Instance.playerBirds[i].gameObject.SetActive(true);
-                }
-                else
-                {
-                    FillPlayer.Instance.playerBirds[i].gameObject.SetActive(false);
-                }
-            }
-            Tutorial.Instance.ShowtutorialStartingText(posInMapRound + mapPos * 3);
-        }
+		if (Var.isTutorial)
+		{
+			for (int i = 0; i < FillPlayer.Instance.playerBirds.Length; i++)
+			{
+				if (i < Tutorial.Instance.BirdCount[posInMapRound + mapPos * 3])
+				{
+					FillPlayer.Instance.playerBirds[i].gameObject.SetActive(true);
+				}
+				else
+				{
+					FillPlayer.Instance.playerBirds[i].gameObject.SetActive(false);
+				}
+			}
+			Tutorial.Instance.ShowtutorialStartingText(posInMapRound + mapPos * 3);
+		}
 		BattleData Area = Var.map[mapPos];
 		if (Area.type != Var.Em.finish)
 		{
-            if (Var.isTutorial)
-            {
-                int posInMap = posInMapRound  + mapPos * 3;
-                Tutorial.Instance.SetCurrenPos(posInMap);
-                GetComponent<fillEnemy>().CreateTutorialEnemies(Tutorial.Instance.TutorialMap[posInMap]);
-            }
-            else
-            {
-                GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
-                ObstacleGenerator.Instance.clearObstacles();
-                ObstacleGenerator.Instance.GenerateObstacles();
-            }
-            GameLogic.Instance.CanWeFight();
+			if (Var.isTutorial)
+			{
+				int posInMap = posInMapRound  + mapPos * 3;
+				Tutorial.Instance.SetCurrenPos(posInMap);
+				GetComponent<fillEnemy>().CreateTutorialEnemies(Tutorial.Instance.TutorialMap[posInMap]);
+			}
+			else
+			{
+				GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
+				ObstacleGenerator.Instance.clearObstacles();
+				ObstacleGenerator.Instance.GenerateObstacles();
+			}
+			GameLogic.Instance.CanWeFight();
 			
 		}
 
@@ -770,9 +774,9 @@ public class GuiContoler : MonoBehaviour {
 			mapPos++;
 			if (nextMapArea== Var.Em.finish)
 			{
-                Var.isTutorial = false;
+				Var.isTutorial = false;
 				winBanner.SetActive(true);                
-                mapPos = 0;
+				mapPos = 0;
 			}
 			
 			setMapLocation(mapPos);

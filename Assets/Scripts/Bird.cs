@@ -105,6 +105,7 @@ public class Bird : MonoBehaviour
 	bool started = false;
 	void Start()
 	{
+        
         if (!isEnemy && portrait == null)
             portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
        /* if (!isEnemy && !inMap)
@@ -119,9 +120,10 @@ public class Bird : MonoBehaviour
 		prevConf = confidence;
 		prevFriend = friendliness;		
 		if (!isEnemy)
-		{            
-			//hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
-			if (levelList.Count == 0)
+		{
+            transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName);
+            //hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
+            if (levelList.Count == 0)
 			{
 				levelList = new List<LevelData>();
                 Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);               

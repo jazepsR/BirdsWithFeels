@@ -16,6 +16,14 @@ public class FillPlayer : MonoBehaviour {
             Var.skillIcons = Resources.LoadAll<Sprite>("sprites/skill_pictures");
         if(Var.startingLvlSprites == null)
             Var.startingLvlSprites = Resources.LoadAll<Sprite>("Icons/icons_startingabilties");
+        if(Var.hatSprites == null)
+        {
+            Var.hatSprites = new List<Sprite>();
+            Var.hatSprites.AddRange(Resources.LoadAll<Sprite>("sprites/hat_spriteSheet"));
+            Var.hatSprites.Add(Resources.Load<Sprite>("sprites/hat_spriteSheet_3"));
+            Var.hatSprites.Add(Resources.Load<Sprite>("sprites/hat_spriteSheet_4"));
+            print(Var.hatSprites.Count);
+        }
         Instance = this;
         if (Var.isTutorial && !inMap)
             return;

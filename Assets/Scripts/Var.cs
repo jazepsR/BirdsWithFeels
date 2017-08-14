@@ -37,6 +37,7 @@ public static class Var {
     public static Sprite[] lvlSprites = null;
     public static Sprite[] skillIcons = null;
     public static Sprite[] startingLvlSprites = null;
+    public static List<Sprite> hatSprites = null;
     public static GameObject emotionParticles = null;
     public static bool Infight = false;
     public static string[] maleNames = {"Noah", "Liam", "Mason", "Jacob", "William","Ethan", "James","Alexander","Michael","Benjamin","Elijah",
