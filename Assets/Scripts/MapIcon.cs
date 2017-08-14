@@ -135,7 +135,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero;
         MapControler.Instance.selectionTiles.transform.localScale = Vector3.zero;
         MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
-        LeanTween.move(gameObject, MapControler.Instance.centerPos, 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
+        LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position+(transform.parent.transform.position-transform.position), 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
     }
 
     public void ShowAreaDetails()

@@ -117,8 +117,7 @@ public class Bird : MonoBehaviour
 		x = -1;
 		y = -1;
 		prevConf = confidence;
-		prevFriend = friendliness;
-		maxHealth = 3;
+		prevFriend = friendliness;		
 		if (!isEnemy)
 		{            
 			//hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;

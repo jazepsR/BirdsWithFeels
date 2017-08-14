@@ -443,7 +443,7 @@ public class Levels : MonoBehaviour {
 			{
 				return "First "+ Helpers.Instance.BraveHexColor + "brave</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Brave1);
 			}
-			if (myBird.winsInOneFight > 1 )
+			if (myBird.winsInOneFight > 1 && !Helpers.Instance.ListContainsLevel(type.Brave1, LevelList))
 			{
 				ApplyLevel(new LevelData(type.Brave1, Var.Em.Confident, Var.lvlSprites[1]), "Brave 1");
 			}
@@ -459,7 +459,7 @@ public class Levels : MonoBehaviour {
 			{
 				return "Second " + Helpers.Instance.BraveHexColor + "brave</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Brave2);
 			}
-			if (myBird.consecutiveFightsWon >= 6  && Helpers.Instance.ListContainsLevel(Levels.type.Brave1,myBird.levelList))
+			if (myBird.consecutiveFightsWon >= 6  && Helpers.Instance.ListContainsLevel(Levels.type.Brave1,myBird.levelList) && !Helpers.Instance.ListContainsLevel(type.Brave2, LevelList))
 			{
 				ApplyLevel(new LevelData(type.Brave2, Var.Em.Confident, Var.lvlSprites[5]), "Brave 2");
 			}
@@ -474,7 +474,7 @@ public class Levels : MonoBehaviour {
 			{
 				return "First " + Helpers.Instance.LonelyHexColor + "Lonely</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Lonely1);
 			}
-			if (  Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.wonLastBattle>=1)
+			if (  Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.wonLastBattle>=1 && !Helpers.Instance.ListContainsLevel(type.Lonely1, LevelList))
 			{
 				ApplyLevel(new LevelData(type.Lonely1, Var.Em.Lonely, Var.lvlSprites[3]), "Lonely 1");
 			}            
@@ -490,7 +490,7 @@ public class Levels : MonoBehaviour {
 			{
 				return "Second " + Helpers.Instance.LonelyHexColor + "Lonely</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Lonely2);
 			}
-			if (Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.AdventuresRested>=2 && Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, myBird.levelList))
+			if (Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.AdventuresRested>=2 && Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, myBird.levelList) && !Helpers.Instance.ListContainsLevel(type.Lonely2, LevelList))
 			{
 				ApplyLevel(new LevelData(type.Lonely2, Var.Em.Lonely, Var.lvlSprites[7]),"Lonely 2");
 			}
@@ -506,7 +506,7 @@ public class Levels : MonoBehaviour {
 			{
 				return "First " + Helpers.Instance.FriendlyHexColor + "Friendly</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Friend1);
 			}
-			if (myBird.friendBoost>= 3  && myBird.wonLastBattle >=1 )
+			if (myBird.friendBoost>= 3  && myBird.wonLastBattle >=1 && !Helpers.Instance.ListContainsLevel(type.Friend1, LevelList))
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[0]),"Friendly 1");
 			}
@@ -532,7 +532,7 @@ public class Levels : MonoBehaviour {
 					break;
 				}
 			}
-			if (closeFriend && myBird.friendBoost >= 5 )
+			if (closeFriend && myBird.friendBoost >= 5 && !Helpers.Instance.ListContainsLevel(type.Friend2, LevelList))
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[4]),"Friendly 2");
 			}
@@ -557,7 +557,7 @@ public class Levels : MonoBehaviour {
 				}
 			}
 
-			if ((closeWinner &&myBird.wonLastBattle == 0) || (closeWinner && myBird.wonLastBattle == 2))
+			if ((closeWinner &&myBird.wonLastBattle == 0) || (closeWinner && myBird.wonLastBattle == 2) && !Helpers.Instance.ListContainsLevel(type.Scared1, LevelList))
 			{
 				ApplyLevel(new LevelData(type.Scared1, Var.Em.Scared, Var.lvlSprites[2]),"Scared 1");
 			}
@@ -573,7 +573,7 @@ public class Levels : MonoBehaviour {
 			{
 				return "Second " +Helpers.Instance.ScaredHexColor +"Scared</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Scared2);
 			}
-			if (myBird.roundsRested >= 4  && Helpers.Instance.ListContainsLevel(Levels.type.Scared2, myBird.levelList))
+			if (myBird.roundsRested >= 4  && !Helpers.Instance.ListContainsLevel(type.Scared2, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Scared2, Var.Em.Scared, Var.lvlSprites[6]),"Scared 2");
 			}
