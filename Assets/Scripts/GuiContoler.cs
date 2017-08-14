@@ -239,8 +239,11 @@ public class GuiContoler : MonoBehaviour {
 
 	public void ShowNextGraph()
 	{
-       // if (currentGraph == 4)
-           // CloseGraph();
+        if (currentGraph == 3)
+        {
+            CloseGraph();
+            return;
+        }
 		currentGraph++;
 		if (Var.isTutorial)
 		{
@@ -349,9 +352,12 @@ public class GuiContoler : MonoBehaviour {
 	public void CloseGraph()
 	{
 
-		//graph.SetActive(false);
-		battlePanel.SetActive(true);        
-		LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
+        //graph.SetActive(false);
+        AudioControler.Instance.PlayPaperSound();
+		battlePanel.SetActive(true);
+        if (!Reset())
+            return;
+        LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
 		mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound+1);
 		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
 		{
@@ -359,7 +365,7 @@ public class GuiContoler : MonoBehaviour {
 		}
 		closeReportBtn.SetActive(false);
 		HideSmallGraph.gameObject.SetActive(true);
-		Reset();
+		
 	}
 	public void CloseBirdStats()
 	{
@@ -381,7 +387,7 @@ public class GuiContoler : MonoBehaviour {
 		}
 		int birdNum = (int)o;
         if (birdNum == -1)
-            currentGraph = 4;
+            currentGraph = 3;
         else
             currentGraph = birdNum;
         Graph.Instance.portraits = new List<GameObject>();
@@ -436,9 +442,10 @@ public class GuiContoler : MonoBehaviour {
 		int maxGraph = 3;
 		if (Var.isTutorial)
 			maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos]-1;
-		nextGraph.interactable = (currentGraph < maxGraph);
+		//nextGraph.interactable = (currentGraph < maxGraph);
 		prevGraph.interactable = (currentGraph > 0);
 		//CloseBattleReport.interactable = (currentGraph == maxGraph);
+        
 	}
 	public void GraphButton()
 	{
@@ -654,7 +661,7 @@ public class GuiContoler : MonoBehaviour {
 		SceneManager.LoadScene("MainMenu");
 
 	}
-	public void Reset()
+	public bool Reset()
 	{
 		
 		Var.enemies = new Bird[12];
@@ -662,6 +669,15 @@ public class GuiContoler : MonoBehaviour {
 		foreach (Bird bird in players)
 		{						
 			UpdateBirdSave(bird);		
+            foreach(Bird activeBird in Var.activeBirds)
+            {
+                if (activeBird.health <= 0)
+                {
+                    Time.timeScale = 0.0f;
+                    QuitToMap();
+                    return false;
+                }
+            }
 			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
 			//bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
 			//bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
@@ -719,6 +735,7 @@ public class GuiContoler : MonoBehaviour {
 			GameLogic.Instance.CanWeFight();
 			
 		}
+        return true;
 
 	}
 

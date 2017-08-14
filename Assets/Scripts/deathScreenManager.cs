@@ -12,7 +12,7 @@ public class deathScreenManager : MonoBehaviour {
 
     public void ShowDeathMenu(Bird bird)
     {
-        returnToMapBtn.gameObject.SetActive(true);
+        //returnToMapBtn.gameObject.SetActive(true);
         if (GuiContoler.Instance.nextMapArea == Var.Em.finish && (GuiContoler.Instance.roundLength == GuiContoler.Instance.posInMapRound+1))
             returnToMapBtn.gameObject.SetActive(false);
         DeathMenu.SetActive(true);
