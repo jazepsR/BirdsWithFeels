@@ -118,7 +118,7 @@ public class GuiContoler : MonoBehaviour {
 
 	public void QuitToMap()
 	{
-		int deadCount = 0;
+		int deadCount = 0;        
 		foreach(Bird bird in Var.availableBirds)
 		{
 			if (bird.health <= 0)
@@ -357,8 +357,7 @@ public class GuiContoler : MonoBehaviour {
 		battlePanel.SetActive(true);
         if (!Reset())
             return;
-        LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
-		mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound+1);
+        LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
 		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
 		{
 			Destroy(child.gameObject);
@@ -651,7 +650,8 @@ public class GuiContoler : MonoBehaviour {
 				}
 			}
 		}
-		SceneManager.LoadScene("Map");
+        Var.shouldDoMapEvent = true;
+        SceneManager.LoadScene("Map");
 	}
 
 	public void LoadMainMenu()
@@ -700,8 +700,8 @@ public class GuiContoler : MonoBehaviour {
 		finalResult = 0;
 		players = new List<Bird>();
 
-
-		moveInMap();
+        mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound + 1);
+        moveInMap();
 		if (Var.isTutorial)
 		{
 			for (int i = 0; i < FillPlayer.Instance.playerBirds.Length; i++)
@@ -731,6 +731,7 @@ public class GuiContoler : MonoBehaviour {
 				GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
 				ObstacleGenerator.Instance.clearObstacles();
 				ObstacleGenerator.Instance.GenerateObstacles();
+                EventController.Instance.tryEvent();
 			}
 			GameLogic.Instance.CanWeFight();
 			

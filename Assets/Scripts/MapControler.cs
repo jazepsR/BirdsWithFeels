@@ -37,7 +37,12 @@ public class MapControler : MonoBehaviour {
                 title.text = bird.charName + " can heal one of your birds!";
             }
         }
-        SaveLoad.Save();
+        SaveLoad.Save();        
+        if (Var.shouldDoMapEvent)
+        {
+            EventController.Instance.tryEvent();
+            Var.shouldDoMapEvent = false;
+        }
         //ProgressGUI.Instance.PortraitClick(Var.availableBirds[0]);
     }
 	

@@ -466,17 +466,21 @@ public class Bird : MonoBehaviour
 			}
 			else
 			{
-				List<Bird> birds = Helpers.Instance.GetAdjacentBirds(this);
-				foreach (Bird bird in birds)
-				{
-					if (Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList) && bird.CoolDownLeft == 0)
-					{
-						bird.CoolDownLeft = bird.CoolDownLength;
-						change = 0;
-						GameObject shield = Resources.Load("shieldEffect") as GameObject;
-						Instantiate(shield, transform);
-					}
-				}
+                try
+                {
+                    List<Bird> birds = Helpers.Instance.GetAdjacentBirds(this);
+                    foreach (Bird bird in birds)
+                    {
+                        if (Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList) && bird.CoolDownLeft == 0)
+                        {
+                            bird.CoolDownLeft = bird.CoolDownLength;
+                            change = 0;
+                            GameObject shield = Resources.Load("shieldEffect") as GameObject;
+                            Instantiate(shield, transform);
+                        }
+                    }
+                }
+                catch { }
 			}
 		}
 	   
@@ -516,7 +520,7 @@ public class Bird : MonoBehaviour
 		}
 	}
 
-	public void AddRoundBonuses()
+	public void AddRoundBonuses(bool doFightStuff= true)
 	{
 		print(charName + " doing round bonus. HealthGain " + roundHealthChange);
 		if (dead)
@@ -524,28 +528,31 @@ public class Bird : MonoBehaviour
 		prevRoundHealth = health;
 		friendliness += friendBoost;
 		confidence += confBoos;
-		if (!foughtInRound)
-		{
-			consecutiveFightsWon = 0;
-			roundsRested++;
-			confidence = confidence - confLoseOnRest;            
-		}else
-		{
-			roundsRested = 0;
-		}
-		if(CoolDownLeft>0)
-			CoolDownLeft--;
-		try
-		{
-			CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;
-		}
-		catch
-		{
-			Debug.Log("fix cooldown rings!");
-		}
-		if (!foughtInRound)
-			ChageHealth(1);
-		
+        if (doFightStuff)
+        {
+            if (!foughtInRound)
+            {
+                consecutiveFightsWon = 0;
+                roundsRested++;
+                confidence = confidence - confLoseOnRest;
+            }
+            else
+            {
+                roundsRested = 0;
+            }
+            if (CoolDownLeft > 0)
+                CoolDownLeft--;
+            try
+            {
+                CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;
+            }
+            catch
+            {
+                Debug.Log("fix cooldown rings!");
+            }
+            if (!foughtInRound)
+                ChageHealth(1);
+        }
 		
 		health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
 			 
