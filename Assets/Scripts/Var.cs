@@ -19,7 +19,7 @@ public static class Var {
     public static int friendStraightGain = 2;
     public static int friendDiagGain = 1;
     public static int[] friendTable = new int[] { -2, 0, 2, 4, 6 };
-    public static Bird[] enemies = new Bird[12];
+    public static Bird[] enemies = new Bird[8];
     public static Bird[,] playerPos = new Bird[4,4];
     public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
     public static Text birdInfo;

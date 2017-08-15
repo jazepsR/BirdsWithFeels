@@ -409,13 +409,7 @@ public class Levels : MonoBehaviour {
 		if(x+y>=4)
 		   list.Add(Var.enemies[x + y]);
 		if(x + y + 2 * (4 - x) <=7)
-			list.Add(Var.enemies[x+y + 2*(4-x)]);
-	   
-		//Bottom
-		if(x+y+4>=8)
-			list.Add(Var.enemies[x + y+4]);
-		if(x + (4 - y)+8 > 8 && x + (4 - y)+8 <12)
-			list.Add(Var.enemies[x + y + 2 * (4 - x)]);
+			list.Add(Var.enemies[x+y + 2*(4-x)]);	   
 		return list;
 	}
 

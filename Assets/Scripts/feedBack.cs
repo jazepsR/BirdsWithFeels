@@ -112,27 +112,7 @@ public class feedBack : MonoBehaviour {
 
                     }
                     break;
-                case Bird.dir.bottom:
-                    for (int i = 0; i < 4; i++)
-                    {
-                        if (Var.playerPos[myIndex, 3 - i] != null)
-                        {
-                            Bird bird = Var.playerPos[myIndex, 3 - i];
-                            if (bird.isHiding)
-                            {
-                                hideBonus = hideVal;
-                            }
-                            else
-                            {
-                                PlayerEnemyBird = Var.playerPos[myIndex, 3 - i];
-                                ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, 3 - i], birdScript), Var.playerPos[myIndex, 3 - i]);
-                                hasFeedback = true;
-                                break;
-                            }
-                        }
-
-                    }
-                    break;
+               
             }
         if(!hasFeedback)
             HideFeedBack(false);
@@ -170,19 +150,7 @@ public class feedBack : MonoBehaviour {
 
 				}
 				break;
-			case Bird.dir.bottom:
-				for (int i = 0; i < 4; i++)
-				{
-					if (Var.playerPos[myIndex, 3 - i] != null)
-					{
-						if (Var.playerPos[myIndex, 3 - i] == bird)
-							return false;
-						else
-							break;
-					}
-
-				}
-				break;
+		
 		}
 		return true;
 	}

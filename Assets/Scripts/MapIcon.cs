@@ -22,8 +22,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public bool hasTopEnemyRow = true;
     public bool hasFrontEnemyRow = true;
     [Range(0.0f, 1.0f)]
-    public float mainEmotionSpawnRate = 0.8f;
-    public bool hasBottomEnemyRow = true;
+    public float mainEmotionSpawnRate = 0.8f;   
     [Header("Tile Configuration")]
     public bool hasObstacles;
     public bool hasScaredPowerUps;
@@ -215,9 +214,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         if (hasFrontEnemyRow)
             dirList.Add(Bird.dir.front);
         if (hasTopEnemyRow)
-            dirList.Add(Bird.dir.top);
-        if (hasBottomEnemyRow)
-            dirList.Add(Bird.dir.bottom);
+            dirList.Add(Bird.dir.top);       
         return dirList;
     }
 
@@ -274,9 +271,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         if (hasFrontEnemyRow)
             stageInfo += "\u2022Front ";
         if (hasTopEnemyRow)
-            stageInfo += "\u2022Top ";
-        if (hasBottomEnemyRow)
-            stageInfo += "\u2022Back";
+            stageInfo += "\u2022Top ";      
         if (hasObstacles)
             stageInfo += "\nHas obstacles";
         if (hasHealthPowerUps)

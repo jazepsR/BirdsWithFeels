@@ -547,9 +547,7 @@ public class Helpers : MonoBehaviour {
         switch (dir)
         {
             case Bird.dir.front:
-                return new Vector3(increment, 0);
-            case Bird.dir.bottom:
-                return new Vector3(0, -increment);
+                return new Vector3(increment, 0);          
             case Bird.dir.top:
                 return new Vector3(0, increment);
             default:

@@ -569,19 +569,6 @@ public class GuiContoler : MonoBehaviour {
 						}
 
 					}
-					if (Var.enemies[i].position == Bird.dir.bottom)
-					{
-						if (Var.playerPos[i % 4, 3 - j] != null)
-						{
-							if (!Var.playerPos[i % 4, 3 - j].isHiding)
-							{
-								playerBird = Var.playerPos[i % 4, 3 - j];
-								break;
-							}
-						}
-
-					}
-
 				}
 				playerBird.foughtInRound = true;
 				int resultOfBattle = GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
@@ -664,7 +651,7 @@ public class GuiContoler : MonoBehaviour {
 	public bool Reset()
 	{
 		
-		Var.enemies = new Bird[12];
+		Var.enemies = new Bird[8];
 		Var.Infight = false;
 		foreach (Bird bird in players)
 		{						
