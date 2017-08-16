@@ -37,8 +37,37 @@ public class Helpers : MonoBehaviour {
         emptyHeart = Resources.Load<Sprite>("sprites/emptyHeart");
         Instance = this;
     }
+    public EventScript.Character GetCharEnum(Bird bird)
+    {
+        return (EventScript.Character)Enum.Parse(typeof(EventScript.Character), bird.charName);
+    }
+    public Bird GetBirdFromEnum(EventScript.Character ch)
+    {
+        foreach(Bird bird in Var.availableBirds)
+        {
+            if (bird.charName == ch.ToString())
+                return bird;
+        }
+        return null;
 
 
+    }
+        public Var.Em GetOppositeEmotion(Var.Em type)
+    {
+        switch (type)
+        {
+            case Var.Em.Confident:
+                return Var.Em.Scared;
+            case Var.Em.Scared:
+                return Var.Em.Confident;
+            case Var.Em.Friendly:
+                return Var.Em.Lonely;
+            case Var.Em.Lonely:
+                return Var.Em.Friendly;
+            default:
+                return Var.Em.Neutral;
+        }
+    }
     
     public bool RandomBool()
     {

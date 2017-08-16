@@ -63,7 +63,8 @@ public class Bird : MonoBehaviour
 	public int confLoseOnRest = 1;
 	public int groundMultiplier = 1;
 	public GameObject healParticle;
-	Levels levelControler;
+    [HideInInspector]
+	public Levels levelControler;
 	[HideInInspector]
 	public LevelData lastLevel;
 	public int battleCount = 0;
@@ -98,14 +99,18 @@ public class Bird : MonoBehaviour
 	Color DefaultCol;
 	Color HighlightCol;
 	public bool dead = false;
+    public Var.Em preferredEmotion;
 	public int birdIndex = 0;
 	public bool hasNewLevel = false;
+    [HideInInspector]
+    public Bird relationshipBird = null;
 	[HideInInspector]
 	public Var.Em prevEmotion=  Var.Em.finish;
 	bool started = false;
+    public Dictionary<EventScript.Character, int> relationships;
 	void Start()
 	{
-        
+      
         if (!isEnemy && portrait == null)
             portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
        /* if (!isEnemy && !inMap)
@@ -121,6 +126,16 @@ public class Bird : MonoBehaviour
 		prevFriend = friendliness;		
 		if (!isEnemy)
 		{
+            if (relationships==null)
+            {
+                relationships = new Dictionary<EventScript.Character, int>(); 
+                relationships.Add(EventScript.Character.Kim, 0);
+                relationships.Add(EventScript.Character.Terry, 0);
+                relationships.Add(EventScript.Character.Toby, 0);
+                relationships.Add(EventScript.Character.Tova, 0);
+                relationships.Add(EventScript.Character.Rebecca, 0);
+                relationships.Remove(Helpers.Instance.GetCharEnum(this));
+            }
             transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName);
             //hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
             if (levelList.Count == 0)
@@ -530,6 +545,7 @@ public class Bird : MonoBehaviour
 		confidence += confBoos;
         if (doFightStuff)
         {
+            RelationshipScript.applyRelationship(this);
             if (!foughtInRound)
             {
                 consecutiveFightsWon = 0;
@@ -595,8 +611,8 @@ public class Bird : MonoBehaviour
 				if (confidence >= Var.lvl1)
 					emotion = Var.Em.Confident;
 				//Superconfident
-				if (confidence >= Var.lvl2)
-					emotion = Var.Em.SuperConfident;
+				//if (confidence >= Var.lvl2)
+				//	emotion = Var.Em.SuperConfident;
 			}
 			else
 			{
@@ -605,8 +621,8 @@ public class Bird : MonoBehaviour
 			   if (confidence <= -Var.lvl1)
 					emotion = Var.Em.Scared;
 				//SuperScared
-				if (confidence <= -Var.lvl2)
-					emotion = Var.Em.SuperScared;
+				//if (confidence <= -Var.lvl2)
+				//	emotion = Var.Em.SuperScared;
 			}
 
 		}
@@ -621,8 +637,8 @@ public class Bird : MonoBehaviour
 				if (friendliness >= Var.lvl1)
 					emotion = Var.Em.Friendly;
 				//SuperFriendly
-				if (friendliness >= Var.lvl2)
-					emotion = Var.Em.SuperFriendly;
+				//if (friendliness >= Var.lvl2)
+					//emotion = Var.Em.SuperFriendly;
 			}
 			else
 			{
@@ -631,8 +647,8 @@ public class Bird : MonoBehaviour
 				if (friendliness <= -Var.lvl1)
 					emotion = Var.Em.Lonely;
 				//SuperLonely
-				if (friendliness <= -Var.lvl2)
-					emotion = Var.Em.SuperLonely;
+				//if (friendliness <= -Var.lvl2)
+					//emotion = Var.Em.SuperLonely;
 			}
 
 		}
@@ -674,8 +690,19 @@ public class Bird : MonoBehaviour
 
 				int index = 0;
 				GuiContoler.Instance.levelNumberText.text = level.ToString();
-				///Set level icons
-				foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
+                //Set Relationship bars
+                var keys = new List<EventScript.Character>(relationships.Keys);
+                foreach (EventScript.Character birdFriend in keys)
+                {
+                    GameObject slider = GuiContoler.Instance.relationshipSliders.transform.Find(birdFriend.ToString()).gameObject;
+                    slider.SetActive(true);
+                    slider.GetComponent<Slider>().value = relationships[birdFriend];
+
+                }
+                GuiContoler.Instance.relationshipSliders.transform.Find(charName).gameObject.SetActive(false);
+
+                ///Set level icons
+                foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
 				{
 					if (levelList.Count > index)
 					{

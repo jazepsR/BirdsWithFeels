@@ -70,7 +70,7 @@ public class GuiContoler : MonoBehaviour {
 	public Button nextGraph;
 	public Button prevGraph;
 	public Button HideSmallGraph;
-
+    public GameObject relationshipSliders;
 	public float levelInfo_yvalue;
 	public float levelinfoHideXValue;
 	public float levelinfoshowXValue;

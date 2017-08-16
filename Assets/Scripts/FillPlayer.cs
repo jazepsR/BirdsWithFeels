@@ -22,7 +22,7 @@ public class FillPlayer : MonoBehaviour {
             Var.hatSprites.AddRange(Resources.LoadAll<Sprite>("sprites/hat_spriteSheet"));
             Var.hatSprites.Add(Resources.Load<Sprite>("sprites/hat_spriteSheet_3"));
             Var.hatSprites.Add(Resources.Load<Sprite>("sprites/hat_spriteSheet_4"));
-            print(Var.hatSprites.Count);
+           // print(Var.hatSprites.Count);
         }
         Instance = this;
         if (Var.isTutorial && !inMap)
@@ -129,6 +129,8 @@ public class FillPlayer : MonoBehaviour {
         target.AdventuresRested = template.AdventuresRested;
         target.CoolDownLeft = template.CoolDownLeft;
         target.CoolDownLength = template.CoolDownLength;
+        target.relationships = template.relationships;
+        target.preferredEmotion = template.preferredEmotion;
        // target.transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = template.hatSprite;
     }
 
