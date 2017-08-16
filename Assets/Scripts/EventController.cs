@@ -18,15 +18,37 @@ public class EventController : MonoBehaviour {
 	public RectTransform choiceList;
 	public Image portrait;
 	public Image portraitFill;
-	public GameObject continueBtn;
+    public Image customImage;
+	public GameObject continueBtn;    
 	EventScript currentEvent;
     GameObject currentPortrait;
-    Bird currentBird;    
+    Bird currentBird;
+    List<string> texts;
+    int currentText = 0;
 	// Use this for initialization
 	void Awake () {
 		Instance = this;
 	}
-	
+	public void ContinueBtn()
+    {
+        currentText++;
+        if (currentText < texts.Count)
+            text.text = texts[currentText];
+        if (currentText == texts.Count)
+        {
+            continueBtn.SetActive(false);
+            CreateChoices();
+            return;         
+        }
+        if (currentText > texts.Count)
+        {
+            eventObject.SetActive(false);
+            if (!inMap)
+                GuiContoler.Instance.battlePanel.SetActive(true);
+        }
+        
+       
+    }
 	public void tryEvent()
 	{
         currentBird = null;
@@ -87,48 +109,94 @@ public class EventController : MonoBehaviour {
     }
 	void CreateEvent(EventScript eventData)
 	{
+        choiceList.gameObject.SetActive(false);
+        currentText = 0;
         if (!inMap)
         {
             GuiContoler.Instance.battlePanel.SetActive(false);
         }
 		currentEvent = eventData;
         eventObject.SetActive(true);
+        texts = new List<string>();
+        texts.Add(eventData.text1);
+        if (eventData.text2 != "")
+            texts.Add(eventData.text2);
+        if (eventData.text3 != "")
+            texts.Add(eventData.text3);
+        if (eventData.text4 != "")
+            texts.Add(eventData.text4);
+        if (eventData.text5 != "")
+            texts.Add(eventData.text5);
         if (currentBird == null)
         {
             heading.text = eventData.heading;
-            text.text = eventData.text;
+            text.text = eventData.text1;
         }
         else
         {
             heading.text = Helpers.Instance.ApplyTitle(currentBird.charName, eventData.heading);
-            text.text = Helpers.Instance.ApplyTitle(currentBird.charName, eventData.text);
+            text.text = Helpers.Instance.ApplyTitle(currentBird.charName, eventData.text1);
         }        
 		continueBtn.SetActive(false);
-        if (currentPortrait != null)
+        if(eventData.useCustomPic && eventData.customPic != null)
         {
             portrait.transform.parent.gameObject.SetActive(true);
-            portraitFill.sprite = currentPortrait.transform.Find("bird_color").GetComponent<Image>().sprite;
-            portrait.sprite = currentPortrait.transform.Find("bird").GetComponent<Image>().sprite;
-        }else
-        {
-            portrait.transform.parent.gameObject.SetActive(false);
+            customImage.gameObject.SetActive(true);
+            portraitFill.gameObject.SetActive(false);
+            portrait.gameObject.SetActive(false);
+            customImage.sprite = eventData.customPic;
         }
-		if (eventData.options.Length > 0)
+        else
+        {
+            customImage.gameObject.SetActive(false);
+            if (currentPortrait != null)
+            {
+                portrait.transform.parent.gameObject.SetActive(true);
+                portraitFill.gameObject.SetActive(true);
+                portrait.gameObject.SetActive(true);
+                portraitFill.sprite = currentPortrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+                portraitFill.color = Helpers.Instance.GetEmotionColor(currentBird.emotion);
+                portrait.sprite = currentPortrait.transform.Find("bird").GetComponent<Image>().sprite;
+            }
+            else
+            {
+                portrait.transform.parent.gameObject.SetActive(false);
+            }
+        }
+       
+		if (eventData.options.Length > 0 && eventData.text2 == "" )
 		{
-			int i = 0;
-			foreach(EventConsequence choiceData in eventData.options)
-			{
-				GameObject choiceObj = Instantiate(choice, choiceList);
-				SetupChoice(choiceObj,i);
-				i++;
-			}
+            CreateChoices();
 		}else
 		{
 			continueBtn.SetActive(true);
 		}
 	}
+    void CreateChoices()
+    {
+        
+        if (currentEvent.options.Length > 0)
+        {
+            int i = 0;
+            choiceList.gameObject.SetActive(true);
+            foreach (EventConsequence choiceData in currentEvent.options)
+            {
+                GameObject choiceObj = Instantiate(choice, choiceList);
+                SetupChoice(choiceObj, i);
+                i++;
+            }
+        }
+        else
+        {
+            continueBtn.SetActive(true);
+            ContinueBtn();
+        }
+        currentText++;       
+         
+    }
 	void DisplayChoiceResult(int ID)
 	{
+        choiceList.gameObject.SetActive(false);
         Helpers.Instance.HideTooltip();
         string consequences = ApplyConsequences(ID);
         if (currentBird != null)
@@ -155,42 +223,48 @@ public class EventController : MonoBehaviour {
 
     }
 
-
     string ApplyConsequences(int ID)
     {
-        EventConsequence choiceData = currentEvent.options[ID];
+        string ConsequenceText = ApplyConsequence(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1);
+        ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2);
+        ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3);
+        return ConsequenceText;
+
+    }
+    string ApplyConsequence(EventConsequence.ConsequenceType type, int magnitude)
+    {        
         if (currentBird == null)
             return "";
-        switch (choiceData.type)
+        switch (type)
         {
             case EventConsequence.ConsequenceType.Courage:
-                currentBird.confBoos += choiceData.magnitude;
-                if (choiceData.magnitude > 0)
+                currentBird.confBoos += magnitude;
+                if (magnitude > 0)
                 {
-                    return currentBird.charName + " gained " + choiceData.magnitude + " confidence.";
+                    return currentBird.charName + " gained " + magnitude + " confidence.";
                 }
                 else
                 {
-                    return currentBird.charName + "'s fear increased by " + Mathf.Abs(choiceData.magnitude) + ".";
+                    return currentBird.charName + "'s fear increased by " + Mathf.Abs(magnitude) + ".";
                 }
             case EventConsequence.ConsequenceType.Friendliness:
-                currentBird.friendBoost += choiceData.magnitude;
-                if (choiceData.magnitude > 0)
+                currentBird.friendBoost += magnitude;
+                if (magnitude > 0)
                 {
-                    return currentBird.charName + "'s firendliness has increased by" + choiceData.magnitude + ".";
+                    return currentBird.charName + "'s firendliness has increased by " + magnitude + ".";
                 }
                 else
                 {
-                    return currentBird.charName + " gained " + Mathf.Abs(choiceData.magnitude) + " loneliness.";
+                    return currentBird.charName + " gained " + Mathf.Abs(magnitude) + " loneliness.";
                 }               
             case EventConsequence.ConsequenceType.Health:
-                currentBird.ChageHealth(choiceData.magnitude);
-                if (choiceData.magnitude > 0)
+                currentBird.ChageHealth(magnitude);
+                if (magnitude > 0)
                 {
-                    return currentBird.charName+" gained "+choiceData.magnitude + " health.";
+                    return currentBird.charName+" gained "+ magnitude + " health.";
                 }else
                 {
-                    return currentBird.charName + " lost " + Mathf.Abs(choiceData.magnitude) + " health.";
+                    return currentBird.charName + " lost " + Mathf.Abs(magnitude) + " health.";
                 }
                 
             default:

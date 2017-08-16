@@ -4881,8 +4881,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  magnitude: -1
+  consequenceType1: 3
+  magnitude1: 0
+  consequenceType2: 3
+  magnitude2: 0
+  consequenceType3: 3
+  magnitude3: 0
   useAutoExplanation: 1
   icon: {fileID: 21300004, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Thats sad
@@ -5471,8 +5475,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speaker: 2
+  useCustomPic: 0
+  customPic: {fileID: 0}
   heading: Alone
-  text: Tova feels lonely
+  text1: 'Bird feels alone
+
+'
+  text2: It's though
+  text3: 
+  text4: 
+  text5: 
   options:
   - {fileID: 1106317085}
 --- !u!4 &1195925980
@@ -6910,6 +6922,12 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
+--- !u!114 &1590420954 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114779830321645230, guid: 893a3cdec287067418e9ce268d4f13ea,
+    type: 2}
+  m_PrefabInternal: {fileID: 2132068830}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1632222588
 GameObject:
   m_ObjectHideFlags: 0
@@ -7019,6 +7037,7 @@ MonoBehaviour:
   choiceList: {fileID: 958420585}
   portrait: {fileID: 508926383}
   portraitFill: {fileID: 189529948}
+  customImage: {fileID: 1590420954}
   continueBtn: {fileID: 1377927639}
 --- !u!4 &1661642005
 Transform:
@@ -8694,6 +8713,16 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114065650957879094, guid: 893a3cdec287067418e9ce268d4f13ea,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1661642004}
+    - target: {fileID: 114065650957879094, guid: 893a3cdec287067418e9ce268d4f13ea,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ContinueBtn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 893a3cdec287067418e9ce268d4f13ea, type: 2}

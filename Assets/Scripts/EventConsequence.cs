@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EventConsequence :MonoBehaviour{
-    public ConsequenceType type;
-    public int magnitude;
+    public ConsequenceType consequenceType1 = ConsequenceType.Nothing;
+    public int magnitude1;
+    public ConsequenceType consequenceType2 = ConsequenceType.Nothing;
+    public int magnitude2;
+    public ConsequenceType consequenceType3 = ConsequenceType.Nothing;
+    public int magnitude3;
     public bool useAutoExplanation;
     public Sprite icon;
     [TextArea(3, 10)]
