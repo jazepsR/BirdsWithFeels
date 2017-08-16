@@ -30,9 +30,12 @@ public class LayoutButton : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        sr.color = Var.tileColor;
-        defaultColor = Var.tileColor;
-        baseColor = Var.tileColor;
+        if (LevelVisualSetup.Instance.isDebug)
+            sr.color = LevelVisualSetup.Instance.tileColors[LevelVisualSetup.Instance.debugSelection];
+        else
+            sr.color = LevelVisualSetup.Instance.tileColors[Var.currentBG];
+        defaultColor = sr.color;
+        baseColor = sr.color;
     }
     void OnTriggerEnter2D(Collider2D other)
     {

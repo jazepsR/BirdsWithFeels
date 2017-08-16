@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class LevelVisualSetup : MonoBehaviour {
     public List<GameObject> backgrounds;
-	// Use this for initialization
-	void Start () {
+    public List<Color> tileColors;
+    public static LevelVisualSetup Instance { get; private set; }
+    public bool isDebug = false;
+    public int debugSelection = 0;
+    // Use this for initialization
+    void Awake()
+    {
+        Instance = this;
+    }
+    void Start () {
+        
 		for(int i = 0; i < backgrounds.Count; i++)
         {
-            backgrounds[i].SetActive(i == Var.currentBG);
-            
+            if(isDebug)
+                backgrounds[i].SetActive(i == debugSelection);
+            else
+                backgrounds[i].SetActive(i == Var.currentBG);
         }       
 	}
 	

@@ -15,8 +15,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public bool available;
     [Header("Level configuration")]
     public Var.Em type;
-    public int background = 0;
-    public Color tileColor = Color.gray;
+    public int background = 0;   
     public int birdLVL = 1;
     public int length = 1;
     public int minEnemies = 3;
@@ -176,8 +175,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         if (available && MapControler.Instance.canFight)
         {
             Var.fled = false;
-            Var.isTutorial = false;
-            Var.tileColor = tileColor;
+            Var.isTutorial = false;           
             Var.currentBG = background;
             Var.map.Clear();
             for (int i = 0; i < length; i++)
