@@ -102,7 +102,7 @@ public class Bird : MonoBehaviour
     public Var.Em preferredEmotion;
 	public int birdIndex = 0;
 	public bool hasNewLevel = false;
-    [HideInInspector]
+    //[HideInInspector]
     public Bird relationshipBird = null;
 	[HideInInspector]
 	public Var.Em prevEmotion=  Var.Em.finish;
@@ -722,11 +722,8 @@ public class Bird : MonoBehaviour
 		GuiContoler.Instance.firendSlider.SetDist(friendliness,this);
 		//set hearts
 		if(!inMap)
-		Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
-
-
-
-		}
+		Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);       
+        }
 	}
 
 	

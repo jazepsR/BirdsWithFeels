@@ -43,11 +43,17 @@ public class Helpers : MonoBehaviour {
     }
     public Bird GetBirdFromEnum(EventScript.Character ch)
     {
-        foreach(Bird bird in Var.availableBirds)
+        foreach (Bird bird in Var.activeBirds)
         {
             if (bird.charName == ch.ToString())
                 return bird;
         }
+        foreach (Bird bird in Var.availableBirds)
+        {
+            if (bird.charName == ch.ToString())
+                return bird;
+        }
+       
         return null;
 
 

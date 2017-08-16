@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
+    public Text ToggleRelationPanelText;
+    public GameObject statPanel;
+    public GameObject relationshipPanel;
 	public RectTransform canvasRect;
 	public Text BirdLVLUpText;
 	public Text infoText;    
@@ -95,6 +98,24 @@ public class GuiContoler : MonoBehaviour {
 			setMapLocation(0);
 		}        
 	}
+
+
+    public void StatToggle()
+    {
+        if (relationshipPanel.activeSelf)
+        {
+            relationshipPanel.SetActive(false);
+            statPanel.SetActive(true);
+            ToggleRelationPanelText.text = "Relationships";
+        }else
+        {
+            relationshipPanel.SetActive(true);
+            statPanel.SetActive(false);
+            ToggleRelationPanelText.text = "Stats";
+        }
+
+
+    }
 	public void setPause()
 	{
 		AudioControler.Instance.ClickSound();
@@ -666,6 +687,7 @@ public class GuiContoler : MonoBehaviour {
                 }
             }
 			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
+
 			//bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
 			//bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
 			bird.target = bird.home;
@@ -673,8 +695,11 @@ public class GuiContoler : MonoBehaviour {
 			bird.prevConf = bird.confidence;
 			bird.prevFriend = bird.friendliness;
 		}
-		//After applying levels;
-		foreach(Bird bird in players)
+        //After applying levels;
+        GuiContoler.Instance.relationshipPanel.SetActive(false);
+        GuiContoler.Instance.statPanel.SetActive(true);
+        GuiContoler.Instance.ToggleRelationPanelText.text = "Relationships";
+        foreach (Bird bird in players)
 		{
 			bird.ResetAfterLevel();
 		}

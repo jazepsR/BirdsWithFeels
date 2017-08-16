@@ -6,9 +6,9 @@ public class RelationshipScript : MonoBehaviour {
 	static int minRelationship = -10;
 	static int maxRelationship = 15;
 	static int treshold = 8;
-	static int likeGain = 3;
-	static int normGain = 2;
-	static int dislikeGain = 1;
+	static int likeGain = 9;
+	static int normGain = 4;
+	static int dislikeGain = 4;
 	static int decayLose = 1;
 	// Use this for initialization
 	void Start () {
@@ -51,6 +51,7 @@ public class RelationshipScript : MonoBehaviour {
 			{
 				relationshipBird = Helpers.Instance.GetBirdFromEnum(birdFriend);
 				currentTreshold = bird.relationships[birdFriend];
+                //Debug.LogError("Relationship alert!");
 			}
 		}
 		bird.relationshipBird = relationshipBird;

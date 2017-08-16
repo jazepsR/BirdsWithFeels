@@ -7,6 +7,8 @@ public class firendLine : MonoBehaviour {
 	public List<GameObject> activeLines = new List<GameObject>();
     public Color thick;
     public Color thin;
+    public Color crush;
+    public Color relationship;
     Bird birdScript;
 	// Use this for initialization
 	void Start () {
@@ -49,6 +51,7 @@ public class firendLine : MonoBehaviour {
                 lr.sortingOrder = 0;
                 lr.SetPosition(0, birdScript.target);
                 lr.SetPosition(1, Var.playerPos[y, x].target);
+              
                 if (isThick)
                 {
                     lr.startColor = thick;
@@ -59,6 +62,25 @@ public class firendLine : MonoBehaviour {
                     lr.startColor = thin;
                     lr.startColor = thin;
                 }
+                bool firstCrush = false;
+                bool secondCrush = false;
+                if (birdScript.relationshipBird != null && birdScript.relationshipBird.charName == Var.playerPos[y, x].charName)
+                {
+                    lr.startColor = crush;
+                    firstCrush = true;
+                }
+                if (Var.playerPos[y, x].relationshipBird != null && Var.playerPos[y, x].relationshipBird.charName == birdScript.charName)
+                {
+                    lr.endColor = crush;
+                    firstCrush = true;
+                }
+
+
+                if ( firstCrush && secondCrush)
+                {
+                    lr.startColor = relationship;
+                    lr.endColor = relationship;                   
+                }
                 activeLines.Add(line);
                 Var.playerPos[y, x].lines.activeLines.Add(line);
 
@@ -68,7 +90,9 @@ public class firendLine : MonoBehaviour {
 
             }
 		}
-		catch { }
+		catch {
+            
+        }
 
 	}
 
