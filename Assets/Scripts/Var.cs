@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 public static class Var {
-    
+    public static Color tileColor = new Color(0.3f, 1, 0.5f);
+    public static int currentBG = 0;
     public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared,finish};
     public enum PowerUps { heal,dmg,emotion,obstacle};
     public static bool isTutorial = false;

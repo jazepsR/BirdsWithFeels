@@ -15,6 +15,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public bool available;
     [Header("Level configuration")]
     public Var.Em type;
+    public int background = 0;
+    public Color tileColor = Color.gray;
     public int birdLVL = 1;
     public int length = 1;
     public int minEnemies = 3;
@@ -31,6 +33,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public bool hasLonelyPwerUps;
     public bool hasHealthPowerUps;
     public bool hasDMGPowerUps;
+    [Header("References")]
    // [HideInInspector]
     public MapIcon[] targets;
     MapSaveData mySaveData;
@@ -174,6 +177,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         {
             Var.fled = false;
             Var.isTutorial = false;
+            Var.tileColor = tileColor;
+            Var.currentBG = background;
             Var.map.Clear();
             for (int i = 0; i < length; i++)
             {

@@ -12,8 +12,12 @@ public class ObstacleGenerator : MonoBehaviour {
     public GameObject BattleArea;
     public List<GameObject> obstacles = new List<GameObject>();
 	// Use this for initialization
-	void Start () {
+    void Awake()
+    {
         Instance = this;
+    }
+	void Start () {
+       
         GenerateObstacles();
     }
 	public void clearObstacles()
