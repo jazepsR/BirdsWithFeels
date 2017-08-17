@@ -93,7 +93,8 @@ public class Bird : MonoBehaviour
 	public Image CooldownRing;
 	public bool isHiding = false;
 	public int prevRoundHealth;
-	public int levelRollBonus = 0;	
+	public int levelRollBonus = 0;
+    public int relationshipBonus = 0;
     [HideInInspector]
 	public string levelUpText;
 	Color DefaultCol;
@@ -218,11 +219,26 @@ public class Bird : MonoBehaviour
 			ResetBonuses();
 			ObstacleGenerator.Instance.tiles[y * 4 + x].GetComponent<LayoutButton>().ApplyPower(this);
 		}
-		int superBonus = 0;
-		if (Helpers.Instance.IsSuper(emotion))
-			superBonus = 1;
-		return levelRollBonus + PlayerRollBonus + GroundRollBonus + superBonus;
-	}
+        relationshipBonus = GetRelationshipBonus();
+        return levelRollBonus + PlayerRollBonus + GroundRollBonus + relationshipBonus;
+            }
+
+
+    int GetRelationshipBonus()
+    {
+        if(relationshipBird!= null)
+        {
+            if(relationshipBird.relationshipBird !=null && relationshipBird.relationshipBird.charName == charName)
+            {
+                return 2;
+            }else
+            {
+                return -2;
+            }            
+        }
+
+        return 0;
+    }
 	void LoadStats()
 	{
 		if (dead)
@@ -722,10 +738,38 @@ public class Bird : MonoBehaviour
 		GuiContoler.Instance.firendSlider.SetDist(friendliness,this);
 		//set hearts
 		if(!inMap)
-		Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);       
+		Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
+        SetRelationshipText();     
         }
 	}
+    void SetRelationshipText()
+    {
 
+        GetRelationshipBonus();
+        string relationshipText = "Likes " + Helpers.Instance.GetHexColor(preferredEmotion) + preferredEmotion.ToString() + "</color> birds. ";
+        if(relationshipBonus == 0)
+        {
+            relationshipText += "Single.";
+            GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(false);
+        }
+        if (relationshipBonus > 0)
+        {
+            relationshipText += "In a relationship with " +relationshipBird.charName+".";
+            GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(true);
+            GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+            GuiContoler.Instance.relationshipPortrait.transform.Find("bird").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
+            GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
+        }
+        if (relationshipBonus < 0)
+        {
+            relationshipText += "Has a crush on " + relationshipBird.charName + ".";
+            GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(true);
+            GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+            GuiContoler.Instance.relationshipPortrait.transform.Find("bird").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
+            GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
+        }
+        GuiContoler.Instance.relationshipText.text = relationshipText;
+    }
 	
 	
 	public void Update()
