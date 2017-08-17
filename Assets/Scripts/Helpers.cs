@@ -28,7 +28,7 @@ public class Helpers : MonoBehaviour {
     Sprite fullHeart;
     Sprite emptyHeart;
     List<Image> heartsToFill = new List<Image>();
-
+    public Transform relationshipDialogs;
     public void Awake()
     {
         heartBreak = Resources.Load<GameObject>("prefabs/heartBreak");
@@ -43,6 +43,10 @@ public class Helpers : MonoBehaviour {
     }
     public Bird GetBirdFromEnum(EventScript.Character ch)
     {
+        if(ch == EventScript.Character.Random)
+        {
+            return Var.activeBirds[UnityEngine.Random.Range(0, Var.activeBirds.Count)];
+        }
         foreach (Bird bird in Var.activeBirds)
         {
             if (bird.charName == ch.ToString())

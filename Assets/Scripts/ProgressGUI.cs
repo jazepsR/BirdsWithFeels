@@ -147,27 +147,6 @@ public class ProgressGUI : MonoBehaviour {
         }
     }
 
-
-	/*public void ShowAllPortraits()
-	{
-		skillArea.SetActive(false);
-		for (int i = 0; i < 3; i++)
-		{
-				
-			Graph.Instance.portraits[i].transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(Var.activeBirds[i].emotion);
-			Graph.Instance.portraits[i].transform.Find("bird").GetComponent<Image>().color = Color.white;
-			Graph.Instance.portraits[i].GetComponent<Image>().color = new Color(0.686f, 0.584f, 0.78f);
-			Graph.Instance.portraits[i].transform.Find("BirdName").gameObject.SetActive(true);			
-			foreach(LevelArea level in levelAreas)
-			{
-				level.gameObject.SetActive(false);
-			}
-		}      
-	}*/
- 
-	
-
-
 	public void SmallPortraitClick()
 	{
 

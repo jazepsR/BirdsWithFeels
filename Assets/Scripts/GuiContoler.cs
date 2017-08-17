@@ -97,6 +97,7 @@ public class GuiContoler : MonoBehaviour {
 		if (!inMap)
 		{
 			GuiMap.Instance.CreateMap();
+            DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
 			setMapLocation(0);
 		}        
 	}
@@ -223,8 +224,13 @@ public class GuiContoler : MonoBehaviour {
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
-					if(Var.isTutorial)
-						CloseBattleReport.interactable = true;
+                    {
+                        if (!inMap)
+                        {
+                            nextGraph.interactable = true;
+                            prevGraph.interactable = true;
+                        }
+                    }
 				}
 				else
 				{
@@ -240,8 +246,11 @@ public class GuiContoler : MonoBehaviour {
 	public void ShowSpeechBubble(Transform pos,string text)
 	{
 		if (speechBubbleObj.activeSelf) {
-			if (Var.isTutorial)
-				CloseBattleReport.interactable = false;
+            if (!inMap)
+            {
+                prevGraph.interactable = false;
+                nextGraph.interactable = false;
+            }
 			speechTexts.Add(text);
 			speechPos.Add(pos);
 		}
@@ -424,7 +433,7 @@ public class GuiContoler : MonoBehaviour {
 				levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
 				AudioControler.Instance.PlaySound(AudioControler.Instance.applause);
 				return;
-			}
+            }
 		}
 
 
@@ -454,6 +463,8 @@ public class GuiContoler : MonoBehaviour {
 			Graph.Instance.PlotFull(bird);
 			//feedbackText.text = "";
 			winText.text = "";
+            if(currentGraph!= 3)
+                DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(bird));
 			//winDetails.text = "";
 		}
 		CheckGraphNavBtns();
@@ -745,7 +756,12 @@ public class GuiContoler : MonoBehaviour {
 				GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
 				ObstacleGenerator.Instance.clearObstacles();
 				ObstacleGenerator.Instance.GenerateObstacles();
-                EventController.Instance.tryEvent();
+                DialogueControl.Instance.GetRelationshipDialogs();                                
+                if (!EventController.Instance.tryEvent())
+                    DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+
+
+
 			}
 			GameLogic.Instance.CanWeFight();
 			

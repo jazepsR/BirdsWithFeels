@@ -43,19 +43,26 @@ public class EventController : MonoBehaviour {
         if (currentText > texts.Count)
         {
             eventObject.SetActive(false);
-            if (!inMap)
+            if (inMap)
+            {
+                DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
+            }
+            else
+            {
                 GuiContoler.Instance.battlePanel.SetActive(true);
+                DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+            }
         }
         
        
     }
-	public void tryEvent()
+	public bool tryEvent()
 	{
         currentBird = null;
         currentPortrait = null;
         currentEvent = null;        
         if (Random.Range(0, 1.0f) > eventFreq)
-            return;
+            return false;
         List<Bird> birdsToCheck;
         if (inMap)
         {
@@ -104,8 +111,9 @@ public class EventController : MonoBehaviour {
 
             }
         }
-            if(canCreateEvent)
-                CreateEvent(ev);
+        if(canCreateEvent)
+            CreateEvent(ev);
+        return true;
     }
 	void CreateEvent(EventScript eventData)
 	{

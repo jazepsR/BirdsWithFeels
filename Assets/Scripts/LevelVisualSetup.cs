@@ -12,15 +12,11 @@ public class LevelVisualSetup : MonoBehaviour {
     void Awake()
     {
         Instance = this;
-    }
-    void Start () {
-        
 		for(int i = 0; i < backgrounds.Count; i++)
         {
-            if(isDebug)
-                backgrounds[i].SetActive(i == debugSelection);
-            else
-                backgrounds[i].SetActive(i == Var.currentBG);
+            if (isDebug)
+                Var.currentBG = debugSelection;               
+            backgrounds[i].SetActive(i == Var.currentBG);
         }       
 	}
 	

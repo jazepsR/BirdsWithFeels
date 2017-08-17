@@ -29,7 +29,7 @@ public class Bird : MonoBehaviour
 	public GameObject birdPrefab;
 	public SpriteRenderer colorRenderer;
 	public GameObject bush;    
-    [HideInInspector]
+	[HideInInspector]
 	public GameObject portrait;	
 	[HideInInspector] 
 	public Vector3 target;
@@ -62,7 +62,7 @@ public class Bird : MonoBehaviour
 	public int confLoseOnRest = 1;
 	public int groundMultiplier = 1;
 	public GameObject healParticle;
-    [HideInInspector]
+	[HideInInspector]
 	public Levels levelControler;
 	[HideInInspector]
 	public LevelData lastLevel;
@@ -93,32 +93,34 @@ public class Bird : MonoBehaviour
 	public bool isHiding = false;
 	public int prevRoundHealth;
 	public int levelRollBonus = 0;
-    public int relationshipBonus = 0;
-    [HideInInspector]
+	public int relationshipBonus = 0;
+	[HideInInspector]
 	public string levelUpText;
 	Color DefaultCol;
 	Color HighlightCol;
 	public bool dead = false;
-    public Var.Em preferredEmotion;
+	public Var.Em preferredEmotion;
 	public int birdIndex = 0;
 	public bool hasNewLevel = false;
-    //[HideInInspector]
-    public Bird relationshipBird = null;
+	//[HideInInspector]
+	public Bird relationshipBird = null;
 	[HideInInspector]
 	public Var.Em prevEmotion=  Var.Em.finish;
 	bool started = false;
-    public Dictionary<EventScript.Character, int> relationships;
+	public Dictionary<EventScript.Character, int> relationships;
+    [HideInInspector]
+    public List<Dialogue> relationshipDialogs;
 	void Start()
 	{
-      
-        if (!isEnemy && portrait == null)
-            portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
-       /* if (!isEnemy && !inMap)
-        {
-            GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi!");
-            GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi2!");
-            GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi3!");
-        }*/
+	  
+		if (!isEnemy && portrait == null)
+			portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
+	   /* if (!isEnemy && !inMap)
+		{
+			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi!");
+			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi2!");
+			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi3!");
+		}*/
 		prevRoundHealth = health;
 		x = -1;
 		y = -1;
@@ -126,22 +128,22 @@ public class Bird : MonoBehaviour
 		prevFriend = friendliness;		
 		if (!isEnemy)
 		{
-            if (relationships==null)
-            {
-                relationships = new Dictionary<EventScript.Character, int>(); 
-                relationships.Add(EventScript.Character.Kim, 0);
-                relationships.Add(EventScript.Character.Terry, 0);
-                relationships.Add(EventScript.Character.Toby, 0);
-                relationships.Add(EventScript.Character.Tova, 0);
-                relationships.Add(EventScript.Character.Rebecca, 0);
-                relationships.Remove(Helpers.Instance.GetCharEnum(this));
-            }
-            transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName);
-            //hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
-            if (levelList.Count == 0)
+			if (relationships==null)
+			{
+				relationships = new Dictionary<EventScript.Character, int>(); 
+				relationships.Add(EventScript.Character.Kim, 0);
+				relationships.Add(EventScript.Character.Terry, 0);
+				relationships.Add(EventScript.Character.Toby, 0);
+				relationships.Add(EventScript.Character.Tova, 0);
+				relationships.Add(EventScript.Character.Rebecca, 0);
+				relationships.Remove(Helpers.Instance.GetCharEnum(this));
+			}
+			transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName);
+			//hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
+			if (levelList.Count == 0)
 			{
 				levelList = new List<LevelData>();
-                Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);               
+				Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);               
 				AddLevel(new LevelData(startingLVL, Var.Em.Neutral,icon));
 			}
 			levelControler = GetComponent<Levels>();
@@ -167,7 +169,13 @@ public class Bird : MonoBehaviour
 		SetEmotion();
 		
 	}
-	
+	public void Speak(string text)
+	{
+		GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, text);
+	}
+
+
+
 	public void SetCoolDownRing(bool active)
 	{
 		if (CooldownRing != null)
@@ -218,28 +226,28 @@ public class Bird : MonoBehaviour
 			ResetBonuses();
 			ObstacleGenerator.Instance.tiles[y * 4 + x].GetComponent<LayoutButton>().ApplyPower(this);
 		}
-        relationshipBonus = GetRelationshipBonus();
-        return levelRollBonus + PlayerRollBonus + GroundRollBonus + relationshipBonus;
-            }
+		relationshipBonus = GetRelationshipBonus();
+		return levelRollBonus + PlayerRollBonus + GroundRollBonus + relationshipBonus;
+			}
 
 
-    int GetRelationshipBonus()
-    {
-        if(relationshipBird!= null)
-        {
-           // if (!Helpers.Instance.GetAdjacentBirds(this).Contains(relationshipBird))
-           //     return 0;
-            if(relationshipBird.relationshipBird !=null && relationshipBird.relationshipBird.charName == charName)
-            {
-                return 2;
-            }else
-            {
-                return -2;
-            }            
-        }
+	int GetRelationshipBonus()
+	{
+		if(relationshipBird!= null)
+		{
+		   // if (!Helpers.Instance.GetAdjacentBirds(this).Contains(relationshipBird))
+		   //     return 0;
+			if(relationshipBird.relationshipBird !=null && relationshipBird.relationshipBird.charName == charName)
+			{
+				return 2;
+			}else
+			{
+				return -2;
+			}            
+		}
 
-        return 0;
-    }
+		return 0;
+	}
 	void LoadStats()
 	{
 		if (dead)
@@ -287,8 +295,8 @@ public class Bird : MonoBehaviour
 		{
 			CheckLevels();
 		}
-        if(!Var.isTutorial)
-		    battleCount++;
+		if(!Var.isTutorial)
+			battleCount++;
 		//Reset per battle level variables
 
 	}
@@ -359,11 +367,11 @@ public class Bird : MonoBehaviour
 	}
 	void OnMouseOver()
 	{
-        if (GuiContoler.Instance.speechBubbleObj.activeSelf)
-            return;
-        if (Var.Infight)
-            return;
-        if (isEnemy)
+		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
+			return;
+		if (Var.Infight)
+			return;
+		if (isEnemy)
 			return;
 		SetCoolDownRing(true);
 	  
@@ -375,22 +383,22 @@ public class Bird : MonoBehaviour
 				isHiding = bush.activeSelf;
 				GameLogic.Instance.CanWeFight();
 				GameLogic.Instance.UpdateFeedback();
-                
-            }
+				
+			}
 		}
-        if (Input.GetMouseButtonUp(0))
-        {
-            GetComponent<Animator>().SetBool("lift", false);
-        }
-        if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonUp(0))
 		{
-            if (Var.Infight || health<=0)
-                return;
+			GetComponent<Animator>().SetBool("lift", false);
+		}
+		if (Input.GetMouseButtonDown(0))
+		{
+			if (Var.Infight || health<=0)
+				return;
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
-            GetComponent<Animator>().SetBool("lift", true);
+			GetComponent<Animator>().SetBool("lift", true);
 
 
-            if (inMap)
+			if (inMap)
 			{
 				if (MapControler.Instance.canHeal)
 				{
@@ -437,8 +445,8 @@ public class Bird : MonoBehaviour
 		{
 			SetCoolDownRing(false);
 			colorRenderer.color = DefaultCol;
-            GetComponent<Animator>().SetBool("lift", false);
-        }       
+			GetComponent<Animator>().SetBool("lift", false);
+		}       
 		if (isEnemy)
 		{
 			GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
@@ -478,8 +486,8 @@ public class Bird : MonoBehaviour
 	{
 		if (health <= 0)
 			return;
-        if (health + healthBoost + roundHealthChange <= 0)
-            return;
+		if (health + healthBoost + roundHealthChange <= 0)
+			return;
 		if (change > 0)
 		{
 			if (health != maxHealth)
@@ -498,21 +506,21 @@ public class Bird : MonoBehaviour
 			}
 			else
 			{
-                try
-                {
-                    List<Bird> birds = Helpers.Instance.GetAdjacentBirds(this);
-                    foreach (Bird bird in birds)
-                    {
-                        if (Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList) && bird.CoolDownLeft == 0)
-                        {
-                            bird.CoolDownLeft = bird.CoolDownLength;
-                            change = 0;
-                            GameObject shield = Resources.Load("shieldEffect") as GameObject;
-                            Instantiate(shield, transform);
-                        }
-                    }
-                }
-                catch { }
+				try
+				{
+					List<Bird> birds = Helpers.Instance.GetAdjacentBirds(this);
+					foreach (Bird bird in birds)
+					{
+						if (Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList) && bird.CoolDownLeft == 0)
+						{
+							bird.CoolDownLeft = bird.CoolDownLength;
+							change = 0;
+							GameObject shield = Resources.Load("shieldEffect") as GameObject;
+							Instantiate(shield, transform);
+						}
+					}
+				}
+				catch { }
 			}
 		}
 	   
@@ -520,7 +528,7 @@ public class Bird : MonoBehaviour
 		
 		if (health+ healthBoost + roundHealthChange <= 0)
 		{
-            GetComponent<Animator>().SetBool("dead", true);
+			GetComponent<Animator>().SetBool("dead", true);
 		   // GuiContoler.Instance.ShowDeathMenu(this);
 			//gameObject.SetActive(false);
 		}
@@ -551,7 +559,19 @@ public class Bird : MonoBehaviour
 			return null;
 		}
 	}
+	void setRelationshipDialogs()
+	{
+        if (relationshipBird == null)
+        {
+            relationshipDialogs = null;
+        }else
+        {
+           Transform relationshipTransform= Helpers.Instance.relationshipDialogs.Find(charName).transform.Find(relationshipBird.charName);
+           relationshipDialogs = new List<Dialogue>(relationshipTransform.GetComponentsInChildren<Dialogue>());
+        } 
+        
 
+	}
 	public void AddRoundBonuses(bool doFightStuff= true)
 	{
 		print(charName + " doing round bonus. HealthGain " + roundHealthChange);
@@ -560,32 +580,33 @@ public class Bird : MonoBehaviour
 		prevRoundHealth = health;
 		friendliness += friendBoost;
 		confidence += confBoos;
-        if (doFightStuff)
-        {
-            RelationshipScript.applyRelationship(this);
-            if (!foughtInRound)
-            {
-                consecutiveFightsWon = 0;
-                roundsRested++;
-                confidence = confidence - confLoseOnRest;
-            }
-            else
-            {
-                roundsRested = 0;
-            }
-            if (CoolDownLeft > 0)
-                CoolDownLeft--;
-            try
-            {
-                CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;
-            }
-            catch
-            {
-                Debug.Log("fix cooldown rings!");
-            }
-            if (!foughtInRound)
-                ChageHealth(1);
-        }
+		if (doFightStuff)
+		{
+			RelationshipScript.applyRelationship(this);
+			setRelationshipDialogs();
+			if (!foughtInRound)
+			{
+				consecutiveFightsWon = 0;
+				roundsRested++;
+				confidence = confidence - confLoseOnRest;
+			}
+			else
+			{
+				roundsRested = 0;
+			}
+			if (CoolDownLeft > 0)
+				CoolDownLeft--;
+			try
+			{
+				CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;
+			}
+			catch
+			{
+				Debug.Log("fix cooldown rings!");
+			}
+			if (!foughtInRound)
+				ChageHealth(1);
+		}
 		
 		health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
 			 
@@ -707,19 +728,19 @@ public class Bird : MonoBehaviour
 
 				int index = 0;
 				GuiContoler.Instance.levelNumberText.text = level.ToString();
-                //Set Relationship bars
-                var keys = new List<EventScript.Character>(relationships.Keys);
-                foreach (EventScript.Character birdFriend in keys)
-                {
-                    GameObject slider = GuiContoler.Instance.relationshipSliders.transform.Find(birdFriend.ToString()).gameObject;
-                    slider.SetActive(true);
-                    slider.GetComponent<Slider>().value = relationships[birdFriend];
+				//Set Relationship bars
+				var keys = new List<EventScript.Character>(relationships.Keys);
+				foreach (EventScript.Character birdFriend in keys)
+				{
+					GameObject slider = GuiContoler.Instance.relationshipSliders.transform.Find(birdFriend.ToString()).gameObject;
+					slider.SetActive(true);
+					slider.GetComponent<Slider>().value = relationships[birdFriend];
 
-                }
-                GuiContoler.Instance.relationshipSliders.transform.Find(charName).gameObject.SetActive(false);
+				}
+				GuiContoler.Instance.relationshipSliders.transform.Find(charName).gameObject.SetActive(false);
 
-                ///Set level icons
-                foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
+				///Set level icons
+				foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
 				{
 					if (levelList.Count > index)
 					{
@@ -737,44 +758,44 @@ public class Bird : MonoBehaviour
 		//set emotion bars
 		GuiContoler.Instance.confSlider.SetDist(confidence,this);
 		GuiContoler.Instance.firendSlider.SetDist(friendliness,this);
-            //set hearts
-            if (!inMap)
-                try
-                {
-                    Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
-                    SetRelationshipText();
-                }
-                catch { }
-        }
+			//set hearts
+			if (!inMap)
+				try
+				{
+					Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
+					SetRelationshipText();
+				}
+				catch { }
+		}
 	}
-    void SetRelationshipText()
-    {
+	void SetRelationshipText()
+	{
 
-        relationshipBonus =GetRelationshipBonus();
-        string relationshipText = "Likes " + Helpers.Instance.GetHexColor(preferredEmotion) + preferredEmotion.ToString() + "</color> birds. ";
-        if(relationshipBonus == 0)
-        {
-            relationshipText += "Single.";
-            GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(false);
-        }
-        if (relationshipBonus > 0)
-        {
-            relationshipText += "In a relationship with " +relationshipBird.charName+".";
-            GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(true);
-            GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
-            GuiContoler.Instance.relationshipPortrait.transform.Find("bird").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
-            GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
-        }
-        if (relationshipBonus < 0)
-        {
-            relationshipText += "Has a crush on " + relationshipBird.charName + ".";
-            GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(true);
-            GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
-            GuiContoler.Instance.relationshipPortrait.transform.Find("bird").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
-            GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
-        }
-        GuiContoler.Instance.relationshipText.text = relationshipText;
-    }
+		relationshipBonus =GetRelationshipBonus();
+		string relationshipText = "Likes " + Helpers.Instance.GetHexColor(preferredEmotion) + preferredEmotion.ToString() + "</color> birds. ";
+		if(relationshipBonus == 0)
+		{
+			relationshipText += "Single.";
+			GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(false);
+		}
+		if (relationshipBonus > 0)
+		{
+			relationshipText += "In a relationship with " +relationshipBird.charName+".";
+			GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(true);
+			GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+			GuiContoler.Instance.relationshipPortrait.transform.Find("bird").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
+			GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
+		}
+		if (relationshipBonus < 0)
+		{
+			relationshipText += "Has a crush on " + relationshipBird.charName + ".";
+			GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(true);
+			GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+			GuiContoler.Instance.relationshipPortrait.transform.Find("bird").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
+			GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
+		}
+		GuiContoler.Instance.relationshipText.text = relationshipText;
+	}
 	
 	
 	public void Update()
@@ -815,8 +836,8 @@ public class Bird : MonoBehaviour
 		this.x = x;
 		this.y = y;
 		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.dropBird);
-        GetComponent<Animator>().SetBool("lift", false);
-        if (!inMap)
+		GetComponent<Animator>().SetBool("lift", false);
+		if (!inMap)
 		{
 			lines.DrawLines(x, y);
 			//Debug.Log("x: " + x+ " y: " + y);
@@ -825,13 +846,13 @@ public class Bird : MonoBehaviour
 		}
 		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		SetCoolDownRing(false);
-        if(inMap)
-        {
-            MapControler.Instance.CanLoadBattle();
-        }
+		if(inMap)
+		{
+			MapControler.Instance.CanLoadBattle();
+		}
 
 
-    }
+	}
 	
 
 

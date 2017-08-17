@@ -77,6 +77,7 @@ public class levelPopupScript : MonoBehaviour {
         activeBird.hasNewLevel = false;
         LevelPopup.SetActive(false);
         GuiContoler.Instance.CreateGraph(birdNum);
+       // DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(activeBird));
     }
 	// Update is called once per frame
 	void Update () {

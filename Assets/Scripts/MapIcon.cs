@@ -59,8 +59,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     {
         if(active)
         {
-            transform.parent.position = transform.position - offset;
-            print("active!!");
+            transform.parent.position = transform.position - offset;           
         }
         int i = 0;
         lr.positionCount = targets.Length * 2;
