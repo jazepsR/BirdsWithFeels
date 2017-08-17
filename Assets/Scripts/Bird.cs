@@ -28,8 +28,7 @@ public class Bird : MonoBehaviour
 	public bool inUse = true;
 	public GameObject birdPrefab;
 	public SpriteRenderer colorRenderer;
-	public GameObject bush;
-    string portraitName;
+	public GameObject bush;    
     [HideInInspector]
 	public GameObject portrait;	
 	[HideInInspector] 
@@ -228,6 +227,8 @@ public class Bird : MonoBehaviour
     {
         if(relationshipBird!= null)
         {
+           // if (!Helpers.Instance.GetAdjacentBirds(this).Contains(relationshipBird))
+           //     return 0;
             if(relationshipBird.relationshipBird !=null && relationshipBird.relationshipBird.charName == charName)
             {
                 return 2;
@@ -736,16 +737,20 @@ public class Bird : MonoBehaviour
 		//set emotion bars
 		GuiContoler.Instance.confSlider.SetDist(confidence,this);
 		GuiContoler.Instance.firendSlider.SetDist(friendliness,this);
-		//set hearts
-		if(!inMap)
-		Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
-        SetRelationshipText();     
+            //set hearts
+            if (!inMap)
+                try
+                {
+                    Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
+                    SetRelationshipText();
+                }
+                catch { }
         }
 	}
     void SetRelationshipText()
     {
 
-        GetRelationshipBonus();
+        relationshipBonus =GetRelationshipBonus();
         string relationshipText = "Likes " + Helpers.Instance.GetHexColor(preferredEmotion) + preferredEmotion.ToString() + "</color> birds. ";
         if(relationshipBonus == 0)
         {

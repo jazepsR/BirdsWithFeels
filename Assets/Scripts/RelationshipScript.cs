@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RelationshipScript : MonoBehaviour {
-	static int minRelationship = -10;
+	static int minRelationship = 0;
 	static int maxRelationship = 15;
 	static int treshold = 8;
 	static int likeGain = 9;
@@ -56,13 +56,13 @@ public class RelationshipScript : MonoBehaviour {
 		}
 		bird.relationshipBird = relationshipBird;
 
-        string text = "";
+       /* string text = "";
         foreach (KeyValuePair<EventScript.Character, int> kvp in bird.relationships)
         {
             //textBox3.Text += ("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
             text += string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
         }
-        print(text);
+        print(text);*/
 	}
 	static void weakenRelationship(Bird bird)
 	{

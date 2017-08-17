@@ -85,10 +85,10 @@ public class FillPlayer : MonoBehaviour {
                 SetupBird(deadBirds[i], inactive[i]);
             }
         }
-        if (!inMap && Var.activeBirds.Count < 1)
+       /* if (!inMap && Var.activeBirds.Count < 1)
         {
             Var.activeBirds.AddRange(playerBirds);
-        }
+        }*/
     }
 	void Start()
     {
