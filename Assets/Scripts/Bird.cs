@@ -138,7 +138,7 @@ public class Bird : MonoBehaviour
 				relationships.Add(EventScript.Character.Rebecca, 0);
 				relationships.Remove(Helpers.Instance.GetCharEnum(this));
 			}
-			transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName);
+			//transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName); //seb
 			//hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
 			if (levelList.Count == 0)
 			{
