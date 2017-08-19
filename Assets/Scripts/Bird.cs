@@ -110,6 +110,8 @@ public class Bird : MonoBehaviour
 	public Dictionary<EventScript.Character, int> relationships;
     [HideInInspector]
     public List<Dialogue> relationshipDialogs;
+    [HideInInspector]
+    public bool newRelationship = false;
 	void Start()
 	{
 	  
@@ -231,7 +233,7 @@ public class Bird : MonoBehaviour
 			}
 
 
-	int GetRelationshipBonus()
+	public int GetRelationshipBonus()
 	{
 		if(relationshipBird!= null)
 		{
