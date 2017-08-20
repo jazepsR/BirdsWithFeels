@@ -145,6 +145,7 @@ public class Levels : MonoBehaviour {
 					List<Bird> enemies = GetDiagonalEnemies();
 					foreach(Bird enemy in enemies)
 					{
+                        
 						Color firstColor = enemy.colorRenderer.color;
 						enemy.colorRenderer.color = new Color(firstColor.r - 0.3f, firstColor.g - 0.3f, firstColor.b - 0.3f);
 						enemy.PlayerRollBonus = -1;

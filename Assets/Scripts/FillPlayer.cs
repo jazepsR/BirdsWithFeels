@@ -109,6 +109,7 @@ public class FillPlayer : MonoBehaviour {
 	
 	public static void SetupBird(Bird target, Bird template)
     {
+        target.birdPrefabName = template.birdPrefabName;
         target.charName = template.charName;
         target.friendliness = template.friendliness;
         target.confidence = template.confidence;
@@ -143,7 +144,8 @@ public class FillPlayer : MonoBehaviour {
         target.friendliness = template.friendliness;
         target.confidence = template.confidence;
         target.portraitOrder = template.portraitOrder;
-        target.health = template.health;        
+        target.health = template.health;
+        target.birdPrefabName = template.birdPrefabName;
         //target.portrait = template.portrait;
         target.levelList = template.levelList;
         target.startingLVL = template.startingLVL;
@@ -168,6 +170,7 @@ public class FillPlayer : MonoBehaviour {
         target.confidence = template.confidence;
         target.portraitOrder = template.portraitOrder;
         target.health = template.health;
+        target.birdPrefabName = template.birdPrefabName;
         //target.portrait = template.portrait;
         target.levelList = template.levelList;
         target.startingLVL = template.startingLVL;

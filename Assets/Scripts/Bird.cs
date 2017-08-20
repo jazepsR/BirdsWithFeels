@@ -25,9 +25,9 @@ public class Bird : MonoBehaviour
 	public int y = -1;
 	public Var.Em emotion;
 	public string charName;	
-	public bool inUse = true;
-	public GameObject birdPrefab;
-	public SpriteRenderer colorRenderer;
+	public bool inUse = true;	
+    public SpriteRenderer colorRenderer;
+    List<SpriteRenderer> colorSprites;
 	public GameObject bush;    
 	[HideInInspector]
 	public GameObject portrait;	
@@ -112,9 +112,12 @@ public class Bird : MonoBehaviour
     public List<Dialogue> relationshipDialogs;
     [HideInInspector]
     public bool newRelationship = false;
+    public string birdPrefabName;
 	void Start()
 	{
-	  
+        
+
+	    
 		if (!isEnemy && portrait == null)
 			portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
 	   /* if (!isEnemy && !inMap)
@@ -130,6 +133,15 @@ public class Bird : MonoBehaviour
 		prevFriend = friendliness;		
 		if (!isEnemy)
 		{
+            var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
+            Instantiate(BirdArt, transform);
+            colorSprites = new List<SpriteRenderer>();            
+            foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>())
+            {
+                if (child.gameObject.name.Contains("flat"))
+                    colorSprites.Add(child);                    
+            }
+            print("colored children: " + colorSprites.Count);
 			if (relationships==null)
 			{
 				relationships = new Dictionary<EventScript.Character, int>(); 
@@ -138,7 +150,14 @@ public class Bird : MonoBehaviour
 				relationships.Add(EventScript.Character.Toby, 0);
 				relationships.Add(EventScript.Character.Tova, 0);
 				relationships.Add(EventScript.Character.Rebecca, 0);
-				relationships.Remove(Helpers.Instance.GetCharEnum(this));
+                try
+                {
+                    relationships.Remove(Helpers.Instance.GetCharEnum(this));
+                }
+                catch
+                {
+                    print("error setting up realtionships");
+                }
 			}
 			//transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName); //seb
 			//hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
@@ -358,7 +377,8 @@ public class Bird : MonoBehaviour
 		}
 		else
 		{
-			colorRenderer.color = HighlightCol;
+            foreach (SpriteRenderer sp in colorSprites)
+                sp.color = HighlightCol;			
 			if (!dragged)
 				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.mouseOverBird);
 		}
@@ -446,8 +466,9 @@ public class Bird : MonoBehaviour
 		if (!dragged)
 		{
 			SetCoolDownRing(false);
-			colorRenderer.color = DefaultCol;
-			GetComponent<Animator>().SetBool("lift", false);
+            foreach (SpriteRenderer sp in colorSprites)
+                sp.color = DefaultCol;
+            GetComponent<Animator>().SetBool("lift", false);
 		}       
 		if (isEnemy)
 		{
@@ -634,8 +655,14 @@ public class Bird : MonoBehaviour
 		{
 			//No type
 			emotion = Var.Em.Neutral;
-			LeanTween.color(colorRenderer.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
-			//colorRenderer.color = Helpers.Instance.neutral;
+            if (isEnemy)
+                colorRenderer.color = Helpers.Instance.neutral;
+            else
+            {
+                foreach (SpriteRenderer sp in colorSprites)
+                    LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
+            }
+			//
 			DefaultCol = Helpers.Instance.GetEmotionColor(emotion);            
 			HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g + factor, DefaultCol.b + factor);
 			return;
@@ -692,7 +719,15 @@ public class Bird : MonoBehaviour
 			}
 
 		}
-		LeanTween.color(colorRenderer.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
+        if (isEnemy)
+        {
+            colorRenderer.color = Helpers.Instance.neutral;
+        }else
+        {
+            foreach (SpriteRenderer sp in colorSprites)
+                LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
+        }
+     
 		DefaultCol = Helpers.Instance.GetEmotionColor(emotion);        
 		HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g +factor, DefaultCol.b + factor);
 
@@ -707,7 +742,7 @@ public class Bird : MonoBehaviour
 			GuiContoler.Instance.selectedBird = this;
 			if (!inMap)
 			{
-				Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(charName, lastLevel.title);
+				Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, lastLevel.title);
 				Var.birdInfoFeeling.text = emotion.ToString();
 				Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
 				GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
@@ -824,7 +859,7 @@ public class Bird : MonoBehaviour
 			
 		if (dragged)
 		{
-			LeanTween.move(gameObject, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x+Helpers.Instance.liftOffset.x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y+Helpers.Instance.liftOffset.y, 0), 0.02f);
+			LeanTween.move(gameObject, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0), 0.02f);
 		}
 		
 

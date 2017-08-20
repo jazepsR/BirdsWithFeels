@@ -17,7 +17,7 @@ public class feedBack : MonoBehaviour {
     battleFeedback myBattleFeedback;
     Vector3 scale;  
 	// Use this for initialization
-	void Awake () {
+	void Awake () {        
         scale= BelowBirdIndicator.transform.localScale;
         myBattleFeedback = feedBackText.gameObject.GetComponent<battleFeedback>();
         myBattleFeedback.fb = this;		

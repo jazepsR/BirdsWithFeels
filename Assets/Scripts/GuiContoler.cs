@@ -18,8 +18,7 @@ public class GuiContoler : MonoBehaviour {
 	public Text infoHeading;
 	public Text infoFeeling;
 	public Image powerBarTemp;
-	public Text powerTextTemp;
-	public Image[] tiles;
+	public Text powerTextTemp;	
 	public LVLIconScript[] lvlIcons;
 	public Text reportText;
 	public GameObject report;
@@ -428,6 +427,28 @@ public class GuiContoler : MonoBehaviour {
 		else
 		{
 			BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
+            if (Var.activeBirds[birdNum].newRelationship)
+            {
+                Bird relationshipBird = Var.activeBirds[birdNum].relationshipBird;
+                if (Var.activeBirds[birdNum].GetRelationshipBonus() > 0)
+                {
+                    //Relationship
+                    string title = "<name> is in a relationship!";
+                    string text = "Things are getting serious for <name> and " + relationshipBird.charName + ". They seem very happy for now, but will it last?";
+                    EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title,text );
+                    EventController.Instance.CreateEvent(relationshipEvent);
+                }
+                else
+                {
+                    //Crush
+                    string title = "<name> has a crush!";
+                    string text = "<name> has fallen hard for " + relationshipBird.charName + " will you help <name> get together with his paramour or drive them apart?";
+                    EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
+                    EventController.Instance.CreateEvent(relationshipEvent);
+                }
+               
+                Var.activeBirds[birdNum].newRelationship = false;
+            }
 			if (Var.activeBirds[birdNum].hasNewLevel)
 			{
 				levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);

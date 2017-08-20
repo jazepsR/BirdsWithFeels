@@ -82,6 +82,7 @@ public class SaveData
 public class BirdSaveData
 {    
     public string charName;
+    public string birdPrefabName;
     public int friendliness;
     public int confidence;
     public int portraitOrder;

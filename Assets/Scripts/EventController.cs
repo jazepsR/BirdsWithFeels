@@ -29,11 +29,18 @@ public class EventController : MonoBehaviour {
 	void Awake () {
 		Instance = this;
 	}
+    void Start()
+    {
+        string title = "<name> has a crush!";
+        string text = "<name> has fallen hard for Bertha will you help <name> get together with his paramour or drive them apart?";
+        EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.availableBirds[0]), title, text);
+        EventController.Instance.CreateEvent(relationshipEvent);
+    }
 	public void ContinueBtn()
     {
         currentText++;
         if (currentText < texts.Count)
-            text.text = texts[currentText];
+            text.text = Helpers.Instance.ApplyTitle(currentBird,texts[currentText]);
         if (currentText == texts.Count)
         {
             continueBtn.SetActive(false);
@@ -115,7 +122,7 @@ public class EventController : MonoBehaviour {
             CreateEvent(ev);
         return true;
     }
-	void CreateEvent(EventScript eventData)
+	public void CreateEvent(EventScript eventData)
 	{
         choiceList.gameObject.SetActive(false);
         currentText = 0;
@@ -134,17 +141,9 @@ public class EventController : MonoBehaviour {
         if (eventData.text4 != "")
             texts.Add(eventData.text4);
         if (eventData.text5 != "")
-            texts.Add(eventData.text5);
-        if (currentBird == null)
-        {
-            heading.text = eventData.heading;
-            text.text = eventData.text1;
-        }
-        else
-        {
-            heading.text = Helpers.Instance.ApplyTitle(currentBird.charName, eventData.heading);
-            text.text = Helpers.Instance.ApplyTitle(currentBird.charName, eventData.text1);
-        }        
+            texts.Add(eventData.text5);       
+        heading.text = Helpers.Instance.ApplyTitle(currentBird, eventData.heading);
+        text.text = Helpers.Instance.ApplyTitle(currentBird, eventData.text1);             
 		continueBtn.SetActive(false);
         if(eventData.useCustomPic && eventData.customPic != null)
         {
@@ -216,16 +215,10 @@ public class EventController : MonoBehaviour {
 		{
 			Destroy(child.gameObject);
 		}
-		continueBtn.SetActive(true);
-        if (currentBird == null)
-        {
-            heading.text =  currentEvent.options[ID].conclusionHeading;
-            text.text =currentEvent.options[ID].conclusionText;
-        }else
-        {
-            heading.text = Helpers.Instance.ApplyTitle(currentBird.charName, currentEvent.options[ID].conclusionHeading);
-            text.text = Helpers.Instance.ApplyTitle(currentBird.charName, currentEvent.options[ID].conclusionText);
-        }
+		continueBtn.SetActive(true);      
+        heading.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionHeading);
+        text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionText);
+        
         if (currentEvent.options[ID].useAutoExplanation)
             text.text += "\n" + consequences;
 
@@ -283,17 +276,10 @@ public class EventController : MonoBehaviour {
 	void SetupChoice(GameObject choiceObj,int ID)
 	{
 		EventConsequence choiceData = currentEvent.options[ID];
-        choiceObj.GetComponent<Button>().onClick.AddListener(delegate { DisplayChoiceResult(ID); });
-        if(currentBird== null)
-        {
-            choiceObj.GetComponent<ShowTooltip>().tooltipText = choiceData.selectionTooltip;
-            choiceObj.transform.Find("Description").GetComponent<Text>().text = choiceData.selectionText;
-        }
-        else
-        {
-            choiceObj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.ApplyTitle(currentBird.charName, choiceData.selectionTooltip);
-            choiceObj.transform.Find("Description").GetComponent<Text>().text = Helpers.Instance.ApplyTitle(currentBird.charName, choiceData.selectionText);
-        }
+        choiceObj.GetComponent<Button>().onClick.AddListener(delegate { DisplayChoiceResult(ID); });        
+        choiceObj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
+        choiceObj.transform.Find("Description").GetComponent<Text>().text = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionText);
+        
         if (choiceData.icon != null)
 			choiceObj.transform.Find("Icon").GetComponent<Image>().sprite = choiceData.icon;
 		else

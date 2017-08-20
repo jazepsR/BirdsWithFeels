@@ -54,6 +54,11 @@ public class RelationshipScript : MonoBehaviour {
                 //Debug.LogError("Relationship alert!");
 			}
 		}
+        if (bird.relationshipBird == null && relationshipBird != null)
+            bird.newRelationship = true;
+        if (bird.relationshipBird != null && bird.relationshipBird.charName != relationshipBird.charName)
+            bird.newRelationship = true;
+            
 		bird.relationshipBird = relationshipBird;
 
        /* string text = "";

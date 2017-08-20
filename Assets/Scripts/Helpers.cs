@@ -21,8 +21,7 @@ public class Helpers : MonoBehaviour {
     public string BraveHexColor;
     public string ScaredHexColor;
     public string LonelyHexColor;
-    public string FriendlyHexColor;
-    public Vector2 liftOffset;
+    public string FriendlyHexColor;   
     GameObject heartBreak;
     GameObject heartGain;
     Sprite fullHeart;
@@ -272,12 +271,14 @@ public class Helpers : MonoBehaviour {
             list.Add(Var.playerPos[x - 1, y - 1]);
         return list;
     }
-    public string ApplyTitle(string name, string title)
+    public string ApplyTitle(Bird name, string title)
     {
+        if (name == null)
+            return title;
         if (title != "")
-            return title.Replace("<name>", name);
+            return title.Replace("<name>", name.charName);
         else
-            return name;
+            return name.charName;
     }
     public List<Bird> GetInactiveBirds()
     {
