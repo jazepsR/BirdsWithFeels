@@ -23,8 +23,8 @@ public class EventScript:MonoBehaviour{
     [TextArea(3, 20)]
     public string text5;
     public EventConsequence[] options;
-   
-   public EventScript(Character speaker, string heading, string text1, string text2="",string text3 = "",string text4 ="",string text5= "")
+    public bool canShowMultipleTimes = false;
+    public EventScript(Character speaker, string heading, string text1, string text2="",string text3 = "",string text4 ="",string text5= "")
     {
         this.speaker = speaker;
         this.heading = heading;
@@ -35,5 +35,6 @@ public class EventScript:MonoBehaviour{
         this.text5 = text5;
         options = new EventConsequence[0];
         condition = ConditionCheck.Condition.none;
+        canShowMultipleTimes = true;
     }
 }

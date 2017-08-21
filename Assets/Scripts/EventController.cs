@@ -23,7 +23,8 @@ public class EventController : MonoBehaviour {
 	EventScript currentEvent;
 	GameObject currentPortrait;
 	Bird currentBird;
-	List<string> texts;
+   
+    List<string> texts;
 	int currentText = 0;
 	// Use this for initialization
 	void Awake () {
@@ -81,7 +82,8 @@ public class EventController : MonoBehaviour {
 		}
 		bool canCreateEvent = false;
 		EventScript ev = events[Random.Range(0, events.Length)];
-		for (int i = 0; i < 10; i++)
+
+		for (int i = 0; i < 100; i++)
 		{
 
 
@@ -91,7 +93,9 @@ public class EventController : MonoBehaviour {
 				ev = testEvent;
 			else
 				ev = events[Random.Range(0, events.Length)];
-			if (ev != null)
+
+            bool alreadySeen = Var.shownDialogs.Contains(ev.GetInstanceID());            
+            if (ev != null && !alreadySeen)
 			{
 				if (ev.speaker == EventScript.Character.None)
 				{
@@ -132,7 +136,12 @@ public class EventController : MonoBehaviour {
 	}
 	public void CreateEvent(EventScript eventData)
 	{
-		choiceList.gameObject.SetActive(false);
+        if (eventData.canShowMultipleTimes)
+        {
+            int ID = eventData.GetInstanceID();
+            Var.shownDialogs.Add(ID);
+        }
+        choiceList.gameObject.SetActive(false);
 		currentText = 0;
 		if (!inMap)
 		{
