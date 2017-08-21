@@ -26,6 +26,7 @@ public class Helpers : MonoBehaviour {
     GameObject heartGain;
     Sprite fullHeart;
     Sprite emptyHeart;
+    public bool inMap;
     List<Image> heartsToFill = new List<Image>();
     public Transform relationshipDialogs;
     public void Awake()
@@ -42,21 +43,21 @@ public class Helpers : MonoBehaviour {
     }
     public Bird GetBirdFromEnum(EventScript.Character ch)
     {
+        List<Bird> birds;
+        if (inMap)
+            birds = Var.availableBirds;
+        else
+            birds = Var.activeBirds;
+
         if(ch == EventScript.Character.Random)
         {
-            return Var.activeBirds[UnityEngine.Random.Range(0, Var.activeBirds.Count)];
+            return birds[UnityEngine.Random.Range(0, Var.activeBirds.Count)];
         }
-        foreach (Bird bird in Var.activeBirds)
+        foreach (Bird bird in birds)
         {
             if (bird.charName == ch.ToString())
                 return bird;
         }
-        foreach (Bird bird in Var.availableBirds)
-        {
-            if (bird.charName == ch.ToString())
-                return bird;
-        }
-       
         return null;
 
 

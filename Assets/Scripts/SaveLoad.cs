@@ -40,6 +40,8 @@ public class SaveLoad : MonoBehaviour
     {
         Var.mapSaveData = data.mapSaveData;       
         Var.map = data.map;
+        Var.shownDialogs = data.usedDialogs;
+        Var.shownEvents = data.usedEvents;
         List<Bird> activeBirds = new List<Bird>();
         foreach(BirdSaveData birdData in data.activeBirds)
         {
@@ -61,8 +63,12 @@ public class SaveData
     public List<BirdSaveData> activeBirds;
     public List<BirdSaveData> availableBirds;
     public List<BattleData> map;
+    public List<int> usedDialogs;
+    public List<int> usedEvents;
     public SaveData()
     {
+        usedEvents = Var.shownEvents;
+        usedDialogs = Var.shownDialogs;
         mapSaveData = Var.mapSaveData;
         activeBirds = new List<BirdSaveData>();
         foreach(Bird bird in Var.activeBirds)
