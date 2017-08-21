@@ -95,12 +95,17 @@ public class GuiContoler : MonoBehaviour {
 		Var.powerText = powerTextTemp;	    
 		if (!inMap)
 		{
-			GuiMap.Instance.CreateMap();
-            DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+			GuiMap.Instance.CreateMap();            
 			setMapLocation(0);
-		}        
+            LeanTween.delayedCall(0.05f,tryDialog);
+        }        
 	}
 
+    void tryDialog()
+    {
+        DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+    }
+    
 
     public void StatToggle()
     {

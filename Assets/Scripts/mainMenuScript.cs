@@ -56,6 +56,8 @@ public class mainMenuScript : MonoBehaviour {
     Var.activeBirds = new List<Bird>();
     Var.availableBirds = new List<Bird>();
     Var.map = new List<BattleData>();
+    Var.shownEvents = new List<int>();
+    Var.shownDialogs = new List<int>();
     Var.isTutorial = false;
     ContinueBtn.interactable = false;
     }

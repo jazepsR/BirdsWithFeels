@@ -3261,6 +3261,7 @@ MonoBehaviour:
   ScaredHexColor: <color=#983484ff>
   LonelyHexColor: <color=#0f12b3ff>
   FriendlyHexColor: <color=#2bd617ff>
+  inMap: 1
   relationshipDialogs: {fileID: 0}
 --- !u!114 &685676509
 MonoBehaviour:
@@ -4122,6 +4123,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1964972161}
     m_Modifications:
+    - target: {fileID: 114751699958703836, guid: 9f058c7db173d3e43a338bbc64ffc2fe,
+        type: 2}
+      propertyPath: speakers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4091236563341792, guid: 9f058c7db173d3e43a338bbc64ffc2fe, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4173,6 +4179,11 @@ Prefab:
         type: 2}
       propertyPath: text
       value: This is the map dialog system
+      objectReference: {fileID: 0}
+    - target: {fileID: 114751699958703836, guid: 9f058c7db173d3e43a338bbc64ffc2fe,
+        type: 2}
+      propertyPath: speakers.Array.data[0]
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f058c7db173d3e43a338bbc64ffc2fe, type: 2}
@@ -5980,6 +5991,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speaker: 2
+  condition: 2
+  magnitude: 0
+  targetEmotion: 0
   useCustomPic: 0
   customPic: {fileID: 0}
   heading: Alone

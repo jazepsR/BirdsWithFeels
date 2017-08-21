@@ -5,6 +5,9 @@ using UnityEngine;
 public class EventScript:MonoBehaviour{
     public enum Character  { Terry,Rebecca,Tova,Kim,Toby,Random,None};
     public Character speaker;
+    public ConditionCheck.Condition condition;
+    public int magnitude = 0;
+    public Var.Em targetEmotion;
     public bool useCustomPic = false;
     public Sprite customPic;
     [TextArea(3, 10)]
@@ -31,6 +34,6 @@ public class EventScript:MonoBehaviour{
         this.text4 = text4;
         this.text5 = text5;
         options = new EventConsequence[0];
-
+        condition = ConditionCheck.Condition.none;
     }
 }

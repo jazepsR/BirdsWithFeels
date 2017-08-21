@@ -115,10 +115,7 @@ public class Bird : MonoBehaviour
     public string birdPrefabName;
 	void Start()
 	{
-        
-
-	    
-		if (!isEnemy && portrait == null)
+        if (!isEnemy && portrait == null)
 			portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
 	   /* if (!isEnemy && !inMap)
 		{
@@ -142,7 +139,7 @@ public class Bird : MonoBehaviour
                 if (child.gameObject.name.Contains("flat"))
                     colorSprites.Add(child);                    
             }
-            print("colored children: " + colorSprites.Count);
+            //print("colored children: " + colorSprites.Count);
 			if (relationships==null)
 			{
 				relationships = new Dictionary<EventScript.Character, int>(); 
@@ -160,9 +157,10 @@ public class Bird : MonoBehaviour
                     print("error setting up realtionships");
                 }
 			}
-			//transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName); //seb
-			//hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
-			if (levelList.Count == 0)
+            SetEmotion();
+            //transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName); //seb
+            //hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
+            if (levelList.Count == 0)
 			{
 				levelList = new List<LevelData>();
 				Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);               
@@ -176,8 +174,7 @@ public class Bird : MonoBehaviour
 		{
 			CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;
 		}
-		lines = GetComponent<firendLine>();
-        SetEmotion();
+		lines = GetComponent<firendLine>();        
         if (isEnemy)
 		{
 			home = transform.localPosition;
