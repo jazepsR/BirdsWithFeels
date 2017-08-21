@@ -31,10 +31,7 @@ public class EventController : MonoBehaviour {
 	}
     void Start()
     {
-        string title = "<name> has a crush!";
-        string text = "<name> has fallen hard for Bertha will you help <name> get together with his paramour or drive them apart?";
-        EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.availableBirds[0]), title, text);
-        EventController.Instance.CreateEvent(relationshipEvent);
+        
     }
 	public void ContinueBtn()
     {
@@ -56,8 +53,11 @@ public class EventController : MonoBehaviour {
             }
             else
             {
-                GuiContoler.Instance.battlePanel.SetActive(true);
-                DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+                if (GuiContoler.Instance.graph.transform.localPosition.x<-1000)
+                {
+                    GuiContoler.Instance.battlePanel.SetActive(true);
+                    DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+                }
             }
         }
         
@@ -131,6 +131,12 @@ public class EventController : MonoBehaviour {
             GuiContoler.Instance.battlePanel.SetActive(false);
         }
 		currentEvent = eventData;
+        if (currentBird == null)
+        {
+            currentBird = Helpers.Instance.GetBirdFromEnum(eventData.speaker);
+            currentPortrait = currentBird.portrait;
+
+        }
         eventObject.SetActive(true);
         texts = new List<string>();
         texts.Add(eventData.text1);

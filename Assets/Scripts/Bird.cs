@@ -134,7 +134,8 @@ public class Bird : MonoBehaviour
 		if (!isEnemy)
 		{
             var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
-            Instantiate(BirdArt, transform);
+            GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
+            birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
             colorSprites = new List<SpriteRenderer>();            
             foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>())
             {
@@ -176,9 +177,11 @@ public class Bird : MonoBehaviour
 			CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;
 		}
 		lines = GetComponent<firendLine>();
-		if (isEnemy)
+        SetEmotion();
+        if (isEnemy)
 		{
 			home = transform.localPosition;
+            colorRenderer.color = Helpers.Instance.GetEmotionColor(emotion);
 		}
 		else
 		{
@@ -187,7 +190,7 @@ public class Bird : MonoBehaviour
 		}
 		target = transform.position;
 		prevEmotion = Var.Em.finish;
-		SetEmotion();
+		
 		
 	}
 	public void Speak(string text)
@@ -466,8 +469,15 @@ public class Bird : MonoBehaviour
 		if (!dragged)
 		{
 			SetCoolDownRing(false);
-            foreach (SpriteRenderer sp in colorSprites)
-                sp.color = DefaultCol;
+            if (isEnemy)
+            {
+                colorRenderer.color = DefaultCol;
+            }
+            else
+            {
+                foreach (SpriteRenderer sp in colorSprites)
+                    sp.color = DefaultCol;
+            }
             GetComponent<Animator>().SetBool("lift", false);
 		}       
 		if (isEnemy)
@@ -721,7 +731,7 @@ public class Bird : MonoBehaviour
 		}
         if (isEnemy)
         {
-            colorRenderer.color = Helpers.Instance.neutral;
+            colorRenderer.color = Helpers.Instance.GetEmotionColor(emotion);
         }else
         {
             foreach (SpriteRenderer sp in colorSprites)

@@ -21,13 +21,15 @@ public class EventScript:MonoBehaviour{
     public string text5;
     public EventConsequence[] options;
    
-   public EventScript(Character speaker, string heading, string text1, string text2="",string text3 = "")
+   public EventScript(Character speaker, string heading, string text1, string text2="",string text3 = "",string text4 ="",string text5= "")
     {
         this.speaker = speaker;
         this.heading = heading;
         this.text1 = text1;
         this.text2 = text2;
         this.text3 = text3;
+        this.text4 = text4;
+        this.text5 = text5;
         options = new EventConsequence[0];
 
     }

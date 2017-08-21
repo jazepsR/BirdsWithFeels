@@ -442,7 +442,7 @@ public class GuiContoler : MonoBehaviour {
                 {
                     //Crush
                     string title = "<name> has a crush!";
-                    string text = "<name> has fallen hard for " + relationshipBird.charName + " will you help <name> get together with his paramour or drive them apart?";
+                    string text = "<name> has fallen hard for " + relationshipBird.charName + "! will you help <name> get together with his paramour or drive them apart?";
                     EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
                     EventController.Instance.CreateEvent(relationshipEvent);
                 }

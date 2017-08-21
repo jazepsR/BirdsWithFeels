@@ -105,6 +105,7 @@ public class fillEnemy : MonoBehaviour {
             enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
             enemy.SetEmotion();
             enemy.GetComponent<feedBack>().SetEnemyHoverText();
+            enemy.GetComponent<Animator>().SetBool("dead", false);
             Enemies[enemyPos].SetActive(true);
             enemy.inUse = true;
             enemy.transform.localPosition = enemy.home;
@@ -120,7 +121,7 @@ public class fillEnemy : MonoBehaviour {
             {
                 enemy.gameObject.SetActive(true);
                 enemy.transform.localPosition = enemy.home;
-                enemy.GroundRollBonus = 0;
+                enemy.GroundRollBonus = 0;                
                 enemy.colorRenderer.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
 
             }
