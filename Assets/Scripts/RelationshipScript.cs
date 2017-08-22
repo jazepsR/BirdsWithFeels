@@ -21,6 +21,8 @@ public class RelationshipScript : MonoBehaviour {
 	}
 	public static void applyRelationship(Bird bird)
 	{
+        if (Var.isTutorial)
+            return;
 		List<Bird> closeBirds = Helpers.Instance.GetAdjacentBirds(bird);
 		foreach (Bird closeBird in closeBirds)
 		{

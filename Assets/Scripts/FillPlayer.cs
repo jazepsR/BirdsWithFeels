@@ -54,9 +54,11 @@ public class FillPlayer : MonoBehaviour {
         }
         if (Var.availableBirds.Count < 1 && inMap)
         {           
-
-            Var.availableBirds.AddRange(playerBirds);
-
+            foreach(Bird bird in playerBirds)
+            {
+                if(bird.gameObject.activeSelf)
+                    Var.availableBirds.Add(bird);
+            }          
         }
      
         

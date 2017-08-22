@@ -7,7 +7,7 @@ public class Levels : MonoBehaviour {
 	public enum type { Toby,Kim,Rebecca,Tova, Terry,Friend1,Friend2,Brave1,Brave2,Lonely1,Lonely2,Scared1,Scared2};
 	Bird myBird;	
 	public GameObject Halo;
-    public GameObject SadRest;
+	public GameObject SadRest;
 	public Vector2 lastSwapPos = new Vector2(-2,-2);
 	private bool TovaActivated = false;
 	
@@ -65,50 +65,50 @@ public class Levels : MonoBehaviour {
 
 					}
 					break;
-                //TODO: Maybe someday fix this skill
-                /* case type.Lonely1:
-                     if (myBird.x == -1)
-                         break;
-                     if (Var.enemies[myBird.y + 4].inUse)
-                     {
-                         if (!Var.enemies[myBird.y + 5].inUse)
-                         {
-                             Bird tempBird = Var.enemies[myBird.y + 4];
-                             Var.enemies[myBird.y + 4] = Var.enemies[myBird.y + 5];
-                             Var.enemies[myBird.y + 5] = tempBird;
-                             LeanTween.moveLocal(tempBird.gameObject, Var.enemies[myBird.y + 4].home, 0.4f);
-                             lastSwapPos = new Vector2(myBird.x, myBird.y);
-                             Debug.Log("swapped on some num");
-                         }                        
-                         else
-                         {
-                             if (myBird.y == 3 && !Var.enemies[6].inUse)
-                             {
-                                 Bird tempBird = Var.enemies[7];
-                                 Var.enemies[7] = Var.enemies[6];
-                                 Var.enemies[6] = tempBird;
-                                 //TODO: Get coordinates dynamically
-                                 LeanTween.moveLocal(tempBird.gameObject, new Vector3(1.73f,-1.22f,0f), 0.4f);
-                                 lastSwapPos = new Vector2(myBird.x, myBird.y);
-                                 Debug.Log("swapped on 3");
-                             }
-                         }
-                         string bla = "";
-                         foreach (Bird birdy in Var.enemies)
-                         {
-                             bla += birdy.birdBio + " ";
-                         }
-                        //Debug.Log("Enemie ids after swap" + bla );
-                         GameLogic.Instance.UpdateFeedback();
+				//TODO: Maybe someday fix this skill
+				/* case type.Lonely1:
+					 if (myBird.x == -1)
+						 break;
+					 if (Var.enemies[myBird.y + 4].inUse)
+					 {
+						 if (!Var.enemies[myBird.y + 5].inUse)
+						 {
+							 Bird tempBird = Var.enemies[myBird.y + 4];
+							 Var.enemies[myBird.y + 4] = Var.enemies[myBird.y + 5];
+							 Var.enemies[myBird.y + 5] = tempBird;
+							 LeanTween.moveLocal(tempBird.gameObject, Var.enemies[myBird.y + 4].home, 0.4f);
+							 lastSwapPos = new Vector2(myBird.x, myBird.y);
+							 Debug.Log("swapped on some num");
+						 }                        
+						 else
+						 {
+							 if (myBird.y == 3 && !Var.enemies[6].inUse)
+							 {
+								 Bird tempBird = Var.enemies[7];
+								 Var.enemies[7] = Var.enemies[6];
+								 Var.enemies[6] = tempBird;
+								 //TODO: Get coordinates dynamically
+								 LeanTween.moveLocal(tempBird.gameObject, new Vector3(1.73f,-1.22f,0f), 0.4f);
+								 lastSwapPos = new Vector2(myBird.x, myBird.y);
+								 Debug.Log("swapped on 3");
+							 }
+						 }
+						 string bla = "";
+						 foreach (Bird birdy in Var.enemies)
+						 {
+							 bla += birdy.birdBio + " ";
+						 }
+						//Debug.Log("Enemie ids after swap" + bla );
+						 GameLogic.Instance.UpdateFeedback();
 
-                     }
-                     break;*/
-                case type.Rebecca:
-                    if (myBird.x == -1)
-                        break;
-                    if(GameLogic.Instance.CheckIfResting(myBird))
-                        SadRest.SetActive(true);
-                    break;
+					 }
+					 break;*/
+				case type.Rebecca:
+					if (myBird.x == -1)
+						break;
+					if(GameLogic.Instance.CheckIfResting(myBird))
+						SadRest.SetActive(true);
+					break;
 				case type.Terry:
 					if (myBird.x == -1 )
 						break;
@@ -147,7 +147,7 @@ public class Levels : MonoBehaviour {
 					List<Bird> enemies = GetDiagonalEnemies();
 					foreach(Bird enemy in enemies)
 					{
-                        
+						
 						//Color firstColor = enemy.colorRenderer.color;
 						//enemy.colorRenderer.color = new Color(firstColor.r - 0.3f, firstColor.g - 0.3f, firstColor.b - 0.3f);
 						enemy.PlayerRollBonus = -1;
@@ -177,12 +177,12 @@ public class Levels : MonoBehaviour {
 						tile.FriendBonus = 0;
 					}
 					break;
-                case type.Rebecca:
-                    if (myBird.x == -1)
-                        break;
-                    SadRest.SetActive(false);
-                    break;
-                case type.Terry:
+				case type.Rebecca:
+					if (myBird.x == -1)
+						break;
+					SadRest.SetActive(false);
+					break;
+				case type.Terry:
 					if (myBird.x == -1 )
 						break;
 					foreach (LayoutButton tile in GetRow())
@@ -302,12 +302,12 @@ public class Levels : MonoBehaviour {
 				case type.Tova:
 					TovaActivated = false;
 					break;
-                case type.Rebecca:
-                    if (myBird.x == -1)
-                        break;
-                    SadRest.SetActive(false);
-                    break;
-                default:
+				case type.Rebecca:
+					if (myBird.x == -1)
+						break;
+					SadRest.SetActive(false);
+					break;
+				default:
 					break;
 			}
 		}
@@ -592,8 +592,8 @@ public class Levels : MonoBehaviour {
 public class LevelData{
 	public Levels.type type;
 	public Var.Em emotion;
-    [NonSerialized]
-    public Sprite LVLIcon;
+	[NonSerialized]
+	public Sprite LVLIcon;
 	public string levelInfo;
 	public string title;
 
