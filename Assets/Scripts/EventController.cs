@@ -66,6 +66,8 @@ public class EventController : MonoBehaviour {
 	}
 	public bool tryEvent()
 	{
+        if (eventObject.activeSelf)
+           return false;
 		if (Var.isTutorial)
 			return false;
 		currentBird = null;

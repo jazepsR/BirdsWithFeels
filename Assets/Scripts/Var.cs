@@ -64,7 +64,7 @@ public class MapSaveData
     public int ID;
     public List<int> targets;
     public bool completed;
-    public bool available;
+    public bool available;    
     public MapSaveData(bool completed, bool available, int ID, List<int> targets)
     { 
         this.completed = completed;

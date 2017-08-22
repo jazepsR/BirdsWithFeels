@@ -39,7 +39,9 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     LineRenderer lr;
     Image sr;
     bool active = false;
-    Vector3 offset;    
+    Vector3 offset;
+    public bool addBirdOnComplete = false;
+    public Bird birdToAdd;
     // Use this for initialization
     void Start()
     {
@@ -52,9 +54,40 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         CompleteIcon.SetActive(completed);
         LockedIcon.SetActive(!available);        
         lr = GetComponent<LineRenderer>();
+        AddNewBird();
         if (!CheckTargetsAvailable() && available)
             LeanTween.delayedCall(0.1f, mapBtnClick);
     }
+    void AddNewBird()
+    {
+        if(completed && addBirdOnComplete)
+        {
+            bool canAdd = true;
+            foreach(Bird bird in Var.availableBirds)
+            {
+                if(bird.charName == birdToAdd.charName)
+                {
+                    canAdd = false;
+                    break;
+                }
+            }
+            if (canAdd)
+            {
+                birdToAdd.gameObject.SetActive(true);
+                Var.availableBirds.Add(birdToAdd);
+                birdToAdd.publicStart();
+                string title = "<name> joins your party!";
+                string text = "Your party has grown in renown and <name> has decided to join! How will he fit in? Who will he become on this adventure?";
+                EventScript joinEvent = new EventScript(Helpers.Instance.GetCharEnum(birdToAdd), title, text);
+                EventController.Instance.CreateEvent(joinEvent);
+            }
+
+
+        }
+
+
+    }
+
     void Update()
     {
         if(active)
@@ -63,7 +96,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         }
         int i = 0;
         lr.positionCount = targets.Length * 2;
-        lr.sortingOrder = 9;
+        lr.sortingOrder = 2;
         if (targets.Length > 0)
         {
             foreach (MapIcon pos in targets)

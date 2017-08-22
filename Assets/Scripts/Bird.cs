@@ -192,6 +192,11 @@ public class Bird : MonoBehaviour
 		
 		
 	}
+
+    public void publicStart()
+    {
+        Start();
+    }
 	public void Speak(string text)
 	{
 		GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, text);
