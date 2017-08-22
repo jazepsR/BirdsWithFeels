@@ -445,7 +445,7 @@ public class GuiContoler : MonoBehaviour {
                     EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title,text );
                     EventController.Instance.CreateEvent(relationshipEvent);
                 }
-                else
+                if (Var.activeBirds[birdNum].GetRelationshipBonus() < 0)
                 {
                     //Crush
                     string title = "<name> has a crush!";
@@ -453,7 +453,15 @@ public class GuiContoler : MonoBehaviour {
                     EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
                     EventController.Instance.CreateEvent(relationshipEvent);
                 }
-               
+                if (Var.activeBirds[birdNum].GetRelationshipBonus() == 0)
+                {
+                    //Crush
+                    string title = "A break up for <name>!";
+                    string text = "<name> have seen their new romantic dreams evaporate in front of them! Will <name> try to pursue the previous lover once again, find a new love or just be single for a while?";
+                    EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
+                    EventController.Instance.CreateEvent(relationshipEvent);
+                }
+
                 Var.activeBirds[birdNum].newRelationship = false;
             }
 			if (Var.activeBirds[birdNum].hasNewLevel)
@@ -503,7 +511,7 @@ public class GuiContoler : MonoBehaviour {
 		
 		if (Var.isTutorial)
 			maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos]-1;
-		nextGraph.interactable = (currentGraph < maxGraph);
+		nextGraph.interactable = (currentGraph <= maxGraph);
 		prevGraph.interactable = (currentGraph > 0);
 		//CloseBattleReport.interactable = (currentGraph == maxGraph);
         

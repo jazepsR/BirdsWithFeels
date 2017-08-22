@@ -150,7 +150,7 @@ public class EventController : MonoBehaviour {
 			GuiContoler.Instance.battlePanel.SetActive(false);
 		}
 		currentEvent = eventData;
-		if (currentBird == null && eventData.speaker!= EventScript.Character.None)
+		if (eventData.speaker!= EventScript.Character.None)
 		{
 			currentBird = Helpers.Instance.GetBirdFromEnum(eventData.speaker);
 			currentPortrait = currentBird.portrait;

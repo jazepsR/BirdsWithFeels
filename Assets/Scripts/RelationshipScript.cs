@@ -56,18 +56,19 @@ public class RelationshipScript : MonoBehaviour {
 		}
         if (bird.relationshipBird == null && relationshipBird != null)
             bird.newRelationship = true;
-        if (bird.relationshipBird != null && bird.relationshipBird.charName != relationshipBird.charName)
-            bird.newRelationship = true;
-            
-		bird.relationshipBird = relationshipBird;
 
-       /* string text = "";
-        foreach (KeyValuePair<EventScript.Character, int> kvp in bird.relationships)
+        if (bird.relationshipBird != null)
         {
-            //textBox3.Text += ("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-            text += string.Format("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            if (relationshipBird == null)
+                bird.newRelationship = true;
+            else
+            {
+                if (bird.relationshipBird.charName != relationshipBird.charName)
+                    bird.newRelationship = true;
+            }
         }
-        print(text);*/
+		bird.relationshipBird = relationshipBird;
+        
 	}
 	static void weakenRelationship(Bird bird)
 	{
