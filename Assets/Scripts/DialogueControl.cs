@@ -39,6 +39,8 @@ public class DialogueControl : MonoBehaviour {
 	
 	public void TryDialogue(Dialogue.Location location, EventScript.Character Char = EventScript.Character.None)
 	{
+        if (Var.isTutorial)
+            return;
 		if (Random.Range(0, 1.0f) > dialogueFrequency)
 			return;
 		for(int i =0; i<100; i++)

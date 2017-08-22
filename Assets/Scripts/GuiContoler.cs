@@ -78,10 +78,12 @@ public class GuiContoler : MonoBehaviour {
 	public float levelInfo_yvalue;
 	public float levelinfoHideXValue;
 	public float levelinfoshowXValue;
-	void Awake()
+    int maxGraph = 3;
+    void Awake()
 	{
 		Instance = this;
-	}
+        maxGraph = 3;
+    }
 	void Start()
 	{
 		Var.Infight = false;
@@ -275,7 +277,7 @@ public class GuiContoler : MonoBehaviour {
 
 	public void ShowNextGraph()
 	{
-        if (currentGraph == 3)
+        if (currentGraph == maxGraph)
         {
             CloseGraph();
             return;
@@ -498,10 +500,10 @@ public class GuiContoler : MonoBehaviour {
 	
 	void CheckGraphNavBtns()
 	{
-		int maxGraph = 3;
+		
 		if (Var.isTutorial)
 			maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos]-1;
-		//nextGraph.interactable = (currentGraph < maxGraph);
+		nextGraph.interactable = (currentGraph < maxGraph);
 		prevGraph.interactable = (currentGraph > 0);
 		//CloseBattleReport.interactable = (currentGraph == maxGraph);
         

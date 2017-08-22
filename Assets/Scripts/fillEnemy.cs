@@ -40,13 +40,9 @@ public class fillEnemy : MonoBehaviour {
             if (en != null)
             {
                 Bird enemy = Enemies[index].GetComponent<Bird>();
-                enemy.confidence = en.confidence;
-                enemy.friendliness = en.firendliness;
-                enemy.SetEmotion();
-                enemy.GetComponent<feedBack>().SetEnemyHoverText();
+                CreateEnemy(enemy);              
                 Enemies[index].SetActive(true);
-                enemy.inUse = true;
-                enemy.transform.localPosition = enemy.home;
+                
             }
             index++;
         }
@@ -104,28 +100,33 @@ public class fillEnemy : MonoBehaviour {
                 frontBirds++;
             enemy.confidence = (int)Random.Range(minConf, maxConf);
             enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
-            enemy.SetEmotion();
-            if (enemy.EnemyArt != null)
-                Destroy(enemy.EnemyArt);
-            enemy.EnemyArt =Instantiate(Helpers.Instance.GetEnemyVisual(enemy.position, enemy.emotion),enemy.transform);
-            enemy.EnemyArt.transform.localPosition = new Vector3(0, 0, 0);
-            foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>())
-            {
-                if (child.gameObject.name.Contains("flat"))
-                {
-                    child.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
-                }
-                    
-            }
-            enemy.GetComponent<feedBack>().SetEnemyHoverText();
-            enemy.GetComponent<Animator>().SetBool("dead", false);
+            CreateEnemy(enemy);
             Enemies[enemyPos].SetActive(true);
-            enemy.inUse = true;
-            enemy.transform.localPosition = enemy.home;
         }
         
         
     } 
+    void CreateEnemy(Bird enemy)
+    {
+        enemy.SetEmotion();
+        if (enemy.EnemyArt != null)
+            Destroy(enemy.EnemyArt);
+        enemy.EnemyArt = Instantiate(Helpers.Instance.GetEnemyVisual(enemy.position, enemy.emotion), enemy.transform);
+        enemy.EnemyArt.transform.localPosition = new Vector3(0, 0, 0);
+        foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>())
+        {
+            if (child.gameObject.name.Contains("flat"))
+            {
+                child.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
+            }
+
+        }
+        enemy.GetComponent<feedBack>().SetEnemyHoverText();
+        enemy.GetComponent<Animator>().SetBool("dead", false);
+        enemy.inUse = true;
+        enemy.transform.localPosition = enemy.home;
+    }
+
     public void Reset()
     {
        foreach(Bird enemy in Var.enemies)
