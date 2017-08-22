@@ -40,6 +40,7 @@ public static class Var {
     public static Sprite[] skillIcons = null;
     public static Sprite[] startingLvlSprites = null;
     public static List<Sprite> hatSprites = null;
+    public static List<GameObject> enemySprites = null;
     public static GameObject emotionParticles = null;
     public static bool Infight = false;
     public static bool shouldDoMapEvent = false;

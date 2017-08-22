@@ -97,6 +97,7 @@ public class fillEnemy : MonoBehaviour {
                     }
                 }
             }
+            //TODO: implement new birds for tutorial
             usedPos.Add(enemyPos);
             Bird enemy = Enemies[enemyPos].GetComponent<Bird>();               
             if (enemy.position == Bird.dir.front)
@@ -104,6 +105,16 @@ public class fillEnemy : MonoBehaviour {
             enemy.confidence = (int)Random.Range(minConf, maxConf);
             enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
             enemy.SetEmotion();
+            enemy.EnemyArt =Instantiate(Helpers.Instance.GetEnemyVisual(enemy.position, enemy.emotion),enemy.transform);
+            enemy.EnemyArt.transform.localPosition = new Vector3(0, 0, 0);
+            foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>())
+            {
+                if (child.gameObject.name.Contains("flat"))
+                {
+                    child.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
+                }
+                    
+            }
             enemy.GetComponent<feedBack>().SetEnemyHoverText();
             enemy.GetComponent<Animator>().SetBool("dead", false);
             Enemies[enemyPos].SetActive(true);
@@ -121,8 +132,9 @@ public class fillEnemy : MonoBehaviour {
             {
                 enemy.gameObject.SetActive(true);
                 enemy.transform.localPosition = enemy.home;
-                enemy.GroundRollBonus = 0;                
-                enemy.colorRenderer.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
+                enemy.GroundRollBonus = 0;
+                if (enemy.EnemyArt != null)
+                    Destroy(enemy.EnemyArt);
 
             }
 

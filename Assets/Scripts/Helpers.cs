@@ -78,7 +78,35 @@ public class Helpers : MonoBehaviour {
                 return Var.Em.Neutral;
         }
     }
-    
+    public GameObject GetEnemyVisual(Bird.dir dir, Var.Em emotion)
+    {
+        int id = 0;
+        if (dir == Bird.dir.front)
+            id += 5;
+        switch (emotion)
+        {
+            case Var.Em.Confident:
+                id += 0;
+                break;
+            case Var.Em.Friendly:
+                id += 1;
+                break;
+            case Var.Em.Lonely:
+                id += 2;
+                break;
+            case Var.Em.Neutral:
+                id += 3;
+                break;
+            case Var.Em.Scared:
+                id += 4;
+                break;
+        }
+        return Var.enemySprites[id];
+
+    }
+
+
+
     public bool RandomBool()
     {
         if (UnityEngine.Random.Range(0f, 1f) > 0.5f)

@@ -10,20 +10,7 @@ public class FillPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Awake ()
     {
-        if (Var.lvlSprites == null)
-            Var.lvlSprites = Resources.LoadAll<Sprite>("Icons/NewIcons");
-        if (Var.skillIcons == null)
-            Var.skillIcons = Resources.LoadAll<Sprite>("sprites/skill_pictures");
-        if(Var.startingLvlSprites == null)
-            Var.startingLvlSprites = Resources.LoadAll<Sprite>("Icons/icons_startingabilties");
-        if(Var.hatSprites == null)
-        {
-            Var.hatSprites = new List<Sprite>();
-            Var.hatSprites.AddRange(Resources.LoadAll<Sprite>("sprites/hat_spriteSheet"));
-            Var.hatSprites.Add(Resources.Load<Sprite>("sprites/hat_spriteSheet_3"));
-            Var.hatSprites.Add(Resources.Load<Sprite>("sprites/hat_spriteSheet_4"));
-           // print(Var.hatSprites.Count);
-        }
+        LoadSprites();
         Instance = this;
         if (Var.isTutorial && !inMap)
             return;
@@ -90,6 +77,7 @@ public class FillPlayer : MonoBehaviour {
             Var.activeBirds.AddRange(playerBirds);
         }
     }
+
 	void Start()
     {
         if (Var.isTutorial&& !inMap)
@@ -106,7 +94,37 @@ public class FillPlayer : MonoBehaviour {
             }
         }
     }
-	
+	void LoadSprites()
+    {
+        if (Var.lvlSprites == null)
+            Var.lvlSprites = Resources.LoadAll<Sprite>("Icons/NewIcons");
+        if (Var.skillIcons == null)
+            Var.skillIcons = Resources.LoadAll<Sprite>("sprites/skill_pictures");
+        if (Var.startingLvlSprites == null)
+            Var.startingLvlSprites = Resources.LoadAll<Sprite>("Icons/icons_startingabilties");
+        if (Var.hatSprites == null)
+        {
+            Var.hatSprites = new List<Sprite>();
+            Var.hatSprites.AddRange(Resources.LoadAll<Sprite>("sprites/hat_spriteSheet"));
+            Var.hatSprites.Add(Resources.Load<Sprite>("sprites/hat_spriteSheet_3"));
+            Var.hatSprites.Add(Resources.Load<Sprite>("sprites/hat_spriteSheet_4"));
+            // print(Var.hatSprites.Count);
+        }
+        if (Var.enemySprites == null)
+        {
+            Var.enemySprites = new List<GameObject>();
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_side_confident"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_side_friendly"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_side_lonely"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_side_neutral"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_side_scared"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_confident"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_confident"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_confident"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_confident"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_confident"));
+        }
+    }
 	public static void SetupBird(Bird target, Bird template)
     {
         target.birdPrefabName = template.birdPrefabName;
