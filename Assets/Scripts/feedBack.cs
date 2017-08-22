@@ -194,7 +194,7 @@ public class feedBack : MonoBehaviour {
 		LeanTween.color(feedBackText.gameObject, textCol, 0.2f);
 		LeanTween.scale(feedBackText.gameObject, Vector3.one, 0.3f).setEase(LeanTweenType.easeOutBack);
 		//feedBackText.text = ((int)(value*100)).ToString("+#;-#;0") +" %";
-		feedBackText.text =(Mathf.Ceil(value * 100)).ToString("0") + " %";
+		feedBackText.text =(Mathf.Ceil(value * 100)).ToString("0");
 	}
     
 	public void HideFeedBack(bool forFight)
