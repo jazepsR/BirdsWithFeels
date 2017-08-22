@@ -158,7 +158,7 @@ public class feedBack : MonoBehaviour {
 	public void SetEnemyHoverText()
 	{
         BelowBirdIndicator.gameObject.SetActive(true);
-        BelowBirdIndicator.color = new Color(1, 1, 1, 0.5f);        
+        BelowBirdIndicator.color = new Color(1, 1, 1, 1f);        
         string name = Helpers.Instance.GetName(Helpers.Instance.RandomBool());
         LvlIndicatorText.text = (birdScript.levelRollBonus + 1).ToString();
         string strength = "None";
@@ -203,10 +203,10 @@ public class feedBack : MonoBehaviour {
             BelowBirdIndicator.gameObject.SetActive(false);
         } else
         {
-            if (!BelowBirdIndicator.color.Equals(new Color(1, 1, 1, 0.5f)) )
+            if (!BelowBirdIndicator.color.Equals(new Color(1, 1, 1, 1f)) )
             {
                              
-                BelowBirdIndicator.color = new Color(1, 1, 1, 0.5f);
+                BelowBirdIndicator.color = new Color(1, 1, 1, 1f);
                 LeanTween.scale(BelowBirdIndicator.gameObject, scale * 1.2f, 0.15f).setEase(LeanTweenType.easeOutCubic).setOnComplete(ScaleDownIndicator);
             }
         }
