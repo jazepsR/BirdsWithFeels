@@ -121,8 +121,8 @@ public class fillEnemy : MonoBehaviour {
             }
 
         }
-        enemy.GetComponent<feedBack>().SetEnemyHoverText();
-        enemy.GetComponent<Animator>().SetBool("dead", false);
+        enemy.GetComponent<feedBack>().SetEnemyHoverText();        
+        enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
         enemy.inUse = true;
         enemy.transform.localPosition = enemy.home;
     }

@@ -146,11 +146,15 @@ public class LayoutButton : MonoBehaviour
             {
                 Debug.Log("failed to apply power");
             }
+            if (birdObj.groundMultiplier > 1)
+                birdObj.GroundBonus.SetActive(true);
         }
         birdObj.confBoos += ConfBonus;// *birdObj.groundMultiplier;
         birdObj.friendBoost += FriendBonus;// *birdObj.groundMultiplier;
         birdObj.GroundRollBonus += RollBonus;
         birdObj.PlayerRollBonus += PlayerRollBonus;
+        if (birdObj.groundMultiplier > 1 && (ConfBonus!=0 || FriendBonus!=0 || RollBonus!=0 ))
+            birdObj.GroundBonus.SetActive(true);
     }
 
     public void Reset()

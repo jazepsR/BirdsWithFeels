@@ -115,6 +115,7 @@ public class Bird : MonoBehaviour
     public string birdPrefabName;
     [HideInInspector]
     public GameObject EnemyArt = null;
+    public GameObject GroundBonus;
 	void Start()
 	{
         if (!isEnemy && portrait == null)
@@ -410,7 +411,7 @@ public class Bird : MonoBehaviour
 			}
 		}
 		if (Input.GetMouseButtonUp(0))
-		{
+		{            
 			GetComponent<Animator>().SetBool("lift", false);
 		}
 		if (Input.GetMouseButtonDown(0))
@@ -453,7 +454,8 @@ public class Bird : MonoBehaviour
 				lines.RemoveLines();
 				UpdateFeedback();
 				GuiContoler.Instance.HideLvlText();
-			}
+                GroundBonus.SetActive(false);
+            }
 			levelControler.ApplyLevelOnPickup(this, levelList);
 			// RemoveAllFeedBack();
 		}
@@ -473,10 +475,11 @@ public class Bird : MonoBehaviour
             }
             else
             {
+                GetComponent<Animator>().SetBool("lift", false);
                 foreach (SpriteRenderer sp in colorSprites)
                     sp.color = DefaultCol;
             }
-            GetComponent<Animator>().SetBool("lift", false);
+            
 		}       
 		if (isEnemy)
 		{
@@ -869,6 +872,7 @@ public class Bird : MonoBehaviour
 			//Debug.Log("x: " + x+ " y: " + y);
 			levelControler.ApplyLevelOnDrop(this, levelList);
 			UpdateFeedback();          
+
 		}
 		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		SetCoolDownRing(false);
