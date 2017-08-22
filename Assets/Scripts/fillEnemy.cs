@@ -105,6 +105,8 @@ public class fillEnemy : MonoBehaviour {
             enemy.confidence = (int)Random.Range(minConf, maxConf);
             enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
             enemy.SetEmotion();
+            if (enemy.EnemyArt != null)
+                Destroy(enemy.EnemyArt);
             enemy.EnemyArt =Instantiate(Helpers.Instance.GetEnemyVisual(enemy.position, enemy.emotion),enemy.transform);
             enemy.EnemyArt.transform.localPosition = new Vector3(0, 0, 0);
             foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>())
