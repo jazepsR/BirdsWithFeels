@@ -119,10 +119,10 @@ public class FillPlayer : MonoBehaviour {
             Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_side_neutral"));
             Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_side_scared"));
             Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_confident"));
-            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_confident"));
-            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_confident"));
-            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_confident"));
-            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_confident"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_friendly"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_lonely"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_neutral"));
+            Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_scared"));
         }
     }
 	public static void SetupBird(Bird target, Bird template)

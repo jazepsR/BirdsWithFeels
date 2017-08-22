@@ -81,7 +81,7 @@ public class Helpers : MonoBehaviour {
     public GameObject GetEnemyVisual(Bird.dir dir, Var.Em emotion)
     {
         int id = 0;
-        if (dir == Bird.dir.front)
+        if (dir == Bird.dir.top)
             id += 5;
         switch (emotion)
         {
