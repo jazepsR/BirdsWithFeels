@@ -37,6 +37,7 @@ public class EventController : MonoBehaviour {
 	public void ContinueBtn()
 	{
 		currentText++;
+        AudioControler.Instance.ClickSound();
 		if (currentText < texts.Count)
 			text.text = Helpers.Instance.ApplyTitle(currentBird,texts[currentText]);
 		if (currentText == texts.Count)
@@ -230,6 +231,7 @@ public class EventController : MonoBehaviour {
 	}
 	void DisplayChoiceResult(int ID)
 	{
+        AudioControler.Instance.PlayPaperSound();
 		choiceList.gameObject.SetActive(false);
 		Helpers.Instance.HideTooltip();
 		string consequences = ApplyConsequences(ID);

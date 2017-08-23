@@ -19,6 +19,7 @@ public class AudioControler : MonoBehaviour {
     public AudioClip paperSound;
     public AudioClip battleStart;
     public AudioClip newEmotion;
+    public AudioClip[] birdTalk;
     [Header("Ambient sounds")]
     public AudioClip[] AmbientSounds;
     public AudioClip[] battleTracks;
@@ -55,6 +56,12 @@ public class AudioControler : MonoBehaviour {
         mainAudioSource.pitch = 1f;
         mainAudioSource.PlayOneShot(clip);
     }
+    public void PlayVoice()
+    {
+        PlaySoundWithPitch(birdTalk[ Random.Range(0, birdTalk.Length)]);
+    }
+
+
     void battleVolumeToggle(float vol)
     {
         battleSource.volume = vol*battleVol;

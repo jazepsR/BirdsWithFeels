@@ -240,31 +240,38 @@ public class GuiContoler : MonoBehaviour {
 				}
 				else
 				{
-					SpeechBubbleText.text = speechTexts[0];                    
+                    AudioControler.Instance.PlayVoice();
+                    SpeechBubbleText.text = speechTexts[0];                    
 					speechBubble.GetComponent<UIFollow>().target = speechPos[0];
 					speechPos.RemoveAt(0);
 					speechTexts.RemoveAt(0);
-				}
+                    if (!inMap)
+                    {
+                        prevGraph.interactable = false;
+                        nextGraph.interactable = false;
+                    }
+                }
 			}
 		}
 	}
 
 	public void ShowSpeechBubble(Transform pos,string text)
 	{
-		if (speechBubbleObj.activeSelf) {
-            if (!inMap)
-            {
-                prevGraph.interactable = false;
-                nextGraph.interactable = false;
-            }
+		if (speechBubbleObj.activeSelf) {            
 			speechTexts.Add(text);
 			speechPos.Add(pos);
 		}
 		else
 		{
-			SpeechBubbleText.text = text;
+            if (!inMap)
+            {
+                prevGraph.interactable = false;
+                nextGraph.interactable = false;
+            }
+            SpeechBubbleText.text = text;
 			speechBubbleObj.SetActive(true);
 			speechBubble.GetComponent<UIFollow>().target = pos;
+            AudioControler.Instance.PlayVoice();
 		   // LeanTween.delayedCall(6f, ShowSpeechBubbleReminder);
 		}
 	   
@@ -499,12 +506,13 @@ public class GuiContoler : MonoBehaviour {
 			Graph.Instance.PlotFull(bird);
 			//feedbackText.text = "";
 			winText.text = "";
-            if(currentGraph!= 3)
-                DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(bird));
+            
 			//winDetails.text = "";
 		}
 		CheckGraphNavBtns();
-	} 
+        if (currentGraph != 3)
+            DialogueControl.Instance.TryDialogue(Dialogue.Location.graph,Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]));
+    } 
 	
 	void CheckGraphNavBtns()
 	{

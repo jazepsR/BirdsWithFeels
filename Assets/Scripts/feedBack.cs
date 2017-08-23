@@ -181,9 +181,9 @@ public class feedBack : MonoBehaviour {
 	
 	public void ShowFeedback(float value,Bird bird)
 	{
-		if (!BelowBirdIndicator.color.Equals(new Color(0.5f, 0, 0, 1f)))
+		if (!BelowBirdIndicator.color.Equals(new Color(1f, 0, 0, 1f)))
 		{          
-			BelowBirdIndicator.color = new Color(0.5f, 0, 0, 1f);
+			BelowBirdIndicator.color = new Color(1f, 0, 0, 1f);
 			LeanTween.scale(BelowBirdIndicator.gameObject, scale * 1.2f, 0.15f).setEase(LeanTweenType.easeOutCubic).setOnComplete(ScaleDownIndicator);
 		}
 		bird.fighting = true;
