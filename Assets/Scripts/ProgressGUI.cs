@@ -102,7 +102,11 @@ public class ProgressGUI : MonoBehaviour {
 	
 	public void PortraitClick(Bird bird)
 	{
-        
+        if (!bird.inMap)
+        {
+            bird.SetRelationshipText(GuiContoler.Instance.reportRelationshipPortrait, GuiContoler.Instance.reportRelationshipText);
+            bird.SetRelationshipSliders(GuiContoler.Instance.reportRelationshipSliders);
+        }
         NameText.text = bird.charName;
         if (bird.inMap)
             birdBio.text = bird.birdBio;

@@ -756,83 +756,96 @@ public class Bird : MonoBehaviour
 	
 	public void showText()
 	{
-		if (ToString() != null)
-		{
-			//Var.birdInfo.text = ToString();           
-			GuiContoler.Instance.selectedBird = this;
-			if (!inMap)
-			{
-				Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, lastLevel.title);
-				Var.birdInfoFeeling.text = emotion.ToString();
-				Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
-				GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
-				//set progress to level bar
-				if (battleCount >= battlesToNextLVL)
-				{
-					battleCount = battlesToNextLVL;
-					Var.powerText.text = "Ready to level up!";
-					levelUpText = CheckLevels(false);
-					Var.powerBar.color = Helpers.Instance.GetSoftEmotionColor(emotion);
-					Var.powerBar.fillAmount = 1;
-				}
-				else
-				{
-					Var.powerBar.color = Color.white;
-					Var.powerText.text = null;
-					Var.powerText.text = "Leveling available in " + (battlesToNextLVL - battleCount) + " battles!";
-					Var.powerBar.fillAmount = (float)battleCount % 3 / (float)3;
-				}
+        if (ToString() != null)
+        {
+            //Var.birdInfo.text = ToString();           
+            GuiContoler.Instance.selectedBird = this;
+            SetRelationshipSliders(GuiContoler.Instance.relationshipSliders);
+            Var.birdInfoFeeling.text = emotion.ToString();
+            Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
+            if (!inMap)
+            {
+                Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, lastLevel.title);              
+                GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
+                //set progress to level bar
+                if (battleCount >= battlesToNextLVL)
+                {
+                    battleCount = battlesToNextLVL;
+                    Var.powerText.text = "Ready to level up!";
+                    levelUpText = CheckLevels(false);
+                    Var.powerBar.color = Helpers.Instance.GetSoftEmotionColor(emotion);
+                    Var.powerBar.fillAmount = 1;
+                }
+                else
+                {
+                    Var.powerBar.color = Color.white;
+                    Var.powerText.text = null;
+                    Var.powerText.text = "Leveling available in " + (battlesToNextLVL - battleCount) + " battles!";
+                    Var.powerBar.fillAmount = (float)battleCount % 3 / (float)3;
+                }
 
-				int index = 0;
-				GuiContoler.Instance.levelNumberText.text = level.ToString();
-				//Set Relationship bars
-				var keys = new List<EventScript.Character>(relationships.Keys);
-				foreach (EventScript.Character birdFriend in keys)
-				{
-					GameObject slider = GuiContoler.Instance.relationshipSliders.transform.Find(birdFriend.ToString()).gameObject;
-					slider.SetActive(false);
-					slider.GetComponent<Slider>().value = relationships[birdFriend];
-					try
-					{
-                       
-						if (Helpers.Instance.GetBirdFromEnum(birdFriend, true).charName != null && Helpers.Instance.GetBirdFromEnum(birdFriend, true).health>0)
-							slider.SetActive(true);
-					}
-					catch { }
+                int index = 0;
+                GuiContoler.Instance.levelNumberText.text = level.ToString();
+                //Set Relationship bars
+                
 
-				}
-				GuiContoler.Instance.relationshipSliders.transform.Find(charName).gameObject.SetActive(false);
+                ///Set level icons
+                foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
+                {
+                    if (levelList.Count > index)
+                    {
+                        icon.gameObject.SetActive(true);
+                        icon.GetComponent<Image>().sprite = levelList[index].LVLIcon;
+                        icon.textToDsiplay = levelList[index].levelInfo;
+                    }
+                    else
+                    {
+                        icon.gameObject.SetActive(false);
+                    }
+                    index++;
+                }
+            }
+            //set emotion bars
+            GuiContoler.Instance.confSlider.SetDist(confidence, this);
+            GuiContoler.Instance.firendSlider.SetDist(friendliness, this);
+            //set hearts
+            SetRelationshipText(GuiContoler.Instance.relationshipPortrait, GuiContoler.Instance.relationshipText);
+            if (!inMap)
+            {
+                try
+                {
+                    Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
 
-				///Set level icons
-				foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
-				{
-					if (levelList.Count > index)
-					{
-						icon.gameObject.SetActive(true);
-						icon.GetComponent<Image>().sprite = levelList[index].LVLIcon;
-						icon.textToDsiplay = levelList[index].levelInfo;
-					}
-					else
-					{
-						icon.gameObject.SetActive(false);
-					}
-					index++;
-				}
-			}
-		//set emotion bars
-		GuiContoler.Instance.confSlider.SetDist(confidence,this);
-		GuiContoler.Instance.firendSlider.SetDist(friendliness,this);
-			//set hearts
-			if (!inMap)
-				try
-				{
-					Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
-					SetRelationshipText();
-				}
-				catch { }
-		}
+                }
+                catch { }
+
+            }
+        }
 	}
-	void SetRelationshipText()
+
+    public void SetRelationshipSliders(GameObject sliderParent)
+    {
+        var keys = new List<EventScript.Character>(relationships.Keys);
+        foreach (EventScript.Character birdFriend in keys)
+        {
+            GameObject slider = sliderParent.transform.Find(birdFriend.ToString()).gameObject;
+            slider.SetActive(false);
+            slider.GetComponent<Slider>().value = relationships[birdFriend];
+            try
+            {
+                if (Helpers.Instance.GetBirdFromEnum(birdFriend, true).charName != null && Helpers.Instance.GetBirdFromEnum(birdFriend, true).health > 0)
+                    slider.SetActive(true);
+            }
+            catch { }
+
+        }
+        sliderParent.transform.Find(charName).gameObject.SetActive(false);
+
+    }
+
+
+
+	public void SetRelationshipText(GameObject portrait, Text RelationshipText)
 	{
 
 		relationshipBonus =GetRelationshipBonus();
@@ -840,25 +853,25 @@ public class Bird : MonoBehaviour
 		if(relationshipBonus == 0)
 		{
 			relationshipText += "Single.";
-			GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(false);
+            portrait.transform.parent.gameObject.SetActive(false);
 		}
 		if (relationshipBonus > 0)
 		{
 			relationshipText += "In a relationship with " +relationshipBird.charName+".";
-			GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(true);
-			GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
-			GuiContoler.Instance.relationshipPortrait.transform.Find("bird").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
-			GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
+            portrait.transform.parent.gameObject.SetActive(true);
+            portrait.transform.Find("bird_color").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+            portrait.transform.Find("bird").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
+            portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
 		}
 		if (relationshipBonus < 0)
 		{
 			relationshipText += "Has a crush on " + relationshipBird.charName + ".";
-			GuiContoler.Instance.relationshipPortrait.transform.parent.gameObject.SetActive(true);
-			GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
-			GuiContoler.Instance.relationshipPortrait.transform.Find("bird").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
-			GuiContoler.Instance.relationshipPortrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
+			portrait.transform.parent.gameObject.SetActive(true);
+            portrait.transform.Find("bird_color").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+            portrait.transform.Find("bird").GetComponent<Image>().sprite = relationshipBird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
+            portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
 		}
-		GuiContoler.Instance.relationshipText.text = relationshipText;
+		RelationshipText.text = relationshipText;
 	}
 	
 	

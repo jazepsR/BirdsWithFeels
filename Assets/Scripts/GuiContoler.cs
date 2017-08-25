@@ -10,6 +10,8 @@ public class GuiContoler : MonoBehaviour {
 	public Text ToggleRelationPanelText;
 	public GameObject relationshipPortrait;
 	public Text relationshipText;
+    public GameObject reportRelationshipPortrait;
+    public Text reportRelationshipText;
 	public GameObject statPanel;
 	public GameObject relationshipPanel;
 	public RectTransform canvasRect;
@@ -75,6 +77,7 @@ public class GuiContoler : MonoBehaviour {
 	public Button prevGraph;
 	public Button HideSmallGraph;
 	public GameObject relationshipSliders;
+    public GameObject reportRelationshipSliders;
 	public float levelInfo_yvalue;
 	public float levelinfoHideXValue;
 	public float levelinfoshowXValue;
