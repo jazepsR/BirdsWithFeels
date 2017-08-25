@@ -92,13 +92,13 @@ public class battleAnim :MonoBehaviour {
 
 	void ShowBattleResult(battleData battle)
 	{
-		battle.player.GetComponent<Animator>().SetBool("iswalking", false);
+		battle.player.GetComponentInChildren<Animator>().SetBool("iswalking", false);
 		
 		//Player won
 		if (battle.result == 1)
 		{
-			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.playerWin);
-			battle.player.GetComponent<Animator>().SetTrigger("victory 0");
+			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.playerWin);            
+            battle.player.GetComponentInChildren<Animator>().SetTrigger("victory 0");            
             battle.enemy.GetComponentInChildren<Animator>().SetBool("dead", true);
             battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", false);
            // battle.enemy.gameObject.SetActive(false);
@@ -107,7 +107,7 @@ public class battleAnim :MonoBehaviour {
 		}
 		else
 		{
-			battle.player.GetComponent<Animator>().SetTrigger("lose 0");
+			battle.player.GetComponentInChildren<Animator>().SetTrigger("lose 0");
             battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", false);
 			AudioControler.Instance.EnemySound();
 			battle.player.ChageHealth(-1);

@@ -137,7 +137,7 @@ public class FillPlayer : MonoBehaviour {
 		target.portraitOrder = template.portraitOrder;
 		target.health = template.health;
 		if (template.health < 1)
-			target.gameObject.GetComponent<Animator>().SetBool("dead", true);
+			target.gameObject.GetComponentInChildren<Animator>().SetBool("dead", true);
 		target.portrait = template.portrait;
 		target.maxHealth = template.maxHealth;
 		target.levelList = template.levelList;

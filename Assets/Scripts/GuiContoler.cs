@@ -363,7 +363,7 @@ public class GuiContoler : MonoBehaviour {
 		foreach (Bird bird in Var.activeBirds)
 		{
 			bird.SetEmotion();
-			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
+			bird.gameObject.GetComponentInChildren<Animator>().SetBool("iswalking", false);
 		   // bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
 		   // bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
 			bird.target = bird.home;
@@ -743,7 +743,7 @@ public class GuiContoler : MonoBehaviour {
 					return false;
 				}
 			}
-			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
+			bird.gameObject.GetComponentInChildren<Animator>().SetBool("iswalking", false);
 
 			//bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
 			//bird.gameObject.GetComponent<Animator>().SetBool("victory", false);

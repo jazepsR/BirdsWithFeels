@@ -26,7 +26,7 @@ public class Bird : MonoBehaviour
 	public Var.Em emotion;
 	public string charName;	
 	public bool inUse = true;	
-    public SpriteRenderer colorRenderer;
+    public SpriteRenderer colorRenderer;    
     List<SpriteRenderer> colorSprites;
 	public GameObject bush;    
 	[HideInInspector]
@@ -161,11 +161,12 @@ public class Bird : MonoBehaviour
             var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
             GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
             birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
-            colorSprites = new List<SpriteRenderer>();            
-            foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>())
+            colorSprites = new List<SpriteRenderer>();
+           
+            foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
             {
                 if (child.gameObject.name.Contains("flat"))
-                    colorSprites.Add(child);                    
+                    colorSprites.Add(child);
             }
             //print("colored children: " + colorSprites.Count);
 			
@@ -448,14 +449,14 @@ public class Bird : MonoBehaviour
 		}
 		if (Input.GetMouseButtonUp(0))
 		{            
-			GetComponent<Animator>().SetBool("lift", false);
+			GetComponentInChildren<Animator>().SetBool("lift", false);
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (Var.Infight || health<=0)
 				return;
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
-			GetComponent<Animator>().SetBool("lift", true);
+			GetComponentInChildren<Animator>().SetBool("lift", true);
 
 
 			if (inMap)
@@ -511,7 +512,7 @@ public class Bird : MonoBehaviour
             }
             else
             {
-                GetComponent<Animator>().SetBool("lift", false);
+                GetComponentInChildren<Animator>().SetBool("lift", false);
                 foreach (SpriteRenderer sp in colorSprites)
                     sp.color = DefaultCol;
             }
@@ -598,7 +599,7 @@ public class Bird : MonoBehaviour
 		
 		if (health+ healthBoost + roundHealthChange <= 0)
 		{
-			GetComponent<Animator>().SetBool("dead", true);
+			GetComponentInChildren<Animator>().SetBool("dead", true);
 		   // GuiContoler.Instance.ShowDeathMenu(this);
 			//gameObject.SetActive(false);
 		}
@@ -901,7 +902,7 @@ public class Bird : MonoBehaviour
 		this.x = x;
 		this.y = y;
 		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.dropBird);
-		GetComponent<Animator>().SetBool("lift", false);
+		GetComponentInChildren<Animator>().SetBool("lift", false);
 		if (!inMap)
 		{
 			lines.DrawLines(x, y);
