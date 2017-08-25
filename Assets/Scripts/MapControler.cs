@@ -45,6 +45,8 @@ public class MapControler : MonoBehaviour {
                 DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
             Var.shouldDoMapEvent = false;
         }
+        foreach (Bird bird in FillPlayer.Instance.playerBirds)
+            bird.publicStart();
         //ProgressGUI.Instance.PortraitClick(Var.availableBirds[0]);
     }
 	

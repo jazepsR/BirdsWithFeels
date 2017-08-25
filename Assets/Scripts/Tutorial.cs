@@ -38,10 +38,11 @@ public class Tutorial : MonoBehaviour {
         AddEnemiesToList(sixthStageEnemies);
         ShowtutorialStartingText(0);
     }
+    
     void Update()
     {
         if (!Var.isTutorial)
-            return;
+            return;        
         if (shouldShowFriendlyPopup && !GuiContoler.Instance.speechBubbleObj.activeSelf)
         {
             FirendlinessPopUp.SetActive(true);

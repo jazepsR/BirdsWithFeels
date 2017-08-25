@@ -89,6 +89,14 @@ public class GuiContoler : MonoBehaviour {
 		Var.Infight = false;
 		if (Var.emotionParticles == null)
 			Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
+        if (Var.isTutorial)
+        {
+            try
+            {
+                Tutorial.Instance.enabled = true;
+            }
+            catch { }
+        }
 		messages = new List<string>();
 		Var.birdInfo = infoText;
 		Var.birdInfoHeading = infoHeading;

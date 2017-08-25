@@ -132,8 +132,9 @@ public class Bird : MonoBehaviour
 		y = -1;
 		prevConf = confidence;
 		prevFriend = friendliness;
-       
-		if (!isEnemy)
+      
+ 
+        if (!isEnemy)
 		{
 
             if (relationships == null)
@@ -153,26 +154,10 @@ public class Bird : MonoBehaviour
                     print("error setting up realtionships");
                 }
             }
-            RelationshipScript.applyRelationship(this, false);
-            //Load relationship bird
-           // LeanTween.delayedCall(0.05f, SetRelationship);
-            //relationshipBonus = GetRelationshipBonus();
-            //relationshipBird = Var.availableBirds[2];
+            RelationshipScript.applyRelationship(this, false);       
             var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
             GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
-            birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
-            colorSprites = new List<SpriteRenderer>();
-           
-            foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-            {
-                if (child.gameObject.name.Contains("flat"))
-                    colorSprites.Add(child);
-            }
-            //print("colored children: " + colorSprites.Count);
-			
-            SetEmotion();
-            //transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName); //seb
-            //hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
+            birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);                    
             if (levelList.Count == 0)
 			{
 				levelList = new List<LevelData>();
@@ -182,7 +167,16 @@ public class Bird : MonoBehaviour
 			levelControler = GetComponent<Levels>();
 			levelControler.ApplyStartLevel(this, levelList);       
 		}
-		SetCoolDownRing(false);
+        colorSprites = new List<SpriteRenderer>();
+        foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            if (child.gameObject.name.Contains("flat"))
+                colorSprites.Add(child);
+        }
+        SetEmotion();
+        foreach (SpriteRenderer sp in colorSprites)
+           sp.color = Helpers.Instance.GetEmotionColor(emotion);
+        SetCoolDownRing(false);
 		if (CooldownRing != null)
 		{
 			CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;
@@ -703,11 +697,12 @@ public class Bird : MonoBehaviour
 		{
 			//No type
 			emotion = Var.Em.Neutral;
-            if (!isEnemy)
+            try
             {
                 foreach (SpriteRenderer sp in colorSprites)
                     LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
-            }         
+            }
+            catch { }        
 			DefaultCol = Helpers.Instance.GetEmotionColor(emotion);            
 			HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g + factor, DefaultCol.b + factor);
 			return;
@@ -749,18 +744,14 @@ public class Bird : MonoBehaviour
 			}
 
 		}
-        if (isEnemy)
-        {
-           
-        }else
+        try
         {
             foreach (SpriteRenderer sp in colorSprites)
                 LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
-        }     
+        }
+        catch { }        
 		DefaultCol = Helpers.Instance.GetEmotionColor(emotion);        
 		HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g +factor, DefaultCol.b + factor);
-
-
 	}
 	
 	public void showText()
