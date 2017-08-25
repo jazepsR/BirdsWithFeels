@@ -26,8 +26,8 @@ public class Bird : MonoBehaviour
 	public Var.Em emotion;
 	public string charName;	
 	public bool inUse = true;	
-    public SpriteRenderer colorRenderer;    
-    List<SpriteRenderer> colorSprites;
+	public SpriteRenderer colorRenderer;    
+	List<SpriteRenderer> colorSprites;
 	public GameObject bush;    
 	[HideInInspector]
 	public GameObject portrait;	
@@ -108,17 +108,17 @@ public class Bird : MonoBehaviour
 	public Var.Em prevEmotion=  Var.Em.finish;
 	bool started = false;
 	public Dictionary<EventScript.Character, int> relationships;
-    [HideInInspector]
-    public List<Dialogue> relationshipDialogs;
-    [HideInInspector]
-    public bool newRelationship = false;
-    public string birdPrefabName;
-    [HideInInspector]
-    public GameObject EnemyArt = null;
-    public GameObject GroundBonus;    
+	[HideInInspector]
+	public List<Dialogue> relationshipDialogs;
+	[HideInInspector]
+	public bool newRelationship = false;
+	public string birdPrefabName;
+	[HideInInspector]
+	public GameObject EnemyArt = null;
+	public GameObject GroundBonus;    
 	void Start()
 	{
-        if (!isEnemy && portrait == null)
+		if (!isEnemy && portrait == null)
 			portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
 	   /* if (!isEnemy && !inMap)
 		{
@@ -126,39 +126,39 @@ public class Bird : MonoBehaviour
 			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi2!");
 			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi3!");
 		}*/
-        
+		
 		prevRoundHealth = health;
 		x = -1;
 		y = -1;
 		prevConf = confidence;
 		prevFriend = friendliness;
-      
+	  
  
-        if (!isEnemy)
+		if (!isEnemy)
 		{
 
-            if (relationships == null)
-            {
-                relationships = new Dictionary<EventScript.Character, int>();
-                relationships.Add(EventScript.Character.Kim, 0);
-                relationships.Add(EventScript.Character.Terry, 0);
-                relationships.Add(EventScript.Character.Toby, 0);
-                relationships.Add(EventScript.Character.Tova, 0);
-                relationships.Add(EventScript.Character.Rebecca, 0);
-                try
-                {
-                    relationships.Remove(Helpers.Instance.GetCharEnum(this));
-                }
-                catch
-                {
-                    print("error setting up realtionships");
-                }
-            }
-            RelationshipScript.applyRelationship(this, false);       
-            var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
-            GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
-            birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);                    
-            if (levelList.Count == 0)
+			if (relationships == null)
+			{
+				relationships = new Dictionary<EventScript.Character, int>();
+				relationships.Add(EventScript.Character.Kim, 0);
+				relationships.Add(EventScript.Character.Terry, 0);
+				relationships.Add(EventScript.Character.Toby, 0);
+				relationships.Add(EventScript.Character.Tova, 0);
+				relationships.Add(EventScript.Character.Rebecca, 0);
+				try
+				{
+					relationships.Remove(Helpers.Instance.GetCharEnum(this));
+				}
+				catch
+				{
+					print("error setting up realtionships");
+				}
+			}
+			RelationshipScript.applyRelationship(this, false);       
+			var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
+			GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
+			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);                    
+			if (levelList.Count == 0)
 			{
 				levelList = new List<LevelData>();
 				Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);               
@@ -167,22 +167,22 @@ public class Bird : MonoBehaviour
 			levelControler = GetComponent<Levels>();
 			levelControler.ApplyStartLevel(this, levelList);       
 		}
-        colorSprites = new List<SpriteRenderer>();
-        foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-        {
-            if (child.gameObject.name.Contains("flat"))
-                colorSprites.Add(child);
-        }
-        SetEmotion();
-        foreach (SpriteRenderer sp in colorSprites)
-           sp.color = Helpers.Instance.GetEmotionColor(emotion);
-        SetCoolDownRing(false);
+		colorSprites = new List<SpriteRenderer>();
+		foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+		{
+			if (child.gameObject.name.Contains("flat"))
+				colorSprites.Add(child);
+		}
+		SetEmotion();
+		foreach (SpriteRenderer sp in colorSprites)
+		   sp.color = Helpers.Instance.GetEmotionColor(emotion);
+		SetCoolDownRing(false);
 		if (CooldownRing != null)
 		{
 			CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;
 		}
 		lines = GetComponent<firendLine>();        
-        if (isEnemy)
+		if (isEnemy)
 		{
 			home = transform.localPosition;           
 		}
@@ -197,12 +197,12 @@ public class Bird : MonoBehaviour
 		
 	}
 
-    public void publicStart()
-    {
-        Start();
-    }
+	public void publicStart()
+	{
+		Start();
+	}
 
-    
+	
 	public void Speak(string text)
 	{
 		GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, text);
@@ -267,30 +267,30 @@ public class Bird : MonoBehaviour
 
 	public int GetRelationshipBonus()
 	{
-        try
-        {
-            if (relationshipBird.relationshipBird.charName == charName)
-                return 2;
-            else
-                return -2;
+		try
+		{
+			if (relationshipBird.relationshipBird.charName == charName)
+				return 2;
+			else
+				return -2;
 
-        }
-        catch
-        {
-            try
-            {
-                if (relationshipBird.charName != null)
-                    return -2;
-                else
-                    return 0;
-            }
-            catch
-            {
-                return 0;
-            }
-        }
-        /*
-        if (relationshipBird!= null)
+		}
+		catch
+		{
+			try
+			{
+				if (relationshipBird.charName != null)
+					return -2;
+				else
+					return 0;
+			}
+			catch
+			{
+				return 0;
+			}
+		}
+		/*
+		if (relationshipBird!= null)
 		{
 			if(relationshipBird.relationshipBird !=null && relationshipBird.relationshipBird.charName == charName)
 			{
@@ -410,8 +410,8 @@ public class Bird : MonoBehaviour
 		}
 		else
 		{
-            foreach (SpriteRenderer sp in colorSprites)
-                sp.color = HighlightCol;			
+			foreach (SpriteRenderer sp in colorSprites)
+				sp.color = HighlightCol;			
 			if (!dragged)
 				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.mouseOverBird);
 		}
@@ -485,8 +485,8 @@ public class Bird : MonoBehaviour
 				lines.RemoveLines();
 				UpdateFeedback();
 				GuiContoler.Instance.HideLvlText();
-                GroundBonus.SetActive(false);
-            }
+				GroundBonus.SetActive(false);
+			}
 			levelControler.ApplyLevelOnPickup(this, levelList);
 			// RemoveAllFeedBack();
 		}
@@ -500,17 +500,17 @@ public class Bird : MonoBehaviour
 		if (!dragged)
 		{
 			SetCoolDownRing(false);
-            if (isEnemy)
-            {
-                
-            }
-            else
-            {
-                GetComponentInChildren<Animator>().SetBool("lift", false);
-                foreach (SpriteRenderer sp in colorSprites)
-                    sp.color = DefaultCol;
-            }
-            
+			if (isEnemy)
+			{
+				
+			}
+			else
+			{
+				GetComponentInChildren<Animator>().SetBool("lift", false);
+				foreach (SpriteRenderer sp in colorSprites)
+					sp.color = DefaultCol;
+			}
+			
 		}       
 		if (isEnemy)
 		{
@@ -626,15 +626,15 @@ public class Bird : MonoBehaviour
 	}
 	void setRelationshipDialogs()
 	{
-        if (relationshipBird == null)
-        {
-            relationshipDialogs = null;
-        }else
-        {
-           Transform relationshipTransform= Helpers.Instance.relationshipDialogs.Find(charName).transform.Find(relationshipBird.charName);
-           relationshipDialogs = new List<Dialogue>(relationshipTransform.GetComponentsInChildren<Dialogue>());
-        } 
-        
+		if (relationshipBird == null)
+		{
+			relationshipDialogs = null;
+		}else
+		{
+		   Transform relationshipTransform= Helpers.Instance.relationshipDialogs.Find(charName).transform.Find(relationshipBird.charName);
+		   relationshipDialogs = new List<Dialogue>(relationshipTransform.GetComponentsInChildren<Dialogue>());
+		} 
+		
 
 	}
 	public void AddRoundBonuses(bool doFightStuff= true)
@@ -697,12 +697,12 @@ public class Bird : MonoBehaviour
 		{
 			//No type
 			emotion = Var.Em.Neutral;
-            try
-            {
-                foreach (SpriteRenderer sp in colorSprites)
-                    LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
-            }
-            catch { }        
+			try
+			{
+				foreach (SpriteRenderer sp in colorSprites)
+					LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
+			}
+			catch { }        
 			DefaultCol = Helpers.Instance.GetEmotionColor(emotion);            
 			HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g + factor, DefaultCol.b + factor);
 			return;
@@ -744,12 +744,12 @@ public class Bird : MonoBehaviour
 			}
 
 		}
-        try
-        {
-            foreach (SpriteRenderer sp in colorSprites)
-                LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
-        }
-        catch { }        
+		try
+		{
+			foreach (SpriteRenderer sp in colorSprites)
+				LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
+		}
+		catch { }        
 		DefaultCol = Helpers.Instance.GetEmotionColor(emotion);        
 		HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g +factor, DefaultCol.b + factor);
 	}
@@ -790,8 +790,15 @@ public class Bird : MonoBehaviour
 				foreach (EventScript.Character birdFriend in keys)
 				{
 					GameObject slider = GuiContoler.Instance.relationshipSliders.transform.Find(birdFriend.ToString()).gameObject;
-					slider.SetActive(true);
+					slider.SetActive(false);
 					slider.GetComponent<Slider>().value = relationships[birdFriend];
+					try
+					{
+                       
+						if (Helpers.Instance.GetBirdFromEnum(birdFriend, true).charName != null && Helpers.Instance.GetBirdFromEnum(birdFriend, true).health>0)
+							slider.SetActive(true);
+					}
+					catch { }
 
 				}
 				GuiContoler.Instance.relationshipSliders.transform.Find(charName).gameObject.SetActive(false);

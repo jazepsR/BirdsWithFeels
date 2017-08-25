@@ -201,8 +201,10 @@ public class Helpers : MonoBehaviour {
                 return BraveHexColor;
             case Var.Em.SuperScared:
                 return ScaredHexColor;
+            case Var.Em.Neutral:
+                return "<color=#000000FF>";
             default:
-                return "<color=#FFFFFFFF>";
+                return "<color=#000000FF>";
         }
     }
 

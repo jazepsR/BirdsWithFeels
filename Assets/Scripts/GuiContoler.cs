@@ -456,7 +456,7 @@ public class GuiContoler : MonoBehaviour {
 				{
 					//Relationship
 					string title = "<name> is in a relationship!";
-					string text = "Things are getting serious for <name> and " + relationshipBird.charName + ". They seem very happy for now, but will it last?";
+					string text = "Things are getting serious for <name> and " + relationshipBird.charName + ". They seem very happy for now, but will it last?\nBoth <name> and "+relationshipBird.charName + "gain <b>+20% combat strength<\b> while in this relationship";
 					EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title,text );
 					EventController.Instance.CreateEvent(relationshipEvent);
 				}
@@ -464,7 +464,7 @@ public class GuiContoler : MonoBehaviour {
 				{
 					//Crush
 					string title = "<name> has a crush!";
-					string text = "<name> has fallen hard for " + relationshipBird.charName + "! will you help <name> get together with his paramour or drive them apart?";
+					string text = "<name> has fallen hard for " + relationshipBird.charName + "! will you help <name> get together with his paramour or drive them apart?\n<name> will have <b>-20% combat strength</b> until he gets over the crush, or achives a realtionship with their beloved.";
 					EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
 					EventController.Instance.CreateEvent(relationshipEvent);
 				}
@@ -472,7 +472,7 @@ public class GuiContoler : MonoBehaviour {
 				{
 					//Crush
 					string title = "A break up for <name>!";
-					string text = "<name> have seen their new romantic dreams evaporate in front of them! Will <name> try to pursue the previous lover once again, find a new love or just be single for a while?";
+					string text = "<name> have seen their new romantic dreams evaporate in front of them! Will <name> try to pursue the previous lover once again, find a new love or just be single for a while?\n<name>'s stats have <b>returned to normal.</b>";
 					EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
 					EventController.Instance.CreateEvent(relationshipEvent);
 				}
