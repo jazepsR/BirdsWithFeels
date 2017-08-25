@@ -43,17 +43,37 @@ public class SaveLoad : MonoBehaviour
         Var.shownDialogs = data.usedDialogs;
         Var.shownEvents = data.usedEvents;
         List<Bird> activeBirds = new List<Bird>();
-        foreach(BirdSaveData birdData in data.activeBirds)
+       /* foreach(BirdSaveData birdData in data.activeBirds)
         {
             activeBirds.Add(FillPlayer.LoadSavedBird(birdData));
         }
-        Var.activeBirds = activeBirds;
+        Var.activeBirds = activeBirds;*/
+       
+        
         List<Bird> availableBirds = new List<Bird>();
         foreach (BirdSaveData birdData in data.availableBirds)
         {
             availableBirds.Add(FillPlayer.LoadSavedBird(birdData));
         }
         Var.availableBirds = availableBirds;
+        //Load relationship birds
+        /*foreach (BirdSaveData birdData in data.availableBirds)
+        {
+            if (birdData.relationshipBird != EventScript.Character.None)
+            {
+                foreach (Bird bird in Var.availableBirds)
+                {
+                    if (bird.charName == birdData.charName)
+                    {
+                        bird.relationshipBird = Helpers.Instance.GetBirdFromEnum(birdData.relationshipBird,true);
+                    }
+                }
+            }
+        }*/
+
+
+
+        
     }
 }
 [Serializable]
@@ -76,6 +96,7 @@ public class SaveData
             activeBirds.Add(FillPlayer.SetupSaveBird(bird));
         }
         availableBirds = new List<BirdSaveData>();
+
         foreach (Bird bird in Var.availableBirds)
         {
             availableBirds.Add(FillPlayer.SetupSaveBird(bird));
@@ -94,6 +115,8 @@ public class BirdSaveData
     public int portraitOrder;
     public int health;
     public int maxHealth;
+    public Var.Em preferredEmotion;
+    public EventScript.Character relationshipBird;
     //public GameObject portrait;
     public List<LevelData> levelList;
     public Levels.type startingLVL;
@@ -107,8 +130,8 @@ public class BirdSaveData
     public int AdventuresRested;
     public int CoolDownLeft;
     public int CoolDownLength;
-        
-    }
+    public Dictionary<EventScript.Character, int> relationships;
+}
 
 
 

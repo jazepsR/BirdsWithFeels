@@ -153,6 +153,7 @@ public class FillPlayer : MonoBehaviour {
 		target.CoolDownLeft = template.CoolDownLeft;
 		target.CoolDownLength = template.CoolDownLength;
 		target.relationships = template.relationships;
+        target.relationshipBird = template.relationshipBird;
 		target.preferredEmotion = template.preferredEmotion;
 	   // target.transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = template.hatSprite;
 	}
@@ -167,8 +168,11 @@ public class FillPlayer : MonoBehaviour {
 		target.portraitOrder = template.portraitOrder;
 		target.health = template.health;
 		target.birdPrefabName = template.birdPrefabName;
-		//target.portrait = template.portrait;
-		target.levelList = template.levelList;
+        target.relationships = template.relationships;
+        target.preferredEmotion = template.preferredEmotion;
+        target.relationshipBird = Helpers.Instance.GetCharEnum(template.relationshipBird);
+        //target.portrait = template.portrait;
+        target.levelList = template.levelList;
 		target.startingLVL = template.startingLVL;
 		target.battleCount = template.battleCount;
 		target.lastLevel = template.lastLevel;
@@ -192,8 +196,9 @@ public class FillPlayer : MonoBehaviour {
 		target.portraitOrder = template.portraitOrder;
 		target.health = template.health;
 		target.birdPrefabName = template.birdPrefabName;
-		//target.portrait = template.portrait;
-		target.levelList = template.levelList;
+        target.relationships = template.relationships;
+        target.preferredEmotion = template.preferredEmotion;        //target.portrait = template.portrait;
+        target.levelList = template.levelList;
 		target.startingLVL = template.startingLVL;
 		target.battleCount = template.battleCount;
 		target.lastLevel = template.lastLevel;

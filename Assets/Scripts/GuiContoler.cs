@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
-    public Text ToggleRelationPanelText;
-    public GameObject relationshipPortrait;
-    public Text relationshipText;
-    public GameObject statPanel;
-    public GameObject relationshipPanel;
+	public Text ToggleRelationPanelText;
+	public GameObject relationshipPortrait;
+	public Text relationshipText;
+	public GameObject statPanel;
+	public GameObject relationshipPanel;
 	public RectTransform canvasRect;
 	public Text BirdLVLUpText;
 	public Text infoText;    
@@ -74,16 +74,16 @@ public class GuiContoler : MonoBehaviour {
 	public Button nextGraph;
 	public Button prevGraph;
 	public Button HideSmallGraph;
-    public GameObject relationshipSliders;
+	public GameObject relationshipSliders;
 	public float levelInfo_yvalue;
 	public float levelinfoHideXValue;
 	public float levelinfoshowXValue;
-    int maxGraph = 3;
-    void Awake()
+	int maxGraph = 3;
+	void Awake()
 	{
 		Instance = this;
-        maxGraph = 3;
-    }
+		maxGraph = 3;
+	}
 	void Start()
 	{
 		Var.Infight = false;
@@ -99,32 +99,32 @@ public class GuiContoler : MonoBehaviour {
 		{
 			GuiMap.Instance.CreateMap();            
 			setMapLocation(0);
-            LeanTween.delayedCall(0.05f,tryDialog);
-        }        
+			LeanTween.delayedCall(0.05f,tryDialog);
+		}        
 	}
 
-    void tryDialog()
-    {
-        DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
-    }
-    
+	void tryDialog()
+	{
+		DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+	}
+	
 
-    public void StatToggle()
-    {
-        if (relationshipPanel.activeSelf)
-        {
-            relationshipPanel.SetActive(false);
-            statPanel.SetActive(true);
-            ToggleRelationPanelText.text = "Relationships";
-        }else
-        {
-            relationshipPanel.SetActive(true);
-            statPanel.SetActive(false);
-            ToggleRelationPanelText.text = "Stats";
-        }
+	public void StatToggle()
+	{
+		if (relationshipPanel.activeSelf)
+		{
+			relationshipPanel.SetActive(false);
+			statPanel.SetActive(true);
+			ToggleRelationPanelText.text = "Relationships";
+		}else
+		{
+			relationshipPanel.SetActive(true);
+			statPanel.SetActive(false);
+			ToggleRelationPanelText.text = "Stats";
+		}
 
 
-    }
+	}
 	public void setPause()
 	{
 		AudioControler.Instance.ClickSound();
@@ -230,27 +230,27 @@ public class GuiContoler : MonoBehaviour {
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
-                    {
-                        if (!inMap)
-                        {
-                            nextGraph.interactable = true;
-                            prevGraph.interactable = true;
-                        }
-                    }
+					{
+						if (!inMap)
+						{
+							nextGraph.interactable = true;
+							prevGraph.interactable = true;
+						}
+					}
 				}
 				else
 				{
-                    AudioControler.Instance.PlayVoice();
-                    SpeechBubbleText.text = speechTexts[0];                    
+					AudioControler.Instance.PlayVoice();
+					SpeechBubbleText.text = speechTexts[0];                    
 					speechBubble.GetComponent<UIFollow>().target = speechPos[0];
 					speechPos.RemoveAt(0);
 					speechTexts.RemoveAt(0);
-                    if (!inMap)
-                    {
-                        prevGraph.interactable = false;
-                        nextGraph.interactable = false;
-                    }
-                }
+					if (!inMap)
+					{
+						prevGraph.interactable = false;
+						nextGraph.interactable = false;
+					}
+				}
 			}
 		}
 	}
@@ -263,15 +263,15 @@ public class GuiContoler : MonoBehaviour {
 		}
 		else
 		{
-            if (!inMap)
-            {
-                prevGraph.interactable = false;
-                nextGraph.interactable = false;
-            }
-            SpeechBubbleText.text = text;
+			if (!inMap)
+			{
+				prevGraph.interactable = false;
+				nextGraph.interactable = false;
+			}
+			SpeechBubbleText.text = text;
 			speechBubbleObj.SetActive(true);
 			speechBubble.GetComponent<UIFollow>().target = pos;
-            AudioControler.Instance.PlayVoice();
+			AudioControler.Instance.PlayVoice();
 		   // LeanTween.delayedCall(6f, ShowSpeechBubbleReminder);
 		}
 	   
@@ -284,11 +284,11 @@ public class GuiContoler : MonoBehaviour {
 
 	public void ShowNextGraph()
 	{
-        if (currentGraph == maxGraph)
-        {
-            CloseGraph();
-            return;
-        }
+		if (currentGraph == maxGraph)
+		{
+			CloseGraph();
+			return;
+		}
 		currentGraph++;
 		if (Var.isTutorial)
 		{
@@ -397,12 +397,12 @@ public class GuiContoler : MonoBehaviour {
 	public void CloseGraph()
 	{
 
-        //graph.SetActive(false);
-        AudioControler.Instance.PlayPaperSound();
+		//graph.SetActive(false);
+		AudioControler.Instance.PlayPaperSound();
 		battlePanel.SetActive(true);
-        if (!Reset())
-            return;
-        LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
+		if (!Reset())
+			return;
+		LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
 		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
 		{
 			Destroy(child.gameObject);
@@ -430,53 +430,53 @@ public class GuiContoler : MonoBehaviour {
 			Destroy(child.gameObject);
 		}
 		int birdNum = (int)o;
-        if (birdNum == -1)
-            currentGraph = 3;
-        else
-            currentGraph = birdNum;
-        Graph.Instance.portraits = new List<GameObject>();
+		if (birdNum == -1)
+			currentGraph = 3;
+		else
+			currentGraph = birdNum;
+		Graph.Instance.portraits = new List<GameObject>();
 		List<Bird> BirdsToGraph;
 		if (birdNum == -1)
 			BirdsToGraph = Var.activeBirds;
 		else
 		{
 			BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
-            if (Var.activeBirds[birdNum].newRelationship)
-            {
-                Bird relationshipBird = Var.activeBirds[birdNum].relationshipBird;
-                if (Var.activeBirds[birdNum].GetRelationshipBonus() > 0)
-                {
-                    //Relationship
-                    string title = "<name> is in a relationship!";
-                    string text = "Things are getting serious for <name> and " + relationshipBird.charName + ". They seem very happy for now, but will it last?";
-                    EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title,text );
-                    EventController.Instance.CreateEvent(relationshipEvent);
-                }
-                if (Var.activeBirds[birdNum].GetRelationshipBonus() < 0)
-                {
-                    //Crush
-                    string title = "<name> has a crush!";
-                    string text = "<name> has fallen hard for " + relationshipBird.charName + "! will you help <name> get together with his paramour or drive them apart?";
-                    EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
-                    EventController.Instance.CreateEvent(relationshipEvent);
-                }
-                if (Var.activeBirds[birdNum].GetRelationshipBonus() == 0)
-                {
-                    //Crush
-                    string title = "A break up for <name>!";
-                    string text = "<name> have seen their new romantic dreams evaporate in front of them! Will <name> try to pursue the previous lover once again, find a new love or just be single for a while?";
-                    EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
-                    EventController.Instance.CreateEvent(relationshipEvent);
-                }
+			if (Var.activeBirds[birdNum].newRelationship)
+			{
+				Bird relationshipBird = Var.activeBirds[birdNum].relationshipBird;
+				if (Var.activeBirds[birdNum].GetRelationshipBonus() > 0)
+				{
+					//Relationship
+					string title = "<name> is in a relationship!";
+					string text = "Things are getting serious for <name> and " + relationshipBird.charName + ". They seem very happy for now, but will it last?";
+					EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title,text );
+					EventController.Instance.CreateEvent(relationshipEvent);
+				}
+				if (Var.activeBirds[birdNum].GetRelationshipBonus() < 0)
+				{
+					//Crush
+					string title = "<name> has a crush!";
+					string text = "<name> has fallen hard for " + relationshipBird.charName + "! will you help <name> get together with his paramour or drive them apart?";
+					EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
+					EventController.Instance.CreateEvent(relationshipEvent);
+				}
+				if (Var.activeBirds[birdNum].GetRelationshipBonus() == 0)
+				{
+					//Crush
+					string title = "A break up for <name>!";
+					string text = "<name> have seen their new romantic dreams evaporate in front of them! Will <name> try to pursue the previous lover once again, find a new love or just be single for a while?";
+					EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
+					EventController.Instance.CreateEvent(relationshipEvent);
+				}
 
-                Var.activeBirds[birdNum].newRelationship = false;
-            }
+				Var.activeBirds[birdNum].newRelationship = false;
+			}
 			if (Var.activeBirds[birdNum].hasNewLevel)
 			{
 				levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
 				AudioControler.Instance.PlaySound(AudioControler.Instance.applause);
 				return;
-            }
+			}
 		}
 
 
@@ -506,13 +506,13 @@ public class GuiContoler : MonoBehaviour {
 			Graph.Instance.PlotFull(bird);
 			//feedbackText.text = "";
 			winText.text = "";
-            
+			
 			//winDetails.text = "";
 		}
 		CheckGraphNavBtns();
-        if (currentGraph != 3)
-            DialogueControl.Instance.TryDialogue(Dialogue.Location.graph,Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]));
-    } 
+		if (currentGraph != 3)
+			DialogueControl.Instance.TryDialogue(Dialogue.Location.graph,Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]));
+	} 
 	
 	void CheckGraphNavBtns()
 	{
@@ -522,7 +522,7 @@ public class GuiContoler : MonoBehaviour {
 		nextGraph.interactable = (currentGraph <= maxGraph);
 		prevGraph.interactable = (currentGraph > 0);
 		//CloseBattleReport.interactable = (currentGraph == maxGraph);
-        
+		
 	}
 	public void GraphButton()
 	{
@@ -715,8 +715,8 @@ public class GuiContoler : MonoBehaviour {
 				}
 			}
 		}
-        Var.shouldDoMapEvent = true;
-        SceneManager.LoadScene("Map");
+		Var.shouldDoMapEvent = true;
+		SceneManager.LoadScene("Map");
 	}
 
 	public void LoadMainMenu()
@@ -734,15 +734,15 @@ public class GuiContoler : MonoBehaviour {
 		foreach (Bird bird in players)
 		{						
 			UpdateBirdSave(bird);		
-            foreach(Bird activeBird in Var.activeBirds)
-            {
-                if (activeBird.health <= 0)
-                {
-                    Time.timeScale = 0.0f;
-                    QuitToMap();
-                    return false;
-                }
-            }
+			foreach(Bird activeBird in Var.activeBirds)
+			{
+				if (activeBird.health <= 0)
+				{
+					Time.timeScale = 0.0f;
+					QuitToMap();
+					return false;
+				}
+			}
 			bird.gameObject.GetComponent<Animator>().SetBool("iswalking", false);
 
 			//bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
@@ -751,13 +751,13 @@ public class GuiContoler : MonoBehaviour {
 			bird.transform.position = bird.home;
 			bird.prevConf = bird.confidence;
 			bird.prevFriend = bird.friendliness;
-            bird.GroundBonus.SetActive(false);
-        }
-        //After applying levels;
-        GuiContoler.Instance.relationshipPanel.SetActive(false);
-        GuiContoler.Instance.statPanel.SetActive(true);
-        GuiContoler.Instance.ToggleRelationPanelText.text = "Relationships";
-        foreach (Bird bird in players)
+			bird.GroundBonus.SetActive(false);
+		}
+		//After applying levels;
+		GuiContoler.Instance.relationshipPanel.SetActive(false);
+		GuiContoler.Instance.statPanel.SetActive(true);
+		GuiContoler.Instance.ToggleRelationPanelText.text = "Relationships";
+		foreach (Bird bird in players)
 		{
 			bird.ResetAfterLevel();
 		}
@@ -770,8 +770,8 @@ public class GuiContoler : MonoBehaviour {
 		finalResult = 0;
 		players = new List<Bird>();
 
-        mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound + 1);
-        moveInMap();
+		mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound + 1);
+		moveInMap();
 		if (Var.isTutorial)
 		{
 			for (int i = 0; i < FillPlayer.Instance.playerBirds.Length; i++)
@@ -801,9 +801,9 @@ public class GuiContoler : MonoBehaviour {
 				GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
 				ObstacleGenerator.Instance.clearObstacles();
 				ObstacleGenerator.Instance.GenerateObstacles();
-                DialogueControl.Instance.GetRelationshipDialogs();                                
-                if (!EventController.Instance.tryEvent())
-                    DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+				DialogueControl.Instance.GetRelationshipDialogs();                                
+				if (!EventController.Instance.tryEvent())
+					DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
 
 
 
@@ -811,7 +811,7 @@ public class GuiContoler : MonoBehaviour {
 			GameLogic.Instance.CanWeFight();
 			
 		}
-        return true;
+		return true;
 
 	}
 

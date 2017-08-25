@@ -39,19 +39,26 @@ public class Helpers : MonoBehaviour {
     }
     public EventScript.Character GetCharEnum(Bird bird)
     {
-        return (EventScript.Character)Enum.Parse(typeof(EventScript.Character), bird.charName);
+        try
+        {
+            return (EventScript.Character)Enum.Parse(typeof(EventScript.Character), bird.charName);
+        }
+        catch
+        {
+            return EventScript.Character.None;
+        }
     }
-    public Bird GetBirdFromEnum(EventScript.Character ch)
+    public Bird GetBirdFromEnum(EventScript.Character ch, bool useAll = false)
     {
         List<Bird> birds;
-        if (inMap)
+        if (inMap || useAll)
             birds = Var.availableBirds;
         else
             birds = Var.activeBirds;
 
         if(ch == EventScript.Character.Random)
         {
-            return birds[UnityEngine.Random.Range(0, Var.activeBirds.Count)];
+            return birds[UnityEngine.Random.Range(0, birds.Count)];
         }
         foreach (Bird bird in birds)
         {

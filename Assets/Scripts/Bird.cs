@@ -103,7 +103,7 @@ public class Bird : MonoBehaviour
 	public int birdIndex = 0;
 	public bool hasNewLevel = false;
 	//[HideInInspector]
-	public Bird relationshipBird = null;
+	public Bird relationshipBird;
 	[HideInInspector]
 	public Var.Em prevEmotion=  Var.Em.finish;
 	bool started = false;
@@ -115,7 +115,7 @@ public class Bird : MonoBehaviour
     public string birdPrefabName;
     [HideInInspector]
     public GameObject EnemyArt = null;
-    public GameObject GroundBonus;
+    public GameObject GroundBonus;    
 	void Start()
 	{
         if (!isEnemy && portrait == null)
@@ -126,13 +126,38 @@ public class Bird : MonoBehaviour
 			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi2!");
 			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi3!");
 		}*/
+        
 		prevRoundHealth = health;
 		x = -1;
 		y = -1;
 		prevConf = confidence;
-		prevFriend = friendliness;		
+		prevFriend = friendliness;
+       
 		if (!isEnemy)
 		{
+
+            if (relationships == null)
+            {
+                relationships = new Dictionary<EventScript.Character, int>();
+                relationships.Add(EventScript.Character.Kim, 0);
+                relationships.Add(EventScript.Character.Terry, 0);
+                relationships.Add(EventScript.Character.Toby, 0);
+                relationships.Add(EventScript.Character.Tova, 0);
+                relationships.Add(EventScript.Character.Rebecca, 0);
+                try
+                {
+                    relationships.Remove(Helpers.Instance.GetCharEnum(this));
+                }
+                catch
+                {
+                    print("error setting up realtionships");
+                }
+            }
+            RelationshipScript.applyRelationship(this, false);
+            //Load relationship bird
+           // LeanTween.delayedCall(0.05f, SetRelationship);
+            //relationshipBonus = GetRelationshipBonus();
+            //relationshipBird = Var.availableBirds[2];
             var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
             GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
             birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
@@ -143,23 +168,7 @@ public class Bird : MonoBehaviour
                     colorSprites.Add(child);                    
             }
             //print("colored children: " + colorSprites.Count);
-			if (relationships==null)
-			{
-				relationships = new Dictionary<EventScript.Character, int>(); 
-				relationships.Add(EventScript.Character.Kim, 0);
-				relationships.Add(EventScript.Character.Terry, 0);
-				relationships.Add(EventScript.Character.Toby, 0);
-				relationships.Add(EventScript.Character.Tova, 0);
-				relationships.Add(EventScript.Character.Rebecca, 0);
-                try
-                {
-                    relationships.Remove(Helpers.Instance.GetCharEnum(this));
-                }
-                catch
-                {
-                    print("error setting up realtionships");
-                }
-			}
+			
             SetEmotion();
             //transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetHatSprite(charName); //seb
             //hatSprite = transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite;
@@ -197,6 +206,8 @@ public class Bird : MonoBehaviour
     {
         Start();
     }
+
+    
 	public void Speak(string text)
 	{
 		GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, text);
@@ -261,10 +272,31 @@ public class Bird : MonoBehaviour
 
 	public int GetRelationshipBonus()
 	{
-		if(relationshipBird!= null)
+        try
+        {
+            if (relationshipBird.relationshipBird.charName == charName)
+                return 2;
+            else
+                return -2;
+
+        }
+        catch
+        {
+            try
+            {
+                if (relationshipBird.charName != null)
+                    return -2;
+                else
+                    return 0;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        /*
+        if (relationshipBird!= null)
 		{
-		   // if (!Helpers.Instance.GetAdjacentBirds(this).Contains(relationshipBird))
-		   //     return 0;
 			if(relationshipBird.relationshipBird !=null && relationshipBird.relationshipBird.charName == charName)
 			{
 				return 2;
@@ -273,8 +305,7 @@ public class Bird : MonoBehaviour
 				return -2;
 			}            
 		}
-
-		return 0;
+		return 0;*/
 	}
 	void LoadStats()
 	{

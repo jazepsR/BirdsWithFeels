@@ -67,6 +67,8 @@ public class EventController : MonoBehaviour {
 	}
 	public bool tryEvent()
 	{
+        if (GuiContoler.Instance.winBanner != null && GuiContoler.Instance.winBanner.activeSelf)
+            return false;
         if (eventObject.activeSelf)
            return false;
 		if (Var.isTutorial)
