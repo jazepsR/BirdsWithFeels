@@ -6,13 +6,14 @@ public class battleAnim :MonoBehaviour {
 	public static battleAnim Instance { get; private set; }
 	List<battleData> battles = new List<battleData>();
 	float enemySpeed = 0.85f;
-
+    GameObject fightCloud;
 
 
 	void Awake()
 	{
 		Instance = this;
-	}
+        fightCloud = Resources.Load<GameObject>("prefabs/fightcloud");
+    }
 
 	public void AddData(Bird player, Bird enemy, int result)
 	{
@@ -22,7 +23,7 @@ public class battleAnim :MonoBehaviour {
 	public void Battle()
 	{
 
-		StartCoroutine(DoBattles(1.2f));
+		StartCoroutine(DoBattles(2.2f));
 	}
 
 
@@ -41,7 +42,7 @@ public class battleAnim :MonoBehaviour {
 		{
 
 			StartBattle(battle.player,battle.enemy);
-			StartCoroutine(ShowResult(battle, 3.05f));
+			StartCoroutine(ShowResult(battle, 5.0f));
 			yield return new WaitForSeconds(waitTime);
 		}
 		battles = new List<battleData>();
@@ -86,16 +87,19 @@ public class battleAnim :MonoBehaviour {
 	{
 		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyMove);
 		yield return new WaitForSeconds(enemySpeed+0.25f);
-		ShowBattleResult(battle);
-		yield return new WaitForSeconds(waitTime-(enemySpeed + 0.25f));
+        Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
+        GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
+        Destroy(fightCloudObj, 1.5f);
+        yield return new WaitForSeconds(1.5f);
+        ShowBattleResult(battle);
+		yield return new WaitForSeconds(waitTime-(enemySpeed + 1.75f));
 	}
 
 	void ShowBattleResult(battleData battle)
 	{
-		battle.player.GetComponentInChildren<Animator>().SetBool("iswalking", false);
-		
-		//Player won
-		if (battle.result == 1)
+		   
+        //Player won
+        if (battle.result == 1)
 		{
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.playerWin);            
             battle.player.GetComponentInChildren<Animator>().SetTrigger("victory 0");            
