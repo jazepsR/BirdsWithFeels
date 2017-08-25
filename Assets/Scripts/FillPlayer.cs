@@ -43,6 +43,7 @@ public class FillPlayer : MonoBehaviour {
 					if (bird.charName == loadBird.charName)
 					{
 						SetupBird(bird, loadBird);
+                        bird.gameObject.SetActive(true);
 						foundBird = true;
 						break;
 					}
@@ -129,8 +130,7 @@ public class FillPlayer : MonoBehaviour {
 		}
 	}
 	public static void SetupBird(Bird target, Bird template)
-	{
-		target.birdPrefabName = template.birdPrefabName;
+	{		
 		target.charName = template.charName;
 		target.friendliness = template.friendliness;
 		target.confidence = template.confidence;
@@ -155,6 +155,7 @@ public class FillPlayer : MonoBehaviour {
 		target.relationships = template.relationships;
         target.relationshipBird = template.relationshipBird;
 		target.preferredEmotion = template.preferredEmotion;
+        target.birdPrefabName = template.birdPrefabName;
 	   // target.transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = template.hatSprite;
 	}
 
@@ -183,9 +184,8 @@ public class FillPlayer : MonoBehaviour {
 		target.roundsRested = template.roundsRested;
 		target.AdventuresRested = template.AdventuresRested;
 		target.CoolDownLeft = template.CoolDownLeft;
-		target.CoolDownLength = template.CoolDownLength;
-
-		return target;       
+		target.CoolDownLength = template.CoolDownLength;        
+        return target;       
 	}
 	public static Bird LoadSavedBird(BirdSaveData template)
 	{
@@ -194,8 +194,7 @@ public class FillPlayer : MonoBehaviour {
 		target.friendliness = template.friendliness;
 		target.confidence = template.confidence;
 		target.portraitOrder = template.portraitOrder;
-		target.health = template.health;
-		target.birdPrefabName = template.birdPrefabName;
+		target.health = template.health;		
         target.relationships = template.relationships;
         target.preferredEmotion = template.preferredEmotion;        //target.portrait = template.portrait;
         target.levelList = template.levelList;
@@ -210,7 +209,8 @@ public class FillPlayer : MonoBehaviour {
 		target.AdventuresRested = template.AdventuresRested;
 		target.CoolDownLeft = template.CoolDownLeft;
 		target.CoolDownLength = template.CoolDownLength;
-		try
+        target.birdPrefabName = template.birdPrefabName;
+        try
 		{
 			foreach (LevelData data in target.levelList)
 			{

@@ -844,7 +844,10 @@ public class GuiContoler : MonoBehaviour {
 					break;
 				}
 			}
-		}
+        }else
+        {
+            Var.availableBirds.AddRange(FillPlayer.Instance.playerBirds);
+        }
 	}
 
 
