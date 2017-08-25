@@ -489,6 +489,7 @@ public class Helpers : MonoBehaviour {
     {
         int treshold = Var.lvl2 - 1;
         //Super starts at 10
+        treshold = 12;
         if (bird.level > 1)
         {
             treshold = 12;

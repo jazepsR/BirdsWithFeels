@@ -161,6 +161,7 @@ public class LayoutButton : MonoBehaviour
     {
         swapBird = null;
         currentBird = null;
+        power = null;
         baseColor = defaultColor;
         sr.color = defaultColor;
     }

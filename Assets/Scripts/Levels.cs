@@ -8,6 +8,7 @@ public class Levels : MonoBehaviour {
 	Bird myBird;	
 	public GameObject Halo;
 	public GameObject SadRest;
+    public GameObject Rest;
 	public Vector2 lastSwapPos = new Vector2(-2,-2);
 	private bool TovaActivated = false;
 	
@@ -46,7 +47,9 @@ public class Levels : MonoBehaviour {
 	{
 		if (myBird.inMap)
 			return;
-		foreach (LevelData data in Levels)
+        if (GameLogic.Instance.CheckIfResting(myBird))
+            Rest.SetActive(true);
+        foreach (LevelData data in Levels)
 		{
 			type level = data.type;
 			switch (level)
@@ -163,7 +166,8 @@ public class Levels : MonoBehaviour {
 	{
 		if (myBird.inMap)
 			return;
-		foreach (LevelData data in Levels)
+        Rest.SetActive(false);
+        foreach (LevelData data in Levels)
 		{
 			type level = data.type;
 			switch (level)
@@ -261,7 +265,8 @@ public class Levels : MonoBehaviour {
 	public void OnfightEndLevel(Bird bird, List<LevelData> Levels)
 	{
 		lastSwapPos = new Vector2(-2, -2);
-		foreach (LevelData data in Levels)
+        Rest.SetActive(false);
+        foreach (LevelData data in Levels)
 		{
 			type level = data.type;
 			List<Bird> adjacent = null;

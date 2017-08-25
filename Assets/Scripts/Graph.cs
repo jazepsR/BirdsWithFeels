@@ -32,7 +32,7 @@ public class Graph : MonoBehaviour {
         GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
         GameObject tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait,true,bird);        
         GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();
-        Vector3 secondPos = new Vector3(-bird.friendliness * 26.2f, bird.confidence * 26.2f, 0);
+        Vector3 secondPos = new Vector3(-bird.friendliness * 22.2f, bird.confidence * 22.2f, 0);
        // new Vector3(tempHeart.transform.position.x, tempHeart.transform.position.y, 0);
         portraitScript.StartGraph(secondPos);       
     }
@@ -61,7 +61,7 @@ public class Graph : MonoBehaviour {
 
         }
         heartt.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
-        heartt.transform.localPosition = new Vector3(-x*26.2f, y*26.2f, 0);
+        heartt.transform.localPosition = new Vector3(-x*22.2f, y*22.2f, 0);
 
         
 

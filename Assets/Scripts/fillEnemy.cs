@@ -40,7 +40,9 @@ public class fillEnemy : MonoBehaviour {
             if (en != null)
             {
                 Bird enemy = Enemies[index].GetComponent<Bird>();
-                CreateEnemy(enemy);              
+                enemy.confidence = en.confidence;
+                enemy.friendliness = en.firendliness;
+                CreateEnemy(enemy);             
                 Enemies[index].SetActive(true);
                 
             }

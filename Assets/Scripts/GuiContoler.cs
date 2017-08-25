@@ -491,23 +491,8 @@ public class GuiContoler : MonoBehaviour {
 
 		foreach (Bird bird in BirdsToGraph)
 		{
-			//Normalize bird stats
-			int treshold = Var.lvl2 - 1;
-			//Super starts at 10
-			if (bird.level > 1)
-			{
-				treshold = 12;
-			}
-			if (bird.confidence > treshold)
-				bird.confidence = treshold;
-			if (bird.confidence < -treshold)
-				bird.confidence = -treshold;
-			if (bird.friendliness > treshold)
-				bird.friendliness = treshold;
-			if (bird.friendliness < -treshold)
-				bird.friendliness = -treshold;
-
-
+            //Normalize bird stats
+            Helpers.Instance.NormalizeStats(bird);
 			GameObject portrait = bird.portrait;
 			GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
 			//colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
