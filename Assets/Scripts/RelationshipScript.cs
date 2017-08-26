@@ -6,9 +6,9 @@ public class RelationshipScript : MonoBehaviour {
 	static int minRelationship = 0;
 	static int maxRelationship = 15;
 	public static int treshold = 8;
-	static int likeGain = 9;
-	static int normGain = 4;
-	static int dislikeGain = 4;
+	static int likeGain = 4;
+	static int normGain = 2;
+	static int dislikeGain = 1;
 	static int decayLose = 1;
 	// Use this for initialization
 	void Start () {
