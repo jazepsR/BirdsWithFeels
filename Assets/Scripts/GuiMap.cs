@@ -61,7 +61,7 @@ public class GuiMap : MonoBehaviour {
             GameObject point = Instantiate(mapIcon, new Vector3(start.position.x + dist * count, start.position.y, start.position.z), Quaternion.identity);
             point.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
             LineRenderer lr =point.GetComponent<LineRenderer>();
-            lr.sortingOrder = -5;
+            lr.sortingOrder = 55;
             lr.SetPosition(0, new Vector3(start.position.x + dist * count, start.position.y, start.position.z));
             lr.SetPosition(1, new Vector3(start.position.x + dist * (count+1), start.position.y, start.position.z));
             count++;
