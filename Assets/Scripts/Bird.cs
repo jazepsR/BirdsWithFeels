@@ -115,7 +115,9 @@ public class Bird : MonoBehaviour
 	public string birdPrefabName;
 	[HideInInspector]
 	public GameObject EnemyArt = null;
-	public GameObject GroundBonus;    
+	public GameObject GroundBonus;
+    public GameObject RelationshipParticles;
+    public GameObject CrushParticles;
 	void Start()
 	{
 		if (!isEnemy && portrait == null)
@@ -154,8 +156,9 @@ public class Bird : MonoBehaviour
 					print("error setting up realtionships");
 				}
 			}
-			RelationshipScript.applyRelationship(this, false);       
-			var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
+			RelationshipScript.applyRelationship(this, false);
+            SetRealtionshipParticles();
+            var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
 			GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
 			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);                    
 			if (levelList.Count == 0)
@@ -201,7 +204,14 @@ public class Bird : MonoBehaviour
 	{
 		Start();
 	}
+    void SetRealtionshipParticles()
+    {
+        if (inMap)
+            return;
+        RelationshipParticles.SetActive(relationshipBonus > 0);
+        CrushParticles.SetActive(relationshipBonus < 0);
 
+    }
 	
 	public void Speak(string text)
 	{
@@ -647,8 +657,11 @@ public class Bird : MonoBehaviour
 		confidence += confBoos;
 		if (doFightStuff)
 		{
-			RelationshipScript.applyRelationship(this);
-			setRelationshipDialogs();
+            
+            RelationshipScript.applyRelationship(this);
+            relationshipBonus = GetRelationshipBonus();
+            SetRealtionshipParticles();
+            setRelationshipDialogs();
 			if (!foughtInRound)
 			{
 				consecutiveFightsWon = 0;
