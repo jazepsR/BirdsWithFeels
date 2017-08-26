@@ -8326,7 +8326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerID: 1
-  text: Seems to be working pretty well!
+  text: Hey!
 --- !u!1 &295887883
 GameObject:
   m_ObjectHideFlags: 0
@@ -11470,7 +11470,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -40479,8 +40479,8 @@ RectTransform:
   m_Father: {fileID: 1948846289}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -43117,7 +43117,7 @@ MonoBehaviour:
   confidence: 2
   prevConf: 0
   prevFriend: 0
-  friendliness: -7
+  friendliness: 5
   health: 3
   foughtInRound: 0
   maxHealth: 3
@@ -51078,7 +51078,6 @@ Transform:
   m_Children:
   - {fileID: 2114939209}
   - {fileID: 295028631}
-  - {fileID: 1899959236}
   m_Father: {fileID: 402575103}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -66766,6 +66765,36 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114028745029609630, guid: b6578e645a870944bb0bb9c2602605f3,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.9632353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028745029609630, guid: b6578e645a870944bb0bb9c2602605f3,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9632353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114028745029609630, guid: b6578e645a870944bb0bb9c2602605f3,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.9632353
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733664729757844, guid: b6578e645a870944bb0bb9c2602605f3,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733664729757844, guid: b6578e645a870944bb0bb9c2602605f3,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.9989858
+      objectReference: {fileID: 0}
+    - target: {fileID: 114733664729757844, guid: b6578e645a870944bb0bb9c2602605f3,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.9852941
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b6578e645a870944bb0bb9c2602605f3, type: 2}
   m_IsPrefabParent: 0
@@ -71192,48 +71221,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!1 &1899959235
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1899959236}
-  - component: {fileID: 1899959237}
-  m_Layer: 0
-  m_Name: part 3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1899959236
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1899959235}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1542298410}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1899959237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1899959235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30d5237eb55c0d740b3f8abfa883ddc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerID: 1
-  text: Yeey!
 --- !u!1 &1905915767 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1610529213597630, guid: 0d0c9d675d268854191357e0077af9c8,
@@ -72691,8 +72678,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -93, y: -85}
-  m_SizeDelta: {x: 740, y: 1032}
+  m_AnchoredPosition: {x: -52, y: -85}
+  m_SizeDelta: {x: 774, y: 1032}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1962954927
 MonoBehaviour:
@@ -77885,7 +77872,7 @@ MonoBehaviour:
   confidence: -2
   prevConf: 0
   prevFriend: 0
-  friendliness: 4
+  friendliness: -7
   health: 3
   foughtInRound: 0
   maxHealth: 3
@@ -78190,7 +78177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerID: 0
-  text: Testing the dialogue system, huh?
+  text: Hey guys!
 --- !u!1 &2116275427
 GameObject:
   m_ObjectHideFlags: 0

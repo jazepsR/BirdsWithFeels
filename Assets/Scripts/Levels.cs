@@ -45,7 +45,7 @@ public class Levels : MonoBehaviour {
 
 	public void ApplyLevelOnDrop(Bird bird, List<LevelData> Levels)
 	{
-		if (myBird.inMap)
+		if (myBird.inMap || Var.isTutorial)
 			return;
         if (GameLogic.Instance.CheckIfResting(myBird))
             Rest.SetActive(true);
@@ -164,7 +164,7 @@ public class Levels : MonoBehaviour {
 
 	public void ApplyLevelOnPickup(Bird bird, List<LevelData> Levels)
 	{
-		if (myBird.inMap)
+		if (myBird.inMap || Var.isTutorial)
 			return;
         Rest.SetActive(false);
         foreach (LevelData data in Levels)
