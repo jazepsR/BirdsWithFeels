@@ -120,9 +120,10 @@ public class ProgressGUI : MonoBehaviour {
 			if(!bird.inMap)
 				deathScreen.ShowDeathMenu(bird);
 			portrait.sprite = skull;
-			portraitFill.color = new Color(0, 0, 0, 0);
+            Helpers.Instance.setHearts(Hearts, 0, bird.maxHealth, bird.prevRoundHealth);
+            portraitFill.color = new Color(0, 0, 0, 0);
 			NameText.text += "- Dead";
-		}
+        }
 		else
 		{
             Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth, bird.prevRoundHealth);

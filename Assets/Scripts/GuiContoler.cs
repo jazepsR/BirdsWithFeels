@@ -494,15 +494,17 @@ public class GuiContoler : MonoBehaviour {
 
 		foreach (Bird bird in BirdsToGraph)
 		{
-            //Normalize bird stats
-            Helpers.Instance.NormalizeStats(bird);
-			GameObject portrait = bird.portrait;
-			GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
-			//colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
-			Graph.Instance.PlotFull(bird);
-			//feedbackText.text = "";
-			winText.text = "";
-			
+            if (!bird.dead)
+            {
+                //Normalize bird stats
+                Helpers.Instance.NormalizeStats(bird);
+                GameObject portrait = bird.portrait;
+                GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
+                //colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+                Graph.Instance.PlotFull(bird);
+                //feedbackText.text = "";
+                winText.text = "";
+            }
 			//winDetails.text = "";
 		}
 		CheckGraphNavBtns();
@@ -732,7 +734,7 @@ public class GuiContoler : MonoBehaviour {
 			UpdateBirdSave(bird);		
 			foreach(Bird activeBird in Var.activeBirds)
 			{
-				if (activeBird.health <= 0)
+				if (activeBird.dead)
 				{
 					Time.timeScale = 0.0f;
 					QuitToMap();

@@ -115,6 +115,7 @@ public class BirdSaveData
     public int portraitOrder;
     public int health;
     public int maxHealth;
+    public bool dead;
     public Var.Em preferredEmotion;
     public EventScript.Character relationshipBird;
     //public GameObject portrait;

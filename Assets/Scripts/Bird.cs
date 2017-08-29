@@ -156,12 +156,14 @@ public class Bird : MonoBehaviour
 					print("error setting up realtionships");
 				}
 			}
-			RelationshipScript.applyRelationship(this, false);
+           
+            RelationshipScript.applyRelationship(this, false);
             SetRealtionshipParticles();
             var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
 			GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
-			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);                    
-			if (levelList.Count == 0)
+			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
+       
+            if (levelList.Count == 0)
 			{
 				levelList = new List<LevelData>();
 				Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);               
@@ -196,9 +198,13 @@ public class Bird : MonoBehaviour
 		}
 		target = transform.position;
 		prevEmotion = Var.Em.finish;
-		
-		
-	}
+
+        if (dead)
+        {
+            Animator anim = GetComponentInChildren<Animator>();
+            anim.SetBool("dead", true);
+        }
+    }
 
 	public void publicStart()
 	{
@@ -457,7 +463,7 @@ public class Bird : MonoBehaviour
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
-			if (Var.Infight || health<=0)
+			if (Var.Infight || dead)
 				return;
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
 			GetComponentInChildren<Animator>().SetBool("lift", true);

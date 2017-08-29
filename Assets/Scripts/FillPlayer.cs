@@ -136,8 +136,12 @@ public class FillPlayer : MonoBehaviour {
 		target.confidence = template.confidence;
 		target.portraitOrder = template.portraitOrder;
 		target.health = template.health;
-		if (template.health < 1)
-			target.gameObject.GetComponentInChildren<Animator>().SetBool("dead", true);
+        if (template.dead)
+        {
+            //target.gameObject.GetComponentInChildren<Animator>().SetBool("dead", true);
+            target.health = 0;            
+        }
+        target.dead = template.dead;
 		target.portrait = template.portrait;
 		target.maxHealth = template.maxHealth;
 		target.levelList = template.levelList;
@@ -172,6 +176,7 @@ public class FillPlayer : MonoBehaviour {
         target.relationships = template.relationships;
         target.preferredEmotion = template.preferredEmotion;
         target.relationshipBird = Helpers.Instance.GetCharEnum(template.relationshipBird);
+        target.dead = template.dead;
         //target.portrait = template.portrait;
         target.levelList = template.levelList;
 		target.startingLVL = template.startingLVL;
@@ -196,7 +201,8 @@ public class FillPlayer : MonoBehaviour {
 		target.portraitOrder = template.portraitOrder;
 		target.health = template.health;		
         target.relationships = template.relationships;
-        target.preferredEmotion = template.preferredEmotion;        //target.portrait = template.portrait;
+        target.preferredEmotion = template.preferredEmotion;
+        target.dead = template.dead;//target.portrait = template.portrait;
         target.levelList = template.levelList;
 		target.startingLVL = template.startingLVL;
 		target.battleCount = template.battleCount;
