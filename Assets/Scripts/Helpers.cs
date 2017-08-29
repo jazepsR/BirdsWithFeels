@@ -785,7 +785,7 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Tova:
                 return "If resting, all adjacent birds recieve 10% chance to win fights";
             case Levels.type.Terry:
-                return "All birds in the same column gain +1 confidence";
+                return "All birds in the same row gain +1 confidence";
                 
             default:
                 return "Level not found error";

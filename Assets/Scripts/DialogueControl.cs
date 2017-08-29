@@ -65,7 +65,7 @@ public class DialogueControl : MonoBehaviour {
 
 			}
 			bool canCreate = ConditionCheck.CheckCondition(dialogue.condition, dialogueBird, dialogue.targetEmotion, dialogue.magnitude);
-            bool alreadySeen = Var.shownDialogs.Contains(dialogue.GetInstanceID());
+            bool alreadySeen = Var.shownDialogs.Contains(dialogue.dialogueParts[0].text);
             if (dialogue.location == location && canCreate&& AllBirdsInScene && !alreadySeen)
 			{
 				if (Char == EventScript.Character.None || Char == dialogue.speakers[0])
@@ -85,9 +85,8 @@ public class DialogueControl : MonoBehaviour {
 	{
 		
         if (!dialogue.canShowMultipleTimes)
-        {
-            int ID = dialogue.GetInstanceID();
-            Var.shownDialogs.Add(ID);
+        {           
+            Var.shownDialogs.Add(dialogue.dialogueParts[0].text);
         }
         
 		for(int i=1;i<dialogue.speakers.Count;i++)

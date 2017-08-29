@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using System;
 public static class Var {   
     public static int currentBG = 0;
-    public static List<int> shownDialogs = new List<int>();
-    public static List<int> shownEvents = new List<int>();
+    public static List<string> shownDialogs = new List<string>();
+    public static List<string> shownEvents = new List<string>();
     public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared,finish};
     public enum PowerUps { heal,dmg,emotion,obstacle};
     public static bool isTutorial = false;

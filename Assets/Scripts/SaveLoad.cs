@@ -83,8 +83,8 @@ public class SaveData
     public List<BirdSaveData> activeBirds;
     public List<BirdSaveData> availableBirds;
     public List<BattleData> map;
-    public List<int> usedDialogs;
-    public List<int> usedEvents;
+    public List<string> usedDialogs;
+    public List<string> usedEvents;
     public SaveData()
     {
         usedEvents = Var.shownEvents;

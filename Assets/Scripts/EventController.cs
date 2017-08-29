@@ -101,7 +101,7 @@ public class EventController : MonoBehaviour {
 			else
 				ev = events[Random.Range(0, events.Length)];
 
-			bool alreadySeen = Var.shownEvents.Contains(ev.GetInstanceID());            
+			bool alreadySeen = Var.shownEvents.Contains(ev.text1);            
 			if (ev != null && !alreadySeen)
 			{
 				if (ev.speaker == EventScript.Character.None)
@@ -145,8 +145,7 @@ public class EventController : MonoBehaviour {
 	{
 		if (!eventData.canShowMultipleTimes)
 		{
-			int ID = eventData.GetInstanceID();
-			Var.shownEvents.Add(ID);
+			Var.shownEvents.Add(eventData.text1);
 		}
 		choiceList.gameObject.SetActive(false);
 		currentText = 0;

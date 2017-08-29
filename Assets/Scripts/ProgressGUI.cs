@@ -113,9 +113,9 @@ public class ProgressGUI : MonoBehaviour {
 		NameText.text = bird.charName;
 		if (bird.inMap)
 			birdBio.text = bird.birdBio;
-		Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth,bird.prevRoundHealth);
+		
 		//print("helat: "+ bird.health+ " prev: "+ bird.prevRoundHealth);
-		if (bird.health <= 0)
+		if (bird.dead)
 		{
 			if(!bird.inMap)
 				deathScreen.ShowDeathMenu(bird);
@@ -124,8 +124,9 @@ public class ProgressGUI : MonoBehaviour {
 			NameText.text += "- Dead";
 		}
 		else
-		{ 
-			portraitFill.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+		{
+            Helpers.Instance.setHearts(Hearts, bird.health, bird.maxHealth, bird.prevRoundHealth);
+            portraitFill.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
 			if (bird.prevEmotion != bird.emotion && !bird.inMap)
 			{
 				AudioControler.Instance.PlaySound(AudioControler.Instance.newEmotion);

@@ -47,7 +47,7 @@ public class Levels : MonoBehaviour {
 	{
 		if (myBird.inMap || Var.isTutorial)
 			return;
-        if (GameLogic.Instance.CheckIfResting(myBird))
+        if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
             Rest.SetActive(true);
         foreach (LevelData data in Levels)
 		{

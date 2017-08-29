@@ -159,8 +159,8 @@ public class feedBack : MonoBehaviour {
 	public void SetEnemyHoverText()
 	{
 		BelowBirdIndicator.gameObject.SetActive(true);
-		BelowBirdIndicator.color = new Color(1, 1, 1, 1f);        
-		string name = Helpers.Instance.GetName(Helpers.Instance.RandomBool());
+		BelowBirdIndicator.color = new Color(1, 1, 1, 1f);
+		string name = "<b>" + Helpers.Instance.GetName(Helpers.Instance.RandomBool()) + "</b>";
 		LvlIndicatorText.text = (birdScript.levelRollBonus + 1).ToString();
 		string strength = "None";
 		string weakness = "All";

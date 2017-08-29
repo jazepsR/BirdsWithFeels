@@ -559,7 +559,7 @@ public class Bird : MonoBehaviour
 
 	public void ChageHealth(int change)
 	{
-		if (health <= 0)
+		if (dead)
 			return;
 		if (health + healthBoost + roundHealthChange <= 0)
 			return;
@@ -603,9 +603,9 @@ public class Bird : MonoBehaviour
 		
 		if (health+ healthBoost + roundHealthChange <= 0)
 		{
-			GetComponentInChildren<Animator>().SetBool("dead", true);
-		   // GuiContoler.Instance.ShowDeathMenu(this);
-			//gameObject.SetActive(false);
+            dead = true;
+            GetComponentInChildren<Animator>().SetBool("dead", true);
+            	
 		}
 		
 	}
