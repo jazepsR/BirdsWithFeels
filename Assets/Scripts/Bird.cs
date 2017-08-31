@@ -278,7 +278,24 @@ public class Bird : MonoBehaviour
 		}
 		relationshipBonus = GetRelationshipBonus();
 		return levelRollBonus + PlayerRollBonus + GroundRollBonus + relationshipBonus;
-			}
+	}
+
+    public string GetBonusText()
+    {
+        string bonusText = "";
+        if (levelRollBonus != 0)
+            bonusText += "\nFrom levels: " + (levelRollBonus * 10).ToString("+#;-#;0");
+        if(PlayerRollBonus !=0)
+            bonusText += "\nFrom other birds: " + (PlayerRollBonus * 10).ToString("+#;-#;0");
+        if (GroundRollBonus != 0)
+            bonusText += "\nFrom the current tile: " + (GroundRollBonus * 10).ToString("+#;-#;0");
+        if (relationshipBonus != 0)
+            bonusText += "\nFrom relationships: " + (relationshipBonus * 10).ToString("+#;-#;0");
+        if (bonusText != "")
+            bonusText = bonusText.Substring(1);
+        return bonusText;
+
+    }
 
 
 	public int GetRelationshipBonus()
@@ -786,6 +803,8 @@ public class Bird : MonoBehaviour
             {
                 Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, lastLevel.title);              
                 GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
+                GuiContoler.Instance.BirdCombatStr.text = "Combat strength: " + (getBonus()* 10f).ToString("+#;-#;0") + "%";
+                GuiContoler.Instance.BirdCombatStr.gameObject.GetComponent<ShowTooltip>().tooltipText = GetBonusText();
                 //set progress to level bar
                 if (battleCount >= battlesToNextLVL)
                 {
@@ -938,6 +957,7 @@ public class Bird : MonoBehaviour
 			lines.DrawLines(x, y);
 			//Debug.Log("x: " + x+ " y: " + y);
 			levelControler.ApplyLevelOnDrop(this, levelList);
+            showText();
 			UpdateFeedback();          
 
 		}

@@ -8,7 +8,8 @@ public class ShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public string tooltipText;
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Helpers.Instance.ShowTooltip(tooltipText);
+        if(tooltipText != "")
+            Helpers.Instance.ShowTooltip(tooltipText);
     }
 
     public void OnPointerExit(PointerEventData eventData)

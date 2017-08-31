@@ -42,6 +42,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     Vector3 offset;
     public bool addBirdOnComplete = false;
     public Bird birdToAdd;
+    ShowTooltip tooltipInfo;
     // Use this for initialization
     void Start()
     {
@@ -55,9 +56,30 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         LockedIcon.SetActive(!available);        
         lr = GetComponent<LineRenderer>();
         AddNewBird();
+        tooltipInfo = gameObject.AddComponent<ShowTooltip>();
+        tooltipInfo.tooltipText = GetTooltipText();
         if (!CheckTargetsAvailable() && available)
             LeanTween.delayedCall(0.1f, mapBtnClick);
     }
+
+
+    string GetTooltipText()
+    {
+        string tooltipText = "<b>"+levelName +"</b>\n";
+        
+        string stageState = "<color=#c33b24ff>Not available</color>";
+        if (completed)
+            stageState = "<color=#EEDE00FF>Completed</color>";
+        if (available)
+            stageState = "<color=#2bd617ff>Available</color>";
+        tooltipText += stageState;
+        tooltipText += "\nLength: <b>" + length +"</b>";
+        tooltipText += "\nMain emotion: "+ Helpers.Instance.GetHexColor(type) + type.ToString() +"</color>";
+
+        return tooltipText;
+    }
+
+
     void AddNewBird()
     {
         if(completed && addBirdOnComplete)

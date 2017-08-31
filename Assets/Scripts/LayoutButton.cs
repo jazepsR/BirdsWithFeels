@@ -228,9 +228,11 @@ public class LayoutButton : MonoBehaviour
                 {
                     currentBird.target = currentBird.home;
                     print("swapped home");
-                }             
+                }
+                
                 currentBird.OnLevelPickup();
                 currentBird.ReleseBird(swapBird.x, swapBird.y);
+                currentBird.GroundRollBonus = 0;
                 currentBird = swapBird;
                 currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
                // currentBird.res

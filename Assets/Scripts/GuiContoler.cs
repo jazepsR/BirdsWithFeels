@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
+    
 	public Text ToggleRelationPanelText;
 	public GameObject relationshipPortrait;
 	public Text relationshipText;
@@ -16,6 +17,7 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject relationshipPanel;
 	public RectTransform canvasRect;
 	public Text BirdLVLUpText;
+    public Text BirdCombatStr;
 	public Text infoText;    
 	public Text infoHeading;
 	public Text infoFeeling;
