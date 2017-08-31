@@ -475,8 +475,12 @@ public class Bird : MonoBehaviour
 			}
 		}
 		if (Input.GetMouseButtonUp(0))
-		{            
-			GetComponentInChildren<Animator>().SetBool("lift", false);
+		{
+            foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+            {
+                child.sortingLayerName = "Default";
+            }
+            GetComponentInChildren<Animator>().SetBool("lift", false);
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -484,9 +488,12 @@ public class Bird : MonoBehaviour
 				return;
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
 			GetComponentInChildren<Animator>().SetBool("lift", true);
+            foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+            {
+                child.sortingLayerName = "Front";
+            }
 
-
-			if (inMap)
+            if (inMap)
 			{
 				if (MapControler.Instance.canHeal)
 				{
@@ -518,8 +525,8 @@ public class Bird : MonoBehaviour
 				lines.RemoveLines();
 				UpdateFeedback();
 				GuiContoler.Instance.HideLvlText();
-				GroundBonus.SetActive(false);
-			}
+				GroundBonus.SetActive(false);               
+            }
 			levelControler.ApplyLevelOnPickup(this, levelList);
 			// RemoveAllFeedBack();
 		}
@@ -952,7 +959,11 @@ public class Bird : MonoBehaviour
 		this.y = y;
 		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.dropBird);
 		GetComponentInChildren<Animator>().SetBool("lift", false);
-		if (!inMap)
+        foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            child.sortingLayerName = "Default";
+        }
+        if (!inMap)
 		{
 			lines.DrawLines(x, y);
 			//Debug.Log("x: " + x+ " y: " + y);

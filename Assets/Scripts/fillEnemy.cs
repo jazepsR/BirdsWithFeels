@@ -115,6 +115,7 @@ public class fillEnemy : MonoBehaviour {
             Destroy(enemy.EnemyArt);
         enemy.EnemyArt = Instantiate(Helpers.Instance.GetEnemyVisual(enemy.position, enemy.emotion), enemy.transform);
         enemy.EnemyArt.transform.localPosition = new Vector3(0, 0, 0);
+       
         foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>())
         {
             if (child.gameObject.name.Contains("flat"))
@@ -122,11 +123,18 @@ public class fillEnemy : MonoBehaviour {
                 child.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
             }
 
-        }
+        }       
         enemy.GetComponent<feedBack>().SetEnemyHoverText();        
         enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
         enemy.inUse = true;
         enemy.transform.localPosition = enemy.home;
+        foreach (TextMesh text in enemy.transform.GetComponentsInChildren<TextMesh>())
+        {
+            if (text.gameObject.tag == "number")
+            {
+                text.text = (enemy.levelRollBonus + 1).ToString();                
+            }
+        }
     }
 
     public void Reset()
