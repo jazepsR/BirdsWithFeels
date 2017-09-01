@@ -23,7 +23,7 @@ public class battleAnim :MonoBehaviour {
 	public void Battle()
 	{
 
-		StartCoroutine(DoBattles(2.2f));
+		StartCoroutine(DoBattles(2.7f));
 	}
 
 

@@ -751,7 +751,9 @@ public class GuiContoler : MonoBehaviour {
 			bird.transform.position = bird.home;
 			bird.prevConf = bird.confidence;
 			bird.prevFriend = bird.friendliness;
+            bird.ResetBonuses();
 			bird.GroundBonus.SetActive(false);
+            
 		}
 		//After applying levels;
 		GuiContoler.Instance.relationshipPanel.SetActive(false);

@@ -62,7 +62,7 @@ public class ProgressGUI : MonoBehaviour {
 			}
 			if(lvl.level.ToString().Contains("2"))
 			{
-				print("two");
+				//print("two");
 				if(!HasSuper)
 					lvl.Lock();
 				if (!Helpers.Instance.ListContainsEmotion(lvl.emotion, bird.levelList))

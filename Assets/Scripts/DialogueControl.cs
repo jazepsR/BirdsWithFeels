@@ -52,6 +52,7 @@ public class DialogueControl : MonoBehaviour {
 			if (Random.Range(0, 1.0f) < relationshipDialogueFrequency && relationshipDialogs.Count>0)
 				dialogue = relationshipDialogs[Random.Range(0, relationshipDialogs.Count)];
 			Bird dialogueBird = Helpers.Instance.GetBirdFromEnum(dialogue.speakers[0]);
+
 			speakers = new List<Bird>();
 			speakers.Add(dialogueBird);
 			bool AllBirdsInScene = true;
@@ -66,7 +67,7 @@ public class DialogueControl : MonoBehaviour {
 			}
 			bool canCreate = ConditionCheck.CheckCondition(dialogue.condition, dialogueBird, dialogue.targetEmotion, dialogue.magnitude);
             bool alreadySeen = Var.shownDialogs.Contains(dialogue.dialogueParts[0].text);
-            if (dialogue.location == location && canCreate&& AllBirdsInScene && !alreadySeen)
+            if (dialogue.location == location && canCreate&& AllBirdsInScene && !alreadySeen && !dialogueBird.dead)
 			{
 				if (Char == EventScript.Character.None || Char == dialogue.speakers[0])
 				{

@@ -47,7 +47,7 @@ public class Bird : MonoBehaviour
 	public int friendBoost = 0;
 	[HideInInspector]
 	public int confBoos = 0;
-	[HideInInspector]
+	//[HideInInspector]
 	public int healthBoost = 0;
 	int roundHealthChange = 0;
 	[HideInInspector]
@@ -365,7 +365,7 @@ public class Bird : MonoBehaviour
 		}
 	}
 	
-	void ResetBonuses()
+	public void ResetBonuses()
 	{
 		confBoos = 0;
 		friendBoost = 0;
@@ -591,7 +591,7 @@ public class Bird : MonoBehaviour
 	{
 		if (dead)
 			return;
-		if (health + healthBoost + roundHealthChange <= 0)
+		if (health + roundHealthChange <= 0)
 			return;
 		if (change > 0)
 		{
@@ -629,9 +629,10 @@ public class Bird : MonoBehaviour
 			}
 		}
 	   
-		   roundHealthChange+= change;
-		
-		if (health+ healthBoost + roundHealthChange <= 0)
+		roundHealthChange+= change;
+        Debug.Log(charName + " health change " + change);
+
+        if (health+ roundHealthChange <= 0)
 		{
             dead = true;
             GetComponentInChildren<Animator>().SetBool("dead", true);
@@ -679,7 +680,7 @@ public class Bird : MonoBehaviour
 	}
 	public void AddRoundBonuses(bool doFightStuff= true)
 	{
-		print(charName + " doing round bonus. HealthGain " + roundHealthChange);
+		//print(charName + " doing round bonus. HealthGain " + roundHealthChange);
 		if (dead)
 			return;
 		prevRoundHealth = health;
@@ -717,7 +718,7 @@ public class Bird : MonoBehaviour
 		}
 		
 		health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
-			 
+        print(charName + " healthboost " + healthBoost + " round change " + roundHealthChange);			 
 		roundHealthChange = 0;
 		foughtInRound = false;        
 		ConfGainedInRound = confidence - prevConf;
