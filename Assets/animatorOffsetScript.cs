@@ -16,7 +16,7 @@ public class animatorOffsetScript : MonoBehaviour {
         }
 
         anime.SetFloat("offset", offset);
-        print( offset);
+        //print( offset);
 	}
 
 }
