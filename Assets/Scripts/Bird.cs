@@ -46,10 +46,19 @@ public class Bird : MonoBehaviour
 	public bool isEnemy = true;
 	[HideInInspector]
 	public int friendBoost = 0;
-	[HideInInspector]
+    [HideInInspector]
+    public int groundFriendBoos = 0;
+    [HideInInspector]
+    public int wizardFrienBoos = 0;
+    [HideInInspector]
 	public int confBoos = 0;
     [HideInInspector]
     public int battleConfBoos = 0;
+    [HideInInspector]
+    public int groundConfBoos = 0;
+    [HideInInspector]
+    public int wizardConfBoos = 0;
+
 	//[HideInInspector]
 	public int healthBoost = 0;
 	int roundHealthChange = 0;

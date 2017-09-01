@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
-    
+    public Text EmotionChangeFeedback;
 	public Text ToggleRelationPanelText;
 	public GameObject relationshipPortrait;
 	public Text relationshipText;
@@ -453,36 +453,7 @@ public class GuiContoler : MonoBehaviour {
 		else
 		{
 			BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
-			if (Var.activeBirds[birdNum].newRelationship)
-			{
-				Bird relationshipBird = Var.activeBirds[birdNum].relationshipBird;
-				if (Var.activeBirds[birdNum].GetRelationshipBonus() > 0)
-				{
-					//Relationship
-					string title = "<name> is in a relationship!";
-					string text = "Things are getting serious for <name> and " + relationshipBird.charName + ". They seem very happy for now, but will it last?\nBoth <name> and "+relationshipBird.charName + "gain <b>+20% combat strength<\b> while in this relationship";
-					EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title,text );
-					EventController.Instance.CreateEvent(relationshipEvent);
-				}
-				if (Var.activeBirds[birdNum].GetRelationshipBonus() < 0)
-				{
-					//Crush
-					string title = "<name> has a crush!";
-					string text = "<name> has fallen hard for " + relationshipBird.charName + "! will you help <name> get together with his paramour or drive them apart?\n<name> will have <b>-20% combat strength</b> until he gets over the crush, or achives a realtionship with their beloved.";
-					EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
-					EventController.Instance.CreateEvent(relationshipEvent);
-				}
-				if (Var.activeBirds[birdNum].GetRelationshipBonus() == 0)
-				{
-					//Crush
-					string title = "A break up for <name>!";
-					string text = "<name> have seen their new romantic dreams evaporate in front of them! Will <name> try to pursue the previous lover once again, find a new love or just be single for a while?\n<name>'s stats have <b>returned to normal.</b>";
-					EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
-					EventController.Instance.CreateEvent(relationshipEvent);
-				}
-
-				Var.activeBirds[birdNum].newRelationship = false;
-			}
+            CreateRelationshipEvent(birdNum);
 			if (Var.activeBirds[birdNum].hasNewLevel)
 			{
 				levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
@@ -509,10 +480,72 @@ public class GuiContoler : MonoBehaviour {
 			//winDetails.text = "";
 		}
 		CheckGraphNavBtns();
-		if (currentGraph != 3)
-			DialogueControl.Instance.TryDialogue(Dialogue.Location.graph,Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]));
+        if (currentGraph != 3)
+        {
+            //Normal case
+            DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]));
+            EmotionChangeFeedback.gameObject.SetActive(true);
+            EmotionChangeFeedback.text = CreateEmotionChangeText(Var.activeBirds[birdNum]);
+        }
+        else
+        {
+            //Summary
+            EmotionChangeFeedback.gameObject.SetActive(false);
+
+        }
 	} 
-	
+
+    string CreateEmotionChangeText(Bird bird)
+    {
+        string fbText = "<b>Feeling changes in round:</b>";
+        if (bird.ConfGainedInRound > 0)
+            fbText += Helpers.Instance.BraveHexColor+"\nConfidence gained: " + bird.ConfGainedInRound +"</color>";
+        if (bird.ConfGainedInRound < 0)
+            fbText += Helpers.Instance.ScaredHexColor + "\nScaredness gained: " + Mathf.Abs(bird.ConfGainedInRound) + "</color>";
+        if (bird.FriendGainedInRound > 0)
+            fbText += Helpers.Instance.FriendlyHexColor + "\nFriendliness gained in round: " + bird.FriendGainedInRound + "</color>";
+        if (bird.FriendGainedInRound < 0)
+            fbText += Helpers.Instance.LonelyHexColor + "\nLoneliness gained in round: " + Mathf.Abs(bird.FriendGainedInRound) + "</color>";
+
+
+        return fbText;
+    }
+
+
+
+	void CreateRelationshipEvent(int birdNum)
+    {
+        if (Var.activeBirds[birdNum].newRelationship)
+        {
+            Bird relationshipBird = Var.activeBirds[birdNum].relationshipBird;
+            if (Var.activeBirds[birdNum].GetRelationshipBonus() > 0)
+            {
+                //Relationship
+                string title = "<name> is in a relationship!";
+                string text = "Things are getting serious for <name> and " + relationshipBird.charName + ". They seem very happy for now, but will it last?\nBoth <name> and " + relationshipBird.charName + "gain <b>+20% combat strength<\b> while in this relationship";
+                EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
+                EventController.Instance.CreateEvent(relationshipEvent);
+            }
+            if (Var.activeBirds[birdNum].GetRelationshipBonus() < 0)
+            {
+                //Crush
+                string title = "<name> has a crush!";
+                string text = "<name> has fallen hard for " + relationshipBird.charName + "! will you help <name> get together with his paramour or drive them apart?\n<name> will have <b>-20% combat strength</b> until he gets over the crush, or achives a realtionship with their beloved.";
+                EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
+                EventController.Instance.CreateEvent(relationshipEvent);
+            }
+            if (Var.activeBirds[birdNum].GetRelationshipBonus() == 0)
+            {
+                //Breakup
+                string title = "A break up for <name>!";
+                string text = "<name> have seen their new romantic dreams evaporate in front of them! Will <name> try to pursue the previous lover once again, find a new love or just be single for a while?\n<name>'s stats have <b>returned to normal.</b>";
+                EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
+                EventController.Instance.CreateEvent(relationshipEvent);
+            }
+
+            Var.activeBirds[birdNum].newRelationship = false;
+        }
+    }
 	void CheckGraphNavBtns()
 	{
 		
