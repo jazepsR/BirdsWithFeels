@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 
 public class fillEnemy : MonoBehaviour {
-    public GameObject[] Enemies;      
-
+    public GameObject[] Enemies;
+    public enum enemyType {normal,wizard, drill };
         // Use this for initialization
     void Start ()
     {
@@ -16,7 +16,7 @@ public class fillEnemy : MonoBehaviour {
         else
         {
             BattleData Area = Var.map[0];
-            createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
+            createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies, Area.hasWizards, Area.hasDrills);
         }
     } 
 
@@ -52,13 +52,16 @@ public class fillEnemy : MonoBehaviour {
 
 
 
-    public void createEnemies(float minConf=-5, float maxConf=5, float minFriend=-5, float maxFriend=5,int birdLVL = 1,List<Bird.dir> dirList= null,int minEnemies= 3,int maxEnemies =4)
+    public void createEnemies(float minConf = -5, float maxConf = 5, float minFriend = -5, float maxFriend = 5, int birdLVL = 1, List<Bird.dir> dirList = null, int minEnemies = 3, int maxEnemies = 4, bool hasWizards = false, bool hasDrills = false)
     {
         int index = 0;
+        hasWizards = true;
         int frontBirds = 0;
         if (dirList == null)
             dirList = new List<Bird.dir>() { Bird.dir.front, Bird.dir.top};
         
+
+
         int max = maxEnemies;
         print("min: "+ minEnemies + " max: " + maxEnemies);
         if (dirList.Count == 1 && dirList.Contains(Bird.dir.front))
@@ -102,20 +105,29 @@ public class fillEnemy : MonoBehaviour {
                 frontBirds++;
             enemy.confidence = (int)Random.Range(minConf, maxConf);
             enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
-            CreateEnemy(enemy);
+            float rand = Random.Range(0, 1f);
+            if (rand > 0.8f && hasDrills)
+                CreateEnemy(enemy, enemyType.drill);
+            if (rand < 0.2f && hasWizards)
+                CreateEnemy(enemy, enemyType.wizard);
+            else
+                CreateEnemy(enemy);
             Enemies[enemyPos].SetActive(true);
         }
         
         
     } 
-    void CreateEnemy(Bird enemy)
+    void CreateEnemy(Bird enemy, enemyType type = enemyType.normal)
     {
         enemy.SetEmotion();
+        
         if (enemy.EnemyArt != null)
             Destroy(enemy.EnemyArt);
         enemy.EnemyArt = Instantiate(Helpers.Instance.GetEnemyVisual(enemy.position, enemy.emotion), enemy.transform);
         enemy.EnemyArt.transform.localPosition = new Vector3(0, 0, 0);
-       
+        enemy.enemyType = type;
+        if (enemy.emotion == Var.Em.Neutral && enemy.enemyType == enemyType.wizard)
+            enemy.enemyType = enemyType.normal;
         foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>())
         {
             if (child.gameObject.name.Contains("flat"))
@@ -132,7 +144,10 @@ public class fillEnemy : MonoBehaviour {
         {
             if (text.gameObject.tag == "number")
             {
-                text.text = (enemy.levelRollBonus + 1).ToString();                
+                if (enemy.enemyType == enemyType.wizard)
+                    text.text = "W";
+                else
+                    text.text = (enemy.levelRollBonus + 1).ToString();                
             }
         }
     }

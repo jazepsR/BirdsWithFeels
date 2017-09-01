@@ -246,8 +246,7 @@ public class GuiContoler : MonoBehaviour {
 					{
 						if (!inMap)
 						{
-							nextGraph.interactable = true;
-							prevGraph.interactable = true;
+                            CheckGraphNavBtns();
 						}
 					}
 				}

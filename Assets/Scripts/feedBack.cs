@@ -15,9 +15,11 @@ public class feedBack : MonoBehaviour {
 	public int myIndex;
 	string toolTipText;
 	battleFeedback myBattleFeedback;
-	Vector3 scale;  
+	Vector3 scale;
+	GameObject line;
 	// Use this for initialization
 	void Awake () {
+		line = Resources.Load<GameObject>("prefabs/lightningLine");
 		feedBackText.gameObject.GetComponent<Renderer>().sortingLayerName = "front";    
 		scale= BelowBirdIndicator.transform.localScale;
 		myBattleFeedback = feedBackText.gameObject.GetComponent<battleFeedback>();
@@ -39,6 +41,7 @@ public class feedBack : MonoBehaviour {
 					if (!Var.playerPos[i, myIndex].isHiding)
 					{
 						canfight = true;
+						//TryWizardLine(Var.playerPos[i,myIndex], birdScript);
 						break;
 					}
 				}
@@ -53,6 +56,7 @@ public class feedBack : MonoBehaviour {
 					if (!Var.playerPos[myIndex, i].isHiding)
 					{
 						canfight = true;
+						//TryWizardLine(Var.playerPos[myIndex, i], birdScript);
 						break;
 					}
 				}
@@ -60,6 +64,40 @@ public class feedBack : MonoBehaviour {
 			}
 		}        
 		return canfight;
+	}
+
+	public void TryWizardLine(Bird player, Bird enemy)
+	{
+		if (enemy.enemyType != fillEnemy.enemyType.wizard ) 
+			return;
+        if(enemy.emotion == Var.Em.Neutral)
+            return;
+		switch (enemy.emotion)
+		{
+			case Var.Em.Lonely:
+				player.friendBoost += 2;
+				break;
+			case Var.Em.Friendly:
+				player.friendBoost -= 2;
+				break;
+			case Var.Em.Scared:
+				player.confBoos -= 2;
+				break;
+			case Var.Em.Confident:
+				player.confBoos += 2;
+				break;
+			default:
+				break;
+		}
+		var lineObj = Instantiate(line);
+		LineRenderer lr = lineObj.GetComponent<LineRenderer>();
+		lr.sortingOrder = 0;
+		lr.SetPosition(0, player.target);
+		lr.SetPosition(1, enemy.target);
+		lr.startColor = Helpers.Instance.GetEmotionColor(enemy.emotion);
+		lr.endColor = Helpers.Instance.GetEmotionColor(enemy.emotion);
+		player.lines.activeLines.Add(lineObj);
+
 	}
 
 	public void RefreshFeedback()
@@ -85,6 +123,7 @@ public class feedBack : MonoBehaviour {
 								PlayerEnemyBird = Var.playerPos[myIndex, i];
 								ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
 								hasFeedback = true;
+								TryWizardLine(Var.playerPos[myIndex, i], birdScript);
 								break;
 							}
 						}
@@ -107,6 +146,7 @@ public class feedBack : MonoBehaviour {
 								PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
 								ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
 								hasFeedback = true;
+								TryWizardLine(Var.playerPos[3 - i, myIndex], birdScript);
 								break;
 							}
 						}

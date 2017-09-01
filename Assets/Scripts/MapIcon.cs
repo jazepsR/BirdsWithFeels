@@ -41,6 +41,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     bool active = false;
     Vector3 offset;
     public bool addBirdOnComplete = false;
+    public bool hasWizards = false;
+    public bool hasDrills = false;
     public Bird birdToAdd;
     ShowTooltip tooltipInfo;
     // Use this for initialization

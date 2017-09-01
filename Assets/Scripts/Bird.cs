@@ -41,12 +41,15 @@ public class Bird : MonoBehaviour
 	public int level = 1;
 	bool needsReset = false; 
 	public enum dir { top,front,bottom};
-	public dir position;	
+	public dir position;
+    public fillEnemy.enemyType enemyType = fillEnemy.enemyType.normal;	
 	public bool isEnemy = true;
 	[HideInInspector]
 	public int friendBoost = 0;
 	[HideInInspector]
 	public int confBoos = 0;
+    [HideInInspector]
+    public int battleConfBoos = 0;
 	//[HideInInspector]
 	public int healthBoost = 0;
 	int roundHealthChange = 0;
@@ -273,8 +276,8 @@ public class Bird : MonoBehaviour
 	{
 		if (y != -1)
 		{
-			ResetBonuses();
-			ObstacleGenerator.Instance.tiles[y * 4 + x].GetComponent<LayoutButton>().ApplyPower(this);
+			//ResetBonuses();
+			//ObstacleGenerator.Instance.tiles[y * 4 + x].GetComponent<LayoutButton>().ApplyPower(this);
 		}
 		relationshipBonus = GetRelationshipBonus();
 		return levelRollBonus + PlayerRollBonus + GroundRollBonus + relationshipBonus;
@@ -368,6 +371,7 @@ public class Bird : MonoBehaviour
 	public void ResetBonuses()
 	{
 		confBoos = 0;
+        battleConfBoos = 0;
 		friendBoost = 0;
 		GroundRollBonus = 0;
 		PlayerRollBonus = 0;
@@ -434,8 +438,8 @@ public class Bird : MonoBehaviour
 	void OnMouseEnter()
 	{
 	   
-	   
-		showText();
+	    //if(!Var.Infight)
+		    showText();
 		if (isEnemy)
 		{
 			GetComponent<feedBack>().ShowEnemyHoverText();
@@ -450,7 +454,7 @@ public class Bird : MonoBehaviour
 		}
 		if(inMap)
 			ProgressGUI.Instance.PortraitClick(this);
-		if (!inMap && !isEnemy && levelUpText != null && levelUpText != "" && !dragged)
+		if (!inMap && !isEnemy && levelUpText != null && levelUpText != "" && !dragged && !Var.Infight)
 			GuiContoler.Instance.ShowLvlText(levelUpText);
 	}
 	void OnMouseOver()
@@ -516,7 +520,8 @@ public class Bird : MonoBehaviour
 					}
 				}
 			}
-			ResetBonuses();
+            if(!Var.Infight)
+			    ResetBonuses();
 			dragged = true;
 			Var.selectedBird = gameObject;
 			
@@ -631,7 +636,10 @@ public class Bird : MonoBehaviour
 	   
 		roundHealthChange+= change;
         Debug.Log(charName + " health change " + change);
-
+        if(GuiContoler.Instance.selectedBird == this)
+        {
+            showText();
+        }
         if (health+ roundHealthChange <= 0)
 		{
             dead = true;
@@ -686,6 +694,7 @@ public class Bird : MonoBehaviour
 		prevRoundHealth = health;
 		friendliness += friendBoost;
 		confidence += confBoos;
+        confidence += battleConfBoos;
 		if (doFightStuff)
 		{
             
@@ -725,7 +734,9 @@ public class Bird : MonoBehaviour
 		FriendGainedInRound = friendliness - prevFriend;
 		Helpers.Instance.NormalizeStats(this);
 		levelControler.OnfightEndLevel(this, levelList);           
-		ResetBonuses();                
+		ResetBonuses();
+        if (this == GuiContoler.Instance.selectedBird)
+            showText();    
 	}
 
 	public void SetEmotion()
@@ -852,7 +863,7 @@ public class Bird : MonoBehaviour
                 }
             }
             //set emotion bars
-            GuiContoler.Instance.confSlider.SetDist(confidence, this);
+            GuiContoler.Instance.confSlider.SetDist(confidence + battleConfBoos, this);
             GuiContoler.Instance.firendSlider.SetDist(friendliness, this);
             //set hearts
             SetRelationshipText(GuiContoler.Instance.relationshipPortrait, GuiContoler.Instance.relationshipText);
@@ -860,10 +871,12 @@ public class Bird : MonoBehaviour
             {
                 try
                 {
-                    Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health, maxHealth);
+                    Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health+roundHealthChange, maxHealth);
 
                 }
-                catch { }
+                catch {
+                    Debug.Log("failed to set hearts");
+                }
 
             }
         }
