@@ -414,9 +414,15 @@ MonoBehaviour:
   lines: {fileID: 0}
   level: 1
   position: 0
+  enemyType: 0
   isEnemy: 0
   friendBoost: 0
+  groundFriendBoos: 0
+  wizardFrienBoos: 0
   confBoos: 0
+  battleConfBoos: 0
+  groundConfBoos: 0
+  wizardConfBoos: 0
   healthBoost: 0
   GroundRollBonus: 0
   inMap: 1
@@ -487,7 +493,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 165253486}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.08, y: -1.21, z: 0}
+  m_LocalPosition: {x: 0.08, y: -1.93, z: 0}
   m_LocalScale: {x: 1.3004228, y: 1.3004224, z: 1.3004223}
   m_Children:
   - {fileID: 17241804}
@@ -643,6 +649,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &179608266
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +807,7 @@ Prefab:
     - target: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 191
+      value: -215
       objectReference: {fileID: 0}
     - target: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
         type: 2}
@@ -1967,9 +1974,15 @@ MonoBehaviour:
   lines: {fileID: 0}
   level: 2
   position: 0
+  enemyType: 0
   isEnemy: 0
   friendBoost: 0
+  groundFriendBoos: 0
+  wizardFrienBoos: 0
   confBoos: 0
+  battleConfBoos: 0
+  groundConfBoos: 0
+  wizardConfBoos: 0
   healthBoost: 0
   GroundRollBonus: 0
   inMap: 1
@@ -2527,6 +2540,7 @@ SpriteRenderer:
   m_Size: {x: 2.63, y: 2.33}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &498355363
 GameObject:
   m_ObjectHideFlags: 0
@@ -3151,6 +3165,7 @@ SpriteRenderer:
   m_Size: {x: 2.63, y: 2.33}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1001 &529536230
 Prefab:
   m_ObjectHideFlags: 0
@@ -4432,6 +4447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d73a56be5cb57468b5e795dcc1cac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EmotionChangeFeedback: {fileID: 0}
   ToggleRelationPanelText: {fileID: 0}
   relationshipPortrait: {fileID: 320999942}
   relationshipText: {fileID: 2011968247}
@@ -4441,6 +4457,7 @@ MonoBehaviour:
   relationshipPanel: {fileID: 0}
   canvasRect: {fileID: 0}
   BirdLVLUpText: {fileID: 0}
+  BirdCombatStr: {fileID: 0}
   infoText: {fileID: 0}
   infoHeading: {fileID: 0}
   infoFeeling: {fileID: 116979982}
@@ -4745,6 +4762,7 @@ SpriteRenderer:
   m_Size: {x: 5.15, y: 0.37}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1001 &708667831
 Prefab:
   m_ObjectHideFlags: 0
@@ -6947,9 +6965,15 @@ MonoBehaviour:
   lines: {fileID: 0}
   level: 1
   position: 0
+  enemyType: 0
   isEnemy: 0
   friendBoost: 0
+  groundFriendBoos: 0
+  wizardFrienBoos: 0
   confBoos: 0
+  battleConfBoos: 0
+  groundConfBoos: 0
+  wizardConfBoos: 0
   healthBoost: 0
   GroundRollBonus: 0
   inMap: 1
@@ -7034,9 +7058,15 @@ MonoBehaviour:
   lines: {fileID: 0}
   level: 1
   position: 0
+  enemyType: 0
   isEnemy: 0
   friendBoost: 0
+  groundFriendBoos: 0
+  wizardFrienBoos: 0
   confBoos: 0
+  battleConfBoos: 0
+  groundConfBoos: 0
+  wizardConfBoos: 0
   healthBoost: 0
   GroundRollBonus: 0
   inMap: 1
@@ -8955,9 +8985,15 @@ MonoBehaviour:
   lines: {fileID: 0}
   level: 1
   position: 0
+  enemyType: 0
   isEnemy: 0
   friendBoost: 0
+  groundFriendBoos: 0
+  wizardFrienBoos: 0
   confBoos: 0
+  battleConfBoos: 0
+  groundConfBoos: 0
+  wizardConfBoos: 0
   healthBoost: 0
   GroundRollBonus: 0
   inMap: 1
@@ -9881,6 +9917,7 @@ SpriteRenderer:
   m_Size: {x: 2.63, y: 2.33}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1477300644
 GameObject:
   m_ObjectHideFlags: 0
@@ -10371,6 +10408,7 @@ SpriteRenderer:
   m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
 --- !u!1 &1509130606
 GameObject:
   m_ObjectHideFlags: 0
@@ -11245,7 +11283,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1580165268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.42, y: -2.33, z: 0}
+  m_LocalPosition: {x: 5.42, y: -1.81, z: 0}
   m_LocalScale: {x: 0.44111514, y: 0.44111517, z: 0.44111517}
   m_Children: []
   m_Father: {fileID: 165253487}
@@ -11291,6 +11329,7 @@ SpriteRenderer:
   m_Size: {x: 7.58, y: 6.26}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!114 &1590420954 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114779830321645230, guid: 893a3cdec287067418e9ce268d4f13ea,
@@ -11425,6 +11464,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &1632222590
 Transform:
   m_ObjectHideFlags: 0
@@ -14019,6 +14059,7 @@ SpriteRenderer:
   m_Size: {x: 19.66, y: 3.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &2061843357
 Transform:
   m_ObjectHideFlags: 0
@@ -14026,7 +14067,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2061843355}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.52, y: -4.68, z: 10}
+  m_LocalPosition: {x: 0.52, y: -5.52, z: 10}
   m_LocalScale: {x: 0.9261795, y: 0.92617965, z: 0.92617965}
   m_Children: []
   m_Father: {fileID: 0}
