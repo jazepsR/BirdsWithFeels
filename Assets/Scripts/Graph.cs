@@ -32,8 +32,8 @@ public class Graph : MonoBehaviour {
         GameObject preHeart = PlotPoint(bird.friendliness, bird.confidence, prevHeart,false);
         GameObject tempHeart = PlotPoint(bird.friendliness, bird.confidence, bird.portrait,true,bird);        
         GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();
-        float friend = bird.friendliness+bird.friendBoost + bird.groundFriendBoos + bird.levelFriendBoos + bird.wizardFrienBoos;
-        float conf = bird.confidence+bird.battleConfBoos + bird.groundConfBoos + bird.levelConfBoos + bird.wizardConfBoos;
+        float friend = Mathf.Min(12,bird.friendliness+bird.friendBoost + bird.groundFriendBoos + bird.levelFriendBoos + bird.wizardFrienBoos);
+        float conf = Mathf.Min(12, bird.confidence + bird.battleConfBoos + bird.groundConfBoos + bird.levelConfBoos + bird.wizardConfBoos);
         Vector3 secondPos = new Vector3(-friend * 22.2f, conf * 22.2f, 0);
        // new Vector3(tempHeart.transform.position.x, tempHeart.transform.position.y, 0);
         portraitScript.StartGraph(secondPos);       

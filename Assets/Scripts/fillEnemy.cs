@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class fillEnemy : MonoBehaviour {
     public GameObject[] Enemies;
     public enum enemyType {normal,wizard, drill };
+    [HideInInspector]
+    public bool hasDrill = false;
         // Use this for initialization
     void Start ()
     {
@@ -26,7 +28,10 @@ public class fillEnemy : MonoBehaviour {
         foreach (GameObject enemy in Enemies)
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
-            enemy.GetComponent<feedBack>().myIndex = index % 4;
+            foreach(feedBack fb in enemy.GetComponents<feedBack>())
+            {
+                fb.myIndex = index % 4;
+            }
             enemy.GetComponent<Bird>().levelRollBonus = 0;
             enemy.GetComponent<Bird>().inUse = false;
             enemy.SetActive(false);
@@ -55,7 +60,8 @@ public class fillEnemy : MonoBehaviour {
     public void createEnemies(float minConf = -5, float maxConf = 5, float minFriend = -5, float maxFriend = 5, int birdLVL = 1, List<Bird.dir> dirList = null, int minEnemies = 3, int maxEnemies = 4, bool hasWizards = false, bool hasDrills = false)
     {
         int index = 0;
-        hasWizards = true;
+        //hasWizards = true;
+        hasDrills = true;
         int frontBirds = 0;
         if (dirList == null)
             dirList = new List<Bird.dir>() { Bird.dir.front, Bird.dir.top};
@@ -69,7 +75,10 @@ public class fillEnemy : MonoBehaviour {
         foreach(GameObject enemy in Enemies)
         {
             Var.enemies[index] = enemy.GetComponent<Bird>();
-            enemy.GetComponent<feedBack>().myIndex = index % 4;            
+            foreach (feedBack fb in enemy.GetComponents<feedBack>())
+            {
+                fb.myIndex = index % 4;
+            }        
             enemy.GetComponent<Bird>().levelRollBonus = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL))-1;
             enemy.GetComponent<Bird>().inUse = false;
             enemy.SetActive(false);
@@ -106,12 +115,18 @@ public class fillEnemy : MonoBehaviour {
             enemy.confidence = (int)Random.Range(minConf, maxConf);
             enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
             float rand = Random.Range(0, 1f);
-            if (rand > 0.8f && hasDrills)
+            if (rand > 0.5f && hasDrills && !hasDrill)
+            {
+                hasDrill = true;
                 CreateEnemy(enemy, enemyType.drill);
-            if (rand < 0.7f && hasWizards)
-                CreateEnemy(enemy, enemyType.wizard);
+            }
             else
-                CreateEnemy(enemy);
+            {
+                if (rand < 0.2f && hasWizards)
+                    CreateEnemy(enemy, enemyType.wizard);
+                else
+                    CreateEnemy(enemy);
+            }
             Enemies[enemyPos].SetActive(true);
         }
         
@@ -128,7 +143,7 @@ public class fillEnemy : MonoBehaviour {
         enemy.enemyType = type;
         if (enemy.emotion == Var.Em.Neutral && enemy.enemyType == enemyType.wizard)
             enemy.enemyType = enemyType.normal;
-        foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>())
+        foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>(true))
         {
             if (child.gameObject.name.Contains("flat"))
             {
@@ -146,6 +161,12 @@ public class fillEnemy : MonoBehaviour {
             {
                 if (enemy.enemyType == enemyType.wizard)
                     text.text = "W";
+                if (enemy.enemyType == enemyType.drill)
+                {
+                    text.text = "D";
+                    text.color = Color.red;
+
+                }
                 else
                     text.text = (enemy.levelRollBonus + 1).ToString();                
             }
@@ -154,6 +175,7 @@ public class fillEnemy : MonoBehaviour {
 
     public void Reset()
     {
+        hasDrill = false;
        foreach(Bird enemy in Var.enemies)
         {
             if (enemy.inUse)

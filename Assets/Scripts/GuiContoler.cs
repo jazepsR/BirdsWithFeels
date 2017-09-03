@@ -498,57 +498,57 @@ public class GuiContoler : MonoBehaviour {
 	string CreateEmotionChangeText(Bird bird)
 	{
 		string fbText = "<b>Feeling changes in round:</b>";
-        int ConfGainedInRound = bird.battleConfBoos + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
-        int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
-        //Confidence stuff
-        if (ConfGainedInRound > 0)
-			fbText += Helpers.Instance.BraveHexColor+"\nConfidence gained: " + ConfGainedInRound +"</color>";
+		int ConfGainedInRound = bird.battleConfBoos + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
+		int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
+		//Confidence stuff
+		if (ConfGainedInRound > 0)
+			fbText += Helpers.Instance.BraveHexColor+"\n<b>Confidence gained: " + ConfGainedInRound +"</b></color>";
 		if (ConfGainedInRound < 0)
-			fbText += Helpers.Instance.ScaredHexColor + "\nScaredness gained: " + Mathf.Abs(ConfGainedInRound) + "</color>";
-        if (bird.battleConfBoos > 0)
-            fbText += Helpers.Instance.BraveHexColor + "\n\tFrom combat: " + bird.battleConfBoos.ToString("+#;-#;0") + " confidence</color>";
-        if (bird.battleConfBoos < 0)
-            fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs(bird.battleConfBoos).ToString("+#;-#;0") + " scaredness</color>";
-        if (bird.groundConfBoos > 0)
-            fbText += Helpers.Instance.BraveHexColor + "\n\tFrom tiles: " + bird.groundConfBoos.ToString("+#;-#;0") + " confidence</color>";
-        if (bird.groundConfBoos < 0)
-            fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundConfBoos).ToString("+#;-#;0") + " scaredness</color>";
-        if (bird.levelConfBoos > 0)
-            fbText += Helpers.Instance.BraveHexColor + "\n\tFrom abilities: " + bird.levelConfBoos.ToString("+#;-#;0") + " confidence</color>";
-        if (bird.levelConfBoos < 0)
-            fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom abilities: " + Mathf.Abs(bird.levelConfBoos).ToString("+#;-#;0") + " scaredness</color>";
-        if (bird.wizardConfBoos > 0)
-            fbText += Helpers.Instance.BraveHexColor + "\n\tFrom enemies: " + bird.wizardConfBoos.ToString("+#;-#;0") + " confidence</color>";
-        if (bird.wizardConfBoos < 0)
-            fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+			fbText += Helpers.Instance.ScaredHexColor + "\nS<b>caredness gained: " + Mathf.Abs(ConfGainedInRound) + "</b></color>";
+		if (bird.battleConfBoos > 0)
+			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom combat: " + bird.battleConfBoos.ToString("+#;-#;0") + " confidence</color>";
+		if (bird.battleConfBoos < 0)
+			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs(bird.battleConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+		if (bird.groundConfBoos > 0)
+			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom tiles: " + bird.groundConfBoos.ToString("+#;-#;0") + " confidence</color>";
+		if (bird.groundConfBoos < 0)
+			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+		if (bird.levelConfBoos > 0)
+			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom abilities: " + bird.levelConfBoos.ToString("+#;-#;0") + " confidence</color>";
+		if (bird.levelConfBoos < 0)
+			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom abilities: " + Mathf.Abs(bird.levelConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+		if (bird.wizardConfBoos > 0)
+			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom enemies: " + bird.wizardConfBoos.ToString("+#;-#;0") + " confidence</color>";
+		if (bird.wizardConfBoos < 0)
+			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardConfBoos).ToString("+#;-#;0") + " scaredness</color>";
 
 
 
 
 
 
-        //Friendship stuff
-        if (FriendGainedInRound > 0)
-			fbText += Helpers.Instance.FriendlyHexColor + "\nFriendliness gained in round: " + FriendGainedInRound + "</color>";
+		//Friendship stuff
+		if (FriendGainedInRound > 0)
+			fbText += Helpers.Instance.FriendlyHexColor + "\n<b>Friendliness gained in round: " + FriendGainedInRound + "</b></color>";
 		if (FriendGainedInRound < 0)
-			fbText += Helpers.Instance.LonelyHexColor + "\nLoneliness gained in round: " + Mathf.Abs(FriendGainedInRound) + "</color>";
-        if (bird.friendBoost > 0)
-            fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom interactions: " + bird.friendBoost.ToString("+#;-#;0") + " friendship</color>";
-        if (bird.friendBoost < 0)
-            fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom interactions: " + Mathf.Abs(bird.friendBoost).ToString("+#;-#;0") + " loneliness</color>";
-        if (bird.groundFriendBoos > 0)
-            fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom tiles: " + bird.groundFriendBoos.ToString("+#;-#;0") + " friendship</color>";
-        if (bird.groundFriendBoos < 0)
-            fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
-        if (bird.levelFriendBoos > 0)
-            fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom abilities: " + bird.levelFriendBoos.ToString("+#;-#;0") + " friendship</color>";
-        if (bird.groundFriendBoos < 0)
-            fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom abilities: " + Mathf.Abs(bird.levelFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
-        if (bird.wizardFrienBoos > 0)
-            fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom enemies: " + bird.wizardFrienBoos.ToString("+#;-#;0") + " friendship</color>";
-        if (bird.wizardFrienBoos < 0)
-            fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardFrienBoos).ToString("+#;-#;0") + " loneliness</color>";
-        return fbText;
+			fbText += Helpers.Instance.LonelyHexColor + "\n<b>Loneliness gained in round: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
+		if (bird.friendBoost > 0)
+			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom interactions: " + bird.friendBoost.ToString("+#;-#;0") + " friendship</color>";
+		if (bird.friendBoost < 0)
+			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom interactions: " + Mathf.Abs(bird.friendBoost).ToString("+#;-#;0") + " loneliness</color>";
+		if (bird.groundFriendBoos > 0)
+			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom tiles: " + bird.groundFriendBoos.ToString("+#;-#;0") + " friendship</color>";
+		if (bird.groundFriendBoos < 0)
+			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
+		if (bird.levelFriendBoos > 0)
+			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom abilities: " + bird.levelFriendBoos.ToString("+#;-#;0") + " friendship</color>";
+		if (bird.groundFriendBoos < 0)
+			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom abilities: " + Mathf.Abs(bird.levelFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
+		if (bird.wizardFrienBoos > 0)
+			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom enemies: " + bird.wizardFrienBoos.ToString("+#;-#;0") + " friendship</color>";
+		if (bird.wizardFrienBoos < 0)
+			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardFrienBoos).ToString("+#;-#;0") + " loneliness</color>";
+		return fbText;
 	}
 
 
@@ -685,7 +685,7 @@ public class GuiContoler : MonoBehaviour {
 		int result = 0;
 		Var.Infight = true;
 		Bird playerBird = null;
-
+		Bird secondPlayerBird = null;
 	
 	   
 
@@ -702,8 +702,18 @@ public class GuiContoler : MonoBehaviour {
 						{
 							if (!Var.playerPos[3 - j, i % 4].isHiding)
 							{
-								playerBird = Var.playerPos[3 - j, i % 4];
-								break;
+								if (playerBird == null)
+								{
+									playerBird = Var.playerPos[3 - j, i % 4];
+									if (Var.enemies[i].enemyType != fillEnemy.enemyType.drill)
+										break;
+								}
+								else
+								{
+									secondPlayerBird = Var.playerPos[3 - j, i % 4];
+									break;
+								}
+								
 							}
 						}
 					}
@@ -713,19 +723,37 @@ public class GuiContoler : MonoBehaviour {
 						{
 							if (!Var.playerPos[i % 4, j].isHiding)
 							{
-								playerBird = Var.playerPos[i % 4, j];
-								break;
+								if (playerBird == null)
+								{
+									playerBird = Var.playerPos[i % 4, j];
+									if (Var.enemies[i].enemyType != fillEnemy.enemyType.drill)
+										break;
+								}
+								else
+								{
+									secondPlayerBird = Var.playerPos[i % 4, j];
+									break;
+								}
 							}
 						}
 
 					}
 				}
+				// Fight Logic
 				playerBird.foughtInRound = true;
 				int resultOfBattle = GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
-
-				// Fight Logic
 				battleAnim.Instance.AddData(playerBird, Var.enemies[i], resultOfBattle);
 				result += resultOfBattle;
+				if (secondPlayerBird != null)
+				{
+					secondPlayerBird.foughtInRound = true;
+					int resultOfSecondBattle = GameLogic.Instance.Fight(secondPlayerBird, Var.enemies[i]);
+					battleAnim.Instance.AddData(secondPlayerBird, Var.enemies[i], resultOfSecondBattle);
+					result += resultOfSecondBattle;
+				}
+				playerBird = null;
+				secondPlayerBird = null;
+				
 
 
 			}
@@ -803,6 +831,7 @@ public class GuiContoler : MonoBehaviour {
 		
 		Var.enemies = new Bird[8];
 		Var.Infight = false;
+		GetComponent<fillEnemy>().hasDrill = false;
 		foreach (Bird bird in players)
 		{
 			bird.AddRoundBonuses();

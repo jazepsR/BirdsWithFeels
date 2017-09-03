@@ -78,6 +78,7 @@ public class GameLogic : MonoBehaviour {
     public void UpdateFeedback()
     {
         feedBack[] feedBack = FindObjectsOfType<feedBack>();
+        print("updateCall");
         foreach(feedBack fb in feedBack)
         {
             fb.RefreshFeedback();
@@ -278,10 +279,13 @@ public class GameLogic : MonoBehaviour {
         feedBack[] feedBack = FindObjectsOfType<feedBack>();
         foreach (feedBack fb in feedBack)
         {
-            if (!fb.CheckOpponent())
+            if (fb.isMain)
             {
-                canFight = false;
-                break;
+                if (!fb.CheckOpponent())
+                {
+                    canFight = false;
+                    break;
+                }
             }
         }
 

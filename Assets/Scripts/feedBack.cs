@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class feedBack : MonoBehaviour {
 	public TextMesh feedBackText;
+    public bool isMain = true;
 	public TextMesh LvlIndicatorText;
 	public SpriteRenderer BelowBirdIndicator;
 	public Bird birdScript;
@@ -14,16 +15,17 @@ public class feedBack : MonoBehaviour {
 	public float hideVal = 0.3f;
 	public int myIndex;
 	string toolTipText;
-	battleFeedback myBattleFeedback;
+	public battleFeedback myBattleFeedback;
 	Vector3 scale;
 	GameObject line;
-    GameObject lineObj = null;
+	GameObject lineObj = null;
 	// Use this for initialization
 	void Awake () {
 		line = Resources.Load<GameObject>("prefabs/lightningLine");
 		feedBackText.gameObject.GetComponent<Renderer>().sortingLayerName = "front";    
-		scale= BelowBirdIndicator.transform.localScale;
-		myBattleFeedback = feedBackText.gameObject.GetComponent<battleFeedback>();
+        if(isMain)
+		    scale= BelowBirdIndicator.transform.localScale;
+		//myBattleFeedback = feedBackText.gameObject.GetComponent<battleFeedback>();
 		myBattleFeedback.fb = this;		
 		dir = birdScript.position;
 		feedBackText.transform.localScale = Vector3.zero;       
@@ -33,46 +35,82 @@ public class feedBack : MonoBehaviour {
 	public bool CheckOpponent()
 	{
 		bool canfight = false;
-		if(dir == Bird.dir.front)
+		if (birdScript.enemyType == fillEnemy.enemyType.drill)
 		{
-			for(int i = 0; i < 4; i++)
+			int enemyCount = 0;
+			if (dir == Bird.dir.front)
 			{
-				if (Var.playerPos[i, myIndex] != null)
+				for (int i = 0; i < 4; i++)
 				{
-					if (!Var.playerPos[i, myIndex].isHiding)
+					if (Var.playerPos[i, myIndex] != null)
 					{
-						canfight = true;
-						break;
+						if (!Var.playerPos[i, myIndex].isHiding)
+						{
+							enemyCount++;
+						}
 					}
 				}
 			}
+			else
+			{
+				for (int i = 0; i < 4; i++)
+				{
+					if (Var.playerPos[myIndex, i] != null)
+					{
+						if (!Var.playerPos[myIndex, i].isHiding)
+						{
+							enemyCount++;
+						}
+					}
+
+				}
+			}
+			if (enemyCount >= 2)
+				canfight = true;
 		}
 		else
 		{
-			for (int i = 0; i < 4; i++)
+			if (dir == Bird.dir.front)
 			{
-				if (Var.playerPos[myIndex, i] != null)
+				for (int i = 0; i < 4; i++)
 				{
-					if (!Var.playerPos[myIndex, i].isHiding)
+					if (Var.playerPos[i, myIndex] != null)
 					{
-						canfight = true;
-						break;
+						if (!Var.playerPos[i, myIndex].isHiding)
+						{
+							canfight = true;
+							break;
+						}
 					}
 				}
-
 			}
-		}        
+			else
+			{
+				for (int i = 0; i < 4; i++)
+				{
+					if (Var.playerPos[myIndex, i] != null)
+					{
+						if (!Var.playerPos[myIndex, i].isHiding)
+						{
+							canfight = true;
+							break;
+						}
+					}
+
+				}
+			}
+		}
 		return canfight;
 	}
 
 	public void TryWizardLine(Bird player, Bird enemy)
 	{
-        if (lineObj != null)
-            return;
+		if (lineObj != null)
+			return;
 		if (enemy.enemyType != fillEnemy.enemyType.wizard ) 
 			return;
-        if(enemy.emotion == Var.Em.Neutral)
-            return;        
+		if(enemy.emotion == Var.Em.Neutral)
+			return;        
 		switch (enemy.emotion)
 		{
 			case Var.Em.Lonely:
@@ -105,55 +143,85 @@ public class feedBack : MonoBehaviour {
 	{
 		
 		hideBonus = 0.0f;
-		//print(birdScript.charName);
 		bool hasFeedback = false;
-			switch (dir)
-			{
-				case Bird.dir.top:
-					for (int i = 0; i < 4; i++)
+        bool skippedFirst = false;
+		switch (dir)
+		{
+			case Bird.dir.top:
+				for (int i = 0; i < 4; i++)
+				{
+					if (Var.playerPos[myIndex, i] != null)
 					{
-						if (Var.playerPos[myIndex, i] != null)
+						Bird bird = Var.playerPos[myIndex, i];
+						if (bird.isHiding)
 						{
-							Bird bird = Var.playerPos[myIndex, i];
-							if (bird.isHiding)
-							{
-								hideBonus = hideVal;
-							}
-							else
-							{
-								PlayerEnemyBird = Var.playerPos[myIndex, i];
-								ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
-								hasFeedback = true;
-								TryWizardLine(Var.playerPos[myIndex, i], birdScript);
-								break;
-							}
+							hideBonus = hideVal;
 						}
-
+						else
+						{
+                            if (isMain)
+                            {
+                                PlayerEnemyBird = Var.playerPos[myIndex, i];
+                                ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
+                                hasFeedback = true;
+                                TryWizardLine(Var.playerPos[myIndex, i], birdScript);
+                                break;                              
+                            }
+                            else
+                            {
+                                if (skippedFirst && birdScript.enemyType == fillEnemy.enemyType.drill)
+                                {
+                                    PlayerEnemyBird = Var.playerPos[myIndex, i];
+                                    ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
+                                    hasFeedback = true;
+                                    break;
+                                }
+                                else
+                                    skippedFirst = true;
+                            }
+						}
 					}
-					break;
-				case Bird.dir.front:
-					for (int i = 0; i < 4; i++)
+
+				}
+				break;
+			case Bird.dir.front:
+				for (int i = 0; i < 4; i++)
+				{
+
+					if (Var.playerPos[3 - i, myIndex] != null)
 					{
-
-						if (Var.playerPos[3 - i, myIndex] != null)
+						Bird bird = Var.playerPos[3 - i, myIndex];
+						if (bird.isHiding)
 						{
-							Bird bird = Var.playerPos[3 - i, myIndex];
-							if (bird.isHiding)
-							{
-								hideBonus = hideVal;
-							}
-							else
-							{
-								PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
-								ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
-								hasFeedback = true;
-								TryWizardLine(Var.playerPos[3 - i, myIndex], birdScript);
-								break;
-							}
+							hideBonus = hideVal;
 						}
-
+						else
+						{
+                            if (isMain)
+                            { 
+							    PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
+							    ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
+							    hasFeedback = true;
+							    TryWizardLine(Var.playerPos[3 - i, myIndex], birdScript);
+                                break;                              
+                            }
+                            else
+                            {
+                                if (skippedFirst && birdScript.enemyType == fillEnemy.enemyType.drill)
+                                {
+                                    PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
+                                    ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
+                                    hasFeedback = true;
+                                    break;
+                                }
+                                else
+                                    skippedFirst = true;
+                            }
+                    }
 					}
-					break;
+
+				}
+				break;
 			   
 			}
 		if(!hasFeedback)
@@ -164,7 +232,7 @@ public class feedBack : MonoBehaviour {
 	}
 
 	public bool CheckResting(Bird bird)
-	{
+	{        
 		switch (dir)
 		{
 			case Bird.dir.top:
@@ -199,6 +267,8 @@ public class feedBack : MonoBehaviour {
 
 	public void SetEnemyHoverText()
 	{
+        if (!isMain)
+            return;
 		BelowBirdIndicator.gameObject.SetActive(true);
 		BelowBirdIndicator.color = new Color(1, 1, 1, 1f);
 		string name = "<b>" + Helpers.Instance.GetName(Helpers.Instance.RandomBool()) + "</b>";
@@ -222,37 +292,40 @@ public class feedBack : MonoBehaviour {
 	
 	public void ShowFeedback(float value,Bird bird)
 	{
-		if (!BelowBirdIndicator.color.Equals(new Color(1f, 0, 0, 1f)))
+        print(bird.charName + " win chance: " + value+ " is main:" +isMain);
+		if (isMain &&!BelowBirdIndicator.color.Equals(new Color(1f, 0, 0, 1f)))
 		{          
 			BelowBirdIndicator.color = new Color(1f, 0, 0, 1f);
 			LeanTween.scale(BelowBirdIndicator.gameObject, scale * 1.2f, 0.15f).setEase(LeanTweenType.easeOutCubic).setOnComplete(ScaleDownIndicator);
 		}
 		bird.fighting = true;
 		feedBackText.gameObject.SetActive(true);
-		//float colorIndex = (value + 4.0f) / 8;
 		value = Mathf.Clamp01(value+hideBonus);
 		float colorIndex = value;
 		Color textCol = Color.Lerp(Color.red, Color.green, colorIndex);
 		LeanTween.color(feedBackText.gameObject, textCol, 0.2f);
 		LeanTween.scale(feedBackText.gameObject, Vector3.one, 0.3f).setEase(LeanTweenType.easeOutBack);
-		//feedBackText.text = ((int)(value*100)).ToString("+#;-#;0") +" %";
 		feedBackText.text =(Mathf.Ceil(value * 100)).ToString("0");
 	}
 	
 	public void HideFeedBack(bool forFight)
 	{
-		if (forFight) {
-			BelowBirdIndicator.gameObject.SetActive(false);
-		} else
-		{
-			if (!BelowBirdIndicator.color.Equals(new Color(1, 1, 1, 1f)) )
-			{
-							 
-				BelowBirdIndicator.color = new Color(1, 1, 1, 1f);
-				LeanTween.scale(BelowBirdIndicator.gameObject, scale * 1.2f, 0.15f).setEase(LeanTweenType.easeOutCubic).setOnComplete(ScaleDownIndicator);
-			}
-		}
+        if (isMain)
+        {
+            if (forFight)
+            {
+                BelowBirdIndicator.gameObject.SetActive(false);
+            }
+            else
+            {
+                if (!BelowBirdIndicator.color.Equals(new Color(1, 1, 1, 1f)))
+                {
 
+                    BelowBirdIndicator.color = new Color(1, 1, 1, 1f);
+                    LeanTween.scale(BelowBirdIndicator.gameObject, scale * 1.2f, 0.15f).setEase(LeanTweenType.easeOutCubic).setOnComplete(ScaleDownIndicator);
+                }
+            }
+        }
 		LeanTween.scale(feedBackText.gameObject, Vector3.zero, 0.3f).setEase(LeanTweenType.easeInOutBack);
 
 	}

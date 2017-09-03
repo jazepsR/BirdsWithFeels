@@ -21,7 +21,7 @@ public class EmotionBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
 	}
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-        Debug.Log("pointer enter");
+       // Debug.Log("pointer enter");
 		string tooltipText = "";
 		switch (currentState)
 		{
@@ -43,7 +43,7 @@ public class EmotionBarScript : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
-        Debug.Log("pointer exit");
+       // Debug.Log("pointer exit");
         Helpers.Instance.HideTooltip();
 	}
 	}

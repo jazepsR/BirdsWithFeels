@@ -30,7 +30,9 @@ public class battleAnim :MonoBehaviour {
 	void StartBattle(Bird player,Bird enemy)
 	{
 		enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
-		LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position), enemySpeed).setEase(LeanTweenType.easeInBack); 
+        enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
+        enemy.GetComponentInChildren<Animator>().SetBool("win", false);
+        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position), enemySpeed).setEase(LeanTweenType.easeInBack); 
 		
 
 	}
