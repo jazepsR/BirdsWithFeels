@@ -7,17 +7,17 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
-    public Text EmotionChangeFeedback;
+	public Text EmotionChangeFeedback;
 	public Text ToggleRelationPanelText;
 	public GameObject relationshipPortrait;
 	public Text relationshipText;
-    public GameObject reportRelationshipPortrait;
-    public Text reportRelationshipText;
+	public GameObject reportRelationshipPortrait;
+	public Text reportRelationshipText;
 	public GameObject statPanel;
 	public GameObject relationshipPanel;
 	public RectTransform canvasRect;
 	public Text BirdLVLUpText;
-    public Text BirdCombatStr;
+	public Text BirdCombatStr;
 	public Text infoText;    
 	public Text infoHeading;
 	public Text infoFeeling;
@@ -79,7 +79,7 @@ public class GuiContoler : MonoBehaviour {
 	public Button prevGraph;
 	public Button HideSmallGraph;
 	public GameObject relationshipSliders;
-    public GameObject reportRelationshipSliders;
+	public GameObject reportRelationshipSliders;
 	public float levelInfo_yvalue;
 	public float levelinfoHideXValue;
 	public float levelinfoshowXValue;
@@ -94,14 +94,14 @@ public class GuiContoler : MonoBehaviour {
 		Var.Infight = false;
 		if (Var.emotionParticles == null)
 			Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
-        if (Var.isTutorial)
-        {
-            try
-            {
-                Tutorial.Instance.enabled = true;
-            }
-            catch { }
-        }
+		if (Var.isTutorial)
+		{
+			try
+			{
+				Tutorial.Instance.enabled = true;
+			}
+			catch { }
+		}
 		messages = new List<string>();
 		Var.birdInfo = infoText;
 		Var.birdInfoHeading = infoHeading;
@@ -246,7 +246,7 @@ public class GuiContoler : MonoBehaviour {
 					{
 						if (!inMap)
 						{
-                            CheckGraphNavBtns();
+							CheckGraphNavBtns();
 						}
 					}
 				}
@@ -453,7 +453,7 @@ public class GuiContoler : MonoBehaviour {
 		else
 		{
 			BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
-            CreateRelationshipEvent(birdNum);
+			CreateRelationshipEvent(birdNum);
 			if (Var.activeBirds[birdNum].hasNewLevel)
 			{
 				levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
@@ -466,86 +466,126 @@ public class GuiContoler : MonoBehaviour {
 
 		foreach (Bird bird in BirdsToGraph)
 		{
-            if (!bird.dead)
-            {
-                //Normalize bird stats
-                Helpers.Instance.NormalizeStats(bird);
-                GameObject portrait = bird.portrait;
-                GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
-                //colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
-                Graph.Instance.PlotFull(bird);
-                //feedbackText.text = "";
-                winText.text = "";
-            }
+			if (!bird.dead)
+			{
+				//Normalize bird stats
+				Helpers.Instance.NormalizeStats(bird);
+				GameObject portrait = bird.portrait;
+				GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
+				//colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+				Graph.Instance.PlotFull(bird);
+				//feedbackText.text = "";
+				winText.text = "";
+			}
 			//winDetails.text = "";
 		}
 		CheckGraphNavBtns();
-        if (currentGraph != 3)
-        {
-            //Normal case
-            DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]));
-            EmotionChangeFeedback.gameObject.SetActive(true);
-            EmotionChangeFeedback.text = CreateEmotionChangeText(Var.activeBirds[birdNum]);
-        }
-        else
-        {
-            //Summary
-            EmotionChangeFeedback.gameObject.SetActive(false);
+		if (currentGraph != 3)
+		{
+			//Normal case
+			DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]));
+			EmotionChangeFeedback.gameObject.SetActive(true);
+			EmotionChangeFeedback.text = CreateEmotionChangeText(Var.activeBirds[birdNum]);
+		}
+		else
+		{
+			//Summary
+			EmotionChangeFeedback.gameObject.SetActive(false);
 
-        }
+		}
 	} 
 
-    string CreateEmotionChangeText(Bird bird)
-    {
-        string fbText = "<b>Feeling changes in round:</b>";
-        if (bird.ConfGainedInRound > 0)
-            fbText += Helpers.Instance.BraveHexColor+"\nConfidence gained: " + bird.ConfGainedInRound +"</color>";
-        if (bird.ConfGainedInRound < 0)
-            fbText += Helpers.Instance.ScaredHexColor + "\nScaredness gained: " + Mathf.Abs(bird.ConfGainedInRound) + "</color>";
-        if (bird.FriendGainedInRound > 0)
-            fbText += Helpers.Instance.FriendlyHexColor + "\nFriendliness gained in round: " + bird.FriendGainedInRound + "</color>";
-        if (bird.FriendGainedInRound < 0)
-            fbText += Helpers.Instance.LonelyHexColor + "\nLoneliness gained in round: " + Mathf.Abs(bird.FriendGainedInRound) + "</color>";
+	string CreateEmotionChangeText(Bird bird)
+	{
+		string fbText = "<b>Feeling changes in round:</b>";
+        int ConfGainedInRound = bird.battleConfBoos + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
+        int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
+        //Confidence stuff
+        if (ConfGainedInRound > 0)
+			fbText += Helpers.Instance.BraveHexColor+"\nConfidence gained: " + ConfGainedInRound +"</color>";
+		if (ConfGainedInRound < 0)
+			fbText += Helpers.Instance.ScaredHexColor + "\nScaredness gained: " + Mathf.Abs(ConfGainedInRound) + "</color>";
+        if (bird.battleConfBoos > 0)
+            fbText += Helpers.Instance.BraveHexColor + "\n\tFrom combat: " + bird.battleConfBoos.ToString("+#;-#;0") + " confidence</color>";
+        if (bird.battleConfBoos < 0)
+            fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs(bird.battleConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+        if (bird.groundConfBoos > 0)
+            fbText += Helpers.Instance.BraveHexColor + "\n\tFrom tiles: " + bird.groundConfBoos.ToString("+#;-#;0") + " confidence</color>";
+        if (bird.groundConfBoos < 0)
+            fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+        if (bird.levelConfBoos > 0)
+            fbText += Helpers.Instance.BraveHexColor + "\n\tFrom abilities: " + bird.levelConfBoos.ToString("+#;-#;0") + " confidence</color>";
+        if (bird.levelConfBoos < 0)
+            fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom abilities: " + Mathf.Abs(bird.levelConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+        if (bird.wizardConfBoos > 0)
+            fbText += Helpers.Instance.BraveHexColor + "\n\tFrom enemies: " + bird.wizardConfBoos.ToString("+#;-#;0") + " confidence</color>";
+        if (bird.wizardConfBoos < 0)
+            fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardConfBoos).ToString("+#;-#;0") + " scaredness</color>";
 
 
+
+
+
+
+        //Friendship stuff
+        if (FriendGainedInRound > 0)
+			fbText += Helpers.Instance.FriendlyHexColor + "\nFriendliness gained in round: " + FriendGainedInRound + "</color>";
+		if (FriendGainedInRound < 0)
+			fbText += Helpers.Instance.LonelyHexColor + "\nLoneliness gained in round: " + Mathf.Abs(FriendGainedInRound) + "</color>";
+        if (bird.friendBoost > 0)
+            fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom interactions: " + bird.friendBoost.ToString("+#;-#;0") + " friendship</color>";
+        if (bird.friendBoost < 0)
+            fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom interactions: " + Mathf.Abs(bird.friendBoost).ToString("+#;-#;0") + " loneliness</color>";
+        if (bird.groundFriendBoos > 0)
+            fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom tiles: " + bird.groundFriendBoos.ToString("+#;-#;0") + " friendship</color>";
+        if (bird.groundFriendBoos < 0)
+            fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
+        if (bird.levelFriendBoos > 0)
+            fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom abilities: " + bird.levelFriendBoos.ToString("+#;-#;0") + " friendship</color>";
+        if (bird.groundFriendBoos < 0)
+            fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom abilities: " + Mathf.Abs(bird.levelFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
+        if (bird.wizardFrienBoos > 0)
+            fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom enemies: " + bird.wizardFrienBoos.ToString("+#;-#;0") + " friendship</color>";
+        if (bird.wizardFrienBoos < 0)
+            fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardFrienBoos).ToString("+#;-#;0") + " loneliness</color>";
         return fbText;
-    }
+	}
 
 
 
 	void CreateRelationshipEvent(int birdNum)
-    {
-        if (Var.activeBirds[birdNum].newRelationship)
-        {
-            Bird relationshipBird = Var.activeBirds[birdNum].relationshipBird;
-            if (Var.activeBirds[birdNum].GetRelationshipBonus() > 0)
-            {
-                //Relationship
-                string title = "<name> is in a relationship!";
-                string text = "Things are getting serious for <name> and " + relationshipBird.charName + ". They seem very happy for now, but will it last?\nBoth <name> and " + relationshipBird.charName + "gain <b>+20% combat strength<\b> while in this relationship";
-                EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
-                EventController.Instance.CreateEvent(relationshipEvent);
-            }
-            if (Var.activeBirds[birdNum].GetRelationshipBonus() < 0)
-            {
-                //Crush
-                string title = "<name> has a crush!";
-                string text = "<name> has fallen hard for " + relationshipBird.charName + "! will you help <name> get together with his paramour or drive them apart?\n<name> will have <b>-20% combat strength</b> until he gets over the crush, or achives a realtionship with their beloved.";
-                EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
-                EventController.Instance.CreateEvent(relationshipEvent);
-            }
-            if (Var.activeBirds[birdNum].GetRelationshipBonus() == 0)
-            {
-                //Breakup
-                string title = "A break up for <name>!";
-                string text = "<name> have seen their new romantic dreams evaporate in front of them! Will <name> try to pursue the previous lover once again, find a new love or just be single for a while?\n<name>'s stats have <b>returned to normal.</b>";
-                EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
-                EventController.Instance.CreateEvent(relationshipEvent);
-            }
+	{
+		if (Var.activeBirds[birdNum].newRelationship)
+		{
+			Bird relationshipBird = Var.activeBirds[birdNum].relationshipBird;
+			if (Var.activeBirds[birdNum].GetRelationshipBonus() > 0)
+			{
+				//Relationship
+				string title = "<name> is in a relationship!";
+				string text = "Things are getting serious for <name> and " + relationshipBird.charName + ". They seem very happy for now, but will it last?\nBoth <name> and " + relationshipBird.charName + "gain <b>+20% combat strength<\b> while in this relationship";
+				EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
+				EventController.Instance.CreateEvent(relationshipEvent);
+			}
+			if (Var.activeBirds[birdNum].GetRelationshipBonus() < 0)
+			{
+				//Crush
+				string title = "<name> has a crush!";
+				string text = "<name> has fallen hard for " + relationshipBird.charName + "! will you help <name> get together with his paramour or drive them apart?\n<name> will have <b>-20% combat strength</b> until he gets over the crush, or achives a realtionship with their beloved.";
+				EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
+				EventController.Instance.CreateEvent(relationshipEvent);
+			}
+			if (Var.activeBirds[birdNum].GetRelationshipBonus() == 0)
+			{
+				//Breakup
+				string title = "A break up for <name>!";
+				string text = "<name> have seen their new romantic dreams evaporate in front of them! Will <name> try to pursue the previous lover once again, find a new love or just be single for a while?\n<name>'s stats have <b>returned to normal.</b>";
+				EventScript relationshipEvent = new EventScript(Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]), title, text);
+				EventController.Instance.CreateEvent(relationshipEvent);
+			}
 
-            Var.activeBirds[birdNum].newRelationship = false;
-        }
-    }
+			Var.activeBirds[birdNum].newRelationship = false;
+		}
+	}
 	void CheckGraphNavBtns()
 	{
 		
@@ -764,7 +804,8 @@ public class GuiContoler : MonoBehaviour {
 		Var.enemies = new Bird[8];
 		Var.Infight = false;
 		foreach (Bird bird in players)
-		{						
+		{
+			bird.AddRoundBonuses();
 			UpdateBirdSave(bird);		
 			foreach(Bird activeBird in Var.activeBirds)
 			{
@@ -783,9 +824,9 @@ public class GuiContoler : MonoBehaviour {
 			bird.transform.position = bird.home;
 			bird.prevConf = bird.confidence;
 			bird.prevFriend = bird.friendliness;
-            bird.ResetBonuses();
+			bird.ResetBonuses();
 			bird.GroundBonus.SetActive(false);
-            
+			
 		}
 		//After applying levels;
 		GuiContoler.Instance.relationshipPanel.SetActive(false);
@@ -870,10 +911,10 @@ public class GuiContoler : MonoBehaviour {
 					break;
 				}
 			}
-        }else
-        {
-            Var.availableBirds.AddRange(FillPlayer.Instance.playerBirds);
-        }
+		}else
+		{
+			Var.availableBirds.AddRange(FillPlayer.Instance.playerBirds);
+		}
 	}
 
 

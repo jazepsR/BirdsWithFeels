@@ -8,7 +8,7 @@ public class Levels : MonoBehaviour {
 	Bird myBird;	
 	public GameObject Halo;
 	public GameObject SadRest;
-    public GameObject Rest;
+	public GameObject Rest;
 	public Vector2 lastSwapPos = new Vector2(-2,-2);
 	private bool TovaActivated = false;
 	
@@ -47,9 +47,9 @@ public class Levels : MonoBehaviour {
 	{
 		if (myBird.inMap || Var.isTutorial)
 			return;
-        if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
-            Rest.SetActive(true);
-        foreach (LevelData data in Levels)
+		if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
+			Rest.SetActive(true);
+		foreach (LevelData data in Levels)
 		{
 			type level = data.type;
 			switch (level)
@@ -166,8 +166,8 @@ public class Levels : MonoBehaviour {
 	{
 		if (myBird.inMap || Var.isTutorial)
 			return;
-        Rest.SetActive(false);
-        foreach (LevelData data in Levels)
+		Rest.SetActive(false);
+		foreach (LevelData data in Levels)
 		{
 			type level = data.type;
 			switch (level)
@@ -265,8 +265,8 @@ public class Levels : MonoBehaviour {
 	public void OnfightEndLevel(Bird bird, List<LevelData> Levels)
 	{
 		lastSwapPos = new Vector2(-2, -2);
-        Rest.SetActive(false);
-        foreach (LevelData data in Levels)
+		Rest.SetActive(false);
+		foreach (LevelData data in Levels)
 		{
 			type level = data.type;
 			List<Bird> adjacent = null;
@@ -289,9 +289,9 @@ public class Levels : MonoBehaviour {
 						}
 						if (emotion != Var.Em.Neutral)
 						{
-							Vector2 newEmotions = Helpers.Instance.ApplyEmotion(new Vector2(myBird.friendBoost, myBird.confBoos), emotion);
-							myBird.friendBoost = (int)newEmotions.x;
-							myBird.confBoos = (int)newEmotions.y;
+							Vector2 newEmotions = Helpers.Instance.ApplyEmotion(new Vector2(myBird.levelFriendBoos, myBird.levelConfBoos), emotion);
+							myBird.levelFriendBoos = (int)newEmotions.x;
+							myBird.levelConfBoos = (int)newEmotions.y;
 							Helpers.Instance.EmitEmotionParticles(myBird.transform, emotion);
 						}
 					}
@@ -517,7 +517,8 @@ public class Levels : MonoBehaviour {
 			{
 				return "First " + Helpers.Instance.FriendlyHexColor + "Friendly</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Friend1);
 			}
-			if (myBird.friendBoost>= 3  && myBird.wonLastBattle >=1 && !Helpers.Instance.ListContainsLevel(type.Friend1, myBird.levelList))
+            int gain = myBird.friendBoost + myBird.groundFriendBoos + myBird.levelFriendBoos + myBird.wizardFrienBoos;
+            if (gain>= 3  && myBird.wonLastBattle >=1 && !Helpers.Instance.ListContainsLevel(type.Friend1, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[0]),"Friendly 1");
 			}
@@ -543,7 +544,8 @@ public class Levels : MonoBehaviour {
 					break;
 				}
 			}
-			if (closeFriend && myBird.friendBoost >= 5 && !Helpers.Instance.ListContainsLevel(type.Friend2, myBird.levelList))
+            int gain = myBird.friendBoost + myBird.groundFriendBoos + myBird.levelFriendBoos + myBird.wizardFrienBoos;
+            if (closeFriend && gain >= 5 && !Helpers.Instance.ListContainsLevel(type.Friend2, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[4]),"Friendly 2");
 			}

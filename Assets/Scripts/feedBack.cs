@@ -17,6 +17,7 @@ public class feedBack : MonoBehaviour {
 	battleFeedback myBattleFeedback;
 	Vector3 scale;
 	GameObject line;
+    GameObject lineObj = null;
 	// Use this for initialization
 	void Awake () {
 		line = Resources.Load<GameObject>("prefabs/lightningLine");
@@ -41,7 +42,6 @@ public class feedBack : MonoBehaviour {
 					if (!Var.playerPos[i, myIndex].isHiding)
 					{
 						canfight = true;
-						//TryWizardLine(Var.playerPos[i,myIndex], birdScript);
 						break;
 					}
 				}
@@ -56,7 +56,6 @@ public class feedBack : MonoBehaviour {
 					if (!Var.playerPos[myIndex, i].isHiding)
 					{
 						canfight = true;
-						//TryWizardLine(Var.playerPos[myIndex, i], birdScript);
 						break;
 					}
 				}
@@ -68,28 +67,30 @@ public class feedBack : MonoBehaviour {
 
 	public void TryWizardLine(Bird player, Bird enemy)
 	{
+        if (lineObj != null)
+            return;
 		if (enemy.enemyType != fillEnemy.enemyType.wizard ) 
 			return;
         if(enemy.emotion == Var.Em.Neutral)
-            return;
+            return;        
 		switch (enemy.emotion)
 		{
 			case Var.Em.Lonely:
-				player.friendBoost += 2;
+				player.wizardFrienBoos -= 2;
 				break;
 			case Var.Em.Friendly:
-				player.friendBoost -= 2;
+				player.wizardFrienBoos += 2;
 				break;
 			case Var.Em.Scared:
-				player.confBoos -= 2;
+				player.wizardConfBoos -= 2;
 				break;
 			case Var.Em.Confident:
-				player.confBoos += 2;
+				player.wizardConfBoos += 2;
 				break;
 			default:
 				break;
 		}
-		var lineObj = Instantiate(line);
+		lineObj = Instantiate(line);
 		LineRenderer lr = lineObj.GetComponent<LineRenderer>();
 		lr.sortingOrder = 0;
 		lr.SetPosition(0, player.target);

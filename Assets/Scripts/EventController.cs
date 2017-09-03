@@ -269,7 +269,7 @@ public class EventController : MonoBehaviour {
 		switch (type)
 		{
 			case EventConsequence.ConsequenceType.Courage:
-				currentBird.confBoos += magnitude;
+				currentBird.confidence += magnitude;
 				if (magnitude > 0)
 				{
 					return currentBird.charName + " gained " + magnitude + " confidence.";
@@ -279,7 +279,7 @@ public class EventController : MonoBehaviour {
 					return currentBird.charName + "'s fear increased by " + Mathf.Abs(magnitude) + ".";
 				}
 			case EventConsequence.ConsequenceType.Friendliness:
-				currentBird.friendBoost += magnitude;
+				currentBird.friendliness += magnitude;
 				if (magnitude > 0)
 				{
 					return currentBird.charName + "'s firendliness has increased by " + magnitude + ".";

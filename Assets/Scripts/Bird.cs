@@ -51,13 +51,15 @@ public class Bird : MonoBehaviour
     [HideInInspector]
     public int wizardFrienBoos = 0;
     [HideInInspector]
-	public int confBoos = 0;
+    public int levelFriendBoos = 0;
     [HideInInspector]
     public int battleConfBoos = 0;
     [HideInInspector]
     public int groundConfBoos = 0;
     [HideInInspector]
     public int wizardConfBoos = 0;
+    [HideInInspector]
+    public int levelConfBoos = 0;
 
 	//[HideInInspector]
 	public int healthBoost = 0;
@@ -378,10 +380,13 @@ public class Bird : MonoBehaviour
 	}
 	
 	public void ResetBonuses()
-	{
-		confBoos = 0;
+	{		
         battleConfBoos = 0;
-		friendBoost = 0;
+		friendBoost = 0;       
+        groundConfBoos = 0;
+        groundFriendBoos = 0;
+        wizardConfBoos = 0;
+        wizardFrienBoos = 0;
 		GroundRollBonus = 0;
 		PlayerRollBonus = 0;
 		healthBoost = 0;
@@ -618,7 +623,7 @@ public class Bird : MonoBehaviour
 		{
 			if (Helpers.Instance.ListContainsLevel(Levels.type.Brave2, levelList) && (emotion == Var.Em.Confident || emotion == Var.Em.SuperConfident))
 			{
-				confBoos = confBoos - 2;
+				levelConfBoos -= 2;
 				GameObject shield = Resources.Load("shieldEffect") as GameObject;
 				Instantiate(shield, transform);
 
@@ -701,9 +706,9 @@ public class Bird : MonoBehaviour
 		if (dead)
 			return;
 		prevRoundHealth = health;
-		friendliness += friendBoost;
-		confidence += confBoos;
-        confidence += battleConfBoos;
+        friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
+        confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
+   
 		if (doFightStuff)
 		{
             

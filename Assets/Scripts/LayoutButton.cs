@@ -149,8 +149,8 @@ public class LayoutButton : MonoBehaviour
             if (birdObj.groundMultiplier > 1)
                 birdObj.GroundBonus.SetActive(true);
         }
-        birdObj.confBoos += ConfBonus;// *birdObj.groundMultiplier;
-        birdObj.friendBoost += FriendBonus;// *birdObj.groundMultiplier;
+        birdObj.groundConfBoos += ConfBonus;// *birdObj.groundMultiplier;
+        birdObj.groundFriendBoos += FriendBonus;// *birdObj.groundMultiplier;
         birdObj.GroundRollBonus += RollBonus;
         birdObj.PlayerRollBonus += PlayerRollBonus;
         if (birdObj.groundMultiplier > 1 && (ConfBonus!=0 || FriendBonus!=0 || RollBonus!=0 ))

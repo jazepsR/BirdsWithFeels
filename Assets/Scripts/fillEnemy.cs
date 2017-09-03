@@ -108,7 +108,7 @@ public class fillEnemy : MonoBehaviour {
             float rand = Random.Range(0, 1f);
             if (rand > 0.8f && hasDrills)
                 CreateEnemy(enemy, enemyType.drill);
-            if (rand < 0.2f && hasWizards)
+            if (rand < 0.7f && hasWizards)
                 CreateEnemy(enemy, enemyType.wizard);
             else
                 CreateEnemy(enemy);
