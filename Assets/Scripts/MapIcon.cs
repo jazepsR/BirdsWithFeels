@@ -17,13 +17,15 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public Var.Em type;
     public int background = 0;   
     public int birdLVL = 1;
-    public int length = 1;
+    int length = 0;
     public int minEnemies = 3;
     public int maxEnemies = 4;
     public bool hasTopEnemyRow = true;
     public bool hasFrontEnemyRow = true;
     [Range(0.0f, 1.0f)]
-    public float mainEmotionSpawnRate = 0.8f;   
+    public float mainEmotionSpawnRate = 0.8f;
+    [Header("Battle list")]
+    public List<MapBattleData> battles;
     [Header("Tile Configuration")]
     public bool hasObstacles;
     public bool hasScaredPowerUps;
@@ -34,7 +36,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public bool hasDMGPowerUps;
     [Header("References")]
    // [HideInInspector]
-    public MapIcon[] targets;
+    public MapIcon[] targets;    
     MapSaveData mySaveData;
     LineRenderer lr;
     Image sr;
@@ -45,10 +47,13 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public bool hasDrills = false;
     public Bird birdToAdd;
     ShowTooltip tooltipInfo;
+    List<Var.Em> totalEmotions;
+    List<float> totalPercentages;
+
     // Use this for initialization
     void Start()
     {
-     
+        length = battles.Count;
         offset = transform.position- transform.parent.position;
         LoadSaveData();
         sr = GetComponent<Image>();
@@ -62,9 +67,85 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         tooltipInfo.tooltipText = GetTooltipText();
         if (!CheckTargetsAvailable() && available)
             LeanTween.delayedCall(0.1f, mapBtnClick);
+        ValidateAll();
+        CalculateTotals();   
     }
 
+    void ValidateAll()
+    {
+        int i = 1;
+        foreach(MapBattleData data in battles)
+        {
+            Validate(i, data);
+            i++;
+        }
 
+    }
+        
+    void Validate(int id, MapBattleData data)
+    {
+        if (data.emotionPercentage.Count != data.emotionType.Count)
+            Debug.LogError(levelName + " battle " + id + " dosent have the same number of percentages and types");
+        float total = 0;
+        foreach (float percentage in data.emotionPercentage)
+            total += percentage;
+        if(total != 1.0f)
+            Debug.LogError(levelName + " battle " + id + " dont add up to 100%");
+        
+    }
+        
+    void CalculateTotals()
+    {
+        totalEmotions = new List<Var.Em>();
+        totalPercentages = new List<float>();
+        foreach(MapBattleData data in battles)
+        {
+            for( int i=0;i<data.emotionType.Count;i++)
+            {
+                if (!totalEmotions.Contains(data.emotionType[i]))
+                {
+                    totalEmotions.Add(data.emotionType[i]);
+                    float percentage = data.emotionPercentage[i]/ battles.Count;
+                    totalPercentages.Add(percentage);
+                }else
+                {
+                    int index =totalEmotions.IndexOf(data.emotionType[i]);
+                    float percentage = data.emotionPercentage[i]/ battles.Count;
+                    totalPercentages[index] = totalPercentages[index] + percentage;
+                }                
+            }
+        }
+    }
+
+    void SetupPieGraph()
+    {
+        float fill = 0;
+        for(int i = 0; i < totalEmotions.Count; i++)
+        {
+            fill += totalPercentages[i];
+            MapControler.Instance.pieChart[i].fillAmount = fill;
+            MapControler.Instance.pieChart[i].color = Helpers.Instance.GetEmotionColor(totalEmotions[i]);
+        }
+        try
+        {
+            string pieTooltip = "";
+            int total = 0;
+            for (int i = 0; i < totalEmotions.Count; i++)
+            {
+                int val = (int)(totalPercentages[i] * 100);
+                total += val;
+                if (i == totalEmotions.Count - 1)
+                    val += 100 - total;
+                pieTooltip += "\n" + Helpers.Instance.GetHexColor(totalEmotions[i]) + totalEmotions[i] + " " +val + " %</color>";
+            }
+            pieTooltip = pieTooltip.Substring(1);
+            MapControler.Instance.pieChart[0].gameObject.GetComponent<ShowTooltip>().tooltipText = pieTooltip;
+        }
+        catch
+        {
+            print("Could not assign pie chart tooltip");
+        }
+    }
     string GetTooltipText()
     {
         string tooltipText = "<b>"+levelName +"</b>\n";
@@ -186,6 +267,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             AudioControler.Instance.ClickSound();
         }
         catch { }
+        SetupPieGraph();
         active = true;
         MapControler.Instance.SelectedIcon = null;
         MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
@@ -236,9 +318,9 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             Var.map.Clear();
             for (int i = 0; i < length; i++)
             {
-                AddStageToLevel(type);
+                AddStageToLevel(battles[i]);
             }
-            Var.map.Add(new BattleData(Var.Em.finish, hasObstacles, new List<Var.Em>()));
+            Var.map.Add(new BattleData(Var.Em.finish, hasObstacles, new List<Var.Em>(), null));
             Var.currentStageID = ID;
 
             Var.activeBirds = new List<Bird>();
@@ -251,17 +333,25 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         }
 
     }
-
-    void AddStageToLevel(Var.Em emotion)
+    Var.Em FindTopEmotion(MapBattleData data)
     {
-        List<Var.Em> emotions = new List<Var.Em> { Var.Em.Confident, Var.Em.Friendly, Var.Em.Lonely, Var.Em.Scared, Var.Em.Neutral };
-        emotions.Remove(emotion);
-        BattleData data;
-        if (Random.Range(0f, 1f) < mainEmotionSpawnRate)        
-            data = new BattleData(emotion, hasObstacles, EmPowerList(), birdLVL, CreateDirList(), PowerList());
-          
-        else
-           data = new BattleData(emotions[Random.Range(0, 4)], hasObstacles, EmPowerList(), birdLVL, CreateDirList(), PowerList());
+        float biggestTotal = 0.0f;
+        Var.Em toReturn = Var.Em.finish;
+        for (int i = 0; i < data.emotionPercentage.Count; i++)
+        {
+            if (data.emotionPercentage[i] > biggestTotal)
+            { 
+                toReturn = data.emotionType[i];
+                biggestTotal = data.emotionPercentage[i];
+            }
+
+        }
+        return toReturn;
+    }
+
+    void AddStageToLevel(MapBattleData mapData)
+    {
+        BattleData data = new BattleData(FindTopEmotion(mapData), hasObstacles, EmPowerList(),mapData, birdLVL, CreateDirList(), PowerList(),hasWizards,hasDrills);
         data.maxEnemies = maxEnemies;
         data.minEnemies = minEnemies;
         Var.map.Add(data);

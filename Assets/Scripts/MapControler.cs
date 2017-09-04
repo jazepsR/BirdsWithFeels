@@ -18,6 +18,7 @@ public class MapControler : MonoBehaviour {
     public GameObject selectionTiles;
     public Button startLvlBtn;
     public float scaleTime = 0.35f;
+    public Image[] pieChart;
     [HideInInspector]
     public MapIcon SelectedIcon;    
     void Awake()

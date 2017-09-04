@@ -17,18 +17,32 @@ public class GuiMap : MonoBehaviour {
         Instance = this;
         if (Var.isTutorial)
         {
-            Var.map.Add(new BattleData(Var.Em.Neutral, false, new List<Var.Em>()));
-            Var.map.Add(new BattleData(Var.Em.Neutral, false, new List<Var.Em>()));
-            Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>()));
+            for(int i = 0; i < 6; i++) {
+                MapBattleData BattleStuff = new MapBattleData();
+                BattleStuff.emotionPercentage.Add(1);
+                BattleStuff.emotionType.Add(Var.Em.Neutral);
+                Var.map.Add(new BattleData(Var.Em.Neutral, false, new List<Var.Em>(),BattleStuff));
+            }
+                     
+            Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(),null));
         }
         else
         {
             if (Var.map.Count == 0)
             {
-                Var.map.Add(new BattleData(Var.Em.Neutral, true, new List<Var.Em>() { Var.Em.Confident }, 1, new List<Bird.dir>() {Bird.dir.front,Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
-                Var.map.Add(new BattleData(Var.Em.Neutral, true, new List<Var.Em>() { Var.Em.Confident }, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
+                for (int i = 0; i < 4; i++)
+                {
+                    MapBattleData BattleStuff = new MapBattleData();
+                    BattleStuff.emotionPercentage.Add(1);
+                    BattleStuff.emotionType.Add(Var.Em.Neutral);
+                    Var.map.Add(new BattleData(Var.Em.Neutral, true, new List<Var.Em>() { Var.Em.Confident },BattleStuff, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
+                    MapBattleData BattleStuff2 = new MapBattleData();
+                    BattleStuff2.emotionPercentage.Add(1);
+                    BattleStuff2.emotionType.Add(Var.Em.Confident);
+                    Var.map.Add(new BattleData(Var.Em.Confident, true, new List<Var.Em>() { Var.Em.Confident }, BattleStuff2, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
 
-                Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>()));
+                }
+                Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(),null));
             }
         }
     }
@@ -44,7 +58,7 @@ public class GuiMap : MonoBehaviour {
     public void CreateMap()
     {
         
-        dist = Mathf.Abs(start.position.x - finish.position.x)/((Var.map.Count-1)*3);
+        dist = Mathf.Abs(start.position.x - finish.position.x)/((Var.map.Count-1));
         foreach (BattleData part in Var.map)
         {
             if(part.type!= Var.Em.finish)
@@ -55,16 +69,13 @@ public class GuiMap : MonoBehaviour {
     }
 
     void DrawCircles(Var.Em emotion)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            GameObject point = Instantiate(mapIcon, new Vector3(start.position.x + dist * count, start.position.y, start.position.z), Quaternion.identity);
-            point.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
-            LineRenderer lr =point.GetComponent<LineRenderer>();
-            lr.sortingOrder = 55;
-            lr.SetPosition(0, new Vector3(start.position.x + dist * count, start.position.y, start.position.z));
-            lr.SetPosition(1, new Vector3(start.position.x + dist * (count+1), start.position.y, start.position.z));
-            count++;
-        }
+    {       
+        GameObject point = Instantiate(mapIcon, new Vector3(start.position.x + dist * count, start.position.y, start.position.z), Quaternion.identity);
+        point.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
+        LineRenderer lr =point.GetComponent<LineRenderer>();
+        lr.sortingOrder = 55;
+        lr.SetPosition(0, new Vector3(start.position.x + dist * count, start.position.y, start.position.z));
+        lr.SetPosition(1, new Vector3(start.position.x + dist * (count+1), start.position.y, start.position.z));
+        count++;        
     }
 }

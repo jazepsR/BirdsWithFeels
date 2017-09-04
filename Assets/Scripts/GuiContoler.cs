@@ -891,7 +891,7 @@ public class GuiContoler : MonoBehaviour {
 			}
 			Tutorial.Instance.ShowtutorialStartingText(posInMapRound + mapPos * 3);
 		}
-		BattleData Area = Var.map[mapPos];
+		BattleData Area = Var.map[posInMapRound + mapPos * 3];
 		if (Area.type != Var.Em.finish)
 		{
 			if (Var.isTutorial)
@@ -902,7 +902,7 @@ public class GuiContoler : MonoBehaviour {
 			}
 			else
 			{
-				GetComponent<fillEnemy>().createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
+				GetComponent<fillEnemy>().createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
 				ObstacleGenerator.Instance.clearObstacles();
 				ObstacleGenerator.Instance.GenerateObstacles();
 				DialogueControl.Instance.GetRelationshipDialogs();                                

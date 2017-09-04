@@ -18,7 +18,7 @@ public class fillEnemy : MonoBehaviour {
         else
         {
             BattleData Area = Var.map[0];
-            createEnemies(Area.minConf, Area.maxConf, Area.minFriend, Area.maxFriend, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies, Area.hasWizards, Area.hasDrills);
+            createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies, Area.hasWizards, Area.hasDrills);
         }
     } 
 
@@ -57,11 +57,11 @@ public class fillEnemy : MonoBehaviour {
 
 
 
-    public void createEnemies(float minConf = -5, float maxConf = 5, float minFriend = -5, float maxFriend = 5, int birdLVL = 1, List<Bird.dir> dirList = null, int minEnemies = 3, int maxEnemies = 4, bool hasWizards = false, bool hasDrills = false)
+    public void createEnemies(MapBattleData battleData, int birdLVL = 1, List<Bird.dir> dirList = null, int minEnemies = 3, int maxEnemies = 4, bool hasWizards = false, bool hasDrills = false)
     {
         int index = 0;
         //hasWizards = true;
-        hasDrills = true;
+        //hasDrills = true;
         List<int> frontPos = new List<int>();
         List<int> topPos = new List<int>();
         int frontBirds = 0;
@@ -113,8 +113,34 @@ public class fillEnemy : MonoBehaviour {
                 topPos.Add(enemyPos);                       
             if (enemy.position == Bird.dir.front)
                 frontBirds++;
-            enemy.confidence = (int)Random.Range(minConf, maxConf);
-            enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
+            switch (GetEmotion(battleData))
+            {
+                case Var.Em.Confident:
+                    enemy.confidence = 7;
+                    enemy.friendliness = 0;
+                    break;
+                case Var.Em.Scared:
+                    enemy.confidence = -7;
+                    enemy.friendliness = 0;
+                    break;
+                case Var.Em.Friendly:
+                    enemy.confidence = 0;
+                    enemy.friendliness = 7;
+                    break;
+                case Var.Em.Lonely:
+                    enemy.confidence = 0;
+                    enemy.friendliness = -7;
+                    break;
+                case Var.Em.Neutral:
+                    enemy.confidence = 0;
+                    enemy.friendliness = 0;
+                    break;
+                default:
+                    enemy.confidence = 0;
+                    enemy.friendliness = 0;
+                    break;                    
+            }
+          
             float rand = Random.Range(0, 1f);           
             if (rand < 0.2f && hasWizards)
                 CreateEnemy(enemy, enemyType.wizard);
@@ -137,6 +163,43 @@ public class fillEnemy : MonoBehaviour {
 
         }
     } 
+    Var.Em GetEmotion(MapBattleData data)
+    {
+        Var.Em emotion = Var.Em.finish;
+        float rand = Random.Range(0f, 1f);
+        float currentVal = 0;
+        for (int i = 0; i < data.emotionType.Count; i++)
+        {
+            if (rand < data.emotionPercentage[i])
+            {
+                emotion = data.emotionType[i];
+                break;
+            }
+            else
+            {
+                currentVal += data.emotionPercentage[i];
+            }
+        }     
+        if(emotion == Var.Em.Random)
+        {
+            int rnd = Random.Range(0, 5);
+            switch (rnd)
+            {
+                case 0:
+                    return Var.Em.Neutral;
+                case 1:
+                    return Var.Em.Confident;
+                case 2:
+                    return Var.Em.Lonely;
+                case 3:
+                    return Var.Em.Scared;
+                case 4:
+                    return Var.Em.Friendly;
+            }
+        }
+        return emotion;
+    }
+
 
     void setAsDrill(Bird bird)
     {

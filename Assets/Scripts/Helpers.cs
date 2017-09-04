@@ -530,6 +530,8 @@ public class Helpers : MonoBehaviour {
                 return scared;
             case Var.Em.finish:
                 return level;
+            case Var.Em.Random:
+                return level;
             default:
                 return neutral;
         }
