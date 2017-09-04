@@ -747,8 +747,7 @@ public class Bird : MonoBehaviour
 		ConfGainedInRound = confidence - prevConf;
 		FriendGainedInRound = friendliness - prevFriend;
 		Helpers.Instance.NormalizeStats(this);
-		levelControler.OnfightEndLevel(this, levelList);           
-		ResetBonuses();
+		levelControler.OnfightEndLevel(this, levelList);         
         if (this == GuiContoler.Instance.selectedBird)
             showText();    
 	}

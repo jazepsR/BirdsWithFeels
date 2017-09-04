@@ -834,7 +834,7 @@ public class GuiContoler : MonoBehaviour {
 		GetComponent<fillEnemy>().hasDrill = false;
 		foreach (Bird bird in players)
 		{
-			bird.AddRoundBonuses();
+            bird.ResetBonuses();          
 			UpdateBirdSave(bird);		
 			foreach(Bird activeBird in Var.activeBirds)
 			{

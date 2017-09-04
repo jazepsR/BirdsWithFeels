@@ -67,6 +67,7 @@ public class battleAnim :MonoBehaviour {
 				{
 					bird.UpdateBattleCount();					
 					GuiContoler.Instance.UpdateBirdSave(bird);
+                    bird.AddRoundBonuses();
 					bird.SetEmotion();
 				}
 			}
@@ -74,7 +75,6 @@ public class battleAnim :MonoBehaviour {
 			AudioControler.Instance.setBattleVolume(0f);            
 			GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
 			GuiContoler.Instance.CreateBattleReport();
-
 			if(Var.isTutorial)
 			{
 				yield return new WaitForSeconds(1.0f);
