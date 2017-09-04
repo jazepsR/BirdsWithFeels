@@ -106,7 +106,6 @@ public class battleAnim :MonoBehaviour {
 			battle.player.GetComponentInChildren<Animator>().SetTrigger("victory 0");            
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("dead", true);
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", false);
-			// battle.enemy.gameObject.SetActive(false);
 			battle.player.battleConfBoos += Var.confWinFight;
 			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Confident);
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("lose", true);

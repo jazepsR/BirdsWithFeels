@@ -756,6 +756,7 @@ public class Bird : MonoBehaviour
 	{
 		float factor = 0.13f;
 		float transitionTime = 1.9f;
+        print(charName + " applied emotion");
 		if (prevEmotion.Equals( Var.Em.finish)|| isEnemy)
 		{
 			transitionTime = 0.0f;

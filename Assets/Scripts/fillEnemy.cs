@@ -62,12 +62,11 @@ public class fillEnemy : MonoBehaviour {
         int index = 0;
         //hasWizards = true;
         hasDrills = true;
+        List<int> frontPos = new List<int>();
+        List<int> topPos = new List<int>();
         int frontBirds = 0;
         if (dirList == null)
             dirList = new List<Bird.dir>() { Bird.dir.front, Bird.dir.top};
-        
-
-
         int max = maxEnemies;
         print("min: "+ minEnemies + " max: " + maxEnemies);
         if (dirList.Count == 1 && dirList.Contains(Bird.dir.front))
@@ -84,8 +83,6 @@ public class fillEnemy : MonoBehaviour {
             enemy.SetActive(false);
             index++;
         }
-
-
         List<int> usedPos = new List<int>();
         int enemyCount = Random.Range(minEnemies, max+1);
         for (int i = 0; i < enemyCount; i++)
@@ -107,31 +104,55 @@ public class fillEnemy : MonoBehaviour {
                     }
                 }
             }
-            //TODO: implement new birds for tutorial
+                    
             usedPos.Add(enemyPos);
-            Bird enemy = Enemies[enemyPos].GetComponent<Bird>();               
+            Bird enemy = Enemies[enemyPos].GetComponent<Bird>();
+            if (enemy.position == Bird.dir.front)
+                frontPos.Add(enemyPos);
+            if (enemy.position == Bird.dir.top)
+                topPos.Add(enemyPos);                       
             if (enemy.position == Bird.dir.front)
                 frontBirds++;
             enemy.confidence = (int)Random.Range(minConf, maxConf);
             enemy.friendliness = (int)Random.Range(minFriend, maxFriend);
-            float rand = Random.Range(0, 1f);
-            if (rand > 0.5f && hasDrills && !hasDrill)
-            {
-                hasDrill = true;
-                CreateEnemy(enemy, enemyType.drill);
-            }
+            float rand = Random.Range(0, 1f);           
+            if (rand < 0.2f && hasWizards)
+                CreateEnemy(enemy, enemyType.wizard);
             else
-            {
-                if (rand < 0.2f && hasWizards)
-                    CreateEnemy(enemy, enemyType.wizard);
-                else
-                    CreateEnemy(enemy);
-            }
+                CreateEnemy(enemy);            
             Enemies[enemyPos].SetActive(true);
         }
-        
-        
+        if (hasDrills) {
+            float drillrange = 0.3f;
+
+            if (frontPos.Count < 3 && frontPos.Count > 0 && Random.Range(0, 1f) < drillrange) {
+                int id = frontPos[Random.Range(0, frontPos.Count)];
+                setAsDrill(Enemies[id].GetComponent<Bird>());
+            }
+            if (topPos.Count < 3 && topPos.Count > 0 && Random.Range(0, 1f) < drillrange)
+            {
+                int id = topPos[Random.Range(0, topPos.Count)];
+                setAsDrill(Enemies[id].GetComponent<Bird>());
+            }
+
+        }
     } 
+
+    void setAsDrill(Bird bird)
+    {
+        bird.enemyType = enemyType.drill;
+        foreach (TextMesh text in bird.transform.GetComponentsInChildren<TextMesh>())
+        {
+            if (text.gameObject.tag == "number")
+            {                
+                text.text = "D";
+                text.color = Color.red;
+            }
+        }
+
+    }
+
+
     void CreateEnemy(Bird enemy, enemyType type = enemyType.normal)
     {
         enemy.SetEmotion();
@@ -161,12 +182,7 @@ public class fillEnemy : MonoBehaviour {
             {
                 if (enemy.enemyType == enemyType.wizard)
                     text.text = "W";
-                if (enemy.enemyType == enemyType.drill)
-                {
-                    text.text = "D";
-                    text.color = Color.red;
-
-                }
+                
                 else
                     text.text = (enemy.levelRollBonus + 1).ToString();                
             }
