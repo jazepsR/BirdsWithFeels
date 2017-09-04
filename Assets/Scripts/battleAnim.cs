@@ -87,11 +87,11 @@ public class battleAnim :MonoBehaviour {
 	IEnumerator ShowResult(battleData battle,float waitTime)
 	{
 		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyMove);
-		yield return new WaitForSeconds(enemySpeed+0.25f);
+		yield return new WaitForSeconds(enemySpeed);
 		Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
 		GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
-		Destroy(fightCloudObj, 1.5f);
-		yield return new WaitForSeconds(1.5f);
+		Destroy(fightCloudObj, 1.75f);
+		yield return new WaitForSeconds(1.75f);
 		ShowBattleResult(battle);
 		yield return new WaitForSeconds(waitTime-(enemySpeed + 1.75f));
 	}
