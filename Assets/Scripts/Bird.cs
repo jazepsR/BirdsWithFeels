@@ -832,51 +832,49 @@ public class Bird : MonoBehaviour
             GuiContoler.Instance.selectedBird = this;
             SetRelationshipSliders(GuiContoler.Instance.relationshipSliders);
             Var.birdInfoFeeling.text = emotion.ToString();
-            Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
-            if (!inMap)
+            Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);            
+            Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, lastLevel.title);              
+            GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
+            GuiContoler.Instance.BirdCombatStr.text = "Combat strength: " + (getBonus()* 10f).ToString("+#;-#;0") + "%";
+            GuiContoler.Instance.BirdCombatStr.gameObject.GetComponent<ShowTooltip>().tooltipText = GetBonusText();
+            //set progress to level bar
+            if (battleCount >= battlesToNextLVL)
             {
-                Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, lastLevel.title);              
-                GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
-                GuiContoler.Instance.BirdCombatStr.text = "Combat strength: " + (getBonus()* 10f).ToString("+#;-#;0") + "%";
-                GuiContoler.Instance.BirdCombatStr.gameObject.GetComponent<ShowTooltip>().tooltipText = GetBonusText();
-                //set progress to level bar
-                if (battleCount >= battlesToNextLVL)
+                battleCount = battlesToNextLVL;
+                Var.powerText.text = "Ready to level up!";
+                levelUpText = CheckLevels(false);
+                Var.powerBar.color = Helpers.Instance.GetSoftEmotionColor(emotion);
+                Var.powerBar.fillAmount = 1;
+            }
+            else
+            {
+                Var.powerBar.color = Color.white;
+                Var.powerText.text = null;
+                Var.powerText.text = "Leveling available in " + (battlesToNextLVL - battleCount) + " battles!";
+                Var.powerBar.fillAmount = (float)battleCount % 3 / (float)3;
+            }
+
+            int index = 0;
+            GuiContoler.Instance.levelNumberText.text = level.ToString();
+            //Set Relationship bars
+                
+
+            ///Set level icons
+            foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
+            {
+                if (levelList.Count > index)
                 {
-                    battleCount = battlesToNextLVL;
-                    Var.powerText.text = "Ready to level up!";
-                    levelUpText = CheckLevels(false);
-                    Var.powerBar.color = Helpers.Instance.GetSoftEmotionColor(emotion);
-                    Var.powerBar.fillAmount = 1;
+                    icon.gameObject.SetActive(true);
+                    icon.GetComponent<Image>().sprite = levelList[index].LVLIcon;
+                    icon.textToDsiplay = levelList[index].levelInfo;
                 }
                 else
                 {
-                    Var.powerBar.color = Color.white;
-                    Var.powerText.text = null;
-                    Var.powerText.text = "Leveling available in " + (battlesToNextLVL - battleCount) + " battles!";
-                    Var.powerBar.fillAmount = (float)battleCount % 3 / (float)3;
+                    icon.gameObject.SetActive(false);
                 }
-
-                int index = 0;
-                GuiContoler.Instance.levelNumberText.text = level.ToString();
-                //Set Relationship bars
-                
-
-                ///Set level icons
-                foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
-                {
-                    if (levelList.Count > index)
-                    {
-                        icon.gameObject.SetActive(true);
-                        icon.GetComponent<Image>().sprite = levelList[index].LVLIcon;
-                        icon.textToDsiplay = levelList[index].levelInfo;
-                    }
-                    else
-                    {
-                        icon.gameObject.SetActive(false);
-                    }
-                    index++;
-                }
+                index++;
             }
+            
             //set emotion bars
             GuiContoler.Instance.confSlider.SetDist(confidence + battleConfBoos, this);
             GuiContoler.Instance.firendSlider.SetDist(friendliness, this);

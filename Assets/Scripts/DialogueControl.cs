@@ -40,8 +40,8 @@ public class DialogueControl : MonoBehaviour {
 	public void TryDialogue(Dialogue.Location location, EventScript.Character Char = EventScript.Character.None)
 	{
 
-        if (Var.isTutorial ||(GuiContoler.Instance.winBanner!= null && GuiContoler.Instance.winBanner.activeSelf ))
-            return;
+		if (Var.isTutorial ||(GuiContoler.Instance.winBanner!= null && GuiContoler.Instance.winBanner.activeSelf ))
+			return;
 		if (Random.Range(0, 1.0f) > dialogueFrequency)
 			return;
 		for(int i =0; i<100; i++)
@@ -66,8 +66,8 @@ public class DialogueControl : MonoBehaviour {
 
 			}
 			bool canCreate = ConditionCheck.CheckCondition(dialogue.condition, dialogueBird, dialogue.targetEmotion, dialogue.magnitude);
-            bool alreadySeen = Var.shownDialogs.Contains(dialogue.dialogueParts[0].text);
-            if (dialogue.location == location && canCreate&& AllBirdsInScene && !alreadySeen && !dialogueBird.dead)
+			bool alreadySeen = Var.shownDialogs.Contains(dialogue.dialogueParts[0].text);
+			if (dialogue.location == location && canCreate&& AllBirdsInScene && !alreadySeen && !dialogueBird.dead)
 			{
 				if (Char == EventScript.Character.None || Char == dialogue.speakers[0])
 				{
@@ -85,15 +85,15 @@ public class DialogueControl : MonoBehaviour {
 	public void CreateDialogue(Dialogue dialogue)
 	{
 		
-        if (!dialogue.canShowMultipleTimes)
-        {           
-            Var.shownDialogs.Add(dialogue.dialogueParts[0].text);
-        }
-        
+		if (!dialogue.canShowMultipleTimes)
+		{           
+			Var.shownDialogs.Add(dialogue.dialogueParts[0].text);
+		}
+		
 		for(int i=1;i<dialogue.speakers.Count;i++)
 		{
 			int j = 0;
-            EventScript.Character dialogBird = dialogue.speakers[i];
+			EventScript.Character dialogBird = dialogue.speakers[i];
 			while (true)
 			{
 				Bird enumBird = Helpers.Instance.GetBirdFromEnum(dialogBird);
