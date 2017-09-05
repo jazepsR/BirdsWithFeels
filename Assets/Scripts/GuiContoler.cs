@@ -110,7 +110,7 @@ public class GuiContoler : MonoBehaviour {
 		Var.powerText = powerTextTemp;	    
 		if (!inMap)
 		{
-			GuiMap.Instance.CreateMap();            
+			GuiMap.Instance.CreateMap(Var.map);            
 			setMapLocation(0);
 			LeanTween.delayedCall(0.05f,tryDialog);
 		}        

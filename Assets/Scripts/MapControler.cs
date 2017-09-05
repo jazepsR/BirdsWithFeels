@@ -14,6 +14,7 @@ public class MapControler : MonoBehaviour {
     public Transform centerPos;
     public GameObject SelectionMenu;
     public Text SelectionText;
+    public Text SelectionDescription;
     public Text SelectionTitle;
     public GameObject selectionTiles;
     public Button startLvlBtn;
@@ -99,6 +100,7 @@ public class MapControler : MonoBehaviour {
         LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
         LeanTween.scale(MapControler.Instance.selectionTiles, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
         MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
+        GuiMap.Instance.Clear();
     }
 
     

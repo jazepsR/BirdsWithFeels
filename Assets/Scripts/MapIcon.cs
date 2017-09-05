@@ -9,9 +9,11 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 {
     public GameObject CompleteIcon;
     public GameObject LockedIcon;
-    public int ID;
+    public int ID;    
     public bool completed = false;
     public string levelName;
+    [TextArea(3, 20)]
+    public string levelDescription = "";
     public bool available;
     [Header("Level configuration")]
     public Var.Em type;
@@ -20,8 +22,6 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     int length = 0;
     public int minEnemies = 3;
     public int maxEnemies = 4;
-    public bool hasTopEnemyRow = true;
-    public bool hasFrontEnemyRow = true;
     [Range(0.0f, 1.0f)]
     public float mainEmotionSpawnRate = 0.8f;
     [Header("Battle list")]
@@ -275,6 +275,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         MapControler.Instance.selectionTiles.transform.localScale = Vector3.zero;
         MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
         LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position+(transform.parent.transform.position-transform.position), 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
+
     }
 
     public void ShowAreaDetails()
@@ -284,7 +285,9 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         MapControler.Instance.selectionTiles.SetActive(true);
         MapControler.Instance.SelectionTitle.text = levelName + " details";
         MapControler.Instance.SelectionText.text = ToString();
+        MapControler.Instance.SelectionDescription.text = levelDescription;
         AudioControler.Instance.ClickSound();
+        GuiMap.Instance.CreateMap(CreateMap());
         LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack);
         if (available)
         {
@@ -316,11 +319,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             Var.isTutorial = false;           
             Var.currentBG = background;
             Var.map.Clear();
-            for (int i = 0; i < length; i++)
-            {
-                AddStageToLevel(battles[i]);
-            }
-            Var.map.Add(new BattleData(Var.Em.finish, hasObstacles, new List<Var.Em>(), null));
+            Var.map = CreateMap();
             Var.currentStageID = ID;
 
             Var.activeBirds = new List<Bird>();
@@ -348,22 +347,29 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         }
         return toReturn;
     }
-
-    void AddStageToLevel(MapBattleData mapData)
+    List<BattleData> CreateMap()
+    {
+        List<BattleData> map = new List<BattleData>();
+        for (int i = 0; i < length; i++)
+        {
+            AddStageToLevel(battles[i],map);
+        }
+        map.Add(new BattleData(Var.Em.finish, hasObstacles, new List<Var.Em>(), null));
+        return map;
+    }
+    void AddStageToLevel(MapBattleData mapData, List<BattleData> map)
     {
         BattleData data = new BattleData(FindTopEmotion(mapData), hasObstacles, EmPowerList(),mapData, birdLVL, CreateDirList(), PowerList(),hasWizards,hasDrills);
         data.maxEnemies = maxEnemies;
         data.minEnemies = minEnemies;
-        Var.map.Add(data);
+        map.Add(data);
     }
 
     List<Bird.dir> CreateDirList()
     {
         List<Bird.dir> dirList = new List<Bird.dir>();
-        if (hasFrontEnemyRow)
-            dirList.Add(Bird.dir.front);
-        if (hasTopEnemyRow)
-            dirList.Add(Bird.dir.top);       
+        dirList.Add(Bird.dir.front);
+        dirList.Add(Bird.dir.top);       
         return dirList;
     }
 
@@ -413,13 +419,12 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         if (available)
             stageState = "available";
         stageInfo += "Stage " + (ID + 1) + ": " + stageState;
-        stageInfo += "\nLength " + length;
         string weakness = "All";
         if (type != Var.Em.Neutral)
             weakness = Helpers.Instance.GetWeakness(type).ToString();
-        stageInfo += "\nMain emotion: " +Helpers.Instance.GetHexColor(type)+ type + "</color>. Weak to: " +
+        stageInfo += ". Main emotion: " +Helpers.Instance.GetHexColor(type)+ type + "</color>. Weak to: " +
             Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(type)) + weakness + "</color>.";
-        stageInfo += "\nEnemies attack from the: ";
+        /*stageInfo += "\nEnemies attack from the: ";
         if (hasFrontEnemyRow)
             stageInfo += "\u2022Front ";
         if (hasTopEnemyRow)
@@ -429,7 +434,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         if (hasHealthPowerUps)
             stageInfo += "\nHas healing tiles";
         if (hasDMGPowerUps)
-            stageInfo += "\nHas bonus damage tiles";
+            stageInfo += "\nHas bonus damage tiles";*/
         return stageInfo;
     }
 

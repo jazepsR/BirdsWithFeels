@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GuiMap : MonoBehaviour {
-
+    public bool inMap = false;
     public GameObject mapIcon;
     public static GuiMap Instance { get; private set; }
     public Transform start;
     public Transform finish;
     public GameObject cup;
+    public Transform nodes;
     float dist;
     int count = 0;
     void Awake()
-    {
-        
+    {        
         Instance = this;
+        if (inMap)
+            return;
         if (Var.isTutorial)
         {
             for(int i = 0; i < 6; i++) {
@@ -55,27 +57,53 @@ public class GuiMap : MonoBehaviour {
 
 
 
-    public void CreateMap()
+    public void CreateMap(List<BattleData> map)
     {
-        
-        dist = Mathf.Abs(start.position.x - finish.position.x)/((Var.map.Count-1));
-        foreach (BattleData part in Var.map)
+        Clear();
+        dist = Mathf.Abs(start.position.x - finish.position.x)/((map.Count-1));
+        foreach (BattleData part in map)
         {
             if(part.type!= Var.Em.finish)
                 DrawCircles(part.type);
         }
-        Instantiate(cup, finish.position,Quaternion.identity);
-       
+        GameObject cupObj =  Instantiate(cup, finish.position,Quaternion.identity);
+        cupObj.transform.parent = nodes;
+        print("created map");
+        if (inMap)
+            LeanTween.delayedCall(0.3f, CreateColor);
     }
+    public void Clear()
+    {
+        count = 0;
+        foreach (Transform child in nodes)
+            Destroy(child.gameObject);
 
+    }
     void DrawCircles(Var.Em emotion)
     {       
         GameObject point = Instantiate(mapIcon, new Vector3(start.position.x + dist * count, start.position.y, start.position.z), Quaternion.identity);
+        point.transform.parent = nodes;
         point.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
         LineRenderer lr =point.GetComponent<LineRenderer>();
+        if (inMap)
+        {
+            lr.startColor = new Color(0, 0, 0, 0);
+            lr.endColor = new Color(0, 0, 0, 0);
+        }
         lr.sortingOrder = 55;
         lr.SetPosition(0, new Vector3(start.position.x + dist * count, start.position.y, start.position.z));
         lr.SetPosition(1, new Vector3(start.position.x + dist * (count+1), start.position.y, start.position.z));
         count++;        
+    }
+    void CreateColor()
+    {
+        foreach(LineRenderer lr in nodes.GetComponentsInChildren<LineRenderer>())
+        {
+            lr.startColor = Color.white;
+            lr.endColor = Color.black;
+
+        }
+
+
     }
 }
