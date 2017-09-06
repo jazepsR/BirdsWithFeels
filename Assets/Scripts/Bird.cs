@@ -24,7 +24,7 @@ public class Bird : MonoBehaviour
 	public int x = -1;
 	public int y = -1;
 	public Var.Em emotion;
-    public Var.Em bannedLevels = Var.Em.finish;
+	public Var.Em bannedLevels = Var.Em.finish;
 	public string charName;	
 	public bool inUse = true;	
 	public SpriteRenderer colorRenderer;    
@@ -316,7 +316,7 @@ public class Bird : MonoBehaviour
 
 	public int GetRelationshipBonus()
 	{
-        return 0;
+		return 0;
 		try
 		{
 			if (relationshipBird.relationshipBird.charName == charName)
@@ -392,8 +392,8 @@ public class Bird : MonoBehaviour
 		wizardFrienBoos = 0;
 		GroundRollBonus = 0;
 		PlayerRollBonus = 0;
-        levelFriendBoos = 0;
-        levelConfBoos = 0;
+		levelFriendBoos = 0;
+		levelConfBoos = 0;
 		healthBoost = 0;
 		isInfluenced = false;
 	}
@@ -550,8 +550,15 @@ public class Bird : MonoBehaviour
 				lines.RemoveLines();
 				UpdateFeedback();
 				GuiContoler.Instance.HideLvlText();
-				GroundBonus.SetActive(false);               
-			}
+				GroundBonus.SetActive(false);
+                foreach (Bird bird in FillPlayer.Instance.playerBirds)
+                {
+                    if (Helpers.Instance.ListContainsLevel(Levels.type.Toby, bird.levelList))
+                    {
+                        bird.levelControler.ApplyLevelOnDrop(this, bird.levelList);
+                    }
+                }
+            }
 			levelControler.ApplyLevelOnPickup(this, levelList);
 			// RemoveAllFeedBack();
 		}
@@ -585,7 +592,7 @@ public class Bird : MonoBehaviour
 	void UpdateFeedback()
 	{
 		fighting = false;
-		if (Helpers.Instance.ListContainsLevel(Levels.type.Tova,levelList))
+		if (Helpers.Instance.ListContainsLevel(Levels.type.Tova,levelList) )
 		{
 			if (GameLogic.Instance.CheckIfResting(this)&&!dragged)
 			{
@@ -595,8 +602,9 @@ public class Bird : MonoBehaviour
 			{
 				levelControler.ApplyLevelOnPickup(this, levelList);
 			}
-		}
+		}       
 		GameLogic.Instance.UpdateFeedback();
+        
 	}
 	public Bird(string name,int confidence =0,int friendliness = 0)
 	{
@@ -706,45 +714,45 @@ public class Bird : MonoBehaviour
 		
 
 	}
-    void ApplyInfluence()
-    {
-        if (isInfluenced)
-        {
-            if (friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos > 0)
-            {
-                levelFriendBoos += 2;
-                print(charName + " got influenced to friendly");
-            }
-            else
-            {
-                if (friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos < 0)
-                {
-                    levelFriendBoos -= 2;
-                    print(charName + " got influenced to lonely");
-                }
-            }
-            if (battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos > 0)
-            {
-                levelConfBoos += 2;
-                print(charName + " got influenced to confident");
+	void ApplyInfluence()
+	{
+		if (isInfluenced)
+		{
+			if (friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos > 0)
+			{
+				levelFriendBoos += 2;
+				print(charName + " got influenced to friendly");
+			}
+			else
+			{
+				if (friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos < 0)
+				{
+					levelFriendBoos -= 2;
+					print(charName + " got influenced to lonely");
+				}
+			}
+			if (battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos > 0)
+			{
+				levelConfBoos += 2;
+				print(charName + " got influenced to confident");
 
-            }
-            else
-            {
-                if (battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos < 0)
-                {
-                    levelConfBoos -= 2;
-                    print(charName + " got influenced to scared");
-                }
-            }
-        }
-    }
+			}
+			else
+			{
+				if (battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos < 0)
+				{
+					levelConfBoos -= 2;
+					print(charName + " got influenced to scared");
+				}
+			}
+		}
+	}
 	public void AddRoundBonuses(bool doFightStuff= true)
 	{
 		//print(charName + " doing round bonus. HealthGain " + roundHealthChange);
 		if (dead)
 			return;
-        ApplyInfluence();		
+		ApplyInfluence();		
 		prevRoundHealth = health;   
 		if (doFightStuff)
 		{
@@ -757,7 +765,7 @@ public class Bird : MonoBehaviour
 			{
 				consecutiveFightsWon = 0;
 				roundsRested++;				
-                battleConfBoos -= confLoseOnRest;
+				battleConfBoos -= confLoseOnRest;
 			}
 			else
 			{
@@ -777,9 +785,9 @@ public class Bird : MonoBehaviour
 				ChageHealth(1);
 		}
 
-        friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
-        confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
-        health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
+		friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
+		confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
+		health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
 		print(charName + " healthboost " + healthBoost + " round change " + roundHealthChange);			 
 		roundHealthChange = 0;
 		foughtInRound = false;        
@@ -1035,9 +1043,15 @@ public class Bird : MonoBehaviour
 			//Debug.Log("x: " + x+ " y: " + y);
 			levelControler.ApplyLevelOnDrop(this, levelList);
 			showText();
-			UpdateFeedback();          
-
-		}
+			UpdateFeedback();
+            foreach (Bird bird in FillPlayer.Instance.playerBirds)
+            {
+                if (Helpers.Instance.ListContainsLevel(Levels.type.Toby, bird.levelList))
+                {
+                    bird.levelControler.ApplyLevelOnDrop(this, bird.levelList);
+                }
+            }
+        }
 		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		SetCoolDownRing(false);
 		if(inMap)

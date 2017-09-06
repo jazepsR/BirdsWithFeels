@@ -11,10 +11,10 @@ public class Levels : MonoBehaviour {
 	public GameObject Rest;
 	public Vector2 lastSwapPos = new Vector2(-2,-2);
 	private bool TovaActivated = false;
-	
+    public GameObject impressionableIndicator;
 
-	// Use this for initialization
-	void Start () {        
+    // Use this for initialization
+    void Start () {        
 		myBird = GetComponent<Bird>();
 	}
 	
@@ -68,8 +68,42 @@ public class Levels : MonoBehaviour {
 
 					}
 					break;
-				//TODO: Maybe someday fix this skill
-				/* case type.Lonely1:
+                case type.Toby:
+                    if (myBird.x == -1)
+                        break;
+                    List<Bird> adjacentBirds = Helpers.Instance.GetAdjacentBirds(myBird);
+                    if (adjacentBirds.Count > 0)
+                    {
+                        Var.Em emotion = Var.Em.Neutral;
+                        int emStr = 0;
+                        Bird biggestBird = null;
+                        foreach (Bird closeBird in adjacentBirds)
+                        {
+                            int emotionStr = (int)Mathf.Max(Mathf.Abs(closeBird.confidence), Mathf.Abs(closeBird.friendliness));
+                            if (emotionStr > emStr)
+                            {
+                                emotion = closeBird.emotion;
+                                emStr = emotionStr;
+                                biggestBird = closeBird;
+                            }
+                        }
+                        if (emotion != Var.Em.Neutral)
+                        {
+                            impressionableIndicator.SetActive(true);
+                            Vector3 moveDirection = biggestBird.transform.position - myBird.transform.position;
+                            float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg - 90f;
+                            impressionableIndicator.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                            impressionableIndicator.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
+                        }else
+                            impressionableIndicator.SetActive(false);
+                    }
+                    else
+                    {
+                        impressionableIndicator.SetActive(false);
+                    }
+                    break;
+                //TODO: Maybe someday fix this skill
+                /* case type.Lonely1:
 					 if (myBird.x == -1)
 						 break;
 					 if (Var.enemies[myBird.y + 4].inUse)
@@ -106,7 +140,7 @@ public class Levels : MonoBehaviour {
 
 					 }
 					 break;*/
-				case type.Rebecca:
+                case type.Rebecca:
 					if (myBird.x == -1)
 						break;
 					if(GameLogic.Instance.CheckIfResting(myBird))
@@ -188,7 +222,12 @@ public class Levels : MonoBehaviour {
 						break;
 					SadRest.SetActive(false);
 					break;
-				case type.Terry:
+                case type.Toby:
+                    if (myBird.x == -1)
+                        break;
+                    impressionableIndicator.SetActive(false);
+                    break;
+                case type.Terry:
 					if (myBird.x == -1 )
 						break;
                     Color ColConf = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
@@ -279,6 +318,7 @@ public class Levels : MonoBehaviour {
 			switch (level)
 			{
 				case type.Toby:
+                    impressionableIndicator.SetActive(false);
 					adjacent = Helpers.Instance.GetAdjacentBirds(myBird);
 					if (adjacent.Count > 0)
 					{

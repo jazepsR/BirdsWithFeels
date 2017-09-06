@@ -48,8 +48,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public Bird birdToAdd;
     ShowTooltip tooltipInfo;
     List<Var.Em> totalEmotions;
-    List<float> totalPercentages;
-
+    List<float> totalPercentages;    
     // Use this for initialization
     void Start()
     {
