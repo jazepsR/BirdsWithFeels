@@ -49,7 +49,7 @@ public class fillEnemy : MonoBehaviour {
                 enemy.friendliness = en.firendliness;
                 CreateEnemy(enemy);             
                 Enemies[index].SetActive(true);
-                
+                ApplyArt(enemy);
             }
             index++;
         }
@@ -108,11 +108,12 @@ public class fillEnemy : MonoBehaviour {
             usedPos.Add(enemyPos);
             Bird enemy = Enemies[enemyPos].GetComponent<Bird>();
             if (enemy.position == Bird.dir.front)
-                frontPos.Add(enemyPos);
-            if (enemy.position == Bird.dir.top)
-                topPos.Add(enemyPos);                       
-            if (enemy.position == Bird.dir.front)
+            {
                 frontBirds++;
+                frontPos.Add(enemyPos);
+            }
+            if (enemy.position == Bird.dir.top)
+                topPos.Add(enemyPos);        
             switch (GetEmotion(battleData))
             {
                 case Var.Em.Confident:
@@ -153,16 +154,42 @@ public class fillEnemy : MonoBehaviour {
 
             if (frontPos.Count < 3 && frontPos.Count > 0 && Random.Range(0, 1f) < drillrange) {
                 int id = frontPos[Random.Range(0, frontPos.Count)];
-                setAsDrill(Enemies[id].GetComponent<Bird>());
+                Enemies[id].GetComponent<Bird>().enemyType = enemyType.drill;
             }
             if (topPos.Count < 3 && topPos.Count > 0 && Random.Range(0, 1f) < drillrange)
             {
                 int id = topPos[Random.Range(0, topPos.Count)];
-                setAsDrill(Enemies[id].GetComponent<Bird>());
+                Enemies[id].GetComponent<Bird>().enemyType= enemyType.drill;
             }
-
+        }
+        foreach(int id in usedPos)
+        {
+            ApplyArt(Enemies[id].GetComponent<Bird>());
         }
     } 
+
+    void ApplyArt(Bird enemy)
+    {
+        enemy.EnemyArt = Instantiate(Helpers.Instance.GetEnemyVisual(enemy.position, enemy.emotion, enemy.enemyType), enemy.transform);
+        enemy.EnemyArt.transform.localPosition = new Vector3(0, 0, 0);
+        foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            if (child.gameObject.name.Contains("flat"))
+            {
+                child.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
+            }
+        }
+        foreach (TextMesh text in enemy.transform.GetComponentsInChildren<TextMesh>())
+        {
+            if (text.gameObject.tag == "number")
+                text.text = (enemy.levelRollBonus + 1).ToString();
+
+        }
+        enemy.GetComponent<feedBack>().SetEnemyHoverText();
+        enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
+    }
+
+
     Var.Em GetEmotion(MapBattleData data)
     {
         Var.Em emotion = Var.Em.finish;
@@ -201,55 +228,19 @@ public class fillEnemy : MonoBehaviour {
     }
 
 
-    void setAsDrill(Bird bird)
-    {
-        bird.enemyType = enemyType.drill;
-        foreach (TextMesh text in bird.transform.GetComponentsInChildren<TextMesh>())
-        {
-            if (text.gameObject.tag == "number")
-            {                
-                text.text = "D";
-                text.color = Color.red;
-            }
-        }
-
-    }
+  
 
 
     void CreateEnemy(Bird enemy, enemyType type = enemyType.normal)
     {
-        enemy.SetEmotion();
-        
+        enemy.SetEmotion();        
         if (enemy.EnemyArt != null)
-            Destroy(enemy.EnemyArt);
-        enemy.EnemyArt = Instantiate(Helpers.Instance.GetEnemyVisual(enemy.position, enemy.emotion), enemy.transform);
-        enemy.EnemyArt.transform.localPosition = new Vector3(0, 0, 0);
+            Destroy(enemy.EnemyArt);       
         enemy.enemyType = type;
         if (enemy.emotion == Var.Em.Neutral && enemy.enemyType == enemyType.wizard)
-            enemy.enemyType = enemyType.normal;
-        foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>(true))
-        {
-            if (child.gameObject.name.Contains("flat"))
-            {
-                child.color = Helpers.Instance.GetEmotionColor(enemy.emotion);
-            }
-
-        }       
-        enemy.GetComponent<feedBack>().SetEnemyHoverText();        
-        enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
+            enemy.enemyType = enemyType.normal;               
         enemy.inUse = true;
-        enemy.transform.localPosition = enemy.home;
-        foreach (TextMesh text in enemy.transform.GetComponentsInChildren<TextMesh>())
-        {
-            if (text.gameObject.tag == "number")
-            {
-                if (enemy.enemyType == enemyType.wizard)
-                    text.text = "W";
-                
-                else
-                    text.text = (enemy.levelRollBonus + 1).ToString();                
-            }
-        }
+        enemy.transform.localPosition = enemy.home;       
     }
 
     public void Reset()

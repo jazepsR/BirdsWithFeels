@@ -128,7 +128,35 @@ public class FillPlayer : MonoBehaviour {
 			Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_neutral"));
 			Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_scared"));
 		}
-	}
+        if (Var.wizardEnemySprites == null)
+        {
+            Var.wizardEnemySprites = new List<GameObject>();
+            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_confident_MAGIC"));
+            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_friendly_MAGIC"));
+            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_lonely_MAGIC"));
+            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_neutral_MAGIC"));
+            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_scared_MAGIC"));
+            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_confident_MAGIC"));
+            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_friendly_MAGIC"));
+            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_lonely_MAGIC"));
+            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_neutral_MAGIC"));
+            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_scared_MAGIC"));
+        }
+        if (Var.drillEnemySprites == null)
+        {
+            Var.drillEnemySprites = new List<GameObject>();
+            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_confident_DRILL"));
+            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_friendly_DRILL"));
+            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_lonely_DRILL"));
+            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_neutral_DRILL"));
+            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_scared_DRILL"));
+            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_confident_DRILL"));
+            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_friendly_DRILL"));
+            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_lonely_DRILL"));
+            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_neutral_DRILL"));
+            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_scared_DRILL"));
+        }
+    }
 	public static void SetupBird(Bird target, Bird template)
 	{		
 		target.charName = template.charName;

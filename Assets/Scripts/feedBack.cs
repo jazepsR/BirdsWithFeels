@@ -279,8 +279,18 @@ public class feedBack : MonoBehaviour {
 			strength = Helpers.Instance.GetHexColor(Helpers.Instance.GetStenght(birdScript.emotion)) + Helpers.Instance.GetStenght(birdScript.emotion).ToString() + "</color>";
 		if (Helpers.Instance.GetWeakness(birdScript.emotion) != Var.Em.Neutral)
 			weakness = Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(birdScript.emotion)) + Helpers.Instance.GetWeakness(birdScript.emotion).ToString() + "</color>";
-		toolTipText = name + "- "+Helpers.Instance.GetHexColor(birdScript.emotion) + birdScript.emotion + "</color>\nStrength " + (birdScript.levelRollBonus+1).ToString() + "\n Weak to: " + weakness + "\nStrong against: " + strength; 
-	}
+        toolTipText = name + "- " + Helpers.Instance.GetHexColor(birdScript.emotion) + birdScript.emotion + "</color>";
+        string abilityText = "";
+        if (birdScript.enemyType == fillEnemy.enemyType.drill)
+            abilityText = "<b>\nAttacks two birds!</b>";
+        if (birdScript.enemyType == fillEnemy.enemyType.wizard)
+            abilityText = "<b>\nInfluences emotions!</b>";
+        toolTipText += abilityText;
+        toolTipText += "\nStrength: " + (birdScript.levelRollBonus + 1).ToString();
+        toolTipText += "\n Weak to: " + weakness + "\nStrong against: " + strength;
+
+
+    }
 	void ScaleDownIndicator()
 	{
 		LeanTween.scale(BelowBirdIndicator.gameObject, scale, 0.2f).setEase(LeanTweenType.easeInBack);       

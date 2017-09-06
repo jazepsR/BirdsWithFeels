@@ -85,7 +85,7 @@ public class Helpers : MonoBehaviour {
                 return Var.Em.Neutral;
         }
     }
-    public GameObject GetEnemyVisual(Bird.dir dir, Var.Em emotion)
+    public GameObject GetEnemyVisual(Bird.dir dir, Var.Em emotion, fillEnemy.enemyType type)
     {
         int id = 0;
         if (dir == Bird.dir.top)
@@ -108,7 +108,17 @@ public class Helpers : MonoBehaviour {
                 id += 4;
                 break;
         }
-        return Var.enemySprites[id];
+        switch (type)
+        {
+            case fillEnemy.enemyType.drill:
+                return Var.drillEnemySprites[id];
+            case fillEnemy.enemyType.normal:
+                return Var.enemySprites[id];
+            case fillEnemy.enemyType.wizard:
+                return Var.wizardEnemySprites[id];
+        }
+        return null;
+        
 
     }
 

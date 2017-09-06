@@ -30,9 +30,9 @@ public class battleAnim :MonoBehaviour {
 	void StartBattle(Bird player,Bird enemy)
 	{
 		enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
-        enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
-        enemy.GetComponentInChildren<Animator>().SetBool("win", false);
-        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position), enemySpeed).setEase(LeanTweenType.easeInBack); 
+		enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
+		enemy.GetComponentInChildren<Animator>().SetBool("win", false);
+		LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position), enemySpeed).setEase(LeanTweenType.easeInBack); 
 		
 
 	}
@@ -40,7 +40,7 @@ public class battleAnim :MonoBehaviour {
 	IEnumerator DoBattles(float waitTime)
 	{
 		yield return new WaitForSeconds(waitTime);
-        float extraWait = 0.8f;
+		float extraWait = 0.8f;
 		foreach (battleData battle in battles)
 		{
 
@@ -62,14 +62,14 @@ public class battleAnim :MonoBehaviour {
 		}
 		else
 		{
-            yield return new WaitForSeconds((battles.Count+1)*0.2f);
-            foreach (Bird bird in FillPlayer.Instance.playerBirds)
+			yield return new WaitForSeconds((battles.Count+1)*0.2f);
+			foreach (Bird bird in FillPlayer.Instance.playerBirds)
 			{
 				if (bird.gameObject.activeSelf)
 				{
 					bird.UpdateBattleCount();					
 					GuiContoler.Instance.UpdateBirdSave(bird);
-                    bird.AddRoundBonuses();
+					bird.AddRoundBonuses();
 					bird.SetEmotion();
 				}
 			}
@@ -112,7 +112,7 @@ public class battleAnim :MonoBehaviour {
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("lose", true);
 			if (battle.player == GuiContoler.Instance.selectedBird)
 				battle.player.showText();
-            print(battle.player.charName + " won fight");
+			print(battle.player.charName + " won fight");
 		}
 		else
 		{
@@ -125,8 +125,8 @@ public class battleAnim :MonoBehaviour {
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("victory", true);
 			if (battle.player == GuiContoler.Instance.selectedBird)
 				battle.player.showText();
-            print(battle.player.charName + " lost fight");
-        }
+			print(battle.player.charName + " lost fight");
+		}
 
 	}
 }
