@@ -316,6 +316,7 @@ public class Bird : MonoBehaviour
 
 	public int GetRelationshipBonus()
 	{
+        return 0;
 		try
 		{
 			if (relationshipBird.relationshipBird.charName == charName)
@@ -705,14 +706,10 @@ public class Bird : MonoBehaviour
 		
 
 	}
-	public void AddRoundBonuses(bool doFightStuff= true)
-	{
-		//print(charName + " doing round bonus. HealthGain " + roundHealthChange);
-		if (dead)
-			return;
-
-		if(isInfluenced)
-		{
+    void ApplyInfluence()
+    {
+        if (isInfluenced)
+        {
             if (friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos > 0)
             {
                 levelFriendBoos += 2;
@@ -740,11 +737,15 @@ public class Bird : MonoBehaviour
                     print(charName + " got influenced to scared");
                 }
             }
-		}
-		prevRoundHealth = health;
-		friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
-		confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
-   
+        }
+    }
+	public void AddRoundBonuses(bool doFightStuff= true)
+	{
+		//print(charName + " doing round bonus. HealthGain " + roundHealthChange);
+		if (dead)
+			return;
+        ApplyInfluence();		
+		prevRoundHealth = health;   
 		if (doFightStuff)
 		{
 			
@@ -755,8 +756,8 @@ public class Bird : MonoBehaviour
 			if (!foughtInRound)
 			{
 				consecutiveFightsWon = 0;
-				roundsRested++;
-				confidence = confidence - confLoseOnRest;
+				roundsRested++;				
+                battleConfBoos -= confLoseOnRest;
 			}
 			else
 			{
@@ -775,8 +776,10 @@ public class Bird : MonoBehaviour
 			if (!foughtInRound)
 				ChageHealth(1);
 		}
-		
-		health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
+
+        friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
+        confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
+        health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
 		print(charName + " healthboost " + healthBoost + " round change " + roundHealthChange);			 
 		roundHealthChange = 0;
 		foughtInRound = false;        
