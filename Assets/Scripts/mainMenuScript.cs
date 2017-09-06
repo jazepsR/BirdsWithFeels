@@ -51,15 +51,16 @@ public class mainMenuScript : MonoBehaviour {
 
     public void ResetGame()
     {
-    SaveLoad.DeleteSave();
-    Var.mapSaveData = new List<MapSaveData>(); 
-    Var.activeBirds = new List<Bird>();
-    Var.availableBirds = new List<Bird>();
-    Var.map = new List<BattleData>();
-    Var.shownEvents = new List<string>();
-    Var.shownDialogs = new List<string>();
-    Var.isTutorial = false;
-    ContinueBtn.interactable = false;
+        SaveLoad.DeleteSave();
+        Var.currentWeek = -1;
+        Var.mapSaveData = new List<MapSaveData>(); 
+        Var.activeBirds = new List<Bird>();
+        Var.availableBirds = new List<Bird>();
+        Var.map = new List<BattleData>();
+        Var.shownEvents = new List<string>();
+        Var.shownDialogs = new List<string>();
+        Var.isTutorial = false;
+        ContinueBtn.interactable = false;
     }
 }
 

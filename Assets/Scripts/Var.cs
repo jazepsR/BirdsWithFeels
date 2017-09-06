@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-public static class Var {   
+public static class Var {
+    public static int currentWeek = -1; 
     public static int currentBG = 0;
     public static List<string> shownDialogs = new List<string>();
     public static List<string> shownEvents = new List<string>();

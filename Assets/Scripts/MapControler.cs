@@ -21,14 +21,15 @@ public class MapControler : MonoBehaviour {
     public float scaleTime = 0.35f;
     public Image[] pieChart;
     [HideInInspector]
-    public MapIcon SelectedIcon;    
+    public MapIcon SelectedIcon;
+    public Text timerText;
     void Awake()
 	{
         Instance = this;
     }
 	// Use this for initialization
 	void Start () {
-        
+        timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);
         canHeal = false;
         foreach(Bird bird in Var.activeBirds)
         {

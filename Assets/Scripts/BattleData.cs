@@ -13,6 +13,7 @@ public class BattleData {
 	public int maxEnemies=4;
 	public List<Bird.dir> dirs;
 	public List<Var.PowerUps> powers;
+    [NonSerialized]
     public MapBattleData battleData;
 	public bool hasWizards;
 	public bool hasDrills;

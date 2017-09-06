@@ -161,13 +161,14 @@ public class GuiContoler : MonoBehaviour {
 
 	public void QuitToMap()
 	{
-		int deadCount = 0;        
-		foreach(Bird bird in Var.availableBirds)
+		int livingCount = 0;
+        Var.currentWeek++;
+        foreach (Bird bird in Var.availableBirds)
 		{
 			if (bird.health <= 0)
-				deadCount++;
+				livingCount++;
 		}
-		if (deadCount < 3)
+		if (livingCount < 3)
 		{
 			AudioControler.Instance.ClickSound();
 			Time.timeScale = 1.0f;
@@ -178,7 +179,8 @@ public class GuiContoler : MonoBehaviour {
 			Time.timeScale = 1.0f;
 			loseBanner.SetActive(true);
 		}
-	}
+        
+    }
 
 	public void ShowDeathMenu(Bird deadBird)
 	{
@@ -408,8 +410,6 @@ public class GuiContoler : MonoBehaviour {
 			
 	public void CloseGraph()
 	{
-
-		//graph.SetActive(false);
 		AudioControler.Instance.PlayPaperSound();
 		battlePanel.SetActive(true);
 		if (!Reset())
@@ -815,6 +815,7 @@ public class GuiContoler : MonoBehaviour {
 				}
 			}
 		}
+        Var.currentWeek++;
 		Var.shouldDoMapEvent = true;
 		SceneManager.LoadScene("Map");
 	}
@@ -972,17 +973,18 @@ public class GuiContoler : MonoBehaviour {
 		{
 			posInMapRound = 0;
 			mapPos++;
-			if (nextMapArea== Var.Em.finish)
-			{
-				Var.isTutorial = false;
-				winBanner.SetActive(true);                
-				mapPos = 0;
-			}
 			
-			setMapLocation(mapPos);
+			
+			setMapLocation(mapPos * 3 + posInMapRound + 1);
 		}
-		
-	}
+        if (nextMapArea == Var.Em.finish)
+        {
+            Var.isTutorial = false;
+            winBanner.SetActive(true);
+            mapPos = 0;
+        }
+
+    }
 	
 	public void ShowMessage(string message)
 	{
