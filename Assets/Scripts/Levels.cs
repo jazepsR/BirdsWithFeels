@@ -437,6 +437,8 @@ public class Levels : MonoBehaviour {
 	//Level triggers
 	public void ApplyLevel(LevelData data, string levelName)
 	{
+        if (data.emotion == myBird.bannedLevels)
+            return;
 		if (!Helpers.Instance.ListContainsLevel(data.type, myBird.levelList))
 		{
 			//GuiContoler.Instance.ShowMessage(Helpers.Instance.GetLevelUpText(myBird.charName,data.type));

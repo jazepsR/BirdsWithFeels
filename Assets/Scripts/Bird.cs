@@ -24,6 +24,7 @@ public class Bird : MonoBehaviour
 	public int x = -1;
 	public int y = -1;
 	public Var.Em emotion;
+    public Var.Em bannedLevels = Var.Em.finish;
 	public string charName;	
 	public bool inUse = true;	
 	public SpriteRenderer colorRenderer;    

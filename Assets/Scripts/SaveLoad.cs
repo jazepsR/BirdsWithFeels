@@ -117,6 +117,7 @@ public class BirdSaveData
     public int maxHealth;
     public bool dead;
     public Var.Em preferredEmotion;
+    public Var.Em bannedLevels;
     public EventScript.Character relationshipBird;
     //public GameObject portrait;
     public List<LevelData> levelList;

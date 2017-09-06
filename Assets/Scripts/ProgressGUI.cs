@@ -56,7 +56,7 @@ public class ProgressGUI : MonoBehaviour {
 				if (lvl.gameObject.GetComponent<LevelArea>().isSmall)
 					lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 650);
 			}
-			if(bird.lastLevel.emotion == lvl.emotion)
+            if (bird.lastLevel.emotion == lvl.emotion || bird.bannedLevels == lvl.emotion)
 			{
 				lvl.gameObject.SetActive(false);
 			}
