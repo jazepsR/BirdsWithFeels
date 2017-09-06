@@ -16,4 +16,14 @@ public class ShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         Helpers.Instance.HideTooltip();
     }
+    public void OnMouseEnter()
+    {
+        if (tooltipText != "")
+            Helpers.Instance.ShowTooltip(tooltipText);
     }
+
+    public void OnMouseExit()
+    {
+        Helpers.Instance.HideTooltip();
+    }
+}
