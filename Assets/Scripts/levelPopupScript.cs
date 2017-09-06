@@ -39,16 +39,12 @@ public class levelPopupScript : MonoBehaviour {
         title.text = name + " gained a level!";
         LevelPopup.SetActive(true);
         //First part
-        if (data.emotion == Var.Em.Scared || data.emotion == Var.Em.Lonely)
+        //if (data.emotion == Var.Em.Scared || data.emotion == Var.Em.Lonely)
         {
             firstImage.sprite = sword;
             firstText.text = name + " gained +10% combat strength!";
         }
-        else
-        {
-            firstImage.sprite = heart;
-            firstText.text = name + " gained +1 health!";
-        }
+        
         //second part
         secondText.text = Helpers.Instance.GetLevelUpText(name, data.type);
         secondImage.sprite = Helpers.Instance.GetSkillPicture(data.type);
@@ -59,9 +55,17 @@ public class levelPopupScript : MonoBehaviour {
     }
 	public void FirstBtn()
 	{
-        firstPart.SetActive(false);
-        secondPart.SetActive(true);
-        thirdPart.SetActive(false);
+        if (activeBird.GainedLVLHealth)
+        {
+            firstImage.sprite = heart;
+            firstText.text = "First level in a new emotion!\nGained +1 health!";
+            activeBird.GainedLVLHealth = false;
+        }else
+        {
+            firstPart.SetActive(false);
+            secondPart.SetActive(true);
+            thirdPart.SetActive(false);
+        }
     }
 	public void SecondBtn()
 	{

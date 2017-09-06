@@ -17,6 +17,8 @@ public class Bird : MonoBehaviour
 	public int prevFriend = 0;
 	public int friendliness = 0;
 	public int health = 3;
+    [HideInInspector]
+    public bool GainedLVLHealth = false;
 	[HideInInspector]
 	public bool foughtInRound = false;
    // [HideInInspector]
@@ -272,17 +274,29 @@ public class Bird : MonoBehaviour
 			Helpers.Instance.EmitEmotionParticles(transform, data.emotion, false);
 		}
 		lastLevel = data;
-		levelList.Add(data);
+        List<Var.Em> currentEmotions = new List<Var.Em>();
+        foreach (LevelData lvlData in levelList)
+        {
+            if (!currentEmotions.Contains(lvlData.emotion))
+                currentEmotions.Add(lvlData.emotion);
+
+        }
+        if (data.emotion != Var.Em.Neutral)
+        {
+            if (!currentEmotions.Contains(data.emotion))
+            {
+                maxHealth++;
+                health++;
+                GainedLVLHealth = true;
+            }
+            levelRollBonus++;
+        }
+        levelList.Add(data);
 		level = levelList.Count;       
 		battlesToNextLVL = level * 3;
 		levelUpText = null;
-		if (data.emotion == Var.Em.Scared || data.emotion == Var.Em.Lonely)
-			levelRollBonus++;
-		if(data.emotion == Var.Em.Confident || data.emotion == Var.Em.Friendly)
-		{
-			maxHealth++;
-			health++;
-		}
+		
+      
 
 	}
 	public float getBonus()
