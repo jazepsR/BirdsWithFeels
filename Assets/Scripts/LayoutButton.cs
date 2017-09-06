@@ -26,7 +26,7 @@ public class LayoutButton : MonoBehaviour
     public int FriendBonus = 0;
     public int RollBonus = 0;
     public int PlayerRollBonus = 0;
-
+    public bool isInfluenced = false;
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -149,6 +149,7 @@ public class LayoutButton : MonoBehaviour
             if (birdObj.groundMultiplier > 1)
                 birdObj.GroundBonus.SetActive(true);
         }
+        birdObj.isInfluenced = isInfluenced;
         birdObj.groundConfBoos += ConfBonus;// *birdObj.groundMultiplier;
         birdObj.groundFriendBoos += FriendBonus;// *birdObj.groundMultiplier;
         birdObj.GroundRollBonus += RollBonus;
@@ -162,6 +163,11 @@ public class LayoutButton : MonoBehaviour
         swapBird = null;
         currentBird = null;
         power = null;
+        isInfluenced = false;
+        ConfBonus = 0;
+        FriendBonus = 0;
+        RollBonus = 0;
+        PlayerRollBonus = 0;
         baseColor = defaultColor;
         sr.color = defaultColor;
     }

@@ -23,7 +23,7 @@ public class battleAnim :MonoBehaviour {
 	public void Battle()
 	{
 
-		StartCoroutine(DoBattles(2.7f));
+		StartCoroutine(DoBattles(1.8f));
 	}
 
 
@@ -39,13 +39,14 @@ public class battleAnim :MonoBehaviour {
 
 	IEnumerator DoBattles(float waitTime)
 	{
-		yield return new WaitForSeconds(1.8f);
+		yield return new WaitForSeconds(waitTime);
+        float extraWait = 0.8f;
 		foreach (battleData battle in battles)
 		{
 
 			StartBattle(battle.player,battle.enemy);
-			StartCoroutine(ShowResult(battle, 5.0f));
-			yield return new WaitForSeconds(waitTime);
+			StartCoroutine(ShowResult(battle, waitTime+1f));
+			yield return new WaitForSeconds(waitTime+1f);
 		}
 		battles = new List<battleData>();
 		bool canReroll = false;
@@ -61,7 +62,8 @@ public class battleAnim :MonoBehaviour {
 		}
 		else
 		{
-			foreach (Bird bird in FillPlayer.Instance.playerBirds)
+            yield return new WaitForSeconds((battles.Count+1)*0.2f);
+            foreach (Bird bird in FillPlayer.Instance.playerBirds)
 			{
 				if (bird.gameObject.activeSelf)
 				{
@@ -71,7 +73,7 @@ public class battleAnim :MonoBehaviour {
 					bird.SetEmotion();
 				}
 			}
-			yield return new WaitForSeconds(2.4f);
+			yield return new WaitForSeconds(2.0f);
 			AudioControler.Instance.setBattleVolume(0f);            
 			GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
 			GuiContoler.Instance.CreateBattleReport();
@@ -90,10 +92,9 @@ public class battleAnim :MonoBehaviour {
 		yield return new WaitForSeconds(enemySpeed);
 		Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
 		GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
-		Destroy(fightCloudObj, 1.75f);
-		yield return new WaitForSeconds(1.75f);
+		Destroy(fightCloudObj, waitTime-enemySpeed);
+		yield return new WaitForSeconds(waitTime-enemySpeed);
 		ShowBattleResult(battle);
-		yield return new WaitForSeconds(waitTime-(enemySpeed + 1.75f));
 	}
 
 	void ShowBattleResult(battleData battle)
@@ -111,6 +112,7 @@ public class battleAnim :MonoBehaviour {
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("lose", true);
 			if (battle.player == GuiContoler.Instance.selectedBird)
 				battle.player.showText();
+            print(battle.player.charName + " won fight");
 		}
 		else
 		{
@@ -123,7 +125,8 @@ public class battleAnim :MonoBehaviour {
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("victory", true);
 			if (battle.player == GuiContoler.Instance.selectedBird)
 				battle.player.showText();
-		}
+            print(battle.player.charName + " lost fight");
+        }
 
 	}
 }

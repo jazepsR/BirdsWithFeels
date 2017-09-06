@@ -514,9 +514,9 @@ public class GuiContoler : MonoBehaviour {
 		if (bird.groundConfBoos < 0)
 			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundConfBoos).ToString("+#;-#;0") + " scaredness</color>";
 		if (bird.levelConfBoos > 0)
-			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom abilities: " + bird.levelConfBoos.ToString("+#;-#;0") + " confidence</color>";
+			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom level abilities: " + bird.levelConfBoos.ToString("+#;-#;0") + " confidence</color>";
 		if (bird.levelConfBoos < 0)
-			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom abilities: " + Mathf.Abs(bird.levelConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom level abilities: " + Mathf.Abs(bird.levelConfBoos).ToString("+#;-#;0") + " scaredness</color>";
 		if (bird.wizardConfBoos > 0)
 			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom enemies: " + bird.wizardConfBoos.ToString("+#;-#;0") + " confidence</color>";
 		if (bird.wizardConfBoos < 0)
@@ -541,9 +541,9 @@ public class GuiContoler : MonoBehaviour {
 		if (bird.groundFriendBoos < 0)
 			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
 		if (bird.levelFriendBoos > 0)
-			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom abilities: " + bird.levelFriendBoos.ToString("+#;-#;0") + " friendship</color>";
-		if (bird.groundFriendBoos < 0)
-			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom abilities: " + Mathf.Abs(bird.levelFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
+			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom level abilities: " + bird.levelFriendBoos.ToString("+#;-#;0") + " friendship</color>";
+		if (bird.levelFriendBoos < 0)
+			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom level abilities: " + Mathf.Abs(bird.levelFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
 		if (bird.wizardFrienBoos > 0)
 			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom enemies: " + bird.wizardFrienBoos.ToString("+#;-#;0") + " friendship</color>";
 		if (bird.wizardFrienBoos < 0)

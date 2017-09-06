@@ -63,8 +63,8 @@ public class Levels : MonoBehaviour {
 						Color col = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
 						col = new Color(col.r, col.g, col.b, 0.3f);
 						tileCol[i].SetColor(col,false);
-						if(i!=0)
-							tileCol[i].FriendBonus = -1;
+                        if (i != 0)
+                            tileCol[i].isInfluenced = true;
 
 					}
 					break;
@@ -178,7 +178,7 @@ public class Levels : MonoBehaviour {
 					foreach (LayoutButton tile in GetColumn())
 					{
 						tile.ResetColor(false);
-						tile.FriendBonus = 0;
+						tile.isInfluenced = false;
 					}
 					break;
 				case type.Rebecca:
@@ -517,8 +517,8 @@ public class Levels : MonoBehaviour {
 			{
 				return "First " + Helpers.Instance.FriendlyHexColor + "Friendly</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Friend1);
 			}
-            int gain = myBird.friendBoost + myBird.groundFriendBoos + myBird.levelFriendBoos + myBird.wizardFrienBoos;
-            if (gain>= 3  && myBird.wonLastBattle >=1 && !Helpers.Instance.ListContainsLevel(type.Friend1, myBird.levelList))
+			int gain = myBird.friendBoost + myBird.groundFriendBoos + myBird.levelFriendBoos + myBird.wizardFrienBoos;
+			if (gain>= 3  && myBird.wonLastBattle >=1 && !Helpers.Instance.ListContainsLevel(type.Friend1, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[0]),"Friendly 1");
 			}
@@ -544,8 +544,8 @@ public class Levels : MonoBehaviour {
 					break;
 				}
 			}
-            int gain = myBird.friendBoost + myBird.groundFriendBoos + myBird.levelFriendBoos + myBird.wizardFrienBoos;
-            if (closeFriend && gain >= 5 && !Helpers.Instance.ListContainsLevel(type.Friend2, myBird.levelList))
+			int gain = myBird.friendBoost + myBird.groundFriendBoos + myBird.levelFriendBoos + myBird.wizardFrienBoos;
+			if (closeFriend && gain >= 5 && !Helpers.Instance.ListContainsLevel(type.Friend2, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[4]),"Friendly 2");
 			}
