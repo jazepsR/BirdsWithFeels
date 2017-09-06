@@ -84,6 +84,7 @@ public class GuiContoler : MonoBehaviour {
 	public float levelinfoHideXValue;
 	public float levelinfoshowXValue;
 	int maxGraph = 3;
+    public GameObject boss;
 	void Awake()
 	{
 		Instance = this;
@@ -113,6 +114,7 @@ public class GuiContoler : MonoBehaviour {
 			GuiMap.Instance.CreateMap(Var.map);            
 			setMapLocation(0);
 			LeanTween.delayedCall(0.05f,tryDialog);
+            boss.SetActive(Var.isBoss);
 		}        
 	}
 
@@ -980,6 +982,7 @@ public class GuiContoler : MonoBehaviour {
         if (nextMapArea == Var.Em.finish)
         {
             Var.isTutorial = false;
+            Var.isBoss = false;
             winBanner.SetActive(true);
             mapPos = 0;
         }

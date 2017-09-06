@@ -24,6 +24,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public int maxEnemies = 4;
     [Range(0.0f, 1.0f)]
     public float mainEmotionSpawnRate = 0.8f;
+    public bool isBoss = false;
     [Header("Battle list")]
     public List<MapBattleData> battles;
     [Header("Tile Configuration")]
@@ -314,8 +315,9 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         
         if (available && MapControler.Instance.canFight)
         {
+            Var.isBoss = isBoss;
             Var.fled = false;
-            Var.isTutorial = false;           
+            Var.isTutorial = false;                       
             Var.currentBG = background;
             Var.map.Clear();
             Var.map = CreateMap();

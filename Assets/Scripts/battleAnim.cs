@@ -74,9 +74,16 @@ public class battleAnim :MonoBehaviour {
 				}
 			}
 			yield return new WaitForSeconds(2.0f);
-			AudioControler.Instance.setBattleVolume(0f);            
-			GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
-			GuiContoler.Instance.CreateBattleReport();
+			AudioControler.Instance.setBattleVolume(0f);
+            if (Var.isBoss)
+            {
+                GuiContoler.Instance.Reset();
+            }
+            else
+            {
+                GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
+                GuiContoler.Instance.CreateBattleReport();
+            }
 			if(Var.isTutorial)
 			{
 				yield return new WaitForSeconds(1.0f);

@@ -29,6 +29,7 @@ public class MapControler : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
+        Var.isBoss = false;
         timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);
         canHeal = false;
         foreach(Bird bird in Var.activeBirds)

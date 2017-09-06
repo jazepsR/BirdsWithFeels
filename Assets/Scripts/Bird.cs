@@ -17,8 +17,8 @@ public class Bird : MonoBehaviour
 	public int prevFriend = 0;
 	public int friendliness = 0;
 	public int health = 3;
-    [HideInInspector]
-    public bool GainedLVLHealth = false;
+	[HideInInspector]
+	public bool GainedLVLHealth = false;
 	[HideInInspector]
 	public bool foughtInRound = false;
    // [HideInInspector]
@@ -274,29 +274,29 @@ public class Bird : MonoBehaviour
 			Helpers.Instance.EmitEmotionParticles(transform, data.emotion, false);
 		}
 		lastLevel = data;
-        List<Var.Em> currentEmotions = new List<Var.Em>();
-        foreach (LevelData lvlData in levelList)
-        {
-            if (!currentEmotions.Contains(lvlData.emotion))
-                currentEmotions.Add(lvlData.emotion);
+		List<Var.Em> currentEmotions = new List<Var.Em>();
+		foreach (LevelData lvlData in levelList)
+		{
+			if (!currentEmotions.Contains(lvlData.emotion))
+				currentEmotions.Add(lvlData.emotion);
 
-        }
-        if (data.emotion != Var.Em.Neutral)
-        {
-            if (!currentEmotions.Contains(data.emotion))
-            {
-                maxHealth++;
-                health++;
-                GainedLVLHealth = true;
-            }
-            levelRollBonus++;
-        }
-        levelList.Add(data);
+		}
+		if (data.emotion != Var.Em.Neutral)
+		{
+			if (!currentEmotions.Contains(data.emotion))
+			{
+				maxHealth++;
+				health++;
+				GainedLVLHealth = true;
+			}
+			levelRollBonus++;
+		}
+		levelList.Add(data);
 		level = levelList.Count;       
 		battlesToNextLVL = level * 3;
 		levelUpText = null;
 		
-      
+	  
 
 	}
 	public float getBonus()
@@ -565,14 +565,14 @@ public class Bird : MonoBehaviour
 				UpdateFeedback();
 				GuiContoler.Instance.HideLvlText();
 				GroundBonus.SetActive(false);
-                foreach (Bird bird in FillPlayer.Instance.playerBirds)
-                {
-                    if (Helpers.Instance.ListContainsLevel(Levels.type.Toby, bird.levelList))
-                    {
-                        bird.levelControler.ApplyLevelOnDrop(this, bird.levelList);
-                    }
-                }
-            }
+				foreach (Bird bird in FillPlayer.Instance.playerBirds)
+				{
+					if (Helpers.Instance.ListContainsLevel(Levels.type.Toby, bird.levelList))
+					{
+						bird.levelControler.ApplyLevelOnDrop(this, bird.levelList);
+					}
+				}
+			}
 			levelControler.ApplyLevelOnPickup(this, levelList);
 			// RemoveAllFeedBack();
 		}
@@ -618,7 +618,7 @@ public class Bird : MonoBehaviour
 			}
 		}       
 		GameLogic.Instance.UpdateFeedback();
-        
+		
 	}
 	public Bird(string name,int confidence =0,int friendliness = 0)
 	{
@@ -1058,14 +1058,14 @@ public class Bird : MonoBehaviour
 			levelControler.ApplyLevelOnDrop(this, levelList);
 			showText();
 			UpdateFeedback();
-            foreach (Bird bird in FillPlayer.Instance.playerBirds)
-            {
-                if (Helpers.Instance.ListContainsLevel(Levels.type.Toby, bird.levelList))
-                {
-                    bird.levelControler.ApplyLevelOnDrop(this, bird.levelList);
-                }
-            }
-        }
+			foreach (Bird bird in FillPlayer.Instance.playerBirds)
+			{
+				if (Helpers.Instance.ListContainsLevel(Levels.type.Toby, bird.levelList))
+				{
+					bird.levelControler.ApplyLevelOnDrop(this, bird.levelList);
+				}
+			}
+		}
 		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		SetCoolDownRing(false);
 		if(inMap)

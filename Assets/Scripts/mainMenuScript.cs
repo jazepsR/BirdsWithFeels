@@ -60,6 +60,7 @@ public class mainMenuScript : MonoBehaviour {
         Var.shownEvents = new List<string>();
         Var.shownDialogs = new List<string>();
         Var.isTutorial = false;
+        Var.isBoss = false;
         ContinueBtn.interactable = false;
     }
 }

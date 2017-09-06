@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 public static class Var {
+    
     public static int currentWeek = -1; 
     public static int currentBG = 0;
     public static List<string> shownDialogs = new List<string>();
@@ -11,6 +12,7 @@ public static class Var {
     public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared,finish,Random};
     public enum PowerUps { heal,dmg,emotion,obstacle};
     public static bool isTutorial = false;
+    public static bool isBoss = false;
     public static int MoveGraphBy = 1550;
     public static int lvl1 = 4;
     public static bool fled = false;
