@@ -20,6 +20,7 @@ public class LayoutButton : MonoBehaviour
     Color columnColor = Color.clear;
     Color baseColor;
     public Color highlightColor;
+    public List<Color> tileColors;
    // [HideInInspector]
     public int ConfBonus = 0;
    // [HideInInspector]
@@ -30,6 +31,7 @@ public class LayoutButton : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
+        tileColors = new List<Color>();
         try
         {
             if (LevelVisualSetup.Instance.isDebug)
@@ -56,77 +58,33 @@ public class LayoutButton : MonoBehaviour
 
         }
     }
-    public void SetColor(Color color,bool isRow)
-    {        
-            //Clear == null
-            if (isRow)
-            {
-                rowColor = color;
-                if (columnColor.Equals(Color.clear))
-                {
-                    LeanTween.color(gameObject, color, 0.3f);
-                    baseColor = color;
-                }
-                else
-                {
-                    Color col = (columnColor + color) / 2;
-                    LeanTween.color(gameObject, col, 0.3f);
-                    baseColor = col;
-                }
-
-            }
-            else
-            {
-                columnColor = color;
-                if (rowColor.Equals(Color.clear))
-                {
-                    LeanTween.color(gameObject, color, 0.3f);
-                    baseColor = color;
-                }
-                else
-                {
-                    Color col = (rowColor + color) / 2;
-                    LeanTween.color(gameObject, col, 0.3f);
-                    baseColor = col;
-                }
-            }
-        
-        
+    public void AddColor(Color color)
+    {
+        if (!tileColors.Contains(color))
+            tileColors.Add(color);
+        SetColor();
     }
-    public void ResetColor(bool isRow)
-    {        
-            if (isRow)
-            {
-                //Clear == null
-                rowColor = Color.clear;
-                if (columnColor.Equals(Color.clear))
-                {
-                    LeanTween.color(gameObject, defaultColor, 0.3f);
-                    baseColor = defaultColor;
-                }
-                else
-                {
-                    LeanTween.color(gameObject, columnColor, 0.3f);
-                    baseColor = columnColor;
-                }
-            }
-            else
-            {
-                //Clear == null
-                columnColor = Color.clear;
-                if (rowColor.Equals(Color.clear))
-                {
-                    LeanTween.color(gameObject, defaultColor, 0.3f);
-                    baseColor = defaultColor;
-                }
-                else
-                {
-                    LeanTween.color(gameObject, rowColor, 0.3f);
-                    baseColor = rowColor;
-                }
-            }
-        
-        
+    void SetColor()
+    {
+
+        baseColor = new Color();
+        foreach (Color col in tileColors)
+            baseColor += col / tileColors.Count;
+        sr.color = baseColor;
+        LeanTween.color(gameObject, baseColor, 0.7f);
+    }
+    public void RemoveColor(Color color)
+    {
+        if (tileColors.Contains(color))
+            tileColors.Remove(color);
+        if (tileColors.Count > 0)
+            SetColor();
+        else
+        {
+            sr.color = defaultColor;
+            baseColor = defaultColor;
+            LeanTween.color(gameObject, baseColor, 0.3f);
+        }   
 
     }
 
@@ -170,6 +128,7 @@ public class LayoutButton : MonoBehaviour
         PlayerRollBonus = 0;
         baseColor = defaultColor;
         sr.color = defaultColor;
+        tileColors = new List<Color>();
     }
     public void fullReset()
     {

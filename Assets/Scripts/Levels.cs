@@ -62,7 +62,7 @@ public class Levels : MonoBehaviour {
 					{
 						Color col = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
 						col = new Color(col.r, col.g, col.b, 0.3f);
-						tileCol[i].SetColor(col,false);
+						tileCol[i].AddColor(col);
                         if (i != 0)
                             tileCol[i].isInfluenced = true;
 
@@ -120,7 +120,7 @@ public class Levels : MonoBehaviour {
 					{
 						Color col = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
 						col = new Color(col.r, col.g, col.b, 0.3f);
-						tileRow[i].SetColor(col,true);
+						tileRow[i].AddColor(col);
 						if(i!=0)
 							tileRow[i].ConfBonus = -1;
 					}
@@ -143,7 +143,7 @@ public class Levels : MonoBehaviour {
 					{
 						Color col = Helpers.Instance.GetEmotionColor(Var.Em.Scared);
 						col = new Color(col.r, col.g, col.b, 0.3f);
-						tileDiag[i].SetColor(col, true);
+						tileDiag[i].AddColor(col);
 						if (myBird.x != tileDiag[i].index.x && myBird.y != tileDiag[i].index.y)
 							tileDiag[i].PlayerRollBonus = -1;
 					}
@@ -175,9 +175,11 @@ public class Levels : MonoBehaviour {
 				case type.Lonely1:
 					if (myBird.x == -1)
 						break;
-					foreach (LayoutButton tile in GetColumn())
+                    Color col = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
+                    col = new Color(col.r, col.g, col.b, 0.3f);
+                    foreach (LayoutButton tile in GetColumn())
 					{
-						tile.ResetColor(false);
+						tile.RemoveColor(col);
 						tile.isInfluenced = false;
 					}
 					break;
@@ -189,18 +191,22 @@ public class Levels : MonoBehaviour {
 				case type.Terry:
 					if (myBird.x == -1 )
 						break;
-					foreach (LayoutButton tile in GetRow())
+                    Color ColConf = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
+                    ColConf = new Color(ColConf.r, ColConf.g, ColConf.b, 0.3f);
+                    foreach (LayoutButton tile in GetRow())
 					{
-						tile.ResetColor(true);
+						tile.RemoveColor(ColConf);
 						tile.ConfBonus = 0;
 					}
 					break;
 				case type.Scared1:
 					if (myBird.x == -1 )
 						break;
-					foreach (LayoutButton tile in GetDiagonals())
+                    Color colScared = Helpers.Instance.GetEmotionColor(Var.Em.Scared);
+                    colScared = new Color(colScared.r, colScared.g, colScared.b, 0.3f);
+                    foreach (LayoutButton tile in GetDiagonals())
 					{
-						tile.ResetColor(true);
+						tile.RemoveColor(colScared);
 						if (myBird.x != tile.index.x && myBird.y != tile.index.y)
 							tile.PlayerRollBonus += 1;
 					}
