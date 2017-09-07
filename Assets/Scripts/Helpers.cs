@@ -121,8 +121,37 @@ public class Helpers : MonoBehaviour {
         
 
     }
+    public GameObject GetPortrait(EventScript.Character Char)
+    {
+        if (Char == EventScript.Character.Random)
+            return GetBirdFromEnum(Char).portrait;
+        else
+        {
+            return Resources.Load<GameObject>("prefabs/portrait_" + Char.ToString());
+        }
+
+    }
+    public Var.Em RandomEmotion()
+    {
+        int rnd = UnityEngine.Random.Range(0, 5);
+        switch (rnd)
+        {
+            case 0:
+                return Var.Em.Neutral;
+            case 1:
+                return Var.Em.Scared;
+            case 2:
+                return Var.Em.Confident;
+            case 3:
+                return Var.Em.Lonely;
+            case 4:
+                return Var.Em.Friendly;
+            default:
+                return Var.Em.Neutral;
+        }
 
 
+    }
 
     public bool RandomBool()
     {

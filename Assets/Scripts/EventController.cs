@@ -8,7 +8,7 @@ public class EventController : MonoBehaviour {
 	public float eventFreq;
 	public static EventController Instance { get; private set; }
 	public EventScript testEvent;
-	public EventScript[] events;
+	public List<EventScript> events;
 	public bool inMap;
 	[Header("References")]
 	public GameObject eventObject;
@@ -23,8 +23,9 @@ public class EventController : MonoBehaviour {
 	EventScript currentEvent;
 	GameObject currentPortrait;
 	Bird currentBird;
-   
-	List<string> texts;
+	public List<Transform> areaDialogues;
+	List<GameObject> portraits;
+	List<string> texts;    
 	int currentText = 0;
 	// Use this for initialization
 	void Awake () {
@@ -36,15 +37,28 @@ public class EventController : MonoBehaviour {
 	}
 	public void ContinueBtn()
 	{
+		try
+		{
+			events.AddRange(areaDialogues[Var.currentBG].GetComponentsInChildren<EventScript>());
+		}
+		catch
+		{
+
+		}
 		currentText++;
-        AudioControler.Instance.ClickSound();
+		AudioControler.Instance.ClickSound();
 		if (currentText < texts.Count)
-			text.text = Helpers.Instance.ApplyTitle(currentBird,texts[currentText]);
+		{
+			text.text = Helpers.Instance.ApplyTitle(currentBird, texts[currentText]);
+			SetPortrait(currentText);
+
+		}
 		if (currentText == texts.Count)
 		{
 			continueBtn.SetActive(false);
 			CreateChoices();
-			return;         
+            SetPortrait(0);
+            return;         
 		}
 		if (currentText > texts.Count)
 		{
@@ -67,10 +81,10 @@ public class EventController : MonoBehaviour {
 	}
 	public bool tryEvent()
 	{
-        if (GuiContoler.Instance.winBanner != null && GuiContoler.Instance.winBanner.activeSelf)
-            return false;
-        if (eventObject.activeSelf)
-           return false;
+		if (GuiContoler.Instance.winBanner != null && GuiContoler.Instance.winBanner.activeSelf)
+			return false;
+		if (eventObject.activeSelf)
+		   return false;
 		if (Var.isTutorial)
 			return false;
 		currentBird = null;
@@ -88,55 +102,38 @@ public class EventController : MonoBehaviour {
 			birdsToCheck = Var.activeBirds;
 		}
 		bool canCreateEvent = false;
-		EventScript ev = events[Random.Range(0, events.Length)];
+		EventScript ev = events[Random.Range(0, events.Count)];
 
 		for (int i = 0; i < 100; i++)
 		{
 
 
-			if (canCreateEvent)
-				break;
+			
 			if (testEvent != null)
 				ev = testEvent;
 			else
-				ev = events[Random.Range(0, events.Length)];
-
-			bool alreadySeen = Var.shownEvents.Contains(ev.text1);            
-			if (ev != null && !alreadySeen)
+				ev = events[Random.Range(0, events.Count)];
+			canCreateEvent = true;
+			if (ev == null)
+				canCreateEvent = false;
+			else
 			{
-				if (ev.speaker == EventScript.Character.None)
-				{
-					canCreateEvent = true;
-					break;
-				}
-				if (ev.speaker == EventScript.Character.Random)
-				{					
-					Bird tempBird = birdsToCheck[Random.Range(0, birdsToCheck.Count)];
-					if (ConditionCheck.CheckCondition(ev.condition, tempBird, ev.targetEmotion, ev.magnitude))
-					{
-						canCreateEvent = true;
-						currentBird = tempBird;
-						currentPortrait = currentBird.portrait;
-						break;
-					}
-				}
-				foreach (Bird bird in birdsToCheck)
-				{
-					if (bird.charName == ev.speaker.ToString())
-					{
-
-						if (ConditionCheck.CheckCondition(ev.condition, bird, ev.targetEmotion, ev.magnitude))
-						{
-							currentBird = bird;
-							currentPortrait = bird.portrait;
-							canCreateEvent = true;
-							break;
-						}
-					}
-				}
-
+				if (Var.shownEvents.Contains(ev.text1))
+					canCreateEvent = false;
+				if (ev.speakers.Contains(EventScript.Character.Toby) && Var.availableBirds.Count < 4)
+					canCreateEvent = false;
+				if (ev.speakers.Contains(EventScript.Character.Tova) && Var.availableBirds.Count < 5)
+					canCreateEvent = false;
+                if (ev.speakers[0] != EventScript.Character.None)
+                {
+                    if (!ConditionCheck.CheckCondition(ev.condition, Helpers.Instance.GetBirdFromEnum(ev.speakers[0]), ev.targetEmotion, ev.magnitude))
+                        canCreateEvent = false;
+                }
 			}
+			if (canCreateEvent)
+				break;
 		}
+
 		if(canCreateEvent)
 			CreateEvent(ev);
 		return true;
@@ -154,12 +151,22 @@ public class EventController : MonoBehaviour {
 			GuiContoler.Instance.battlePanel.SetActive(false);
 		}
 		currentEvent = eventData;
-		if (eventData.speaker!= EventScript.Character.None)
+		if (eventData.speakers[0] != EventScript.Character.None)
 		{
-			currentBird = Helpers.Instance.GetBirdFromEnum(eventData.speaker);
-			currentPortrait = currentBird.portrait;
-
+			try
+			{
+				currentBird = Helpers.Instance.GetBirdFromEnum(eventData.speakers[0]);
+			}
+			catch { }
+			//currentPortrait = currentBird.portrait;
 		}
+		portraits = new List<GameObject>();
+		foreach(EventScript.Character Char in eventData.speakers)
+		{
+			portraits.Add(Helpers.Instance.GetPortrait(Char));
+		}
+
+
 		eventObject.SetActive(true);
 		texts = new List<string>();
 		texts.Add(eventData.text1);
@@ -174,31 +181,7 @@ public class EventController : MonoBehaviour {
 		heading.text = Helpers.Instance.ApplyTitle(currentBird, eventData.heading);
 		text.text = Helpers.Instance.ApplyTitle(currentBird, eventData.text1);             
 		continueBtn.SetActive(false);
-		if(eventData.useCustomPic && eventData.customPic != null)
-		{
-			portrait.transform.parent.gameObject.SetActive(true);
-			customImage.gameObject.SetActive(true);
-			portraitFill.gameObject.SetActive(false);
-			portrait.gameObject.SetActive(false);
-			customImage.sprite = eventData.customPic;
-		}
-		else
-		{
-			customImage.gameObject.SetActive(false);
-			if (currentPortrait != null)
-			{
-				portrait.transform.parent.gameObject.SetActive(true);
-				portraitFill.gameObject.SetActive(true);
-				portrait.gameObject.SetActive(true);
-				portraitFill.sprite = currentPortrait.transform.Find("bird_color").GetComponent<Image>().sprite;
-				portraitFill.color = Helpers.Instance.GetEmotionColor(currentBird.emotion);
-				portrait.sprite = currentPortrait.transform.Find("bird").GetComponent<Image>().sprite;
-			}
-			else
-			{
-				portrait.transform.parent.gameObject.SetActive(false);
-			}
-		}
+		SetPortrait(0);
 	   
 		if (eventData.options.Length > 0 && eventData.text2 == "" )
 		{
@@ -208,6 +191,40 @@ public class EventController : MonoBehaviour {
 			continueBtn.SetActive(true);
 		}
 	}
+
+
+	void SetPortrait(int id)
+	{
+		
+		if (currentEvent.useCustomPic && currentEvent.customPic != null)
+		{
+			portrait.transform.parent.gameObject.SetActive(true);
+			customImage.gameObject.SetActive(true);
+			portraitFill.gameObject.SetActive(false);
+			portrait.gameObject.SetActive(false);
+			customImage.sprite = currentEvent.customPic;
+		}
+		else
+		{
+			customImage.gameObject.SetActive(false);
+			try
+			{
+				portrait.transform.parent.gameObject.SetActive(true);
+				portraitFill.gameObject.SetActive(true);
+				portrait.gameObject.SetActive(true);
+				portraitFill.sprite = portraits[id].transform.Find("bird_color").GetComponent<Image>().sprite;
+				portraitFill.color = Helpers.Instance.GetEmotionColor(Helpers.Instance.RandomEmotion());
+				portrait.sprite = portraits[id].transform.Find("bird").GetComponent<Image>().sprite;
+			}
+			catch
+			{
+				portrait.transform.parent.gameObject.SetActive(false);
+			}
+		}
+
+	}
+
+
 	void CreateChoices()
 	{
 		
@@ -232,7 +249,7 @@ public class EventController : MonoBehaviour {
 	}
 	void DisplayChoiceResult(int ID)
 	{
-        AudioControler.Instance.PlayPaperSound();
+		AudioControler.Instance.PlayPaperSound();
 		choiceList.gameObject.SetActive(false);
 		Helpers.Instance.HideTooltip();
 		string consequences = ApplyConsequences(ID);
@@ -248,7 +265,14 @@ public class EventController : MonoBehaviour {
 		continueBtn.SetActive(true);      
 		heading.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionHeading);
 		text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionText);
-		
+		if(currentEvent.options[ID].AfterImage!= null)
+		{
+			portrait.transform.parent.gameObject.SetActive(true);
+			customImage.gameObject.SetActive(true);
+			portraitFill.gameObject.SetActive(false);
+			portrait.gameObject.SetActive(false);
+			customImage.sprite = currentEvent.options[ID].AfterImage;
+		}
 		if (currentEvent.options[ID].useAutoExplanation)
 			text.text += "\n" + consequences;
 

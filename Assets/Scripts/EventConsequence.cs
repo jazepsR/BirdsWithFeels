@@ -10,6 +10,7 @@ public class EventConsequence :MonoBehaviour{
 	public ConsequenceType consequenceType3 = ConsequenceType.Nothing;
 	public int magnitude3;
 	public bool useAutoExplanation;
+    public Sprite AfterImage = null;
 	public Sprite icon;
 	[TextArea(3, 10)]
 	public string selectionText;

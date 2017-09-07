@@ -5878,6 +5878,60 @@ Transform:
   m_Father: {fileID: 1079079010}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &179283058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 179283059}
+  - component: {fileID: 179283060}
+  m_Layer: 0
+  m_Name: Option2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &179283059
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 179283058}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 788857154}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &179283060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 179283058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consequenceType1: 3
+  magnitude1: 0
+  consequenceType2: 3
+  magnitude2: 0
+  consequenceType3: 3
+  magnitude3: 0
+  useAutoExplanation: 1
+  AfterImage: {fileID: 21300000, guid: 09db06965d192e244b9faf45a9306261, type: 3}
+  icon: {fileID: 21300000, guid: 3e1ebf05b2b9f2b4daa2d24f649b099a, type: 3}
+  selectionText: Her blessing
+  selectionTooltip: She is the queen, after all
+  conclusionHeading: Blessed!
+  conclusionText: '"By the seven beaks and forty feathers, I bestow you with the force
+    and grace of the crown!" Terry feels humbled.'
 --- !u!114 &181698836 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114999815751427598, guid: 532ca55b8f8d1a24b92fe867ac8b622f,
@@ -7309,7 +7363,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2034288841}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -8360,6 +8414,7 @@ MonoBehaviour:
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
+  AfterImage: {fileID: 0}
   icon: {fileID: 21300000, guid: 8e313a265ff96ea4e94a1f7e5706757d, type: 3}
   selectionText: Suck it up! The quest is more important than one bird's feelings
   selectionTooltip: He should be ok
@@ -11495,18 +11550,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speaker: 6
+  speakers: 06000000
   condition: 0
   magnitude: 0
   targetEmotion: 0
   useCustomPic: 1
   customPic: {fileID: 21300000, guid: 655af71609d42c047bf58a9003b612c9, type: 3}
   heading: Suprise Inheritence!
+  speaker1Id: 0
   text1: Your wealthy uncle has perished and left you a sizeable sum to spend as you
     see fit
+  speaker2Id: 0
   text2: 
+  speaker3Id: 0
   text3: 
+  speaker4Id: 0
   text4: 
+  speaker5Id: 0
   text5: 
   options:
   - {fileID: 1085401209}
@@ -15612,8 +15672,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc704d33cd01fc74494d58d4ea2d38d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventFreq: 0.19
-  testEvent: {fileID: 0}
+  eventFreq: 1
+  testEvent: {fileID: 788857155}
   events:
   - {fileID: 1595554660}
   - {fileID: 468008036}
@@ -15629,6 +15689,7 @@ MonoBehaviour:
   portraitFill: {fileID: 1769710222}
   customImage: {fileID: 882787726}
   continueBtn: {fileID: 431175411}
+  areaDialogues: []
 --- !u!4 &707801115
 Transform:
   m_ObjectHideFlags: 0
@@ -15643,6 +15704,7 @@ Transform:
   - {fileID: 468008037}
   - {fileID: 1087507630}
   - {fileID: 1719981000}
+  - {fileID: 788857154}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16457,6 +16519,7 @@ MonoBehaviour:
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
+  AfterImage: {fileID: 0}
   icon: {fileID: 21300006, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Scold <name>
   selectionTooltip: No place for weakness!
@@ -17592,6 +17655,69 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 785764527}
+--- !u!1 &788857153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 788857154}
+  - component: {fileID: 788857155}
+  m_Layer: 0
+  m_Name: Testing multiple Speakers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &788857154
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 788857153}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 986382689}
+  - {fileID: 179283059}
+  m_Father: {fileID: 707801115}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &788857155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 788857153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakers: 000000000700000005000000
+  condition: 0
+  magnitude: 0
+  targetEmotion: 0
+  useCustomPic: 0
+  customPic: {fileID: 0}
+  heading: A small conversation
+  speaker1Id: 0
+  text1: OMG your majesty! how do you do?
+  speaker2Id: 1
+  text2: Quite well my loyal subject, quite well. What is it you want?
+  speaker3Id: 2
+  text3: Oooh! ooh! Ask for some candy!
+  speaker4Id: 0
+  text4: Terry thinks on this. What should he ask for?
+  speaker5Id: 0
+  text5: 
+  options:
+  - {fileID: 986382690}
+  - {fileID: 179283060}
+  canShowMultipleTimes: 0
 --- !u!1 &790715877
 GameObject:
   m_ObjectHideFlags: 0
@@ -29583,6 +29709,59 @@ MonoBehaviour:
   - {fileID: 742526309}
   - {fileID: 1862014140}
   - {fileID: 1950285052}
+--- !u!1 &986382688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 986382689}
+  - component: {fileID: 986382690}
+  m_Layer: 0
+  m_Name: Option1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &986382689
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 986382688}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 788857154}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &986382690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 986382688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  consequenceType1: 3
+  magnitude1: 0
+  consequenceType2: 3
+  magnitude2: 0
+  consequenceType3: 3
+  magnitude3: 0
+  useAutoExplanation: 1
+  AfterImage: {fileID: 21300000, guid: 328cec8357906e147846e13efe4b1ebb, type: 3}
+  icon: {fileID: 21300000, guid: c2f760df934c7408a9c9eeb7d160669d, type: 3}
+  selectionText: Ask for candy!
+  selectionTooltip: It's delicious, you know
+  conclusionHeading: The queen is furious!
+  conclusionText: '"How dare you ask for something so silly! Out, out with you!"'
 --- !u!1 &987081324
 GameObject:
   m_ObjectHideFlags: 0
@@ -37539,7 +37718,7 @@ Prefab:
     - target: {fileID: 224349387991716410, guid: 532ca55b8f8d1a24b92fe867ac8b622f,
         type: 2}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 224349387991716410, guid: 532ca55b8f8d1a24b92fe867ac8b622f,
         type: 2}
@@ -37751,6 +37930,7 @@ MonoBehaviour:
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 0
+  AfterImage: {fileID: 0}
   icon: {fileID: 21300008, guid: b7029f9ef86eeec458bb956efa9df87b, type: 3}
   selectionText: Spend it on hats!
   selectionTooltip: You happen to love hats
@@ -37797,17 +37977,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speaker: 1
+  speakers: 01000000
   condition: 0
   magnitude: 0
   targetEmotion: 0
   useCustomPic: 0
   customPic: {fileID: 0}
   heading: HI!
+  speaker1Id: 0
   text1: How's it going?
+  speaker2Id: 0
   text2: Nice day, huh?
+  speaker3Id: 0
   text3: 
+  speaker4Id: 0
   text4: 
+  speaker5Id: 0
   text5: 
   options: []
   canShowMultipleTimes: 0
@@ -37984,7 +38169,7 @@ Prefab:
     - target: {fileID: 224238659448374646, guid: c39e8916bfe2dde4692b57cea2c4ee0a,
         type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 224238659448374646, guid: c39e8916bfe2dde4692b57cea2c4ee0a,
         type: 2}
@@ -39673,7 +39858,7 @@ Prefab:
     - target: {fileID: 224592931320408410, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
       propertyPath: m_RootOrder
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 224592931320408410, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
@@ -41376,7 +41561,7 @@ RectTransform:
   m_Children:
   - {fileID: 310613068}
   m_Father: {fileID: 2034288841}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -41430,6 +41615,7 @@ MonoBehaviour:
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
+  AfterImage: {fileID: 0}
   icon: {fileID: 21300000, guid: 1884ac89837af9c4fa02d64cbfcc7439, type: 3}
   selectionText: Encourage <name> to take care of it
   selectionTooltip: <name>'s a grown bird after all
@@ -42258,7 +42444,7 @@ RectTransform:
   - {fileID: 578568450}
   - {fileID: 149872831}
   m_Father: {fileID: 2034288841}
-  m_RootOrder: 20
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -47475,6 +47661,7 @@ MonoBehaviour:
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
+  AfterImage: {fileID: 0}
   icon: {fileID: 21300000, guid: a47d2f3f0c4e12f40ae0a45d80f17721, type: 3}
   selectionText: Terry is understandably upset. he should go home and grieve for a
     while
@@ -54144,20 +54331,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speaker: 0
+  speakers: 00000000
   condition: 0
   magnitude: 0
   targetEmotion: 0
   useCustomPic: 0
   customPic: {fileID: 0}
-  heading: "Late in the evening, a messenger dog comes, with a letter for Terry. He
+  heading: A Tragedy
+  speaker1Id: 0
+  text1: "Late in the evening, a messenger dog comes, with a letter for Terry. He
     reads it. After a pause, he looks up, his eyes gazing beyond the landscape into
     the eternal abyss. \n\n\"My mom finally bit the bullet\", he says. "
-  text1: 'Terry looks to you, a pleading look in his eyes. You sense he is conflicted
+  speaker2Id: 0
+  text2: 'Terry looks to you, a pleading look in his eyes. You sense he is conflicted
     about something. '
-  text2: He asks you to let him go home and recover
-  text3: 
+  speaker3Id: 0
+  text3: He asks you to let him go home and recover
+  speaker4Id: 0
   text4: 
+  speaker5Id: 0
   text5: 
   options:
   - {fileID: 308562957}
@@ -63278,17 +63470,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speaker: 5
+  speakers: 05000000
   condition: 0
   magnitude: 0
   targetEmotion: 0
   useCustomPic: 0
   customPic: {fileID: 0}
   heading: '<name> saw a spider! '
+  speaker1Id: 0
   text1: 
+  speaker2Id: 0
   text2: 
+  speaker3Id: 0
   text3: 
+  speaker4Id: 0
   text4: 
+  speaker5Id: 0
   text5: 
   options:
   - {fileID: 1279381612}
@@ -65160,6 +65357,7 @@ MonoBehaviour:
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
+  AfterImage: {fileID: 0}
   icon: {fileID: 21300000, guid: 363c0e3104a942247bdd915a64a96125, type: 3}
   selectionText: Do it yourself
   selectionTooltip: Finally a chance to show off your skills
@@ -69604,9 +69802,9 @@ RectTransform:
   - {fileID: 1565839663}
   - {fileID: 685824183}
   - {fileID: 1293172060}
+  - {fileID: 248335718}
   - {fileID: 1276784168}
   - {fileID: 1698107304}
-  - {fileID: 248335718}
   - {fileID: 555556493}
   - {fileID: 2116275428}
   - {fileID: 618562788}
@@ -69615,9 +69813,9 @@ RectTransform:
   - {fileID: 803439186}
   - {fileID: 651453144}
   - {fileID: 1114297639}
+  - {fileID: 1383505039}
   - {fileID: 1951080139}
   - {fileID: 1964960999}
-  - {fileID: 1383505039}
   - {fileID: 1493918481}
   - {fileID: 304264396}
   m_Father: {fileID: 0}

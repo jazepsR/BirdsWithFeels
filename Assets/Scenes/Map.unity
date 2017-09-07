@@ -7658,7 +7658,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -240, y: -106}
+  m_AnchoredPosition: {x: -339, y: -103}
   m_SizeDelta: {x: 3338, y: 4628}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &420989940
@@ -12048,6 +12048,7 @@ MonoBehaviour:
   canHeal: 0
   title: {fileID: 0}
   centerPos: {fileID: 2056998367}
+  canMove: 1
   SelectionMenu: {fileID: 827790621}
   SelectionText: {fileID: 360093138}
   SelectionDescription: {fileID: 1375557923}
@@ -14210,7 +14211,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 809451533}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 685676506}
+        m_MethodName: HideSelectionMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &809451533
@@ -14515,7 +14527,6 @@ RectTransform:
   - {fileID: 809451531}
   - {fileID: 297362698}
   - {fileID: 706018061}
-  - {fileID: 1688448893}
   m_Father: {fileID: 179608270}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16060,7 +16071,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 912135980}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1785031066}
@@ -18772,6 +18783,7 @@ MonoBehaviour:
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
+  AfterImage: {fileID: 0}
   icon: {fileID: 21300004, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Thats sad
   selectionTooltip: very sad
@@ -21026,19 +21038,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speaker: 2
+  speakers: 05000000
   condition: 0
   magnitude: 0
   targetEmotion: 0
   useCustomPic: 0
   customPic: {fileID: 0}
   heading: Alone
+  speaker1Id: 0
   text1: 'Bird feels alone
 
 '
+  speaker2Id: 0
   text2: It's though
+  speaker3Id: 0
   text3: 
+  speaker4Id: 0
   text4: 
+  speaker5Id: 0
   text5: 
   options:
   - {fileID: 1106317085}
@@ -25885,7 +25902,6 @@ MonoBehaviour:
   mapSwoosh: {fileID: 8300000, guid: 62349a00f88e1e74896519bbc882a3a4, type: 3}
   mouseSensitivity: 0.02
   screenSize: {x: 1330, y: -2200}
-  canMove: 0
   zoomFactor: 0.5
   maxScale: 2
   minScale: 0.5
@@ -27707,6 +27723,7 @@ MonoBehaviour:
   portraitFill: {fileID: 189529948}
   customImage: {fileID: 1590420954}
   continueBtn: {fileID: 1377927639}
+  areaDialogues: []
 --- !u!4 &1661642005
 Transform:
   m_ObjectHideFlags: 0
@@ -28475,74 +28492,6 @@ Transform:
   m_Father: {fileID: 1004417511}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1688448892
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1688448893}
-  - component: {fileID: 1688448895}
-  - component: {fileID: 1688448894}
-  m_Layer: 5
-  m_Name: Image (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1688448893
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1688448892}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 827790622}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65, y: -100.52001}
-  m_SizeDelta: {x: 382, y: 130.95}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1688448894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1688448892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &1688448895
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1688448892}
 --- !u!224 &1691262575 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
