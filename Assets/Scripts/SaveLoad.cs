@@ -107,7 +107,8 @@ public class SaveData
 
 [Serializable]
 public class BirdSaveData
-{    
+{
+    public int levelRollBonus;
     public string charName;
     public string birdPrefabName;
     public int friendliness;

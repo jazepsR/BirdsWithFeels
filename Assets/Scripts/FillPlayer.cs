@@ -171,6 +171,7 @@ public class FillPlayer : MonoBehaviour {
             //target.gameObject.GetComponentInChildren<Animator>().SetBool("dead", true);
             target.health = 0;            
         }
+        target.levelRollBonus = template.levelRollBonus;
         target.bannedLevels = template.bannedLevels;
         target.dead = template.dead;
 		target.portrait = template.portrait;
@@ -197,7 +198,8 @@ public class FillPlayer : MonoBehaviour {
 
 	public static BirdSaveData SetupSaveBird(Bird template)
 	{
-		BirdSaveData target = new BirdSaveData();
+        BirdSaveData target = new BirdSaveData();
+        target.levelRollBonus = template.levelRollBonus;
         target.bannedLevels = template.bannedLevels;
 		target.charName = template.charName;
 		target.friendliness = template.friendliness;
@@ -226,8 +228,9 @@ public class FillPlayer : MonoBehaviour {
 	}
 	public static Bird LoadSavedBird(BirdSaveData template)
 	{
-		Bird target = new Bird("steve");
-		target.charName = template.charName;
+        Bird target = new Bird("steve");
+        target.levelRollBonus = template.levelRollBonus;
+        target.charName = template.charName;
 		target.friendliness = template.friendliness;
 		target.confidence = template.confidence;
 		target.portraitOrder = template.portraitOrder;

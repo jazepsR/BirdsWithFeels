@@ -940,19 +940,15 @@ public class Bird : MonoBehaviour
 			GuiContoler.Instance.confSlider.SetDist(confidence + battleConfBoos, this);
 			GuiContoler.Instance.firendSlider.SetDist(friendliness, this);
 			//set hearts
-			SetRelationshipText(GuiContoler.Instance.relationshipPortrait, GuiContoler.Instance.relationshipText);
-			if (!inMap)
+			//SetRelationshipText(GuiContoler.Instance.relationshipPortrait, GuiContoler.Instance.relationshipText);			
+			try
 			{
-				try
-				{
-					Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health+roundHealthChange, maxHealth);
-
-				}
-				catch {
-					Debug.Log("failed to set hearts");
-				}
+				Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health+roundHealthChange, maxHealth);
 
 			}
+			catch {
+				Debug.Log("failed to set hearts");
+			}			
 		}
 	}
 
