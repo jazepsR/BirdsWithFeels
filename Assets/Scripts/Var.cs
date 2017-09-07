@@ -13,6 +13,7 @@ public static class Var {
     public enum PowerUps { heal,dmg,emotion,obstacle};
     public static bool isTutorial = false;
     public static bool isBoss = false;
+    public static GameObject dustCloud = null;
     public static int MoveGraphBy = 1550;
     public static int lvl1 = 4;
     public static bool fled = false;

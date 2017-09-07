@@ -167,7 +167,7 @@ public class LayoutButton : MonoBehaviour
                 if ((int)index.x == -1)
                 {
                     currentBird.target = currentBird.home;
-                    currentBird.ReleseBird((int)index.x, (int)index.y);
+                    currentBird.ReleaseBird((int)index.x, (int)index.y);
                     currentBird = null;
                     swapBird = null;
                     return;
@@ -176,7 +176,7 @@ public class LayoutButton : MonoBehaviour
                 LeanTween.color(gameObject, baseColor, 0.3f);                
                 currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
                 ApplyPower(currentBird);
-                currentBird.ReleseBird((int)index.x, (int)index.y);
+                currentBird.ReleaseBird((int)index.x, (int)index.y);
               
 
             }
@@ -196,13 +196,13 @@ public class LayoutButton : MonoBehaviour
                 }
                 
                 currentBird.OnLevelPickup();
-                currentBird.ReleseBird(swapBird.x, swapBird.y);
+                currentBird.ReleaseBird(swapBird.x, swapBird.y);
                 currentBird.GroundRollBonus = 0;
                 currentBird = swapBird;
                 currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
                // currentBird.res
                 ApplyPower(currentBird);
-                currentBird.ReleseBird((int)index.x, (int)index.y);
+                currentBird.ReleaseBird((int)index.x, (int)index.y);
                 if (!inMap)
                 {
                     GameLogic.Instance.CanWeFight();                    

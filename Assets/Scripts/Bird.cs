@@ -1038,7 +1038,7 @@ public class Bird : MonoBehaviour
 
 	}
 
-	public void ReleseBird(int x, int y)
+	public void ReleaseBird(int x, int y)
 	{
 		
 		Var.selectedBird = null;
@@ -1051,6 +1051,9 @@ public class Bird : MonoBehaviour
 		{
 			child.sortingLayerName = "Default";
 		}
+        GameObject dustObj = Instantiate(Var.dustCloud, transform.Find("feet"));
+        dustObj.transform.localPosition = Vector3.zero;
+        Destroy(dustObj, 1.0f);
 		if (!inMap)
 		{
 			lines.DrawLines(x, y);
@@ -1066,6 +1069,7 @@ public class Bird : MonoBehaviour
 				}
 			}
 		}
+
 		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		SetCoolDownRing(false);
 		if(inMap)

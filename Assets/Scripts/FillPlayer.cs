@@ -100,6 +100,8 @@ public class FillPlayer : MonoBehaviour {
 	}
 	void LoadSprites()
 	{
+        if (Var.dustCloud == null)
+            Var.dustCloud = Resources.Load<GameObject>("prefabs/dustcloud");
 		if (Var.lvlSprites == null)
 			Var.lvlSprites = Resources.LoadAll<Sprite>("Icons/NewIcons");
 		if (Var.skillIcons == null)
