@@ -9,7 +9,6 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public float mouseSensitivity;
     private Vector3 lastPosition;
     public Vector2 screenSize;
-    public bool canMove = true;
     public float zoomFactor = 1;
     public float maxScale = 2;
     public float minScale = 0.5f;   
@@ -35,7 +34,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             transform.localScale = new Vector3(newScale,newScale,newScale);
             transform.position = finalPos;            
         }
-        if (Input.GetMouseButtonDown(0) && canMove && Var.selectedBird == null)
+        if (Input.GetMouseButtonDown(0) && MapControler.Instance.canMove && Var.selectedBird == null)
         {
             lastPosition = Input.mousePosition;
             AudioControler.Instance.PlaySound(mapSwoosh);
@@ -44,7 +43,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
         }
 
-        if (Input.GetMouseButton(0) && canMove && Var.selectedBird == null)
+        if (Input.GetMouseButton(0) && MapControler.Instance.canMove && Var.selectedBird == null)
         {
             var delta = Input.mousePosition - lastPosition;
             transform.Translate(delta.x * mouseSensitivity, delta.y * mouseSensitivity, 0);
@@ -56,10 +55,10 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        canMove = true;
+        //canMove = true;
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        canMove = false;
+       // canMove = false;
     }
 }

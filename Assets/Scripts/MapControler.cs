@@ -12,6 +12,7 @@ public class MapControler : MonoBehaviour {
     GameObject healTrail;
     public Text title;
     public Transform centerPos;
+    public bool canMove = true;
     public GameObject SelectionMenu;
     public Text SelectionText;
     public Text SelectionDescription;
@@ -31,6 +32,8 @@ public class MapControler : MonoBehaviour {
 	void Start () {
         Var.isBoss = false;
         timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);
+        selectionTiles.transform.localScale = Vector3.zero;
+        SelectionMenu.transform.localScale = Vector3.zero;
         canHeal = false;
         foreach(Bird bird in Var.activeBirds)
         {
@@ -90,7 +93,6 @@ public class MapControler : MonoBehaviour {
     {
         if (SelectedIcon != null)
         {
-            AudioControler.Instance.ClickSound();
             SelectedIcon.LoadBattleScene();
             
         }
@@ -99,6 +101,7 @@ public class MapControler : MonoBehaviour {
 
     public void HideSelectionMenu()
     {
+        canMove = true;
         LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
         LeanTween.scale(MapControler.Instance.selectionTiles, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
         MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);

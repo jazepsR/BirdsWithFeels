@@ -66,7 +66,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         tooltipInfo = gameObject.AddComponent<ShowTooltip>();
         tooltipInfo.tooltipText = GetTooltipText();
         if (!CheckTargetsAvailable() && available)
-            LeanTween.delayedCall(0.1f, mapBtnClick);
+            LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position + (transform.parent.transform.position - transform.position) + new Vector3(-3,0,0), 0.01f);
+            //LeanTween.delayedCall(0.1f, mapBtnClick);
         ValidateAll();
         CalculateTotals();   
     }
@@ -262,6 +263,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 
     public void mapBtnClick()
     {
+        if (MapControler.Instance.SelectedIcon == this)
+            return;
         try
         {
             AudioControler.Instance.ClickSound();
@@ -269,6 +272,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         catch { }
         SetupPieGraph();
         active = true;
+        GuiMap.Instance.Clear();
         MapControler.Instance.SelectedIcon = null;
         MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
         MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero;
@@ -280,20 +284,22 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 
     public void ShowAreaDetails()
     {
+        MapControler.Instance.canMove = false;
         active = false;      
+        
         MapControler.Instance.SelectionMenu.SetActive(true);
         MapControler.Instance.selectionTiles.SetActive(true);
-        MapControler.Instance.SelectionTitle.text = levelName + " details";
+        MapControler.Instance.SelectionTitle.text = levelName;
         MapControler.Instance.SelectionText.text = ToString();
         MapControler.Instance.SelectionDescription.text = levelDescription;
         AudioControler.Instance.ClickSound();
         GuiMap.Instance.CreateMap(CreateMap());
         LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack);
+        MapControler.Instance.SelectedIcon = this;
         if (available)
         {
             LeanTween.scale(MapControler.Instance.selectionTiles, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack);
-            MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);
-            MapControler.Instance.SelectedIcon = this;
+            MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);            
             MapControler.Instance.startLvlBtn.gameObject.SetActive(true);
             
         }
@@ -315,6 +321,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         
         if (available && MapControler.Instance.canFight)
         {
+
+            AudioControler.Instance.ClickSound();
             Var.isBoss = isBoss;
             Var.fled = false;
             Var.isTutorial = false;                       
@@ -349,7 +357,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         return toReturn;
     }
     List<BattleData> CreateMap()
-    {
+    {        
         List<BattleData> map = new List<BattleData>();
         for (int i = 0; i < length; i++)
         {
