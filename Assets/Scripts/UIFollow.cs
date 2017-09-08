@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UIFollow : MonoBehaviour {
     public Transform target;
+    public Vector3 offset;
 	// Use this for initialization
 	void Start () {
 		
@@ -12,7 +13,7 @@ public class UIFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if(target!= null)
-            transform.position =new Vector3(target.position.x,target.position.y, 0);
+            transform.position =new Vector3(target.position.x,target.position.y, 0) + offset;
         else
             transform.position = new Vector3(-10000,-10000);
     }

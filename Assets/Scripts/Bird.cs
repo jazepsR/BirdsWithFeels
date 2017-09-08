@@ -201,7 +201,7 @@ public class Bird : MonoBehaviour
 		SetEmotion();
 		foreach (SpriteRenderer sp in colorSprites)
 		   sp.color = Helpers.Instance.GetEmotionColor(emotion);
-		SetCoolDownRing(false);
+		//SetCoolDownRing(false);
 		if (CooldownRing != null)
 		{
 			CooldownRing.fillAmount = (float)(CoolDownLength - CoolDownLeft) / (float)CoolDownLength;

@@ -41,6 +41,8 @@ public class EventController : MonoBehaviour {
         {
 
         }
+        if (testEvent != null)
+            CreateEvent(testEvent);
     }
 	public void ContinueBtn()
 	{
