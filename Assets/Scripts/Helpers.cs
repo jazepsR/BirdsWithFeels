@@ -350,6 +350,7 @@ public class Helpers : MonoBehaviour {
     }
     public string ApplyTitle(Bird name, string title)
     {
+        
         if (name == null)
             return title;
         if (title != "")

@@ -25,7 +25,7 @@ public class EventController : MonoBehaviour {
 	Bird currentBird;
 	public List<Transform> areaDialogues;
 	List<GameObject> portraits;
-	List<string> texts;    
+	//List<string> texts;    
 	int currentText = 0;
 	// Use this for initialization
 	void Awake () {
@@ -33,34 +33,35 @@ public class EventController : MonoBehaviour {
 	}
 	void Start()
 	{
-		
-	}
+        try
+        {
+            events.AddRange(areaDialogues[Var.currentBG].GetComponentsInChildren<EventScript>());
+        }
+        catch
+        {
+
+        }
+    }
 	public void ContinueBtn()
 	{
-		try
-		{
-			events.AddRange(areaDialogues[Var.currentBG].GetComponentsInChildren<EventScript>());
-		}
-		catch
-		{
-
-		}
+		
 		currentText++;
 		AudioControler.Instance.ClickSound();
-		if (currentText < texts.Count)
+		if (currentText < currentEvent.parts.Count-1)
 		{
-			text.text = Helpers.Instance.ApplyTitle(currentBird, texts[currentText]);
+			text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
 			SetPortrait(currentText);
 
 		}
-		if (currentText == texts.Count)
+		if (currentText == currentEvent.parts.Count-1)
 		{
-			continueBtn.SetActive(false);
+            text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
+            SetPortrait(currentText);
+            continueBtn.SetActive(false);
 			CreateChoices();
-            SetPortrait(0);
-            return;         
+			return;         
 		}
-		if (currentText > texts.Count)
+		if (currentText > currentEvent.parts.Count-1)
 		{
 			eventObject.SetActive(false);
 			if (inMap)
@@ -118,17 +119,17 @@ public class EventController : MonoBehaviour {
 				canCreateEvent = false;
 			else
 			{
-				if (Var.shownEvents.Contains(ev.text1))
+				if (Var.shownEvents.Contains(ev.heading))
 					canCreateEvent = false;
 				if (ev.speakers.Contains(EventScript.Character.Toby) && Var.availableBirds.Count < 4)
 					canCreateEvent = false;
 				if (ev.speakers.Contains(EventScript.Character.Tova) && Var.availableBirds.Count < 5)
 					canCreateEvent = false;
-                if (ev.speakers[0] != EventScript.Character.None)
-                {
-                    if (!ConditionCheck.CheckCondition(ev.condition, Helpers.Instance.GetBirdFromEnum(ev.speakers[0]), ev.targetEmotion, ev.magnitude))
-                        canCreateEvent = false;
-                }
+				if (ev.speakers[0] != EventScript.Character.None)
+				{
+					if (!ConditionCheck.CheckCondition(ev.condition, Helpers.Instance.GetBirdFromEnum(ev.speakers[0]), ev.targetEmotion, ev.magnitude))
+						canCreateEvent = false;
+				}
 			}
 			if (canCreateEvent)
 				break;
@@ -142,8 +143,9 @@ public class EventController : MonoBehaviour {
 	{
 		if (!eventData.canShowMultipleTimes)
 		{
-			Var.shownEvents.Add(eventData.text1);
+			Var.shownEvents.Add(eventData.heading);
 		}
+        
 		choiceList.gameObject.SetActive(false);
 		currentText = 0;
 		if (!inMap)
@@ -151,7 +153,8 @@ public class EventController : MonoBehaviour {
 			GuiContoler.Instance.battlePanel.SetActive(false);
 		}
 		currentEvent = eventData;
-		if (eventData.speakers[0] != EventScript.Character.None)
+        currentEvent.parts.AddRange(eventData.transform.GetComponentsInChildren<EventPart>());
+        if (eventData.speakers[0] != EventScript.Character.None)
 		{
 			try
 			{
@@ -167,23 +170,13 @@ public class EventController : MonoBehaviour {
 		}
 
 
-		eventObject.SetActive(true);
-		texts = new List<string>();
-		texts.Add(eventData.text1);
-		if (eventData.text2 != "")
-			texts.Add(eventData.text2);
-		if (eventData.text3 != "")
-			texts.Add(eventData.text3);
-		if (eventData.text4 != "")
-			texts.Add(eventData.text4);
-		if (eventData.text5 != "")
-			texts.Add(eventData.text5);       
+		eventObject.SetActive(true);		
 		heading.text = Helpers.Instance.ApplyTitle(currentBird, eventData.heading);
-		text.text = Helpers.Instance.ApplyTitle(currentBird, eventData.text1);             
+		text.text = Helpers.Instance.ApplyTitle(currentBird, eventData.parts[0].text);             
 		continueBtn.SetActive(false);
 		SetPortrait(0);
 	   
-		if (eventData.options.Length > 0 && eventData.text2 == "" )
+		if (eventData.options.Length > 0 && eventData.parts.Count <=1 )
 		{
 			CreateChoices();
 		}else
@@ -196,13 +189,13 @@ public class EventController : MonoBehaviour {
 	void SetPortrait(int id)
 	{
 		
-		if (currentEvent.useCustomPic && currentEvent.customPic != null)
+		if (currentEvent.parts[id].useCustomPic && currentEvent.parts[id].customPic != null)
 		{
 			portrait.transform.parent.gameObject.SetActive(true);
 			customImage.gameObject.SetActive(true);
 			portraitFill.gameObject.SetActive(false);
 			portrait.gameObject.SetActive(false);
-			customImage.sprite = currentEvent.customPic;
+			customImage.sprite = currentEvent.parts[id].customPic;
 		}
 		else
 		{
@@ -212,9 +205,9 @@ public class EventController : MonoBehaviour {
 				portrait.transform.parent.gameObject.SetActive(true);
 				portraitFill.gameObject.SetActive(true);
 				portrait.gameObject.SetActive(true);
-				portraitFill.sprite = portraits[id].transform.Find("bird_color").GetComponent<Image>().sprite;
+				portraitFill.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird_color").GetComponent<Image>().sprite;
 				portraitFill.color = Helpers.Instance.GetEmotionColor(Helpers.Instance.RandomEmotion());
-				portrait.sprite = portraits[id].transform.Find("bird").GetComponent<Image>().sprite;
+				portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird").GetComponent<Image>().sprite;
 			}
 			catch
 			{
@@ -283,7 +276,8 @@ public class EventController : MonoBehaviour {
 		string ConsequenceText = ApplyConsequence(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1);
 		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2);
 		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3);
-        currentBird.SetEmotion();        
+        if(currentBird!= null)
+		    currentBird.SetEmotion();        
 		return ConsequenceText;
 
 	}
