@@ -10,6 +10,7 @@ public class GraphPortraitScript : MonoBehaviour {
     void Starter () {
         lr = gameObject.AddComponent<LineRenderer>();
         lr.sortingOrder = 120;
+        lr.sortingLayerName = "Front";
         lr.SetWidth(0.045f, 0.045f);
         lr.textureMode = LineTextureMode.Tile;
         lr.widthMultiplier = 3f;

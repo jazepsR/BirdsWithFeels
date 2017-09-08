@@ -874,9 +874,10 @@ public class GuiContoler : MonoBehaviour {
 
 		finalResult = 0;
 		players = new List<Bird>();
-
+        moveInMap();
+        mapPos++;
 		mapBirdScript.MoveMapBird(mapPos);
-		moveInMap();
+		
 		if (Var.isTutorial)
 		{
 			for (int i = 0; i < FillPlayer.Instance.playerBirds.Length; i++)
@@ -966,9 +967,8 @@ public class GuiContoler : MonoBehaviour {
 	}
 
 	void moveInMap()
-	{
-		
-		mapPos++;			
+	{				
+
 		setMapLocation(mapPos);
 		if (nextMapArea == Var.Em.finish)
 		{

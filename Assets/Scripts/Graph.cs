@@ -65,11 +65,9 @@ public class Graph : MonoBehaviour {
 		}
 		heartt.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
 		heartt.transform.localPosition = new Vector3(-x*22.2f, y*22.2f, 0);
-
-		
-
 		Canvas dummy = heartt.AddComponent<Canvas> ();
 		dummy.overrideSorting = true;
+        dummy.sortingLayerName = "Front";
 		dummy.sortingOrder = 210;
 
 		return heartt;     
