@@ -497,7 +497,7 @@ public class GuiContoler : MonoBehaviour {
 
 	string CreateEmotionChangeText(Bird bird)
 	{
-		string fbText = "<b>Feeling changes in round:</b>";
+		string fbText = "";
 		int ConfGainedInRound = bird.battleConfBoos + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
 		int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
 		//Confidence stuff
