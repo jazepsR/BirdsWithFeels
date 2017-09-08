@@ -161,6 +161,12 @@ public class GuiContoler : MonoBehaviour {
 
 	public void QuitToMap()
 	{
+		if(!Var.tutorialCompleted)
+		{
+            Time.timeScale = 1.0f;
+            SceneManager.LoadScene("MainMenu");
+			return;
+		}
 		int livingCount = 0;
 		Var.currentWeek++;
 		foreach (Bird bird in Var.availableBirds)
@@ -649,6 +655,8 @@ public class GuiContoler : MonoBehaviour {
 
 			string winDetString = winNo + " / 3 Battles won!";
 			winDetails.text = winDetString;
+        if (Var.isTutorial)
+            winDetails.text = "";
 		}
 
 
@@ -874,8 +882,8 @@ public class GuiContoler : MonoBehaviour {
 
 		finalResult = 0;
 		players = new List<Bird>();
-        moveInMap();
-        mapPos++;
+		moveInMap();
+		mapPos++;
 		mapBirdScript.MoveMapBird(mapPos);
 		
 		if (Var.isTutorial)
@@ -973,6 +981,7 @@ public class GuiContoler : MonoBehaviour {
 		if (nextMapArea == Var.Em.finish)
 		{
 			Var.isTutorial = false;
+            Var.tutorialCompleted = true;
 			Var.isBoss = false;
 			winBanner.SetActive(true);
 			mapPos = 0;

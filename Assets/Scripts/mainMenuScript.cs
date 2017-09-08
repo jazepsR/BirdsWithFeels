@@ -62,6 +62,7 @@ public class mainMenuScript : MonoBehaviour {
         Var.isTutorial = false;
         Var.isBoss = false;
         ContinueBtn.interactable = false;
+        Var.tutorialCompleted = false;
     }
 }
 
