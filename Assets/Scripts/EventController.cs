@@ -41,6 +41,13 @@ public class EventController : MonoBehaviour {
         {
 
         }
+        LeanTween.delayedCall(0.1f, TestEvent);
+       
+    }
+
+
+    void TestEvent()
+    {
         if (testEvent != null)
             CreateEvent(testEvent);
     }

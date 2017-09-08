@@ -139,8 +139,8 @@ public class Bird : MonoBehaviour
 	void Start()
 	{
 
-        wonLastBattle = -1;
-        if (!isEnemy && portrait == null)
+		wonLastBattle = -1;
+		if (!isEnemy && portrait == null)
 			portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
 	   /* if (!isEnemy && !inMap)
 		{
@@ -799,6 +799,7 @@ public class Bird : MonoBehaviour
 			}
 			if (!foughtInRound)
 				ChageHealth(1);
+			levelControler.OnfightEndLevel(this, levelList);
 		}
 
 		friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
@@ -809,8 +810,7 @@ public class Bird : MonoBehaviour
 		foughtInRound = false;        
 		ConfGainedInRound = confidence - prevConf;
 		FriendGainedInRound = friendliness - prevFriend;
-		Helpers.Instance.NormalizeStats(this);
-		levelControler.OnfightEndLevel(this, levelList);         
+		Helpers.Instance.NormalizeStats(this);        
 		if (this == GuiContoler.Instance.selectedBird)
 			showText();    
 	}
@@ -893,7 +893,7 @@ public class Bird : MonoBehaviour
 		{
 			//Var.birdInfo.text = ToString();           
 			GuiContoler.Instance.selectedBird = this;
-			SetRelationshipSliders(GuiContoler.Instance.relationshipSliders);
+			//SetRelationshipSliders(GuiContoler.Instance.relationshipSliders);
 			Var.birdInfoFeeling.text = emotion.ToString();
 			Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);            
 			Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, lastLevel.title);              
@@ -1049,9 +1049,9 @@ public class Bird : MonoBehaviour
 		{
 			child.sortingLayerName = "Default";
 		}
-        GameObject dustObj = Instantiate(Var.dustCloud, transform.Find("feet"));
-        dustObj.transform.localPosition = Vector3.zero;
-        Destroy(dustObj, 1.0f);
+		GameObject dustObj = Instantiate(Var.dustCloud, transform.Find("feet"));
+		dustObj.transform.localPosition = Vector3.zero;
+		Destroy(dustObj, 1.0f);
 		if (!inMap)
 		{
 			lines.DrawLines(x, y);

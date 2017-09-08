@@ -31,11 +31,9 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject winBanner;
 	public GameObject[] portraits;
 	public Transform[] battleTrag;
-	public GameObject rerollBox;
-	public int roundLength = 3;
+	public GameObject rerollBox;	
 	Var.Em currentMapArea;
 	public Var.Em nextMapArea;
-	public int posInMapRound = 0;
 	public static int mapPos = 0;
 	private int finalResult = 0;
 	public GameObject graph;
@@ -632,11 +630,11 @@ public class GuiContoler : MonoBehaviour {
 		string feedBackString = "";
 			if (currentMapArea != nextMapArea)
 			{
-				feedBackString += nextMapArea + " birds coming in " + (roundLength - posInMapRound) + " battles!"; 
+				feedBackString += nextMapArea + " birds coming in " + mapPos + " battles!"; 
 			}
 			if(nextMapArea == Var.Em.finish)
 		{
-			feedBackString = "Victory in " + (roundLength - posInMapRound-1) + " battles!";
+			feedBackString = "Victory in " + mapPos + " battles!";
 		}
 			feedbackText.text = feedBackString;
 
@@ -877,13 +875,13 @@ public class GuiContoler : MonoBehaviour {
 		finalResult = 0;
 		players = new List<Bird>();
 
-		mapBirdScript.MoveMapBird(mapPos * 3 + posInMapRound + 1);
+		mapBirdScript.MoveMapBird(mapPos);
 		moveInMap();
 		if (Var.isTutorial)
 		{
 			for (int i = 0; i < FillPlayer.Instance.playerBirds.Length; i++)
 			{
-				if (i < Tutorial.Instance.BirdCount[posInMapRound + mapPos * 3])
+				if (i < Tutorial.Instance.BirdCount[mapPos])
 				{
 					FillPlayer.Instance.playerBirds[i].gameObject.SetActive(true);
 				}
@@ -892,16 +890,15 @@ public class GuiContoler : MonoBehaviour {
 					FillPlayer.Instance.playerBirds[i].gameObject.SetActive(false);
 				}
 			}
-			Tutorial.Instance.ShowtutorialStartingText(posInMapRound + mapPos * 3);
+			Tutorial.Instance.ShowtutorialStartingText(mapPos);
 		}
-		BattleData Area = Var.map[posInMapRound + mapPos * 3];
+		BattleData Area = Var.map[mapPos];
 		if (Area.type != Var.Em.finish)
 		{
 			if (Var.isTutorial)
-			{
-				int posInMap = posInMapRound  + mapPos * 3;
-				Tutorial.Instance.SetCurrenPos(posInMap);
-				GetComponent<fillEnemy>().CreateTutorialEnemies(Tutorial.Instance.TutorialMap[posInMap]);
+			{				
+				Tutorial.Instance.SetCurrenPos(mapPos);
+				GetComponent<fillEnemy>().CreateTutorialEnemies(Tutorial.Instance.TutorialMap[mapPos]);
 			}
 			else
 			{
@@ -970,15 +967,9 @@ public class GuiContoler : MonoBehaviour {
 
 	void moveInMap()
 	{
-		posInMapRound++;      
-		if (posInMapRound == roundLength)
-		{
-			posInMapRound = 0;
-			mapPos++;
-			
-			
-			setMapLocation(mapPos * 3 + posInMapRound + 1);
-		}
+		
+		mapPos++;			
+		setMapLocation(mapPos);
 		if (nextMapArea == Var.Em.finish)
 		{
 			Var.isTutorial = false;
