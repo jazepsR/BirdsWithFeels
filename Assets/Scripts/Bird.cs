@@ -138,7 +138,9 @@ public class Bird : MonoBehaviour
 	public GameObject CrushParticles;
 	void Start()
 	{
-		if (!isEnemy && portrait == null)
+
+        wonLastBattle = -1;
+        if (!isEnemy && portrait == null)
 			portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
 	   /* if (!isEnemy && !inMap)
 		{

@@ -192,7 +192,7 @@ public class GameLogic : MonoBehaviour {
             
             playerBird.consecutiveFightsWon++;
             playerBird.winsInOneFight++;
-            if (playerBird.wonLastBattle == 0)
+            if (playerBird.wonLastBattle == 0 || playerBird.wonLastBattle == 2)
                 playerBird.wonLastBattle = 2;
             else
                 playerBird.wonLastBattle = 1;
@@ -202,7 +202,7 @@ public class GameLogic : MonoBehaviour {
             //lose
             
             playerBird.consecutiveFightsWon = 0;
-            if (playerBird.wonLastBattle == 1)
+            if (playerBird.wonLastBattle == 1 || playerBird.wonLastBattle == 2)
                 playerBird.wonLastBattle = 2;
             else
                 playerBird.wonLastBattle = 0;       

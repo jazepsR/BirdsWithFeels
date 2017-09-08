@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class feedBack : MonoBehaviour {
 	public TextMesh feedBackText;
-    public bool isMain = true;
+	public bool isMain = true;
 	public TextMesh LvlIndicatorText;
 	public SpriteRenderer BelowBirdIndicator;
 	public Bird birdScript;
@@ -23,8 +23,8 @@ public class feedBack : MonoBehaviour {
 	void Awake () {
 		line = Resources.Load<GameObject>("prefabs/lightningLine");
 		feedBackText.gameObject.GetComponent<Renderer>().sortingLayerName = "front";    
-        if(isMain)
-		    scale= BelowBirdIndicator.transform.localScale;
+		if(isMain)
+			scale= BelowBirdIndicator.transform.localScale;
 		//myBattleFeedback = feedBackText.gameObject.GetComponent<battleFeedback>();
 		myBattleFeedback.fb = this;		
 		dir = birdScript.position;
@@ -144,7 +144,7 @@ public class feedBack : MonoBehaviour {
 		
 		hideBonus = 0.0f;
 		bool hasFeedback = false;
-        bool skippedFirst = false;
+		bool skippedFirst = false;
 		switch (dir)
 		{
 			case Bird.dir.top:
@@ -159,26 +159,26 @@ public class feedBack : MonoBehaviour {
 						}
 						else
 						{
-                            if (isMain)
-                            {
-                                PlayerEnemyBird = Var.playerPos[myIndex, i];
-                                ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
-                                hasFeedback = true;
-                                TryWizardLine(Var.playerPos[myIndex, i], birdScript);
-                                break;                              
-                            }
-                            else
-                            {
-                                if (skippedFirst && birdScript.enemyType == fillEnemy.enemyType.drill)
-                                {
-                                    PlayerEnemyBird = Var.playerPos[myIndex, i];
-                                    ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
-                                    hasFeedback = true;
-                                    break;
-                                }
-                                else
-                                    skippedFirst = true;
-                            }
+							if (isMain)
+							{
+								PlayerEnemyBird = Var.playerPos[myIndex, i];
+								ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
+								hasFeedback = true;
+								TryWizardLine(Var.playerPos[myIndex, i], birdScript);
+								break;                              
+							}
+							else
+							{
+								if (skippedFirst && birdScript.enemyType == fillEnemy.enemyType.drill)
+								{
+									PlayerEnemyBird = Var.playerPos[myIndex, i];
+									ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
+									hasFeedback = true;
+									break;
+								}
+								else
+									skippedFirst = true;
+							}
 						}
 					}
 
@@ -197,27 +197,27 @@ public class feedBack : MonoBehaviour {
 						}
 						else
 						{
-                            if (isMain)
-                            { 
-							    PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
-							    ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
-							    hasFeedback = true;
-							    TryWizardLine(Var.playerPos[3 - i, myIndex], birdScript);
-                                break;                              
-                            }
-                            else
-                            {
-                                if (skippedFirst && birdScript.enemyType == fillEnemy.enemyType.drill)
-                                {
-                                    PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
-                                    ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
-                                    hasFeedback = true;
-                                    break;
-                                }
-                                else
-                                    skippedFirst = true;
-                            }
-                    }
+							if (isMain)
+							{ 
+								PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
+								ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
+								hasFeedback = true;
+								TryWizardLine(Var.playerPos[3 - i, myIndex], birdScript);
+								break;                              
+							}
+							else
+							{
+								if (skippedFirst && birdScript.enemyType == fillEnemy.enemyType.drill)
+								{
+									PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
+									ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
+									hasFeedback = true;
+									break;
+								}
+								else
+									skippedFirst = true;
+							}
+					}
 					}
 
 				}
@@ -232,7 +232,8 @@ public class feedBack : MonoBehaviour {
 	}
 
 	public bool CheckResting(Bird bird)
-	{        
+	{
+		bool skippedEnemy = false;
 		switch (dir)
 		{
 			case Bird.dir.top:
@@ -242,8 +243,22 @@ public class feedBack : MonoBehaviour {
 					{
 						if (Var.playerPos[myIndex, i] == bird)
 							return false;
-						else
-							break;
+						else { 
+							if (birdScript.enemyType == fillEnemy.enemyType.drill)
+							{
+								if (skippedEnemy)
+								{
+									if (Var.playerPos[myIndex,i] == bird)
+										return false;
+									else
+										break;
+								}
+								else
+									skippedEnemy = true;
+							}
+							else
+								break;
+						}
 					}
 				}
 				break;
@@ -255,20 +270,34 @@ public class feedBack : MonoBehaviour {
 						if (Var.playerPos[3 - i, myIndex] == bird)
 							return false;
 						else
-							break;
+						{
+							if (birdScript.enemyType == fillEnemy.enemyType.drill)
+							{
+								if (skippedEnemy)
+								{
+									if (Var.playerPos[3 - i, myIndex] == bird)
+										return false;
+									else
+										break;
+								}
+								else
+									skippedEnemy = true;
+							}
+							else
+								break;                           
+						}
 					}
 
 				}
-				break;
-		
+				break;            
 		}
 		return true;
 	}
 
 	public void SetEnemyHoverText()
 	{
-        if (!isMain)
-            return;
+		if (!isMain)
+			return;
 		BelowBirdIndicator.gameObject.SetActive(true);
 		BelowBirdIndicator.color = new Color(1, 1, 1, 1f);
 		string name = "<b>" + Helpers.Instance.GetName(Helpers.Instance.RandomBool()) + "</b>";
@@ -279,18 +308,18 @@ public class feedBack : MonoBehaviour {
 			strength = Helpers.Instance.GetHexColor(Helpers.Instance.GetStenght(birdScript.emotion)) + Helpers.Instance.GetStenght(birdScript.emotion).ToString() + "</color>";
 		if (Helpers.Instance.GetWeakness(birdScript.emotion) != Var.Em.Neutral)
 			weakness = Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(birdScript.emotion)) + Helpers.Instance.GetWeakness(birdScript.emotion).ToString() + "</color>";
-        toolTipText = name + "- " + Helpers.Instance.GetHexColor(birdScript.emotion) + birdScript.emotion + "</color>";
-        string abilityText = "";
-        if (birdScript.enemyType == fillEnemy.enemyType.drill)
-            abilityText = "<b>\nAttacks two birds!</b>";
-        if (birdScript.enemyType == fillEnemy.enemyType.wizard)
-            abilityText = "<b>\nInfluences emotions!</b>";
-        toolTipText += abilityText;
-        toolTipText += "\nStrength: " + (birdScript.levelRollBonus + 1).ToString();
-        toolTipText += "\n Weak to: " + weakness + "\nStrong against: " + strength;
+		toolTipText = name + "- " + Helpers.Instance.GetHexColor(birdScript.emotion) + birdScript.emotion + "</color>";
+		string abilityText = "";
+		if (birdScript.enemyType == fillEnemy.enemyType.drill)
+			abilityText = "<b>\nAttacks two birds!</b>";
+		if (birdScript.enemyType == fillEnemy.enemyType.wizard)
+			abilityText = "<b>\nInfluences emotions!</b>";
+		toolTipText += abilityText;
+		toolTipText += "\nStrength: " + (birdScript.levelRollBonus + 1).ToString();
+		toolTipText += "\n Weak to: " + weakness + "\nStrong against: " + strength;
 
 
-    }
+	}
 	void ScaleDownIndicator()
 	{
 		LeanTween.scale(BelowBirdIndicator.gameObject, scale, 0.2f).setEase(LeanTweenType.easeInBack);       
@@ -302,7 +331,7 @@ public class feedBack : MonoBehaviour {
 	
 	public void ShowFeedback(float value,Bird bird)
 	{
-        print(bird.charName + " win chance: " + value+ " is main:" +isMain);
+		print(bird.charName + " win chance: " + value+ " is main:" +isMain);
 		if (isMain &&!BelowBirdIndicator.color.Equals(new Color(1f, 0, 0, 1f)))
 		{          
 			BelowBirdIndicator.color = new Color(1f, 0, 0, 1f);
@@ -320,22 +349,22 @@ public class feedBack : MonoBehaviour {
 	
 	public void HideFeedBack(bool forFight)
 	{
-        if (isMain)
-        {
-            if (forFight)
-            {
-                BelowBirdIndicator.gameObject.SetActive(false);
-            }
-            else
-            {
-                if (!BelowBirdIndicator.color.Equals(new Color(1, 1, 1, 1f)))
-                {
+		if (isMain)
+		{
+			if (forFight)
+			{
+				BelowBirdIndicator.gameObject.SetActive(false);
+			}
+			else
+			{
+				if (!BelowBirdIndicator.color.Equals(new Color(1, 1, 1, 1f)))
+				{
 
-                    BelowBirdIndicator.color = new Color(1, 1, 1, 1f);
-                    LeanTween.scale(BelowBirdIndicator.gameObject, scale * 1.2f, 0.15f).setEase(LeanTweenType.easeOutCubic).setOnComplete(ScaleDownIndicator);
-                }
-            }
-        }
+					BelowBirdIndicator.color = new Color(1, 1, 1, 1f);
+					LeanTween.scale(BelowBirdIndicator.gameObject, scale * 1.2f, 0.15f).setEase(LeanTweenType.easeOutCubic).setOnComplete(ScaleDownIndicator);
+				}
+			}
+		}
 		LeanTween.scale(feedBackText.gameObject, Vector3.zero, 0.3f).setEase(LeanTweenType.easeInOutBack);
 
 	}

@@ -47,26 +47,30 @@ public class ProgressGUI : MonoBehaviour {
 			lvl.Unlock();
 			if (Helpers.Instance.ListContainsLevel(lvl.level, bird.levelList))
 			{
-				lvl.myImage.sprite = lvl.Completed;
+                lvl.gameObject.SetActive(false);
+				/*lvl.myImage.sprite = lvl.Completed;
 				if(lvl.gameObject.GetComponent<LevelArea>().isSmall)
 					lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(75, 525);
-				break;
+				break;*/
 			}else
 			{
 				if (lvl.gameObject.GetComponent<LevelArea>().isSmall)
 					lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 650);
 			}
-            if (bird.lastLevel.emotion == lvl.emotion || bird.bannedLevels == lvl.emotion)
+            /*if (bird.lastLevel.emotion == lvl.emotion || bird.bannedLevels == lvl.emotion)
 			{
 				lvl.gameObject.SetActive(false);
-			}
-			if(lvl.level.ToString().Contains("2"))
+			}*/
+            if ( bird.bannedLevels == lvl.emotion)           
+               lvl.gameObject.SetActive(false);
+           
+            if (lvl.level.ToString().Contains("2"))
 			{
-				//print("two");
+				/*//print("two");
 				if(!HasSuper)
 					lvl.Lock();
 				if (!Helpers.Instance.ListContainsEmotion(lvl.emotion, bird.levelList))
-					lvl.gameObject.SetActive(false);              
+					lvl.gameObject.SetActive(false);         */     
 
 			}
             if (Var.isTutorial)
@@ -78,7 +82,6 @@ public class ProgressGUI : MonoBehaviour {
 	public void updateLevels(Bird bird)
 	{
 		int index = 0;
-	   // lvlListParent.sizeDelta = new Vector2(110 * Var.activeBirds[id].levelList.Count, lvlListParent.rect.width);
 		foreach (levelElementFill element in lvlListElements)
 		{
 			if (bird.levelList.Count > index)

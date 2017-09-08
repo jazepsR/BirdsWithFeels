@@ -11,10 +11,10 @@ public class Levels : MonoBehaviour {
 	public GameObject Rest;
 	public Vector2 lastSwapPos = new Vector2(-2,-2);
 	private bool TovaActivated = false;
-    public GameObject impressionableIndicator;
+	public GameObject impressionableIndicator;
 
-    // Use this for initialization
-    void Start () {        
+	// Use this for initialization
+	void Start () {        
 		myBird = GetComponent<Bird>();
 	}
 	
@@ -63,47 +63,47 @@ public class Levels : MonoBehaviour {
 						Color col = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
 						col = new Color(col.r, col.g, col.b, 0.3f);
 						tileCol[i].AddColor(col);
-                        if (i != 0)
-                            tileCol[i].isInfluenced = true;
+						if (i != 0)
+							tileCol[i].isInfluenced = true;
 
 					}
 					break;
-                case type.Toby:
-                    if (myBird.x == -1)
-                        break;
-                    List<Bird> adjacentBirds = Helpers.Instance.GetAdjacentBirds(myBird);
-                    if (adjacentBirds.Count > 0)
-                    {
-                        Var.Em emotion = Var.Em.Neutral;
-                        int emStr = 0;
-                        Bird biggestBird = null;
-                        foreach (Bird closeBird in adjacentBirds)
-                        {
-                            int emotionStr = (int)Mathf.Max(Mathf.Abs(closeBird.confidence), Mathf.Abs(closeBird.friendliness));
-                            if (emotionStr > emStr)
-                            {
-                                emotion = closeBird.emotion;
-                                emStr = emotionStr;
-                                biggestBird = closeBird;
-                            }
-                        }
-                        if (emotion != Var.Em.Neutral)
-                        {
-                            impressionableIndicator.SetActive(true);
-                            Vector3 moveDirection = biggestBird.transform.position - myBird.transform.position;
-                            float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg - 90f;
-                            impressionableIndicator.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                            impressionableIndicator.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
-                        }else
-                            impressionableIndicator.SetActive(false);
-                    }
-                    else
-                    {
-                        impressionableIndicator.SetActive(false);
-                    }
-                    break;
-                //TODO: Maybe someday fix this skill
-                /* case type.Lonely1:
+				case type.Toby:
+					if (myBird.x == -1)
+						break;
+					List<Bird> adjacentBirds = Helpers.Instance.GetAdjacentBirds(myBird);
+					if (adjacentBirds.Count > 0)
+					{
+						Var.Em emotion = Var.Em.Neutral;
+						int emStr = 0;
+						Bird biggestBird = null;
+						foreach (Bird closeBird in adjacentBirds)
+						{
+							int emotionStr = (int)Mathf.Max(Mathf.Abs(closeBird.confidence), Mathf.Abs(closeBird.friendliness));
+							if (emotionStr > emStr)
+							{
+								emotion = closeBird.emotion;
+								emStr = emotionStr;
+								biggestBird = closeBird;
+							}
+						}
+						if (emotion != Var.Em.Neutral)
+						{
+							impressionableIndicator.SetActive(true);
+							Vector3 moveDirection = biggestBird.transform.position - myBird.transform.position;
+							float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg - 90f;
+							impressionableIndicator.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+							impressionableIndicator.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
+						}else
+							impressionableIndicator.SetActive(false);
+					}
+					else
+					{
+						impressionableIndicator.SetActive(false);
+					}
+					break;
+				//TODO: Maybe someday fix this skill
+				/* case type.Lonely1:
 					 if (myBird.x == -1)
 						 break;
 					 if (Var.enemies[myBird.y + 4].inUse)
@@ -140,7 +140,7 @@ public class Levels : MonoBehaviour {
 
 					 }
 					 break;*/
-                case type.Rebecca:
+				case type.Rebecca:
 					if (myBird.x == -1)
 						break;
 					if(GameLogic.Instance.CheckIfResting(myBird))
@@ -209,9 +209,9 @@ public class Levels : MonoBehaviour {
 				case type.Lonely1:
 					if (myBird.x == -1)
 						break;
-                    Color col = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
-                    col = new Color(col.r, col.g, col.b, 0.3f);
-                    foreach (LayoutButton tile in GetColumn())
+					Color col = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
+					col = new Color(col.r, col.g, col.b, 0.3f);
+					foreach (LayoutButton tile in GetColumn())
 					{
 						tile.RemoveColor(col);
 						tile.isInfluenced = false;
@@ -222,17 +222,17 @@ public class Levels : MonoBehaviour {
 						break;
 					SadRest.SetActive(false);
 					break;
-                case type.Toby:
-                    if (myBird.x == -1)
-                        break;
-                    impressionableIndicator.SetActive(false);
-                    break;
-                case type.Terry:
+				case type.Toby:
+					if (myBird.x == -1)
+						break;
+					impressionableIndicator.SetActive(false);
+					break;
+				case type.Terry:
 					if (myBird.x == -1 )
 						break;
-                    Color ColConf = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
-                    ColConf = new Color(ColConf.r, ColConf.g, ColConf.b, 0.3f);
-                    foreach (LayoutButton tile in GetRow())
+					Color ColConf = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
+					ColConf = new Color(ColConf.r, ColConf.g, ColConf.b, 0.3f);
+					foreach (LayoutButton tile in GetRow())
 					{
 						tile.RemoveColor(ColConf);
 						tile.ConfBonus = 0;
@@ -241,9 +241,9 @@ public class Levels : MonoBehaviour {
 				case type.Scared1:
 					if (myBird.x == -1 )
 						break;
-                    Color colScared = Helpers.Instance.GetEmotionColor(Var.Em.Scared);
-                    colScared = new Color(colScared.r, colScared.g, colScared.b, 0.3f);
-                    foreach (LayoutButton tile in GetDiagonals())
+					Color colScared = Helpers.Instance.GetEmotionColor(Var.Em.Scared);
+					colScared = new Color(colScared.r, colScared.g, colScared.b, 0.3f);
+					foreach (LayoutButton tile in GetDiagonals())
 					{
 						tile.RemoveColor(colScared);
 						if (myBird.x != tile.index.x && myBird.y != tile.index.y)
@@ -318,7 +318,7 @@ public class Levels : MonoBehaviour {
 			switch (level)
 			{
 				case type.Toby:
-                    impressionableIndicator.SetActive(false);
+					impressionableIndicator.SetActive(false);
 					adjacent = Helpers.Instance.GetAdjacentBirds(myBird);
 					if (adjacent.Count > 0)
 					{
@@ -483,8 +483,8 @@ public class Levels : MonoBehaviour {
 	//Level triggers
 	public void ApplyLevel(LevelData data, string levelName)
 	{
-        if (data.emotion == myBird.bannedLevels)
-            return;
+		if (data.emotion == myBird.bannedLevels)
+			return;
 		if (!Helpers.Instance.ListContainsLevel(data.type, myBird.levelList))
 		{
 			//GuiContoler.Instance.ShowMessage(Helpers.Instance.GetLevelUpText(myBird.charName,data.type));

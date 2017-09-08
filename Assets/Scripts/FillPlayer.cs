@@ -43,7 +43,7 @@ public class FillPlayer : MonoBehaviour {
 					if (bird.charName == loadBird.charName)
 					{
 						SetupBird(bird, loadBird);
-                        bird.gameObject.SetActive(true);
+						bird.gameObject.SetActive(true);
 						foundBird = true;
 						break;
 					}
@@ -78,7 +78,7 @@ public class FillPlayer : MonoBehaviour {
 	   if (!inMap && Var.activeBirds.Count < 1)
 		{
 			Var.activeBirds.AddRange(playerBirds);
-            Var.availableBirds.AddRange(playerBirds);
+			Var.availableBirds.AddRange(playerBirds);
 		}
 	}
 
@@ -100,8 +100,8 @@ public class FillPlayer : MonoBehaviour {
 	}
 	void LoadSprites()
 	{
-        if (Var.dustCloud == null)
-            Var.dustCloud = Resources.Load<GameObject>("prefabs/dustcloud");
+		if (Var.dustCloud == null)
+			Var.dustCloud = Resources.Load<GameObject>("prefabs/dustcloud");
 		if (Var.lvlSprites == null)
 			Var.lvlSprites = Resources.LoadAll<Sprite>("Icons/NewIcons");
 		if (Var.skillIcons == null)
@@ -130,35 +130,35 @@ public class FillPlayer : MonoBehaviour {
 			Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_neutral"));
 			Var.enemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/Visuals_top_scared"));
 		}
-        if (Var.wizardEnemySprites == null)
-        {
-            Var.wizardEnemySprites = new List<GameObject>();
-            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_confident_MAGIC"));
-            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_friendly_MAGIC"));
-            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_lonely_MAGIC"));
-            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_neutral_MAGIC"));
-            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_scared_MAGIC"));
-            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_confident_MAGIC"));
-            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_friendly_MAGIC"));
-            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_lonely_MAGIC"));
-            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_neutral_MAGIC"));
-            Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_scared_MAGIC"));
-        }
-        if (Var.drillEnemySprites == null)
-        {
-            Var.drillEnemySprites = new List<GameObject>();
-            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_confident_DRILL"));
-            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_friendly_DRILL"));
-            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_lonely_DRILL"));
-            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_neutral_DRILL"));
-            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_scared_DRILL"));
-            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_confident_DRILL"));
-            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_friendly_DRILL"));
-            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_lonely_DRILL"));
-            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_neutral_DRILL"));
-            Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_scared_DRILL"));
-        }
-    }
+		if (Var.wizardEnemySprites == null)
+		{
+			Var.wizardEnemySprites = new List<GameObject>();
+			Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_confident_MAGIC"));
+			Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_friendly_MAGIC"));
+			Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_lonely_MAGIC"));
+			Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_neutral_MAGIC"));
+			Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_side_scared_MAGIC"));
+			Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_confident_MAGIC"));
+			Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_friendly_MAGIC"));
+			Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_lonely_MAGIC"));
+			Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_neutral_MAGIC"));
+			Var.wizardEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/magic enemies/Visuals_top_scared_MAGIC"));
+		}
+		if (Var.drillEnemySprites == null)
+		{
+			Var.drillEnemySprites = new List<GameObject>();
+			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_confident_DRILL"));
+			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_friendly_DRILL"));
+			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_lonely_DRILL"));
+			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_neutral_DRILL"));
+			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_side_scared_DRILL"));
+			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_confident_DRILL"));
+			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_friendly_DRILL"));
+			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_lonely_DRILL"));
+			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_neutral_DRILL"));
+			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_scared_DRILL"));
+		}
+	}
 	public static void SetupBird(Bird target, Bird template)
 	{		
 		target.charName = template.charName;
@@ -166,14 +166,14 @@ public class FillPlayer : MonoBehaviour {
 		target.confidence = template.confidence;
 		target.portraitOrder = template.portraitOrder;
 		target.health = template.health;
-        if (template.dead)
-        {
-            //target.gameObject.GetComponentInChildren<Animator>().SetBool("dead", true);
-            target.health = 0;            
-        }
-        target.levelRollBonus = template.levelRollBonus;
-        target.bannedLevels = template.bannedLevels;
-        target.dead = template.dead;
+		if (template.dead)
+		{
+			//target.gameObject.GetComponentInChildren<Animator>().SetBool("dead", true);
+			target.health = 0;            
+		}
+		target.levelRollBonus = template.levelRollBonus;
+		target.bannedLevels = template.bannedLevels;
+		target.dead = template.dead;
 		target.portrait = template.portrait;
 		target.maxHealth = template.maxHealth;
 		target.levelList = template.levelList;
@@ -189,30 +189,30 @@ public class FillPlayer : MonoBehaviour {
 		target.CoolDownLeft = template.CoolDownLeft;
 		target.CoolDownLength = template.CoolDownLength;
 		target.relationships = template.relationships;
-        target.relationshipBird = template.relationshipBird;
+		target.relationshipBird = template.relationshipBird;
 		target.preferredEmotion = template.preferredEmotion;
-        target.birdPrefabName = template.birdPrefabName;
+		target.birdPrefabName = template.birdPrefabName;
 	   // target.transform.Find("BIRB_sprite/hat").GetComponent<SpriteRenderer>().sprite = template.hatSprite;
 	}
 
 
 	public static BirdSaveData SetupSaveBird(Bird template)
 	{
-        BirdSaveData target = new BirdSaveData();
-        target.levelRollBonus = template.levelRollBonus;
-        target.bannedLevels = template.bannedLevels;
+		BirdSaveData target = new BirdSaveData();
+		target.levelRollBonus = template.levelRollBonus;
+		target.bannedLevels = template.bannedLevels;
 		target.charName = template.charName;
 		target.friendliness = template.friendliness;
 		target.confidence = template.confidence;
 		target.portraitOrder = template.portraitOrder;
 		target.health = template.health;
 		target.birdPrefabName = template.birdPrefabName;
-        target.relationships = template.relationships;
-        target.preferredEmotion = template.preferredEmotion;
-        target.relationshipBird = Helpers.Instance.GetCharEnum(template.relationshipBird);
-        target.dead = template.dead;
-        //target.portrait = template.portrait;
-        target.levelList = template.levelList;
+		target.relationships = template.relationships;
+		target.preferredEmotion = template.preferredEmotion;
+		target.relationshipBird = Helpers.Instance.GetCharEnum(template.relationshipBird);
+		target.dead = template.dead;
+		//target.portrait = template.portrait;
+		target.levelList = template.levelList;
 		target.startingLVL = template.startingLVL;
 		target.battleCount = template.battleCount;
 		target.lastLevel = template.lastLevel;
@@ -224,22 +224,22 @@ public class FillPlayer : MonoBehaviour {
 		target.AdventuresRested = template.AdventuresRested;
 		target.CoolDownLeft = template.CoolDownLeft;
 		target.CoolDownLength = template.CoolDownLength;        
-        return target;       
+		return target;       
 	}
 	public static Bird LoadSavedBird(BirdSaveData template)
 	{
-        Bird target = new Bird("steve");
-        target.levelRollBonus = template.levelRollBonus;
-        target.charName = template.charName;
+		Bird target = new Bird("steve");
+		target.levelRollBonus = template.levelRollBonus;
+		target.charName = template.charName;
 		target.friendliness = template.friendliness;
 		target.confidence = template.confidence;
 		target.portraitOrder = template.portraitOrder;
-        target.bannedLevels = template.bannedLevels;
+		target.bannedLevels = template.bannedLevels;
 		target.health = template.health;		
-        target.relationships = template.relationships;
-        target.preferredEmotion = template.preferredEmotion;
-        target.dead = template.dead;//target.portrait = template.portrait;
-        target.levelList = template.levelList;
+		target.relationships = template.relationships;
+		target.preferredEmotion = template.preferredEmotion;
+		target.dead = template.dead;//target.portrait = template.portrait;
+		target.levelList = template.levelList;
 		target.startingLVL = template.startingLVL;
 		target.battleCount = template.battleCount;
 		target.lastLevel = template.lastLevel;
@@ -251,8 +251,8 @@ public class FillPlayer : MonoBehaviour {
 		target.AdventuresRested = template.AdventuresRested;
 		target.CoolDownLeft = template.CoolDownLeft;
 		target.CoolDownLength = template.CoolDownLength;
-        target.birdPrefabName = template.birdPrefabName;
-        try
+		target.birdPrefabName = template.birdPrefabName;
+		try
 		{
 			foreach (LevelData data in target.levelList)
 			{

@@ -84,7 +84,7 @@ public class GuiContoler : MonoBehaviour {
 	public float levelinfoHideXValue;
 	public float levelinfoshowXValue;
 	int maxGraph = 3;
-    public GameObject boss;
+	public GameObject boss;
 	void Awake()
 	{
 		Instance = this;
@@ -114,7 +114,7 @@ public class GuiContoler : MonoBehaviour {
 			GuiMap.Instance.CreateMap(Var.map);            
 			setMapLocation(0);
 			LeanTween.delayedCall(0.05f,tryDialog);
-            boss.SetActive(Var.isBoss);
+			boss.SetActive(Var.isBoss);
 		}        
 	}
 
@@ -164,8 +164,8 @@ public class GuiContoler : MonoBehaviour {
 	public void QuitToMap()
 	{
 		int livingCount = 0;
-        Var.currentWeek++;
-        foreach (Bird bird in Var.availableBirds)
+		Var.currentWeek++;
+		foreach (Bird bird in Var.availableBirds)
 		{
 			if (bird.health <= 0)
 				livingCount++;
@@ -181,8 +181,8 @@ public class GuiContoler : MonoBehaviour {
 			Time.timeScale = 1.0f;
 			loseBanner.SetActive(true);
 		}
-        
-    }
+		
+	}
 
 	public void ShowDeathMenu(Bird deadBird)
 	{
@@ -817,7 +817,7 @@ public class GuiContoler : MonoBehaviour {
 				}
 			}
 		}
-        Var.currentWeek++;
+		Var.currentWeek++;
 		Var.shouldDoMapEvent = true;
 		SceneManager.LoadScene("Map");
 	}
@@ -837,7 +837,7 @@ public class GuiContoler : MonoBehaviour {
 		GetComponent<fillEnemy>().hasDrill = false;
 		foreach (Bird bird in players)
 		{
-            bird.ResetBonuses();          
+			bird.ResetBonuses();          
 			UpdateBirdSave(bird);		
 			foreach(Bird activeBird in Var.activeBirds)
 			{
@@ -979,15 +979,15 @@ public class GuiContoler : MonoBehaviour {
 			
 			setMapLocation(mapPos * 3 + posInMapRound + 1);
 		}
-        if (nextMapArea == Var.Em.finish)
-        {
-            Var.isTutorial = false;
-            Var.isBoss = false;
-            winBanner.SetActive(true);
-            mapPos = 0;
-        }
+		if (nextMapArea == Var.Em.finish)
+		{
+			Var.isTutorial = false;
+			Var.isBoss = false;
+			winBanner.SetActive(true);
+			mapPos = 0;
+		}
 
-    }
+	}
 	
 	public void ShowMessage(string message)
 	{
