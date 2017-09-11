@@ -164,8 +164,8 @@ public class Bird : MonoBehaviour
 				relationships = new Dictionary<EventScript.Character, int>();
 				relationships.Add(EventScript.Character.Kim, 0);
 				relationships.Add(EventScript.Character.Terry, 0);
-				relationships.Add(EventScript.Character.Toby, 0);
-				relationships.Add(EventScript.Character.Tova, 0);
+				relationships.Add(EventScript.Character.Alexander, 0);
+				relationships.Add(EventScript.Character.Sophie, 0);
 				relationships.Add(EventScript.Character.Rebecca, 0);
 				try
 				{
@@ -436,7 +436,7 @@ public class Bird : MonoBehaviour
 		x = -1;
 		y = -1;
 		levelControler.ApplyLevelOnPickup(this, levelList);
-		if (Helpers.Instance.ListContainsLevel(Levels.type.Tova, levelList))       
+		if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, levelList))       
 			levelControler.Halo.SetActive(false);
 		showText();
 	}
@@ -569,7 +569,7 @@ public class Bird : MonoBehaviour
 				GroundBonus.SetActive(false);
 				foreach (Bird bird in FillPlayer.Instance.playerBirds)
 				{
-					if (Helpers.Instance.ListContainsLevel(Levels.type.Toby, bird.levelList))
+					if (Helpers.Instance.ListContainsLevel(Levels.type.Alexander, bird.levelList))
 					{
 						bird.levelControler.ApplyLevelOnDrop(this, bird.levelList);
 					}
@@ -608,7 +608,7 @@ public class Bird : MonoBehaviour
 	void UpdateFeedback()
 	{
 		fighting = false;
-		if (Helpers.Instance.ListContainsLevel(Levels.type.Tova,levelList) )
+		if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie,levelList) )
 		{
 			if (GameLogic.Instance.CheckIfResting(this)&&!dragged)
 			{
@@ -1061,7 +1061,7 @@ public class Bird : MonoBehaviour
 			UpdateFeedback();
 			foreach (Bird bird in FillPlayer.Instance.playerBirds)
 			{
-				if (Helpers.Instance.ListContainsLevel(Levels.type.Toby, bird.levelList))
+				if (Helpers.Instance.ListContainsLevel(Levels.type.Alexander, bird.levelList))
 				{
 					bird.levelControler.ApplyLevelOnDrop(this, bird.levelList);
 				}

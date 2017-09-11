@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 [Serializable]
 public class Levels : MonoBehaviour {
-	public enum type { Toby,Kim,Rebecca,Tova, Terry,Friend1,Friend2,Brave1,Brave2,Lonely1,Lonely2,Scared1,Scared2};
+	public enum type { Alexander,Kim,Rebecca,Sophie, Terry,Friend1,Friend2,Brave1,Brave2,Lonely1,Lonely2,Scared1,Scared2};
 	Bird myBird;	
 	public GameObject Halo;
 	public GameObject SadRest;
@@ -68,7 +68,7 @@ public class Levels : MonoBehaviour {
 
 					}
 					break;
-				case type.Toby:
+				case type.Alexander:
 					if (myBird.x == -1)
 						break;
 					List<Bird> adjacentBirds = Helpers.Instance.GetAdjacentBirds(myBird);
@@ -159,7 +159,7 @@ public class Levels : MonoBehaviour {
 							tileRow[i].ConfBonus = -1;
 					}
 					break;
-				case type.Tova:
+				case type.Sophie:
 					if (myBird.x == -1 || TovaActivated)
 						break;
 					foreach (LayoutButton tile in GetAdjacent())
@@ -222,7 +222,7 @@ public class Levels : MonoBehaviour {
 						break;
 					SadRest.SetActive(false);
 					break;
-				case type.Toby:
+				case type.Alexander:
 					if (myBird.x == -1)
 						break;
 					impressionableIndicator.SetActive(false);
@@ -288,7 +288,7 @@ public class Levels : MonoBehaviour {
 						GameLogic.Instance.UpdateFeedback();                       
 					
 					break;*/
-				case type.Tova:
+				case type.Sophie:
 					if (myBird.x == -1|| !TovaActivated)
 						break;
 					foreach (LayoutButton tile in GetAdjacent())
@@ -317,7 +317,7 @@ public class Levels : MonoBehaviour {
 			List<Bird> adjacent = null;
 			switch (level)
 			{
-				case type.Toby:
+				case type.Alexander:
 					impressionableIndicator.SetActive(false);
 					adjacent = Helpers.Instance.GetAdjacentBirds(myBird);
 					if (adjacent.Count > 0)
@@ -350,7 +350,7 @@ public class Levels : MonoBehaviour {
 						healBird.ChageHealth(+1);
 					}
 					break;
-				case type.Tova:
+				case type.Sophie:
 					TovaActivated = false;
 					break;
 				case type.Rebecca:

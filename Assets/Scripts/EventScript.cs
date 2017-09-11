@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EventScript:MonoBehaviour{
-    public enum Character  { Terry,Rebecca,Tova,Kim,Toby,Random,None, the_Queen, the_Vulture_King, a_vulture, a_bird, player };
+    public enum Character  { Terry,Rebecca,Sophie,Kim,Alexander,Random,None, the_Queen, the_Vulture_King, a_vulture, a_bird, player };
     public List<Character> speakers;
     public ConditionCheck.Condition condition;
     public int magnitude = 0;

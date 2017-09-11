@@ -130,9 +130,9 @@ public class EventController : MonoBehaviour {
 			{
 				if (Var.shownEvents.Contains(ev.heading))
 					canCreateEvent = false;
-				if (ev.speakers.Contains(EventScript.Character.Toby) && Var.availableBirds.Count < 4)
+				if (ev.speakers.Contains(EventScript.Character.Alexander) && Var.availableBirds.Count < 4)
 					canCreateEvent = false;
-				if (ev.speakers.Contains(EventScript.Character.Tova) && Var.availableBirds.Count < 5)
+				if (ev.speakers.Contains(EventScript.Character.Sophie) && Var.availableBirds.Count < 5)
 					canCreateEvent = false;
 				if (ev.speakers[0] != EventScript.Character.None)
 				{

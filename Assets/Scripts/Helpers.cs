@@ -612,9 +612,9 @@ public class Helpers : MonoBehaviour {
                 return Var.startingLvlSprites[0];
             case Levels.type.Terry:
                 return Var.startingLvlSprites[4];
-            case Levels.type.Toby:
+            case Levels.type.Alexander:
                 return Var.startingLvlSprites[1];
-            case Levels.type.Tova:
+            case Levels.type.Sophie:
                 return Var.startingLvlSprites[2];
             case Levels.type.Brave1:
                 return Var.lvlSprites[1];
@@ -818,13 +818,13 @@ public class Helpers : MonoBehaviour {
                 return "All birds in the same column gain +1 loneliness";
             case Levels.type.Lonely2:
                 return " if resting, reroll all battles. 3 turn cooldown";
-            case Levels.type.Toby:
+            case Levels.type.Alexander:
                 return "Impressionable- bird gains +1 in the dominant feeling of an adjacent bird";                
             case Levels.type.Kim:
                 return "Ground effects affect you twice as much";
             case Levels.type.Rebecca:
                 return "Lose -2 confidence when resting";
-            case Levels.type.Tova:
+            case Levels.type.Sophie:
                 return "If resting, all adjacent birds recieve 10% chance to win fights";
             case Levels.type.Terry:
                 return "All birds in the same row gain +1 confidence";
