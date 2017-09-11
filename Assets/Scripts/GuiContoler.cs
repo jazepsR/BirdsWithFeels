@@ -317,11 +317,14 @@ public class GuiContoler : MonoBehaviour {
 		if (currentGraph == 3)
 		{
 			CreateGraph(-1);
+            ProgressGUI.Instance.AllPortraitClick();
 		}
 		else
 		{
 			CreateGraph(currentGraph);
-			ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+            ProgressGUI.Instance.SetOnePortrait();
+            ProgressGUI.Instance.SetOnePortrait();
+            ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
 		}
 		
 		
@@ -331,7 +334,8 @@ public class GuiContoler : MonoBehaviour {
 	{
 		currentGraph--;
 		CreateGraph(currentGraph);
-		ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+        ProgressGUI.Instance.SetOnePortrait();
+        ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
 		
 	   
 		
@@ -841,6 +845,7 @@ public class GuiContoler : MonoBehaviour {
 		Var.enemies = new Bird[8];
 		Var.Infight = false;
 		GetComponent<fillEnemy>().hasDrill = false;
+        ProgressGUI.Instance.SetOnePortrait();       
 		foreach (Bird bird in players)
 		{
 			bird.ResetBonuses();          
