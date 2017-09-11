@@ -282,18 +282,56 @@ public class Helpers : MonoBehaviour {
         {
             case "Kim":
                 return Var.hatSprites[1];
-            case "Tova":
+            case "Sophie":
                 return Var.hatSprites[0];
             case "Terry":
                 return Var.hatSprites[2];
             case "Rebecca":
                 return Var.hatSprites[4];
-            case "Toby":
+            case "Alexander":
                 return Var.hatSprites[3];
             default:
                 return null;
         }
     }
+
+    public string GetLevelTitle(Levels.type type)
+    {
+       
+        switch (type)
+        {
+            case Levels.type.Alexander:
+                return "Alexander";
+            case Levels.type.Kim:
+                return "Kim";
+            case Levels.type.Rebecca:
+                return "Rebecca";
+            case Levels.type.Sophie:
+                return "Sophie";
+            case Levels.type.Terry:
+                return "Terry";
+            case Levels.type.Friend1:
+                return "Healing touch";
+            case Levels.type.Friend2:
+                return "A great massage";
+            case Levels.type.Brave1:
+                return "Bird shield";
+            case Levels.type.Brave2:
+                return "Fake hearts";
+            case Levels.type.Lonely1:
+                return "Emo intensifier";
+            case Levels.type.Lonely2:
+                return "Time lord";
+            case Levels.type.Scared1:
+                return "Diagonal backstabber";
+            case Levels.type.Scared2:
+                return "Original backstabber";
+            default:
+                return "";
+        }
+
+    }
+
     //Neutral means weak to all
     public Var.Em GetStenght(Var.Em Emotion)
     {

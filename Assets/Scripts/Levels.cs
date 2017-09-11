@@ -657,7 +657,7 @@ public class LevelData{
 		this.emotion = emotion;
 		LVLIcon = icon;
 		this.type = type;
-		levelInfo = Helpers.Instance.GetLVLInfoText(type);
+		levelInfo ="<b>" + Helpers.Instance.GetLevelTitle(type)+"</b>\n"+ Helpers.Instance.GetLVLInfoText(type);
 		title = Helpers.Instance.GetLVLTitle(type);
 	}
 

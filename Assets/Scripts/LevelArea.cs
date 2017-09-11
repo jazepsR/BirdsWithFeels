@@ -8,7 +8,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 {
     public Sprite Completed;
     public Sprite Default;
-	public string LevelName;
+	//public string LevelName;
 	public Sprite skillImage;    
 	public string SkillText;
 	public string ConditionText;
@@ -46,11 +46,11 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         //Debug.Log("enterd!");
         ProgressGUI.Instance.skillBG.color = Helpers.Instance.GetSoftEmotionColor(emotion);
         ProgressGUI.Instance.skillArea.SetActive(true);        
-        LevelNameHolder.text = LevelName;
+        LevelNameHolder.text = "<b>" +Helpers.Instance.GetLevelTitle(level) + "</b>";
         if (myImage.sprite.Equals(Completed))
             LevelNameHolder.text += " - Completed";
-        SkillTextHolder.text = "Ability\n" +Helpers.Instance.GetLVLInfoText(level);
-        ConditionTextHolder.text = "Requirements:\n" + Helpers.Instance.GetLVLRequirements(level);
+        SkillTextHolder.text = "<b>Ability</b>\n" +Helpers.Instance.GetLVLInfoText(level);
+        ConditionTextHolder.text = "<b>Requirements</b>\n" + Helpers.Instance.GetLVLRequirements(level);
         LoreTextHolder.text = LoreText;
         SkillImageHolder.sprite = Helpers.Instance.GetSkillPicture(level);
         SkillImageHolder.gameObject.SetActive(true);
