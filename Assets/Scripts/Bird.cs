@@ -488,8 +488,8 @@ public class Bird : MonoBehaviour
 			if (!dragged)
 				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.mouseOverBird);
 		}
-		if(inMap)
-			ProgressGUI.Instance.PortraitClick(this);
+		//if(inMap)
+			//ProgressGUI.Instance.PortraitClick(this);
 		if (!inMap && !isEnemy && levelUpText != null && levelUpText != "" && !dragged && !Var.Infight)
 			GuiContoler.Instance.ShowLvlText(levelUpText);
 	}
