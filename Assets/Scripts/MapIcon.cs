@@ -49,10 +49,14 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public Bird birdToAdd;
     ShowTooltip tooltipInfo;
     List<Var.Em> totalEmotions;
-    List<float> totalPercentages;    
+    List<float> totalPercentages;
+    public Image unlockedRoad;
+    bool useline;
     // Use this for initialization
     void Start()
     {
+
+
         length = battles.Count;
         offset = transform.position- transform.parent.position;
         LoadSaveData();
@@ -69,7 +73,16 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position + (transform.parent.transform.position - transform.position) + new Vector3(-3,0,0), 0.01f);
             //LeanTween.delayedCall(0.1f, mapBtnClick);
         ValidateAll();
-        CalculateTotals();   
+        CalculateTotals();
+
+        if (unlockedRoad == null)
+        {
+            useline = true;
+        }
+        else
+        {
+            useline = false;
+        }
     }
 
     void ValidateAll()
@@ -200,6 +213,26 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         {
             transform.parent.position = transform.position - offset;           
         }
+     
+        if(useline)
+        {
+            renderLine();
+        }
+        else
+        {
+            if(completed)
+            {
+                unlockedRoad.gameObject.SetActive(true);
+            }
+            else
+            {
+                unlockedRoad.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    void renderLine()
+    {
         int i = 0;
         lr.positionCount = targets.Length * 2;
         lr.sortingOrder = 2;
@@ -218,6 +251,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             lr.startColor = Color.gray;
         }
     }
+
     public void RemoveLock()
     {
        // LockedIcon.SetActive(false);
