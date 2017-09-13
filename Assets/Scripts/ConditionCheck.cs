@@ -6,25 +6,33 @@ public class ConditionCheck : MonoBehaviour {
     public enum Condition { level, emotion, none };
     public static bool CheckCondition( Condition condition, Bird bird = null,Var.Em targetEmotion = Var.Em.finish, int magnitude = 0)
     {
-        switch (condition)
+        try
         {
-            case Condition.level:
-                if (bird.level >= magnitude)
+            switch (condition)
+            {
+                case Condition.level:
+                    if (bird.level >= magnitude)
+                        return true;
+                    else
+                        return false;
+                case Condition.emotion:
+                    if (bird.emotion == targetEmotion)
+                    {
+                        print(bird.emotion.ToString() + " " + targetEmotion.ToString() + " " + bird.charName);
+                        return true;
+                    }
+                    else
+                        return false;
+                case Condition.none:
                     return true;
-                else
-                    return false;
-            case Condition.emotion:
-                if (bird.emotion == targetEmotion)
-                {
-                    print(bird.emotion.ToString() + " " + targetEmotion.ToString() + " " + bird.charName);
+                default:
                     return true;
-                }
-                else
-                    return false;
-            case Condition.none:
-                return true;
-            default:
-                return true;
+            }
+        }
+        catch
+        {
+            return false;
+            print("condition check error");
         }
         
     }

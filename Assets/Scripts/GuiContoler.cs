@@ -80,7 +80,6 @@ public class GuiContoler : MonoBehaviour {
 	public Button HideSmallGraph;
 	public GameObject relationshipSliders;
 	public GameObject reportRelationshipSliders;
-	public float levelInfo_yvalue;
 	public float levelinfoHideXValue;
 	public float levelinfoshowXValue;
 	int maxGraph = 3;
@@ -361,13 +360,15 @@ public class GuiContoler : MonoBehaviour {
 	public void MoveLvlText()
 	{
 		if(selectedBird.levelUpText != null)
-			LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoshowXValue, levelInfo_yvalue, 0), 0.3f).setEase(LeanTweenType.easeOutBack);
+        {
+            LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoshowXValue, -200, 0), 0.3f).setEase(LeanTweenType.easeOutBack);
+        }
 
-	}
+    }
 	public void HideLvlText()
 	{
-		//BirdLVLUpText.text = "";
-		LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoHideXValue, levelInfo_yvalue, 0), 0.3f).setEase(LeanTweenType.easeInBack);
+        //BirdLVLUpText.text = "";
+        LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoHideXValue, -200, 0), 0.3f).setEase(LeanTweenType.easeInBack);
 		//BirdLVLUpText.transform.parent.gameObject.SetActive(false);-340
 
 	}
