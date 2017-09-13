@@ -443,21 +443,21 @@ public class Helpers : MonoBehaviour {
         switch (type)
         {
             case Levels.type.Brave1:
-                return "<name> has grown strong, but that dosen't mean <name> has forgotten about his teammates! <name> has decided to protect them whenever possible!".Replace("<name>", name);
+                return "Successfully fending off two crows at once, <name> feels a surge of confidence flow through them. Nothing can stop <name> at this point! <name> promises to use their newfound confidence to shield their teammates from harm. ".Replace("<name>", name);
             case Levels.type.Brave2:
-                return "There's no stopping <name> now! Nothing can hurt this bird! (As long as <name> remains sure of this, that is)".Replace("<name>", name);
+                return "There's no stopping <name> now! Nothing can hurt them! (As long as they think so, that is)".Replace("<name>", name);
             case Levels.type.Friend1:
-                return "<name> is really getting along with the other! <name> will now be able to help them recover from injuries!".Replace("<name>", name);
+                return "<name> smacks down the enemy! Surrounded by friends, <name> realizes they'd do almost anything for them. <name> promises themselves to help their team mates in any way possible".Replace("<name>", name);
             case Levels.type.Friend2:
-                return "<name> has found a way to help all the bird friends even more! They will surely appreciate getting healed after adventures!".Replace("<name>", name);
+                return "<name> has found a way to help their friends even more! Applying massage techniques passed down from the friendship gods, <name> can now fully heal team mates if given the time!".Replace("<name>", name);
             case Levels.type.Lonely1:
-                return "<name> feels like the other birds have forgotten about him. Fine! <name> won't talk to them either! Other birds will feel more lonely near <name>.".Replace("<name>", name);
+                return "As <name> succeeds to successfully fend of the enemy threatening them, their independence reaches new heights! Through deep soliditary meditation coupled with the rush of victory, <name> realizes that all emotions are just a result of circumstances. By applying this to team mates, <name> can intensify their emotional changes!".Replace("<name>", name);
             case Levels.type.Lonely2:
-                return "All this alone was a great chance for <name> to do some serious studying! <name> can't wait to try out all these new, strange skills!".Replace("<name>", name);
+                return "All this alone time was a great chance for <name> to do some serious studying! Through careful observation, <name> has percieved that life is but a series of turns, which can be manipulated with the right tools. ".Replace("<name>", name);
             case Levels.type.Scared1:
-                return "Looks like brute force isn't the answer for <name>! But <name> has found a way to help the team by weakening the enemy!".Replace("<name>", name);
+                return "As <name> hits the ground from losing their fight, they look up to see their teammate succeeding. <name> realizes the depths of their incompetence, were they ever fit for battle? They resolve to help the team with more cunning means - by weakening the enemy. ".Replace("<name>", name);
             case Levels.type.Scared2:
-                return "Direct combat is definetelly not for <name>! Rather, <name> will attack the enemies from behind and let the others finish the job!".Replace("<name>", name);
+                return "Direct combat is definetelly not for <name>! They prefers to attack his enemies from behind and let teammates finish the job! ".Replace("<name>", name);
             default:
                 return "Error in level up text";        
         }
@@ -470,10 +470,10 @@ public class Helpers : MonoBehaviour {
         switch (type)
         {
             case Levels.type.Brave1:
-                deathTxt = "Despite his bravery, the enemies were too much for <name>. <name> hopes they will be strong enough to make it without him. ";
+                deathTxt = "Despite their bravery, the enemies were too much for <name>. <name> hopes they will be strong enough to make it without him. ";
                 break;
             case Levels.type.Brave2:
-                deathTxt = "<name> was sure nothing could hurt <name>. Unfortunately, <name> realized this error too late... ";
+                deathTxt = "<name> was sure nothing could hurt them. Unfortunately, <name> realized this error too late... ";
                 break;
             case Levels.type.Friend1:
                 deathTxt = "<name> tired to help the team, but was not able to escape the danger. Who will take care of them now? ";
@@ -482,16 +482,16 @@ public class Helpers : MonoBehaviour {
                 deathTxt = "<name> was so close... If they had just made it back to base quicker, <name> would have made it all right. It's too late now. ";
                 break;
             case Levels.type.Lonely1:
-                deathTxt = "<name> knew this was a dangerous undertaking from the start. He should have just stayed home where it is nice and safe. ";
+                deathTxt = "<name> kept to themselves during the last period of their life. Would they have survived with more friends? Questions the team will never stop asking themselves ";
                 break;
             case Levels.type.Lonely2:
                 deathTxt = "Alas, it is too late for <name> to turn back time now... ";
                 break;
             case Levels.type.Scared1:
-                deathTxt = "<name> wasn't cut out for fighting. And in the end, his clever tricks came up short. ";
+                deathTxt = "<name> wasn't cut out for fighting. And in the end, their clever tricks came up short. ";
                 break;
             case Levels.type.Scared2:
-                deathTxt = "For all his attempts do avoid the battles, violence eventually found <name>. ";
+                deathTxt = "For all their attempts do avoid fighting, violence eventually found <name>. ";
                 break;
             default:
                 deathTxt = "<name>'s young life was tragically cut short. Lets hope the rest of the team won't suffer a similar fate. ";
