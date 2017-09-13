@@ -28,7 +28,7 @@ public class LayoutButton : MonoBehaviour
     public int RollBonus = 0;
     public int PlayerRollBonus = 0;
     public bool isInfluenced = false;
-    void Start()
+    void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         tileColors = new List<Color>();
