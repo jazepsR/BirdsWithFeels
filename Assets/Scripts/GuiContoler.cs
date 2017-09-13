@@ -253,7 +253,7 @@ public class GuiContoler : MonoBehaviour {
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
-                    if (!Var.isBoss)
+                    if (!Var.isBoss && !inMap)
                     {
                         ///GameObject dustObj = Instantiate(Var.dustCloud, boss.transform.position, Quaternion.identity);
                         //dustObj.transform.localPosition = Vector3.zero;                       
