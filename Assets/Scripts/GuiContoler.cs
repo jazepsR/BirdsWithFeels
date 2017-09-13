@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
+    public GameObject kingMouth;
+    public GameObject playerMouth;
 	public Text EmotionChangeFeedback;
 	public Text ToggleRelationPanelText;
 	public GameObject relationshipPortrait;
@@ -121,7 +123,8 @@ public class GuiContoler : MonoBehaviour {
 		DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
 	}
 	
-
+    
+    
 	public void StatToggle()
 	{
 		if (relationshipPanel.activeSelf)
@@ -251,12 +254,20 @@ public class GuiContoler : MonoBehaviour {
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
+                    if (!Var.isBoss)
+                    {
+                        ///GameObject dustObj = Instantiate(Var.dustCloud, boss.transform.position, Quaternion.identity);
+                        //dustObj.transform.localPosition = Vector3.zero;                       
+                        //Destroy(dustObj, 1.0f);
+                        boss.SetActive(false);
+                       
+                    }
+					
+					if (!inMap)
 					{
-						if (!inMap)
-						{
-							CheckGraphNavBtns();
-						}
+						CheckGraphNavBtns();
 					}
+					
 				}
 				else
 				{
