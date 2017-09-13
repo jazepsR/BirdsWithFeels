@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObstacleGenerator : MonoBehaviour {
     public static ObstacleGenerator Instance { get; private set; }
     public List<LayoutButton> tiles = new List<LayoutButton>();
-    public GameObject rock;
+    GameObject rock= null;
     public GameObject powerTile;
     public GameObject LonelyTile;
     public GameObject FirendTile;
@@ -21,7 +21,10 @@ public class ObstacleGenerator : MonoBehaviour {
         Instance = this;
     }
 	void Start () {
-       
+        if(rock == null)
+        {
+            rock = Resources.Load<GameObject>("prefabs/rock");
+        }
         GenerateObstacles();
     }
 	public void clearObstacles()
@@ -47,10 +50,11 @@ public class ObstacleGenerator : MonoBehaviour {
             float rand = Random.Range(0.0f, 1.0f);
             if (Var.map[GuiContoler.mapPos].hasRocks && rand > 0.9f)
             {          
-                Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y + 0.15f, 20);
+                Vector3 pos = new Vector3(tile.transform.position.x+0.05f, tile.transform.position.y + 0.3f, 20);
                 tile.isActive = false;
                 GameObject rockObj = Instantiate(rock, pos, Quaternion.identity);
                 rockObj.transform.parent = BattleArea.transform;
+                tile.gameObject.SetActive(false);
                 obstacles.Add(rockObj);              
             }
             if(rand>0.8f && rand < 0.9f && Var.map[GuiContoler.mapPos].powerUps.Count>0)

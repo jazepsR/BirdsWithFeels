@@ -8,16 +8,14 @@ public class powerTile : MonoBehaviour {
 	public Var.PowerUps type;
 	public Color secondColor;
 	public Color firstColor;
+    bool canKiss = true;
 	// Use this for initialization
 	void Start () {
 		
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 	public void SetColor(Var.Em emotion)
 	{
 		this.emotion = emotion;
@@ -37,11 +35,27 @@ public class powerTile : MonoBehaviour {
 		LeanTween.color(gameObject, secondColor, 1f).setEase(LeanTweenType.linear).setOnComplete(TweenToFirst);
 
 	}
+   
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.tag == "feet" && Var.selectedBird == null && type == Var.PowerUps.obstacle)
+        {
+            GetComponent<Animator>().SetTrigger("grump");
+            print("gtumper");
+            canKiss = false;
+            LeanTween.delayedCall(1f, AllowKiss);
+        }
+    }
 
-	void OnMouseEnter()
+    void AllowKiss()
+    {
+        canKiss = true;
+    }
+
+    void OnMouseEnter()
 	{
-		if (Var.selectedBird != null)
-			return;
+        if (Var.selectedBird != null)       
+            return;        
 		string info = "";
 		switch (type)
 		{
@@ -55,7 +69,9 @@ public class powerTile : MonoBehaviour {
 				info = "Birds on this tile will heal 1 heart after the battle";
 				break;
 			case Var.PowerUps.obstacle:
-				info = "You can't place birds on this tile";
+				info = "You can't place birds here";     
+                if(canKiss)           
+                    GetComponent<Animator>().SetTrigger("kiss");
 				break;
 
 		}
@@ -67,7 +83,7 @@ public class powerTile : MonoBehaviour {
 	void OnMouseExit()
 	{
 		Helpers.Instance.HideTooltip();
-	}
+    }
 
 	public void ApplyPower(Bird bird)
 	{

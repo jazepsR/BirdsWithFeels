@@ -78,7 +78,7 @@ public class GameLogic : MonoBehaviour {
     public void UpdateFeedback()
     {
         feedBack[] feedBack = FindObjectsOfType<feedBack>();
-        print("updateCall");
+        //print("updateCall");
         foreach(feedBack fb in feedBack)
         {
             fb.RefreshFeedback();

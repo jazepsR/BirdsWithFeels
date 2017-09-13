@@ -881,6 +881,7 @@ public class GuiContoler : MonoBehaviour {
 		Var.playerPos = new Bird[4, 4];
 		foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
 		{
+            tile.gameObject.SetActive(true);
 			tile.Reset();
 		}
 
