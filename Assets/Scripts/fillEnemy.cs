@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class fillEnemy : MonoBehaviour {
     public GameObject[] Enemies;
     public enum enemyType {normal,wizard, drill };
-    [HideInInspector]
-    public bool hasDrill = false;
-        // Use this for initialization
+    [Header("Debug")]
+    public bool isDebug = false;
+    public bool hasDrillsDebug = false;
+    public bool hasWizardsDebug = false;
+    // Use this for initialization
     void Start ()
     {
 
@@ -60,8 +62,15 @@ public class fillEnemy : MonoBehaviour {
     public void createEnemies(MapBattleData battleData, int birdLVL = 1, List<Bird.dir> dirList = null, int minEnemies = 3, int maxEnemies = 4, bool hasWizards = false, bool hasDrills = false)
     {
         int index = 0;
-        //hasWizards = true;
-        //hasDrills = true;
+        float wizardChance = 0.2f;
+        float drillChance = 0.3f;
+        if (isDebug)
+        {
+            hasWizards = hasWizardsDebug;
+            wizardChance = 0.8f;
+            drillChance = 0.9f;
+            hasDrills = hasDrillsDebug;
+        }
         List<int> frontPos = new List<int>();
         List<int> topPos = new List<int>();
         int frontBirds = 0;
@@ -143,20 +152,18 @@ public class fillEnemy : MonoBehaviour {
             }
           
             float rand = Random.Range(0, 1f);           
-            if (rand < 0.2f && hasWizards)
+            if (rand < wizardChance && hasWizards)
                 CreateEnemy(enemy, enemyType.wizard);
             else
                 CreateEnemy(enemy);            
             Enemies[enemyPos].SetActive(true);
         }
-        if (hasDrills) {
-            float drillrange = 0.3f;
-
-            if (frontPos.Count < 3 && frontPos.Count > 0 && Random.Range(0, 1f) < drillrange) {
+        if (hasDrills) {            
+            if (frontPos.Count < 3 && frontPos.Count > 0 && Random.Range(0, 1f) < drillChance) {
                 int id = frontPos[Random.Range(0, frontPos.Count)];
                 Enemies[id].GetComponent<Bird>().enemyType = enemyType.drill;
             }
-            if (topPos.Count < 3 && topPos.Count > 0 && Random.Range(0, 1f) < drillrange)
+            if (topPos.Count < 3 && topPos.Count > 0 && Random.Range(0, 1f) < drillChance)
             {
                 int id = topPos[Random.Range(0, topPos.Count)];
                 Enemies[id].GetComponent<Bird>().enemyType= enemyType.drill;
@@ -245,7 +252,6 @@ public class fillEnemy : MonoBehaviour {
 
     public void Reset()
     {
-        hasDrill = false;
        foreach(Bird enemy in Var.enemies)
         {
             if (enemy.inUse)

@@ -843,8 +843,7 @@ public class GuiContoler : MonoBehaviour {
 	{
 		
 		Var.enemies = new Bird[8];
-		Var.Infight = false;
-		GetComponent<fillEnemy>().hasDrill = false;
+		Var.Infight = false;		
         ProgressGUI.Instance.SetOnePortrait();       
 		foreach (Bird bird in players)
 		{
