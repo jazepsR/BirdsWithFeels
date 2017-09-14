@@ -475,6 +475,7 @@ public class Bird : MonoBehaviour
 	{
 	   
 		//if(!Var.Infight)
+        if(Var.CanShowHover)
 			showText();
 		if (isEnemy)
 		{
@@ -490,7 +491,7 @@ public class Bird : MonoBehaviour
 		}
 		//if(inMap)
 			//ProgressGUI.Instance.PortraitClick(this);
-		if (!inMap && !isEnemy && levelUpText != null && levelUpText != "" && !dragged && !Var.Infight)
+		if (!inMap && !isEnemy && levelUpText != null && levelUpText != "" && !dragged && !Var.Infight && Var.CanShowHover)
 			GuiContoler.Instance.ShowLvlText(levelUpText);
 	}
 	void OnMouseOver()

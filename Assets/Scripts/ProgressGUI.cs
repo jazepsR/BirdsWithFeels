@@ -76,7 +76,7 @@ public class ProgressGUI : MonoBehaviour {
 					lvl.gameObject.SetActive(false);         */     
 
 			}
-            if (Var.isTutorial || isFinal)
+            if (Var.isTutorial || isFinal || Var.currentStageID == 0)
                 lvl.gameObject.SetActive(false);
         }
 		skillBG.color = skillDefaultCol;

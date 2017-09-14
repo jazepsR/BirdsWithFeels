@@ -63,6 +63,7 @@ public class mainMenuScript : MonoBehaviour {
         Var.isBoss = false;
         ContinueBtn.interactable = false;
         Var.tutorialCompleted = false;
+        Var.gameSettings = new Settings();
     }
 }
 

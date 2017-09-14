@@ -42,43 +42,20 @@ public class SaveLoad : MonoBehaviour
         Var.map = data.map;
         Var.shownDialogs = data.usedDialogs;
         Var.shownEvents = data.usedEvents;
+        Var.gameSettings = data.gameSettings;
         List<Bird> activeBirds = new List<Bird>();
-       /* foreach(BirdSaveData birdData in data.activeBirds)
-        {
-            activeBirds.Add(FillPlayer.LoadSavedBird(birdData));
-        }
-        Var.activeBirds = activeBirds;*/
-       
-        
         List<Bird> availableBirds = new List<Bird>();
         foreach (BirdSaveData birdData in data.availableBirds)
         {
             availableBirds.Add(FillPlayer.LoadSavedBird(birdData));
         }
         Var.availableBirds = availableBirds;
-        //Load relationship birds
-        /*foreach (BirdSaveData birdData in data.availableBirds)
-        {
-            if (birdData.relationshipBird != EventScript.Character.None)
-            {
-                foreach (Bird bird in Var.availableBirds)
-                {
-                    if (bird.charName == birdData.charName)
-                    {
-                        bird.relationshipBird = Helpers.Instance.GetBirdFromEnum(birdData.relationshipBird,true);
-                    }
-                }
-            }
-        }*/
-
-
-
-        
     }
 }
 [Serializable]
 public class SaveData
 {
+    public Settings gameSettings;
     public List<MapSaveData> mapSaveData;
     public List<BirdSaveData> activeBirds;
     public List<BirdSaveData> availableBirds;
@@ -90,6 +67,7 @@ public class SaveData
         usedEvents = Var.shownEvents;
         usedDialogs = Var.shownDialogs;
         mapSaveData = Var.mapSaveData;
+        gameSettings = Var.gameSettings;
         activeBirds = new List<BirdSaveData>();
         foreach(Bird bird in Var.activeBirds)
         {
