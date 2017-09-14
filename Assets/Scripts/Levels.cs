@@ -160,7 +160,7 @@ public class Levels : MonoBehaviour {
 					}
 					break;
 				case type.Sophie:
-					if (myBird.x == -1 || TovaActivated)
+					if (myBird.x == -1 || TovaActivated || !GameLogic.Instance.CheckIfResting(myBird))
 						break;
 					foreach (LayoutButton tile in GetAdjacent())
 					{

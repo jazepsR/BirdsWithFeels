@@ -331,7 +331,7 @@ public class feedBack : MonoBehaviour {
 	
 	public void ShowFeedback(float value,Bird bird)
 	{
-		print(bird.charName + " win chance: " + value+ " is main:" +isMain);
+		//print(bird.charName + " win chance: " + value+ " is main:" +isMain);
 		if (isMain &&!BelowBirdIndicator.color.Equals(new Color(1f, 0, 0, 1f)))
 		{          
 			BelowBirdIndicator.color = new Color(1f, 0, 0, 1f);
