@@ -36,8 +36,10 @@ public class firendLine : MonoBehaviour {
 	}
 
 
-	public void DrawLines(int x, int y)
+	public void DrawLines()
 	{
+        int x = birdScript.x;
+        int y = birdScript.y;
 		if (x < 0 || y < 0)
 			return;
 		DrawLine(y, x + 1,horizontalLine);
@@ -62,7 +64,7 @@ public class firendLine : MonoBehaviour {
 			{
 
 
-                Vector3 pos = (birdScript.transform.position + Var.playerPos[y,x].transform.position)/ 2f;
+                Vector3 pos = (birdScript.target + Var.playerPos[y,x].target)/ 2f;
                 Quaternion rot = line.transform.rotation;
                 GameObject LineObj = Instantiate(line,pos, rot);
                 activeLines.Add(LineObj);

@@ -309,7 +309,7 @@ public class Bird : MonoBehaviour
 			//ObstacleGenerator.Instance.tiles[y * 4 + x].GetComponent<LayoutButton>().ApplyPower(this);
 		}
 		relationshipBonus = GetRelationshipBonus();
-        print(charName+ " playerRollBonus: "+ PlayerRollBonus + " GroundRollBonus: "+ GroundRollBonus);
+		print(charName+ " playerRollBonus: "+ PlayerRollBonus + " GroundRollBonus: "+ GroundRollBonus);
 		return levelRollBonus + PlayerRollBonus + GroundRollBonus + relationshipBonus;
 	}
 
@@ -564,15 +564,15 @@ public class Bird : MonoBehaviour
 			
 			if (!inMap)
 			{
-                if (!Var.Infight)
-                    ResetBonuses();
-                lines.RemoveLines();				
+				if (!Var.Infight)
+					ResetBonuses();
+				lines.RemoveLines();				
 				GuiContoler.Instance.HideLvlText();
 				GroundBonus.SetActive(false);
 				foreach (Bird bird in FillPlayer.Instance.playerBirds)
 				{			                    		
 					bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
-                    //bird.UpdateFeedback();			
+					//bird.UpdateFeedback();			
 				}
 				//levelControler.ApplyLevelOnPickup(this, levelList);
 				
@@ -1037,7 +1037,10 @@ public class Bird : MonoBehaviour
 		
 
 	}
-
+    void drawLines()
+    {
+        lines.DrawLines();
+    }
 	public void ReleaseBird(int x, int y)
 	{
 		
@@ -1056,8 +1059,9 @@ public class Bird : MonoBehaviour
 		Destroy(dustObj, 1.0f);
 		if (!inMap)
 		{
-			lines.DrawLines(x, y);
-			showText();			
+            LeanTween.delayedCall(0.15f, drawLines);
+            //lines.DrawLines();
+            showText();			
 			foreach (Bird bird in FillPlayer.Instance.playerBirds)
 			{
 				bird.levelControler.ApplyLevelOnDrop(bird, bird.levelList);				
@@ -1066,10 +1070,10 @@ public class Bird : MonoBehaviour
 			{
 				if(bird.x>=0 && bird.y>=0)
 					ObstacleGenerator.Instance.tiles[bird.x + 4 * bird.y].ApplyPower(bird);
-              
-            }
-            UpdateFeedback();
-        }
+			  
+			}
+			UpdateFeedback();
+		}
 
 		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		SetCoolDownRing(false);
