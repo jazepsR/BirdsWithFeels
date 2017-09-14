@@ -187,7 +187,8 @@ public class Tutorial : MonoBehaviour {
             case 0:
                  break;
             case 1:
-                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I became scared - due to me losing that last fight! I may be scared, but that strong emotion is making me stronger! Losing is not always bad. ");
+                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I became scared - due to me losing that last fight!. ");
+                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "But that strong emotion is making me stronger! Losing is not always bad.");
                 break;
             case 2:               
                 break;

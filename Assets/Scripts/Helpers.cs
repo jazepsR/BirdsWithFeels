@@ -54,7 +54,11 @@ public class Helpers : MonoBehaviour {
         if (inMap || useAll)
             birds = Var.availableBirds;
         else
-            birds = Var.activeBirds;
+        {
+            birds = new List<Bird>();
+            birds.AddRange(FillPlayer.Instance.playerBirds);
+        }
+         
 
         if(ch == EventScript.Character.Random)
         {

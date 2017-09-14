@@ -475,7 +475,7 @@ public class Bird : MonoBehaviour
 	{
 	   
 		//if(!Var.Infight)
-        if(Var.CanShowHover)
+		if(Var.CanShowHover)
 			showText();
 		if (isEnemy)
 		{
