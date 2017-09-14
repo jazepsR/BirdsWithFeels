@@ -214,7 +214,7 @@ public class GuiContoler : MonoBehaviour {
 		CanToggleDeathTriggers = false;
 		
 		LeanTween.delayedCall(0.05f, allowCall);
-		for(int i = 0; i < deadBirdToggles.Length; i++)
+		/*for(int i = 0; i < deadBirdToggles.Length; i++)
 		{
 			if (num != i)
 				deadBirdToggles[i].isOn = false;
@@ -222,11 +222,11 @@ public class GuiContoler : MonoBehaviour {
 			{
 				SelectDeathBirdBtn.interactable = deadBirdToggles[i].isOn;
 				if (deadBirdToggles[i].isOn)                
-					SelectedDeathBird = FillPlayer.Instance.deadBirds[num];                
+					//SelectedDeathBird = FillPlayer.Instance.deadBirds[num];                
 				else                
 					SelectedDeathBird = null;                 
 			}
-		}
+		}*/
 	}
 	void allowCall()
 	{

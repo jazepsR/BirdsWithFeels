@@ -13,7 +13,8 @@ public class LevelTutorial : MonoBehaviour {
     bool shouldShowGraphDiag2 = false;
 	bool shouldShowSecondBattleDialog = false;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
 		//Var.currentStageID = 1;
 		if (Var.currentStageID == 1 && !Var.gameSettings.shownLevelTutorial)
 		{
@@ -22,13 +23,13 @@ public class LevelTutorial : MonoBehaviour {
 			shouldShowGraphDialog = true;
             Var.CanShowHover = false;
             try
-            {
+            {               
                 Helpers.Instance.GetBirdFromEnum(EventScript.Character.Rebecca).showText();
             }
             catch { }
         }
 	}
-
+   
 	// Update is called once per frame
 	void Update()
 	{

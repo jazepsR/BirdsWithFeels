@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FillPlayer : MonoBehaviour {
 	public Bird[] playerBirds;
-	public Bird[] deadBirds;
+	//public Bird[] deadBirds;
 	public bool inMap = false;
 	public static FillPlayer Instance { get; private set; }
 	// Use this for initialization
@@ -70,10 +70,10 @@ public class FillPlayer : MonoBehaviour {
 				SetupBird(playerBirds[i], Var.activeBirds[i]);
 			}
 			List<Bird> inactive = Helpers.Instance.GetInactiveBirds();
-			for(int i=0; i < inactive.Count; i++)
+			/*for(int i=0; i < inactive.Count; i++)
 			{
 				SetupBird(deadBirds[i], inactive[i]);
-			}
+			}*/
 		}
 	   if (!inMap && Var.activeBirds.Count < 1)
 		{
