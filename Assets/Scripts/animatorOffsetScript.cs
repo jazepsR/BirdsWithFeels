@@ -5,15 +5,14 @@ using UnityEngine;
 public class animatorOffsetScript : MonoBehaviour {
 
     Animator anime;
-    public float offset;
+         float offset;
 
 	// Use this for initialization
 	void Start () {
         anime = GetComponent<Animator>();
-        if (offset == 0)
-        {
-            offset = Random.Range(0, 50)/10;
-        }
+       
+            offset = Random.Range(0.0f, 1.0f);
+        
 
         anime.SetFloat("offset", offset);
         //print( offset);
