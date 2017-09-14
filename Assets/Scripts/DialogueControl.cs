@@ -42,13 +42,20 @@ public class DialogueControl : MonoBehaviour {
     {
         if(testDialog != null)
         {
-            Bird dialogueBird = Helpers.Instance.GetBirdFromEnum(testDialog.speakers[0]);
-            speakers = new List<Bird>();
-            speakers.Add(dialogueBird);
-            CreateDialogue(testDialog);
+            CreateParticularDialog(testDialog);
         }
 
     }
+
+    public void CreateParticularDialog(Dialogue dialog)
+    {
+        Bird dialogueBird = Helpers.Instance.GetBirdFromEnum(dialog.speakers[0]);
+        speakers = new List<Bird>();
+        speakers.Add(dialogueBird);
+        CreateDialogue(dialog);
+
+    }
+
 	public void TryDialogue(Dialogue.Location location, EventScript.Character Char = EventScript.Character.None)
 	{
 

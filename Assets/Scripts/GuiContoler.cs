@@ -119,7 +119,8 @@ public class GuiContoler : MonoBehaviour {
 
 	void tryDialog()
 	{
-		DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+        if (Var.currentStageID != 1)       
+            DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);       
 	}
 	
     
@@ -620,9 +621,17 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void GraphButton()
 	{
+        if (LevelTutorial.shouldShowFirstBattleDialog)
+        {
+            LevelTutorial.shouldShowFirstBattleDialog = false;
+            LeanTween.delayedCall(0.05f, CloseTutorialText);
+        }               
 		InitiateGraph(selectedBird);
 	}
-
+    void CloseTutorialText()
+    {
+        speechBubbleObj.SetActive(false);       
+    }
 	public void InitiateGraph(Bird bird)
 	{
 		int index = -1;

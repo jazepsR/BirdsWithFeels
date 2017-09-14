@@ -34,15 +34,16 @@ public class GuiMap : MonoBehaviour {
             {
                 for (int i = 0; i < 2; i++)
                 {
+                    MapBattleData BattleStuff = new MapBattleData();
+                    BattleStuff.emotionPercentage.Add(1);
+                    BattleStuff.emotionType.Add(Var.Em.Neutral);
+                    Var.map.Add(new BattleData(Var.Em.Neutral, true, new List<Var.Em>() { Var.Em.Confident, Var.Em.Scared, Var.Em.Lonely, Var.Em.Friendly }, BattleStuff, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
+
                     MapBattleData BattleStuff2 = new MapBattleData();
                     BattleStuff2.emotionPercentage.Add(1);
                     BattleStuff2.emotionType.Add(Var.Em.Confident);
                     Var.map.Add(new BattleData(Var.Em.Confident, true, new List<Var.Em>() { Var.Em.Confident }, BattleStuff2, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
 
-                    MapBattleData BattleStuff = new MapBattleData();
-                    BattleStuff.emotionPercentage.Add(1);
-                    BattleStuff.emotionType.Add(Var.Em.Neutral);
-                    Var.map.Add(new BattleData(Var.Em.Neutral, true, new List<Var.Em>() { Var.Em.Confident, Var.Em.Scared,Var.Em.Lonely,Var.Em.Friendly },BattleStuff, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
                    
                 }
                 Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(),null));
