@@ -108,10 +108,11 @@ public class LayoutButton : MonoBehaviour
                 birdObj.GroundBonus.SetActive(true);
         }
         birdObj.isInfluenced = isInfluenced;
-        birdObj.groundConfBoos += ConfBonus;// *birdObj.groundMultiplier;
-        birdObj.groundFriendBoos += FriendBonus;// *birdObj.groundMultiplier;
-        birdObj.GroundRollBonus += RollBonus;
-        birdObj.PlayerRollBonus += PlayerRollBonus;
+        birdObj.groundConfBoos = ConfBonus;// *birdObj.groundMultiplier;
+        birdObj.groundFriendBoos = FriendBonus;// *birdObj.groundMultiplier;
+        birdObj.GroundRollBonus = RollBonus;
+        birdObj.PlayerRollBonus = PlayerRollBonus;
+        print(birdObj.charName+" apply power playerRollBonus: " + PlayerRollBonus + " groundRollBonus: " + RollBonus);
         if (birdObj.groundMultiplier > 1 && (ConfBonus!=0 || FriendBonus!=0 || RollBonus!=0 ))
             birdObj.GroundBonus.SetActive(true);
     }
