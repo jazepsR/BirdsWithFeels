@@ -303,7 +303,11 @@ public class GuiContoler : MonoBehaviour {
 			SpeechBubbleText.text = text;
 			speechBubbleObj.SetActive(true);
 			speechBubble.GetComponent<UIFollow>().target = pos;
-			AudioControler.Instance.PlayVoice();
+            try
+            {
+                AudioControler.Instance.PlayVoice();
+            }
+            catch { print("voice issue"); }
 		   // LeanTween.delayedCall(6f, ShowSpeechBubbleReminder);
 		}
 	   

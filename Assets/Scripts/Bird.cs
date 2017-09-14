@@ -569,11 +569,15 @@ public class Bird : MonoBehaviour
 				lines.RemoveLines();				
 				GuiContoler.Instance.HideLvlText();
 				GroundBonus.SetActive(false);
-				foreach (Bird bird in FillPlayer.Instance.playerBirds)
-				{			                    		
-					bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
-					//bird.UpdateFeedback();			
-				}
+                try
+                {
+                    foreach (Bird bird in FillPlayer.Instance.playerBirds)
+                    {
+                        bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
+                        //bird.UpdateFeedback();			
+                    }
+                }
+                catch { }
 				//levelControler.ApplyLevelOnPickup(this, levelList);
 				
 			}
@@ -1061,18 +1065,24 @@ public class Bird : MonoBehaviour
 		{
             LeanTween.delayedCall(0.15f, drawLines);
             //lines.DrawLines();
-            showText();			
-			foreach (Bird bird in FillPlayer.Instance.playerBirds)
-			{
-				bird.levelControler.ApplyLevelOnDrop(bird, bird.levelList);				
-			}
-			foreach (Bird bird in FillPlayer.Instance.playerBirds)
-			{
-				if(bird.x>=0 && bird.y>=0)
-					ObstacleGenerator.Instance.tiles[bird.x + 4 * bird.y].ApplyPower(bird);
-			  
-			}
-			UpdateFeedback();
+            showText();
+            try
+            {
+                foreach (Bird bird in FillPlayer.Instance.playerBirds)
+                {
+                    bird.levelControler.ApplyLevelOnDrop(bird, bird.levelList);
+                }
+                foreach (Bird bird in FillPlayer.Instance.playerBirds)
+                {
+                    if (bird.x >= 0 && bird.y >= 0)
+                        ObstacleGenerator.Instance.tiles[bird.x + 4 * bird.y].ApplyPower(bird);
+
+                }
+                UpdateFeedback();
+            }
+            catch {
+                UpdateFeedback();
+            }
 		}
 
 		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
