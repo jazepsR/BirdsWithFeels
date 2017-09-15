@@ -518,19 +518,19 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Brave1:
                 return "Win two fights at once";
             case Levels.type.Brave2:
-                return "Win 6 fights in a row";
+                return "Win 5 fights in a row";
             case Levels.type.Friend1:
-                return "Surrounded by teammates(AKA gain + 3 or more social in one turn) and win a fight";
+                return "gain + 5 or more social in one turn and and win a fight";
             case Levels.type.Friend2:
                 return "Be close to a friendly bird and gain + 5 or more social in one turn";
             case Levels.type.Lonely1:
-                return "No teammates to be seen in all four directions + diagonally! at the same time, Win a fight";
+                return "No teammates to be seen in all four directions + diagonally! At the same time, Win a fight";
             case Levels.type.Lonely2:
                 return "The bird is not used for two adventures in a row. Then, spend a fight all alone";
             case Levels.type.Scared1:
                 return "Lose a fight while being close to a friendly bird winning a fight";
             case Levels.type.Scared2:
-                return "Rest 4 turns in a row";
+                return "Rest 3 turns in a row";
             default:
                 return "Error in level up text";
         }

@@ -30,7 +30,8 @@ public class Bird : MonoBehaviour
 	public string charName;	
 	public bool inUse = true;	
 	public SpriteRenderer colorRenderer;    
-	List<SpriteRenderer> colorSprites;
+    [HideInInspector]
+	public List<SpriteRenderer> colorSprites;
 	public GameObject bush;    
 	[HideInInspector]
 	public GameObject portrait;	
@@ -573,13 +574,19 @@ public class Bird : MonoBehaviour
                 {
                     foreach (Bird bird in FillPlayer.Instance.playerBirds)
                     {
-                        bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
+                        if (bird.charName != charName)
+                        {
+                            bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
+                            bird.levelControler.ApplyLevelOnDrop(bird, bird.levelList);
+                        }
                         //bird.UpdateFeedback();			
                     }
                 }
-                catch { }
-				//levelControler.ApplyLevelOnPickup(this, levelList);
-				
+                catch {
+                    levelControler.ApplyLevelOnPickup(this, levelList);
+                }
+				levelControler.ApplyLevelOnPickup(this, levelList);
+                UpdateFeedback();
 			}
 			
 			// RemoveAllFeedBack();
@@ -1068,9 +1075,14 @@ public class Bird : MonoBehaviour
             showText();
             try
             {
+                levelControler.ApplyLevelOnDrop(this, levelList);
                 foreach (Bird bird in FillPlayer.Instance.playerBirds)
                 {
-                    bird.levelControler.ApplyLevelOnDrop(bird, bird.levelList);
+                    if (bird.charName != charName)
+                    {
+                        bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
+                        bird.levelControler.ApplyLevelOnDrop(bird, bird.levelList);
+                    }
                 }
                 foreach (Bird bird in FillPlayer.Instance.playerBirds)
                 {

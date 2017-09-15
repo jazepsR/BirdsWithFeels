@@ -47,6 +47,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     public bool hasWizards = false;
     public bool hasDrills = false;
     public Bird birdToAdd;
+    public EventScript birdToAddScript;
     ShowTooltip tooltipInfo;
     List<Var.Em> totalEmotions;
     List<float> totalPercentages;
@@ -190,15 +191,11 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
                     break;
                 }
             }
-            if (canAdd)
+            if (canAdd && birdToAdd != null && birdToAddScript != null)
             {
                 birdToAdd.gameObject.SetActive(true);
                 Var.availableBirds.Add(birdToAdd);
-                birdToAdd.publicStart();
-                string title = "<name> joins your party!";
-                string text = "Your party has grown in renown and <name> has decided to join! How will he fit in? Who will he become on this adventure?";
-                EventScript joinEvent = new EventScript(Helpers.Instance.GetCharEnum(birdToAdd), title, text);
-                EventController.Instance.CreateEvent(joinEvent);
+                EventController.Instance.CreateEvent(birdToAddScript);
             }
 
 

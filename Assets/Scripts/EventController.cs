@@ -25,6 +25,7 @@ public class EventController : MonoBehaviour {
 	Bird currentBird;
 	public List<Transform> areaDialogues;
 	List<GameObject> portraits;
+    List<Color> colors;
 	//List<string> texts;    
 	int currentText = 0;
 	// Use this for initialization
@@ -33,28 +34,29 @@ public class EventController : MonoBehaviour {
 	}
 	void Start()
 	{
-        try
-        {
-            events.AddRange(areaDialogues[Var.currentBG].GetComponentsInChildren<EventScript>());
-        }
-        catch
-        {
+		try
+		{
+			events.AddRange(areaDialogues[Var.currentBG].GetComponentsInChildren<EventScript>());
+		}
+		catch
+		{
 
-        }
-        LeanTween.delayedCall(0.1f, TestEvent);
-       
-    }
+		}
+		LeanTween.delayedCall(0.1f, TestEvent);
+	   
+	}
 
 
-    void TestEvent()
-    {
-        if (testEvent != null)
-            CreateEvent(testEvent);
-    }
+	void TestEvent()
+	{
+		if (testEvent != null)
+			CreateEvent(testEvent);
+	}
 	public void ContinueBtn()
 	{
 		
 		currentText++;
+        print("currentText: " + currentText);
 		AudioControler.Instance.ClickSound();
 		if (currentText < currentEvent.parts.Count-1)
 		{
@@ -64,9 +66,9 @@ public class EventController : MonoBehaviour {
 		}
 		if (currentText == currentEvent.parts.Count-1)
 		{
-            text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
-            SetPortrait(currentText);
-            continueBtn.SetActive(false);
+			text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
+			SetPortrait(currentText);
+			continueBtn.SetActive(false);
 			CreateChoices();
 			return;         
 		}
@@ -154,7 +156,7 @@ public class EventController : MonoBehaviour {
 		{
 			Var.shownEvents.Add(eventData.heading);
 		}
-        
+		
 		choiceList.gameObject.SetActive(false);
 		currentText = 0;
 		if (!inMap)
@@ -162,8 +164,9 @@ public class EventController : MonoBehaviour {
 			GuiContoler.Instance.battlePanel.SetActive(false);
 		}
 		currentEvent = eventData;
-        currentEvent.parts.AddRange(eventData.transform.GetComponentsInChildren<EventPart>());
-        if (eventData.speakers[0] != EventScript.Character.None)
+        currentEvent.parts = new List<EventPart>();
+		currentEvent.parts.AddRange(eventData.transform.GetComponentsInChildren<EventPart>());
+		if (eventData.speakers[0] != EventScript.Character.None)
 		{
 			try
 			{
@@ -173,9 +176,21 @@ public class EventController : MonoBehaviour {
 			//currentPortrait = currentBird.portrait;
 		}
 		portraits = new List<GameObject>();
+        colors = new List<Color>();
 		foreach(EventScript.Character Char in eventData.speakers)
 		{
 			portraits.Add(Helpers.Instance.GetPortrait(Char));
+            try
+            {
+                Color col = Helpers.Instance.GetEmotionColor(Helpers.Instance.GetBirdFromEnum(Char).emotion);
+                colors.Add(col);
+
+            }
+            catch
+            {
+                colors.Add(Helpers.Instance.GetEmotionColor(Helpers.Instance.RandomEmotion()));
+            }
+            
 		}
 
 
@@ -215,8 +230,8 @@ public class EventController : MonoBehaviour {
 				portraitFill.gameObject.SetActive(true);
 				portrait.gameObject.SetActive(true);
 				portraitFill.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird_color").GetComponent<Image>().sprite;
-				portraitFill.color = Helpers.Instance.GetEmotionColor(Helpers.Instance.RandomEmotion());
-				portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird").GetComponent<Image>().sprite;
+                portraitFill.color = colors[currentEvent.parts[currentText].speakerId];
+                portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird").GetComponent<Image>().sprite;
 			}
 			catch
 			{
@@ -257,12 +272,12 @@ public class EventController : MonoBehaviour {
 		string consequences = ApplyConsequences(ID);
 		if (currentBird != null)
 		{
-            try
-            {
-                currentBird.AddRoundBonuses(false);
-                currentBird.showText();
-            }
-            catch { }
+			try
+			{
+				currentBird.AddRoundBonuses(false);
+				currentBird.showText();
+			}
+			catch { }
 		}
 		foreach (Transform child in choiceList)
 		{
@@ -289,8 +304,8 @@ public class EventController : MonoBehaviour {
 		string ConsequenceText = ApplyConsequence(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1);
 		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2);
 		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3);
-        if(currentBird!= null)
-		    currentBird.SetEmotion();        
+		if(currentBird!= null)
+			currentBird.SetEmotion();        
 		return ConsequenceText;
 
 	}
