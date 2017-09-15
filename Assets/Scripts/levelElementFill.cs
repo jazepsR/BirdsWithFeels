@@ -13,6 +13,6 @@ public class levelElementFill : MonoBehaviour {
 	public void FillLevel(LevelData data)
     {
         icon.sprite = data.LVLIcon;
-        Description.text = Helpers.Instance.GetLVLInfoText(data.type);
+        Description.text ="<b>"+ Helpers.Instance.GetLevelTitle(data.type)+"</b>\n"+ Helpers.Instance.GetLVLInfoText(data.type);
     }
 }

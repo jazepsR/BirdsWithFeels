@@ -12,6 +12,7 @@ public class Tutorial : MonoBehaviour {
     public Var.Em[] forthStageEnemies;
     public Var.Em[] fifthStageEnemies;
     public Var.Em[] sixthStageEnemies;
+    public EventScript AddAlexEvent;
     public List<List<TutorialEnemy>> TutorialMap = new List<List<TutorialEnemy>>();
     public List<int> BirdCount;
     [HideInInspector]
@@ -24,8 +25,7 @@ public class Tutorial : MonoBehaviour {
     bool showedThirdBirdReportText = false;
     bool[] shownMapInfos = new bool[6];
     // Use this for initialization
-    void Awake () {
-        
+    void Awake () {        
         if (!Var.isTutorial)
             return;
         CurrentPos = 0;
@@ -107,9 +107,10 @@ public class Tutorial : MonoBehaviour {
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You'll also gain some scaredness!");
                 break;
             case 4:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[2], "Hey guys! Can I join your team?");
+                EventController.Instance.CreateEvent(AddAlexEvent);
+                /*GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[2], "Hey guys! Can I join your team?");
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Eh I guess sure!");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Birds usually fight in teams of three, so this is perfect!");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Birds usually fight in teams of three, so this is perfect!");*/
                 break;
             case 5:
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "This looks dangerous!");

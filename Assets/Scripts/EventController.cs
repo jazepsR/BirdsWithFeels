@@ -257,8 +257,12 @@ public class EventController : MonoBehaviour {
 		string consequences = ApplyConsequences(ID);
 		if (currentBird != null)
 		{
-			currentBird.AddRoundBonuses(false);
-			currentBird.showText();
+            try
+            {
+                currentBird.AddRoundBonuses(false);
+                currentBird.showText();
+            }
+            catch { }
 		}
 		foreach (Transform child in choiceList)
 		{

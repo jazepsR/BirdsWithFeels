@@ -7,10 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
-    public GameObject kingMouth;
-    public GameObject playerMouth;
+	public GameObject kingMouth;
+	public GameObject playerMouth;
 	public Text EmotionChangeFeedback;
-	public Text ToggleRelationPanelText;
+    public Text EmotionChangeHeading;
+    public Text ToggleRelationPanelText;
 	public GameObject relationshipPortrait;
 	public Text relationshipText;
 	public GameObject reportRelationshipPortrait;
@@ -119,12 +120,12 @@ public class GuiContoler : MonoBehaviour {
 
 	void tryDialog()
 	{
-        if (Var.currentStageID != 1)       
-            DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);       
+		if (Var.currentStageID != 1)       
+			DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);       
 	}
 	
-    
-    
+	
+	
 	public void StatToggle()
 	{
 		if (relationshipPanel.activeSelf)
@@ -166,8 +167,8 @@ public class GuiContoler : MonoBehaviour {
 	{
 		if(!Var.tutorialCompleted)
 		{
-            Time.timeScale = 1.0f;
-            SceneManager.LoadScene("MainMenu");
+			Time.timeScale = 1.0f;
+			SceneManager.LoadScene("MainMenu");
 			return;
 		}
 		int livingCount = 0;
@@ -254,14 +255,14 @@ public class GuiContoler : MonoBehaviour {
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
-                    if (!Var.isBoss && !inMap)
-                    {
-                        ///GameObject dustObj = Instantiate(Var.dustCloud, boss.transform.position, Quaternion.identity);
-                        //dustObj.transform.localPosition = Vector3.zero;                       
-                        //Destroy(dustObj, 1.0f);
-                        boss.SetActive(false);
-                       
-                    }
+					if (!Var.isBoss && !inMap)
+					{
+						///GameObject dustObj = Instantiate(Var.dustCloud, boss.transform.position, Quaternion.identity);
+						//dustObj.transform.localPosition = Vector3.zero;                       
+						//Destroy(dustObj, 1.0f);
+						boss.SetActive(false);
+					   
+					}
 					
 					if (!inMap)
 					{
@@ -302,7 +303,11 @@ public class GuiContoler : MonoBehaviour {
 			SpeechBubbleText.text = text;
 			speechBubbleObj.SetActive(true);
 			speechBubble.GetComponent<UIFollow>().target = pos;
-			AudioControler.Instance.PlayVoice();
+            try
+            {
+                AudioControler.Instance.PlayVoice();
+            }
+            catch { print("voice issue"); }
 		   // LeanTween.delayedCall(6f, ShowSpeechBubbleReminder);
 		}
 	   
@@ -328,14 +333,14 @@ public class GuiContoler : MonoBehaviour {
 		if (currentGraph == 3)
 		{
 			CreateGraph(-1);
-            ProgressGUI.Instance.AllPortraitClick();
+			ProgressGUI.Instance.AllPortraitClick();
 		}
 		else
 		{
 			CreateGraph(currentGraph);
-            ProgressGUI.Instance.SetOnePortrait();
-            ProgressGUI.Instance.SetOnePortrait();
-            ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+			ProgressGUI.Instance.SetOnePortrait();
+			ProgressGUI.Instance.SetOnePortrait();
+			ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
 		}
 		
 		
@@ -345,8 +350,8 @@ public class GuiContoler : MonoBehaviour {
 	{
 		currentGraph--;
 		CreateGraph(currentGraph);
-        ProgressGUI.Instance.SetOnePortrait();
-        ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+		ProgressGUI.Instance.SetOnePortrait();
+		ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
 		
 	   
 		
@@ -361,15 +366,15 @@ public class GuiContoler : MonoBehaviour {
 	public void MoveLvlText()
 	{
 		if(selectedBird.levelUpText != null)
-        {
-            LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoshowXValue, -200, 0), 0.3f).setEase(LeanTweenType.easeOutBack);
-        }
+		{
+			LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoshowXValue, -200, 0), 0.3f).setEase(LeanTweenType.easeOutBack);
+		}
 
-    }
+	}
 	public void HideLvlText()
 	{
-        //BirdLVLUpText.text = "";
-        LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoHideXValue, -200, 0), 0.3f).setEase(LeanTweenType.easeInBack);
+		//BirdLVLUpText.text = "";
+		LeanTween.moveLocal(BirdLVLUpText.transform.parent.gameObject, new Vector3(levelinfoHideXValue, -200, 0), 0.3f).setEase(LeanTweenType.easeInBack);
 		//BirdLVLUpText.transform.parent.gameObject.SetActive(false);-340
 
 	}
@@ -508,8 +513,10 @@ public class GuiContoler : MonoBehaviour {
 			//Normal case
 			DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]));
 			EmotionChangeFeedback.gameObject.SetActive(true);
-			EmotionChangeFeedback.text = CreateEmotionChangeText(Var.activeBirds[birdNum]);
-		}
+            string changeText = CreateEmotionChangeText(Var.activeBirds[birdNum]);
+            EmotionChangeFeedback.text = changeText;
+            EmotionChangeHeading.gameObject.SetActive(changeText != "");
+        }
 		else
 		{
 			//Summary
@@ -621,17 +628,17 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void GraphButton()
 	{
-        if (LevelTutorial.shouldShowFirstBattleDialog)
-        {
-            LevelTutorial.shouldShowFirstBattleDialog = false;
-            LeanTween.delayedCall(0.05f, CloseTutorialText);
-        }               
+		if (LevelTutorial.shouldShowFirstBattleDialog)
+		{
+			LevelTutorial.shouldShowFirstBattleDialog = false;
+			LeanTween.delayedCall(0.05f, CloseTutorialText);
+		}               
 		InitiateGraph(selectedBird);
 	}
-    void CloseTutorialText()
-    {
-        speechBubbleObj.SetActive(false);       
-    }
+	void CloseTutorialText()
+	{
+		speechBubbleObj.SetActive(false);       
+	}
 	public void InitiateGraph(Bird bird)
 	{
 		int index = -1;
@@ -680,8 +687,8 @@ public class GuiContoler : MonoBehaviour {
 
 			string winDetString = winNo + " / 3 Battles won!";
 			winDetails.text = winDetString;
-        if (Var.isTutorial)
-            winDetails.text = "";
+		if (Var.isTutorial)
+			winDetails.text = "";
 		}
 
 
@@ -865,7 +872,7 @@ public class GuiContoler : MonoBehaviour {
 		
 		Var.enemies = new Bird[8];
 		Var.Infight = false;		
-        ProgressGUI.Instance.SetOnePortrait();       
+		ProgressGUI.Instance.SetOnePortrait();       
 		foreach (Bird bird in players)
 		{
 			bird.ResetBonuses();          
@@ -902,7 +909,7 @@ public class GuiContoler : MonoBehaviour {
 		Var.playerPos = new Bird[4, 4];
 		foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
 		{
-            tile.gameObject.SetActive(true);
+			tile.gameObject.SetActive(true);
 			tile.Reset();
 		}
 
@@ -1007,7 +1014,7 @@ public class GuiContoler : MonoBehaviour {
 		if (nextMapArea == Var.Em.finish)
 		{
 			Var.isTutorial = false;
-            Var.tutorialCompleted = true;
+			Var.tutorialCompleted = true;
 			Var.isBoss = false;
 			winBanner.SetActive(true);
 			mapPos = 0;

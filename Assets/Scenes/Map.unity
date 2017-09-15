@@ -3473,12 +3473,12 @@ Prefab:
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 101
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -251
+      value: -891
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -3543,7 +3543,7 @@ Prefab:
         type: 2}
       propertyPath: targets.Array.data[0]
       value: 
-      objectReference: {fileID: 309299215}
+      objectReference: {fileID: 448800156}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: length
@@ -5988,12 +5988,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
     type: 2}
   m_PrefabInternal: {fileID: 309299213}
---- !u!114 &309299215 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
-    type: 2}
-  m_PrefabInternal: {fileID: 309299213}
-  m_Script: {fileID: 11500000, guid: 759a613d3738b784f882023685cb836d, type: 3}
 --- !u!1 &311739514
 GameObject:
   m_ObjectHideFlags: 0
@@ -8306,12 +8300,12 @@ Prefab:
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -312
+      value: -148
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -251
+      value: -794
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -8535,6 +8529,16 @@ Prefab:
       propertyPath: maxEnemies
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: addBirdOnComplete
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: birdToAdd
+      value: 
+      objectReference: {fileID: 164446746}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
   m_IsPrefabParent: 0
@@ -9938,7 +9942,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: targets.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -9988,12 +9992,12 @@ Prefab:
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -121.2
+      value: -34
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -701.5
+      value: -1154
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -10186,13 +10190,13 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: addBirdOnComplete
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: birdToAdd
       value: 
-      objectReference: {fileID: 164446746}
+      objectReference: {fileID: 0}
     - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
       propertyPath: m_IsActive
       value: 1
@@ -12188,6 +12192,7 @@ MonoBehaviour:
   kingMouth: {fileID: 0}
   playerMouth: {fileID: 0}
   EmotionChangeFeedback: {fileID: 0}
+  EmotionChangeHeading: {fileID: 0}
   ToggleRelationPanelText: {fileID: 0}
   relationshipPortrait: {fileID: 320999942}
   relationshipText: {fileID: 2011968247}
@@ -13182,7 +13187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &748782884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14503,7 +14508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &827790622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16536,7 +16541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &940840525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17469,7 +17474,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 940840521}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.85, y: -0.69, z: 0}
+  m_LocalPosition: {x: -1.53, y: -0.69, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 1004801777}
@@ -19685,7 +19690,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: targets.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -19944,13 +19949,13 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: addBirdOnComplete
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: birdToAdd
       value: 
-      objectReference: {fileID: 362185450}
+      objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: mainEmotionSpawnRate
@@ -20632,6 +20637,11 @@ Prefab:
       propertyPath: battles.Array.size
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: targets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -20675,12 +20685,12 @@ Prefab:
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -38.4
+      value: -322
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -1158.1
+      value: -1333
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -20755,7 +20765,7 @@ Prefab:
         type: 2}
       propertyPath: targets.Array.data[0]
       value: 
-      objectReference: {fileID: 1349252704}
+      objectReference: {fileID: 1763941220}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: length
@@ -20910,6 +20920,21 @@ Prefab:
       propertyPath: unlockedRoad
       value: 
       objectReference: {fileID: 413295978}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: targets.Array.data[1]
+      value: 
+      objectReference: {fileID: 1349252704}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: addBirdOnComplete
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: birdToAdd
+      value: 
+      objectReference: {fileID: 1364067972}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
   m_IsPrefabParent: 0
@@ -23915,12 +23940,12 @@ Prefab:
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -382
+      value: -106
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -89
+      value: -659
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -33003,7 +33028,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 748782880}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.453, y: -0.69, z: 0}
+  m_LocalPosition: {x: -0.83, y: -0.69, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children:
   - {fileID: 1231924874}
@@ -33677,7 +33702,7 @@ Prefab:
         type: 2}
       propertyPath: targets.Array.data[0]
       value: 
-      objectReference: {fileID: 1349252704}
+      objectReference: {fileID: 448800156}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: length
