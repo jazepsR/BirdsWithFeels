@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
+    public Image[] vingette;
 	public GameObject kingMouth;
 	public GameObject playerMouth;
 	public Text EmotionChangeFeedback;
@@ -255,6 +256,7 @@ public class GuiContoler : MonoBehaviour {
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
+
 					if (!Var.isBoss && !inMap)
 					{
 						///GameObject dustObj = Instantiate(Var.dustCloud, boss.transform.position, Quaternion.identity);
@@ -266,7 +268,11 @@ public class GuiContoler : MonoBehaviour {
 					
 					if (!inMap)
 					{
-						CheckGraphNavBtns();
+                        foreach (Image img in vingette)
+                        {
+                            LeanTween.alpha(img.rectTransform, 0, 0.5f);
+                        }
+                        CheckGraphNavBtns();
 					}
 					
 				}
@@ -302,7 +308,11 @@ public class GuiContoler : MonoBehaviour {
 			}
 			SpeechBubbleText.text = text;
 			speechBubbleObj.SetActive(true);
-			speechBubble.GetComponent<UIFollow>().target = pos;
+            foreach (Image img in vingette)
+            {
+                LeanTween.alpha(img.rectTransform, 0.5f, 0.5f);
+            }
+            speechBubble.GetComponent<UIFollow>().target = pos;
             try
             {
                 AudioControler.Instance.PlayVoice();

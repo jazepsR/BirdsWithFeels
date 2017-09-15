@@ -509,8 +509,16 @@ public class Helpers : MonoBehaviour {
 
 
     }
+    public string GetLVLProgress(Levels.type type, Bird bird)
+    {
+        switch (type)
+        {
+            case Levels.type.Brave2:
 
-
+            default:
+                return "";
+        }
+    }
     public string GetLVLRequirements(Levels.type type)
     {
         switch (type)
