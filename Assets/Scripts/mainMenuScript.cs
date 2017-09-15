@@ -8,7 +8,8 @@ public class mainMenuScript : MonoBehaviour {
     public Text title;
     public Color titleColor2;
     Color titleColor;
-    public Button ContinueBtn;   
+    public Button ContinueBtn;
+    public cutScene cutsceneScript;
     void Start()
     {
         titleColor = title.color;
@@ -36,7 +37,8 @@ public class mainMenuScript : MonoBehaviour {
     {
         ResetGame();
         Var.isTutorial = true;
-        SceneManager.LoadScene("NewMain");
+        cutsceneScript.StartCutscene();
+        //SceneManager.LoadScene("NewMain");
     }
     public void SecretStartClick()
     {
