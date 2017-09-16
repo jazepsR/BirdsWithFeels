@@ -455,11 +455,11 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Friend2:
                 return "<name> has found a way to help their friends even more! Applying massage techniques passed down from the friendship gods, <name> can now fully heal team mates if given the time!".Replace("<name>", name);
             case Levels.type.Lonely1:
-                return "As <name> succeeds to successfully fend of the enemy threatening them, their independence reaches new heights! Through deep soliditary meditation coupled with the rush of victory, <name> realizes that all emotions are just a result of circumstances. By applying this to team mates, <name> can intensify their emotional changes!".Replace("<name>", name);
+                return "Through deep soliditary meditation coupled with the rush of victory, <name> realizes that all emotions are just a result of circumstances. <name> realizes they can intensify the emotions of their teammates!".Replace("<name>", name);
             case Levels.type.Lonely2:
                 return "All this alone time was a great chance for <name> to do some serious studying! Through careful observation, <name> has percieved that life is but a series of turns, which can be manipulated with the right tools. ".Replace("<name>", name);
             case Levels.type.Scared1:
-                return "As <name> hits the ground from losing their fight, they look up to see their teammate succeeding. <name> realizes the depths of their incompetence, were they ever fit for battle? They resolve to help the team with more cunning means - by weakening the enemy. ".Replace("<name>", name);
+                return "<name> realizes the depths of their incompetence. Were they ever fit for battle? They resolve to help the team with more cunning means - by weakening the enemy.  ".Replace("<name>", name);
             case Levels.type.Scared2:
                 return "Direct combat is definetelly not for <name>! They prefers to attack his enemies from behind and let teammates finish the job! ".Replace("<name>", name);
             default:
@@ -865,7 +865,7 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Scared2:
                 return "Backstabbing. If in stealth, bird does not fight enemies. All enemies passing by bird gains -30% chance to win. Toggle stealth by clicking bird";
             case Levels.type.Lonely1:
-                return "All birds in the same column gain +1 loneliness";
+                return "Emo Intensifier - All birds in the same column's emotional changes are increased by +2";
             case Levels.type.Lonely2:
                 return " if resting, reroll all battles. 3 turn cooldown";
             case Levels.type.Alexander:

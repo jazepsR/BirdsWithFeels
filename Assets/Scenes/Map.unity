@@ -579,7 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd381716cc3883418c398822b233976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emotionType: 010000000a000000
+  emotionType: 070000000a000000
   emotionPercentage:
   - 0.7
   - 0.3
@@ -1573,6 +1573,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &153427852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2487,6 +2488,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &171914121
 GameObject:
   m_ObjectHideFlags: 0
@@ -3218,6 +3220,10 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1133084286298400, guid: ad8acf0bd215db74884b964d95b969f3, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ad8acf0bd215db74884b964d95b969f3, type: 2}
   m_IsPrefabParent: 0
@@ -3429,7 +3435,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -3558,7 +3564,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: type
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -3632,7 +3638,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: levelName
-      value: Bird city
+      value: Soliditary hills
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -3667,32 +3673,53 @@ Prefab:
         type: 2}
       propertyPath: battles.Array.data[0]
       value: 
-      objectReference: {fileID: 1548821033}
+      objectReference: {fileID: 1814722680}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[1]
       value: 
-      objectReference: {fileID: 1548821033}
+      objectReference: {fileID: 1814722680}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[2]
       value: 
-      objectReference: {fileID: 1548821033}
+      objectReference: {fileID: 1679394478}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[3]
       value: 
-      objectReference: {fileID: 1548821033}
+      objectReference: {fileID: 1814722680}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[4]
       value: 
-      objectReference: {fileID: 1976071737}
+      objectReference: {fileID: 1679394478}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: unlockedRoad
       value: 
       objectReference: {fileID: 2046980759}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: levelDescription
+      value: 'A number of soliditary vultures reside in these hills, eager to smack
+        you down. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: minEnemies
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: maxEnemies
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: background
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
   m_IsPrefabParent: 0
@@ -8200,7 +8227,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -8294,7 +8321,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
       propertyPath: m_Name
-      value: lvl 4 B (neutral)
+      value: lvl 4 B (neutral) rando
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -8324,7 +8351,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: birdLVL
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -8403,7 +8430,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: levelName
-      value: Bird city
+      value: Mountain's shadow
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -8438,22 +8465,22 @@ Prefab:
         type: 2}
       propertyPath: battles.Array.data[0]
       value: 
-      objectReference: {fileID: 1548821033}
+      objectReference: {fileID: 861202022}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[1]
       value: 
-      objectReference: {fileID: 1548821033}
+      objectReference: {fileID: 861202022}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[2]
       value: 
-      objectReference: {fileID: 1548821033}
+      objectReference: {fileID: 861202022}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[3]
       value: 
-      objectReference: {fileID: 396335614}
+      objectReference: {fileID: 861202022}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[4]
@@ -8462,7 +8489,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: minEnemies
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -8472,7 +8499,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: maxEnemies
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -8495,6 +8522,16 @@ Prefab:
       propertyPath: unlockedRoad
       value: 
       objectReference: {fileID: 1827155680}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: levelDescription
+      value: Darkness creeps upon you - unknown enemies lurk ahead
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: background
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
   m_IsPrefabParent: 0
@@ -8650,6 +8687,7 @@ SpriteRenderer:
   m_Size: {x: 2.63, y: 2.33}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &475859774
 GameObject:
   m_ObjectHideFlags: 0
@@ -9888,6 +9926,7 @@ SpriteRenderer:
   m_Size: {x: 2.63, y: 2.33}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1001 &529536230
 Prefab:
   m_ObjectHideFlags: 0
@@ -9903,7 +9942,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.size
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -10047,7 +10086,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: type
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -10121,7 +10160,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: levelName
-      value: Party cave
+      value: Unsettling farm
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -10161,22 +10200,22 @@ Prefab:
         type: 2}
       propertyPath: battles.Array.data[0]
       value: 
-      objectReference: {fileID: 1814722680}
+      objectReference: {fileID: 71626196}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[2]
       value: 
-      objectReference: {fileID: 768381305}
+      objectReference: {fileID: 1679394478}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[1]
       value: 
-      objectReference: {fileID: 768381305}
+      objectReference: {fileID: 71626196}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[3]
       value: 
-      objectReference: {fileID: 1814722680}
+      objectReference: {fileID: 71626196}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[4]
@@ -10190,8 +10229,8 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: levelDescription
-      value: 'A strange band of party birds have taken residense in the cave leading
-        to the great plains. '
+      value: 'A group of vultures have become scared of the crushing pressure of reality
+        and now hides in the farmlands, ready to pounce on you. '
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -10208,6 +10247,11 @@ Prefab:
       propertyPath: unlockedRoad
       value: 
       objectReference: {fileID: 1498607052}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: background
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
   m_IsPrefabParent: 0
@@ -10517,6 +10561,105 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 563893730}
+--- !u!1 &569126218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1999649063770212, guid: 893a3cdec287067418e9ce268d4f13ea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 569126219}
+  - component: {fileID: 569126222}
+  - component: {fileID: 569126221}
+  - component: {fileID: 569126220}
+  m_Layer: 5
+  m_Name: BG (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &569126219
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 224204747005742658, guid: 893a3cdec287067418e9ce268d4f13ea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 569126218}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1975439756}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -15.000002, y: 8.999037}
+  m_SizeDelta: {x: 1741, y: 1237}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!61 &569126220
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 61362418058178502, guid: 893a3cdec287067418e9ce268d4f13ea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 569126218}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 2.3624573, y: -2.5460815}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1269.4888, y: 888.5963}
+  m_EdgeRadius: 0
+--- !u!114 &569126221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114914533562244856, guid: 893a3cdec287067418e9ce268d4f13ea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 569126218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.9852941, g: 0.97909856, b: 0.760705, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 83ec67eb03234d34f950ec6e08c1d78c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &569126222
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222678848408579402, guid: 893a3cdec287067418e9ce268d4f13ea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 569126218}
 --- !u!1 &569298917
 GameObject:
   m_ObjectHideFlags: 0
@@ -12712,6 +12855,7 @@ SpriteRenderer:
   m_Size: {x: 5.15, y: 0.37}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &715279072
 GameObject:
   m_ObjectHideFlags: 0
@@ -13898,12 +14042,13 @@ Prefab:
     - target: {fileID: 114318317950056012, guid: 9f058c7db173d3e43a338bbc64ffc2fe,
         type: 2}
       propertyPath: text
-      value: Now we have dialogs everywhere
+      value: 'This one dosen''t fit my style. I want more flowers on there.. or maybe
+        some knives? '
       objectReference: {fileID: 0}
     - target: {fileID: 114727846506153714, guid: 9f058c7db173d3e43a338bbc64ffc2fe,
         type: 2}
       propertyPath: text
-      value: This is the map dialog system
+      value: Could we get a new car?
       objectReference: {fileID: 0}
     - target: {fileID: 114751699958703836, guid: 9f058c7db173d3e43a338bbc64ffc2fe,
         type: 2}
@@ -14714,7 +14859,7 @@ RectTransform:
   m_Children:
   - {fileID: 2027989742}
   m_Father: {fileID: 1975439756}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -20058,7 +20203,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: background
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -20604,7 +20749,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -20743,7 +20888,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: type
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -20857,12 +21002,12 @@ Prefab:
         type: 2}
       propertyPath: battles.Array.data[0]
       value: 
-      objectReference: {fileID: 71626196}
+      objectReference: {fileID: 861202022}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[1]
       value: 
-      objectReference: {fileID: 71626196}
+      objectReference: {fileID: 861202022}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[2]
@@ -20881,8 +21026,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: levelDescription
-      value: 'A band of secretive crafters are rumoured to reside in these fields.
-        Doubtful they''ll welcome your passing through '
+      value: 'The vultures ran over the fields, toward the mountain in the north! '
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -20909,6 +21053,11 @@ Prefab:
       propertyPath: birdToAddScript
       value: 
       objectReference: {fileID: 317212874}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: background
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
   m_IsPrefabParent: 0
@@ -23865,7 +24014,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -23964,7 +24113,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
       propertyPath: m_Name
-      value: lvl 5 A Lonely
+      value: lvl 5 A social party cave
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -23994,12 +24143,12 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: birdLVL
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: type
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -24048,7 +24197,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: hasScaredPowerUps
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224656020093011680, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -24078,7 +24227,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: levelName
-      value: Field of fear
+      value: Party cave
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -24108,12 +24257,12 @@ Prefab:
         type: 2}
       propertyPath: battles.Array.data[0]
       value: 
-      objectReference: {fileID: 1814722680}
+      objectReference: {fileID: 768381305}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[1]
       value: 
-      objectReference: {fileID: 1814722680}
+      objectReference: {fileID: 768381305}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[2]
@@ -24123,17 +24272,17 @@ Prefab:
         type: 2}
       propertyPath: battles.Array.data[3]
       value: 
-      objectReference: {fileID: 1814722680}
+      objectReference: {fileID: 768381305}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[4]
       value: 
-      objectReference: {fileID: 1934855783}
+      objectReference: {fileID: 1814722680}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[5]
       value: 
-      objectReference: {fileID: 1934855783}
+      objectReference: {fileID: 768381305}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: targets.Array.data[1]
@@ -24142,13 +24291,44 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: hasConfidentPowerUps
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: unlockedRoad
       value: 
       objectReference: {fileID: 1684869672}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: levelDescription
+      value: 'To exit to the great plains, you must pass through a spooky mountain
+        filled to the brim with social birds. Your worst nightmare! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: hasDrills
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: hasDMGPowerUps
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: minEnemies
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: maxEnemies
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: background
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
   m_IsPrefabParent: 0
@@ -24991,6 +25171,7 @@ SpriteRenderer:
   m_Size: {x: 2.63, y: 2.33}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1467915937
 GameObject:
   m_ObjectHideFlags: 0
@@ -25704,6 +25885,7 @@ SpriteRenderer:
   m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
 --- !u!1 &1506255623
 GameObject:
   m_ObjectHideFlags: 0
@@ -27723,6 +27905,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &1632222590
 Transform:
   m_ObjectHideFlags: 0
@@ -30055,6 +30238,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!1 &1777622457
 GameObject:
   m_ObjectHideFlags: 0
@@ -33887,7 +34071,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -34095,7 +34279,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: levelName
-      value: A forest
+      value: Great forest
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -34125,7 +34309,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: birdLVL
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
       propertyPath: m_IsActive
@@ -34155,7 +34339,7 @@ Prefab:
         type: 2}
       propertyPath: battles.Array.data[4]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2027537491}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: levelDescription
@@ -34167,6 +34351,11 @@ Prefab:
       propertyPath: unlockedRoad
       value: 
       objectReference: {fileID: 1436692717}
+    - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 2}
+      propertyPath: background
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
   m_IsPrefabParent: 0
@@ -35541,6 +35730,7 @@ SpriteRenderer:
   m_Size: {x: 19.66, y: 3.85}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &2061843357
 Transform:
   m_ObjectHideFlags: 0
@@ -37129,7 +37319,7 @@ Prefab:
     - target: {fileID: 224450911143057126, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 416
+      value: 410.25
       objectReference: {fileID: 0}
     - target: {fileID: 224300613673831500, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
@@ -37144,7 +37334,7 @@ Prefab:
     - target: {fileID: 224300613673831500, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 416
+      value: 410.25
       objectReference: {fileID: 0}
     - target: {fileID: 224300613673831500, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
@@ -37164,7 +37354,7 @@ Prefab:
     - target: {fileID: 224864208389793848, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 416
+      value: 410.25
       objectReference: {fileID: 0}
     - target: {fileID: 224864208389793848, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
@@ -37184,7 +37374,7 @@ Prefab:
     - target: {fileID: 224928383649592196, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 416
+      value: 410.25
       objectReference: {fileID: 0}
     - target: {fileID: 224928383649592196, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
@@ -37194,7 +37384,7 @@ Prefab:
     - target: {fileID: 224655241659315598, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 832
+      value: 820.5
       objectReference: {fileID: 0}
     - target: {fileID: 224655241659315598, guid: 893a3cdec287067418e9ce268d4f13ea,
         type: 2}
@@ -37229,6 +37419,47 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.x
       value: 1741
+      objectReference: {fileID: 0}
+    - target: {fileID: 224305959700859552, guid: 893a3cdec287067418e9ce268d4f13ea,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 224864208389793848, guid: 893a3cdec287067418e9ce268d4f13ea,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 511.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 224864208389793848, guid: 893a3cdec287067418e9ce268d4f13ea,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 107
+      objectReference: {fileID: 0}
+    - target: {fileID: 114035028677921962, guid: 893a3cdec287067418e9ce268d4f13ea,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 95a15f878bc6c2347b5ed49c6b633b7d,
+        type: 3}
+    - target: {fileID: 114035028677921962, guid: 893a3cdec287067418e9ce268d4f13ea,
+        type: 2}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224655241659315598, guid: 893a3cdec287067418e9ce268d4f13ea,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224305959700859552, guid: 893a3cdec287067418e9ce268d4f13ea,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224300613673831500, guid: 893a3cdec287067418e9ce268d4f13ea,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 520.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 893a3cdec287067418e9ce268d4f13ea, type: 2}

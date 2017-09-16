@@ -15,7 +15,14 @@ public class LevelVisualSetup : MonoBehaviour {
 		for(int i = 0; i < backgrounds.Count; i++)
         {
             if (isDebug)
-                Var.currentBG = debugSelection;               
+                Var.currentBG = debugSelection;
+
+              
+            if(Var.currentBG==0) //Seb hates the swamp
+            {
+                Var.currentBG=1;
+            }         
+              
             backgrounds[i].SetActive(i == Var.currentBG);
         }       
 	}
