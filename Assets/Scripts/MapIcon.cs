@@ -362,8 +362,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             Var.map.Clear();
             Var.map = CreateMap();
             Var.currentStageID = ID;
-
             Var.activeBirds = new List<Bird>();
+            GuiContoler.mapPos = 0;
             for (int i = 0; i < 3; i++)
             {
                 Var.activeBirds.Add(Var.playerPos[i, 0]);

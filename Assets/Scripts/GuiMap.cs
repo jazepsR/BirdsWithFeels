@@ -54,7 +54,7 @@ public class GuiMap : MonoBehaviour {
     public void MoveMapBird(int pos)
     {
         //transform.localPosition = new Vector3(-578 + pos * 95,transform.localPosition.y,transform.localPosition.z);
-        transform.position = new Vector3(start.position.x + dist * pos, start.position.y+0.3f, start.position.z);
+        transform.position = new Vector3(start.position.x + dist * pos-0.05f, transform.position.y, start.position.z);
     }
 
 

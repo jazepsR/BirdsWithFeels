@@ -1023,11 +1023,11 @@ public class GuiContoler : MonoBehaviour {
 		setMapLocation(mapPos);
 		if (nextMapArea == Var.Em.finish)
 		{
-			Var.isTutorial = false;
+            mapPos = 0;
+            Var.isTutorial = false;
 			Var.tutorialCompleted = true;
 			Var.isBoss = false;
-			winBanner.SetActive(true);
-			mapPos = 0;
+			winBanner.SetActive(true);			
 		}
 
 	}

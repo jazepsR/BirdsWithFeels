@@ -55,6 +55,9 @@ public class mainMenuScript : MonoBehaviour {
     {
         SaveLoad.DeleteSave();
         Var.currentWeek = -1;
+        Var.currentBG = 0;
+        Var.currentStageID = -1;
+        GuiContoler.mapPos = 0;
         Var.mapSaveData = new List<MapSaveData>(); 
         Var.activeBirds = new List<Bird>();
         Var.availableBirds = new List<Bird>();
