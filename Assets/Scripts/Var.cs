@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 public static class Var {
+    public static bool StartedNormally = false;
     public static bool CanShowHover = true;
     public static int currentWeek = -1;     
     public static int currentBG = 0;
@@ -23,8 +24,10 @@ public static class Var {
     public static int confWinFight = 2;
     public static int confWinAll = 1;
     public static int confLoseAll = -1;
-    public static int friendStraightGain = 2;
-    public static int friendDiagGain = 1;
+    public static int oneFriendStraightGain = 2;
+    public static int twoFriendStraightGain = 4;
+    public static int noFriendGain = -3;
+    public static int friendDiagGain = 0;
     public static int[] friendTable = new int[] { -2, 0, 2, 4, 6 };
     public static Bird[] enemies = new Bird[8];
     public static Bird[,] playerPos = new Bird[4,4];
@@ -67,6 +70,7 @@ public static class Var {
 public class Settings
 {
    public bool shownFirstLevelUp = false;
+   public bool shownAbilityTutorial = false;
    public bool shownLevelTutorial = false;
 }
 

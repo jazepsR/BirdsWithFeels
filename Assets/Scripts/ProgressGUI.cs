@@ -172,7 +172,7 @@ public class ProgressGUI : MonoBehaviour {
 			if (bird.prevEmotion != bird.emotion && !bird.inMap)
 			{
 				AudioControler.Instance.PlaySound(AudioControler.Instance.newEmotion);
-				LeanTween.scale(portraits[portraitNum].transform.parent.GetComponent<RectTransform>(), Vector3.one * 1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownPortrait).setOnCompleteParam(portraitNum as object); ;
+				LeanTween.scale(portraits[portraitNum].transform.parent.GetComponent<RectTransform>(), Vector3.one * 1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownPortrait).setOnCompleteParam(portraitNum as object);
 				portraitFill[portraitNum].color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
 				bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
 				LeanTween.color(portraitFill[portraitNum].rectTransform, Helpers.Instance.GetEmotionColor(bird.emotion), 2.25f);
@@ -195,11 +195,6 @@ public class ProgressGUI : MonoBehaviour {
 				skillArea.SetActive(false);
 			}
 		}
-	}
-
-	public void SmallPortraitClick()
-	{
-
 	}
 }
 

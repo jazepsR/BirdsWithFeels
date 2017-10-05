@@ -137,6 +137,7 @@ public class Bird : MonoBehaviour
 	public GameObject GroundBonus;
 	public GameObject RelationshipParticles;
 	public GameObject CrushParticles;
+    public GameObject mapHighlight;
 	void Start()
 	{
 
@@ -529,6 +530,21 @@ public class Bird : MonoBehaviour
 		{
 			if (Var.Infight || dead)
 				return;
+            if (inMap)
+            {
+                if (MapControler.Instance.selectedBirds.Contains(this))
+                {
+                    mapHighlight.SetActive(false);
+                    MapControler.Instance.selectedBirds.Remove(this);
+                }else
+                {
+                    mapHighlight.SetActive(true);
+                    MapControler.Instance.selectedBirds.Add(this);
+                }
+                MapControler.Instance.CanLoadBattle();
+                return;
+
+            }
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
 			GetComponentInChildren<Animator>().SetBool("lift", true);
 			foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
@@ -938,7 +954,8 @@ public class Bird : MonoBehaviour
 			///Set level icons
 			foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
 			{
-				if (levelList.Count > index)
+                
+				if (levelList.Count > index && !Var.isTutorial)
 				{
 					icon.gameObject.SetActive(true);
 					icon.GetComponent<Image>().sprite = levelList[index].LVLIcon;

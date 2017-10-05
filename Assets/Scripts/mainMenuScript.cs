@@ -12,6 +12,7 @@ public class mainMenuScript : MonoBehaviour {
     public cutScene cutsceneScript;
     void Start()
     {
+        Var.StartedNormally = true;
         titleColor = title.color;
         TweenForward();       
         

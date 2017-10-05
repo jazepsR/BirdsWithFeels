@@ -29,6 +29,7 @@ public class Helpers : MonoBehaviour {
     public bool inMap;
     List<Image> heartsToFill = new List<Image>();
     public Transform relationshipDialogs;
+    enum friendState { alone, diagonal, oneFriend, twoFriends };
     public void Awake()
     {
         heartBreak = Resources.Load<GameObject>("prefabs/heartBreak");
@@ -447,7 +448,7 @@ public class Helpers : MonoBehaviour {
         switch (type)
         {
             case Levels.type.Brave1:
-                return "Successfully fending off two crows at once, <name> feels a surge of confidence flow through them. Nothing can stop <name> at this point! <name> promises to use their newfound confidence to shield their teammates from harm. ".Replace("<name>", name);
+                return "Successfully fending off two vultures at once, <name> feels a surge of confidence flow through them. Nothing can stop <name> at this point! <name> promises to use their newfound confidence to shield their teammates from harm. ".Replace("<name>", name);
             case Levels.type.Brave2:
                 return "There's no stopping <name> now! Nothing can hurt them! (As long as they think so, that is)".Replace("<name>", name);
             case Levels.type.Friend1:
@@ -461,7 +462,7 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Scared1:
                 return "<name> realizes the depths of their incompetence. Were they ever fit for battle? They resolve to help the team with more cunning means - by weakening the enemy.  ".Replace("<name>", name);
             case Levels.type.Scared2:
-                return "Direct combat is definetelly not for <name>! They prefers to attack his enemies from behind and let teammates finish the job! ".Replace("<name>", name);
+                return "Direct combat is definetelly not for <name>! They prefer to attack their enemies from behind and let teammates finish the job! ".Replace("<name>", name);
             default:
                 return "Error in level up text";        
         }
@@ -526,13 +527,13 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Brave1:
                 return "Win two fights at once";
             case Levels.type.Brave2:
-                return "Win 5 fights in a row";
+                return "Win 4 fights in a row";
             case Levels.type.Friend1:
-                return "gain + 5 or more social in one turn and and win a fight";
+                return "gain + 3 or more social in one turn and and win a fight";
             case Levels.type.Friend2:
                 return "Be close to a friendly bird and gain + 5 or more social in one turn";
             case Levels.type.Lonely1:
-                return "No teammates to be seen in all four directions + diagonally! At the same time, Win a fight";
+                return "Be alone (no teammates all four directions or diagonally). At the same time, win a fight";
             case Levels.type.Lonely2:
                 return "The bird is not used for two adventures in a row. Then, spend a fight all alone";
             case Levels.type.Scared1:
@@ -544,7 +545,42 @@ public class Helpers : MonoBehaviour {
         }
 
     }
+    public string GetLVLInfoText(Levels.type level)
+    {
+        switch (level)
+        {
+            case Levels.type.Brave1:
+                return "Prevent a random close bird from losing health if they lose their fight. 3 turn cooldown";
+            case Levels.type.Brave2:
+                return "If feeling confident, when taking damage lose 2 confidence instead of 1 health";
+            case Levels.type.Friend1:
+                return "Once per turn, if resting, restore 1 health to a random close bird";
+            case Levels.type.Friend2:
+                return "After an adventure fully heal one bird of your choice";
+            case Levels.type.Scared1:
+                return "Give all diagonal birds - 10% in combat (both friendly and enemy birds)";
+            case Levels.type.Scared2:
+                return "If in hidden, this bird does not fight enemies. Instead, all enemies crossing this birds tile have -30% in combat. Hide the bird by left clicking them.";
+            case Levels.type.Lonely1:
+                return "Emotional changes increased by 2 for all teammates in this birds column.";
+            case Levels.type.Lonely2:
+                return "If resting, the player can chosse to redo the last battle. 3 turn cooldown";
+            case Levels.type.Alexander:
+                return "Bird gains +1 in the dominant feeling of an adjacent bird";
+            case Levels.type.Kim:
+                return "Ground effects affect this bird twice as much";
+            case Levels.type.Rebecca:
+                return "Bird loses -2 confidence when resting";
+            case Levels.type.Sophie:
+                return "If resting, all adjacent birds recieve 10% chance to win fights";
+            case Levels.type.Terry:
+                return "All birds in the same horizontal row gain +1 confidence";
 
+            default:
+                return "Level not found error";
+
+        }
+    }
 
     public bool ListContainsLevel(Levels.type level, List<LevelData> list)
     {
@@ -796,40 +832,64 @@ public class Helpers : MonoBehaviour {
         //TODO: Make these values global
         int sizeY = Var.playerPos.GetLength(1)-1;
         int sizeX = Var.playerPos.GetLength(0)-1;
-        int lonelyVal = 0;
-        if(y+1<= sizeY && Var.playerPos[x, y + 1] != null)
+        friendState state = friendState.alone;
+        if (y + 1 <= sizeY && x + 1 <= sizeX && Var.playerPos[x + 1, y + 1] != null)
         {
-            lonelyVal += 2;
-        }
-        if (y - 1 >=0 && Var.playerPos[x, y - 1] != null)
-        {
-            lonelyVal += 2;
-        }
-        if (x + 1 <= sizeX && Var.playerPos[x+1, y] != null)
-        {
-            lonelyVal += 2;
-        }
-        if (x - 1 >= 0 && Var.playerPos[x-1, y ] != null)
-        {
-            lonelyVal += 2;
-        }
-        if (y+1<=sizeY && x+1<= sizeX && Var.playerPos[x+1, y + 1] != null)
-        {
-            lonelyVal += 1;
+            state = friendState.diagonal;
         }
         if (y + 1 <= sizeY && x - 1 >= 0 && Var.playerPos[x - 1, y + 1] != null)
         {
-            lonelyVal += 1;
+            state = friendState.diagonal;
         }
         if (y - 1 >= 0 && x + 1 <= sizeX && Var.playerPos[x + 1, y - 1] != null)
         {
-            lonelyVal += 1;
+            state = friendState.diagonal;
         }
         if (y - 1 >= 0 && x - 1 >= 0 && Var.playerPos[x - 1, y - 1] != null)
         {
-            lonelyVal += 1;
+            state = friendState.diagonal;
         }
-        return -3 + 2 * lonelyVal;
+        if (y+1<= sizeY && Var.playerPos[x, y + 1] != null)
+        {
+            if (state == friendState.oneFriend)
+                state = friendState.twoFriends;
+            else
+                state = friendState.oneFriend;
+        }
+        if (y - 1 >=0 && Var.playerPos[x, y - 1] != null)
+        {
+            if (state == friendState.oneFriend)
+                state = friendState.twoFriends;
+            else
+                state = friendState.oneFriend;
+        }
+        if (x + 1 <= sizeX && Var.playerPos[x+1, y] != null)
+        {
+            if (state == friendState.oneFriend)
+                state = friendState.twoFriends;
+            else
+                state = friendState.oneFriend;
+        }
+        if (x - 1 >= 0 && Var.playerPos[x-1, y ] != null)
+        {
+            if (state == friendState.oneFriend)
+                state = friendState.twoFriends;
+            else
+                state = friendState.oneFriend;
+        }
+        
+        switch (state) {
+            case friendState.alone:
+                return Var.noFriendGain;
+            case friendState.diagonal:
+                return Var.friendDiagGain;
+            case friendState.oneFriend:
+                return Var.oneFriendStraightGain;
+            case friendState.twoFriends:
+                return Var.twoFriendStraightGain;
+            default:
+                return 0;
+        }  
 
     }
 
@@ -848,40 +908,5 @@ public class Helpers : MonoBehaviour {
     }
 
 
-    public string GetLVLInfoText(Levels.type level)
-    {
-        switch (level)
-        {
-            case Levels.type.Brave1:
-                return "Prevent a random close bird from losing health if they lose their fight. 3 turn cooldown";
-            case Levels.type.Brave2:
-                return "If feeling confident - when taking damage, -2 confidence instead of -1 heart";
-            case Levels.type.Friend1:
-                return "Once per turn, if resting, give a random close bird +1 hearts";
-            case Levels.type.Friend2:
-                return "After an adventure fully heal one bird of your choice";
-            case Levels.type.Scared1:
-                return "Give all diagonal birds - X to all dice rolls  (both friendly and enemy birds)";
-            case Levels.type.Scared2:
-                return "Backstabbing. If in stealth, bird does not fight enemies. All enemies passing by bird gains -30% chance to win. Toggle stealth by clicking bird";
-            case Levels.type.Lonely1:
-                return "Emo Intensifier - All birds in the same column's emotional changes are increased by +2";
-            case Levels.type.Lonely2:
-                return " if resting, reroll all battles. 3 turn cooldown";
-            case Levels.type.Alexander:
-                return "Impressionable- bird gains +1 in the dominant feeling of an adjacent bird";                
-            case Levels.type.Kim:
-                return "Ground effects affect you twice as much";
-            case Levels.type.Rebecca:
-                return "Lose -2 confidence when resting";
-            case Levels.type.Sophie:
-                return "If resting, all adjacent birds recieve 10% chance to win fights";
-            case Levels.type.Terry:
-                return "All birds in the same row gain +1 confidence";
-                
-            default:
-                return "Level not found error";
-                
-        }       
-    }
+
 }
