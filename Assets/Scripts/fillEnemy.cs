@@ -64,6 +64,7 @@ public class fillEnemy : MonoBehaviour {
         int index = 0;
         float wizardChance = 0.2f;
         float drillChance = 0.3f;
+        //isDebug = true;
         if (isDebug)
         {
             hasWizards = hasWizardsDebug;
@@ -150,7 +151,6 @@ public class fillEnemy : MonoBehaviour {
                     enemy.friendliness = 0;
                     break;                    
             }
-          
             float rand = Random.Range(0, 1f);           
             if (rand < wizardChance && hasWizards)
                 CreateEnemy(enemy, enemyType.wizard);

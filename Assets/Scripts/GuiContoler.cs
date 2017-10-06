@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
-    public Image[] vingette;
+	public Image[] vingette;
 	public GameObject kingMouth;
 	public GameObject playerMouth;
 	public Text EmotionChangeFeedback;
-    public Text EmotionChangeHeading;
-    public Text ToggleRelationPanelText;
+	public Text EmotionChangeHeading;
+	public Text ToggleRelationPanelText;
 	public GameObject relationshipPortrait;
 	public Text relationshipText;
 	public GameObject reportRelationshipPortrait;
@@ -88,7 +88,8 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject boss;
 	void Awake()
 	{
-		Instance = this;
+        LeanTween.init(1000);
+        Instance = this;
 		maxGraph = 3;
 	}
 	void Start()
@@ -121,7 +122,7 @@ public class GuiContoler : MonoBehaviour {
 
 	void tryDialog()
 	{
-		if (Var.currentStageID != 1)       
+		if (Var.currentStageID != 1 || Var.currentStageID != 0)       
 			DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);       
 	}
 	
@@ -268,11 +269,11 @@ public class GuiContoler : MonoBehaviour {
 					
 					if (!inMap)
 					{
-                        foreach (Image img in vingette)
-                        {
-                            LeanTween.alpha(img.rectTransform, 0, 0.5f);
-                        }
-                        CheckGraphNavBtns();
+						foreach (Image img in vingette)
+						{
+							LeanTween.alpha(img.rectTransform, 0, 0.5f);
+						}
+						CheckGraphNavBtns();
 					}
 					
 				}
@@ -308,16 +309,16 @@ public class GuiContoler : MonoBehaviour {
 			}
 			SpeechBubbleText.text = text;
 			speechBubbleObj.SetActive(true);
-            foreach (Image img in vingette)
-            {
-                LeanTween.alpha(img.rectTransform, 0.5f, 0.5f);
-            }
-            speechBubble.GetComponent<UIFollow>().target = pos;
-            try
-            {
-                AudioControler.Instance.PlayVoice();
-            }
-            catch { print("voice issue"); }
+			foreach (Image img in vingette)
+			{
+				LeanTween.alpha(img.rectTransform, 0.5f, 0.5f);
+			}
+			speechBubble.GetComponent<UIFollow>().target = pos;
+			try
+			{
+				AudioControler.Instance.PlayVoice();
+			}
+			catch { print("voice issue"); }
 		   // LeanTween.delayedCall(6f, ShowSpeechBubbleReminder);
 		}
 	   
@@ -523,10 +524,10 @@ public class GuiContoler : MonoBehaviour {
 			//Normal case
 			DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]));
 			EmotionChangeFeedback.gameObject.SetActive(true);
-            string changeText = CreateEmotionChangeText(Var.activeBirds[birdNum]);
-            EmotionChangeFeedback.text = changeText;
-            EmotionChangeHeading.gameObject.SetActive(changeText != "");
-        }
+			string changeText = CreateEmotionChangeText(Var.activeBirds[birdNum]);
+			EmotionChangeFeedback.text = changeText;
+			EmotionChangeHeading.gameObject.SetActive(changeText != "");
+		}
 		else
 		{
 			//Summary
@@ -544,23 +545,23 @@ public class GuiContoler : MonoBehaviour {
 		if (ConfGainedInRound > 0)
 			fbText += Helpers.Instance.BraveHexColor+"\n<b>Confidence gained: " + ConfGainedInRound +"</b></color>";
 		if (ConfGainedInRound < 0)
-			fbText += Helpers.Instance.ScaredHexColor + "\nS<b>caredness gained: " + Mathf.Abs(ConfGainedInRound) + "</b></color>";
+			fbText += Helpers.Instance.ScaredHexColor + "\n<b>Caution gained: " + Mathf.Abs(ConfGainedInRound) + "</b></color>";
 		if (bird.battleConfBoos > 0)
 			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom combat: " + bird.battleConfBoos.ToString("+#;-#;0") + " confidence</color>";
 		if (bird.battleConfBoos < 0)
-			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs(bird.battleConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs(bird.battleConfBoos).ToString("+#;-#;0") + " caution</color>";
 		if (bird.groundConfBoos > 0)
 			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom tiles: " + bird.groundConfBoos.ToString("+#;-#;0") + " confidence</color>";
 		if (bird.groundConfBoos < 0)
-			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundConfBoos).ToString("+#;-#;0") + " caution</color>";
 		if (bird.levelConfBoos > 0)
 			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom level abilities: " + bird.levelConfBoos.ToString("+#;-#;0") + " confidence</color>";
 		if (bird.levelConfBoos < 0)
-			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom level abilities: " + Mathf.Abs(bird.levelConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom level abilities: " + Mathf.Abs(bird.levelConfBoos).ToString("+#;-#;0") + " caution</color>";
 		if (bird.wizardConfBoos > 0)
 			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom enemies: " + bird.wizardConfBoos.ToString("+#;-#;0") + " confidence</color>";
 		if (bird.wizardConfBoos < 0)
-			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardConfBoos).ToString("+#;-#;0") + " scaredness</color>";
+			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardConfBoos).ToString("+#;-#;0") + " caution</color>";
 
 
 
@@ -571,23 +572,23 @@ public class GuiContoler : MonoBehaviour {
 		if (FriendGainedInRound > 0)
 			fbText += Helpers.Instance.FriendlyHexColor + "\n<b>Friendliness gained in round: " + FriendGainedInRound + "</b></color>";
 		if (FriendGainedInRound < 0)
-			fbText += Helpers.Instance.LonelyHexColor + "\n<b>Loneliness gained in round: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
+			fbText += Helpers.Instance.LonelyHexColor + "\n<b>Solitude gained in round: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
 		if (bird.friendBoost > 0)
 			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom interactions: " + bird.friendBoost.ToString("+#;-#;0") + " friendship</color>";
 		if (bird.friendBoost < 0)
-			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom interactions: " + Mathf.Abs(bird.friendBoost).ToString("+#;-#;0") + " loneliness</color>";
+			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom interactions: " + Mathf.Abs(bird.friendBoost).ToString("+#;-#;0") + " solitude</color>";
 		if (bird.groundFriendBoos > 0)
 			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom tiles: " + bird.groundFriendBoos.ToString("+#;-#;0") + " friendship</color>";
 		if (bird.groundFriendBoos < 0)
-			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
+			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundFriendBoos).ToString("+#;-#;0") + " solitude</color>";
 		if (bird.levelFriendBoos > 0)
 			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom level abilities: " + bird.levelFriendBoos.ToString("+#;-#;0") + " friendship</color>";
 		if (bird.levelFriendBoos < 0)
-			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom level abilities: " + Mathf.Abs(bird.levelFriendBoos).ToString("+#;-#;0") + " loneliness</color>";
+			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom level abilities: " + Mathf.Abs(bird.levelFriendBoos).ToString("+#;-#;0") + " solitude</color>";
 		if (bird.wizardFrienBoos > 0)
 			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom enemies: " + bird.wizardFrienBoos.ToString("+#;-#;0") + " friendship</color>";
 		if (bird.wizardFrienBoos < 0)
-			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardFrienBoos).ToString("+#;-#;0") + " loneliness</color>";
+			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardFrienBoos).ToString("+#;-#;0") + " solitude</color>";
 		return fbText;
 	}
 
@@ -636,6 +637,22 @@ public class GuiContoler : MonoBehaviour {
 		//CloseBattleReport.interactable = (currentGraph == maxGraph);
 		
 	}
+    public void FightButtonMouseOver()
+    {
+        feedBack[] feedBack = FindObjectsOfType<feedBack>();
+        foreach (feedBack fb in feedBack)
+        {
+            if (fb.isMain)
+            {
+                if (!fb.CheckOpponent())
+                {
+                    fb.HighlightEnemy();
+                }
+            }
+        }
+
+    }
+
 	public void GraphButton()
 	{
 		if (LevelTutorial.shouldShowFirstBattleDialog)
@@ -1023,8 +1040,8 @@ public class GuiContoler : MonoBehaviour {
 		setMapLocation(mapPos);
 		if (nextMapArea == Var.Em.finish)
 		{
-            mapPos = 0;
-            Var.isTutorial = false;
+			mapPos = 0;
+			Var.isTutorial = false;
 			Var.tutorialCompleted = true;
 			Var.isBoss = false;
 			winBanner.SetActive(true);			

@@ -19,8 +19,9 @@ public class feedBack : MonoBehaviour {
 	Vector3 scale;
 	GameObject line;
 	GameObject lineObj = null;
-	// Use this for initialization
-	void Awake () {
+    float factor = 0.35f;
+    // Use this for initialization
+    void Awake () {
 		line = Resources.Load<GameObject>("prefabs/lightningLine");
 		feedBackText.gameObject.GetComponent<Renderer>().sortingLayerName = "front";    
 		if(isMain)
@@ -102,7 +103,22 @@ public class feedBack : MonoBehaviour {
 		}
 		return canfight;
 	}
-
+    public void HighlightEnemy()
+    {
+        Debug.Log("highliting");
+       foreach(SpriteRenderer sp in birdScript.GetComponentsInChildren<SpriteRenderer>())
+        {
+            LeanTween.color(sp.gameObject, new Color(sp.color.r + factor, sp.color.g + factor, sp.color.b - factor*2), 0.25f).setEaseOutBack();
+            LeanTween.delayedCall(0.45f,DeHighlight);
+        }
+    }
+    void DeHighlight()
+    {
+        foreach (SpriteRenderer sp in birdScript.GetComponentsInChildren<SpriteRenderer>())
+        {
+            LeanTween.color(sp.gameObject, new Color(sp.color.r - factor, sp.color.g - factor, sp.color.b + factor * 2), 0.25f);
+        }
+    }
 	public void TryWizardLine(Bird player, Bird enemy)
 	{
 		if (lineObj != null)

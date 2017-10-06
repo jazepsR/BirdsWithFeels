@@ -277,6 +277,18 @@ public class GameLogic : MonoBehaviour {
     {
         bool canFight = true;
         feedBack[] feedBack = FindObjectsOfType<feedBack>();
+        ShowTooltip fightTooltip = FightButton.gameObject.GetComponent<ShowTooltip>();
+        string tooltipText = "";
+        tooltipText = "";
+        foreach (Bird bird in FillPlayer.Instance.playerBirds)
+        {
+            if (bird.gameObject.activeSelf && bird.x <= -1)
+            {
+                canFight = false;
+                tooltipText = "All your birds must be placed on the grid!";
+                break;
+            }
+        }
         foreach (feedBack fb in feedBack)
         {
             if (fb.isMain)
@@ -284,22 +296,16 @@ public class GameLogic : MonoBehaviour {
                 if (!fb.CheckOpponent())
                 {
                     canFight = false;
+                    tooltipText = "You must fight all the enemies!";
                     break;
                 }
             }
         }
-
-        foreach(Bird bird in FillPlayer.Instance.playerBirds)
-        {
-            if(bird.gameObject.activeSelf && bird.x <= -1)
-            {
-                canFight = false;
-                break;
-            }
-        }
+        fightTooltip.tooltipText = tooltipText;
         if (Var.Infight)
             canFight = false;
         //FightButton.gameObject.SetActive(canFight);  
+        
         FightButton.interactable = canFight;
         if (canFight && Var.isTutorial)
             Tutorial.Instance.ShowTutorialBeforeBattleText(Tutorial.Instance.CurrentPos);     

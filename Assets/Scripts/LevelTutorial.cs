@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelTutorial : MonoBehaviour {
+    [Header("first level")]
+    public Dialogue abilityDialogue;
+    [Header("second level")]
 	public Dialogue firstBattleDailog;
 	public Dialogue graphDialog;
 	public Dialogue secondBattleDialog;
@@ -16,6 +19,13 @@ public class LevelTutorial : MonoBehaviour {
 	void Start ()
     {
 		//Var.currentStageID = 1;
+        if(Var.currentStageID == 0 && !Var.gameSettings.shownAbilityTutorial)
+        {
+            Var.gameSettings.shownAbilityTutorial = true;
+            DialogueControl.Instance.CreateParticularDialog(abilityDialogue);
+        }
+
+
 		if (Var.currentStageID == 1 && !Var.gameSettings.shownLevelTutorial)
 		{
 			DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);

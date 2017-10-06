@@ -12,6 +12,7 @@ public class Graph : MonoBehaviour {
 	int multiplier;   
 	public static Graph Instance { get; private set; }
 	public List<GameObject> portraits;
+    float factor = 22.4f;
 	// Use this for initialization
 	void Start()
 	{
@@ -31,17 +32,14 @@ public class Graph : MonoBehaviour {
 			return;
 		GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
 		GameObject tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait,true,bird);        
-		GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();
-	   // float friend = Mathf.Min(12,bird.friendliness+bird.friendBoost + bird.groundFriendBoos + bird.levelFriendBoos + bird.wizardFrienBoos);
-		//float conf = Mathf.Min(12, bird.confidence + bird.battleConfBoos + bird.groundConfBoos + bird.levelConfBoos + bird.wizardConfBoos);
-		//Vector3 secondPos = new Vector3(-friend * 22.2f, conf * 22.2f, 0);
-		Vector3 secondPos = new Vector3(-bird.friendliness * 22.2f, bird.confidence * 22.2f, 0);
-		// new Vector3(tempHeart.transform.position.x, tempHeart.transform.position.y, 0);
-		portraitScript.StartGraph(secondPos);       
+		GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();       
+        Vector3 secondPos = new Vector3(-bird.friendliness, bird.confidence, 0);
+        Var.Em emotion = bird.emotion;
+        if (bird.prevEmotion == bird.emotion)
+            emotion = Var.Em.finish;
+		portraitScript.StartGraph(secondPos,emotion);       
 	}
-	
-
-
+    
 	GameObject PlotPoint(int x,int y, GameObject obj, bool isPortrait, Bird bird=null )
 	{
 		Vector2 corner = graphArea.rectTransform.anchoredPosition;
@@ -53,18 +51,12 @@ public class Graph : MonoBehaviour {
 		{
 			heartt.transform.Find("BirdName").GetComponent<Text>().text = bird.charName;
 			portraits.Add(heartt);
-			if (bird.prevEmotion != bird.emotion)
-			{
-				heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
-				LeanTween.color(heartt.transform.Find("bird_color").GetComponent<Image>().rectTransform, Helpers.Instance.GetEmotionColor(bird.emotion), 1.35f);
-			}else
-			{
-				heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
-			}
+            heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
+           
 
 		}
 		heartt.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
-		heartt.transform.localPosition = new Vector3(-x*22.2f, y*22.2f, 0);
+		heartt.transform.localPosition = new Vector3(-x*factor, y*factor, 0);
 		Canvas dummy = heartt.AddComponent<Canvas> ();
 		dummy.overrideSorting = true;
         dummy.sortingLayerName = "Front";

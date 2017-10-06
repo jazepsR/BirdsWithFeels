@@ -56,11 +56,12 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
     // Use this for initialization
     void Start()
     {
-
-
+        
         length = battles.Count;
         offset = transform.position- transform.parent.position;
         LoadSaveData();
+        if (!Var.StartedNormally)
+            available = true;
         sr = GetComponent<Image>();
         sr.color = Helpers.Instance.GetEmotionColor(type);
         //GetComponent<Button>().interactable = available;
@@ -70,7 +71,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         AddNewBird();
         tooltipInfo = gameObject.AddComponent<ShowTooltip>();
         tooltipInfo.tooltipText = GetTooltipText();
-        if (!CheckTargetsAvailable() && available)
+        if (!CheckTargetsAvailable() && available && Var.StartedNormally)
             LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position + (transform.parent.transform.position - transform.position) + new Vector3(-3,0,0), 0.01f);
             //LeanTween.delayedCall(0.1f, mapBtnClick);
         ValidateAll();
@@ -84,6 +85,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
         {
             useline = false;
         }
+        
     }
 
     void ValidateAll()
@@ -366,7 +368,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             GuiContoler.mapPos = 0;
             for (int i = 0; i < 3; i++)
             {
-                Var.activeBirds.Add(Var.playerPos[i, 0]);
+                Var.activeBirds.Add(MapControler.Instance.selectedBirds[i]);
             }
 
             SceneManager.LoadScene("NewMain");
