@@ -524,13 +524,13 @@ public class Helpers : MonoBehaviour {
         switch (type)
         {
             case Levels.type.Brave1:
-                return "Win two fights at once";
+                return "Defeat two enemies in the same fight";
             case Levels.type.Brave2:
-                return "Win 5 fights in a row";
+                return "Defeat 4 enemies in a row without losing";
             case Levels.type.Friend1:
-                return "gain + 5 or more social in one turn and and win a fight";
+                return "Gain + 4 or more social in one turn and and win a fight";
             case Levels.type.Friend2:
-                return "Be close to a friendly bird and gain + 5 or more social in one turn";
+                return "Be close to a friendly bird and gain + 5 or more social in one turn"; //?
             case Levels.type.Lonely1:
                 return "No teammates to be seen in all four directions + diagonally! At the same time, Win a fight";
             case Levels.type.Lonely2:
