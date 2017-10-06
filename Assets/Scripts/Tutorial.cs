@@ -90,7 +90,8 @@ public class Tutorial : MonoBehaviour {
         switch (stage)
         {
             case 0:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Hiya, I'm Terry! Drag and place me in front of the enemy to make me FIGHT");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Hiya, I'm Terry! ");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "DRAG and place me ANYWHERE in front of that mean bird - I will prepare to fight them!");
                 break;
             case 1:
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Hey, I’m Rebecca! Let's hang out!");
@@ -98,13 +99,13 @@ public class Tutorial : MonoBehaviour {
                 shouldShowFriendlyPopup = true;
                 break;
             case 2:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "These birds look tough! How will we beat them?");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "These birds have emotions too! How will we beat them?");
                 shouldShowEmotionPopup = true;
                 break;
             case 3:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "These battles are costing me some health!");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Try resting - If you don't fight for one round you will regain one health");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You'll also gain some scaredness!");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "These battles are taking a toll on me..");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Hey no worries - I'll fight so that you can rest and regain some health ");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You'll also gain some cautiousness!");
                 break;
             case 4:
                 EventController.Instance.CreateEvent(AddAlexEvent);
@@ -127,7 +128,8 @@ public class Tutorial : MonoBehaviour {
         switch (stage)
         {
             case 0:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "I may be lonely, but my independence makes me stronger! Any emotion beats a lack of emotion in this emo eats emo world! LEMME FIGHT!");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "I may be lonely, but my independence makes me stronger! ");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Any emotion beats a lack of emotion in this emo eats emo world! LEMME FIGHT! ");
                 break;
             case 1:
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Since me and that mean bird have the same emotion, I have a 50% chance of winning the fight!");
@@ -153,12 +155,15 @@ public class Tutorial : MonoBehaviour {
                 break;
             case 1:
                 if(Var.activeBirds[0].FriendGainedInRound>0)
-                    GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "By hanging out with Rebecca I became more friendly!");
+                    GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Rebecca's such a nice person, I feel more social!");
                 else
                 {
                     if (Var.activeBirds[0].FriendGainedInRound < 0)
                     {
-                        GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Being alone this battle made me more lonely");
+                        GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Being alone this battle made me more lonely..I mean independent! And strong. Strong and independent.");
+                        GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I mean independent! ");
+                        GuiContoler.Instance.ShowSpeechBubble(portraitPoint, " And strong."); 
+                             GuiContoler.Instance.ShowSpeechBubble(portraitPoint, " Strong and independent.");
                     }
                     else
                     {
@@ -195,7 +200,8 @@ public class Tutorial : MonoBehaviour {
                 break;
             case 3:
                 if (Var.activeBirds[1].prevRoundHealth < Var.activeBirds[1].health)
-                    GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I love resting. I could do it all day");
+                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Ahhh, back to full health!");
+                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I love resting. I could do it all day");
                 break;
             case 4:                
                 break;
