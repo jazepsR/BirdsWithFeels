@@ -780,13 +780,18 @@ public class Helpers : MonoBehaviour {
 
     public void EmitEmotionParticles(Transform parent,Var.Em emotion, bool useText= true)
     {
-        var emParticles = Instantiate(Var.emotionParticles, parent);
-        var particleSys = emParticles.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
+        var emParticleObject = Instantiate(Var.emotionParticles, parent);
+
+        emoParticleController emoParticleCtrl = emParticleObject.GetComponent<emoParticleController>();
+
+        emoParticleCtrl.emitParticles(emotion, 1); //let number go between 0-2 for different intensities! 
+
+        var particleSys = emParticleObject.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
         Gradient grad = new Gradient();
         Color col = GetEmotionColor(emotion);
-        grad.SetKeys(new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
-        particleSys.color = grad;
-        Text text = emParticles.transform.Find("Text").GetComponent<Text>();
+      //  grad.SetKeys(new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
+      //  particleSys.color = grad;
+        Text text = emParticleObject.transform.Find("Text").GetComponent<Text>();
         text.enabled = useText;
         text.text = emotion.ToString().Replace("Super","");
         if (text.text == "finish")
@@ -795,7 +800,7 @@ public class Helpers : MonoBehaviour {
        // LeanTween.moveLocalZ(text.gameObject, 55.0f, 1f);
        // LeanTween.scale(text.gameObject, Vector3.one * 2f, 1.2f);
      //   LeanTween.alphaText(text.rectTransform, 0.0f, 1.2f);
-        Destroy(emParticles, 1.7f);
+        Destroy(emParticleObject, 1.7f);
     }
 
 
