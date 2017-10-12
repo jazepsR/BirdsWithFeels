@@ -86,11 +86,11 @@ public class GuiContoler : MonoBehaviour {
 	public float levelinfoshowXValue;
 	int maxGraph = 3;
 	public GameObject boss;
-    Transform lastSpeechPos = null;
+	Transform lastSpeechPos = null;
 	void Awake()
 	{
-        LeanTween.init(1000);
-        Instance = this;
+		LeanTween.init(1000);
+		Instance = this;
 		maxGraph = 3;
 	}
 	void Start()
@@ -258,7 +258,7 @@ public class GuiContoler : MonoBehaviour {
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
-                    lastSpeechPos = null;
+					lastSpeechPos = null;
 					if (!Var.isBoss && !inMap)
 					{
 						///GameObject dustObj = Instantiate(Var.dustCloud, boss.transform.position, Quaternion.identity);
@@ -283,12 +283,12 @@ public class GuiContoler : MonoBehaviour {
 					AudioControler.Instance.PlayVoice();
 					SpeechBubbleText.text = speechTexts[0];                    
 					speechBubble.GetComponent<UIFollow>().target = speechPos[0];
-                    if (lastSpeechPos != null &&lastSpeechPos.Equals(speechPos[0]))
-                    {
-                        speechBubbleObj.GetComponent<Animator>().SetTrigger("newline");
-                    }
-                    lastSpeechPos = speechPos[0];
-                    speechPos.RemoveAt(0);                    
+					if (lastSpeechPos != null &&lastSpeechPos.Equals(speechPos[0]))
+					{
+						speechBubbleObj.GetComponent<Animator>().SetTrigger("newline");
+					}
+					lastSpeechPos = speechPos[0];
+					speechPos.RemoveAt(0);                    
 					speechTexts.RemoveAt(0);
 					if (!inMap)
 					{
@@ -460,7 +460,7 @@ public class GuiContoler : MonoBehaviour {
 		if (!Reset())
 			return;
 		LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
-		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
+		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
 			Destroy(child.gameObject);
 		}
@@ -473,7 +473,7 @@ public class GuiContoler : MonoBehaviour {
 		//graph.SetActive(false);
 		LeanTween.moveLocal(graph, new Vector3(-Var.MoveGraphBy, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
 		//battlePanel.SetActive(true);
-		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
+		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
 			Destroy(child.gameObject);
 		}
@@ -482,7 +482,7 @@ public class GuiContoler : MonoBehaviour {
 	{
 		Helpers.Instance.HideTooltip();
 		battlePanel.SetActive(false);       
-		foreach (Transform child in graph.transform.Find("ReportGraph").transform)
+		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
 			Destroy(child.gameObject);
 		}
@@ -643,21 +643,21 @@ public class GuiContoler : MonoBehaviour {
 		//CloseBattleReport.interactable = (currentGraph == maxGraph);
 		
 	}
-    public void FightButtonMouseOver()
-    {
-        feedBack[] feedBack = FindObjectsOfType<feedBack>();
-        foreach (feedBack fb in feedBack)
-        {
-            if (fb.isMain)
-            {
-                if (!fb.CheckOpponent())
-                {
-                    fb.HighlightEnemy();
-                }
-            }
-        }
+	public void FightButtonMouseOver()
+	{
+		feedBack[] feedBack = FindObjectsOfType<feedBack>();
+		foreach (feedBack fb in feedBack)
+		{
+			if (fb.isMain)
+			{
+				if (!fb.CheckOpponent())
+				{
+					fb.HighlightEnemy();
+				}
+			}
+		}
 
-    }
+	}
 
 	public void GraphButton()
 	{
@@ -852,7 +852,7 @@ public class GuiContoler : MonoBehaviour {
 
 			bird.friendBoost += friendGain;			
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();
-        }
+		}
 
 
 
@@ -928,7 +928,7 @@ public class GuiContoler : MonoBehaviour {
 			bird.prevFriend = bird.friendliness;
 			bird.ResetBonuses();
 			bird.GroundBonus.SetActive(false);
-        }
+		}
 		//After applying levels;
 		/*GuiContoler.Instance.relationshipPanel.SetActive(false);
 		GuiContoler.Instance.statPanel.SetActive(true);

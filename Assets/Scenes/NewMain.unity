@@ -19237,6 +19237,7 @@ RectTransform:
   - {fileID: 1928598572}
   - {fileID: 1336961421}
   - {fileID: 2097863512}
+  - {fileID: 1147794984}
   - {fileID: 1371275279}
   - {fileID: 1874221974}
   - {fileID: 1208229958}
@@ -21175,6 +21176,7 @@ MonoBehaviour:
   graphArea: {fileID: 1794714218}
   heart: {fileID: 114379301434647072, guid: eb4d28fc5a317e447a6905a6bb5d077d, type: 2}
   prevHeart: {fileID: 1673474852785688, guid: ce5d8cc27b9f12149b62eb91a3195e2f, type: 2}
+  graphParent: {fileID: 1147794983}
   canvas: {fileID: 0}
   graphSize: 220
   portraits: []
@@ -79273,6 +79275,39 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1147740266}
+--- !u!1 &1147794983
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1147794984}
+  m_Layer: 5
+  m_Name: GraphParts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1147794984
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1147794983}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 30.027}
+  m_LocalScale: {x: 1.1278479, y: 1.127848, z: 1.127848}
+  m_Children: []
+  m_Father: {fileID: 310613068}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -8}
+  m_SizeDelta: {x: 650, y: 650}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1156094839
 Prefab:
   m_ObjectHideFlags: 0
@@ -83251,7 +83286,7 @@ RectTransform:
   - {fileID: 1108077276}
   - {fileID: 785764528}
   m_Father: {fileID: 310613068}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -113835,7 +113870,7 @@ Prefab:
     - target: {fileID: 224166566090785570, guid: b6578e645a870944bb0bb9c2602605f3,
         type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 224166566090785570, guid: b6578e645a870944bb0bb9c2602605f3,
         type: 2}
@@ -124563,7 +124598,7 @@ RectTransform:
   - {fileID: 1273031368}
   - {fileID: 1947007110}
   m_Father: {fileID: 310613068}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

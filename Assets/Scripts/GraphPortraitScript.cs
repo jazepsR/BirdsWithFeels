@@ -14,7 +14,8 @@ public class GraphPortraitScript : MonoBehaviour {
     Var.Em targetEmotion;
     void Starter () {
         lr = gameObject.AddComponent<LineRenderer>();
-        lr.sortingOrder = 120;
+        //lr.sortingOrder = 120;
+        lr.sortingOrder = 3;
         lr.sortingLayerName = "Front";
         lr.SetWidth(0.045f, 0.045f);
         lr.textureMode = LineTextureMode.Tile;
@@ -35,7 +36,21 @@ public class GraphPortraitScript : MonoBehaviour {
         lr.material = Resources.Load<Material>("mat");
         ShowTooltip info =gameObject.AddComponent<ShowTooltip>();
         finish = target * 22.4f;
-        info.tooltipText = "Confidence: " + target.x +"\nFirendliness: " + target.y;            
+        string tooltipText = "";
+        if (target.y > 0)
+            tooltipText += Helpers.Instance.GetHexColor(Var.Em.Confident) + "Confidence: " + target.y + "</color>\n";
+        if(target.y < 0)
+            tooltipText += Helpers.Instance.GetHexColor(Var.Em.Scared) + "Cautions: " + Mathf.Abs(target.y) + "</color>\n";
+        if (target.y == 0)
+            tooltipText += "Confidence: 0\n";
+        if (target.x > 0)
+            tooltipText += Helpers.Instance.GetHexColor(Var.Em.Lonely) + "Solitary: " + target.x + "</color>\n";
+        if (target.x < 0)
+            tooltipText += Helpers.Instance.GetHexColor(Var.Em.Friendly) + "Social: " + Mathf.Abs(target.x) + "</color>\n";
+        if (target.x == 0)
+            tooltipText += "Solitude: 0\n";
+
+        info.tooltipText = "<b>"+tooltipText+"</b>";           
         LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);        
             
     }

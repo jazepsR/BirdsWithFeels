@@ -7,6 +7,7 @@ public class Graph : MonoBehaviour {
 	public Image graphArea;
 	public Image heart;
 	public GameObject prevHeart;
+    public GameObject graphParent;
 	public Transform canvas;
 	public int graphSize = 275;
 	int multiplier;   
@@ -19,13 +20,8 @@ public class Graph : MonoBehaviour {
 		Instance = this;
 		Sprite sp = Resources.Load<Sprite>("Icons/NewIcons_1");
 		multiplier = graphSize / 15;
-		
-
-
 	}
-
-
-
+    
 	 public void PlotFull(Bird bird)
 	{
 		if (bird.health <= 0)
@@ -46,22 +42,20 @@ public class Graph : MonoBehaviour {
 		Rect size = graphArea.rectTransform.rect;
 		Vector2 max = graphArea.rectTransform.anchorMax;
 		Vector2 offset = graphArea.rectTransform.offsetMax;
-		GameObject heartt =Instantiate(obj,graphArea.transform);
+		GameObject heartt =Instantiate(obj,graphParent.transform);
 		if (isPortrait)
 		{
 			heartt.transform.Find("BirdName").GetComponent<Text>().text = bird.charName;
 			portraits.Add(heartt);
             heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
-           
-
-		}
+            Canvas dummy = heartt.AddComponent<Canvas>();
+            dummy.overrideSorting = true;
+            dummy.sortingLayerName = "Front";
+            dummy.sortingOrder = 10;
+            heartt.AddComponent<GraphicRaycaster>();
+        }
 		heartt.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
 		heartt.transform.localPosition = new Vector3(-x*factor, y*factor, 0);
-		Canvas dummy = heartt.AddComponent<Canvas> ();
-		dummy.overrideSorting = true;
-        dummy.sortingLayerName = "Front";
-		dummy.sortingOrder = 210;
-
 		return heartt;     
 	}
 	// Update is called once per frame
