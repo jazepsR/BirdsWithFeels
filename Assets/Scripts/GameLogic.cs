@@ -82,6 +82,8 @@ public class GameLogic : MonoBehaviour {
         foreach(feedBack fb in feedBack)
         {
             fb.RefreshFeedback();
+            if (Var.isTutorial)
+                fb.HighlightTutorialTiles();
         }
 
     }

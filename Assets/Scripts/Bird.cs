@@ -30,7 +30,7 @@ public class Bird : MonoBehaviour
 	public string charName;	
 	public bool inUse = true;	
 	public SpriteRenderer colorRenderer;    
-    [HideInInspector]
+	[HideInInspector]
 	public List<SpriteRenderer> colorSprites;
 	public GameObject bush;    
 	[HideInInspector]
@@ -137,7 +137,7 @@ public class Bird : MonoBehaviour
 	public GameObject GroundBonus;
 	public GameObject RelationshipParticles;
 	public GameObject CrushParticles;
-    public GameObject mapHighlight;
+	public GameObject mapHighlight;
 	void Start()
 	{
 
@@ -185,7 +185,7 @@ public class Bird : MonoBehaviour
 			GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
 			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
 	   
-			if (levelList.Count == 0)
+			if (levelList.Count == 0 && !Var.isTutorial)
 			{
 				levelList = new List<LevelData>();
 				Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);               
@@ -312,8 +312,8 @@ public class Bird : MonoBehaviour
 			//ObstacleGenerator.Instance.tiles[y * 4 + x].GetComponent<LayoutButton>().ApplyPower(this);
 		}
 		//relationshipBonus = GetRelationshipBonus();
-		print(charName+ " playerRollBonus: "+ PlayerRollBonus + " GroundRollBonus: "+ GroundRollBonus);
-        return levelRollBonus + PlayerRollBonus + GroundRollBonus;// + relationshipBonus;
+		//print(charName+ " playerRollBonus: "+ PlayerRollBonus + " GroundRollBonus: "+ GroundRollBonus);
+		return levelRollBonus + PlayerRollBonus + GroundRollBonus;// + relationshipBonus;
 	}
 
 	public string GetBonusText()
@@ -526,26 +526,33 @@ public class Bird : MonoBehaviour
 				child.sortingLayerName = "Default";
 			}
 			GetComponentInChildren<Animator>().SetBool("lift", false);
-		}
+            if (Var.isTutorial)
+            {
+                foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
+                {
+                    tile.baseColor = tile.defaultColor;
+                    LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
+                }
+            }
+        }
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (Var.Infight || dead)
 				return;
-            if (inMap)
-            {
-                if (MapControler.Instance.selectedBirds.Contains(this))
-                {
-                    mapHighlight.SetActive(false);
-                    MapControler.Instance.selectedBirds.Remove(this);
-                }else
-                {
-                    mapHighlight.SetActive(true);
-                    MapControler.Instance.selectedBirds.Add(this);
-                }
-                MapControler.Instance.CanLoadBattle();
-                return;
-
-            }
+			if (inMap)
+			{
+				if (MapControler.Instance.selectedBirds.Contains(this))
+				{
+					mapHighlight.SetActive(false);
+					MapControler.Instance.selectedBirds.Remove(this);
+				}else
+				{
+					mapHighlight.SetActive(true);
+					MapControler.Instance.selectedBirds.Add(this);
+				}
+				MapControler.Instance.CanLoadBattle();
+				return;
+			}
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
 			GetComponentInChildren<Animator>().SetBool("lift", true);
 			foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
@@ -587,28 +594,24 @@ public class Bird : MonoBehaviour
 				lines.RemoveLines();				
 				GuiContoler.Instance.HideLvlText();
 				GroundBonus.SetActive(false);
-                try
-                {
-                    foreach (Bird bird in FillPlayer.Instance.playerBirds)
-                    {
-                        if (bird.charName != charName)
-                        {
-                            bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
-                            bird.levelControler.ApplyLevelOnDrop(bird, bird.levelList);
-                        }
-                        //bird.UpdateFeedback();			
-                    }
-                }
-                catch {
-                    levelControler.ApplyLevelOnPickup(this, levelList);
-                }
+				try
+				{
+					foreach (Bird bird in FillPlayer.Instance.playerBirds)
+					{
+						if (bird.charName != charName)
+						{
+							bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
+							bird.levelControler.ApplyLevelOnDrop(bird, bird.levelList);
+						}			
+					}
+				}
+				catch {
+					levelControler.ApplyLevelOnPickup(this, levelList);
+				}
 				levelControler.ApplyLevelOnPickup(this, levelList);
-                UpdateFeedback();
+				UpdateFeedback();
 			}
-			
-			// RemoveAllFeedBack();
-		}
-		// 1 frame delay		
+		}	
 	}
 	void OnMouseExit()
 	{
@@ -955,7 +958,7 @@ public class Bird : MonoBehaviour
 			///Set level icons
 			foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
 			{
-                
+				
 				if (levelList.Count > index && !Var.isTutorial)
 				{
 					icon.gameObject.SetActive(true);
@@ -1066,10 +1069,10 @@ public class Bird : MonoBehaviour
 		
 
 	}
-    void drawLines()
-    {
-        lines.DrawLines();
-    }
+	void drawLines()
+	{
+		lines.DrawLines();
+	}
 	public void ReleaseBird(int x, int y)
 	{
 		
@@ -1088,34 +1091,41 @@ public class Bird : MonoBehaviour
 		Destroy(dustObj, 1.0f);
 		if (!inMap)
 		{
-            LeanTween.delayedCall(0.15f, drawLines);
-            //lines.DrawLines();
-            showText();
-            try
-            {
-                levelControler.ApplyLevelOnDrop(this, levelList);
-                foreach (Bird bird in FillPlayer.Instance.playerBirds)
-                {
-                    if (bird.charName != charName)
-                    {
-                        bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
-                        bird.levelControler.ApplyLevelOnDrop(bird, bird.levelList);
-                    }
-                }
-                foreach (Bird bird in FillPlayer.Instance.playerBirds)
-                {
-                    if (bird.x >= 0 && bird.y >= 0)
-                        ObstacleGenerator.Instance.tiles[bird.x + 4 * bird.y].ApplyPower(bird);
+			LeanTween.delayedCall(0.15f, drawLines);
+			//lines.DrawLines();
+			showText();
+			try
+			{
+				levelControler.ApplyLevelOnDrop(this, levelList);
+				foreach (Bird bird in FillPlayer.Instance.playerBirds)
+				{
+					if (bird.charName != charName)
+					{
+						bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
+						bird.levelControler.ApplyLevelOnDrop(bird, bird.levelList);
+					}
+				}
+				foreach (Bird bird in FillPlayer.Instance.playerBirds)
+				{
+					if (bird.x >= 0 && bird.y >= 0)
+						ObstacleGenerator.Instance.tiles[bird.x + 4 * bird.y].ApplyPower(bird);
 
-                }
-                UpdateFeedback();
-            }
-            catch {
-                UpdateFeedback();
-            }
+				}
+				UpdateFeedback();
+			}
+			catch {
+				UpdateFeedback();
+			}
 		}
-
-		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
+        if (Var.isTutorial)
+        {
+            foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
+            {
+                tile.baseColor = tile.defaultColor;
+                LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
+            }
+        }
+        LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		SetCoolDownRing(false);
 		if(inMap)
 		{

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour {
     public static Tutorial Instance { get; private set; }
+    public GameObject outlines;
     public GameObject FirendlinessPopUp;
     public GameObject EmotionalWheelPopUp;
     public Var.Em[] firstStageEnemies;
@@ -21,6 +22,7 @@ public class Tutorial : MonoBehaviour {
     public Transform portraitPoint;
     bool shouldShowFriendlyPopup = false;
     bool shouldShowEmotionPopup = false;
+    bool shouldShowOutlines = true;
     bool showedSecondBirdReportText = false;
     bool showedThirdBirdReportText = false;
     bool[] shownMapInfos = new bool[6];
@@ -42,7 +44,12 @@ public class Tutorial : MonoBehaviour {
     void Update()
     {
         if (!Var.isTutorial)
-            return;        
+            return;
+        if (shouldShowOutlines && !GuiContoler.Instance.speechBubbleObj.activeSelf)
+        {
+            outlines.SetActive(true);
+            shouldShowOutlines = false;
+        }
         if (shouldShowFriendlyPopup && !GuiContoler.Instance.speechBubbleObj.activeSelf)
         {
             FirendlinessPopUp.SetActive(true);
@@ -91,7 +98,7 @@ public class Tutorial : MonoBehaviour {
         {
             case 0:
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Hiya, I'm Terry! ");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "DRAG and place me ANYWHERE in front of that mean bird - I will prepare to fight them!");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "<b>DRAG</b> and place me ANYWHERE in front of that mean bird - I will prepare to fight them!");
                 break;
             case 1:
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Hey, I’m Rebecca! Let's hang out!");
@@ -99,13 +106,13 @@ public class Tutorial : MonoBehaviour {
                 shouldShowFriendlyPopup = true;
                 break;
             case 2:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "These birds have emotions too! How will we beat them?");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "These birds have <b>emotions</b> too! How will we beat them?");
                 shouldShowEmotionPopup = true;
                 break;
             case 3:
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "These battles are taking a toll on me..");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Hey no worries - I'll fight so that you can rest and regain some health ");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You'll also gain some cautiousness!");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Hey no worries - I'll fight so that you can <b>rest</b> and regain some <b>health</b>");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You'll also gain some <b>cautiousness!</b>");
                 break;
             case 4:
                 EventController.Instance.CreateEvent(AddAlexEvent);
@@ -116,7 +123,7 @@ public class Tutorial : MonoBehaviour {
             case 5:
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "This looks dangerous!");
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[2], "I've seen this before! These enemies will attack from multiple directions!");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You guys can you let me take two at once? I've always wanted to do that! ");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You guys can you let me take <b>two at once?</b> I've always wanted to do that! ");
                 break;
         }
     }
@@ -128,13 +135,16 @@ public class Tutorial : MonoBehaviour {
         switch (stage)
         {
             case 0:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "I may be lonely, but my independence makes me stronger! ");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "I may be <b>lonely</b>, but my independence makes me <b>stronger!</b>");
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Any emotion beats a lack of emotion in this emo eats emo world! LEMME FIGHT! ");
+                outlines.SetActive(false);
                 break;
             case 1:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Since me and that mean bird have the same emotion, I have a 50% chance of winning the fight!");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Since me and that mean bird have the <b>same emotion</b>, I have a <b>50% chance</b> of winning the fight!");
                 break;
-            case 2:                
+            case 2:
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Each emotional state <b>beats one</b> emotion and <b>loses to another</b>");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "It's like<b> rock, paper, feelings!</b>");
                 break;
             case 3:               
                 break;
@@ -149,13 +159,13 @@ public class Tutorial : MonoBehaviour {
         switch (stage)
         {
             case 0:
-                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "We birds are affected emotionally by what happens to us! Unlike you, you monster" );
-                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I won the battle, my confidence is surging! ");
-                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "But there’s also no other birds to hang out with - making me more lonely.");
+                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "We birds are <b>affected emotionally</b> by what happens to us! Unlike you, you monster" );
+                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I <b>won</b> the battle, my <b>confidence</b> is surging! ");
+                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "But there’s also no other birds to hang out with - making me more <b>lonely</b>.");
                 break;
             case 1:
                 if(Var.activeBirds[0].FriendGainedInRound>0)
-                    GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Rebecca's such a nice person, I feel more social!");
+                    GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Rebecca's such a nice person, I feel more <b>social!</b>");
                 else
                 {
                     if (Var.activeBirds[0].FriendGainedInRound < 0)
@@ -163,7 +173,7 @@ public class Tutorial : MonoBehaviour {
                         GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Being alone this battle made me more lonely..I mean independent! And strong. Strong and independent.");
                         GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I mean independent! ");
                         GuiContoler.Instance.ShowSpeechBubble(portraitPoint, " And strong."); 
-                             GuiContoler.Instance.ShowSpeechBubble(portraitPoint, " Strong and independent.");
+                        GuiContoler.Instance.ShowSpeechBubble(portraitPoint, " Strong and independent.");
                     }
                     else
                     {
@@ -193,8 +203,8 @@ public class Tutorial : MonoBehaviour {
             case 0:
                  break;
             case 1:
-                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I became scared - due to me losing that last fight!. ");
-                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "But that strong emotion is making me stronger! Losing is not always bad.");
+                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I became more <b>cautious</b> - due to me <b>losing</b> that last fight!. ");
+                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "But that strong emotion is making me <b>stronger</b>! Losing is <b>not always bad</b>.");
                 break;
             case 2:               
                 break;

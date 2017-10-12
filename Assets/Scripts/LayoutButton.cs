@@ -15,10 +15,12 @@ public class LayoutButton : MonoBehaviour
     public powerTile power = null;
     public bool inMap = false;
     SpriteRenderer sr;
-    Color defaultColor;
+    [HideInInspector]
+    public Color defaultColor;
     Color rowColor = Color.clear;
     Color columnColor = Color.clear;
-    Color baseColor;
+    [HideInInspector]
+    public Color baseColor;
     public Color highlightColor;
     public List<Color> tileColors;
    // [HideInInspector]

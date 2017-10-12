@@ -45,19 +45,20 @@ public class Levels : MonoBehaviour {
 
 	public void ApplyLevelOnDrop(Bird bird, List<LevelData> Levels)
 	{
-		if (myBird.inMap || Var.isTutorial)
-			return;
         if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
         {
-            Rest.SetActive(true);
             myBird.GetComponentInChildren<Animator>().SetBool("rest", true);
         }
         else
         {
             myBird.GetComponentInChildren<Animator>().SetBool("rest", false);
         }
+        if (myBird.inMap || Var.isTutorial)
+			return;
+        if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
+            Rest.SetActive(true);
 
-		foreach (LevelData data in Levels)
+            foreach (LevelData data in Levels)
 		{
 			type level = data.type;
 			switch (level)
