@@ -86,6 +86,7 @@ public class GuiContoler : MonoBehaviour {
 	public float levelinfoshowXValue;
 	int maxGraph = 3;
 	public GameObject boss;
+    Transform lastSpeechPos = null;
 	void Awake()
 	{
         LeanTween.init(1000);
@@ -257,7 +258,7 @@ public class GuiContoler : MonoBehaviour {
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
-
+                    lastSpeechPos = null;
 					if (!Var.isBoss && !inMap)
 					{
 						///GameObject dustObj = Instantiate(Var.dustCloud, boss.transform.position, Quaternion.identity);
@@ -282,7 +283,12 @@ public class GuiContoler : MonoBehaviour {
 					AudioControler.Instance.PlayVoice();
 					SpeechBubbleText.text = speechTexts[0];                    
 					speechBubble.GetComponent<UIFollow>().target = speechPos[0];
-					speechPos.RemoveAt(0);
+                    if (lastSpeechPos != null &&lastSpeechPos.Equals(speechPos[0]))
+                    {
+                        speechBubbleObj.GetComponent<Animator>().SetTrigger("newline");
+                    }
+                    lastSpeechPos = speechPos[0];
+                    speechPos.RemoveAt(0);                    
 					speechTexts.RemoveAt(0);
 					if (!inMap)
 					{
@@ -492,7 +498,7 @@ public class GuiContoler : MonoBehaviour {
 		else
 		{
 			BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
-			CreateRelationshipEvent(birdNum);
+			//CreateRelationshipEvent(birdNum);
 			if (Var.activeBirds[birdNum].hasNewLevel)
 			{
 				levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
@@ -594,7 +600,7 @@ public class GuiContoler : MonoBehaviour {
 
 
 
-	void CreateRelationshipEvent(int birdNum)
+	/*void CreateRelationshipEvent(int birdNum)
 	{
 		if (Var.activeBirds[birdNum].newRelationship)
 		{
@@ -626,7 +632,7 @@ public class GuiContoler : MonoBehaviour {
 
 			Var.activeBirds[birdNum].newRelationship = false;
 		}
-	}
+	}*/
 	void CheckGraphNavBtns()
 	{
 		
@@ -846,8 +852,7 @@ public class GuiContoler : MonoBehaviour {
 
 			bird.friendBoost += friendGain;			
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();
-
-		}
+        }
 
 
 
@@ -923,12 +928,11 @@ public class GuiContoler : MonoBehaviour {
 			bird.prevFriend = bird.friendliness;
 			bird.ResetBonuses();
 			bird.GroundBonus.SetActive(false);
-			
-		}
+        }
 		//After applying levels;
-		GuiContoler.Instance.relationshipPanel.SetActive(false);
+		/*GuiContoler.Instance.relationshipPanel.SetActive(false);
 		GuiContoler.Instance.statPanel.SetActive(true);
-		GuiContoler.Instance.ToggleRelationPanelText.text = "Relationships";
+		GuiContoler.Instance.ToggleRelationPanelText.text = "Relationships";*/
 		foreach (Bird bird in players)
 		{
 			bird.ResetAfterLevel();
@@ -974,7 +978,7 @@ public class GuiContoler : MonoBehaviour {
 				GetComponent<fillEnemy>().createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
 				ObstacleGenerator.Instance.clearObstacles();
 				ObstacleGenerator.Instance.GenerateObstacles();
-				DialogueControl.Instance.GetRelationshipDialogs();                                
+				//DialogueControl.Instance.GetRelationshipDialogs();                                
 				if (!EventController.Instance.tryEvent())
 					DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
 

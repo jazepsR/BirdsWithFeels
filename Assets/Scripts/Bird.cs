@@ -161,7 +161,7 @@ public class Bird : MonoBehaviour
 		if (!isEnemy)
 		{
 
-			if (relationships == null)
+			/*if (relationships == null)
 			{
 				relationships = new Dictionary<EventScript.Character, int>();
 				relationships.Add(EventScript.Character.Kim, 0);
@@ -180,7 +180,7 @@ public class Bird : MonoBehaviour
 			}
 		   
 			RelationshipScript.applyRelationship(this, false);
-			SetRealtionshipParticles();
+			SetRealtionshipParticles();*/
 			var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
 			GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
 			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
@@ -232,18 +232,19 @@ public class Bird : MonoBehaviour
 	{
 		Start();
 	}
-	void SetRealtionshipParticles()
+	/*void SetRealtionshipParticles()
 	{
 		if (inMap)
 			return;
 		RelationshipParticles.SetActive(relationshipBonus > 0);
 		CrushParticles.SetActive(relationshipBonus < 0);
 
-	}
+	}*/
 	
 	public void Speak(string text)
 	{
 		GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, text);
+
 	}
 
 
@@ -310,9 +311,9 @@ public class Bird : MonoBehaviour
 			//ResetBonuses();
 			//ObstacleGenerator.Instance.tiles[y * 4 + x].GetComponent<LayoutButton>().ApplyPower(this);
 		}
-		relationshipBonus = GetRelationshipBonus();
+		//relationshipBonus = GetRelationshipBonus();
 		print(charName+ " playerRollBonus: "+ PlayerRollBonus + " GroundRollBonus: "+ GroundRollBonus);
-		return levelRollBonus + PlayerRollBonus + GroundRollBonus + relationshipBonus;
+        return levelRollBonus + PlayerRollBonus + GroundRollBonus;// + relationshipBonus;
 	}
 
 	public string GetBonusText()
@@ -324,8 +325,8 @@ public class Bird : MonoBehaviour
 			bonusText += "\nFrom other birds: " + (PlayerRollBonus * 10).ToString("+#;-#;0");
 		if (GroundRollBonus != 0)
 			bonusText += "\nFrom the current tile: " + (GroundRollBonus * 10).ToString("+#;-#;0");
-		if (relationshipBonus != 0)
-			bonusText += "\nFrom relationships: " + (relationshipBonus * 10).ToString("+#;-#;0");
+		/*if (relationshipBonus != 0)
+			bonusText += "\nFrom relationships: " + (relationshipBonus * 10).ToString("+#;-#;0");*/
 		if (bonusText != "")
 			bonusText = bonusText.Substring(1);
 		return bonusText;
@@ -333,7 +334,7 @@ public class Bird : MonoBehaviour
 	}
 
 
-	public int GetRelationshipBonus()
+	/*public int GetRelationshipBonus()
 	{
 		return 0;
 		try
@@ -358,7 +359,7 @@ public class Bird : MonoBehaviour
 				return 0;
 			}
 		}
-		/*
+		
 		if (relationshipBird!= null)
 		{
 			if(relationshipBird.relationshipBird !=null && relationshipBird.relationshipBird.charName == charName)
@@ -369,8 +370,8 @@ public class Bird : MonoBehaviour
 				return -2;
 			}            
 		}
-		return 0;*/
-	}
+		return 0;
+	}*/
 	void LoadStats()
 	{
 		if (dead)
@@ -802,10 +803,10 @@ public class Bird : MonoBehaviour
 		if (doFightStuff)
 		{
 			
-			RelationshipScript.applyRelationship(this);
+			/*RelationshipScript.applyRelationship(this);
 			relationshipBonus = GetRelationshipBonus();
 			SetRealtionshipParticles();
-			setRelationshipDialogs();
+			setRelationshipDialogs();*/
 			if (!foughtInRound)
 			{
 				consecutiveFightsWon = 0;
@@ -984,7 +985,7 @@ public class Bird : MonoBehaviour
 		}
 	}
 
-	public void SetRelationshipSliders(GameObject sliderParent)
+	/*public void SetRelationshipSliders(GameObject sliderParent)
 	{
 		var keys = new List<EventScript.Character>(relationships.Keys);
 		foreach (EventScript.Character birdFriend in keys)
@@ -1002,11 +1003,11 @@ public class Bird : MonoBehaviour
 		}
 		sliderParent.transform.Find(charName).gameObject.SetActive(false);
 
-	}
+	}*/
 
 
 
-	public void SetRelationshipText(GameObject portrait, Text RelationshipText)
+	/*public void SetRelationshipText(GameObject portrait, Text RelationshipText)
 	{
 
 		relationshipBonus =GetRelationshipBonus();
@@ -1033,7 +1034,7 @@ public class Bird : MonoBehaviour
 			portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(relationshipBird.emotion);
 		}
 		RelationshipText.text = relationshipText;
-	}
+	}*/
 	
 	
 	public void Update()

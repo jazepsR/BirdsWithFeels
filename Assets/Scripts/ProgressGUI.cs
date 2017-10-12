@@ -133,7 +133,7 @@ public class ProgressGUI : MonoBehaviour {
         portraits[portraitNum].transform.parent.gameObject.SetActive(true);
 		if (!bird.inMap)
 		{
-			bird.SetRelationshipText(GuiContoler.Instance.reportRelationshipPortrait, GuiContoler.Instance.reportRelationshipText);
+			//bird.SetRelationshipText(GuiContoler.Instance.reportRelationshipPortrait, GuiContoler.Instance.reportRelationshipText);
 			//bird.SetRelationshipSliders(GuiContoler.Instance.reportRelationshipSliders);
 		}
 		NameText[portraitNum].text = bird.charName;

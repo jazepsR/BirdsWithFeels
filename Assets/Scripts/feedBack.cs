@@ -106,19 +106,20 @@ public class feedBack : MonoBehaviour {
     public void HighlightEnemy()
     {
         Debug.Log("highliting");
-       foreach(SpriteRenderer sp in birdScript.GetComponentsInChildren<SpriteRenderer>())
+        birdScript.GetComponentInChildren<Animator>().SetTrigger("highlight");
+       /*foreach(SpriteRenderer sp in birdScript.GetComponentsInChildren<SpriteRenderer>())
         {
             LeanTween.color(sp.gameObject, new Color(sp.color.r + factor, sp.color.g + factor, sp.color.b - factor*2), 0.25f).setEaseOutBack();
             LeanTween.delayedCall(0.45f,DeHighlight);
-        }
+        }*/
     }
-    void DeHighlight()
+    /*void DeHighlight()
     {
         foreach (SpriteRenderer sp in birdScript.GetComponentsInChildren<SpriteRenderer>())
         {
             LeanTween.color(sp.gameObject, new Color(sp.color.r - factor, sp.color.g - factor, sp.color.b + factor * 2), 0.25f);
         }
-    }
+    }*/
 	public void TryWizardLine(Bird player, Bird enemy)
 	{
 		if (lineObj != null)

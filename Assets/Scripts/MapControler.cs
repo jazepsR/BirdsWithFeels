@@ -64,7 +64,9 @@ public class MapControler : MonoBehaviour {
 			}
 		}
 		SaveLoad.Save();
-		Var.shouldDoMapEvent = true;
+        if (!Var.gameSettings.shownMapTutorial)
+            Var.shouldDoMapEvent = false;
+		//Var.shouldDoMapEvent = true;
 		if (Var.shouldDoMapEvent)
 		{
 			if (!EventController.Instance.tryEvent())

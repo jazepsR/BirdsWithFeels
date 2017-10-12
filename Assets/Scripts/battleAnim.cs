@@ -67,13 +67,14 @@ public class battleAnim :MonoBehaviour {
 			{
 				if (bird.gameObject.activeSelf)
 				{
-					bird.UpdateBattleCount();					
+                    bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
+                    bird.UpdateBattleCount();					
 					GuiContoler.Instance.UpdateBirdSave(bird);
 					bird.AddRoundBonuses();
 					bird.SetEmotion();
 				}
 			}
-			yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(2.0f);
 			AudioControler.Instance.setBattleVolume(0f);
             if (Var.isBoss)
             {
@@ -108,7 +109,7 @@ public class battleAnim :MonoBehaviour {
 	{
 		   
 		//Player won
-		if (battle.result == 1)
+        if (battle.result == 1)
 		{
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.playerWin);            
 			battle.player.GetComponentInChildren<Animator>().SetTrigger("victory 0");            

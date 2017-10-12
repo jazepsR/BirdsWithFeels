@@ -305,7 +305,7 @@ public class GameLogic : MonoBehaviour {
         if (Var.Infight)
             canFight = false;
         //FightButton.gameObject.SetActive(canFight);  
-        
+        FightButton.GetComponent<Animator>().SetBool("active", canFight);
         FightButton.interactable = canFight;
         if (canFight && Var.isTutorial)
             Tutorial.Instance.ShowTutorialBeforeBattleText(Tutorial.Instance.CurrentPos);     

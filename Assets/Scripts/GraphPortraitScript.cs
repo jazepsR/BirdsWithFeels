@@ -41,8 +41,12 @@ public class GraphPortraitScript : MonoBehaviour {
     }
     void ResumeMovement()
     {
-        targetEmotion = Var.Em.finish;
-        LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);
+        try
+        {
+            targetEmotion = Var.Em.finish;
+            LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);
+        }
+        catch { }
     }
 
   

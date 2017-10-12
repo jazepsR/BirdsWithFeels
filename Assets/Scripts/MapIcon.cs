@@ -296,6 +296,9 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 
     public void mapBtnClick()
     {
+     
+
+
         if (MapControler.Instance.SelectedIcon == this)
             return;
         try
@@ -303,6 +306,13 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             AudioControler.Instance.ClickSound();
         }
         catch { }
+        //Tutorial
+        if (!Var.gameSettings.shownMapTutorial)
+        {
+            MapTutorial tut = FindObjectOfType<MapTutorial>();
+            tut.tutorialHighlight.SetTrigger("off");
+            tut.ShowDialog2();
+        }
         SetupPieGraph();
         active = true;
         GuiMap.Instance.Clear();
