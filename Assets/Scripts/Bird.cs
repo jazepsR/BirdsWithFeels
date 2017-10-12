@@ -295,12 +295,49 @@ public class Bird : MonoBehaviour
 				GainedLVLHealth = true;
 			}
 			levelRollBonus++;
-		}
+            //Reset Emotions
+            prevConf = confidence;
+            prevFriend = friendliness;
+            switch (data.emotion)
+            {
+                case Var.Em.Confident:
+                    confidence = 4;
+                    if (friendliness > 0)
+                        friendliness = (int)Mathf.Min(4, friendliness);
+                    else
+                        friendliness = (int)Mathf.Max(-4, friendliness);
+                    break;
+                case Var.Em.Scared:
+                    confidence = -4;
+                    if (friendliness > 0)
+                        friendliness = (int)Mathf.Min(4, friendliness);
+                    else
+                        friendliness = (int)Mathf.Max(-4, friendliness);
+                    break;
+                case Var.Em.Friendly:
+                    friendliness = 4;
+                    if (confidence > 0)
+                        confidence = (int)Mathf.Min(4, confidence);
+                    else
+                        confidence = (int)Mathf.Max(-4, confidence);
+                    break;
+                case Var.Em.Lonely:
+                    friendliness = -4;
+                    if (confidence > 0)
+                        confidence = (int)Mathf.Min(4, confidence);
+                    else
+                        confidence = (int)Mathf.Max(-4, confidence);
+                    break;
+                default:
+                    break;
+            }
+            ResetBonuses();
+        }
 		levelList.Add(data);
 		level = levelList.Count;       
 		battlesToNextLVL = level * 3;
 		levelUpText = null;
-		
+       
 	  
 
 	}
@@ -417,20 +454,13 @@ public class Bird : MonoBehaviour
 		healthBoost = 0;
 		isInfluenced = false;
 	}
-	public void UpdateBattleCount()
+	public void TryLevelUp()
 	{
 		if (dead)
 			return;
-		
-		if (battleCount >= battlesToNextLVL)
-		{
-			CheckLevels();
-		}
-		if(!Var.isTutorial)
-			battleCount++;
-		//Reset per battle level variables
-
-	}
+        if (Var.gameSettings.shownLevelTutorial)
+            CheckLevels();
+    }
 	public void ResetAfterLevel()
 	{
 		if (dead)
@@ -834,15 +864,18 @@ public class Bird : MonoBehaviour
 				ChageHealth(1);
 			levelControler.OnfightEndLevel(this, levelList);
 		}
-
-		friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
-		confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
+        if (!hasNewLevel)
+        {
+            friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
+            confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
+            ConfGainedInRound = confidence - prevConf;
+            FriendGainedInRound = friendliness - prevFriend;
+        }
 		health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
 		print(charName + " healthboost " + healthBoost + " round change " + roundHealthChange);			 
 		roundHealthChange = 0;
 		foughtInRound = false;        
-		ConfGainedInRound = confidence - prevConf;
-		FriendGainedInRound = friendliness - prevFriend;
+		
 		Helpers.Instance.NormalizeStats(this);        
 		if (this == GuiContoler.Instance.selectedBird)
 			showText();    
@@ -933,12 +966,12 @@ public class Bird : MonoBehaviour
 			GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
 			GuiContoler.Instance.BirdCombatStr.text = "Combat strength: " + (getBonus()* 10f).ToString("+#;-#;0") + "%";
 			GuiContoler.Instance.BirdCombatStr.gameObject.GetComponent<ShowTooltip>().tooltipText = GetBonusText();
-			//set progress to level bar
-			if (battleCount >= battlesToNextLVL)
+            levelUpText = CheckLevels(false);
+            //set progress to level bar
+            /*if (battleCount >= battlesToNextLVL)
 			{
 				battleCount = battlesToNextLVL;
 				Var.powerText.text = "Ready to level up!";
-				levelUpText = CheckLevels(false);
 				Var.powerBar.color = Helpers.Instance.GetSoftEmotionColor(emotion);
 				Var.powerBar.fillAmount = 1;
 			}
@@ -948,9 +981,9 @@ public class Bird : MonoBehaviour
 				Var.powerText.text = null;
 				Var.powerText.text = "Leveling available in " + (battlesToNextLVL - battleCount) + " battles!";
 				Var.powerBar.fillAmount = (float)battleCount % 3 / (float)3;
-			}
+			}*/
 
-			int index = 0;
+            int index = 0;
 			GuiContoler.Instance.levelNumberText.text = level.ToString();
 			//Set Relationship bars
 				

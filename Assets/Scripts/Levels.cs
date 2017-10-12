@@ -45,20 +45,20 @@ public class Levels : MonoBehaviour {
 
 	public void ApplyLevelOnDrop(Bird bird, List<LevelData> Levels)
 	{
-        if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
-        {
-            myBird.GetComponentInChildren<Animator>().SetBool("rest", true);
-        }
-        else
-        {
-            myBird.GetComponentInChildren<Animator>().SetBool("rest", false);
-        }
-        if (myBird.inMap || Var.isTutorial)
+		if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
+		{
+			myBird.GetComponentInChildren<Animator>().SetBool("rest", true);
+		}
+		else
+		{
+			myBird.GetComponentInChildren<Animator>().SetBool("rest", false);
+		}
+		if (myBird.inMap || Var.isTutorial)
 			return;
-        if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
-            Rest.SetActive(true);
+		if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
+			Rest.SetActive(true);
 
-            foreach (LevelData data in Levels)
+			foreach (LevelData data in Levels)
 		{
 			type level = data.type;
 			switch (level)
@@ -526,7 +526,7 @@ public class Levels : MonoBehaviour {
 			if (myBird.winsInOneFight > 1 && !Helpers.Instance.ListContainsLevel(type.Brave1, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Brave1, Var.Em.Confident, Var.lvlSprites[1]), "Brave 1");
-                return "did LVL";
+				return "did LVL";
 			}
 		}
 		return null;
@@ -543,8 +543,8 @@ public class Levels : MonoBehaviour {
 			if (myBird.consecutiveFightsWon >= 5  && Helpers.Instance.ListContainsLevel(Levels.type.Brave1,myBird.levelList) && !Helpers.Instance.ListContainsLevel(type.Brave2, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Brave2, Var.Em.Confident, Var.lvlSprites[5]), "Brave 2");
-                return "did LVL";
-            }
+				return "did LVL";
+			}
 		}
 		return null;
 	}
@@ -559,8 +559,8 @@ public class Levels : MonoBehaviour {
 			if (  Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.wonLastBattle>=1 && !Helpers.Instance.ListContainsLevel(type.Lonely1, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Lonely1, Var.Em.Lonely, Var.lvlSprites[3]), "Lonely 1");
-                return "did LVL";
-            }            
+				return "did LVL";
+			}            
 		}
 		return null;
 	}
@@ -576,8 +576,8 @@ public class Levels : MonoBehaviour {
 			if (Helpers.Instance.GetAdjacentBirds(myBird).Count == 0 && myBird.AdventuresRested>=2 && Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, myBird.levelList) && !Helpers.Instance.ListContainsLevel(type.Lonely2, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Lonely2, Var.Em.Lonely, Var.lvlSprites[7]),"Lonely 2");
-                return "did LVL";
-            }
+				return "did LVL";
+			}
 		}
 		return null;
 	}
@@ -594,8 +594,8 @@ public class Levels : MonoBehaviour {
 			if (gain>= 3  && myBird.wonLastBattle >=1 && !Helpers.Instance.ListContainsLevel(type.Friend1, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[0]),"Friendly 1");
-                return "did LVL";
-            }
+				return "did LVL";
+			}
 		}
 		return null;
 
@@ -622,8 +622,8 @@ public class Levels : MonoBehaviour {
 			if (closeFriend && gain >= 5 && !Helpers.Instance.ListContainsLevel(type.Friend2, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[4]),"Friendly 2");
-                return "did LVL";
-            }
+				return "did LVL";
+			}
 		}
 		return null;
 
@@ -648,8 +648,8 @@ public class Levels : MonoBehaviour {
 			if ((closeWinner &&myBird.wonLastBattle == 0) || (closeWinner && myBird.wonLastBattle == 2) && !Helpers.Instance.ListContainsLevel(type.Scared1, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Scared1, Var.Em.Scared, Var.lvlSprites[2]),"Scared 1");
-                return "did LVL";
-            }
+				return "did LVL";
+			}
 		}
 		return null;
 
@@ -665,8 +665,8 @@ public class Levels : MonoBehaviour {
 			if (myBird.roundsRested >= 3  && !Helpers.Instance.ListContainsLevel(type.Scared2, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Scared2, Var.Em.Scared, Var.lvlSprites[6]),"Scared 2");
-                return "did LVL";
-            }
+				return "did LVL";
+			}
 		}
 		return null;
 	}

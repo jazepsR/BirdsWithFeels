@@ -68,7 +68,7 @@ public class battleAnim :MonoBehaviour {
 				if (bird.gameObject.activeSelf)
 				{
                     bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
-                    bird.UpdateBattleCount();					
+                    bird.TryLevelUp();					
 					GuiContoler.Instance.UpdateBirdSave(bird);
 					bird.AddRoundBonuses();
 					bird.SetEmotion();

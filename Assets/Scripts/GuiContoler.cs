@@ -408,7 +408,7 @@ public class GuiContoler : MonoBehaviour {
 	{
 		foreach (Bird bird in FillPlayer.Instance.playerBirds)
 		{
-			bird.UpdateBattleCount();
+			bird.TryLevelUp();
 			bird.AddRoundBonuses();
 			UpdateBirdSave(bird);
 		}
