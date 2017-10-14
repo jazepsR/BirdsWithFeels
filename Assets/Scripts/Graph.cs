@@ -8,12 +8,13 @@ public class Graph : MonoBehaviour {
 	public Image heart;
 	public GameObject prevHeart;
     public GameObject graphParent;
-	public Transform canvas;
 	public int graphSize = 275;
 	int multiplier;   
 	public static Graph Instance { get; private set; }
+    [HideInInspector]
 	public List<GameObject> portraits;
-    float factor = 22.4f;
+    public float factor = 22.4f;
+    public bool isSmall = false;
 	// Use this for initialization
 	void Start()
 	{
@@ -21,19 +22,22 @@ public class Graph : MonoBehaviour {
 		Sprite sp = Resources.Load<Sprite>("Icons/NewIcons_1");
 		multiplier = graphSize / 15;
 	}
-    
-	 public void PlotFull(Bird bird)
+
+    public void PlotFull(Bird bird)
 	{
 		if (bird.health <= 0)
 			return;
 		GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
-		GameObject tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait,true,bird);        
-		GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();       
-        Vector3 secondPos = new Vector3(-bird.friendliness, bird.confidence, 0);
-        Var.Em emotion = bird.emotion;
-        if (bird.prevEmotion == bird.emotion)
-            emotion = Var.Em.finish;
-		portraitScript.StartGraph(secondPos,emotion);       
+		GameObject tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait,true,bird);
+        if (!isSmall)
+        {
+            GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();
+            Vector3 secondPos = new Vector3(-bird.friendliness, bird.confidence, 0);
+            Var.Em emotion = bird.emotion;
+            if (bird.prevEmotion == bird.emotion)
+                emotion = Var.Em.finish;
+            portraitScript.StartGraph(secondPos, emotion);
+        }  
 	}
     
 	GameObject PlotPoint(int x,int y, GameObject obj, bool isPortrait, Bird bird=null )
@@ -45,16 +49,42 @@ public class Graph : MonoBehaviour {
 		GameObject heartt =Instantiate(obj,graphParent.transform);
 		if (isPortrait)
 		{
-			heartt.transform.Find("BirdName").GetComponent<Text>().text = bird.charName;
-			portraits.Add(heartt);
-            heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
+            if (isSmall)
+            {
+                heartt.transform.Find("BirdName").GetComponent<Text>().gameObject.SetActive(false);
+                heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+                ShowTooltip info = heartt.gameObject.AddComponent<ShowTooltip>();
+                string tooltipText = "";
+                if (y > 0)
+                    tooltipText += Helpers.Instance.GetHexColor(Var.Em.Confident) + "Confidence: " + y + "</color>\n";
+                if (y < 0)
+                    tooltipText += Helpers.Instance.GetHexColor(Var.Em.Scared) + "Cautions: " + Mathf.Abs(y) + "</color>\n";
+                if (y == 0)
+                    tooltipText += "Confidence: 0\n";
+                if (x > 0)
+                    tooltipText += Helpers.Instance.GetHexColor(Var.Em.Friendly) + "Social: " + x + "</color>\n";
+                if (x < 0)
+                    tooltipText += Helpers.Instance.GetHexColor(Var.Em.Lonely) + "Solitary: " + Mathf.Abs(x) + "</color>\n";
+                if (x == 0)
+                    tooltipText += "Solitude: 0\n";
+                info.tooltipText = "<b>" + tooltipText + "</b>";
+            }
+            else
+            {
+                heartt.transform.Find("BirdName").GetComponent<Text>().text = bird.charName;
+                heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
+            }
+            portraits.Add(heartt);
             Canvas dummy = heartt.AddComponent<Canvas>();
             dummy.overrideSorting = true;
             dummy.sortingLayerName = "Front";
             dummy.sortingOrder = 10;
             heartt.AddComponent<GraphicRaycaster>();
         }
-		heartt.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
+        if(isSmall)
+            heartt.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        else
+            heartt.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
 		heartt.transform.localPosition = new Vector3(-x*factor, y*factor, 0);
 		return heartt;     
 	}

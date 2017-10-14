@@ -84,6 +84,7 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject reportRelationshipSliders;
 	public float levelinfoHideXValue;
 	public float levelinfoshowXValue;
+	public Graph smallGraph;
 	int maxGraph = 3;
 	public GameObject boss;
 	Transform lastSpeechPos = null;
@@ -258,6 +259,7 @@ public class GuiContoler : MonoBehaviour {
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
+                    
 					lastSpeechPos = null;
 					if (!Var.isBoss && !inMap)
 					{
@@ -275,6 +277,7 @@ public class GuiContoler : MonoBehaviour {
 							LeanTween.alpha(img.rectTransform, 0, 0.5f);
 						}
 						CheckGraphNavBtns();
+                        GameLogic.Instance.CanWeFight();
 					}
 					
 				}
@@ -474,6 +477,14 @@ public class GuiContoler : MonoBehaviour {
 		LeanTween.moveLocal(graph, new Vector3(-Var.MoveGraphBy, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
 		//battlePanel.SetActive(true);
 		foreach (Transform child in graph.transform.Find("GraphParts").transform)
+		{
+			Destroy(child.gameObject);
+		}
+	}
+
+	public void clearSmallGraph()
+	{
+		foreach (Transform child in smallGraph.graphParent.transform)
 		{
 			Destroy(child.gameObject);
 		}

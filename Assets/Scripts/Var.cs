@@ -71,7 +71,7 @@ public class Settings
 {
    public bool shownFirstLevelUp = false;
    public bool shownAbilityTutorial = false;
-   public bool shownLevelTutorial = true;
+   public bool shownLevelTutorial = false;
     public bool shownMapTutorial = false;
 }
 

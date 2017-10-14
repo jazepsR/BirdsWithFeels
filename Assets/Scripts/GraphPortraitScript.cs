@@ -32,6 +32,7 @@ public class GraphPortraitScript : MonoBehaviour {
     public void StartGraph(Vector3 target, Var.Em targetEmotion)
     {
         Starter();
+        GuiContoler.Instance.clearSmallGraph();
         this.targetEmotion = targetEmotion;
         lr.material = Resources.Load<Material>("mat");
         ShowTooltip info =gameObject.AddComponent<ShowTooltip>();
@@ -49,7 +50,6 @@ public class GraphPortraitScript : MonoBehaviour {
             tooltipText += Helpers.Instance.GetHexColor(Var.Em.Friendly) + "Social: " + Mathf.Abs(target.x) + "</color>\n";
         if (target.x == 0)
             tooltipText += "Solitude: 0\n";
-
         info.tooltipText = "<b>"+tooltipText+"</b>";           
         LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);        
             

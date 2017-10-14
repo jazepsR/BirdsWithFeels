@@ -303,6 +303,11 @@ public class GameLogic : MonoBehaviour {
                 }
             }
         }
+        if (GuiContoler.Instance.speechBubbleObj.activeSelf)
+        {
+            canFight = false;
+            tooltipText = "Fight availabe after the dialogue is completed";
+        }
         fightTooltip.tooltipText = tooltipText;
         if (Var.Infight)
             canFight = false;

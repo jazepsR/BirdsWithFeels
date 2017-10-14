@@ -10,8 +10,8 @@ public class ProgressGUI : MonoBehaviour {
 	public Text[] NameText;
 	public LevelArea[] levelAreas;
 	public Image[] Hearts;
-    public Image[] Hearts2;
-    public Image[] Hearts3;
+	public Image[] Hearts2;
+	public Image[] Hearts3;
 	public LVLIconScript[] LvlIcons;  
 	public static ProgressGUI Instance { get; private set; }
 	public GameObject skillArea;
@@ -22,7 +22,7 @@ public class ProgressGUI : MonoBehaviour {
 	public deathScreenManager deathScreen;
 	public Text birdBio;
 	Color skillDefaultCol;
-    public GameObject levelArea;
+	public GameObject levelArea;
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -50,7 +50,7 @@ public class ProgressGUI : MonoBehaviour {
 			lvl.Unlock();
 			if (Helpers.Instance.ListContainsLevel(lvl.level, bird.levelList))
 			{
-                lvl.gameObject.SetActive(false);
+				lvl.gameObject.SetActive(false);
 				/*lvl.myImage.sprite = lvl.Completed;
 				if(lvl.gameObject.GetComponent<LevelArea>().isSmall)
 					lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(75, 525);
@@ -60,14 +60,14 @@ public class ProgressGUI : MonoBehaviour {
 				if (lvl.gameObject.GetComponent<LevelArea>().isSmall)
 					lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 650);
 			}
-            /*if (bird.lastLevel.emotion == lvl.emotion || bird.bannedLevels == lvl.emotion)
+			/*if (bird.lastLevel.emotion == lvl.emotion || bird.bannedLevels == lvl.emotion)
 			{
 				lvl.gameObject.SetActive(false);
 			}*/
-            if ( bird.bannedLevels == lvl.emotion)           
-               lvl.gameObject.SetActive(false);
-           
-            if (lvl.level.ToString().Contains("2"))
+			if ( bird.bannedLevels == lvl.emotion)           
+			   lvl.gameObject.SetActive(false);
+		   
+			if (lvl.level.ToString().Contains("2"))
 			{
 				//print("two");
 				//if(!HasSuper)
@@ -76,9 +76,9 @@ public class ProgressGUI : MonoBehaviour {
 					lvl.gameObject.SetActive(false);              
 
 			}
-            if (Var.isTutorial || isFinal || Var.currentStageID == 0)
-                lvl.gameObject.SetActive(false);
-        }
+			if (Var.isTutorial || isFinal || Var.currentStageID == 0)
+				lvl.gameObject.SetActive(false);
+		}
 		skillBG.color = skillDefaultCol;
 	}
 	
@@ -104,33 +104,33 @@ public class ProgressGUI : MonoBehaviour {
 
 	public void scaleDownPortrait(object o)
 	{
-        int portraitNum = (int)o;
+		int portraitNum = (int)o;
 		LeanTween.scale(portraits[portraitNum].transform.parent.GetComponent<RectTransform>(), Vector3.one*1.3f, 1f).setEase(LeanTweenType.easeInBack);
 		LeanTween.textAlpha(newEmotion[portraitNum].rectTransform, 0.0f, 2.5f);
 		LeanTween.scale(newEmotion[portraitNum].rectTransform, Vector3.one * 2.3f, 2.5f).setEase(LeanTweenType.easeInOutQuad);
 	}
 	
-    public void AllPortraitClick()
-    {
-        for(int i = 0; i < 3; i++)
-        {
-            PortraitClick(Var.activeBirds[i], i);
-        }
-        UpdateLevelAreas(Var.activeBirds[0], true);
-        levelArea.SetActive(false);
-    }
+	public void AllPortraitClick()
+	{
+		for(int i = 0; i < 3; i++)
+		{
+			PortraitClick(Var.activeBirds[i], i);
+		}
+		UpdateLevelAreas(Var.activeBirds[0], true);
+		levelArea.SetActive(false);
+	}
 
-    public void SetOnePortrait()
-    {
-        foreach (Image portrait in portraits)
-        {
-            portrait.transform.parent.gameObject.SetActive(false);
-        }
-        levelArea.SetActive(true);
-    }
+	public void SetOnePortrait()
+	{
+		foreach (Image portrait in portraits)
+		{
+			portrait.transform.parent.gameObject.SetActive(false);
+		}
+		levelArea.SetActive(true);
+	}
 	public void PortraitClick(Bird bird, int portraitNum=0)
 	{
-        portraits[portraitNum].transform.parent.gameObject.SetActive(true);
+		portraits[portraitNum].transform.parent.gameObject.SetActive(true);
 		if (!bird.inMap)
 		{
 			//bird.SetRelationshipText(GuiContoler.Instance.reportRelationshipPortrait, GuiContoler.Instance.reportRelationshipText);
@@ -139,36 +139,36 @@ public class ProgressGUI : MonoBehaviour {
 		NameText[portraitNum].text = bird.charName;
 		if (bird.inMap)
 			birdBio.text = bird.birdBio;
-        Image[] activeHearts;
-        switch (portraitNum)
-        {
-            case 0:
-                activeHearts = Hearts;
-                break;
-            case 1:
-                activeHearts = Hearts2;
-                break;
-            case 2:
-                activeHearts = Hearts3;
-                break;
-            default:
-                activeHearts = Hearts;
-                break;
-        }
+		Image[] activeHearts;
+		switch (portraitNum)
+		{
+			case 0:
+				activeHearts = Hearts;
+				break;
+			case 1:
+				activeHearts = Hearts2;
+				break;
+			case 2:
+				activeHearts = Hearts3;
+				break;
+			default:
+				activeHearts = Hearts;
+				break;
+		}
 		//print("helat: "+ bird.health+ " prev: "+ bird.prevRoundHealth);
 		if (bird.dead)
 		{
 			if(!bird.inMap)
 				deathScreen.ShowDeathMenu(bird);
 			portraits[portraitNum].sprite = skull;
-            Helpers.Instance.setHearts(activeHearts, 0, bird.maxHealth, bird.prevRoundHealth);
-            portraitFill[portraitNum].color = new Color(0, 0, 0, 0);
+			Helpers.Instance.setHearts(activeHearts, 0, bird.maxHealth, bird.prevRoundHealth);
+			portraitFill[portraitNum].color = new Color(0, 0, 0, 0);
 			NameText[portraitNum].text += "- Dead";
-        }
+		}
 		else
 		{
-            Helpers.Instance.setHearts(activeHearts, bird.health, bird.maxHealth, bird.prevRoundHealth);
-            portraitFill[portraitNum].sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+			Helpers.Instance.setHearts(activeHearts, bird.health, bird.maxHealth, bird.prevRoundHealth);
+			portraitFill[portraitNum].sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
 			if (bird.prevEmotion != bird.emotion && !bird.inMap)
 			{
 				AudioControler.Instance.PlaySound(AudioControler.Instance.newEmotion);

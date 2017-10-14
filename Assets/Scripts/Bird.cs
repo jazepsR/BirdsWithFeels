@@ -219,8 +219,6 @@ public class Bird : MonoBehaviour
 			LoadStats();
 		}
 		target = transform.position;
-		prevEmotion = Var.Em.finish;
-
 		if (dead)
 		{
 			Animator anim = GetComponentInChildren<Animator>();
@@ -478,6 +476,8 @@ public class Bird : MonoBehaviour
 	{
 		//TODO: make this look nice
 		string st = "";
+        if (!Var.gameSettings.shownLevelTutorial)
+            return st;
 		st= levelControler.CheckBrave1(toApply);
 		if (st != null)
 			return st;
@@ -645,9 +645,13 @@ public class Bird : MonoBehaviour
 	}
 	void OnMouseExit()
 	{
-		
-		if (!inMap && !isEnemy)
-			GuiContoler.Instance.HideLvlText();
+
+        if (!inMap && !isEnemy)
+        {
+            GuiContoler.Instance.HideLvlText();
+            
+        }
+
 		if (!dragged)
 		{
 			SetCoolDownRing(false);
@@ -951,13 +955,20 @@ public class Bird : MonoBehaviour
 		catch { }        
 		DefaultCol = Helpers.Instance.GetEmotionColor(emotion);        
 		HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g +factor, DefaultCol.b + factor);
+        if (prevEmotion.Equals(Var.Em.finish))
+            prevEmotion = emotion;
 	}
 	
 	public void showText()
 	{
 		if (ToString() != null)
 		{
-			//Var.birdInfo.text = ToString();           
+            //Var.birdInfo.text = ToString();         
+            if (!inMap)
+            {
+                GuiContoler.Instance.clearSmallGraph();
+                GuiContoler.Instance.smallGraph.PlotFull(this);
+            }
 			GuiContoler.Instance.selectedBird = this;
 			//SetRelationshipSliders(GuiContoler.Instance.relationshipSliders);
 			Var.birdInfoFeeling.text = emotion.ToString();
