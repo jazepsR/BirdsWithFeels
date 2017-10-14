@@ -13,6 +13,7 @@ public class MapTutorial : MonoBehaviour {
         {
             tutorialHighlight.gameObject.SetActive(true);
             DialogueControl.Instance.CreateParticularDialog(mapTutorialDialog);
+            print("Did map tutorial dialog");
         }
 	}
 	

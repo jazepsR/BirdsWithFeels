@@ -90,6 +90,8 @@ public class GuiContoler : MonoBehaviour {
 	Transform lastSpeechPos = null;
 	void Awake()
 	{
+		if (!Var.StartedNormally)
+			Var.gameSettings.shownLevelTutorial = true;
 		LeanTween.init(1000);
 		Instance = this;
 		maxGraph = 3;
@@ -259,7 +261,7 @@ public class GuiContoler : MonoBehaviour {
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
-                    
+					
 					lastSpeechPos = null;
 					if (!Var.isBoss && !inMap)
 					{
@@ -277,8 +279,8 @@ public class GuiContoler : MonoBehaviour {
 							LeanTween.alpha(img.rectTransform, 0, 0.5f);
 						}
 						CheckGraphNavBtns();
-                        GameLogic.Instance.CanWeFight();
-                    }
+						GameLogic.Instance.CanWeFight();
+					}
 					
 				}
 				else
@@ -672,7 +674,7 @@ public class GuiContoler : MonoBehaviour {
 
 	public void GraphButton()
 	{
-        clearSmallGraph();
+		clearSmallGraph();
 		if (LevelTutorial.shouldShowFirstBattleDialog)
 		{
 			LevelTutorial.shouldShowFirstBattleDialog = false;
@@ -702,7 +704,7 @@ public class GuiContoler : MonoBehaviour {
 			
 			}
 	public void CreateBattleReport() {
-        clearSmallGraph();
+		clearSmallGraph();
 		feedbackText.gameObject.SetActive(true);
 		feedbackText.gameObject.SetActive(true);
 		closeReportBtn.SetActive(true);
@@ -859,7 +861,12 @@ public class GuiContoler : MonoBehaviour {
 		{
 			int friendGain = Helpers.Instance.Findfirendlieness(bird);
 			if (friendGain > 0)
-				Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Friendly);
+			{
+				if(friendGain>2)
+					Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Friendly,true,2);
+				else
+					Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Friendly);
+			}
 			if(friendGain<0)
 				Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Lonely);
 
@@ -875,6 +882,8 @@ public class GuiContoler : MonoBehaviour {
 		
 
 	}
+
+	
 	public void ReturnToMap()
 	{
 		if(Var.currentStageID != -1)
@@ -1061,7 +1070,8 @@ public class GuiContoler : MonoBehaviour {
 			Var.isTutorial = false;
 			Var.tutorialCompleted = true;
 			Var.isBoss = false;
-			winBanner.SetActive(true);			
+			winBanner.SetActive(true);
+			clearSmallGraph();		
 		}
 
 	}

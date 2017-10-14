@@ -293,49 +293,49 @@ public class Bird : MonoBehaviour
 				GainedLVLHealth = true;
 			}
 			levelRollBonus++;
-            //Reset Emotions
-            prevConf = confidence;
-            prevFriend = friendliness;
-            switch (data.emotion)
-            {
-                case Var.Em.Confident:
-                    confidence = 4;
-                    if (friendliness > 0)
-                        friendliness = (int)Mathf.Min(4, friendliness);
-                    else
-                        friendliness = (int)Mathf.Max(-4, friendliness);
-                    break;
-                case Var.Em.Scared:
-                    confidence = -4;
-                    if (friendliness > 0)
-                        friendliness = (int)Mathf.Min(4, friendliness);
-                    else
-                        friendliness = (int)Mathf.Max(-4, friendliness);
-                    break;
-                case Var.Em.Friendly:
-                    friendliness = 4;
-                    if (confidence > 0)
-                        confidence = (int)Mathf.Min(4, confidence);
-                    else
-                        confidence = (int)Mathf.Max(-4, confidence);
-                    break;
-                case Var.Em.Lonely:
-                    friendliness = -4;
-                    if (confidence > 0)
-                        confidence = (int)Mathf.Min(4, confidence);
-                    else
-                        confidence = (int)Mathf.Max(-4, confidence);
-                    break;
-                default:
-                    break;
-            }
-            ResetBonuses();
-        }
+			//Reset Emotions
+			prevConf = confidence;
+			prevFriend = friendliness;
+			switch (data.emotion)
+			{
+				case Var.Em.Confident:
+					confidence = 4;
+					if (friendliness > 0)
+						friendliness = (int)Mathf.Min(4, friendliness);
+					else
+						friendliness = (int)Mathf.Max(-4, friendliness);
+					break;
+				case Var.Em.Scared:
+					confidence = -4;
+					if (friendliness > 0)
+						friendliness = (int)Mathf.Min(4, friendliness);
+					else
+						friendliness = (int)Mathf.Max(-4, friendliness);
+					break;
+				case Var.Em.Friendly:
+					friendliness = 4;
+					if (confidence > 0)
+						confidence = (int)Mathf.Min(4, confidence);
+					else
+						confidence = (int)Mathf.Max(-4, confidence);
+					break;
+				case Var.Em.Lonely:
+					friendliness = -4;
+					if (confidence > 0)
+						confidence = (int)Mathf.Min(4, confidence);
+					else
+						confidence = (int)Mathf.Max(-4, confidence);
+					break;
+				default:
+					break;
+			}
+			ResetBonuses();
+		}
 		levelList.Add(data);
 		level = levelList.Count;       
 		battlesToNextLVL = level * 3;
 		levelUpText = null;
-       
+	   
 	  
 
 	}
@@ -456,9 +456,9 @@ public class Bird : MonoBehaviour
 	{
 		if (dead)
 			return;
-        if (Var.gameSettings.shownLevelTutorial)
-            CheckLevels();
-    }
+		if (Var.gameSettings.shownLevelTutorial)
+			CheckLevels();
+	}
 	public void ResetAfterLevel()
 	{
 		if (dead)
@@ -476,8 +476,8 @@ public class Bird : MonoBehaviour
 	{
 		//TODO: make this look nice
 		string st = "";
-        if (!Var.gameSettings.shownLevelTutorial)
-            return st;
+		if (!Var.gameSettings.shownLevelTutorial)
+			return st;
 		st= levelControler.CheckBrave1(toApply);
 		if (st != null)
 			return st;
@@ -556,15 +556,15 @@ public class Bird : MonoBehaviour
 				child.sortingLayerName = "Default";
 			}
 			GetComponentInChildren<Animator>().SetBool("lift", false);
-            if (Var.isTutorial)
-            {
-                foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
-                {
-                    tile.baseColor = tile.defaultColor;
-                    LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
-                }
-            }
-        }
+			if (Var.isTutorial)
+			{
+				foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
+				{
+					tile.baseColor = tile.defaultColor;
+					LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
+				}
+			}
+		}
 		if (Input.GetMouseButtonDown(0))
 		{
 			if (Var.Infight || dead)
@@ -646,11 +646,11 @@ public class Bird : MonoBehaviour
 	void OnMouseExit()
 	{
 
-        if (!inMap && !isEnemy)
-        {
-            GuiContoler.Instance.HideLvlText();
-            
-        }
+		if (!inMap && !isEnemy)
+		{
+			GuiContoler.Instance.HideLvlText();
+			
+		}
 
 		if (!dragged)
 		{
@@ -868,13 +868,13 @@ public class Bird : MonoBehaviour
 				ChageHealth(1);
 			levelControler.OnfightEndLevel(this, levelList);
 		}
-        if (!hasNewLevel)
-        {
-            friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
-            confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
-            ConfGainedInRound = confidence - prevConf;
-            FriendGainedInRound = friendliness - prevFriend;
-        }
+		if (!hasNewLevel)
+		{
+			friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
+			confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
+			ConfGainedInRound = confidence - prevConf;
+			FriendGainedInRound = friendliness - prevFriend;
+		}
 		health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
 		print(charName + " healthboost " + healthBoost + " round change " + roundHealthChange);			 
 		roundHealthChange = 0;
@@ -955,20 +955,20 @@ public class Bird : MonoBehaviour
 		catch { }        
 		DefaultCol = Helpers.Instance.GetEmotionColor(emotion);        
 		HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g +factor, DefaultCol.b + factor);
-        if (prevEmotion.Equals(Var.Em.finish))
-            prevEmotion = emotion;
+		if (prevEmotion.Equals(Var.Em.finish))
+			prevEmotion = emotion;
 	}
 	
 	public void showText()
 	{
 		if (ToString() != null)
 		{
-            //Var.birdInfo.text = ToString();         
-            if (!inMap)
-            {
-                GuiContoler.Instance.clearSmallGraph();
-                GuiContoler.Instance.smallGraph.PlotFull(this);
-            }
+			//Var.birdInfo.text = ToString();         
+			if (!inMap)
+			{
+				GuiContoler.Instance.clearSmallGraph();
+				GuiContoler.Instance.smallGraph.PlotFull(this);
+			}
 			GuiContoler.Instance.selectedBird = this;
 			//SetRelationshipSliders(GuiContoler.Instance.relationshipSliders);
 			Var.birdInfoFeeling.text = emotion.ToString();
@@ -977,9 +977,9 @@ public class Bird : MonoBehaviour
 			GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
 			GuiContoler.Instance.BirdCombatStr.text = "Combat strength: " + (getBonus()* 10f).ToString("+#;-#;0") + "%";
 			GuiContoler.Instance.BirdCombatStr.gameObject.GetComponent<ShowTooltip>().tooltipText = GetBonusText();
-            levelUpText = CheckLevels(false);
-            //set progress to level bar
-            /*if (battleCount >= battlesToNextLVL)
+			levelUpText = CheckLevels(false);
+			//set progress to level bar
+			/*if (battleCount >= battlesToNextLVL)
 			{
 				battleCount = battlesToNextLVL;
 				Var.powerText.text = "Ready to level up!";
@@ -994,7 +994,7 @@ public class Bird : MonoBehaviour
 				Var.powerBar.fillAmount = (float)battleCount % 3 / (float)3;
 			}*/
 
-            int index = 0;
+			int index = 0;
 			GuiContoler.Instance.levelNumberText.text = level.ToString();
 			//Set Relationship bars
 				
@@ -1161,15 +1161,15 @@ public class Bird : MonoBehaviour
 				UpdateFeedback();
 			}
 		}
-        if (Var.isTutorial)
-        {
-            foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
-            {
-                tile.baseColor = tile.defaultColor;
-                LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
-            }
-        }
-        LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
+		if (Var.isTutorial)
+		{
+			foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
+			{
+				tile.baseColor = tile.defaultColor;
+				LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
+			}
+		}
+		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		SetCoolDownRing(false);
 		if(inMap)
 		{

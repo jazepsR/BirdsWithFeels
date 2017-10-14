@@ -52,7 +52,7 @@ public class Helpers : MonoBehaviour {
     public Bird GetBirdFromEnum(EventScript.Character ch, bool useAll = false)
     {
         List<Bird> birds;
-        if (inMap || useAll)
+        if ( useAll)
             birds = Var.availableBirds;
         else
         {
@@ -448,7 +448,7 @@ public class Helpers : MonoBehaviour {
         switch (type)
         {
             case Levels.type.Brave1:
-                return "Successfully fending off two vultures at once, <name> feels a surge of confidence flow through them. Nothing can stop <name> at this point! <name> promises to use their newfound confidence to shield their teammates from harm. ".Replace("<name>", name);
+                return "Successfully fending off two vultures at once, <name> feels a surge of confidence flow through them.& Nothing can stop <name> at this point! <name> promises to use their newfound confidence to shield their teammates from harm. ".Replace("<name>", name);
             case Levels.type.Brave2:
                 return "There's no stopping <name> now! Nothing can hurt them! (As long as they think so, that is)".Replace("<name>", name);
             case Levels.type.Friend1:
@@ -456,7 +456,7 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Friend2:
                 return "<name> has found a way to help their friends even more! Applying massage techniques passed down from the friendship gods, <name> can now fully heal team mates if given the time!".Replace("<name>", name);
             case Levels.type.Lonely1:
-                return "Through deep soliditary meditation coupled with the rush of victory, <name> realizes that all emotions are just a result of circumstances. <name> realizes they can intensify the emotions of their teammates!".Replace("<name>", name);
+                return "Through deep soliditary meditation coupled with the rush of victory, <name> realizes that all emotions are just a result of circumstances.& <name> realizes they can intensify the emotions of their teammates!".Replace("<name>", name);
             case Levels.type.Lonely2:
                 return "All this alone time was a great chance for <name> to do some serious studying! Through careful observation, <name> has percieved that life is but a series of turns, which can be manipulated with the right tools. ".Replace("<name>", name);
             case Levels.type.Scared1:
@@ -527,11 +527,9 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Brave1:
                 return "Defeat two enemies in the same fight";
             case Levels.type.Brave2:
-
                 return "Defeat 4 enemies in a row without losing";
             case Levels.type.Friend1:
                 return "Gain + 4 or more social in one turn and and win a fight";
-
             case Levels.type.Friend2:
                 return "Be close to a friendly bird and gain + 5 or more social in one turn"; //?
             case Levels.type.Lonely1:
@@ -778,13 +776,13 @@ public class Helpers : MonoBehaviour {
     }
 
 
-    public void EmitEmotionParticles(Transform parent,Var.Em emotion, bool useText= true)
+    public void EmitEmotionParticles(Transform parent,Var.Em emotion, bool useText= true, int intensity = 1)
     {
         var emParticleObject = Instantiate(Var.emotionParticles, parent);
 
         emoParticleController emoParticleCtrl = emParticleObject.GetComponent<emoParticleController>();
 
-        emoParticleCtrl.emitParticles(emotion, 1); //let number go between 0-2 for different intensities! 
+        emoParticleCtrl.emitParticles(emotion, intensity); //let number go between 0-2 for different intensities! 
 
         var particleSys = emParticleObject.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
         Gradient grad = new Gradient();

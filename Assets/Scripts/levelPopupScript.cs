@@ -17,10 +17,13 @@ public class levelPopupScript : MonoBehaviour {
 	public GameObject secondPart;
 	public GameObject thirdPart;
 	public Dialogue firstLevelUpDialog;
+    public Image skillIcon;
+    public List<string> secondTextList;
 	Sprite heart;
 	Sprite sword;
 	Bird activeBird;
 	int birdNum;
+	LevelData data;
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -31,6 +34,7 @@ public class levelPopupScript : MonoBehaviour {
 	
 	public void Setup(Bird bird, LevelData data,int birdNum)
 	{
+		this.data = data;
 		this.birdNum = birdNum;
 		activeBird = bird;
 		firstPart.SetActive(true);
@@ -39,15 +43,19 @@ public class levelPopupScript : MonoBehaviour {
 		string name = activeBird.charName;
 		title.text = name + " gained a level!";
 		LevelPopup.SetActive(true);
+        skillIcon.sprite = Helpers.Instance.GetLVLSprite(data.type);
 		//First part
 		//if (data.emotion == Var.Em.Scared || data.emotion == Var.Em.Lonely)
 		{
 			firstImage.sprite = sword;
 			firstText.text = name + " gained +10% combat strength!";
 		}
-		
-		//second part
-		secondText.text = Helpers.Instance.GetLevelUpText(name, data.type);
+
+        //second part
+        secondTextList = new List<string>();
+        secondTextList.AddRange(Helpers.Instance.GetLevelUpText(name, data.type).Split('&'));
+        secondText.text = secondTextList[0];
+        secondTextList.RemoveAt(0);   
 		secondImage.sprite = Helpers.Instance.GetSkillPicture(data.type);
 		// Third part
 		thirdText.text = Helpers.Instance.GetLVLInfoText(data.type);
@@ -63,6 +71,7 @@ public class levelPopupScript : MonoBehaviour {
 			activeBird.GainedLVLHealth = false;
 		}else
 		{
+			title.text = "New skill: " + Helpers.Instance.GetLevelTitle(data.type);
 			firstPart.SetActive(false);
 			secondPart.SetActive(true);
 			thirdPart.SetActive(false);
@@ -70,9 +79,16 @@ public class levelPopupScript : MonoBehaviour {
 	}
 	public void SecondBtn()
 	{
-		firstPart.SetActive(false);
-		secondPart.SetActive(false);
-		thirdPart.SetActive(true);
+        if (secondTextList.Count == 0)
+        {
+            firstPart.SetActive(false);
+            secondPart.SetActive(false);
+            thirdPart.SetActive(true);
+        }else
+        {
+            secondText.text = secondTextList[0];
+            secondTextList.RemoveAt(0);
+        }
 	}
 	public void ThirdBtn()
 	{

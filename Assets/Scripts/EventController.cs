@@ -23,9 +23,9 @@ public class EventController : MonoBehaviour {
 	EventScript currentEvent;
 	GameObject currentPortrait;
 	Bird currentBird;
-	public List<Transform> areaDialogues;
+	public List<Transform> areaDialogues;    
 	List<GameObject> portraits;
-    List<Color> colors;
+	List<Color> colors;
 	//List<string> texts;    
 	int currentText = 0;
 	// Use this for initialization
@@ -56,7 +56,7 @@ public class EventController : MonoBehaviour {
 	{
 		
 		currentText++;
-        print("currentText: " + currentText);
+		print("currentText: " + currentText);
 		AudioControler.Instance.ClickSound();
 		if (currentText < currentEvent.parts.Count-1)
 		{
@@ -75,18 +75,23 @@ public class EventController : MonoBehaviour {
 		if (currentText > currentEvent.parts.Count-1)
 		{
 			eventObject.SetActive(false);
-			if (inMap)
-			{
-				DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
-			}
-			else
-			{
-				if (GuiContoler.Instance.graph.transform.localPosition.x<-1000)
-				{
-					GuiContoler.Instance.battlePanel.SetActive(true);
-					DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
-				}
-			}
+            if (currentEvent.afterEventDialog != null)
+                DialogueControl.Instance.CreateParticularDialog(currentEvent.afterEventDialog);
+            else
+            {
+                if (inMap)
+                {
+                    DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
+                }
+                else
+                {
+                    if (GuiContoler.Instance.graph.transform.localPosition.x < -1000)
+                    {
+                        GuiContoler.Instance.battlePanel.SetActive(true);
+                        DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+                    }
+                }
+            }
 		}
 		
 	   
@@ -164,7 +169,7 @@ public class EventController : MonoBehaviour {
 			GuiContoler.Instance.battlePanel.SetActive(false);
 		}
 		currentEvent = eventData;
-        currentEvent.parts = new List<EventPart>();
+		currentEvent.parts = new List<EventPart>();
 		currentEvent.parts.AddRange(eventData.transform.GetComponentsInChildren<EventPart>());
 		if (eventData.speakers[0] != EventScript.Character.None)
 		{
@@ -176,21 +181,21 @@ public class EventController : MonoBehaviour {
 			//currentPortrait = currentBird.portrait;
 		}
 		portraits = new List<GameObject>();
-        colors = new List<Color>();
+		colors = new List<Color>();
 		foreach(EventScript.Character Char in eventData.speakers)
 		{
 			portraits.Add(Helpers.Instance.GetPortrait(Char));
-            try
-            {
-                Color col = Helpers.Instance.GetEmotionColor(Helpers.Instance.GetBirdFromEnum(Char).emotion);
-                colors.Add(col);
+			try
+			{
+				Color col = Helpers.Instance.GetEmotionColor(Helpers.Instance.GetBirdFromEnum(Char).emotion);
+				colors.Add(col);
 
-            }
-            catch
-            {
-                colors.Add(Helpers.Instance.GetEmotionColor(Helpers.Instance.RandomEmotion()));
-            }
-            
+			}
+			catch
+			{
+				colors.Add(Helpers.Instance.GetEmotionColor(Helpers.Instance.RandomEmotion()));
+			}
+			
 		}
 
 
@@ -230,8 +235,8 @@ public class EventController : MonoBehaviour {
 				portraitFill.gameObject.SetActive(true);
 				portrait.gameObject.SetActive(true);
 				portraitFill.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird_color").GetComponent<Image>().sprite;
-                portraitFill.color = colors[currentEvent.parts[currentText].speakerId];
-                portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird").GetComponent<Image>().sprite;
+				portraitFill.color = colors[currentEvent.parts[currentText].speakerId];
+				portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird").GetComponent<Image>().sprite;
 			}
 			catch
 			{

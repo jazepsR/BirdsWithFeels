@@ -538,9 +538,9 @@ public class Levels : MonoBehaviour {
 		{
 			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Brave2, myBird.levelList))
 			{
-				return "Second " + Helpers.Instance.BraveHexColor + "brave</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Brave2);
+                return "Second " + Helpers.Instance.BraveHexColor + "brave</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Brave2) + " Currently won: " + myBird.consecutiveFightsWon + " fights in a row";
 			}
-			if (myBird.consecutiveFightsWon >= 5  && Helpers.Instance.ListContainsLevel(Levels.type.Brave1,myBird.levelList) && !Helpers.Instance.ListContainsLevel(type.Brave2, myBird.levelList))
+			if (myBird.consecutiveFightsWon >= 4  && Helpers.Instance.ListContainsLevel(Levels.type.Brave1,myBird.levelList) && !Helpers.Instance.ListContainsLevel(type.Brave2, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Brave2, Var.Em.Confident, Var.lvlSprites[5]), "Brave 2");
 				return "did LVL";

@@ -29,11 +29,11 @@ public class Tutorial : MonoBehaviour {
     [HideInInspector]
     public bool[] shownMapInfos = new bool[6];
     // Use this for initialization
-    void Awake () {        
+    void Awake () {
+        Instance = this;
         if (!Var.isTutorial)
             return;
         CurrentPos = 0;
-        Instance = this;
         AddEnemiesToList(firstStageEnemies);
         AddEnemiesToList(secondStageEnemies);
         AddEnemiesToList(thirdStageEnemies);
@@ -42,7 +42,16 @@ public class Tutorial : MonoBehaviour {
         AddEnemiesToList(sixthStageEnemies);
         ShowtutorialStartingText(0);
     }
-    
+    public void jiggleGraph()
+    {
+        graphAnim.SetBool("shake", true);
+        LeanTween.delayedCall(0.7f, stopJiggle);
+    }
+    void stopJiggle()
+    {
+        graphAnim.SetBool("shake", false);
+    }
+
     void Update()
     {
         if (!Var.isTutorial)
