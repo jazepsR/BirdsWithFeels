@@ -143,6 +143,10 @@ public class Tutorial : MonoBehaviour {
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Since me and that mean bird have the <b>same emotion</b>, I have a <b>50% chance</b> of winning the fight!");
                 break;
             case 2:
+
+
+
+
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Each emotional state <b>beats one</b> emotion and <b>loses to another</b>");
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "It's like<b> rock, paper, feelings!</b>");
                 break;
