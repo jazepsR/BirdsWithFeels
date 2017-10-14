@@ -7,6 +7,7 @@ public class Tutorial : MonoBehaviour {
     public GameObject outlines;
     public GameObject FirendlinessPopUp;
     public GameObject EmotionalWheelPopUp;
+    public Animator graphAnim;
     public Var.Em[] firstStageEnemies;
     public Var.Em[] secondStageEnemies;
     public Var.Em[] thirdStageEnemies;
@@ -25,7 +26,8 @@ public class Tutorial : MonoBehaviour {
     bool shouldShowOutlines = true;
     bool showedSecondBirdReportText = false;
     bool showedThirdBirdReportText = false;
-    bool[] shownMapInfos = new bool[6];
+    [HideInInspector]
+    public bool[] shownMapInfos = new bool[6];
     // Use this for initialization
     void Awake () {        
         if (!Var.isTutorial)
@@ -129,6 +131,7 @@ public class Tutorial : MonoBehaviour {
     }
     public void ShowTutorialBeforeBattleText(int stage)
     {
+        
         if (shownMapInfos[stage] == true)
             return;
         shownMapInfos[stage] = true;
@@ -143,12 +146,24 @@ public class Tutorial : MonoBehaviour {
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Since me and that mean bird have the <b>same emotion</b>, I have a <b>50% chance</b> of winning the fight!");
                 break;
             case 2:
-
-
-
-
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Each emotional state <b>beats one</b> emotion and <b>loses to another</b>");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "It's like<b> rock, paper, feelings!</b>");
+                int total = 0;
+                foreach(feedBack fb in FindObjectsOfType<feedBack>())
+                {
+                    total += fb.feedbackVal;
+                }
+                if (total > 100)
+                {
+                    GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Each emotional state <b>beats one</b> emotion and <b>loses to another</b>");
+                    GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "It's like<b> rock, paper, feelings!</b>");
+                    graphAnim.SetBool("shake", false);
+                }
+                else
+                {
+                    GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Hmm.. This seems risky");
+                    GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "We should use our <b>emotions</b> to our advantage!");
+                    graphAnim.SetBool("shake", true);
+                }
+                shownMapInfos[stage] = false;
                 break;
             case 3:               
                 break;
@@ -185,7 +200,8 @@ public class Tutorial : MonoBehaviour {
                     }
                 }
                 break;
-            case 2:                
+            case 2:
+                graphAnim.SetBool("shake", false);
                 break;
             case 3:
                 if(Var.activeBirds[0].prevRoundHealth<Var.activeBirds[0].health)

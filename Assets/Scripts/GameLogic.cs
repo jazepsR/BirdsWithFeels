@@ -11,7 +11,7 @@ public class GameLogic : MonoBehaviour {
     private Vector3 screenPosition = Vector3.zero;
     public List<GameObject> battleResultHolders = new List<GameObject> ();       
     public static GameLogic Instance { get; private set; }
-
+    bool prevstate = false;
     void Awake()
     {
         Instance = this;
@@ -314,8 +314,12 @@ public class GameLogic : MonoBehaviour {
         //FightButton.gameObject.SetActive(canFight);  
         FightButton.GetComponent<Animator>().SetBool("active", canFight);
         FightButton.interactable = canFight;
-        if (canFight && Var.isTutorial)
-            Tutorial.Instance.ShowTutorialBeforeBattleText(Tutorial.Instance.CurrentPos);     
+        if (Var.isTutorial && canFight &&prevstate!= canFight)
+                Tutorial.Instance.ShowTutorialBeforeBattleText(Tutorial.Instance.CurrentPos);
+        if (GuiContoler.Instance.speechBubbleObj.activeSelf)
+            prevstate = true;
+        else
+            prevstate = canFight;
     }
     
 }

@@ -278,7 +278,7 @@ public class GuiContoler : MonoBehaviour {
 						}
 						CheckGraphNavBtns();
                         GameLogic.Instance.CanWeFight();
-					}
+                    }
 					
 				}
 				else
@@ -672,6 +672,7 @@ public class GuiContoler : MonoBehaviour {
 
 	public void GraphButton()
 	{
+        clearSmallGraph();
 		if (LevelTutorial.shouldShowFirstBattleDialog)
 		{
 			LevelTutorial.shouldShowFirstBattleDialog = false;
@@ -701,6 +702,7 @@ public class GuiContoler : MonoBehaviour {
 			
 			}
 	public void CreateBattleReport() {
+        clearSmallGraph();
 		feedbackText.gameObject.SetActive(true);
 		feedbackText.gameObject.SetActive(true);
 		closeReportBtn.SetActive(true);

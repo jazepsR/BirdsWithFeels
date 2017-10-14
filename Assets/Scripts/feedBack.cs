@@ -17,6 +17,8 @@ public class feedBack : MonoBehaviour {
 	string toolTipText;
 	public battleFeedback myBattleFeedback;
 	Vector3 scale;
+	[HideInInspector]
+	public int feedbackVal;
 	GameObject line;
 	GameObject lineObj = null;
 	float factor = 0.35f;
@@ -158,13 +160,13 @@ public class feedBack : MonoBehaviour {
 	}
 	public void HighlightTutorialTiles()
 	{
-        Color col;
-        if (canFight)
-            col = ObstacleGenerator.Instance.tiles[0].defaultColor;
-        else
-            col = ObstacleGenerator.Instance.tiles[0].highlightColor;
+		Color col;
+		if (canFight)
+			col = ObstacleGenerator.Instance.tiles[0].defaultColor;
+		else
+			col = ObstacleGenerator.Instance.tiles[0].highlightColor;
 
-        if (dir == Bird.dir.top)
+		if (dir == Bird.dir.top)
 		{
 			for (int i = 0; i < 4; i++)
 			{
@@ -225,8 +227,8 @@ public class feedBack : MonoBehaviour {
 					}
 
 				}
-                canFight = hasFeedback;
-                break;
+				canFight = hasFeedback;
+				break;
 			case Bird.dir.front:
 				for (int i = 0; i < 4; i++)
 				{
@@ -264,11 +266,11 @@ public class feedBack : MonoBehaviour {
 				}
 
 			}
-                canFight = hasFeedback;
-                break;			   
+				canFight = hasFeedback;
+				break;			   
 		}
 		
-        print(canFight);
+		print(canFight);
 		if(!hasFeedback)
 			HideFeedBack(false);
 
@@ -389,7 +391,8 @@ public class feedBack : MonoBehaviour {
 		Color textCol = Color.Lerp(Color.red, Color.green, colorIndex);
 		LeanTween.color(feedBackText.gameObject, textCol, 0.2f);
 		LeanTween.scale(feedBackText.gameObject, Vector3.one, 0.3f).setEase(LeanTweenType.easeOutBack);
-		feedBackText.text =(Mathf.Ceil(value * 100)).ToString("0");
+		feedbackVal = (int)(Mathf.Ceil(value * 100));
+		feedBackText.text = feedbackVal.ToString("0");
 	}
 	
 	public void HideFeedBack(bool forFight)

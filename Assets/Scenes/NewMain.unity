@@ -1491,6 +1491,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 1157034326}
+  feedbackVal: 0
 --- !u!114 &74870157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1609,6 +1610,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 790715882}
+  feedbackVal: 0
 --- !u!61 &74870159
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22585,6 +22587,7 @@ MonoBehaviour:
   outlines: {fileID: 1943876140}
   FirendlinessPopUp: {fileID: 732885623}
   EmotionalWheelPopUp: {fileID: 1841387416}
+  graphAnim: {fileID: 1546491554}
   firstStageEnemies: 0900000009000000090000000900000000000000090000000900000009000000
   secondStageEnemies: 0900000000000000000000000900000009000000090000000900000009000000
   thirdStageEnemies: 0900000009000000090000000900000009000000090000000300000001000000
@@ -22599,6 +22602,7 @@ MonoBehaviour:
   - {fileID: 173940919}
   - {fileID: 333590462}
   portraitPoint: {fileID: 709205923}
+  shownMapInfos: 000000000000
 --- !u!114 &373818717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24955,6 +24959,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 1899836533}
+  feedbackVal: 0
 --- !u!114 &447389850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25073,6 +25078,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 2022420450}
+  feedbackVal: 0
 --- !u!61 &447389852
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26777,6 +26783,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 1902677962}
+  feedbackVal: 0
 --- !u!114 &528858648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26895,6 +26902,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 1733507769}
+  feedbackVal: 0
 --- !u!61 &528858650
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -27271,7 +27279,6 @@ SpriteRenderer:
   m_Size: {x: 22.38, y: 12.0199995}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
 --- !u!1 &555293209
 GameObject:
   m_ObjectHideFlags: 0
@@ -48427,6 +48434,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 714312064}
+  feedbackVal: 0
 --- !u!114 &740823789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48448,6 +48456,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 707766860}
+  feedbackVal: 0
 --- !u!61 &740823790
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -81198,7 +81207,6 @@ SpriteRenderer:
   m_Size: {x: 22.38, y: 12.0199995}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
 --- !u!1 &1126782866
 GameObject:
   m_ObjectHideFlags: 0
@@ -88303,10 +88311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd9a58243ac7ac419f1bbe064bf319e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundVariations:
-  - {fileID: 301583835}
-  - {fileID: 1085242956}
-  - {fileID: 287487125}
 --- !u!114 &1256222138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89130,7 +89134,6 @@ SpriteRenderer:
   m_Size: {x: 22.38, y: 12.0199995}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
 --- !u!1 &1279381610
 GameObject:
   m_ObjectHideFlags: 0
@@ -95181,7 +95184,6 @@ GameObject:
   - component: {fileID: 1444503272}
   - component: {fileID: 1444503274}
   - component: {fileID: 1794714218}
-  - component: {fileID: 1444503273}
   m_Layer: 5
   m_Name: ReportGraph
   m_TagString: Untagged
@@ -95208,59 +95210,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -8}
   m_SizeDelta: {x: 650, y: 650}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1444503273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114460894075660814, guid: fbabd2b114f0b284da81290312b968f3,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1444503271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_PressedColor: {r: 0.9338235, g: 0.9338235, b: 0.9338235, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1794714218}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1893064363}
-        m_MethodName: ShowAllPortraits
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!222 &1444503274
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -99752,7 +99701,6 @@ SpriteRenderer:
   m_Size: {x: 22.38, y: 12.0199995}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
 --- !u!1 &1523180591
 GameObject:
   m_ObjectHideFlags: 0
@@ -103343,7 +103291,6 @@ SpriteRenderer:
   m_Size: {x: 22.38, y: 12.0199995}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
 --- !u!1 &1537797158
 GameObject:
   m_ObjectHideFlags: 0
@@ -103611,6 +103558,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1546491553}
+  - component: {fileID: 1546491554}
   m_Layer: 5
   m_Name: smallGraph
   m_TagString: Untagged
@@ -103624,7 +103572,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1546491552}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.3602718, y: 1.3602718, z: 1.3602718}
   m_Children:
@@ -103641,6 +103589,23 @@ RectTransform:
   m_AnchoredPosition: {x: 520, y: 177.94992}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1546491554
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1546491552}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6aee01003b068264bbe51ff2748ef51c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!224 &1547015971 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224450911143057126, guid: 893a3cdec287067418e9ce268d4f13ea,
@@ -121455,6 +121420,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 252598657}
+  feedbackVal: 0
 --- !u!114 &1660394609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121573,6 +121539,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 743087180}
+  feedbackVal: 0
 --- !u!61 &1660394611
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -133971,6 +133938,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 744663357}
+  feedbackVal: 0
 --- !u!114 &1862539793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133992,6 +133960,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 1079079014}
+  feedbackVal: 0
 --- !u!61 &1862539794
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134320,6 +134289,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 367431046}
+  feedbackVal: 0
 --- !u!114 &1873808336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134341,6 +134311,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 1665926301}
+  feedbackVal: 0
 --- !u!61 &1873808337
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -141378,6 +141349,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 670200511}
+  feedbackVal: 0
 --- !u!114 &1996505568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141399,6 +141371,7 @@ MonoBehaviour:
   hideVal: 0.3
   myIndex: 0
   myBattleFeedback: {fileID: 1691692169}
+  feedbackVal: 0
 --- !u!61 &1996505569
 BoxCollider2D:
   m_ObjectHideFlags: 0
