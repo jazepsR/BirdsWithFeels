@@ -114,7 +114,7 @@ public class ProgressGUI : MonoBehaviour {
 	{
 		for(int i = 0; i < 3; i++)
 		{
-			PortraitClick(Var.activeBirds[i], i);
+			PortraitClick(Var.activeBirds[i], i,false);
 		}
 		UpdateLevelAreas(Var.activeBirds[0], true);
 		levelArea.SetActive(false);
@@ -128,7 +128,7 @@ public class ProgressGUI : MonoBehaviour {
 		}
 		levelArea.SetActive(true);
 	}
-	public void PortraitClick(Bird bird, int portraitNum=0)
+	public void PortraitClick(Bird bird, int portraitNum=0, bool showDeath = true)
 	{
 		portraits[portraitNum].transform.parent.gameObject.SetActive(true);
 		if (!bird.inMap)
@@ -156,14 +156,14 @@ public class ProgressGUI : MonoBehaviour {
 				break;
 		}
 		//print("helat: "+ bird.health+ " prev: "+ bird.prevRoundHealth);
-		if (bird.injured)
+		if (bird.injured && showDeath)
 		{
 			if(!bird.inMap)
 				deathScreen.ShowDeathMenu(bird);
-			portraits[portraitNum].sprite = skull;
+			//portraits[portraitNum].sprite = skull;
 			Helpers.Instance.setHearts(activeHearts, 0, bird.maxHealth, bird.prevRoundHealth);
 			portraitFill[portraitNum].color = new Color(0, 0, 0, 0);
-			NameText[portraitNum].text += "- Dead";
+			NameText[portraitNum].text += "- Injured";
 		}
 		else
 		{

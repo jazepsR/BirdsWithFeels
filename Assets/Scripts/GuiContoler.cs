@@ -182,7 +182,7 @@ public class GuiContoler : MonoBehaviour {
 		foreach (Bird bird in Var.availableBirds)
 		{
 			bird.DecreaseTurnsInjured();
-            bird.AddRoundBonuses();
+			bird.AddRoundBonuses();
 			if (bird.health <= 0)
 				livingCount++;
 		}
@@ -888,11 +888,11 @@ public class GuiContoler : MonoBehaviour {
 	
 	public void ReturnToMap()
 	{
-        foreach (Bird bird in Var.availableBirds)
-        {
-            bird.AddRoundBonuses();
-            bird.DecreaseTurnsInjured();
-        }
+		foreach (Bird bird in Var.availableBirds)
+		{
+			bird.AddRoundBonuses();
+			bird.DecreaseTurnsInjured();
+		}
 		if(Var.currentStageID != -1)
 		{
 			foreach(MapSaveData data in Var.mapSaveData)

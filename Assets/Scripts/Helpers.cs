@@ -484,22 +484,22 @@ public class Helpers : MonoBehaviour {
                 deathTxt = "<name> tired to help the team, but was not able to escape the danger. Who will take care of them now? ";
                 break;
             case Levels.type.Friend2:
-                deathTxt = "<name> was so close... If they had just made it back to base quicker, <name> would have made it all right. It's too late now. ";
+                deathTxt = "<name> was so close... If they had just made it back to base quicker, <name> would have made it all right.";
                 break;
             case Levels.type.Lonely1:
-                deathTxt = "<name> kept to themselves during the last period of their life. Would they have survived with more friends? Questions the team will never stop asking themselves ";
+                deathTxt = "<name> kept to themselves during the past few weeks. Maybe tht was the wrong strategy?";
                 break;
             case Levels.type.Lonely2:
-                deathTxt = "Alas, it is too late for <name> to turn back time now... ";
+                deathTxt = "This is why <name> didn't want to rely on the other birds! Things like this often lead to injury";
                 break;
             case Levels.type.Scared1:
-                deathTxt = "<name> wasn't cut out for fighting. And in the end, their clever tricks came up short. ";
+                deathTxt = "<name> wasn't cut out for fighting. It turned out their clever tricks could'nt portect them.";
                 break;
             case Levels.type.Scared2:
                 deathTxt = "For all their attempts do avoid fighting, violence eventually found <name>. ";
                 break;
             default:
-                deathTxt = "<name>'s young life was tragically cut short. Lets hope the rest of the team won't suffer a similar fate. ";
+                deathTxt = "Ouch! <name> will be out for a while after this!";
                 break;
         }
         deathTxt += "\n" + Var.deathSignoffs[UnityEngine.Random.Range(0, Var.deathSignoffs.Length)];

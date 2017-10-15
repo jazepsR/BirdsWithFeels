@@ -61,7 +61,7 @@ public static class Var {
         "Christian","Jaxon","Julian","Landon","Grayson","Jonathan","Isaiah","Charles"};
     public static string[] femaleNames = {"Emma","Olivia","Sophia","Ava","Isabella","Mia","Abigail","Emily", "Charlotte", "Harper","Madison", "Amelia",
         "Elizabeth","Sofia","Evelyn","Chloe","Ella","Grace","Victoria","Aubrey","Scarlett","Zoey","Addison","Lily","Lillian","Natalie","Hannah","Aria","Layla"};
-    public static string[] deathSignoffs = { "<name> will be missed.", "Memento mori.", "May <name> rest in peace." };
+    public static string[] deathSignoffs = { "Get well soon, <name>!", "Tis but a scratch!", "I'm sure <name> won't be down for long!" };
 
 
 }
