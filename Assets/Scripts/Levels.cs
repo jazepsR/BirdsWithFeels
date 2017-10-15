@@ -55,8 +55,8 @@ public class Levels : MonoBehaviour {
 		}
 		if (myBird.inMap || Var.isTutorial)
 			return;
-		if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
-			Rest.SetActive(true);
+		//if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
+        //Rest.SetActive(true);
 
 			foreach (LevelData data in Levels)
 		{
@@ -213,7 +213,7 @@ public class Levels : MonoBehaviour {
 	{
 		if (myBird.inMap || Var.isTutorial)
 			return;
-		Rest.SetActive(false);
+		//Rest.SetActive(false);
 		foreach (LevelData data in Levels)
 		{
 			type level = data.type;
@@ -331,7 +331,7 @@ public class Levels : MonoBehaviour {
 	public void OnfightEndLevel(Bird bird, List<LevelData> Levels)
 	{
 		lastSwapPos = new Vector2(-2, -2);
-		Rest.SetActive(false);
+		//Rest.SetActive(false);
 		foreach (LevelData data in Levels)
 		{
 			type level = data.type;

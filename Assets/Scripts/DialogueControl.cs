@@ -90,7 +90,7 @@ public class DialogueControl : MonoBehaviour {
 			}
 			bool canCreate = ConditionCheck.CheckCondition(dialogue.condition, dialogueBird, dialogue.targetEmotion, dialogue.magnitude);
 			bool alreadySeen = Var.shownDialogs.Contains(dialogue.dialogueParts[0].text);
-			if (dialogue.location == location && canCreate&& AllBirdsInScene && !alreadySeen && !dialogueBird.dead)
+			if (dialogue.location == location && canCreate&& AllBirdsInScene && !alreadySeen && !dialogueBird.injured)
 			{
 				if (Char == EventScript.Character.None || Char == dialogue.speakers[0])
 				{

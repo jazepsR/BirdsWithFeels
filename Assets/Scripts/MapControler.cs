@@ -36,24 +36,27 @@ public class MapControler : MonoBehaviour {
 		selectionTiles.transform.localScale = Vector3.zero;
 		SelectionMenu.transform.localScale = Vector3.zero;
 		canHeal = false;
-        int count = 0;
-        foreach(Bird bird in FillPlayer.Instance.playerBirds)
-        {
-            if (bird.gameObject.activeSelf)
-                count++;
-        }
-        if (count == 3)
-        {
-            foreach (Bird bird in FillPlayer.Instance.playerBirds)
-            {
-                if (bird.gameObject.activeSelf)
-                {
-                    bird.mapHighlight.SetActive(true);
-                    selectedBirds.Add(bird);
-                }
-            }
-            CanLoadBattle();
-        }
+		int count = 0;
+		foreach(Bird bird in FillPlayer.Instance.playerBirds)
+		{
+			if (bird.gameObject.activeSelf)
+				count++;
+		}
+		if (count == 3)
+		{
+			foreach (Bird bird in FillPlayer.Instance.playerBirds)
+			{
+				if (bird.gameObject.activeSelf)
+				{
+					if (!bird.injured)
+					{
+						bird.mapHighlight.SetActive(true);
+						selectedBirds.Add(bird);
+					}
+				}
+			}
+			CanLoadBattle();
+		}
 		foreach(Bird bird in Var.activeBirds)
 		{
 			if(Helpers.Instance.ListContainsLevel(Levels.type.Friend2, bird.levelList) &&!Var.fled)
@@ -64,8 +67,8 @@ public class MapControler : MonoBehaviour {
 			}
 		}
 		SaveLoad.Save();
-        if (!Var.gameSettings.shownMapTutorial)
-            Var.shouldDoMapEvent = false;
+		if (!Var.gameSettings.shownMapTutorial)
+			Var.shouldDoMapEvent = false;
 		//Var.shouldDoMapEvent = true;
 		if (Var.shouldDoMapEvent)
 		{
@@ -90,18 +93,18 @@ public class MapControler : MonoBehaviour {
 	}
 	public void CanLoadBattle()
 	{
-        if (selectedBirds.Count == 3)
-        {
-            canFight = true;
-            startLvlBtn.interactable = true;            
-            startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "";
-        }
-        else
-        {
-            canFight = false;
-            startLvlBtn.interactable = false;
-            startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "You must select 3 birds for the fight";
-        }		
+		if (selectedBirds.Count == 3)
+		{
+			canFight = true;
+			startLvlBtn.interactable = true;            
+			startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "";
+		}
+		else
+		{
+			canFight = false;
+			startLvlBtn.interactable = false;
+			startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "You must select 3 birds for the fight";
+		}		
 		
 	}
 	public void StartLevel()
@@ -113,26 +116,26 @@ public class MapControler : MonoBehaviour {
 		}
 	}
 
-    public void Rest()
-    {
-        Var.currentWeek++;
-        timerText.text = "Week: " + Var.currentWeek;
-        foreach(Bird bird in FillPlayer.Instance.playerBirds)
-        {
-            if (bird.dead)
-            {
-
-            }else
-            {
-                if (bird.health < bird.maxHealth)
-                {
-                    bird.health++;
-                    GameObject healObj = Instantiate(bird.healParticle, bird.transform);
-                    Destroy(healObj, 1.5f);
-                }
-            }
-        }
-    }
+	public void Rest()
+	{
+		Var.currentWeek++;
+		timerText.text = "Week: " + Var.currentWeek;
+		foreach(Bird bird in FillPlayer.Instance.playerBirds)
+		{
+			if (bird.injured)
+			{
+				bird.DecreaseTurnsInjured();
+			}else
+			{
+				if (bird.health < bird.maxHealth)
+				{
+					bird.health++;
+					GameObject healObj = Instantiate(bird.healParticle, bird.transform);
+					Destroy(healObj, 1.5f);
+				}
+			}
+		}
+	}
 	public void HideSelectionMenu()
 	{
 		canMove = true;

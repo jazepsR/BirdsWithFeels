@@ -181,6 +181,8 @@ public class GuiContoler : MonoBehaviour {
 		Var.currentWeek++;
 		foreach (Bird bird in Var.availableBirds)
 		{
+			bird.DecreaseTurnsInjured();
+            bird.AddRoundBonuses();
 			if (bird.health <= 0)
 				livingCount++;
 		}
@@ -524,7 +526,7 @@ public class GuiContoler : MonoBehaviour {
 
 		foreach (Bird bird in BirdsToGraph)
 		{
-			if (!bird.dead)
+			if (!bird.injured)
 			{
 				//Normalize bird stats
 				Helpers.Instance.NormalizeStats(bird);
@@ -851,7 +853,7 @@ public class GuiContoler : MonoBehaviour {
 		foreach(Bird bird in birds)
 		{
 
-			if (!bird.isEnemy && !bird.dead)
+			if (!bird.isEnemy && !bird.injured)
 			{
 				
 				players.Add(bird);
@@ -886,6 +888,11 @@ public class GuiContoler : MonoBehaviour {
 	
 	public void ReturnToMap()
 	{
+        foreach (Bird bird in Var.availableBirds)
+        {
+            bird.AddRoundBonuses();
+            bird.DecreaseTurnsInjured();
+        }
 		if(Var.currentStageID != -1)
 		{
 			foreach(MapSaveData data in Var.mapSaveData)
@@ -933,7 +940,7 @@ public class GuiContoler : MonoBehaviour {
 			UpdateBirdSave(bird);		
 			foreach(Bird activeBird in Var.activeBirds)
 			{
-				if (activeBird.dead)
+				if (activeBird.injured)
 				{
 					Time.timeScale = 0.0f;
 					QuitToMap();

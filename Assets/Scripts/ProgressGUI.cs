@@ -156,7 +156,7 @@ public class ProgressGUI : MonoBehaviour {
 				break;
 		}
 		//print("helat: "+ bird.health+ " prev: "+ bird.prevRoundHealth);
-		if (bird.dead)
+		if (bird.injured)
 		{
 			if(!bird.inMap)
 				deathScreen.ShowDeathMenu(bird);

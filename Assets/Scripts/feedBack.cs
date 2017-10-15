@@ -392,8 +392,8 @@ public class feedBack : MonoBehaviour {
 		LeanTween.color(feedBackText.gameObject, textCol, 0.2f);
 		LeanTween.scale(feedBackText.gameObject, Vector3.one, 0.3f).setEase(LeanTweenType.easeOutBack);
 		feedbackVal = (int)(Mathf.Ceil(value * 100));
-        if (feedbackVal < 50)
-            Tutorial.Instance.jiggleGraph();
+        //if (feedbackVal < 50)
+         //   Tutorial.Instance.jiggleGraph();
 		feedBackText.text = feedbackVal.ToString("0");
 	}
 	

@@ -166,14 +166,14 @@ public class FillPlayer : MonoBehaviour {
 		target.confidence = template.confidence;
 		target.portraitOrder = template.portraitOrder;
 		target.health = template.health;
-		if (template.dead)
+		if (template.injured)
 		{
 			//target.gameObject.GetComponentInChildren<Animator>().SetBool("dead", true);
 			target.health = 0;            
 		}
 		target.levelRollBonus = template.levelRollBonus;
 		target.bannedLevels = template.bannedLevels;
-		target.dead = template.dead;
+		target.injured = template.injured;
 		target.portrait = template.portrait;
 		target.maxHealth = template.maxHealth;
 		target.levelList = template.levelList;
@@ -186,6 +186,7 @@ public class FillPlayer : MonoBehaviour {
 		target.battlesToNextLVL = template.battlesToNextLVL;        
 		target.roundsRested = template.roundsRested;
 		target.AdventuresRested = template.AdventuresRested;
+		target.TurnsInjured = template.TurnsInjured;
 		target.CoolDownLeft = template.CoolDownLeft;
 		target.CoolDownLength = template.CoolDownLength;
 		target.relationships = template.relationships;
@@ -198,6 +199,7 @@ public class FillPlayer : MonoBehaviour {
 
 	public static BirdSaveData SetupSaveBird(Bird template)
 	{
+
 		BirdSaveData target = new BirdSaveData();
 		target.levelRollBonus = template.levelRollBonus;
 		target.bannedLevels = template.bannedLevels;
@@ -210,7 +212,7 @@ public class FillPlayer : MonoBehaviour {
 		target.relationships = template.relationships;
 		target.preferredEmotion = template.preferredEmotion;
 		target.relationshipBird = Helpers.Instance.GetCharEnum(template.relationshipBird);
-		target.dead = template.dead;
+		target.dead = template.injured;
 		//target.portrait = template.portrait;
 		target.levelList = template.levelList;
 		target.startingLVL = template.startingLVL;
@@ -221,6 +223,7 @@ public class FillPlayer : MonoBehaviour {
 		target.consecutiveFightsWon = template.consecutiveFightsWon;
 		target.battlesToNextLVL = template.battlesToNextLVL;
 		target.roundsRested = template.roundsRested;
+		target.TurnsInjured = template.TurnsInjured;
 		target.AdventuresRested = template.AdventuresRested;
 		target.CoolDownLeft = template.CoolDownLeft;
 		target.CoolDownLength = template.CoolDownLength;        
@@ -238,7 +241,7 @@ public class FillPlayer : MonoBehaviour {
 		target.health = template.health;		
 		target.relationships = template.relationships;
 		target.preferredEmotion = template.preferredEmotion;
-		target.dead = template.dead;//target.portrait = template.portrait;
+		target.injured = template.dead;//target.portrait = template.portrait;
 		target.levelList = template.levelList;
 		target.startingLVL = template.startingLVL;
 		target.battleCount = template.battleCount;

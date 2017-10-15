@@ -105,6 +105,7 @@ public class Bird : MonoBehaviour
 	public int roundsRested = 0;
 	//[HideInInspector]
 	public int AdventuresRested = 0;
+	public int TurnsInjured = 0;
 	public int PlayerRollBonus = 0;
 	public int CoolDownLeft= 3;
 	public int CoolDownLength = 3;
@@ -117,7 +118,7 @@ public class Bird : MonoBehaviour
 	public string levelUpText;
 	Color DefaultCol;
 	Color HighlightCol;
-	public bool dead = false;
+	public bool injured = false;
 	public Var.Em preferredEmotion;
 	public int birdIndex = 0;
 	public bool hasNewLevel = false;
@@ -219,16 +220,36 @@ public class Bird : MonoBehaviour
 			LoadStats();
 		}
 		target = transform.position;
-		if (dead)
+		if (!isEnemy && (injured || health<=0))
 		{
+			injured = true;
 			Animator anim = GetComponentInChildren<Animator>();
-			anim.SetBool("dead", true);
+			anim.SetBool("injured", true);
+			if (inMap)
+			{
+				mapHighlight.SetActive(false);
+				MapControler.Instance.selectedBirds.Remove(this);
+				MapControler.Instance.CanLoadBattle();
+			}
 		}
 	}
 
 	public void publicStart()
 	{
 		Start();
+	}
+	public void DecreaseTurnsInjured()
+	{
+		if (injured)
+		{
+			TurnsInjured--;
+			if (TurnsInjured<=0)
+			{
+				injured = false;
+				GetComponentInChildren<Animator>().SetBool("injured", false);
+                health = 3;
+			}
+		}
 	}
 	/*void SetRealtionshipParticles()
 	{
@@ -409,7 +430,7 @@ public class Bird : MonoBehaviour
 	}*/
 	void LoadStats()
 	{
-		if (dead)
+		if (injured)
 			return;
 		bool SaveDataCreated = false;
 		Bird savedData = null;
@@ -454,14 +475,14 @@ public class Bird : MonoBehaviour
 	}
 	public void TryLevelUp()
 	{
-		if (dead)
+		if (injured)
 			return;
 		if (Var.gameSettings.shownLevelTutorial)
 			CheckLevels();
 	}
 	public void ResetAfterLevel()
 	{
-		if (dead)
+		if (injured)
 			return;
 		winsInOneFight = 0;
 		wonLastBattle = -1;
@@ -567,7 +588,7 @@ public class Bird : MonoBehaviour
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
-			if (Var.Infight || dead)
+			if (Var.Infight || injured)
 				return;
 			if (inMap)
 			{
@@ -705,7 +726,7 @@ public class Bird : MonoBehaviour
 
 	public void ChageHealth(int change)
 	{
-		if (dead)
+		if (injured)
 			return;
 		if (health + roundHealthChange <= 0)
 			return;
@@ -753,9 +774,9 @@ public class Bird : MonoBehaviour
 		}
 		if (health+ roundHealthChange <= 0)
 		{
-			dead = true;
-			GetComponentInChildren<Animator>().SetBool("dead", true);
-				
+			injured = true;
+			GetComponentInChildren<Animator>().SetBool("injured", true);
+            TurnsInjured = 4;
 		}
 		
 	}
@@ -833,7 +854,7 @@ public class Bird : MonoBehaviour
 	public void AddRoundBonuses(bool doFightStuff= true)
 	{
 		//print(charName + " doing round bonus. HealthGain " + roundHealthChange);
-		if (dead)
+		if (injured)
 			return;
 		ApplyInfluence();		
 		prevRoundHealth = health;   
