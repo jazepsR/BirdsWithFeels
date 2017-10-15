@@ -113,7 +113,26 @@ public class MapControler : MonoBehaviour {
 		}
 	}
 
+    public void Rest()
+    {
+        Var.currentWeek++;
+        timerText.text = "Week: " + Var.currentWeek;
+        foreach(Bird bird in FillPlayer.Instance.playerBirds)
+        {
+            if (bird.dead)
+            {
 
+            }else
+            {
+                if (bird.health < bird.maxHealth)
+                {
+                    bird.health++;
+                    GameObject healObj = Instantiate(bird.healParticle, bird.transform);
+                    Destroy(healObj, 1.5f);
+                }
+            }
+        }
+    }
 	public void HideSelectionMenu()
 	{
 		canMove = true;

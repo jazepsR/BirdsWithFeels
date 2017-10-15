@@ -6,7 +6,7 @@ using System;
 public static class Var {
     public static bool StartedNormally = false;
     public static bool CanShowHover = true;
-    public static int currentWeek = -1;     
+    public static int currentWeek = 0;     
     public static int currentBG = 0;
     public static List<string> shownDialogs = new List<string>();
     public static List<string> shownEvents = new List<string>();
