@@ -48,12 +48,10 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (Input.GetMouseButton(0) && MapControler.Instance.canMove && Var.selectedBird == null)
         {
             
-            var delta = Input.mousePosition - lastPosition;
-            if (transform.position.x + delta.x * mouseSensitivity < maxX)
-            {
-                transform.Translate(delta.x * mouseSensitivity, delta.y * mouseSensitivity, 0);
-                lastPosition = Input.mousePosition;
-            }
+            var delta = Input.mousePosition - lastPosition;            
+            transform.Translate(delta.x * mouseSensitivity, delta.y * mouseSensitivity, 0);
+            lastPosition = Input.mousePosition;
+            
             //float x = Mathf.Clamp(transform.localPosition.x, maxPos.xMin + screenSize.x / 2, maxPos.xMax - screenSize.x / 2 - 1100);//- 551f/0.66f);// *map.localScale.x;
             //float y = Mathf.Clamp(transform.localPosition.y, maxPos.yMin + screenSize.y / 2 + 1140, 30);// maxPos.yMax - screenSize.y / 2 - 1140);// *map.localScale.y;
            // transform.localPosition = new Vector3(x, y, transform.localPosition.z);
