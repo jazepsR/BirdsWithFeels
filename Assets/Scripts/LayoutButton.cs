@@ -112,7 +112,7 @@ public class LayoutButton : MonoBehaviour
         birdObj.isInfluenced = isInfluenced;
         birdObj.groundConfBoos = ConfBonus;// *birdObj.groundMultiplier;
         birdObj.groundFriendBoos = FriendBonus;// *birdObj.groundMultiplier;
-        birdObj.GroundRollBonus = RollBonus;
+        //birdObj.GroundRollBonus = RollBonus;
         birdObj.PlayerRollBonus = PlayerRollBonus;
         print(birdObj.charName+" apply power playerRollBonus: " + PlayerRollBonus + " groundRollBonus: " + RollBonus);
         if (birdObj.groundMultiplier > 1 && (ConfBonus!=0 || FriendBonus!=0 || RollBonus!=0 ))

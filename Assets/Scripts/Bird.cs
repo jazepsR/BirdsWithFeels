@@ -69,7 +69,7 @@ public class Bird : MonoBehaviour
 	//[HideInInspector]
 	public int healthBoost = 0;
 	int roundHealthChange = 0;
-	[HideInInspector]
+	//[HideInInspector]
 	public int GroundRollBonus = 0;
 	public bool inMap = false;
 	[HideInInspector]
@@ -247,7 +247,7 @@ public class Bird : MonoBehaviour
 			{
 				injured = false;
 				GetComponentInChildren<Animator>().SetBool("injured", false);
-                health = 3;
+				health = 3;
 			}
 		}
 	}
@@ -551,13 +551,14 @@ public class Bird : MonoBehaviour
 	}
 	void OnMouseOver()
 	{
-		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
-			return;
+		
 		if (Var.Infight)
 			return;
 		if (isEnemy)
 			return;
-		SetCoolDownRing(true);
+        if (GuiContoler.Instance.speechBubbleObj.activeSelf)
+            showText();
+        SetCoolDownRing(true);
 	  
 		if (Input.GetMouseButtonUp(1))
 		{
@@ -776,7 +777,7 @@ public class Bird : MonoBehaviour
 		{
 			injured = true;
 			GetComponentInChildren<Animator>().SetBool("injured", true);
-            TurnsInjured = 4;
+			TurnsInjured = 4;
 		}
 		
 	}
@@ -887,7 +888,14 @@ public class Bird : MonoBehaviour
 			}
 			if (!foughtInRound)
 				ChageHealth(1);
-			levelControler.OnfightEndLevel(this, levelList);
+			try
+			{
+				levelControler.OnfightEndLevel(this, levelList);
+			}
+			catch
+			{
+
+			}
 		}
 		if (!hasNewLevel)
 		{

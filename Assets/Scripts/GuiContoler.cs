@@ -126,7 +126,7 @@ public class GuiContoler : MonoBehaviour {
 
 	void tryDialog()
 	{
-		if (Var.currentStageID != 1 || Var.currentStageID != 0)       
+		if (Var.currentStageID != 1 && Var.currentStageID != 0)       
 			DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);       
 	}
 	
