@@ -26,6 +26,8 @@ public class Graph : MonoBehaviour {
 
 	public void PlotFull(Bird bird)
 	{
+        if (GuiContoler.Instance.winBanner.activeSelf)
+            return;
 		if (bird.health <= 0)
 			return;
 		GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
