@@ -15,6 +15,7 @@ public class cutScene : MonoBehaviour {
     int currentArea = 0;
     int currentCount = 0;
     public GameObject startBtn;
+	public bool isEnd = false;
 	// Use this for initialization
     void Start()
     {
@@ -25,7 +26,14 @@ public class cutScene : MonoBehaviour {
 	public void StartCutscene()
     {
         cutsceneText.text = parts[0].cutsceneTexts[0];
-        LeanTween.move(mainMenu, panToPoint, 4f).setOnComplete(startTexts).setEase(LeanTweenType.easeOutQuad);
+		if (isEnd)
+		{
+			startTexts();
+		}
+		else
+		{
+			LeanTween.move(mainMenu, panToPoint, 4f).setOnComplete(startTexts).setEase(LeanTweenType.easeOutQuad);
+		}
 
     }
     void Update()
@@ -52,9 +60,16 @@ public class cutScene : MonoBehaviour {
                     clickImage.color = Color.white;
                 }else
                 {
-                    startBtn.SetActive(true);
-                    textBox.SetActive(false);
-                    canClick = false;
+					if (isEnd)
+					{
+						SceneManager.LoadScene("mainMenu");
+					}
+					else
+					{
+						startBtn.SetActive(true);
+						textBox.SetActive(false);
+						canClick = false;
+					}
                 }
             }
         }
