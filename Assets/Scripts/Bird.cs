@@ -528,9 +528,11 @@ public class Bird : MonoBehaviour
 	}
 	void OnMouseEnter()
 	{
-	   
+
 		//if(!Var.Infight)
-		if(Var.CanShowHover)
+		if(GuiContoler.Instance.speechBubbleObj.activeSelf)
+			return;
+		if (Var.CanShowHover)
 			showText();
 		if (isEnemy)
 		{
@@ -554,9 +556,9 @@ public class Bird : MonoBehaviour
 		
 		if (Var.Infight)
 			return;
-		if (isEnemy)
+		if (isEnemy || GuiContoler.Instance.speechBubbleObj.activeSelf)
 			return;
-        if (GuiContoler.Instance.speechBubbleObj.activeSelf)
+		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
             showText();
         SetCoolDownRing(true);
 	  
@@ -589,7 +591,7 @@ public class Bird : MonoBehaviour
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
-			if (Var.Infight || injured)
+			if (Var.Infight || injured || GuiContoler.Instance.speechBubbleObj.activeSelf)
 				return;
 			if (inMap)
 			{

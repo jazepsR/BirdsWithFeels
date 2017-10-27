@@ -38,5 +38,9 @@ public class tooltipScript : MonoBehaviour {
 
         transform.localPosition = pos;   
     }
-    
+
+	public void DoShake()
+	{
+		transform.parent.parent.GetComponent<Animator>().SetTrigger("newline");
+	}    
 }

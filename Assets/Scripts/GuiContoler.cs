@@ -253,17 +253,18 @@ public class GuiContoler : MonoBehaviour {
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
-		{           
+		{
 			setPause();
 		}
-		if (Input.GetMouseButtonDown(0))
-		{
+	}
+	public void SpeechBubbleClicked()
+	{		
 			if (speechBubbleObj != null)
 			{
 				if (speechTexts.Count == 0)
 				{
 					speechBubbleObj.SetActive(false);
-					
+
 					lastSpeechPos = null;
 					if (!Var.isBoss && !inMap)
 					{
@@ -271,9 +272,9 @@ public class GuiContoler : MonoBehaviour {
 						//dustObj.transform.localPosition = Vector3.zero;                       
 						//Destroy(dustObj, 1.0f);
 						boss.SetActive(false);
-					   
+
 					}
-					
+
 					if (!inMap)
 					{
 						foreach (Image img in vingette)
@@ -283,19 +284,19 @@ public class GuiContoler : MonoBehaviour {
 						CheckGraphNavBtns();
 						GameLogic.Instance.CanWeFight();
 					}
-					
+
 				}
 				else
 				{
 					AudioControler.Instance.PlayVoice();
-					SpeechBubbleText.text = speechTexts[0];                    
+					SpeechBubbleText.text = speechTexts[0];
 					speechBubble.GetComponent<UIFollow>().target = speechPos[0];
-					if (lastSpeechPos != null &&lastSpeechPos.Equals(speechPos[0]))
+					if (lastSpeechPos != null && lastSpeechPos.Equals(speechPos[0]))
 					{
 						speechBubbleObj.GetComponent<Animator>().SetTrigger("newline");
 					}
 					lastSpeechPos = speechPos[0];
-					speechPos.RemoveAt(0);                    
+					speechPos.RemoveAt(0);
 					speechTexts.RemoveAt(0);
 					if (!inMap)
 					{
@@ -303,9 +304,10 @@ public class GuiContoler : MonoBehaviour {
 						nextGraph.interactable = false;
 					}
 				}
-			}
-		}
+			}		
 	}
+
+
 
 	public void ShowSpeechBubble(Transform pos,string text)
 	{
