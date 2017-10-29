@@ -561,8 +561,8 @@ public class Bird : MonoBehaviour
 		if (isEnemy || GuiContoler.Instance.speechBubbleObj.activeSelf)
 			return;
 		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
-            showText();
-        SetCoolDownRing(true);
+			showText();
+		SetCoolDownRing(true);
 	  
 		if (Input.GetMouseButtonUp(1))
 		{
@@ -780,6 +780,7 @@ public class Bird : MonoBehaviour
 		if (health+ roundHealthChange <= 0)
 		{
 			injured = true;
+			battleConfBoos -= 5;
 			GetComponentInChildren<Animator>().SetBool("injured", true);
 			TurnsInjured = 4;
 		}

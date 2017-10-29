@@ -573,6 +573,8 @@ public class GuiContoler : MonoBehaviour {
 			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom combat: " + bird.battleConfBoos.ToString("+#;-#;0") + " confidence</color>";
 		if (bird.battleConfBoos < 0)
 			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs(bird.battleConfBoos).ToString("+#;-#;0") + " caution</color>";
+		if(bird.injured)
+			fbText += Helpers.Instance.ScaredHexColor + "\n\t(5 caution from injury)</color>";
 		if (bird.groundConfBoos > 0)
 			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom tiles: " + bird.groundConfBoos.ToString("+#;-#;0") + " confidence</color>";
 		if (bird.groundConfBoos < 0)
