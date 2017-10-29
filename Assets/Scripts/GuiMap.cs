@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GuiMap : MonoBehaviour {
     public bool inMap = false;
@@ -10,46 +11,75 @@ public class GuiMap : MonoBehaviour {
     public Transform finish;
     public GameObject cup;
     public Transform nodes;
+	public Text nextAreaInfo;
     float dist;
     int count = 0;
-    void Awake()
-    {        
-        Instance = this;
-        if (inMap)
-            return;
-        if (Var.isTutorial)
-        {
-            for(int i = 0; i < 6; i++) {
-                MapBattleData BattleStuff = new MapBattleData();
-                BattleStuff.emotionPercentage.Add(1);
-                BattleStuff.emotionType.Add(Var.Em.Neutral);
-                Var.map.Add(new BattleData(Var.Em.Neutral, false, new List<Var.Em>(),BattleStuff));
-            }
-                     
-            Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(),null));
-        }
-        else
-        {
-            if (Var.map.Count == 0)
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    MapBattleData BattleStuff = new MapBattleData();
-                    BattleStuff.emotionPercentage.Add(1);
-                    BattleStuff.emotionType.Add(Var.Em.Neutral);
-                    Var.map.Add(new BattleData(Var.Em.Neutral, true, new List<Var.Em>() { Var.Em.Confident, Var.Em.Scared, Var.Em.Lonely, Var.Em.Friendly }, BattleStuff, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
+	void Awake()
+	{
+		Instance = this;
+		if (inMap)
+			return;
+		if (Var.isTutorial)
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				MapBattleData BattleStuff = new MapBattleData();
+				BattleStuff.emotionPercentage.Add(1);
+				BattleStuff.emotionType.Add(Var.Em.Neutral);
+				Var.map.Add(new BattleData(Var.Em.Neutral, false, new List<Var.Em>(), BattleStuff));
+			}
 
-                    MapBattleData BattleStuff2 = new MapBattleData();
-                    BattleStuff2.emotionPercentage.Add(1);
-                    BattleStuff2.emotionType.Add(Var.Em.Confident);
-                    Var.map.Add(new BattleData(Var.Em.Confident, true, new List<Var.Em>() { Var.Em.Confident }, BattleStuff2, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
+			Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
+			nextAreaInfo.text = "";
+		}
+		else
+		{
+			if (Var.map.Count == 0)
+			{
+				for (int i = 0; i < 2; i++)
+				{
+					MapBattleData BattleStuff = new MapBattleData();
+					BattleStuff.emotionPercentage.Add(1);
+					BattleStuff.emotionType.Add(Var.Em.Neutral);
+					Var.map.Add(new BattleData(Var.Em.Neutral, true, new List<Var.Em>() { Var.Em.Confident, Var.Em.Scared, Var.Em.Lonely, Var.Em.Friendly }, BattleStuff, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
 
-                   
-                }
-                Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(),null));
-            }
-        }
-    }
+					MapBattleData BattleStuff2 = new MapBattleData();
+					BattleStuff2.emotionPercentage.Add(1);
+					BattleStuff2.emotionType.Add(Var.Em.Confident);
+					Var.map.Add(new BattleData(Var.Em.Confident, true, new List<Var.Em>() { Var.Em.Confident }, BattleStuff2, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
+
+
+				}
+				Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
+			}
+			
+			string nextAreasText = "Next Adventure:";
+			foreach (MapSaveData data in Var.mapSaveData)
+			{
+				if (data.ID == Var.currentStageID)
+				{
+					foreach (int id in data.targets)
+					{
+						foreach (MapSaveData targ in Var.mapSaveData)
+						{
+							if (targ.ID == id)
+							{
+								if (nextAreasText == "Next Adventure:")
+									nextAreasText += "\n";
+								else
+									nextAreasText += " or\n";
+								nextAreasText += Helpers.Instance.GetHexColor(targ.emotion) + targ.emotion.ToString() + "</color>";
+							}
+						}
+					}
+				}
+			}
+			if (nextAreasText == "Next Adventure:")
+				nextAreaInfo.text = "";
+			else
+				nextAreaInfo.text = nextAreasText;
+		}
+	}
 
     public void MoveMapBird(int pos)
     {

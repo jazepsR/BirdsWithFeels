@@ -82,12 +82,14 @@ public class MapSaveData
     public int ID;
     public List<int> targets;
     public bool completed;
-    public bool available;    
-    public MapSaveData(bool completed, bool available, int ID, List<int> targets)
+    public bool available;
+	public Var.Em emotion;
+    public MapSaveData(bool completed, bool available, int ID, List<int> targets, Var.Em emotion)
     { 
         this.completed = completed;
         this.available = available;
         this.ID = ID;
         this.targets = targets;
+		this.emotion = emotion;
     }
 }

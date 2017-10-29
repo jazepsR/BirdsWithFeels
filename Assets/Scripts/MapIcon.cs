@@ -275,7 +275,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
             {
                 targIDs.Add(targ.ID);
             }
-            mySaveData = new MapSaveData(completed, available, ID, targIDs);
+            mySaveData = new MapSaveData(completed, available, ID, targIDs,type);
             Var.mapSaveData.Add(mySaveData);
         }
         else

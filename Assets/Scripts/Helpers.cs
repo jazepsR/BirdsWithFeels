@@ -21,7 +21,8 @@ public class Helpers : MonoBehaviour {
     public string BraveHexColor;
     public string ScaredHexColor;
     public string LonelyHexColor;
-    public string FriendlyHexColor;   
+    public string FriendlyHexColor;
+	public string RandomHexColor;
     GameObject heartBreak;
     GameObject heartGain;
     Sprite fullHeart;
@@ -247,6 +248,8 @@ public class Helpers : MonoBehaviour {
                 return ScaredHexColor;
             case Var.Em.Neutral:
                 return "<color=#000000FF>";
+			case Var.Em.Random:
+				return RandomHexColor;
             default:
                 return "<color=#000000FF>";
         }
