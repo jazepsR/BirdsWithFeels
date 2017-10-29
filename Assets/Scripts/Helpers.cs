@@ -75,7 +75,25 @@ public class Helpers : MonoBehaviour {
 
 
 	}
-		public Var.Em GetOppositeEmotion(Var.Em type)
+	public string GetStatInfo(int confidence, int social)
+	{
+		string statText = "";
+		if (confidence > 0)
+			statText += Helpers.Instance.GetHexColor(Var.Em.Confident) + "Confidence: " + confidence + "</color>\n";
+		if (confidence < 0)
+			statText += Helpers.Instance.GetHexColor(Var.Em.Scared) + "Cautions: " + Mathf.Abs(confidence) + "</color>\n";
+		if (confidence == 0)
+			statText += "Confidence: 0\n";
+		if (social > 0)
+			statText += Helpers.Instance.GetHexColor(Var.Em.Friendly) + "Social: " + social+ "</color>\n";
+		if (social < 0)
+				statText += Helpers.Instance.GetHexColor(Var.Em.Lonely) + "Solitary: " + Mathf.Abs(social) + "</color>\n";
+		if (social == 0)
+			statText += "Solitude: 0\n";
+		statText = "<b>" + statText + "</b>";
+		return statText;
+	}
+	public Var.Em GetOppositeEmotion(Var.Em type)
 	{
 		switch (type)
 		{

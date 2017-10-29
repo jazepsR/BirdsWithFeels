@@ -29,7 +29,7 @@ public class GraphPortraitScript : MonoBehaviour {
 		
 	}
 
-    public void StartGraph(Vector3 target, Var.Em targetEmotion)
+    public void StartGraph(Vector3 target, Var.Em targetEmotion, Bird bird)
     {
         Starter();
         GuiContoler.Instance.clearSmallGraph();
@@ -37,21 +37,17 @@ public class GraphPortraitScript : MonoBehaviour {
         lr.material = Resources.Load<Material>("mat");
         ShowTooltip info =gameObject.AddComponent<ShowTooltip>();
         finish = target * 22.4f;
-        string tooltipText = "";
-        if (target.y > 0)
-            tooltipText += Helpers.Instance.GetHexColor(Var.Em.Confident) + "Confidence: " + target.y + "</color>\n";
-        if(target.y < 0)
-            tooltipText += Helpers.Instance.GetHexColor(Var.Em.Scared) + "Cautions: " + Mathf.Abs(target.y) + "</color>\n";
-        if (target.y == 0)
-            tooltipText += "Confidence: 0\n";
-        if (target.x > 0)
-            tooltipText += Helpers.Instance.GetHexColor(Var.Em.Lonely) + "Solitary: " + target.x + "</color>\n";
-        if (target.x < 0)
-            tooltipText += Helpers.Instance.GetHexColor(Var.Em.Friendly) + "Social: " + Mathf.Abs(target.x) + "</color>\n";
-        if (target.x == 0)
-            tooltipText += "Solitude: 0\n";
-        info.tooltipText = "<b>"+tooltipText+"</b>";           
-        LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);        
+		if (Var.Infight)
+		{
+
+
+			info.tooltipText = GuiContoler.Instance.CreateEmotionChangeText(bird).Substring(1);
+			if (info.tooltipText == "")
+				info.tooltipText = Helpers.Instance.GetStatInfo((int)target.y, -(int)target.x);
+		}
+		else
+			info.tooltipText = Helpers.Instance.GetStatInfo((int)target.y, -(int)target.x);
+		LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);        
             
     }
     void ResumeMovement()

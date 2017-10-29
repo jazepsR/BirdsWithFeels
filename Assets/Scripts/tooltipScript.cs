@@ -29,10 +29,10 @@ public class tooltipScript : MonoBehaviour {
 			pos = new Vector3(pos.x - distPastX, pos.y, pos.z);
 			//print("did x");
 		}
-		var distPastY = me.anchoredPosition.y + me.sizeDelta.y - ScreenSize.y;
+		var distPastY = me.anchoredPosition.y + me.sizeDelta.y*2 - ScreenSize.y;
 		if (distPastY > 0)
 		{
-			pos = new Vector3(pos.x, pos.y - distPastY, pos.z);
+			pos = new Vector3(pos.x, pos.y - distPastY-8f, pos.z);
 			//print("did y");
 		}
 

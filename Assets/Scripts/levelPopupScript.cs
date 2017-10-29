@@ -17,8 +17,9 @@ public class levelPopupScript : MonoBehaviour {
 	public GameObject secondPart;
 	public GameObject thirdPart;
 	public Dialogue firstLevelUpDialog;
-    public Image skillIcon;
-    public List<string> secondTextList;
+	public Image skillIcon;
+	[HideInInspector]
+	public List<string> secondTextList;
 	Sprite heart;
 	Sprite sword;
 	Bird activeBird;
@@ -41,9 +42,9 @@ public class levelPopupScript : MonoBehaviour {
 		secondPart.SetActive(false);
 		thirdPart.SetActive(false);
 		string name = activeBird.charName;
-		title.text = name + " gained a level!";
+		title.text = "Character developement!";
 		LevelPopup.SetActive(true);
-        skillIcon.sprite = Helpers.Instance.GetLVLSprite(data.type);
+		skillIcon.sprite = Helpers.Instance.GetLVLSprite(data.type);
 		//First part
 		//if (data.emotion == Var.Em.Scared || data.emotion == Var.Em.Lonely)
 		{
@@ -51,11 +52,11 @@ public class levelPopupScript : MonoBehaviour {
 			firstText.text = name + " gained +10% combat strength!";
 		}
 
-        //second part
-        secondTextList = new List<string>();
-        secondTextList.AddRange(Helpers.Instance.GetLevelUpText(name, data.type).Split('&'));
-        secondText.text = secondTextList[0];
-        secondTextList.RemoveAt(0);   
+		//second part
+		secondTextList = new List<string>();
+		secondTextList.AddRange(Helpers.Instance.GetLevelUpText(name, data.type).Split('&'));
+		secondText.text = secondTextList[0];
+		secondTextList.RemoveAt(0);   
 		secondImage.sprite = Helpers.Instance.GetSkillPicture(data.type);
 		// Third part
 		thirdText.text = Helpers.Instance.GetLVLInfoText(data.type);
@@ -64,31 +65,39 @@ public class levelPopupScript : MonoBehaviour {
 	}
 	public void FirstBtn()
 	{
-		if (activeBird.GainedLVLHealth)
+		if (secondTextList.Count == 0)
 		{
-			firstImage.sprite = heart;
-			firstText.text = "First level in a new emotion!\nGained +1 health!";
-			activeBird.GainedLVLHealth = false;
-		}else
-		{
-			title.text = "New skill: " + Helpers.Instance.GetLevelTitle(data.type);
 			firstPart.SetActive(false);
 			secondPart.SetActive(true);
 			thirdPart.SetActive(false);
+			title.text = "Getting stronger!";
 		}
+		else
+		{
+			secondText.text = secondTextList[0];
+			secondTextList.RemoveAt(0);
+		}	
 	}
 	public void SecondBtn()
 	{
-        if (secondTextList.Count == 0)
-        {
-            firstPart.SetActive(false);
-            secondPart.SetActive(false);
-            thirdPart.SetActive(true);
-        }else
-        {
-            secondText.text = secondTextList[0];
-            secondTextList.RemoveAt(0);
-        }
+		if (activeBird.GainedLVLHealth)
+		{
+			activeBird.maxHealth++;
+			activeBird.health++;
+			ProgressGUI.Instance.PortraitClick(activeBird);
+			firstImage.sprite = heart;
+			firstText.text = "First level in a new emotion!\nGained +1 health!";
+			activeBird.GainedLVLHealth = false;
+		}
+		else
+		{
+			title.text = "New skill: " + Helpers.Instance.GetLevelTitle(data.type);
+			firstPart.SetActive(false);
+			secondPart.SetActive(false);
+			thirdPart.SetActive(true);
+			activeBird.levelList.Add(data);
+			ProgressGUI.Instance.PortraitClick(activeBird);
+		}
 	}
 	public void ThirdBtn()
 	{

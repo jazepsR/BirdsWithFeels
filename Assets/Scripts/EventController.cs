@@ -27,6 +27,7 @@ public class EventController : MonoBehaviour {
 	List<GameObject> portraits;
 	List<Color> colors;
 	EventScript nextEvent = null;
+	public ShowTooltip mouseOver;
 	//List<string> texts;    
 	int currentText = 0;
 	// Use this for initialization
@@ -226,7 +227,7 @@ public class EventController : MonoBehaviour {
 
 	void SetPortrait(int id)
 	{
-		
+		mouseOver.tooltipText = "";
 		if (currentEvent.parts[id].useCustomPic && currentEvent.parts[id].customPic != null)
 		{
 			portrait.transform.parent.gameObject.SetActive(true);
@@ -240,12 +241,15 @@ public class EventController : MonoBehaviour {
 			customImage.gameObject.SetActive(false);
 			try
 			{
+				if (currentBird != null)
+					mouseOver.tooltipText = Helpers.Instance.GetStatInfo(currentBird.confidence, currentBird.friendliness);
 				portrait.transform.parent.gameObject.SetActive(true);
 				portraitFill.gameObject.SetActive(true);
 				portrait.gameObject.SetActive(true);
 				portraitFill.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird_color").GetComponent<Image>().sprite;
 				portraitFill.color = colors[currentEvent.parts[currentText].speakerId];
 				portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird").GetComponent<Image>().sprite;
+				
 			}
 			catch
 			{

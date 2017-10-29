@@ -39,7 +39,7 @@ public class Graph : MonoBehaviour {
 			Var.Em emotion = bird.emotion;
 			if (bird.prevEmotion == bird.emotion)
 				emotion = Var.Em.finish;
-			portraitScript.StartGraph(secondPos, emotion);
+			portraitScript.StartGraph(secondPos, emotion, bird);
 		}  
 	}
 	

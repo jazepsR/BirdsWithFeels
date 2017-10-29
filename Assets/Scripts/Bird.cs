@@ -194,7 +194,8 @@ public class Bird : MonoBehaviour
 					AddLevel(new LevelData(startingLVL, Var.Em.Neutral,icon));
 			}
 			levelControler = GetComponent<Levels>();
-			levelControler.ApplyStartLevel(this, levelList);       
+			if (startingLVL != Levels.type.None)
+				levelControler.ApplyStartLevel(this, levelList);       
 		}
 		colorSprites = new List<SpriteRenderer>();
 		foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
@@ -310,9 +311,7 @@ public class Bird : MonoBehaviour
 		if (data.emotion != Var.Em.Neutral)
 		{
 			if (!currentEmotions.Contains(data.emotion))
-			{
-				maxHealth++;
-				health++;
+			{				
 				GainedLVLHealth = true;
 			}
 			levelRollBonus++;
@@ -354,13 +353,10 @@ public class Bird : MonoBehaviour
 			}
 			ResetBonuses();
 		}
-		levelList.Add(data);
-		level = levelList.Count;       
+		//levelList.Add(data);
+		level = levelList.Count+1;       
 		battlesToNextLVL = level * 3;
 		levelUpText = null;
-	   
-	  
-
 	}
 	public float getBonus()
 	{

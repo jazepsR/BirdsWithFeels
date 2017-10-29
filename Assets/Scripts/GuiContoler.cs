@@ -365,7 +365,6 @@ public class GuiContoler : MonoBehaviour {
 		{
 			CreateGraph(currentGraph);
 			ProgressGUI.Instance.SetOnePortrait();
-			ProgressGUI.Instance.SetOnePortrait();
 			ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
 		}
 		
@@ -559,16 +558,16 @@ public class GuiContoler : MonoBehaviour {
 		}
 	} 
 
-	string CreateEmotionChangeText(Bird bird)
+	 public string CreateEmotionChangeText(Bird bird)
 	{
 		string fbText = "";
 		int ConfGainedInRound = bird.battleConfBoos + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
 		int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
 		//Confidence stuff
 		if (ConfGainedInRound > 0)
-			fbText += Helpers.Instance.BraveHexColor+"\n<b>Confidence gained: " + ConfGainedInRound +"</b></color>";
+			fbText += "\n"+Helpers.Instance.BraveHexColor+"<b>Confidence gained: " + ConfGainedInRound +"</b></color>";
 		if (ConfGainedInRound < 0)
-			fbText += Helpers.Instance.ScaredHexColor + "\n<b>Caution gained: " + Mathf.Abs(ConfGainedInRound) + "</b></color>";
+			fbText += "\n" + Helpers.Instance.ScaredHexColor + "<b>Caution gained: " + Mathf.Abs(ConfGainedInRound) + "</b></color>";
 		if (bird.battleConfBoos > 0)
 			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom combat: " + bird.battleConfBoos.ToString("+#;-#;0") + " confidence</color>";
 		if (bird.battleConfBoos < 0)
@@ -595,9 +594,9 @@ public class GuiContoler : MonoBehaviour {
 
 		//Friendship stuff
 		if (FriendGainedInRound > 0)
-			fbText += Helpers.Instance.FriendlyHexColor + "\n<b>Friendliness gained in round: " + FriendGainedInRound + "</b></color>";
+			fbText += "\n" + Helpers.Instance.FriendlyHexColor + "<b>Friendliness gained in round: " + FriendGainedInRound + "</b></color>";
 		if (FriendGainedInRound < 0)
-			fbText += Helpers.Instance.LonelyHexColor + "\n<b>Solitude gained in round: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
+			fbText += "\n" + Helpers.Instance.LonelyHexColor + "<b>Solitude gained in round: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
 		if (bird.friendBoost > 0)
 			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom interactions: " + bird.friendBoost.ToString("+#;-#;0") + " friendship</color>";
 		if (bird.friendBoost < 0)

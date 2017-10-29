@@ -23,6 +23,7 @@ public class ProgressGUI : MonoBehaviour {
 	public Text birdBio;
 	Color skillDefaultCol;
 	public GameObject levelArea;
+	public Text emotionValuesText;
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -50,28 +51,18 @@ public class ProgressGUI : MonoBehaviour {
 			lvl.Unlock();
 			if (Helpers.Instance.ListContainsLevel(lvl.level, bird.levelList))
 			{
-				lvl.gameObject.SetActive(false);
-				/*lvl.myImage.sprite = lvl.Completed;
-				if(lvl.gameObject.GetComponent<LevelArea>().isSmall)
-					lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(75, 525);
-				break;*/
+				lvl.gameObject.SetActive(false);			
 			}else
 			{
 				if (lvl.gameObject.GetComponent<LevelArea>().isSmall)
 					lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 650);
 			}
-			/*if (bird.lastLevel.emotion == lvl.emotion || bird.bannedLevels == lvl.emotion)
-			{
-				lvl.gameObject.SetActive(false);
-			}*/
+			
 			if ( bird.bannedLevels == lvl.emotion)           
 			   lvl.gameObject.SetActive(false);
 		   
 			if (lvl.level.ToString().Contains("2"))
 			{
-				//print("two");
-				//if(!HasSuper)
-					//lvl.Lock();
 				if (!Helpers.Instance.ListContainsEmotion(lvl.emotion, bird.levelList))
 					lvl.gameObject.SetActive(false);              
 
@@ -137,6 +128,7 @@ public class ProgressGUI : MonoBehaviour {
 			//bird.SetRelationshipSliders(GuiContoler.Instance.reportRelationshipSliders);
 		}
 		NameText[portraitNum].text = bird.charName;
+		emotionValuesText.text = Helpers.Instance.GetStatInfo(bird.confidence, bird.friendliness).Replace('\n', ' ');
 		if (bird.inMap)
 			birdBio.text = bird.birdBio;
 		Image[] activeHearts;
@@ -155,7 +147,6 @@ public class ProgressGUI : MonoBehaviour {
 				activeHearts = Hearts;
 				break;
 		}
-		//print("helat: "+ bird.health+ " prev: "+ bird.prevRoundHealth);
 		if (bird.injured && showDeath)
 		{
 			if(!bird.inMap)
