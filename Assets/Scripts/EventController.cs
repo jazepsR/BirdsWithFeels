@@ -26,6 +26,7 @@ public class EventController : MonoBehaviour {
 	public List<Transform> areaDialogues;    
 	List<GameObject> portraits;
 	List<Color> colors;
+	EventScript nextEvent = null;
 	//List<string> texts;    
 	int currentText = 0;
 	// Use this for initialization
@@ -43,7 +44,7 @@ public class EventController : MonoBehaviour {
 
 		}
 		LeanTween.delayedCall(0.1f, TestEvent);
-	   
+		nextEvent = null;
 	}
 
 
@@ -75,6 +76,13 @@ public class EventController : MonoBehaviour {
 		if (currentText > currentEvent.parts.Count-1)
 		{
 			eventObject.SetActive(false);
+			if(nextEvent!= null)
+			{
+				CreateEvent(nextEvent);
+				return;
+			}
+
+
             if (currentEvent.afterEventDialog != null)
                 DialogueControl.Instance.CreateParticularDialog(currentEvent.afterEventDialog);
             else
@@ -92,6 +100,7 @@ public class EventController : MonoBehaviour {
                     }
                 }
             }
+			nextEvent = null;
 		}
 		
 	   
@@ -271,6 +280,7 @@ public class EventController : MonoBehaviour {
 	}
 	void DisplayChoiceResult(int ID)
 	{
+		
 		AudioControler.Instance.PlayPaperSound();
 		choiceList.gameObject.SetActive(false);
 		Helpers.Instance.HideTooltip();
@@ -288,7 +298,8 @@ public class EventController : MonoBehaviour {
 		{
 			Destroy(child.gameObject);
 		}
-		continueBtn.SetActive(true);      
+		continueBtn.SetActive(true);
+		nextEvent= currentEvent.options[ID].onComplete;
 		heading.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionHeading);
 		text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionText);
 		if(currentEvent.options[ID].AfterImage!= null)

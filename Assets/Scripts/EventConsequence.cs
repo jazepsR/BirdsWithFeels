@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EventConsequence :MonoBehaviour{
+	public EventScript onComplete = null;
 	public ConsequenceType consequenceType1 = ConsequenceType.Nothing;
 	public int magnitude1;
 	public ConsequenceType consequenceType2 = ConsequenceType.Nothing;

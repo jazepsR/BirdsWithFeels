@@ -696,6 +696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 3
   magnitude1: 0
   consequenceType2: 3
@@ -908,6 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 2
   magnitude1: 2
   consequenceType2: 3
@@ -1316,6 +1318,61 @@ Transform:
   m_Father: {fileID: 1685639992}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &69648127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 69648128}
+  - component: {fileID: 69648129}
+  m_Layer: 0
+  m_Name: option1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &69648128
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 69648127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 113235118}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &69648129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 69648127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
+  consequenceType1: 3
+  magnitude1: 0
+  consequenceType2: 3
+  magnitude2: 0
+  consequenceType3: 3
+  magnitude3: 0
+  useAutoExplanation: 0
+  AfterImage: {fileID: 0}
+  icon: {fileID: 21300002, guid: b7029f9ef86eeec458bb956efa9df87b, type: 3}
+  selectionText: Decline
+  selectionTooltip: The quest is more important
+  conclusionHeading: How dare you!
+  conclusionText: The lord has taken offence at your refusal to attend the party!
+    Let's hope he dosen't hold a grudge for long!
 --- !u!1 &71500253
 GameObject:
   m_ObjectHideFlags: 0
@@ -8906,6 +8963,60 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 107247717}
+--- !u!1 &113235117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 113235118}
+  - component: {fileID: 113235119}
+  m_Layer: 0
+  m_Name: A party!
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &113235118
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 113235117}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2144877505}
+  - {fileID: 69648128}
+  - {fileID: 1738908298}
+  m_Father: {fileID: 707801115}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &113235119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 113235117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakers: 06000000
+  condition: 0
+  magnitude: 0
+  targetEmotion: 0
+  heading: Suprise Inheritence!
+  parts: []
+  options:
+  - {fileID: 69648129}
+  - {fileID: 1738908299}
+  canShowMultipleTimes: 0
+  afterEventDialog: {fileID: 0}
 --- !u!1 &118680976
 GameObject:
   m_ObjectHideFlags: 0
@@ -9046,7 +9157,7 @@ Transform:
   - {fileID: 1867522575}
   - {fileID: 815151782}
   m_Father: {fileID: 707801115}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &121036835
 MonoBehaviour:
@@ -13800,6 +13911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 3
   magnitude1: 0
   consequenceType2: 3
@@ -20167,6 +20279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 1
   magnitude1: -2
   consequenceType2: 2
@@ -20415,6 +20528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 3
   magnitude1: 0
   consequenceType2: 3
@@ -20857,6 +20971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 2
   magnitude1: 2
   consequenceType2: 3
@@ -24447,6 +24562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 1
   magnitude1: 2
   consequenceType2: 3
@@ -25576,6 +25692,7 @@ MonoBehaviour:
   parts: []
   options:
   - {fileID: 1085401209}
+  - {fileID: 1287954203}
   canShowMultipleTimes: 0
   afterEventDialog: {fileID: 0}
 --- !u!4 &468008037
@@ -25590,6 +25707,7 @@ Transform:
   m_Children:
   - {fileID: 416612463}
   - {fileID: 1085401210}
+  - {fileID: 1287954202}
   m_Father: {fileID: 707801115}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -31791,6 +31909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 2
   magnitude1: -2
   consequenceType2: 3
@@ -44315,6 +44434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 1
   magnitude1: 2
   consequenceType2: 3
@@ -44562,6 +44682,7 @@ Transform:
   m_Children:
   - {fileID: 1595554661}
   - {fileID: 468008037}
+  - {fileID: 113235118}
   - {fileID: 1087507630}
   - {fileID: 1719981000}
   - {fileID: 788857154}
@@ -45473,7 +45594,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4539132048014056, guid: 82eeee6d719d6684c8d1f088f57ae938, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1741423670822340, guid: 82eeee6d719d6684c8d1f088f57ae938, type: 2}
       propertyPath: m_Name
@@ -48982,6 +49103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 2
   magnitude1: -2
   consequenceType2: 3
@@ -50819,7 +50941,7 @@ Transform:
   - {fileID: 986382689}
   - {fileID: 179283059}
   m_Father: {fileID: 707801115}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &788857155
 MonoBehaviour:
@@ -51599,6 +51721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 2
   magnitude1: -2
   consequenceType2: 3
@@ -71488,6 +71611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 3
   magnitude1: 0
   consequenceType2: 3
@@ -72055,6 +72179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 2
   magnitude1: 2
   consequenceType2: 3
@@ -75316,6 +75441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 2
   magnitude1: -2
   consequenceType2: 3
@@ -79623,7 +79749,7 @@ Transform:
   - {fileID: 1849663325}
   - {fileID: 1868229400}
   m_Father: {fileID: 707801115}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1066398602
 MonoBehaviour:
@@ -80754,6 +80880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 113235119}
   consequenceType1: 3
   magnitude1: 0
   consequenceType2: 3
@@ -80833,7 +80960,7 @@ Transform:
   - {fileID: 2121121373}
   - {fileID: 576444852}
   m_Father: {fileID: 707801115}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1087671996
 GameObject:
@@ -80995,7 +81122,7 @@ Transform:
   - {fileID: 324549945}
   - {fileID: 1007869821}
   m_Father: {fileID: 707801115}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1091503121
 MonoBehaviour:
@@ -86572,7 +86699,7 @@ Transform:
   - {fileID: 669708271}
   - {fileID: 1759279279}
   m_Father: {fileID: 707801115}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1160347285
 MonoBehaviour:
@@ -90076,6 +90203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 3
   magnitude1: 0
   consequenceType2: 3
@@ -90095,6 +90223,61 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1171107327}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &1287954201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1287954202}
+  - component: {fileID: 1287954203}
+  m_Layer: 0
+  m_Name: option2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1287954202
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1287954201}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 468008037}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1287954203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1287954201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
+  consequenceType1: 3
+  magnitude1: 0
+  consequenceType2: 3
+  magnitude2: 0
+  consequenceType3: 3
+  magnitude3: 0
+  useAutoExplanation: 0
+  AfterImage: {fileID: 0}
+  icon: {fileID: 21300000, guid: 577d0146acfda9f4a87d8c2be5dcbad6, type: 3}
+  selectionText: Buy some supplies for the journey ahead
+  selectionTooltip: It's the reasonable thing to do
+  conclusionHeading: Yep.. got some supplies
+  conclusionText: You bought a wagonload of supplies which will help your team in
+    the weeks and months ahead
 --- !u!224 &1293172060
 RectTransform:
   m_ObjectHideFlags: 0
@@ -104042,7 +104225,7 @@ Transform:
   - {fileID: 591367178}
   - {fileID: 1001438569}
   m_Father: {fileID: 707801115}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1527318696
 MonoBehaviour:
@@ -105037,6 +105220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 1
   magnitude1: -2
   consequenceType2: 0
@@ -128188,7 +128372,7 @@ Transform:
   - {fileID: 1158838363}
   - {fileID: 480457293}
   m_Father: {fileID: 707801115}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1721188829
 MonoBehaviour:
@@ -128988,6 +129172,62 @@ MonoBehaviour:
   speakerID: 0
   text: Ahhh Rebecca's hair is so shiny shiny. I wish I had hair instead of this..pot.
     Ugh
+--- !u!1 &1738908297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1738908298}
+  - component: {fileID: 1738908299}
+  m_Layer: 0
+  m_Name: option2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1738908298
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1738908297}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 113235118}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1738908299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1738908297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
+  consequenceType1: 3
+  magnitude1: 0
+  consequenceType2: 3
+  magnitude2: 0
+  consequenceType3: 3
+  magnitude3: 0
+  useAutoExplanation: 0
+  AfterImage: {fileID: 0}
+  icon: {fileID: 21300006, guid: 577d0146acfda9f4a87d8c2be5dcbad6, type: 3}
+  selectionText: Party!
+  selectionTooltip: 'WOOOO! '
+  conclusionHeading: A great time!
+  conclusionText: You attend the party and have a great time. You impress everyone
+    there with stories of your daring deeds. Before you leave, the local lords gather
+    some a wagon full of supplies they hope will help you on your journey.
 --- !u!1 &1739617319
 GameObject:
   m_ObjectHideFlags: 0
@@ -129219,6 +129459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 3
   magnitude1: 0
   consequenceType2: 3
@@ -133868,6 +134109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 1
   magnitude1: 2
   consequenceType2: 3
@@ -134968,6 +135210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 1
   magnitude1: -2
   consequenceType2: 3
@@ -135434,6 +135677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 2
   magnitude1: 2
   consequenceType2: 3
@@ -135489,6 +135733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
   consequenceType1: 1
   magnitude1: 2
   consequenceType2: 3
@@ -140622,7 +140867,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4333098802895934, guid: e777ba048bee5404e97fc46ed5edbe6f, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1693595778957062, guid: e777ba048bee5404e97fc46ed5edbe6f, type: 2}
       propertyPath: m_Name
@@ -150854,6 +151099,51 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2144624104}
+--- !u!1 &2144877504
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2144877505}
+  - component: {fileID: 2144877506}
+  m_Layer: 0
+  m_Name: Part1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2144877505
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2144877504}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 113235118}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2144877506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2144877504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 0
+  text: The local nobility have recieved word of your incredible hat collection! They
+    wish to have a fancy party in your honor! Will you attend?
+  useCustomPic: 0
+  customPic: {fileID: 21300000, guid: 655af71609d42c047bf58a9003b612c9, type: 3}
 --- !u!1 &2145035714
 GameObject:
   m_ObjectHideFlags: 0
@@ -150884,7 +151174,7 @@ Transform:
   - {fileID: 55529961}
   - {fileID: 429833134}
   m_Father: {fileID: 707801115}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2145035716
 MonoBehaviour:
