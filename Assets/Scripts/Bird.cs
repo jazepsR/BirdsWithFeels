@@ -189,8 +189,9 @@ public class Bird : MonoBehaviour
 			if (levelList.Count == 0 && !Var.isTutorial)
 			{
 				levelList = new List<LevelData>();
-				Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);               
-				AddLevel(new LevelData(startingLVL, Var.Em.Neutral,icon));
+				Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);     
+				if(startingLVL != Levels.type.None)          
+					AddLevel(new LevelData(startingLVL, Var.Em.Neutral,icon));
 			}
 			levelControler = GetComponent<Levels>();
 			levelControler.ApplyStartLevel(this, levelList);       
@@ -232,6 +233,7 @@ public class Bird : MonoBehaviour
 				MapControler.Instance.CanLoadBattle();
 			}
 		}
+		showText();
 	}
 
 	public void publicStart()
@@ -290,7 +292,7 @@ public class Bird : MonoBehaviour
 			}
 	}
 	public void AddLevel(LevelData data)
-	{
+	{		
 		if (data.emotion != Var.Em.Neutral)
 		{
 			hasNewLevel = true;            

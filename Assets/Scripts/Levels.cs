@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 [Serializable]
 public class Levels : MonoBehaviour {
-	public enum type { Alexander,Kim,Rebecca,Sophie, Terry,Friend1,Friend2,Brave1,Brave2,Lonely1,Lonely2,Scared1,Scared2};
+	public enum type { Alexander,Kim,Rebecca,Sophie, Terry,Friend1,Friend2,Brave1,Brave2,Lonely1,Lonely2,Scared1,Scared2, None};
 	Bird myBird;	
 	public GameObject Halo;
 	public GameObject SadRest;
@@ -148,7 +148,7 @@ public class Levels : MonoBehaviour {
 
 					 }
 					 break;*/
-				case type.Rebecca:
+				case type.Kim:
 					if (myBird.x == -1)
 						break;
 					if(GameLogic.Instance.CheckIfResting(myBird))
@@ -230,7 +230,7 @@ public class Levels : MonoBehaviour {
 						tile.isInfluenced = false;
 					}
 					break;
-				case type.Rebecca:
+				case type.Kim:
 					if (myBird.x == -1)
 						break;
 					SadRest.SetActive(false);
@@ -374,7 +374,7 @@ public class Levels : MonoBehaviour {
 				case type.Sophie:
 					TovaActivated = false;
 					break;
-				case type.Rebecca:
+				case type.Kim:
 					if (myBird.x == -1)
 						break;
 					SadRest.SetActive(false);

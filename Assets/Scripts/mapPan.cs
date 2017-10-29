@@ -22,7 +22,8 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     void Update()
     {
-       
+		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
+			return;
         if (Input.GetAxis("Mouse ScrollWheel") != 0)
         {
             Vector3 targetpos = transform.position;

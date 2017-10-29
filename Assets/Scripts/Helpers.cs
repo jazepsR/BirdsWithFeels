@@ -568,10 +568,10 @@ public class Helpers : MonoBehaviour {
             case Levels.type.Alexander:
                 return "Bird gains +1 in the dominant feeling of an adjacent bird";
             case Levels.type.Kim:
-                return "Ground effects affect this bird twice as much";
+				return "Bird loses -2 confidence when resting";
             case Levels.type.Rebecca:
-                return "Bird loses -2 confidence when resting";
-            case Levels.type.Sophie:
+				return "Ground effects affect this bird twice as much";
+			case Levels.type.Sophie:
                 return "If resting, all adjacent birds recieve 10% chance to win fights";
             case Levels.type.Terry:
                 return "All birds in the same horizontal row gain +1 confidence";
