@@ -12,7 +12,7 @@ public static class Var {
     public static List<string> shownEvents = new List<string>();
     public enum Em { Neutral,Lonely,SuperLonely, Friendly, SuperFriendly,Confident,SuperConfident,Scared, SuperScared,finish,Random};
     public enum PowerUps { heal,dmg,emotion,obstacle};
-    public static bool isTutorial = false;
+    public static bool isTutorial = true;
     public static bool tutorialCompleted = true;
     public static bool isBoss = false;
     public static GameObject dustCloud = null;

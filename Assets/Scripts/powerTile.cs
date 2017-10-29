@@ -63,7 +63,7 @@ public class powerTile : MonoBehaviour {
 				info = "Birds on this tile recieve +10% fighting bouns";
 				break;
 			case Var.PowerUps.emotion:
-				info = "Birds on this tile recieve +1 to " + emotion.ToString();
+				info = "Gain one extra "+Helpers.Instance.GetHexColor(emotion) + emotion.ToString()+"</color>";
 				break;
 			case Var.PowerUps.heal:
 				info = "Birds on this tile will heal 1 heart after the battle";

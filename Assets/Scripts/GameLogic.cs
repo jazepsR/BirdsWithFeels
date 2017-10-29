@@ -22,7 +22,7 @@ public class GameLogic : MonoBehaviour {
     }
     void Start()
     {
-        CanWeFight ();
+        CanWeFight();
     }
 
 
@@ -303,7 +303,9 @@ public class GameLogic : MonoBehaviour {
                 }
             }
         }
-        if (GuiContoler.Instance.speechBubbleObj.activeSelf)
+		if (Var.isTutorial && canFight && prevstate != canFight)
+			Tutorial.Instance.ShowTutorialBeforeBattleText(Tutorial.Instance.CurrentPos);
+		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
         {
             canFight = false;
             tooltipText = "Fight availabe after the dialogue is completed";
@@ -314,8 +316,7 @@ public class GameLogic : MonoBehaviour {
         //FightButton.gameObject.SetActive(canFight);  
         FightButton.GetComponent<Animator>().SetBool("active", canFight);
         FightButton.interactable = canFight;
-        if (Var.isTutorial && canFight &&prevstate!= canFight)
-                Tutorial.Instance.ShowTutorialBeforeBattleText(Tutorial.Instance.CurrentPos);
+       
         if (GuiContoler.Instance.speechBubbleObj.activeSelf)
             prevstate = true;
         else
