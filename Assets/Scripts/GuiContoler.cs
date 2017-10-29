@@ -1009,15 +1009,11 @@ public class GuiContoler : MonoBehaviour {
 			else
 			{
 				GetComponent<fillEnemy>().createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
-				ObstacleGenerator.Instance.clearObstacles();
-				ObstacleGenerator.Instance.GenerateObstacles();
-				//DialogueControl.Instance.GetRelationshipDialogs();                                
 				if (!EventController.Instance.tryEvent())
 					DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
-
-
-
 			}
+			ObstacleGenerator.Instance.clearObstacles();
+			ObstacleGenerator.Instance.GenerateObstacles();
 			GameLogic.Instance.CanWeFight();
 			
 		}

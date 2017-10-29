@@ -127,9 +127,8 @@ public class Tutorial : MonoBehaviour {
                 break;
             case 4:
                 EventController.Instance.CreateEvent(AddAlexEvent);
-                /*GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[2], "Hey guys! Can I join your team?");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Eh I guess sure!");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Birds usually fight in teams of three, so this is perfect!");*/
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[2], "A Rock!");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Birds can't stand there, but vultures move right over the rocks!");
                 break;
             case 5:
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "This looks dangerous!");
