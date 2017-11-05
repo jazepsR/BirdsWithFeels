@@ -95,6 +95,11 @@ public class GuiContoler : MonoBehaviour {
 		LeanTween.init(1000);
 		Instance = this;
 		maxGraph = 3;
+		Var.birdInfo = infoText;
+		Var.birdInfoHeading = infoHeading;
+		Var.birdInfoFeeling = infoFeeling;
+		Var.powerBar = powerBarTemp;
+		Var.powerText = powerTextTemp;
 	}
 	void Start()
 	{
@@ -110,11 +115,7 @@ public class GuiContoler : MonoBehaviour {
 			catch { }
 		}
 		messages = new List<string>();
-		Var.birdInfo = infoText;
-		Var.birdInfoHeading = infoHeading;
-		Var.birdInfoFeeling = infoFeeling;
-		Var.powerBar = powerBarTemp;
-		Var.powerText = powerTextTemp;	    
+		   
 		if (!inMap)
 		{
 			GuiMap.Instance.CreateMap(Var.map);            

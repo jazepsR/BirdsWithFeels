@@ -14,7 +14,7 @@ public class Levels : MonoBehaviour {
 	public GameObject impressionableIndicator;
 
 	// Use this for initialization
-	void Start () {        
+	void Awake () {        
 		myBird = GetComponent<Bird>();
 	}
 	
