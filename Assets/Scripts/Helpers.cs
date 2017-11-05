@@ -50,6 +50,30 @@ public class Helpers : MonoBehaviour {
 			return EventScript.Character.None;
 		}
 	}
+
+	public bool VarContainsTimedEvent(string evName)
+	{
+		if (Var.timedEvents.Count == 0)
+			return false;
+		foreach(TimedEventData data in Var.timedEvents)
+		{
+			if (data.eventName == evName)
+				return true;
+		}
+		return false;
+	}
+	public TimedEventData GetTimedEvent(string evName)
+	{
+		if (Var.timedEvents.Count == 0)
+			return null;
+		foreach (TimedEventData data in Var.timedEvents)
+		{
+			if (data.eventName == evName)
+				return data;
+		}
+		return null;
+	}
+
 	public Bird GetBirdFromEnum(EventScript.Character ch, bool useAll = false)
 	{
 		List<Bird> birds;

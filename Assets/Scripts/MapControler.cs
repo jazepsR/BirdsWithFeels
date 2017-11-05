@@ -25,12 +25,14 @@ public class MapControler : MonoBehaviour {
 	public MapIcon SelectedIcon;
 	public Text timerText;
 	public List<Bird> selectedBirds;
+	TimedEventControl[] timedEvents;
 	void Awake()
 	{
 		Instance = this;
 	}
 	// Use this for initialization
 	void Start () {
+		timedEvents = FindObjectsOfType<TimedEventControl>();
 		Var.isBoss = false;
 		timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);
 		selectionTiles.transform.localScale = Vector3.zero;
@@ -120,6 +122,8 @@ public class MapControler : MonoBehaviour {
 	{
 		Var.currentWeek++;
 		timerText.text = "Week: " + Var.currentWeek;
+		foreach (TimedEventControl control in timedEvents)
+			control.CheckStatus();
 		foreach(Bird bird in FillPlayer.Instance.playerBirds)
 		{
 			if (bird.injured)

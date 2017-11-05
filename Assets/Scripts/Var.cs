@@ -55,6 +55,7 @@ public static class Var {
 	public static bool Infight = false;
 	public static bool shouldDoMapEvent = false;
 	public static Settings gameSettings = new Settings();
+	public static List<TimedEventData> timedEvents = new List<TimedEventData>();
 	public static string[] maleNames = {"Noah", "Liam", "Mason", "Jacob", "William","Ethan", "James","Alexander","Michael","Benjamin","Elijah",
 		"Daniel", "Aiden", "Logan", "Matthew","Lucas","Jackson","David","Oliver","Jayden","Joseph","Gabriel","Samuel","Carter","Anthony","John",
 		"Dylan", "Luke", "Henry","Andrew","Isaac","Christopher","Joshua","Wyatt","Sebastian","Owen","Caleb","Nathan","Ryan","Jack","Hunter","Levi",

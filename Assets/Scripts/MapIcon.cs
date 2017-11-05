@@ -53,6 +53,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	List<float> totalPercentages;
 	public Image unlockedRoad;
 	bool useline;
+	//[HideInInspector]
+	public TimedEventControl timedEventTrigger;
 	// Use this for initialization
 	void Start()
 	{
@@ -365,7 +367,11 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 
 	public void LoadBattleScene()
 	{
-		
+		if (timedEventTrigger != null && !timedEventTrigger.data.activationEventShown)
+		{
+			timedEventTrigger.TriggerActivationEvent();
+			return;
+		}
 		if (available && MapControler.Instance.canFight)
 		{
 
