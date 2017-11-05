@@ -752,14 +752,17 @@ public class Bird : MonoBehaviour
 				try
 				{
 					List<Bird> birds = Helpers.Instance.GetAdjacentBirds(this);
-					foreach (Bird bird in birds)
+					if (birds != null && birds.Count>0)
 					{
-						if (Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList) && bird.CoolDownLeft == 0)
+						foreach (Bird bird in birds)
 						{
-							bird.CoolDownLeft = bird.CoolDownLength;
-							change = 0;
-							GameObject shield = Resources.Load("shieldEffect") as GameObject;
-							Instantiate(shield, transform);
+							if (Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList) && bird.CoolDownLeft == 0)
+							{
+								bird.CoolDownLeft = bird.CoolDownLength;
+								change = 0;
+								GameObject shield = Resources.Load("shieldEffect") as GameObject;
+								Instantiate(shield, transform);
+							}
 						}
 					}
 				}

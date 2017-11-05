@@ -26,25 +26,28 @@ public class RelationshipScript : MonoBehaviour {
         if (applyFriendly)
         {
             List<Bird> closeBirds = Helpers.Instance.GetAdjacentBirds(bird);
-            foreach (Bird closeBird in closeBirds)
-            {
-                var key = Helpers.Instance.GetCharEnum(closeBird);
-                if (closeBird.emotion == bird.preferredEmotion)
-                {
-                    bird.relationships[key] = bird.relationships[key] + likeGain;
-                }
-                else
-                {
-                    if (closeBird.emotion == Helpers.Instance.GetOppositeEmotion(bird.preferredEmotion))
-                    {
-                        bird.relationships[key] = bird.relationships[key] + dislikeGain;
-                    }
-                    else
-                    {
-                        bird.relationships[key] = bird.relationships[key] + normGain;
-                    }
-                }
-            }
+			if (closeBirds != null && closeBirds.Count>0)
+			{
+				foreach (Bird closeBird in closeBirds)
+				{
+					var key = Helpers.Instance.GetCharEnum(closeBird);
+					if (closeBird.emotion == bird.preferredEmotion)
+					{
+						bird.relationships[key] = bird.relationships[key] + likeGain;
+					}
+					else
+					{
+						if (closeBird.emotion == Helpers.Instance.GetOppositeEmotion(bird.preferredEmotion))
+						{
+							bird.relationships[key] = bird.relationships[key] + dislikeGain;
+						}
+						else
+						{
+							bird.relationships[key] = bird.relationships[key] + normGain;
+						}
+					}
+				}
+			}
             weakenRelationship(bird);
         }
 		Bird relationshipBird = GetRelationshipBird(bird);

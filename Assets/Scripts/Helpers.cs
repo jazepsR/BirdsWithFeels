@@ -389,28 +389,36 @@ public class Helpers : MonoBehaviour {
 	}
 	public List<Bird> GetAdjacentBirds(Bird bird)
 	{
-		int x = bird.x;
-		int y = bird.y;
-		List<Bird> list = new List<Bird>();
-		int sizeY = Var.playerPos.GetLength(1) - 1;
-		int sizeX = Var.playerPos.GetLength(0) - 1;
-		if (y + 1 <= sizeY && Var.playerPos[x, y + 1] != null)
-			list.Add(Var.playerPos[x, y + 1]);
-		if (y - 1 >= 0 && Var.playerPos[x, y - 1] != null)
-			list.Add(Var.playerPos[x, y - 1]);
-		if (x + 1 <= sizeX && Var.playerPos[x + 1, y] != null)
-			list.Add(Var.playerPos[x + 1, y]);
-		if (x - 1 >= 0 && Var.playerPos[x - 1, y] != null)
-			list.Add(Var.playerPos[x - 1, y]);
-		if (y + 1 <= sizeY && x + 1 <= sizeX && Var.playerPos[x + 1, y + 1] != null)
-			list.Add(Var.playerPos[x + 1, y + 1]);
-		if (y + 1 <= sizeY && x - 1 >= 0 && Var.playerPos[x - 1, y + 1] != null)
-			list.Add(Var.playerPos[x - 1, y + 1]);
-		if (y - 1 >= 0 && x + 1 <= sizeX && Var.playerPos[x + 1, y - 1] != null)
-			list.Add(Var.playerPos[x + 1, y - 1]);
-		if (y - 1 >= 0 && x - 1 >= 0 && Var.playerPos[x - 1, y - 1] != null)
-			list.Add(Var.playerPos[x - 1, y - 1]);
-		return list;
+		try
+		{
+			int x = bird.x;
+			int y = bird.y;
+			List<Bird> list = new List<Bird>();
+			int sizeY = Var.playerPos.GetLength(1) - 1;
+			int sizeX = Var.playerPos.GetLength(0) - 1;
+			if (y + 1 <= sizeY && Var.playerPos[x, y + 1] != null)
+				list.Add(Var.playerPos[x, y + 1]);
+			if (y - 1 >= 0 && Var.playerPos[x, y - 1] != null)
+				list.Add(Var.playerPos[x, y - 1]);
+			if (x + 1 <= sizeX && Var.playerPos[x + 1, y] != null)
+				list.Add(Var.playerPos[x + 1, y]);
+			if (x - 1 >= 0 && Var.playerPos[x - 1, y] != null)
+				list.Add(Var.playerPos[x - 1, y]);
+			if (y + 1 <= sizeY && x + 1 <= sizeX && Var.playerPos[x + 1, y + 1] != null)
+				list.Add(Var.playerPos[x + 1, y + 1]);
+			if (y + 1 <= sizeY && x - 1 >= 0 && Var.playerPos[x - 1, y + 1] != null)
+				list.Add(Var.playerPos[x - 1, y + 1]);
+			if (y - 1 >= 0 && x + 1 <= sizeX && Var.playerPos[x + 1, y - 1] != null)
+				list.Add(Var.playerPos[x + 1, y - 1]);
+			if (y - 1 >= 0 && x - 1 >= 0 && Var.playerPos[x - 1, y - 1] != null)
+				list.Add(Var.playerPos[x - 1, y - 1]);
+			return list;
+		}
+		catch
+		{
+			Debug.LogError("Get close birds failed");
+			return new List<Bird>();
+		}
 	}
 	public string ApplyTitle(Bird name, string title)
 	{
