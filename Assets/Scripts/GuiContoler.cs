@@ -959,6 +959,8 @@ public class GuiContoler : MonoBehaviour {
 			bird.transform.position = bird.home;
 			bird.prevConf = bird.confidence;
 			bird.prevFriend = bird.friendliness;
+			bird.totalConfidence += bird.confidence;
+			bird.totalFriendliness += bird.totalFriendliness;
 			bird.ResetBonuses();
 			bird.GroundBonus.SetActive(false);
 		}

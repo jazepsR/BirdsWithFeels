@@ -15,6 +15,10 @@ public class Bird : MonoBehaviour
 	public int prevConf = 0;
 	[HideInInspector]
 	public int prevFriend = 0;
+	[HideInInspector]
+	public int totalFriendliness = 0;
+	[HideInInspector]
+	public int totalConfidence = 0;
 	public int friendliness = 0;
 	public int health = 3;
 	[HideInInspector]

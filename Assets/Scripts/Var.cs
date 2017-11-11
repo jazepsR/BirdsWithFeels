@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 public static class Var {
+	public static bool yesFinalChoice = false;
 	public static bool StartedNormally = false;
 	public static bool CanShowHover = true;
 	public static int currentWeek = 0;     

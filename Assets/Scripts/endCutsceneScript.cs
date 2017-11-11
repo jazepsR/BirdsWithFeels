@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class endCutsceneScript : MonoBehaviour {
 	public cutScene endCutscene;
+	public ending endingScript;
 	// Use this for initialization
 	void Start () {
+		endingScript.BuildCutscene(endCutscene);
 		endCutscene.StartCutscene();
 	}
 	
