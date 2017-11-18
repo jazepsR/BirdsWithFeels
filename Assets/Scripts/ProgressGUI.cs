@@ -4,8 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ProgressGUI : MonoBehaviour {
-	public Image[] portraits;
+	[Header("emo header")]
+	public GameObject emoHeader;
+	public Image[] emoHeaderHearts;
+	public Text emoHeaderName;
+	public Image emoHeaderPortrait;
+	public Image emoHeaderPortraitFill;
+	public Text lvlNumber;
+	public Text newEmotionHeader;
+	[Header("summary")]
 	public Image skillBG;
+	public Image[] portraits;
 	public Image[] portraitFill;
 	public Text[] NameText;
 	public LevelArea[] levelAreas;
@@ -100,12 +109,17 @@ public class ProgressGUI : MonoBehaviour {
 		LeanTween.textAlpha(newEmotion[portraitNum].rectTransform, 0.0f, 2.5f);
 		LeanTween.scale(newEmotion[portraitNum].rectTransform, Vector3.one * 2.3f, 2.5f).setEase(LeanTweenType.easeInOutQuad);
 	}
-	
+	public void scaleDownEmoHeaderPortrait()
+	{
+		LeanTween.scale(emoHeaderPortrait.transform.parent.GetComponent<RectTransform>(), Vector3.one * 1.3f, 1f).setEase(LeanTweenType.easeInBack);
+		LeanTween.textAlpha(newEmotionHeader.rectTransform, 0.0f, 2.5f);
+		LeanTween.scale(newEmotionHeader.rectTransform, Vector3.one * 2.3f, 2.5f).setEase(LeanTweenType.easeInOutQuad);
+	}
 	public void AllPortraitClick()
 	{
 		for(int i = 0; i < 3; i++)
 		{
-			PortraitClick(Var.activeBirds[i], i,false);
+			PortraitClick(Var.activeBirds[i], i,false,false);
 		}
 		UpdateLevelAreas(Var.activeBirds[0], true);
 		levelArea.SetActive(false);
@@ -119,18 +133,28 @@ public class ProgressGUI : MonoBehaviour {
 		}
 		levelArea.SetActive(true);
 	}
-	public void PortraitClick(Bird bird, int portraitNum=0, bool showDeath = true)
+	public void PortraitClick(Bird bird, int portraitNum=0,bool useEmoHeader = true, bool showDeath = true)
 	{
-		portraits[portraitNum].transform.parent.gameObject.SetActive(true);
-		if (!bird.inMap)
+		Text nameText;
+		Image portrait;
+		Image portraitFillObj;
+		if (useEmoHeader)
 		{
-			//bird.SetRelationshipText(GuiContoler.Instance.reportRelationshipPortrait, GuiContoler.Instance.reportRelationshipText);
-			//bird.SetRelationshipSliders(GuiContoler.Instance.reportRelationshipSliders);
+			nameText = emoHeaderName;
+			portrait = emoHeaderPortrait;
+			portraitFillObj = emoHeaderPortraitFill;
+			lvlNumber.text = bird.level.ToString();
 		}
-		NameText[portraitNum].text = bird.charName;
+		else
+		{
+			nameText = NameText[portraitNum];
+			portrait = portraits[portraitNum];
+			portraitFillObj = portraitFill[portraitNum];
+		}
+		emoHeader.SetActive(useEmoHeader);
+		portraits[portraitNum].transform.parent.gameObject.SetActive(!useEmoHeader);
+		nameText.text = bird.charName;
 		emotionValuesText.text = Helpers.Instance.GetStatInfo(bird.confidence, bird.friendliness).Replace('\n', ' ');
-		if (bird.inMap)
-			birdBio.text = bird.birdBio;
 		Image[] activeHearts;
 		switch (portraitNum)
 		{
@@ -147,38 +171,53 @@ public class ProgressGUI : MonoBehaviour {
 				activeHearts = Hearts;
 				break;
 		}
+		if(useEmoHeader)
+			activeHearts = emoHeaderHearts;
+
+
+
 		if (bird.injured && showDeath)
 		{
 			if(!bird.inMap)
 				deathScreen.ShowDeathMenu(bird);
-			//portraits[portraitNum].sprite = skull;
 			Helpers.Instance.setHearts(activeHearts, 0, bird.maxHealth, bird.prevRoundHealth);
-			portraitFill[portraitNum].color = new Color(0, 0, 0, 0);
-			NameText[portraitNum].text += "- Injured";
+			portraitFillObj.color = new Color(0, 0, 0, 0);
+			nameText.text += "- Injured";
 		}
 		else
 		{
 			Helpers.Instance.setHearts(activeHearts, bird.health, bird.maxHealth, bird.prevRoundHealth);
-			portraitFill[portraitNum].sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+			portraitFillObj.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
 			if (bird.prevEmotion != bird.emotion && !bird.inMap)
 			{
 				AudioControler.Instance.PlaySound(AudioControler.Instance.newEmotion);
-				LeanTween.scale(portraits[portraitNum].transform.parent.GetComponent<RectTransform>(), Vector3.one * 1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownPortrait).setOnCompleteParam(portraitNum as object);
-				portraitFill[portraitNum].color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
+				if(useEmoHeader)
+					LeanTween.scale(portrait.transform.parent.GetComponent<RectTransform>(), Vector3.one * 1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownEmoHeaderPortrait);
+				else
+					LeanTween.scale(portrait.transform.parent.GetComponent<RectTransform>(), Vector3.one * 1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownPortrait).setOnCompleteParam(portraitNum as object);
+				portraitFillObj.color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
 				bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
-				LeanTween.color(portraitFill[portraitNum].rectTransform, Helpers.Instance.GetEmotionColor(bird.emotion), 2.25f);
+				LeanTween.color(portraitFillObj.rectTransform, Helpers.Instance.GetEmotionColor(bird.emotion), 2.25f);
 				Debug.Log("had emotional change! From: " + bird.prevEmotion.ToString() + " to: " + bird.emotion.ToString());
-				newEmotion[portraitNum].color = Helpers.Instance.GetEmotionColor(bird.emotion);
-				newEmotion[portraitNum].rectTransform.localScale = Vector3.one;
+				if (useEmoHeader)
+				{
+					newEmotionHeader.color = Helpers.Instance.GetEmotionColor(bird.emotion);
+					newEmotionHeader.rectTransform.localScale = Vector3.one;
+				}
+				else
+				{
+					newEmotion[portraitNum].color = Helpers.Instance.GetEmotionColor(bird.emotion);
+					newEmotion[portraitNum].rectTransform.localScale = Vector3.one;
+				}
 
 			}
 			else
 			{
 				bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
-				portraitFill[portraitNum].color = Helpers.Instance.GetEmotionColor(bird.emotion);
+				portraitFillObj.color = Helpers.Instance.GetEmotionColor(bird.emotion);
 			}
 			bird.portrait.transform.Find("bird").GetComponent<Image>().color = Color.white;
-			portraits[portraitNum].sprite = bird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
+			portrait.sprite = bird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
 			updateLevels(bird);
 			if (!bird.inMap)
 			{
