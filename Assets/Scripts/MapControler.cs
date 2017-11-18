@@ -25,6 +25,7 @@ public class MapControler : MonoBehaviour {
 	public MapIcon SelectedIcon;
 	public Text timerText;
 	public List<Bird> selectedBirds;
+	public Sprite trialSprite;
 	TimedEventControl[] timedEvents;
 	void Awake()
 	{
@@ -69,7 +70,7 @@ public class MapControler : MonoBehaviour {
 			}
 		}
 		SaveLoad.Save();
-		if (!Var.gameSettings.shownMapTutorial)
+		if (!Var.gameSettings.shownMapTutorial || !Var.gameSettings.shownMapPlanningTutorial)
 			Var.shouldDoMapEvent = false;
 		//Var.shouldDoMapEvent = true;
 		if (Var.shouldDoMapEvent)

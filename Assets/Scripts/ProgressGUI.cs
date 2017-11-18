@@ -12,6 +12,7 @@ public class ProgressGUI : MonoBehaviour {
 	public Image emoHeaderPortraitFill;
 	public Text lvlNumber;
 	public Text newEmotionHeader;
+	public Text levelStuffText;
 	[Header("summary")]
 	public Image skillBG;
 	public Image[] portraits;
@@ -52,7 +53,8 @@ public class ProgressGUI : MonoBehaviour {
 	void UpdateLevelAreas(Bird bird, bool isFinal =false)
 	{
 		bool HasSuper = (bird.level > 1);
-		foreach(LevelArea lvl in levelAreas)
+		levelStuffText.text = "<b>" + bird.charName+"</b> must grow emotionally to gain new abilites";
+		foreach (LevelArea lvl in levelAreas)
 		{
 			lvl.myImage.color = lvl.defaultColor;
 			lvl.gameObject.SetActive(true);
@@ -60,24 +62,32 @@ public class ProgressGUI : MonoBehaviour {
 			lvl.Unlock();
 			if (Helpers.Instance.ListContainsLevel(lvl.level, bird.levelList))
 			{
-				lvl.gameObject.SetActive(false);			
-			}else
+				lvl.gameObject.SetActive(false);
+			} else
 			{
 				if (lvl.gameObject.GetComponent<LevelArea>().isSmall)
 					lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 650);
 			}
-			
-			if ( bird.bannedLevels == lvl.emotion)           
-			   lvl.gameObject.SetActive(false);
-		   
+
+			if (bird.bannedLevels == lvl.emotion)
+				lvl.gameObject.SetActive(false);
+
+			float emotionRequirement = 7;
 			if (lvl.level.ToString().Contains("2"))
 			{
+				emotionRequirement = 10;
 				if (!Helpers.Instance.ListContainsEmotion(lvl.emotion, bird.levelList))
-					lvl.gameObject.SetActive(false);              
+					lvl.gameObject.SetActive(false);
 
 			}
 			if (Var.isTutorial || isFinal || !Var.gameSettings.shownLevelTutorial)
 				lvl.gameObject.SetActive(false);
+			if (lvl.gameObject.activeSelf && bird.emotion == lvl.emotion && Helpers.Instance.GetEmotionValue(bird, lvl.emotion) >= emotionRequirement)
+			{
+				levelStuffText.text = "<b>" + Helpers.Instance.GetLevelTitle(lvl.level) +
+					"</b> available!<b>\nRequirements:</b>\n" + Helpers.Instance.GetLVLRequirements(lvl.level);
+			}
+
 		}
 		skillBG.color = skillDefaultCol;
 	}

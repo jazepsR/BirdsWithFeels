@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
+	public bool isTrial = false;
 	public GameObject CompleteIcon;
 	public GameObject LockedIcon;
 	public int ID;    
@@ -53,6 +54,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	List<float> totalPercentages;
 	public Image unlockedRoad;
 	bool useline;
+	int trialID;
 	//[HideInInspector]
 	public TimedEventControl timedEventTrigger;
 	// Use this for initialization
@@ -64,6 +66,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		if (!Var.StartedNormally)
 			available = true;
 		sr = GetComponent<Image>();
+		if (isTrial)
+			sr.sprite = MapControler.Instance.trialSprite;
 		sr.color = Helpers.Instance.GetEmotionColor(type);
 		//GetComponent<Button>().interactable = available;
 		CompleteIcon.SetActive(completed);
@@ -86,7 +90,19 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		{
 			useline = false;
 		}
+		trialID = GetTargetID(this);
 	}
+	int GetTargetID(MapIcon data)
+	{
+		if (data.targets.Length == 0)
+			return -1;
+		if (data.targets[0].isTrial)
+			return data.targets[0].ID;
+		else
+			return GetTargetID(data.targets[0]);
+	}
+
+
 
 	void ValidateAll()
 	{
@@ -170,7 +186,10 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	}
 	string GetTooltipText()
 	{
-		string tooltipText = "<b>"+levelName +"</b>\n";
+		string tooltipText ="";
+		if (isTrial)
+			tooltipText += "<b>TRIAL</b>";
+		tooltipText = "<b>"+levelName +"</b>\n";
 		
 		string stageState = "<color=#c33b24ff>Not available</color>";
 		if (completed)
@@ -280,7 +299,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			{
 				targIDs.Add(targ.ID);
 			}
-			mySaveData = new MapSaveData(completed, available, ID, targIDs,type);
+			mySaveData = new MapSaveData(completed, available, ID, targIDs,type, trialID);
 			Var.mapSaveData.Add(mySaveData);
 		}
 		else
@@ -311,7 +330,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			AudioControler.Instance.ClickSound();
 		}
 		catch { }
-		//Tutorial
+		//map tutorial
 		if (!Var.gameSettings.shownMapTutorial)
 		{
 			MapTutorial tut = FindObjectOfType<MapTutorial>();

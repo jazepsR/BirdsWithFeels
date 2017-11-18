@@ -7,6 +7,7 @@ public class MapTutorial : MonoBehaviour {
     public Animator tutorialHighlight;
     public Dialogue mapTutorialDialog;
     public Dialogue mapTutorialDialog2;
+	public Dialogue mapPlanningTutorial;
     // Use this for initialization
     void Start () {
         if (!Var.gameSettings.shownMapTutorial)
@@ -15,6 +16,11 @@ public class MapTutorial : MonoBehaviour {
             DialogueControl.Instance.CreateParticularDialog(mapTutorialDialog);
             print("Did map tutorial dialog");
         }
+		if (Var.gameSettings.shownMapTutorial && !Var.gameSettings.shownMapPlanningTutorial)
+		{
+			DialogueControl.Instance.CreateParticularDialog(mapPlanningTutorial);
+			Var.gameSettings.shownMapPlanningTutorial = true;
+		}
 	}
 	
 public void ShowDialog2()

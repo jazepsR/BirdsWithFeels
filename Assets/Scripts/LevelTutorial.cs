@@ -19,9 +19,9 @@ public class LevelTutorial : MonoBehaviour {
 	void Start ()
 	{
 		//Var.currentStageID = 1;
-		if(Var.currentStageID == 0 && !Var.gameSettings.shownAbilityTutorial)
+		if(Var.currentStageID == 0 && !Var.gameSettings.shownBattlePlanningTutorial)
 		{
-			Var.gameSettings.shownAbilityTutorial = true;
+			Var.gameSettings.shownBattlePlanningTutorial = true;
 			DialogueControl.Instance.CreateParticularDialog(abilityDialogue);
 		}
 

@@ -13649,7 +13649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerID: 0
-  text: 'You know what I find beautiful? That every bird is like a unique snowflake! '
+  text: No one ever succeeded without proper <b>planning.</b>
 --- !u!114 &157555824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20776,7 +20776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1316}
+  m_AnchoredPosition: {x: 0, y: -1315}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &311877935
@@ -23839,7 +23839,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1096607659}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &384127503
 MonoBehaviour:
@@ -23853,7 +23853,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerID: 1
-  text: What my *ahem* ...friend is trying to say, is that we all have unique abilites
+  text: That's right! Use the <b>map</b> in the <b>top right</b> corner to learn about
+    your upcoming enemies.
 --- !u!1 &384223508
 GameObject:
   m_ObjectHideFlags: 0
@@ -45543,7 +45544,6 @@ MonoBehaviour:
   customImage: {fileID: 882787726}
   continueBtn: {fileID: 431175411}
   areaDialogues:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -82341,7 +82341,7 @@ GameObject:
   - component: {fileID: 1096607659}
   - component: {fileID: 1096607660}
   m_Layer: 0
-  m_Name: TutorialAbilityDialog
+  m_Name: Battle1PlanningTutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82358,8 +82358,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 153145937}
+  - {fileID: 2088457003}
   - {fileID: 384127502}
   - {fileID: 1481782587}
+  - {fileID: 1948243062}
   m_Father: {fileID: 468949343}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82378,7 +82380,7 @@ MonoBehaviour:
   magnitude: 0
   targetEmotion: 0
   location: 2
-  speakers: 0100000000000000
+  speakers: 0100000004000000
   canShowMultipleTimes: 0
   dialogueParts: []
 --- !u!1 &1101394703
@@ -90350,7 +90352,7 @@ MonoBehaviour:
   birdBio: 
   birdAbility: Lose -2 confidence when resting
   portraitOrder: 4
-  confidence: 7
+  confidence: 0
   prevConf: 0
   prevFriend: 0
   totalFriendliness: 0
@@ -102295,7 +102297,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1096607659}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1481782588
 MonoBehaviour:
@@ -102308,9 +102310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d5237eb55c0d740b3f8abfa883ddc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerID: 1
-  text: They are at the bottom row of the character sheet. Mouse over them to see
-    more!
+  speakerID: 0
+  text: But that's just for <b>this adventure!</b>
 --- !u!1 &1490395441
 GameObject:
   m_ObjectHideFlags: 0
@@ -138919,6 +138920,7 @@ MonoBehaviour:
   emoHeaderPortraitFill: {fileID: 347990843}
   lvlNumber: {fileID: 544929898}
   newEmotionHeader: {fileID: 550546373}
+  levelStuffText: {fileID: 2046009724}
   skillBG: {fileID: 577134959}
   portraits:
   - {fileID: 720954093}
@@ -143897,6 +143899,49 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!1 &1948243061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1948243062}
+  - component: {fileID: 1948243063}
+  m_Layer: 0
+  m_Name: part 3 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1948243062
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1948243061}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1096607659}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1948243063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1948243061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d5237eb55c0d740b3f8abfa883ddc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerID: 0
+  text: The box next to it shows you the next <b>major challange</b>- a large upcoming
+    battle that will really test your skills.
 --- !u!1 &1949057747
 GameObject:
   m_ObjectHideFlags: 0
@@ -151639,6 +151684,48 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224583111011118300, guid: 2124a2a21ac2ce045a51f5caa65217ab,
     type: 2}
   m_PrefabInternal: {fileID: 1135255315}
+--- !u!1 &2088457002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2088457003}
+  - component: {fileID: 2088457004}
+  m_Layer: 0
+  m_Name: part 1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2088457003
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2088457002}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1096607659}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2088457004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2088457002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d5237eb55c0d740b3f8abfa883ddc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerID: 0
+  text: Thats what my father used to always say!
 --- !u!1 &2088988499
 GameObject:
   m_ObjectHideFlags: 0

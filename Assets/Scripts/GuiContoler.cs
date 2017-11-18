@@ -468,7 +468,7 @@ public class GuiContoler : MonoBehaviour {
 		battlePanel.SetActive(true);
 		if (!Reset())
 			return;
-		LeanTween.moveLocal(graph, new Vector3(-1550, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
+		LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
 		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
 			Destroy(child.gameObject);
@@ -480,7 +480,7 @@ public class GuiContoler : MonoBehaviour {
 	public void CloseBirdStats()
 	{
 		//graph.SetActive(false);
-		LeanTween.moveLocal(graph, new Vector3(-Var.MoveGraphBy, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
+		LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
 		//battlePanel.SetActive(true);
 		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{

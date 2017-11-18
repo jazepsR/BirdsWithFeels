@@ -54,7 +54,7 @@ public class GuiMap : MonoBehaviour {
 			}
 			
 			string nextAreasText = "Next Adventure:";
-			foreach (MapSaveData data in Var.mapSaveData)
+			/*foreach (MapSaveData data in Var.mapSaveData)
 			{
 				if (data.ID == Var.currentStageID)
 				{
@@ -72,6 +72,21 @@ public class GuiMap : MonoBehaviour {
 							}
 						}
 					}
+				}
+			}*/
+			foreach (MapSaveData data in Var.mapSaveData)
+			{
+				if (data.ID == Var.currentStageID)
+				{					
+					foreach (MapSaveData targ in Var.mapSaveData)
+					{
+						if (targ.ID == data.trialID)
+						{
+							
+							nextAreasText = "Next trial:\n"+Helpers.Instance.GetHexColor(targ.emotion) + targ.emotion.ToString() + "</color>";
+						}
+					}
+					
 				}
 			}
 			if (nextAreasText == "Next Adventure:")

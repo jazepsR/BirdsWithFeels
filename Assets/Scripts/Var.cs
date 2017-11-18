@@ -17,7 +17,7 @@ public static class Var {
 	public static bool tutorialCompleted = false;
 	public static bool isBoss = false;
 	public static GameObject dustCloud = null;
-	public static int MoveGraphBy = 1550;
+	public static int MoveGraphBy = 1315;
 	public static int lvl1 = 4;
 	public static bool fled = false;
 	public  static int lvl2 = 10;
@@ -72,9 +72,10 @@ public static class Var {
 public class Settings
 {
    public bool shownFirstLevelUp = false;
-   public bool shownAbilityTutorial = false;
+   public bool shownBattlePlanningTutorial = false;
    public bool shownLevelTutorial = false;
    public bool shownMapTutorial = false;
+   public bool shownMapPlanningTutorial = false;
 }
 
 
@@ -82,16 +83,18 @@ public class Settings
 public class MapSaveData
 {
 	public int ID;
+	public int trialID;
 	public List<int> targets;
 	public bool completed;
 	public bool available;
 	public Var.Em emotion;
-	public MapSaveData(bool completed, bool available, int ID, List<int> targets, Var.Em emotion)
+	public MapSaveData(bool completed, bool available, int ID, List<int> targets, Var.Em emotion, int trialID)
 	{ 
 		this.completed = completed;
 		this.available = available;
 		this.ID = ID;
 		this.targets = targets;
 		this.emotion = emotion;
+		this.trialID = trialID;
 	}
 }

@@ -74,6 +74,24 @@ public class Helpers : MonoBehaviour {
 		return null;
 	}
 
+	public int GetEmotionValue(Bird bird, Var.Em emotion)
+	{
+		switch (emotion)
+		{
+			case Var.Em.Confident:
+				return bird.confidence;
+			case Var.Em.Scared:
+				return Mathf.Abs(bird.confidence);
+			case Var.Em.Friendly:
+				return bird.friendliness;
+			case Var.Em.Lonely:
+				return Mathf.Abs(bird.friendliness);
+			default:
+				return 0;
+		}
+	}
+
+
 	public Bird GetBirdFromEnum(EventScript.Character ch, bool useAll = false)
 	{
 		List<Bird> birds;
