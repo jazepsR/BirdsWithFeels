@@ -42,7 +42,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		Color col = Helpers.Instance.GetEmotionColor(emotion);
-		myImage.color = new Color(col.r,col.g,col.b,0.5f);
+		//myImage.color = new Color(col.r,col.g,col.b,0.5f);
 		//Debug.Log("enterd!");
 		/*ProgressGUI.Instance.skillBG.color = Helpers.Instance.GetSoftEmotionColor(emotion);
 		ProgressGUI.Instance.skillArea.SetActive(true);        
