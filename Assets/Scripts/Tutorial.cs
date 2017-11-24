@@ -133,7 +133,7 @@ public class Tutorial : MonoBehaviour {
             case 5:
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "This looks dangerous!");
                 GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[2], "I've seen this before! These enemies will attack from multiple directions!");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You guys can you let me take <b>two at once?</b> I've always wanted to do that! ");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You guys can you let me fight <b>two at once?</b> I've always wanted to do that! ");
                 break;
         }
     }
@@ -146,8 +146,9 @@ public class Tutorial : MonoBehaviour {
         switch (stage)
         {
             case 0:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "I may be <b>lonely</b>, but my independence makes me <b>stronger!</b>");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Any emotion beats a lack of emotion in this emo eats emo world! LEMME FIGHT! ");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Vultures will walk forward forever until they reach a fight! ");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "I may be <b>lonely</b>, but my independence makes me stronger than that emotionless vulture!");
+                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Any emotion beats a lack of emotion. Let's go! ");
                 outlines.SetActive(false);
                 break;
             case 1:

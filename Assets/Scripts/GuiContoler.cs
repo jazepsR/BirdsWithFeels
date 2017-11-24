@@ -88,6 +88,7 @@ public class GuiContoler : MonoBehaviour {
 	int maxGraph = 3;
 	public GameObject boss;
 	Transform lastSpeechPos = null;
+    public Animator graphAnime;
 	void Awake()
 	{
 		if (!Var.StartedNormally)
@@ -479,8 +480,9 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CloseBirdStats()
 	{
+        graphAnime.SetBool("open", false);
 		//graph.SetActive(false);
-		LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);
+//		LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack); //seb
 		//battlePanel.SetActive(true);
 		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
@@ -705,8 +707,8 @@ public class GuiContoler : MonoBehaviour {
 		}
 		ProgressGUI.Instance.PortraitClick(bird);
 		ProgressGUI.Instance.skillArea.SetActive(false);
-		LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
-	   
+		//LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
+        graphAnime.SetBool("open", true); 
 			
 			}
 	public void CreateBattleReport() {
