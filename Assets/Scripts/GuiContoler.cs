@@ -606,9 +606,9 @@ public class GuiContoler : MonoBehaviour {
 
 		//Friendship stuff
 		if (FriendGainedInRound > 0)
-			fbText += "\n" + Helpers.Instance.FriendlyHexColor + "<b>Friendliness gained in round: " + FriendGainedInRound + "</b></color>";
+			fbText += "\n" + Helpers.Instance.FriendlyHexColor + "<b>Friendliness gained: " + FriendGainedInRound + "</b></color>";
 		if (FriendGainedInRound < 0)
-			fbText += "\n" + Helpers.Instance.LonelyHexColor + "<b>Solitude gained in round: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
+			fbText += "\n" + Helpers.Instance.LonelyHexColor + "<b>Solitude gained: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
 		if (bird.friendBoost > 0)
 			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom interactions: " + bird.friendBoost.ToString("+#;-#;0") + " friendship</color>";
 		if (bird.friendBoost < 0)
