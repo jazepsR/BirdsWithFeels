@@ -54,7 +54,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	List<float> totalPercentages;
 	public Image unlockedRoad;
 	bool useline;
-	int trialID;
+	public int trialID;
 	//[HideInInspector]
 	public TimedEventControl timedEventTrigger;
 	// Use this for initialization
@@ -62,6 +62,10 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	{
 		length = battles.Count;
 		offset = transform.position- transform.parent.position;
+		if (isTrial)
+			trialID = ID;
+		else
+			trialID = GetTargetID(this);
 		LoadSaveData();
 		if (!Var.StartedNormally)
 			available = true;
@@ -90,7 +94,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		{
 			useline = false;
 		}
-		trialID = GetTargetID(this);
+		
 	}
 	int GetTargetID(MapIcon data)
 	{
@@ -299,7 +303,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			{
 				targIDs.Add(targ.ID);
 			}
-			mySaveData = new MapSaveData(completed, available, ID, targIDs,type, trialID);
+			mySaveData = new MapSaveData(completed, available, ID, targIDs,type, trialID,levelName);
 			Var.mapSaveData.Add(mySaveData);
 		}
 		else
@@ -339,7 +343,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		}
 		SetupPieGraph();
 		active = true;
-		GuiMap.Instance.Clear();
+		foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+			map.Clear();
 		MapControler.Instance.SelectedIcon = null;
 		MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
 		MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero;
@@ -361,7 +366,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		MapControler.Instance.SelectionText.text = ToString();
 		MapControler.Instance.SelectionDescription.text = levelDescription;
 		AudioControler.Instance.ClickSound();
-		GuiMap.Instance.CreateMap(CreateMap());
+		FindObjectOfType<GuiMap>().CreateMap(CreateMap());
 		LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack);
 		MapControler.Instance.SelectedIcon = this;
 		if (available)

@@ -82,13 +82,14 @@ public class Settings
 [Serializable]
 public class MapSaveData
 {
+	public string areaName;
 	public int ID;
 	public int trialID;
 	public List<int> targets;
 	public bool completed;
 	public bool available;
 	public Var.Em emotion;
-	public MapSaveData(bool completed, bool available, int ID, List<int> targets, Var.Em emotion, int trialID)
+	public MapSaveData(bool completed, bool available, int ID, List<int> targets, Var.Em emotion, int trialID, string areaName)
 	{ 
 		this.completed = completed;
 		this.available = available;
@@ -96,5 +97,6 @@ public class MapSaveData
 		this.targets = targets;
 		this.emotion = emotion;
 		this.trialID = trialID;
+		this.areaName = areaName;
 	}
 }

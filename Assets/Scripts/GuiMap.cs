@@ -6,17 +6,19 @@ using UnityEngine.UI;
 public class GuiMap : MonoBehaviour {
 	public bool inMap = false;
 	public GameObject mapIcon;
-	public static GuiMap Instance { get; private set; }
+	//public static GuiMap Instance { get; private set; }
 	public Transform start;
 	public Transform finish;
 	public GameObject cup;
 	public Transform nodes;
 	public Text nextAreaInfo;
+	public Image nextAdventureIcon;
+	public GameObject trialObj;
 	float dist;
 	int count = 0;
 	void Awake()
 	{
-		Instance = this;
+		//Instance = this;
 		if (inMap)
 			return;
 		if (Var.isTutorial)
@@ -53,7 +55,7 @@ public class GuiMap : MonoBehaviour {
 				Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
 			}
 			
-			string nextAreasText = "Next Adventure:";
+			string nextAreasText = "";
 			/*foreach (MapSaveData data in Var.mapSaveData)
 			{
 				if (data.ID == Var.currentStageID)
@@ -74,25 +76,35 @@ public class GuiMap : MonoBehaviour {
 					}
 				}
 			}*/
-			foreach (MapSaveData data in Var.mapSaveData)
-			{
-				if (data.ID == Var.currentStageID)
-				{					
-					foreach (MapSaveData targ in Var.mapSaveData)
+			if (inMap)
+				return;
+				foreach (MapSaveData data in Var.mapSaveData)
+				{
+					if (data.ID == Var.currentStageID)
 					{
-						if (targ.ID == data.trialID)
+						if (data.trialID == data.ID)
 						{
-							
-							nextAreasText = "Next trial:\n"+Helpers.Instance.GetHexColor(targ.emotion) + targ.emotion.ToString() + "</color>";
+							trialObj.SetActive(false);
+						}
+						else
+						{
+
+							foreach (MapSaveData targ in Var.mapSaveData)
+							{
+								if (targ.ID == data.trialID)
+								{
+									nextAdventureIcon.color = Helpers.Instance.GetEmotionColor(targ.emotion);
+									nextAreaInfo.text = targ.areaName;
+									nextAdventureIcon.GetComponent<ShowTooltip>().tooltipText = targ.areaName + " is the next big challenge. Main emotion: " + targ.emotion.ToString();
+									break;
+								}
+							}
+
 						}
 					}
-					
 				}
-			}
-			if (nextAreasText == "Next Adventure:")
-				nextAreaInfo.text = "";
-			else
-				nextAreaInfo.text = nextAreasText;
+					
+			
 		}
 	}
 

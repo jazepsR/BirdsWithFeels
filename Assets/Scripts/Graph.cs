@@ -33,7 +33,7 @@ public class Graph : MonoBehaviour {
 		GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
 		GameObject tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait,true,bird);
 		if (!isSmall)
-		{
+		{		
 			GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();
 			Vector3 secondPos = new Vector3(-bird.friendliness, bird.confidence, 0);
 			Var.Em emotion = bird.emotion;

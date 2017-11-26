@@ -88,7 +88,8 @@ public class GuiContoler : MonoBehaviour {
 	int maxGraph = 3;
 	public GameObject boss;
 	Transform lastSpeechPos = null;
-    public Animator graphAnime;
+	public Animator graphAnime;
+	public GameObject minimap;
 	void Awake()
 	{
 		if (!Var.StartedNormally)
@@ -119,7 +120,8 @@ public class GuiContoler : MonoBehaviour {
 		   
 		if (!inMap)
 		{
-			GuiMap.Instance.CreateMap(Var.map);            
+			foreach(GuiMap map in FindObjectsOfType<GuiMap>())
+				map.CreateMap(Var.map);            
 			setMapLocation(0);
 			LeanTween.delayedCall(0.05f,tryDialog);
 			boss.SetActive(Var.isBoss);
@@ -467,9 +469,11 @@ public class GuiContoler : MonoBehaviour {
 	{
 		AudioControler.Instance.PlayPaperSound();
 		battlePanel.SetActive(true);
+		minimap.SetActive(true);
 		if (!Reset())
 			return;
-		LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
+		graphAnime.SetBool("open", false);
+		//LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
 		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
 			Destroy(child.gameObject);
@@ -480,7 +484,8 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CloseBirdStats()
 	{
-        graphAnime.SetBool("open", false);
+		minimap.SetActive(true);
+		graphAnime.SetBool("open", false);
 		//graph.SetActive(false);
 //		LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack); //seb
 		//battlePanel.SetActive(true);
@@ -498,22 +503,23 @@ public class GuiContoler : MonoBehaviour {
 		}
 	}
 	public void CreateGraph(object o)
-	{
+	{		
 		Helpers.Instance.HideTooltip();
-		battlePanel.SetActive(false);       
+		battlePanel.SetActive(false);
+		minimap.SetActive(false);   
 		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
 			Destroy(child.gameObject);
 		}
 		int birdNum = (int)o;
-		if (birdNum == -1)
-			currentGraph = 3;
-		else
-			currentGraph = birdNum;
+		
 		Graph.Instance.portraits = new List<GameObject>();
 		List<Bird> BirdsToGraph;
 		if (birdNum == -1)
+		{
 			BirdsToGraph = Var.activeBirds;
+			ProgressGUI.Instance.ConditionsBG.transform.parent.gameObject.SetActive(false);
+		}
 		else
 		{
 			BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
@@ -526,7 +532,10 @@ public class GuiContoler : MonoBehaviour {
 			}
 		}
 
-
+		if (birdNum == -1)
+			currentGraph = 3;
+		else
+			currentGraph = birdNum;
 
 		foreach (Bird bird in BirdsToGraph)
 		{
@@ -696,6 +705,7 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void InitiateGraph(Bird bird)
 	{
+		minimap.SetActive(false);
 		int index = -1;
 		for(int i= 0; i < Var.activeBirds.Count; i++)
 		{
@@ -705,12 +715,12 @@ public class GuiContoler : MonoBehaviour {
 				break;
 			}
 		}
+		LeanTween.delayedCall(0.7f, () => CreateGraph(index));
 		ProgressGUI.Instance.PortraitClick(bird);
 		ProgressGUI.Instance.skillArea.SetActive(false);
 		//LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
-        graphAnime.SetBool("open", true); 
-			
-			}
+		graphAnime.SetBool("open", true);
+	}
 	public void CreateBattleReport() {
 		clearSmallGraph();
 		feedbackText.gameObject.SetActive(true);
@@ -745,7 +755,7 @@ public class GuiContoler : MonoBehaviour {
 			winDetails.text = winDetString;
 		if (Var.isTutorial)
 			winDetails.text = "";
-		}
+	}
 
 
 

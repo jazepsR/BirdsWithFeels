@@ -34,6 +34,9 @@ public class ProgressGUI : MonoBehaviour {
 	Color skillDefaultCol;
 	public GameObject levelArea;
 	public Text emotionValuesText;
+	public GameObject noAbilities;
+	public GameObject abilityHeading;
+	public Image ConditionsBG;
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -53,7 +56,18 @@ public class ProgressGUI : MonoBehaviour {
 	void UpdateLevelAreas(Bird bird, bool isFinal =false)
 	{
 		bool HasSuper = (bird.level > 1);
+		bool CanLevel = false;
 		levelStuffText.text = "<b>" + bird.charName+"</b> must grow emotionally to gain new abilites";
+		if(bird.levelList.Count ==0)
+		{
+			noAbilities.SetActive(true);
+			abilityHeading.SetActive(false);
+		}
+		else
+		{
+			noAbilities.SetActive(false);
+			abilityHeading.SetActive(true);
+		}
 		foreach (LevelArea lvl in levelAreas)
 		{
 			lvl.myImage.color = lvl.defaultColor;
@@ -84,11 +98,22 @@ public class ProgressGUI : MonoBehaviour {
 				lvl.gameObject.SetActive(false);
 			if (lvl.gameObject.activeSelf && bird.emotion == lvl.emotion && Helpers.Instance.GetEmotionValue(bird, lvl.emotion) >= emotionRequirement)
 			{
+				CanLevel = true;
+				lvl.gameObject.GetComponent<Animator>().SetBool("active", true);
+				ConditionsBG.color = Helpers.Instance.GetSoftEmotionColor(lvl.emotion);
 				levelStuffText.text = "<b>" + Helpers.Instance.GetLevelTitle(lvl.level) +
 					"</b> available!<b>\nRequirements:</b>\n" + Helpers.Instance.GetLVLRequirements(lvl.level);
 			}
+			else
+			{
+				lvl.gameObject.GetComponent<Animator>().SetBool("active", false);
+			}
+
+			
 
 		}
+		if (!CanLevel)
+			ConditionsBG.transform.parent.gameObject.SetActive(false);
 		skillBG.color = skillDefaultCol;
 	}
 	
