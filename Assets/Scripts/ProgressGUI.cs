@@ -112,8 +112,7 @@ public class ProgressGUI : MonoBehaviour {
 			
 
 		}
-		if (!CanLevel)
-			ConditionsBG.transform.parent.gameObject.SetActive(false);
+		ConditionsBG.transform.parent.gameObject.SetActive(CanLevel);
 		skillBG.color = skillDefaultCol;
 	}
 	

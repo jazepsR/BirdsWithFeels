@@ -46,7 +46,8 @@ public class LevelTutorial : MonoBehaviour {
 		if (Var.currentStageID != 1)
 			return;
 		if (shouldShowFirstBattleDialog && !GuiContoler.Instance.speechBubbleObj.activeSelf)
-		{			
+		{
+			Var.gameSettings.shownLevelTutorial = true;
 			GraphHighlight.SetActive(true);
 			Helpers.Instance.GetBirdFromEnum(EventScript.Character.Rebecca).Speak("Leader, open up the emotional grid and I'll explain!");
 			try
@@ -89,7 +90,6 @@ public class LevelTutorial : MonoBehaviour {
 		{
 			shouldShowSecondBattleDialog = false;
 			DialogueControl.Instance.CreateParticularDialog(secondBattleDialog);
-			Var.gameSettings.shownLevelTutorial = true;
 			//shouldShowSecondBattleDialog = true;
 		}
 	}

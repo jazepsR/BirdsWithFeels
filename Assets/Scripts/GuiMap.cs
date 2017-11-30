@@ -23,16 +23,18 @@ public class GuiMap : MonoBehaviour {
 			return;
 		if (Var.isTutorial)
 		{
-			for (int i = 0; i < 6; i++)
+			if (Var.map.Count == 0)
 			{
-				MapBattleData BattleStuff = new MapBattleData();
-				BattleStuff.emotionPercentage.Add(1);
-				BattleStuff.emotionType.Add(Var.Em.Neutral);
-				Var.map.Add(new BattleData(Var.Em.Neutral, false, new List<Var.Em>(), BattleStuff));
+				for (int i = 0; i < 6; i++)
+				{
+					MapBattleData BattleStuff = new MapBattleData();
+					BattleStuff.emotionPercentage.Add(1);
+					BattleStuff.emotionType.Add(Var.Em.Neutral);
+					Var.map.Add(new BattleData(Var.Em.Neutral, false, new List<Var.Em>(), BattleStuff));
+				}
+				Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
+				nextAreaInfo.text = "";
 			}
-
-			Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
-			nextAreaInfo.text = "";
 		}
 		else
 		{
@@ -54,28 +56,6 @@ public class GuiMap : MonoBehaviour {
 				}
 				Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
 			}
-			
-			string nextAreasText = "";
-			/*foreach (MapSaveData data in Var.mapSaveData)
-			{
-				if (data.ID == Var.currentStageID)
-				{
-					foreach (int id in data.targets)
-					{
-						foreach (MapSaveData targ in Var.mapSaveData)
-						{
-							if (targ.ID == id)
-							{
-								if (nextAreasText == "Next Adventure:")
-									nextAreasText += "\n";
-								else
-									nextAreasText += " or\n";
-								nextAreasText += Helpers.Instance.GetHexColor(targ.emotion) + targ.emotion.ToString() + "</color>";
-							}
-						}
-					}
-				}
-			}*/
 			if (inMap)
 				return;
 				foreach (MapSaveData data in Var.mapSaveData)

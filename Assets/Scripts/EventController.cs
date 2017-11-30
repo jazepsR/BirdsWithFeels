@@ -44,16 +44,12 @@ public class EventController : MonoBehaviour {
 		{
 
 		}
-		LeanTween.delayedCall(0.1f, TestEvent);
+		if (testEvent != null)
+			CreateEvent(testEvent);
 		nextEvent = null;
 	}
 
 
-	void TestEvent()
-	{
-		if (testEvent != null)
-			CreateEvent(testEvent);
-	}
 	public void ContinueBtn()
 	{
 		
@@ -94,7 +90,7 @@ public class EventController : MonoBehaviour {
                 }
                 else
                 {
-                    if (GuiContoler.Instance.graph.transform.localPosition.x < -1000)
+                    if (GuiContoler.Instance.graph.transform.localPosition.y < -500)
                     {
                         GuiContoler.Instance.battlePanel.SetActive(true);
                         DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);

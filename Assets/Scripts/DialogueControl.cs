@@ -17,8 +17,9 @@ public class DialogueControl : MonoBehaviour {
 	[Range(0f, 1f)]
 	public float relationshipDialogueFrequency = 1f;
 	List<Bird> speakers;
+	Dialogue afterEventDialog= null;
 	// Use this for initialization
-	public void GetRelationshipDialogs()
+	/*public void GetRelationshipDialogs()
 	{
 		relationshipDialogs = new List<Dialogue>();
 		foreach(Bird bird in Var.availableBirds)
@@ -27,7 +28,7 @@ public class DialogueControl : MonoBehaviour {
 				relationshipDialogs.AddRange(bird.relationshipDialogs);
 		}
 
-	}
+	}*/
 	void Awake() {
 		Instance = this;
 		try
@@ -100,9 +101,26 @@ public class DialogueControl : MonoBehaviour {
 			}            
 		}
 	}
+
+	void Update()
+	{
+		if(afterEventDialog !=null)
+		{
+			if(!EventController.Instance.eventObject.activeSelf)
+			{
+				CreateDialogue(afterEventDialog);
+				afterEventDialog = null;
+			}
+		}
+	}
 	public void CreateDialogue(Dialogue dialogue)
 	{
-		
+		if(EventController.Instance.eventObject.activeSelf)
+		{
+			afterEventDialog = dialogue;
+			return;
+		}
+
 		if (!dialogue.canShowMultipleTimes)
 		{           
 			Var.shownDialogs.Add(dialogue.dialogueParts[0].text);

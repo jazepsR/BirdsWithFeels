@@ -169,7 +169,9 @@ public class GameLogic : MonoBehaviour {
          int enemyroll = Random.Range(0, DiceSize);*/
         if (Var.isTutorial)
         {
-            if (winBonus == 0.5f && Tutorial.Instance.CurrentPos == 1)
+			if (Tutorial.Instance.CurrentPos == 2)
+				Tutorial.Instance.shownMapInfos[2] = true;
+			if (winBonus == 0.5f && Tutorial.Instance.CurrentPos == 1)
             {
                 winBonus = 0.0f;
             }

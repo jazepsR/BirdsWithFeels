@@ -42,18 +42,6 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		Color col = Helpers.Instance.GetEmotionColor(emotion);
-		//myImage.color = new Color(col.r,col.g,col.b,0.5f);
-		//Debug.Log("enterd!");
-		/*ProgressGUI.Instance.skillBG.color = Helpers.Instance.GetSoftEmotionColor(emotion);
-		ProgressGUI.Instance.skillArea.SetActive(true);        
-		LevelNameHolder.text = "<b>" +Helpers.Instance.GetLevelTitle(level) + "</b>";
-		if (myImage.sprite.Equals(Completed))
-			LevelNameHolder.text += " - Completed";
-		SkillTextHolder.text = "<b>Ability</b>\n" +Helpers.Instance.GetLVLInfoText(level);
-		ConditionTextHolder.text = "<b>Requirements</b>\n" + Helpers.Instance.GetLVLRequirements(level);
-		LoreTextHolder.text = LoreText;
-		SkillImageHolder.sprite = Helpers.Instance.GetSkillPicture(level);
-		SkillImageHolder.gameObject.SetActive(true);*/
 		AudioControler.Instance.PlaySound(AudioControler.Instance.expand);
 	}
 	public void OnPointerExit(PointerEventData eventData)
