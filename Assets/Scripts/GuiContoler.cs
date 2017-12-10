@@ -480,7 +480,7 @@ public class GuiContoler : MonoBehaviour {
 		}
 		closeReportBtn.SetActive(false);
 		HideSmallGraph.gameObject.SetActive(true);
-		
+		Var.activeBirds[0].showText();
 	}
 	public void CloseBirdStats()
 	{
@@ -493,6 +493,8 @@ public class GuiContoler : MonoBehaviour {
 		{
 			Destroy(child.gameObject);
 		}
+
+		LeanTween.delayedCall(0.2f,()=> selectedBird.showText());
 	}
 
 	public void clearSmallGraph()

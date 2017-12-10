@@ -604,7 +604,7 @@ public class Helpers : MonoBehaviour {
 			case Levels.type.Friend2:
 				return "Be close to a friendly bird and gain + 5 or more social in one turn"; //?
 			case Levels.type.Lonely1:
-				return "Be alone (no teammates all four directions or diagonally). At the same time, win a fight";
+				return "Be alone (no teammates in this bird's row or column). At the same time, win a fight";
 			case Levels.type.Lonely2:
 				return "The bird is not used for two adventures in a row. Then, spend a fight all alone";
 			case Levels.type.Scared1:

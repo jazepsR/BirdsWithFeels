@@ -827,13 +827,18 @@ public class Bird : MonoBehaviour
 		
 
 	}
-	void ApplyInfluence()
+	public Vector2 ApplyInfluence(bool shouldApply = true)
 	{
+
+		//x is confidence, y is friendly
+		Vector2 toReturn = new Vector2(0, 0);
 		if (isInfluenced)
 		{
 			if (friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos > 0)
 			{
-				levelFriendBoos += 2;
+				if(shouldApply)
+					levelFriendBoos += 2;
+				toReturn.y = 2;
 				print(charName + " got influenced to friendly");
 			}
 			else
@@ -841,12 +846,15 @@ public class Bird : MonoBehaviour
 				if (friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos < 0)
 				{
 					levelFriendBoos -= 2;
+					toReturn.y = -2;
 					print(charName + " got influenced to lonely");
 				}
 			}
 			if (battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos > 0)
 			{
-				levelConfBoos += 2;
+				if (shouldApply)
+					levelConfBoos += 2;
+				toReturn.x = 2;
 				print(charName + " got influenced to confident");
 
 			}
@@ -854,11 +862,14 @@ public class Bird : MonoBehaviour
 			{
 				if (battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos < 0)
 				{
-					levelConfBoos -= 2;
+					if (shouldApply)
+						levelConfBoos -= 2;
+					toReturn.x = -2;
 					print(charName + " got influenced to scared");
 				}
 			}
 		}
+		return toReturn;
 	}
 	public void AddRoundBonuses(bool doFightStuff= true)
 	{

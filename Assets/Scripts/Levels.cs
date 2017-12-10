@@ -556,7 +556,7 @@ public class Levels : MonoBehaviour {
 			{
 				return "First " + Helpers.Instance.LonelyHexColor + "Lonely</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Lonely1);
 			}
-			if ( Helpers.Instance.GetAdjacentBirds(myBird) != null && Helpers.Instance.GetAdjacentBirds(myBird).Count==0 && myBird.wonLastBattle>=1 && !Helpers.Instance.ListContainsLevel(type.Lonely1, myBird.levelList))
+			if ( Helpers.Instance.GetAdjacentBirds(myBird) != null && Helpers.Instance.GetAdjacentBirds(myBird).Count==0 && GetRow().Count==0 && GetColumn().Count == 0 && myBird.wonLastBattle>=1 && !Helpers.Instance.ListContainsLevel(type.Lonely1, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Lonely1, Var.Em.Lonely, Var.lvlSprites[3]), "Lonely 1");
 				return "did LVL";
@@ -590,8 +590,8 @@ public class Levels : MonoBehaviour {
 			{
 				return "First " + Helpers.Instance.FriendlyHexColor + "Friendly</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Friend1);
 			}
-			int gain = myBird.friendBoost + myBird.groundFriendBoos + myBird.levelFriendBoos + myBird.wizardFrienBoos;
-			if (gain>= 3  && myBird.wonLastBattle >=1 && !Helpers.Instance.ListContainsLevel(type.Friend1, myBird.levelList))
+			int gain = myBird.friendBoost + myBird.groundFriendBoos + myBird.levelFriendBoos + myBird.wizardFrienBoos + (int)myBird.ApplyInfluence(false).y; ;
+			if (gain>= 4  && myBird.wonLastBattle >=1 && !Helpers.Instance.ListContainsLevel(type.Friend1, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[0]),"Friendly 1");
 				return "did LVL";
@@ -622,7 +622,7 @@ public class Levels : MonoBehaviour {
 					}
 				}
 			}
-			int gain = myBird.friendBoost + myBird.groundFriendBoos + myBird.levelFriendBoos + myBird.wizardFrienBoos;
+			int gain = myBird.friendBoost + myBird.groundFriendBoos + myBird.levelFriendBoos + myBird.wizardFrienBoos + (int)myBird.ApplyInfluence(false).y;
 			if (closeFriend && gain >= 5 && !Helpers.Instance.ListContainsLevel(type.Friend2, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Friend1, Var.Em.Friendly, Var.lvlSprites[4]),"Friendly 2");
