@@ -106,11 +106,23 @@ public class levelPopupScript : MonoBehaviour {
 		thirdPart.SetActive(false);
 		activeBird.hasNewLevel = false;
 		LevelPopup.SetActive(false);
-		GuiContoler.Instance.CreateGraph(birdNum);
+		try
+		{
+			GuiContoler.Instance.CreateGraph(birdNum);
+		}
+		catch
+		{
+			Debug.LogError(" error in createGraph at levelPopupScript");
+		}
 		if (!Var.gameSettings.shownFirstLevelUp)
 		{
 			DialogueControl.Instance.CreateParticularDialog(firstLevelUpDialog);
 			Var.gameSettings.shownFirstLevelUp = true;
+		}else
+		{
+			string[] texts = Helpers.Instance.GetLevelUpDialogs(data.type, Helpers.Instance.GetCharEnum(activeBird)).Split('&');
+			foreach (string text in texts)
+				GuiContoler.Instance.ShowSpeechBubble(Tutorial.Instance.portraitPoint, text);
 		}
 	}
 	// Update is called once per frame

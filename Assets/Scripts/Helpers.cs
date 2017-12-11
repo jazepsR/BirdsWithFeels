@@ -668,6 +668,133 @@ public class Helpers : MonoBehaviour {
 			return false;
 		}
 	}
+
+
+	public string GetLevelUpDialogs(Levels.type type, EventScript.Character character)
+	{
+		switch (character)
+		{
+			case EventScript.Character.Terry:
+				switch (type)
+				{
+					case Levels.type.Friend1:
+						return "Wow, I’m so glad I had you guys next to me!&Let me know if you get injured, and I’ll do what I can to help you!";
+					case Levels.type.Friend2:
+						return "You guys are so great!&Once we’re done with these vultures, I know just the thing to make you feel better if you need it!";
+					case Levels.type.Lonely1:
+						return "Why were you guys so far away from me?&If you stand a bit closer, I know how to boost your emotions now!";
+					case Levels.type.Lonely2:
+						return "I liked spending some time alone.&If I concentrate for a bit, I can call a do-over when fighting!";
+					case Levels.type.Brave1:
+						return "Did you see that? I took down two of them!&I’ll protect you if something happens!";
+					case Levels.type.Brave2:
+						return "I’m on a roll! If I get hit, I’ll just shrug it off!";
+					case Levels.type.Scared1:
+						return "I know losing isn’t all bad, but it still hurt.&I’ve figured out how to weaken everybirdy’s combat strength now.";
+					case Levels.type.Scared2:
+						return "I practiced hiding while resting. That the vultures won’t even see me coming!";
+					default:
+						return "";
+				}
+			case EventScript.Character.Rebecca:
+				switch (type)
+				{
+					case Levels.type.Friend1:
+						return "I’m so glad we’re all friends. Come to me if you’re injured and I’ll help you!";
+					case Levels.type.Friend2:
+						return "Hanging out with you guys is the best!&Once we get a moment of peace, I can fully heal one of you.";
+					case Levels.type.Lonely1:
+						return "Please, don’t leave me alone again. I don’t like it.&If you stand closer, I can enhance your emotional strength.";
+					case Levels.type.Lonely2:
+						return "I’ve never experience this deep kind of loneliness before…&"+
+							"It’s strange, but I like it. I can use the negotiations I’ve practiced to let us redo a fight!";
+					case Levels.type.Brave1:
+						return "Wow, I never knew I had that in me! I feel like I can take on all the vultures in the world!&I’ll shield you guys if something happens!";
+					case Levels.type.Brave2:
+						return "I can’t believe I won against all those vultures!&Don’t worry about me losing health, I’ll just sacrifice some confidence instead!";
+					case Levels.type.Scared1:
+						return "Why didn’t you help me? I thought we were friends…&I know just how to return the favor.";
+					case Levels.type.Scared2:
+						return "That was a nice rest, and the vultures didn’t even notice me!&I know how to use that in a fight now!";
+					default:
+						return "";
+				}
+
+			case EventScript.Character.Alexander:
+				switch (type)
+				{
+					case Levels.type.Friend1:
+						return "Now this is a proper battle strategy!&I remember the first aid training I’ve had, let me know if you need it.";
+					case Levels.type.Friend2:
+						return "Once we’re through these fights, I can use my medical training to fully heal one of you.";
+					case Levels.type.Lonely1:
+						return "I suppose being alone makes me stronger in a way, too.&I know a strategy to enhance your emotions, just stand in an orderly line!";
+					case Levels.type.Lonely2:
+						return "I spent some time alone and practiced my military negotiations skill..&..so that I can give us a second chance at a fight!";
+					case Levels.type.Brave1:
+						return "Is everybirdy okay? Don’t worry, I’ll protect you if a vulture is headed your way!";
+					case Levels.type.Brave2:
+						return "Now this is true confidence! If I get hit I’ll just shake it off!";
+					case Levels.type.Scared1:
+						return "We can’t win them all, I suppose. That hurt a bit, though.&Reminds me of a backstabbing technique I learned long ago.";
+					case Levels.type.Scared2:
+						return "In the military, we practiced stealth and undercover operations.&I can use those lessons to our advantage!";
+					default:
+						return "";
+				}
+
+			case EventScript.Character.Sophie:
+				switch (type)
+				{
+					case Levels.type.Friend1:
+						return "I’ve never been surrounded by this many friends before.&I’ve read a bit about medicine, let me know if you guys get hurt, okay?";
+					case Levels.type.Friend2:
+						return "Being this close to you guys made me recall the stuff I’ve read about advanced healing!&I can help one of you once we get through these fights.";
+					case Levels.type.Lonely1:
+						return "I like being alone, and now I know just the thing to push everybirdy’s emotions even further!";
+					case Levels.type.Lonely2:
+						return "During my time alone, I researched some strategy and if I rest now, I can give you guys a second chance at fighting.";
+					case Levels.type.Brave1:
+						return "I never knew I could do that! I know how to protect you guys now, if you need it.";
+					case Levels.type.Brave2:
+						return "I can’t believe I keep winning these fights!&I’ve learned how to sacrifice some confidence instead of health now.";
+					case Levels.type.Scared1:
+						return "I’ve read a bit about strategy and I don’t think that was the best move…&I know how to weaken those standing diagonally to me, let me show you.";
+					case Levels.type.Scared2:
+						return "I never realized how nice resting can be.&I’ve figured out how to hide myself so that the vultures can pass right by me!";
+					default:
+						return "";
+				}
+			case EventScript.Character.Kim:
+				switch (type)
+				{
+					case Levels.type.Friend1:
+						return "I feel safe when you guys are around, and I hope I can help.&I think I can heal you if you get injured.";
+					case Levels.type.Friend2:
+						return "It’s so nice to have friends.&I can heal you later, if one of you needs it.";
+					case Levels.type.Lonely1:
+						return "It’s okay to be lonely, but if we all stand together, I can boost your emotions.";
+					case Levels.type.Lonely2:
+						return "I spent some time alone thinking about our adventure so far.&I’ve figured out a way to let us retry a fight if things go badly!";
+					case Levels.type.Brave1:
+						return "Oh my beak, I fought two of them and won!&I’ll shield you if a vulture is coming for you!";
+					case Levels.type.Brave2:
+						return "It’s nice to get some time alone every now and again.&I can give us a second attempt at fighting, if you think we need it.";
+					case Levels.type.Scared1:
+						return "I thought we were a team… I thought we were supposed to look after each other.&Well, I know how to backstab too.";
+					case Levels.type.Scared2:
+						return "All that resting gave me some time to prepare a camouflage.&The vultures won’t see me when they pass!";
+					default:
+						return "";
+				}
+			default:
+				return "";
+		}
+
+
+	}
+
+
 	public bool ListContainsEmotion(Var.Em emotion, List<LevelData> list)
 	{
 		if (list != null)

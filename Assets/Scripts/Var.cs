@@ -71,7 +71,7 @@ public static class Var {
 [Serializable]
 public class Settings
 {
-   public bool shownFirstLevelUp = false;
+   public bool shownFirstLevelUp = true;
    public bool shownBattlePlanningTutorial = false;
    public bool shownLevelTutorial = false;
    public bool shownMapTutorial = false;
