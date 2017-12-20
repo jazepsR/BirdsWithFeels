@@ -21,7 +21,7 @@ public class feedBack : MonoBehaviour {
 	public int feedbackVal;
 	GameObject line;
 	GameObject lineObj = null;
-	float factor = 0.35f;
+	//float factor = 0.35f;
 	bool canFight = false;
 	// Use this for initialization
 	void Awake () {
@@ -391,7 +391,7 @@ public class feedBack : MonoBehaviour {
 		Color textCol = Color.Lerp(Color.red, Color.green, colorIndex);
 		LeanTween.color(feedBackText.gameObject, textCol, 0.2f);
 		LeanTween.scale(feedBackText.gameObject, Vector3.one, 0.3f).setEase(LeanTweenType.easeOutBack);
-		feedbackVal = (int)(Mathf.Ceil(value * 100));
+		feedbackVal = Mathf.RoundToInt(value * 10)*10;
 		//if (feedbackVal < 50)
 		 //   Tutorial.Instance.jiggleGraph();
 		feedBackText.text = feedbackVal.ToString("0");

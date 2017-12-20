@@ -112,7 +112,7 @@ public class levelPopupScript : MonoBehaviour {
 		}
 		catch
 		{
-			Debug.LogError(" error in createGraph at levelPopupScript");
+			Debug.LogError(" error in createGraph at levelPopupScript. BirdNum: " + birdNum);
 		}
 		if (!Var.gameSettings.shownFirstLevelUp)
 		{

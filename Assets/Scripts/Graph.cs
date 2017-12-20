@@ -20,7 +20,7 @@ public class Graph : MonoBehaviour {
 	{
 		if(!isSmall)
 			Instance = this;
-		Sprite sp = Resources.Load<Sprite>("Icons/NewIcons_1");
+		//Sprite sp = Resources.Load<Sprite>("Icons/NewIcons_1");
 		multiplier = graphSize / 15;
 	}
 
@@ -30,7 +30,7 @@ public class Graph : MonoBehaviour {
             return;
 		if (bird.health <= 0)
 			return;
-		GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
+		//GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
 		GameObject tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait,true,bird);
 		if (!isSmall)
 		{		

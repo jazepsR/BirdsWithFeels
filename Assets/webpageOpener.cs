@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class webpageOpener : MonoBehaviour {
 
-    public string webpageLink;
+	public string webpageLink;
 
 	// Use this for initialization
 	void Start () {
@@ -16,8 +16,8 @@ public class webpageOpener : MonoBehaviour {
 		
 	}
 
-    public void OpenWebpage()
-    {
-        Application.OpenURL(webpageLink);
-    }
+	public void OpenWebpage()
+	{
+		Application.OpenURL(webpageLink);
+	}
 }

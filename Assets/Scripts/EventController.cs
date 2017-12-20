@@ -23,22 +23,39 @@ public class EventController : MonoBehaviour {
 	EventScript currentEvent;
 	GameObject currentPortrait;
 	Bird currentBird;
-	public List<Transform> areaDialogues;    
+	public List<Transform> areaEvents;
+	public List<int> areaStartPoints;
 	List<GameObject> portraits;
 	List<Color> colors;
 	EventScript nextEvent = null;
 	public ShowTooltip mouseOver;
+	[HideInInspector]
+	public List<EventScript> eventsToShow;
 	//List<string> texts;    
 	int currentText = 0;
 	// Use this for initialization
 	void Awake () {
+		eventsToShow = new List<EventScript>();
 		Instance = this;
 	}
 	void Start()
 	{
 		try
 		{
-			events.AddRange(areaDialogues[Var.currentBG].GetComponentsInChildren<EventScript>());
+			if (!inMap)
+			{
+				int area = -1;
+				foreach (int id in areaStartPoints)
+				{
+					if (Var.currentStageID < id)
+						break;
+					else
+						area++;
+				}
+
+
+				events.AddRange(areaEvents[area].GetComponentsInChildren<EventScript>());
+			}
 		}
 		catch
 		{
@@ -79,24 +96,31 @@ public class EventController : MonoBehaviour {
 				return;
 			}
 
+			if (eventsToShow.Count>0)
+			{
+				EventScript nextEvent = eventsToShow[0];
+				eventsToShow.RemoveAt(0);
+				currentEvent = null;
+				CreateEvent(nextEvent);
 
-            if (currentEvent.afterEventDialog != null)
-                DialogueControl.Instance.CreateParticularDialog(currentEvent.afterEventDialog);
-            else
-            {
-                if (inMap)
-                {
-                    DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
-                }
-                else
-                {
-                    if (GuiContoler.Instance.graph.transform.localPosition.y < -500)
-                    {
-                        GuiContoler.Instance.battlePanel.SetActive(true);
-                        DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
-                    }
-                }
-            }
+			}
+			else if (currentEvent.afterEventDialog != null)
+				DialogueControl.Instance.CreateParticularDialog(currentEvent.afterEventDialog);
+			else
+			{
+				if (inMap)
+				{
+					DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
+				}
+				else
+				{
+					if (GuiContoler.Instance.graph.transform.localPosition.y < -500)
+					{
+						GuiContoler.Instance.battlePanel.SetActive(true);
+						DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+					}
+				}
+			}
 			nextEvent = null;
 		}
 		
@@ -167,13 +191,19 @@ public class EventController : MonoBehaviour {
 		{
 			Var.shownEvents.Add(eventData.heading);
 		}
-		
+		if (currentEvent != null)
+		{
+			eventsToShow.Add(eventData);
+			return;
+		}
 		choiceList.gameObject.SetActive(false);
 		currentText = 0;
 		if (!inMap)
 		{
 			GuiContoler.Instance.battlePanel.SetActive(false);
 		}
+		
+
 		currentEvent = eventData;
 		currentEvent.parts = new List<EventPart>();
 		currentEvent.parts.AddRange(eventData.transform.GetComponentsInChildren<EventPart>());

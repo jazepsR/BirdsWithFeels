@@ -225,7 +225,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			{
 				birdToAdd.gameObject.SetActive(true);
 				Var.availableBirds.Add(birdToAdd);
-				EventController.Instance.CreateEvent(birdToAddScript);
+				for(int i=0;i<2;i++)
+					EventController.Instance.CreateEvent(birdToAddScript);
 			}
 
 
@@ -398,7 +399,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		}
 		if (available && MapControler.Instance.canFight)
 		{
-
+			SaveLoad.Save();
 			AudioControler.Instance.ClickSound();
 			Var.isBoss = isBoss;
 			Var.fled = false;
@@ -413,7 +414,12 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			{
 				Var.activeBirds.Add(MapControler.Instance.selectedBirds[i]);
 			}
-
+			Var.availableBirds = new List<Bird>();
+			foreach (Bird bird in FillPlayer.Instance.playerBirds)
+			{
+				if (bird.gameObject.activeSelf)
+					Var.availableBirds.Add(bird);
+			}
 			SceneManager.LoadScene("NewMain");
 		}
 

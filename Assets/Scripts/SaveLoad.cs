@@ -44,7 +44,7 @@ public class SaveLoad : MonoBehaviour
 		Var.shownDialogs = data.usedDialogs;
 		Var.shownEvents = data.usedEvents;
 		Var.gameSettings = data.gameSettings;
-		List<Bird> activeBirds = new List<Bird>();
+		//List<Bird> activeBirds = new List<Bird>();
 		List<Bird> availableBirds = new List<Bird>();
 		foreach (BirdSaveData birdData in data.availableBirds)
 		{

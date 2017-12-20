@@ -170,6 +170,7 @@ public class GuiContoler : MonoBehaviour {
 	public void QuitGame()
 	{
 		AudioControler.Instance.ClickSound();
+		SaveLoad.Save();
 		Application.Quit();
 	}
 
@@ -186,9 +187,11 @@ public class GuiContoler : MonoBehaviour {
 		foreach (Bird bird in Var.availableBirds)
 		{
 			bird.DecreaseTurnsInjured();
-			bird.AddRoundBonuses();
 			if (bird.health <= 0)
+			{
 				livingCount++;
+				bird.AddRoundBonuses();
+			}
 		}
 		if (livingCount < 3)
 		{
@@ -942,6 +945,7 @@ public class GuiContoler : MonoBehaviour {
 	public void LoadMainMenu()
 	{
 		Time.timeScale = 1.0f;
+		SaveLoad.Save();
 		AudioControler.Instance.ClickSound();
 		SceneManager.LoadScene("MainMenu");
 
@@ -965,7 +969,7 @@ public class GuiContoler : MonoBehaviour {
 					return false;
 				}
 			}
-			bird.gameObject.GetComponentInChildren<Animator>().SetBool("iswalking", false);
+			//bird.gameObject.GetComponentInChildren<Animator>().SetBool("iswalking", false);
 
 			//bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
 			//bird.gameObject.GetComponent<Animator>().SetBool("victory", false);

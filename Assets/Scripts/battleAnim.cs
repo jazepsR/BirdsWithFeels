@@ -40,7 +40,7 @@ public class battleAnim :MonoBehaviour {
 	IEnumerator DoBattles(float waitTime)
 	{
 		yield return new WaitForSeconds(waitTime);
-		float extraWait = 0.8f;
+		//float extraWait = 0.8f;
 		foreach (battleData battle in battles)
 		{
 
@@ -67,24 +67,24 @@ public class battleAnim :MonoBehaviour {
 			{
 				if (bird.gameObject.activeSelf)
 				{
-                    bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
-                    bird.TryLevelUp();					
+					bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
+					bird.TryLevelUp();					
 					GuiContoler.Instance.UpdateBirdSave(bird);
 					bird.AddRoundBonuses();
 					bird.SetEmotion();
 				}
 			}
-            yield return new WaitForSeconds(2.0f);
+			yield return new WaitForSeconds(2.0f);
 			AudioControler.Instance.setBattleVolume(0f);
-            if (Var.isBoss)
-            {
-                GuiContoler.Instance.Reset();
-            }
-            else
-            {
-                GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
-                GuiContoler.Instance.CreateBattleReport();
-            }
+			if (Var.isBoss)
+			{
+				GuiContoler.Instance.Reset();
+			}
+			else
+			{
+				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
+				GuiContoler.Instance.CreateBattleReport();
+			}
 			if(Var.isTutorial)
 			{
 				yield return new WaitForSeconds(1.0f);
@@ -109,7 +109,7 @@ public class battleAnim :MonoBehaviour {
 	{
 		   
 		//Player won
-        if (battle.result == 1)
+		if (battle.result == 1)
 		{
 			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.playerWin);            
 			battle.player.GetComponentInChildren<Animator>().SetTrigger("victory 0");            
@@ -117,7 +117,7 @@ public class battleAnim :MonoBehaviour {
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", false);
 			battle.player.battleConfBoos += Var.confWinFight;
 			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Confident);
-			battle.enemy.GetComponentInChildren<Animator>().SetBool("lose", true);
+			//battle.enemy.GetComponentInChildren<Animator>().SetBool("lose", true);
 			if (battle.player == GuiContoler.Instance.selectedBird)
 				battle.player.showText();
 			print(battle.player.charName + " won fight");
@@ -130,7 +130,7 @@ public class battleAnim :MonoBehaviour {
 			AudioControler.Instance.EnemySound();
 			battle.player.ChageHealth(-1);
 			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Scared);
-			battle.enemy.GetComponentInChildren<Animator>().SetBool("victory", true);
+			//battle.enemy.GetComponentInChildren<Animator>().SetBool("victory", true);
 			if (battle.player == GuiContoler.Instance.selectedBird)
 				battle.player.showText();
 			print(battle.player.charName + " lost fight");

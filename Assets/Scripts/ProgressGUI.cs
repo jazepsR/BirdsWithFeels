@@ -55,7 +55,7 @@ public class ProgressGUI : MonoBehaviour {
    
 	void UpdateLevelAreas(Bird bird, bool isFinal =false)
 	{
-		bool HasSuper = (bird.level > 1);
+		//bool HasSuper = (bird.level > 1);
 		bool CanLevel = false;
 		levelStuffText.text = "<b>" + bird.charName+"</b> must grow emotionally to gain new abilites";
 		if(bird.levelList.Count ==0)

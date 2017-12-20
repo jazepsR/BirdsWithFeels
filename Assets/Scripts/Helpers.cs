@@ -983,7 +983,7 @@ public class Helpers : MonoBehaviour {
 		emoParticleCtrl.emitParticles(emotion, intensity); //let number go between 0-2 for different intensities! 
 
 		var particleSys = emParticleObject.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
-		Gradient grad = new Gradient();
+		//Gradient grad = new Gradient();
 		Color col = GetEmotionColor(emotion);
 	  //  grad.SetKeys(new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
 	  //  particleSys.color = grad;

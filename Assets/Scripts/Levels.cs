@@ -462,8 +462,8 @@ public class Levels : MonoBehaviour {
 	{
 		int x = myBird.x;
 		int y = myBird.y;
-		int sizeY = Var.playerPos.GetLength(1) - 1;
-		int sizeX = Var.playerPos.GetLength(0) - 1;
+		//int sizeY = Var.playerPos.GetLength(1) - 1;
+		//int sizeX = Var.playerPos.GetLength(0) - 1;
 		List<LayoutButton> list = new List<LayoutButton>();
 		for (int i = -3; i < 4; i++)
 		{
