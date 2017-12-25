@@ -357,7 +357,7 @@ public class Bird : MonoBehaviour
 			}
 			ResetBonuses();
 		}
-		//levelList.Add(data);
+		levelList.Add(data);
 		level = levelList.Count+1;       
 		battlesToNextLVL = level * 3;
 		levelUpText = null;

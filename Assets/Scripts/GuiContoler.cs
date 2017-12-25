@@ -365,12 +365,20 @@ public class GuiContoler : MonoBehaviour {
 		}
 		if (currentGraph == 3)
 		{
-			CreateGraph(-1);
+			foreach (Transform child in graph.transform.Find("GraphParts").transform)
+			{
+				Destroy(child.gameObject);
+			}
+			LeanTween.delayedCall(0.35f,()=>CreateGraph(-1));
 			ProgressGUI.Instance.AllPortraitClick();
 		}
 		else
 		{
-			CreateGraph(currentGraph);
+			foreach (Transform child in graph.transform.Find("GraphParts").transform)
+			{
+				Destroy(child.gameObject);
+			}
+			LeanTween.delayedCall(0.35f, () => CreateGraph(currentGraph));
 			ProgressGUI.Instance.SetOnePortrait();
 			ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
 		}
@@ -1001,7 +1009,8 @@ public class GuiContoler : MonoBehaviour {
 		players = new List<Bird>();
 		moveInMap();
 		mapPos++;
-		mapBirdScript.MoveMapBird(mapPos);
+		foreach(GuiMap map in FindObjectsOfType<GuiMap>())
+			map.MoveMapBird(mapPos);
 		
 		if (Var.isTutorial)
 		{
