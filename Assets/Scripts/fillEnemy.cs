@@ -6,21 +6,22 @@ using UnityEngine.UI;
 
 public class fillEnemy : MonoBehaviour {
     public GameObject[] Enemies;
-    public enum enemyType {normal,wizard, drill };
+    public enum enemyType {normal,wizard, drill,super };
     [Header("Debug")]
     public bool isDebug = false;
     public bool hasDrillsDebug = false;
     public bool hasWizardsDebug = false;
+	List<Bird> newBirds;
     // Use this for initialization
     void Start ()
     {
-
+		newBirds = new List<Bird>();
         if (Var.isTutorial)
             CreateTutorialEnemies(Tutorial.Instance.TutorialMap[0]);
         else
         {
             BattleData Area = Var.map[0];
-            createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies, Area.hasWizards, Area.hasDrills);
+            createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies, Area.hasWizards, Area.hasDrills,Area.hasSuper);
         }
     } 
 
@@ -59,18 +60,21 @@ public class fillEnemy : MonoBehaviour {
 
 
 
-    public void createEnemies(MapBattleData battleData, int birdLVL = 1, List<Bird.dir> dirList = null, int minEnemies = 3, int maxEnemies = 4, bool hasWizards = false, bool hasDrills = false)
+    public void createEnemies(MapBattleData battleData, int birdLVL = 1, List<Bird.dir> dirList = null, int minEnemies = 3, int maxEnemies = 4, bool hasWizards = false, bool hasDrills = false, bool hasSuper= false)
     {
         int index = 0;
         float wizardChance = 0.2f;
         float drillChance = 0.3f;
+		float superChance = 0.5f;
         //isDebug = true;
         if (isDebug)
         {
             hasWizards = hasWizardsDebug;
-            wizardChance = 0.8f;
+            wizardChance = 0.1f;
             drillChance = 0.9f;
             hasDrills = hasDrillsDebug;
+			hasSuper = true;
+			superChance = 1f;
         }
         List<int> frontPos = new List<int>();
         List<int> topPos = new List<int>();
@@ -151,13 +155,18 @@ public class fillEnemy : MonoBehaviour {
                     enemy.friendliness = 0;
                     break;                    
             }
-            float rand = Random.Range(0, 1f);           
-            if (rand < wizardChance && hasWizards)
+            float rand = Random.Range(0, 1f);
+			if (hasSuper && rand < superChance && rand > wizardChance)
+			{
+				CreateEnemy(enemy, enemyType.super);
+			}
+			else if (rand < wizardChance && hasWizards)
                 CreateEnemy(enemy, enemyType.wizard);
             else
                 CreateEnemy(enemy);            
             Enemies[enemyPos].SetActive(true);
-        }
+			newBirds.Add(enemy);
+		}
         if (hasDrills) {            
             if (frontPos.Count < 3 && frontPos.Count > 0 && Random.Range(0, 1f) < drillChance) {
                 int id = frontPos[Random.Range(0, frontPos.Count)];
@@ -168,11 +177,9 @@ public class fillEnemy : MonoBehaviour {
                 int id = topPos[Random.Range(0, topPos.Count)];
                 Enemies[id].GetComponent<Bird>().enemyType= enemyType.drill;
             }
-        }
-        foreach(int id in usedPos)
-        {
-            ApplyArt(Enemies[id].GetComponent<Bird>());
-        }
+		}
+		foreach (Bird newBird in newBirds)
+			ApplyArt(newBird);
     } 
 
     void ApplyArt(Bird enemy)
@@ -244,9 +251,9 @@ public class fillEnemy : MonoBehaviour {
         if (enemy.EnemyArt != null)
             Destroy(enemy.EnemyArt);       
         enemy.enemyType = type;
-        if (enemy.emotion == Var.Em.Neutral && enemy.enemyType == enemyType.wizard)
-            enemy.enemyType = enemyType.normal;               
-        enemy.inUse = true;
+        if (enemy.emotion == Var.Em.Neutral && (enemy.enemyType == enemyType.wizard || enemy.enemyType == enemyType.super))
+            enemy.enemyType = enemyType.normal;
+		enemy.inUse = true;
         enemy.transform.localPosition = enemy.home;       
     }
 

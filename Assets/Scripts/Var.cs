@@ -52,6 +52,7 @@ public static class Var {
 	public static List<GameObject> enemySprites = null;
 	public static List<GameObject> wizardEnemySprites = null;
 	public static List<GameObject> drillEnemySprites = null;
+	public static List<GameObject> sueprEnemySprites = null;
 	public static GameObject emotionParticles = null;
 	public static bool Infight = false;
 	public static bool shouldDoMapEvent = false;

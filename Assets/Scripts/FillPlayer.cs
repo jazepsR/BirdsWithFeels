@@ -158,6 +158,20 @@ public class FillPlayer : MonoBehaviour {
 			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_neutral_DRILL"));
 			Var.drillEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/drill enemies/Visuals_top_scared_DRILL"));
 		}
+		if(Var.sueprEnemySprites == null)
+		{
+			Var.sueprEnemySprites = new List<GameObject>();
+			Var.sueprEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/super enemies/Visuals_side_confident_SUPER"));
+			Var.sueprEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/super enemies/Visuals_side_friendly_SUPER"));
+			Var.sueprEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/super enemies/Visuals_side_lonely_SUPER"));
+			Var.sueprEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/super enemies/Visuals_side_neutral_SUPER"));
+			Var.sueprEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/super enemies/Visuals_side_scared_SUPER"));
+			Var.sueprEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/super enemies/Visuals_top_confident_SUPER"));
+			Var.sueprEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/super enemies/Visuals_top_friendly_SUPER"));
+			Var.sueprEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/super enemies/Visuals_top_lonely_SUPER"));
+			Var.sueprEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/super enemies/Visuals_top_neutral_SUPER"));
+			Var.sueprEnemySprites.Add(Resources.Load<GameObject>("prefabs/enemies/super enemies/Visuals_top_scared_SUPER"));
+		}
 	}
 	public static void SetupBird(Bird target, Bird template)
 	{		

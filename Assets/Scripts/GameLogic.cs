@@ -152,13 +152,21 @@ public class GameLogic : MonoBehaviour {
         float winBonus = 0.0f;
         winBonus = winBonus + playerBird.getBonus() - enemyBird.getBonus();
 
+		if (enemyBird.enemyType == fillEnemy.enemyType.super)
+		{
+			if (playerBird.emotion == Helpers.Instance.GetWeakness(enemyBird.emotion))
+				winBonus += 4;
+			else
+				winBonus -= 4;
+		}
+		else
+		{
+			if (Bird1Win(playerBird, enemyBird))
+				winBonus += 4;
 
-        if (Bird1Win(playerBird, enemyBird))
-            winBonus += 4;
-
-        if (Bird1Win(enemyBird, playerBird))
-            winBonus -= 4;      
-        
+			if (Bird1Win(enemyBird, playerBird))
+				winBonus -= 4;
+		}
         return 0.5f + winBonus * 0.1f;
     }
 

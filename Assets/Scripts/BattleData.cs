@@ -17,6 +17,7 @@ public class BattleData {
     public MapBattleData battleData;
 	public bool hasWizards;
 	public bool hasDrills;
+	public bool hasSuper;
 	
 	void SetBattleData(float minConf, float maxConf, float minFriend, float maxFriend)
 	{
@@ -25,12 +26,14 @@ public class BattleData {
 		this.minFriend = minFriend;
 		this.maxFriend = maxFriend;        
 	}
-	public BattleData(Var.Em type,bool hasRocks,List<Var.Em> powerUps, MapBattleData battleData,int birdLVL=1, List<Bird.dir> dirs= null, List<Var.PowerUps> powers = null, bool hasWizards = false, bool hasDrills = false)
+	public BattleData(Var.Em type,bool hasRocks,List<Var.Em> powerUps, MapBattleData battleData,int birdLVL=1, List<Bird.dir> dirs= null, 
+		List<Var.PowerUps> powers = null, bool hasWizards = false, bool hasDrills = false, bool hasSuper = false)
 	{
         this.battleData = battleData;
 		this.hasWizards = hasWizards;
 		this.hasDrills = hasDrills;
 		this.powers = powers;
+		this.hasSuper = hasSuper;
 		this.type = type;
 		this.powerUps = powerUps;
 		this.hasRocks = hasRocks;

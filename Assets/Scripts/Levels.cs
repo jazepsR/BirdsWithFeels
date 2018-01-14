@@ -517,7 +517,7 @@ public class Levels : MonoBehaviour {
 
 	public string CheckBrave1(bool tryingToApply = true)
 	{
-		if ( (myBird.emotion == Var.Em.Confident || myBird.emotion == Var.Em.SuperConfident) && myBird.confidence >= 7)
+		if ( (myBird.emotion == Var.Em.Confident || myBird.emotion == Var.Em.SuperConfident) && myBird.confidence >= 7 && myBird.bannedLevels != Var.Em.Confident)
 		{
 			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Brave1, myBird.levelList))
 			{
@@ -534,7 +534,7 @@ public class Levels : MonoBehaviour {
 	}
 	public string CheckBrave2(bool tryingToApply = true)
 	{
-		if ( (myBird.emotion == Var.Em.Confident || myBird.emotion == Var.Em.SuperConfident) && myBird.confidence >= 10)
+		if ( (myBird.emotion == Var.Em.Confident || myBird.emotion == Var.Em.SuperConfident) && myBird.confidence >= 10 && myBird.bannedLevels != Var.Em.Confident)
 		{
 			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Brave2, myBird.levelList))
 			{
@@ -550,7 +550,7 @@ public class Levels : MonoBehaviour {
 	}
 	public string CheckLonely1(bool tryingToApply = true)
 	{
-		if ( (myBird.emotion == Var.Em.Lonely || myBird.emotion == Var.Em.SuperLonely) && myBird.friendliness <= -7 )
+		if ( (myBird.emotion == Var.Em.Lonely || myBird.emotion == Var.Em.SuperLonely) && myBird.friendliness <= -7 && myBird.bannedLevels != Var.Em.Lonely)
 		{
 			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Lonely1, myBird.levelList))
 			{
@@ -567,7 +567,7 @@ public class Levels : MonoBehaviour {
 
 	public string CheckLonely2(bool tryingToApply = true)
 	{
-		if ((myBird.emotion == Var.Em.Lonely || myBird.emotion == Var.Em.SuperLonely) && myBird.friendliness <= -10)
+		if ((myBird.emotion == Var.Em.Lonely || myBird.emotion == Var.Em.SuperLonely) && myBird.friendliness <= -10 && myBird.bannedLevels != Var.Em.Lonely)
 		{
 			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Lonely2, myBird.levelList))
 			{
@@ -584,7 +584,7 @@ public class Levels : MonoBehaviour {
 	
 	public string CheckFriendly1(bool tryingToApply = true)
 	{
-		if ((myBird.emotion == Var.Em.Friendly || myBird.emotion == Var.Em.SuperFriendly) && myBird.friendliness >= 7)
+		if ((myBird.emotion == Var.Em.Friendly || myBird.emotion == Var.Em.SuperFriendly) && myBird.friendliness >= 7 && myBird.bannedLevels != Var.Em.Friendly)
 		{
 			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Friend1, myBird.levelList))
 			{
@@ -603,7 +603,7 @@ public class Levels : MonoBehaviour {
 
 	public string CheckFriendly2(bool tryingToApply = true)
 	{
-		if ((myBird.emotion == Var.Em.Friendly || myBird.emotion == Var.Em.SuperFriendly) && myBird.friendliness >= 10)
+		if ((myBird.emotion == Var.Em.Friendly || myBird.emotion == Var.Em.SuperFriendly) && myBird.friendliness >= 10 && myBird.bannedLevels != Var.Em.Friendly)
 		{
 			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Friend2, myBird.levelList))
 			{
@@ -635,7 +635,7 @@ public class Levels : MonoBehaviour {
 
 	public string CheckScared1(bool tryingToApply = true)
 	{
-		if ((myBird.emotion == Var.Em.Scared || myBird.emotion == Var.Em.SuperScared) && myBird.confidence <= -7)
+		if ((myBird.emotion == Var.Em.Scared || myBird.emotion == Var.Em.SuperScared) && myBird.confidence <= -7 && myBird.bannedLevels != Var.Em.Scared)
 		{
 			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Scared1, myBird.levelList))
 				return "First " +Helpers.Instance.ScaredHexColor +"Scared </color>level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Scared1);
@@ -665,7 +665,7 @@ public class Levels : MonoBehaviour {
 	}
 	public string CheckScared2(bool tryingToApply = true)
 	{
-		if ( (myBird.emotion == Var.Em.Scared || myBird.emotion == Var.Em.SuperScared) && myBird.confidence <= -10)
+		if ( (myBird.emotion == Var.Em.Scared || myBird.emotion == Var.Em.SuperScared) && myBird.confidence <= -10 && myBird.bannedLevels != Var.Em.Scared)
 		{
 			if (!tryingToApply && !Helpers.Instance.ListContainsLevel(type.Scared2, myBird.levelList))
 			{

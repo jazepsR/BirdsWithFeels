@@ -47,6 +47,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	public bool addBirdOnComplete = false;
 	public bool hasWizards = false;
 	public bool hasDrills = false;
+	public bool hasSuper = false;
 	public Bird birdToAdd;
 	public EventScript birdToAddScript;
 	ShowTooltip tooltipInfo;
@@ -451,7 +452,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	}
 	void AddStageToLevel(MapBattleData mapData, List<BattleData> map)
 	{
-		BattleData data = new BattleData(FindTopEmotion(mapData), hasObstacles, EmPowerList(),mapData, birdLVL, CreateDirList(), PowerList(),hasWizards,hasDrills);
+		BattleData data = new BattleData(FindTopEmotion(mapData), hasObstacles, EmPowerList(),mapData, birdLVL, CreateDirList(), PowerList(),hasWizards,hasDrills,hasSuper);
 		data.maxEnemies = maxEnemies;
 		data.minEnemies = minEnemies;
 		map.Add(data);

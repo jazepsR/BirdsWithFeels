@@ -363,8 +363,10 @@ public class feedBack : MonoBehaviour {
 			abilityText = "<b>\nInfluences emotions!</b>";
 		toolTipText += abilityText;
 		toolTipText += "\nStrength: " + (birdScript.levelRollBonus + 1).ToString();
-		toolTipText += "\n Weak to: " + weakness + "\nStrong against: " + strength;
-
+		if (birdScript.enemyType == fillEnemy.enemyType.super)
+			toolTipText += "\n Weak to: " + weakness + "\nStrong against: <b>everything</b>";
+		else
+			toolTipText += "\n Weak to: " + weakness + "\nStrong against: " + strength;
 
 	}
 	void ScaleDownIndicator()

@@ -182,6 +182,8 @@ public class Helpers : MonoBehaviour {
 				return Var.enemySprites[id];
 			case fillEnemy.enemyType.wizard:
 				return Var.wizardEnemySprites[id];
+			case fillEnemy.enemyType.super:
+				return Var.sueprEnemySprites[id];
 		}
 		return null;
 		
