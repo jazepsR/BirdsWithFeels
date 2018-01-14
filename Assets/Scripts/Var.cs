@@ -22,7 +22,7 @@ public static class Var {
 	public static bool fled = false;
 	public  static int lvl2 = 10;
 	public static int confLoseFight = -3;
-	public static int confWinFight = 0;
+	public static int confWinFight = 2;
 	public static int confWinAll = 1;
 	public static int confLoseAll = -1;
 	public static int oneFriendStraightGain = 2;

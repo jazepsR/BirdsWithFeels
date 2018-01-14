@@ -920,8 +920,8 @@ public class Bird : MonoBehaviour
 		{
 			friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
 
-			//confidence += 1 + groundConfBoos + wizardConfBoos + levelConfBoos;
-			confidence += 1+ battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
+			confidence += 1 + groundConfBoos + wizardConfBoos + levelConfBoos;
+			//confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
 			ConfGainedInRound = confidence - prevConf;
 			FriendGainedInRound = friendliness - prevFriend;
 		}

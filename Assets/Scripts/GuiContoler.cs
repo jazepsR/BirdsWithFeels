@@ -586,9 +586,9 @@ public class GuiContoler : MonoBehaviour {
 	 public string CreateEmotionChangeText(Bird bird)
 	{
 		string fbText = "";
-
-
-		int ConfGainedInRound = 1+bird.battleConfBoos + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
+		if (bird.battleConfBoos == 0)
+			bird.battleConfBoos = 1;
+		int ConfGainedInRound = Mathf.Min(1, bird.battleConfBoos) + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
 		int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
 		
 		//Confidence stuff
@@ -596,10 +596,10 @@ public class GuiContoler : MonoBehaviour {
 			fbText += "\n"+Helpers.Instance.BraveHexColor+"<b>Confidence gained: " + ConfGainedInRound +"</b></color>";
 		if (ConfGainedInRound < 0)
 			fbText += "\n" + Helpers.Instance.ScaredHexColor + "<b>Caution gained: " + Mathf.Abs(ConfGainedInRound) + "</b></color>";
-		if ((bird.battleConfBoos+1) > 0)
-			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom combat: " + (bird.battleConfBoos + 1).ToString("+#;-#;0") + " confidence</color>";
-		if ((bird.battleConfBoos + 1) < 0)
-			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs((bird.battleConfBoos + 1)).ToString("+#;-#;0") + " caution</color>";
+		if (bird.battleConfBoos > 0)
+			fbText += Helpers.Instance.BraveHexColor + "\n\tFrom combat: " + 1.ToString("+#;-#;0") + " confidence</color>";
+		if (bird.battleConfBoos < 0)
+			fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs(bird.battleConfBoos).ToString("+#;-#;0") + " caution</color>";
 		if(bird.injured)
 			fbText += Helpers.Instance.ScaredHexColor + "\n\t(5 caution from injury)</color>";
 		if (bird.groundConfBoos > 0)
