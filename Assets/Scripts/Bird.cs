@@ -21,12 +21,15 @@ public class Bird : MonoBehaviour
 	public int totalConfidence = 0;
 	public int friendliness = 0;
 	public int health = 3;
+	public int mentalHealth = 3;
 	[HideInInspector]
 	public bool GainedLVLHealth = false;
 	[HideInInspector]
 	public bool foughtInRound = false;
    // [HideInInspector]
 	public int maxHealth = 3;
+	[HideInInspector]
+	public bool hadMentalPain = false;
 	public int x = -1;
 	public int y = -1;
 	public Var.Em emotion;
@@ -116,6 +119,7 @@ public class Bird : MonoBehaviour
 	public Image CooldownRing;
 	public bool isHiding = false;
 	public int prevRoundHealth;
+	public int prevRoundMentalHealth;
 	public int levelRollBonus = 0;
 	public int relationshipBonus = 0;
 	[HideInInspector]
@@ -157,6 +161,7 @@ public class Bird : MonoBehaviour
 		}*/
 		
 		prevRoundHealth = health;
+		prevRoundMentalHealth = mentalHealth;
 		x = -1;
 		y = -1;
 		prevConf = confidence;
@@ -873,11 +878,16 @@ public class Bird : MonoBehaviour
 	}
 	public void AddRoundBonuses(bool doFightStuff= true)
 	{
-		//print(charName + " doing round bonus. HealthGain " + roundHealthChange);
+		print(charName + " doing round bonus. HealthGain " + roundHealthChange);
 		if (injured)
 			return;
-		ApplyInfluence();		
-		prevRoundHealth = health;   
+		ApplyInfluence();
+
+		prevRoundHealth = health;
+		prevRoundMentalHealth = mentalHealth;
+		
+
+
 		if (doFightStuff)
 		{
 			
@@ -924,6 +934,31 @@ public class Bird : MonoBehaviour
 			FriendGainedInRound = friendliness - prevFriend;
 		}
 		health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
+
+		if (Mathf.Abs(confidence) >= 12 || Mathf.Abs(friendliness) >= 12)
+		{//In danger zone
+			mentalHealth = Math.Max(mentalHealth - 1, 0);
+			if (mentalHealth == 0)
+			{
+				//dont kill the player
+				if (health > 1)
+				{//Effects from having no mental health left
+					mentalHealth = Var.maxMentalHealth;
+					Helpers.Instance.NormalizeStats(this, 12);
+					hadMentalPain = true;
+					health--;
+				}
+					
+				
+			}
+
+		}
+		else
+		{//In comfort zone
+			mentalHealth = Mathf.Min(Var.maxMentalHealth, mentalHealth + 1);
+		}
+
+
 		print(charName + " healthboost " + healthBoost + " round change " + roundHealthChange);			 
 		roundHealthChange = 0;
 		foughtInRound = false;        
@@ -1072,6 +1107,7 @@ public class Bird : MonoBehaviour
 			try
 			{
 				Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, health+roundHealthChange, maxHealth);
+				Helpers.Instance.setHearts(GuiContoler.Instance.BirdMentalHearts, mentalHealth, Var.maxMentalHealth,-1,true);
 
 			}
 			catch {

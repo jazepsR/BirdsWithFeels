@@ -65,6 +65,7 @@ public class GuiContoler : MonoBehaviour {
 	public SliderSwitcher confSlider;
 	public SliderSwitcher firendSlider;    
 	public Image[] BirdInfoHearts;
+	public Image[] BirdMentalHearts;
 	public Text levelNumberText;
 	public GameObject pause;
 	public GameObject deathMenu;

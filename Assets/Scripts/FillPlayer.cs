@@ -180,6 +180,7 @@ public class FillPlayer : MonoBehaviour {
 		target.confidence = template.confidence;
 		target.portraitOrder = template.portraitOrder;
 		target.health = template.health;
+		target.mentalHealth = template.mentalHealth;
 		if (template.injured)
 		{
 			//target.gameObject.GetComponentInChildren<Animator>().SetBool("dead", true);
@@ -222,6 +223,7 @@ public class FillPlayer : MonoBehaviour {
 		target.confidence = template.confidence;
 		target.portraitOrder = template.portraitOrder;
 		target.health = template.health;
+		target.mentalHealth = template.mentalHealth;
 		target.birdPrefabName = template.birdPrefabName;
 		target.relationships = template.relationships;
 		target.preferredEmotion = template.preferredEmotion;

@@ -37,7 +37,7 @@ public class GraphPortraitScript : MonoBehaviour {
 		this.targetEmotion = targetEmotion;
 		lr.material = Resources.Load<Material>("mat");
 		ShowTooltip info =gameObject.AddComponent<ShowTooltip>();
-		finish = target * 22.4f;
+		finish = target * 17.92f;
 		if (Var.Infight)
 		{
 			info.tooltipText = "";
@@ -68,7 +68,7 @@ public class GraphPortraitScript : MonoBehaviour {
 	public void MovePoint(Vector3 pos)
 	{
 		
-		if (reachedTarget(-pos.x/22.4f, pos.y/22.4f))
+		if (reachedTarget(-pos.x/17.92f, pos.y/17.92f))
 		{
 			LeanTween.pause(gameObject);
 			GetComponent<Animator>().SetTrigger("NewEmotion");

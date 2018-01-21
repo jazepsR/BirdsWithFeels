@@ -26,6 +26,7 @@ public class Helpers : MonoBehaviour {
 	GameObject heartBreak;
 	GameObject heartGain;
 	Sprite fullHeart;
+	Sprite mentalHeart;
 	Sprite emptyHeart;
 	public bool inMap;
 	List<Image> heartsToFill = new List<Image>();
@@ -37,6 +38,7 @@ public class Helpers : MonoBehaviour {
 		heartGain = Resources.Load<GameObject>("prefabs/heartGain");
 		fullHeart = Resources.Load<Sprite>("sprites/heart");
 		emptyHeart = Resources.Load<Sprite>("sprites/emptyHeart");
+		mentalHeart = Resources.Load<Sprite>("sprites/mentalHeart");
 		Instance = this;
 	}
 	public EventScript.Character GetCharEnum(Bird bird)
@@ -235,16 +237,19 @@ public class Helpers : MonoBehaviour {
 		else
 			return Var.femaleNames[UnityEngine.Random.Range(0, Var.femaleNames.Length)];
 	}
-	void FillHearts()
+	void FillHearts(Sprite HeartSprite)
 	{
 		foreach(Image heart in heartsToFill)
 		{
-			heart.sprite = fullHeart;
+			heart.sprite = HeartSprite;
 		}
 		heartsToFill = new List<Image>();
 	}
-	public void setHearts(Image[] hearts,int currentHP, int MaxHP, int prevRoundHealth = -1)
+	public void setHearts(Image[] hearts, int currentHP, int MaxHP, int prevRoundHealth = -1, bool isMental = false)
 	{
+		Sprite heartSprite = fullHeart;
+		if (isMental)
+			heartSprite = mentalHeart;
 		for (int i = 0; i < hearts.Length; i++)
 		{
 			if (i < currentHP)
@@ -256,12 +261,12 @@ public class Helpers : MonoBehaviour {
 					breakObj.transform.parent = hearts[i].transform;
 					breakObj.transform.localScale = Vector3.one;// * 0.5f;
 					heartsToFill.Add(hearts[i]);
-					LeanTween.delayedCall(0.46f, FillHearts);
+					LeanTween.delayedCall(0.46f,()=> FillHearts(heartSprite));
 					Destroy(breakObj, 0.45f);
 				}
 				else
 				{
-					hearts[i].sprite = fullHeart;
+					hearts[i].sprite = heartSprite;
 					
 				}
 			} else
@@ -813,14 +818,12 @@ public class Helpers : MonoBehaviour {
 			return false;
 		}
 	}
-	public void NormalizeStats(Bird bird)
+	public void NormalizeStats(Bird bird, int treshold = 15)
 	{
-		int treshold = Var.lvl2 - 1;
-		//Super starts at 10
-		treshold = 12;
+		
 		if (bird.level > 1)
 		{
-			treshold = 12;
+			treshold = 15;
 		}
 		if (bird.confidence > treshold)
 			bird.confidence = treshold;

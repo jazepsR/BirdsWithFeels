@@ -22,6 +22,7 @@ public class ProgressGUI : MonoBehaviour {
 	public Image[] Hearts;
 	public Image[] Hearts2;
 	public Image[] Hearts3;
+	public Image[] mentalHearts;
 	public LVLIconScript[] LvlIcons;  
 	public static ProgressGUI Instance { get; private set; }
 	public GameObject skillArea;
@@ -37,6 +38,7 @@ public class ProgressGUI : MonoBehaviour {
 	public GameObject noAbilities;
 	public GameObject abilityHeading;
 	public Image ConditionsBG;
+	public GameObject mentalPainPopup;
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -77,11 +79,12 @@ public class ProgressGUI : MonoBehaviour {
 			if (Helpers.Instance.ListContainsLevel(lvl.level, bird.levelList))
 			{
 				lvl.gameObject.SetActive(false);
-			} else
+			}
+			/*else
 			{
 				if (lvl.gameObject.GetComponent<LevelArea>().isSmall)
 					lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 650);
-			}
+			}*/
 
 			if (bird.bannedLevels == lvl.emotion)
 				lvl.gameObject.SetActive(false);
@@ -221,6 +224,12 @@ public class ProgressGUI : MonoBehaviour {
 		else
 		{
 			Helpers.Instance.setHearts(activeHearts, bird.health, bird.maxHealth, bird.prevRoundHealth);
+			Helpers.Instance.setHearts(mentalHearts, bird.mentalHealth, Var.maxMentalHealth, bird.prevRoundMentalHealth, true);
+			if(bird.hadMentalPain)
+			{
+				mentalPainPopup.SetActive(true);
+				bird.hadMentalPain = false;
+			}
 			portraitFillObj.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
 			if (bird.prevEmotion != bird.emotion && !bird.inMap)
 			{

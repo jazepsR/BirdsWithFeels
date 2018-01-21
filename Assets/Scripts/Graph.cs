@@ -13,7 +13,7 @@ public class Graph : MonoBehaviour {
 	public static Graph Instance { get; private set; }
 	[HideInInspector]
 	public List<GameObject> portraits;
-	public float factor = 22.4f;
+	public float factor =2f;
 	public bool isSmall;
 	// Use this for initialization
 	void Start()

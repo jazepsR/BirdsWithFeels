@@ -97,6 +97,7 @@ public class BirdSaveData
 	public int confidence;
 	public int portraitOrder;
 	public int health;
+	public int mentalHealth;
 	public int maxHealth;
 	public bool dead;
 	public Var.Em preferredEmotion;
