@@ -28,6 +28,7 @@ public class Helpers : MonoBehaviour {
 	Sprite fullHeart;
 	Sprite mentalHeart;
 	Sprite emptyHeart;
+	Sprite emptyMentalHeart;
 	public bool inMap;
 	List<Image> heartsToFill = new List<Image>();
 	public Transform relationshipDialogs;
@@ -39,6 +40,7 @@ public class Helpers : MonoBehaviour {
 		fullHeart = Resources.Load<Sprite>("sprites/heart");
 		emptyHeart = Resources.Load<Sprite>("sprites/emptyHeart");
 		mentalHeart = Resources.Load<Sprite>("sprites/mentalHeart");
+		emptyMentalHeart = Resources.Load<Sprite>("sprites/mentalHeart_empty");
 		Instance = this;
 	}
 	public EventScript.Character GetCharEnum(Bird bird)
@@ -248,8 +250,13 @@ public class Helpers : MonoBehaviour {
 	public void setHearts(Image[] hearts, int currentHP, int MaxHP, int prevRoundHealth = -1, bool isMental = false)
 	{
 		Sprite heartSprite = fullHeart;
+		Sprite emptyHeartSprite = emptyHeart;
 		if (isMental)
+		{
 			heartSprite = mentalHeart;
+			emptyHeartSprite = emptyMentalHeart;
+
+		}
 		for (int i = 0; i < hearts.Length; i++)
 		{
 			if (i < currentHP)
@@ -281,7 +288,7 @@ public class Helpers : MonoBehaviour {
 				
 				if (i < MaxHP)
 				{
-					hearts[i].sprite = emptyHeart;
+					hearts[i].sprite = emptyHeartSprite;
 					hearts[i].gameObject.SetActive(true);
 				}
 				else

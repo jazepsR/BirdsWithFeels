@@ -224,7 +224,14 @@ public class ProgressGUI : MonoBehaviour {
 		else
 		{
 			Helpers.Instance.setHearts(activeHearts, bird.health, bird.maxHealth, bird.prevRoundHealth);
-			Helpers.Instance.setHearts(mentalHearts, bird.mentalHealth, Var.maxMentalHealth, bird.prevRoundMentalHealth, true);
+
+			foreach(Image mentalHeart in mentalHearts)
+			{
+
+
+
+			}
+			LeanTween.delayedCall(1f, () => SetMentalHearts(bird.mentalHealth, Var.maxMentalHealth, bird.prevRoundMentalHealth, bird));
 			if(bird.hadMentalPain)
 			{
 				mentalPainPopup.SetActive(true);
@@ -267,6 +274,39 @@ public class ProgressGUI : MonoBehaviour {
 				UpdateLevelAreas(bird);
 				skillArea.SetActive(false);
 			}
+		}
+	}
+	void SetMentalHearts(int MHP, int maxMHP, int prevMHP, Bird bird)
+	{
+		for (int i = 0; i < mentalHearts.Length; i++)
+		{
+			Animator anim = mentalHearts[i].GetComponent<Animator>();
+			if (i < MHP)
+			{
+				if (i >= prevMHP && prevMHP != -1)
+				{
+					anim.SetTrigger("gain");
+				}
+				else
+				{
+					anim.SetBool("active", true);
+				}
+			}
+			else
+			{
+				if (i < prevMHP && prevMHP != -1)
+				{
+					anim.SetTrigger("lose");
+				}
+
+				if (i < maxMHP)
+				{
+					anim.SetBool("active", false);
+				}
+			}
+			if (i == MHP - 1 && (Mathf.Abs(bird.confidence) >= 12 || Mathf.Abs(bird.friendliness) >= 12))
+				anim.SetBool("indanger", true);
+			
 		}
 	}
 }

@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GraphPortraitScript : MonoBehaviour {
-
-	// Use this for initialization
+	
 	LineRenderer lr;
 	Vector3 firstPos;
 	Vector3 intercept;
 	Vector3 finish;
 	Text activeText;
 	Var.Em targetEmotion;
+	bool inDangerZone = false;
+	float factor = 17.92f;
 	void Starter () {
 		lr = gameObject.AddComponent<LineRenderer>();
 		//lr.sortingOrder = 120;
@@ -23,11 +24,29 @@ public class GraphPortraitScript : MonoBehaviour {
 		firstPos = new Vector3(transform.position.x,transform.position.y, 0);
 		lr.SetPosition(0, firstPos);
 		lr.SetPosition(1, firstPos);
+		if (Mathf.Abs(transform.localPosition.x /factor) > 12 || Mathf.Abs(transform.localPosition.y / factor) > 12)
+			inDangerZone = true;
+		else
+			inDangerZone = false;
+		print("pos:" + transform.localPosition);
+		GetComponent<Animator>().SetBool("dangerzone",inDangerZone);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if ((Mathf.Abs(transform.localPosition.x / factor) >= 12 || Mathf.Abs(transform.localPosition.y / factor) >= 12) && !inDangerZone)
+		{
+
+			inDangerZone = true;
+			GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+		}
+		if ((Mathf.Abs(transform.localPosition.x / factor) < 12 && Mathf.Abs(transform.localPosition.y / factor) < 12) && inDangerZone)
+		{
+
+			inDangerZone = false;
+			GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+		}
+
 	}
 
 	public void StartGraph(Vector3 target, Var.Em targetEmotion, Bird bird)
@@ -37,7 +56,7 @@ public class GraphPortraitScript : MonoBehaviour {
 		this.targetEmotion = targetEmotion;
 		lr.material = Resources.Load<Material>("mat");
 		ShowTooltip info =gameObject.AddComponent<ShowTooltip>();
-		finish = target * 17.92f;
+		finish = target * factor;
 		if (Var.Infight)
 		{
 			info.tooltipText = "";

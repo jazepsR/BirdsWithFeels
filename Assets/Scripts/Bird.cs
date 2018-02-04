@@ -934,17 +934,16 @@ public class Bird : MonoBehaviour
 			FriendGainedInRound = friendliness - prevFriend;
 		}
 		health = Mathf.Min(health + healthBoost + roundHealthChange, maxHealth);
-
-		if (Mathf.Abs(confidence) >= 12 || Mathf.Abs(friendliness) >= 12)
+		//Mental health
+		if ((Mathf.Abs(confidence) >= 12 || Mathf.Abs(friendliness) >= 12) && (Mathf.Abs(prevConf) >= 12 || Mathf.Abs(prevFriend) >= 12))
 		{//In danger zone
 			mentalHealth = Math.Max(mentalHealth - 1, 0);
-			if (mentalHealth == 0)
+			if (mentalHealth == -1)
 			{
 				//dont kill the player
 				if (health > 1)
 				{//Effects from having no mental health left
-					mentalHealth = Var.maxMentalHealth;
-					Helpers.Instance.NormalizeStats(this, 12);
+					//mentalHealth = Var.maxMentalHealth;					
 					hadMentalPain = true;
 					health--;
 				}
@@ -953,7 +952,7 @@ public class Bird : MonoBehaviour
 			}
 
 		}
-		else
+		else if(Mathf.Abs(confidence)< 12 && Mathf.Abs(friendliness) < 12 && (Mathf.Abs(prevConf) < 12 && Mathf.Abs(prevFriend) <12))
 		{//In comfort zone
 			mentalHealth = Mathf.Min(Var.maxMentalHealth, mentalHealth + 1);
 		}
