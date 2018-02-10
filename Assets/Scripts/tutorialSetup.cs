@@ -23,7 +23,7 @@ public class tutorialSetup : MonoBehaviour {
 		Bird terry =FillPlayer.Instance.playerBirds[0];
 		terry.confidence = confidence1;
 		terry.friendliness = friendliness1;
-		terry.startingLVL = startingLVL1;
+		//terry.startingLVL = startingLVL1;
 		terry.SetEmotion();
 		AddLevel(terry, startingLVL1);
 
@@ -31,7 +31,7 @@ public class tutorialSetup : MonoBehaviour {
 		Bird rebecca = FillPlayer.Instance.playerBirds[1];
 		rebecca.confidence = confidence2;
 		rebecca.friendliness = friendliness2;
-		rebecca.startingLVL = startingLVL2;
+		//rebecca.startingLVL = startingLVL2;
 		rebecca.SetEmotion();
 		AddLevel(rebecca, startingLVL2);
 

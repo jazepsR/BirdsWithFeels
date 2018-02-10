@@ -289,7 +289,7 @@ public class TutorialEnemy
                 confidence = 0;
                 firendliness = 0;
                 break;
-            case Var.Em.Scared:
+            case Var.Em.Cautious:
                 confidence = -7;
                 firendliness = 0;
                 break;
@@ -297,11 +297,11 @@ public class TutorialEnemy
                 confidence = 7;
                 firendliness = 0;
                 break;
-            case Var.Em.Friendly:
+            case Var.Em.Social:
                 confidence = 0;
                 firendliness = 7;
                 break;
-            case Var.Em.Lonely:
+            case Var.Em.Solitary:
                 confidence = 0;
                 firendliness = -7;
                 break;

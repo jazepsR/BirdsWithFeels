@@ -78,17 +78,37 @@ public class Helpers : MonoBehaviour {
 		return null;
 	}
 
+	public static int GetEmotionNumber(Var.Em emotion)
+	{
+		switch (emotion)
+		{
+			case Var.Em.Neutral:
+				return 0;
+			case Var.Em.Cautious:
+				return 1;
+			case Var.Em.Confident:
+				return 2;
+			case Var.Em.Social:
+				return 3;
+			case Var.Em.Solitary:
+				return 4;
+			default:
+				return 0;
+		}
+	}
+
+
 	public int GetEmotionValue(Bird bird, Var.Em emotion)
 	{
 		switch (emotion)
 		{
 			case Var.Em.Confident:
 				return bird.confidence;
-			case Var.Em.Scared:
+			case Var.Em.Cautious:
 				return Mathf.Abs(bird.confidence);
-			case Var.Em.Friendly:
+			case Var.Em.Social:
 				return bird.friendliness;
-			case Var.Em.Lonely:
+			case Var.Em.Solitary:
 				return Mathf.Abs(bird.friendliness);
 			default:
 				return 0;
@@ -127,13 +147,13 @@ public class Helpers : MonoBehaviour {
 		if (confidence > 0)
 			statText += Helpers.Instance.GetHexColor(Var.Em.Confident) + "Confidence: " + confidence + "</color>\n";
 		if (confidence < 0)
-			statText += Helpers.Instance.GetHexColor(Var.Em.Scared) + "Cautions: " + Mathf.Abs(confidence) + "</color>\n";
+			statText += Helpers.Instance.GetHexColor(Var.Em.Cautious) + "Cautions: " + Mathf.Abs(confidence) + "</color>\n";
 		if (confidence == 0)
 			statText += "Confidence: 0\n";
 		if (social > 0)
-			statText += Helpers.Instance.GetHexColor(Var.Em.Friendly) + "Social: " + social+ "</color>\n";
+			statText += Helpers.Instance.GetHexColor(Var.Em.Social) + "Social: " + social+ "</color>\n";
 		if (social < 0)
-				statText += Helpers.Instance.GetHexColor(Var.Em.Lonely) + "Solitary: " + Mathf.Abs(social) + "</color>\n";
+				statText += Helpers.Instance.GetHexColor(Var.Em.Solitary) + "Solitary: " + Mathf.Abs(social) + "</color>\n";
 		if (social == 0)
 			statText += "Solitude: 0\n";
 		statText = "<b>" + statText + "</b>";
@@ -144,13 +164,13 @@ public class Helpers : MonoBehaviour {
 		switch (type)
 		{
 			case Var.Em.Confident:
-				return Var.Em.Scared;
-			case Var.Em.Scared:
+				return Var.Em.Cautious;
+			case Var.Em.Cautious:
 				return Var.Em.Confident;
-			case Var.Em.Friendly:
-				return Var.Em.Lonely;
-			case Var.Em.Lonely:
-				return Var.Em.Friendly;
+			case Var.Em.Social:
+				return Var.Em.Solitary;
+			case Var.Em.Solitary:
+				return Var.Em.Social;
 			default:
 				return Var.Em.Neutral;
 		}
@@ -165,16 +185,16 @@ public class Helpers : MonoBehaviour {
 			case Var.Em.Confident:
 				id += 0;
 				break;
-			case Var.Em.Friendly:
+			case Var.Em.Social:
 				id += 1;
 				break;
-			case Var.Em.Lonely:
+			case Var.Em.Solitary:
 				id += 2;
 				break;
 			case Var.Em.Neutral:
 				id += 3;
 				break;
-			case Var.Em.Scared:
+			case Var.Em.Cautious:
 				id += 4;
 				break;
 		}
@@ -211,13 +231,13 @@ public class Helpers : MonoBehaviour {
 			case 0:
 				return Var.Em.Neutral;
 			case 1:
-				return Var.Em.Scared;
+				return Var.Em.Cautious;
 			case 2:
 				return Var.Em.Confident;
 			case 3:
-				return Var.Em.Lonely;
+				return Var.Em.Solitary;
 			case 4:
-				return Var.Em.Friendly;
+				return Var.Em.Social;
 			default:
 				return Var.Em.Neutral;
 		}
@@ -304,13 +324,13 @@ public class Helpers : MonoBehaviour {
 	{
 		switch (emotion)
 		{
-			case Var.Em.Friendly:
+			case Var.Em.Social:
 				return FriendlyHexColor;
-			case Var.Em.Lonely:
+			case Var.Em.Solitary:
 				return LonelyHexColor;
 			case Var.Em.Confident:
 				return BraveHexColor;
-			case Var.Em.Scared:
+			case Var.Em.Cautious:
 				return ScaredHexColor;
 			case Var.Em.SuperFriendly:
 				return FriendlyHexColor;
@@ -336,22 +356,22 @@ public class Helpers : MonoBehaviour {
 		{
 			case Var.Em.Neutral:
 				return Var.Em.Neutral;
-			case Var.Em.Lonely:
+			case Var.Em.Solitary:
 				return Var.Em.Confident;
 			case Var.Em.SuperLonely:
 				return Var.Em.Confident;
-			case Var.Em.Friendly:
-				return Var.Em.Scared;
+			case Var.Em.Social:
+				return Var.Em.Cautious;
 			case Var.Em.SuperFriendly:
-				return Var.Em.Scared;
+				return Var.Em.Cautious;
 			case Var.Em.Confident:
-				return Var.Em.Friendly;
+				return Var.Em.Social;
 			case Var.Em.SuperConfident:
-				return Var.Em.Friendly;
-			case Var.Em.Scared:
-				return Var.Em.Lonely;
+				return Var.Em.Social;
+			case Var.Em.Cautious:
+				return Var.Em.Solitary;
 			case Var.Em.SuperScared:
-				return Var.Em.Lonely;
+				return Var.Em.Solitary;
 			case Var.Em.finish:
 				return Var.Em.Neutral;
 			default:
@@ -421,22 +441,22 @@ public class Helpers : MonoBehaviour {
 		{
 			case Var.Em.Neutral:
 				return Var.Em.Neutral;
-			case Var.Em.Lonely:
-				return Var.Em.Scared;
+			case Var.Em.Solitary:
+				return Var.Em.Cautious;
 			case Var.Em.SuperLonely:
-				return Var.Em.Scared;
-			case Var.Em.Friendly:
+				return Var.Em.Cautious;
+			case Var.Em.Social:
 				return Var.Em.Confident;
 			case Var.Em.SuperFriendly:
 				return Var.Em.Confident;
 			case Var.Em.Confident:
-				return Var.Em.Lonely;
+				return Var.Em.Solitary;
 			case Var.Em.SuperConfident:
-				return Var.Em.Lonely;
-			case Var.Em.Scared:
-				return Var.Em.Friendly;
+				return Var.Em.Solitary;
+			case Var.Em.Cautious:
+				return Var.Em.Social;
 			case Var.Em.SuperScared:
-				return Var.Em.Friendly;
+				return Var.Em.Social;
 			case Var.Em.finish:
 				return Var.Em.Neutral;
 			default:
@@ -848,13 +868,13 @@ public class Helpers : MonoBehaviour {
 		{
 			case Var.Em.Neutral:
 				return neutral;
-			case Var.Em.Friendly:
+			case Var.Em.Social:
 				return friendly;
-			case Var.Em.Lonely:
+			case Var.Em.Solitary:
 				return lonely;
 			case Var.Em.Confident:
 				return brave;
-			case Var.Em.Scared:
+			case Var.Em.Cautious:
 				return scared;
 			case Var.Em.SuperFriendly:
 				return friendly;
@@ -878,13 +898,13 @@ public class Helpers : MonoBehaviour {
 		{
 			case Var.Em.Neutral:
 				return neutral;
-			case Var.Em.Friendly:
+			case Var.Em.Social:
 				return softFriendly;
-			case Var.Em.Lonely:
+			case Var.Em.Solitary:
 				return softLonely;
 			case Var.Em.Confident:
 				return softBrave;
-			case Var.Em.Scared:
+			case Var.Em.Cautious:
 				return softScared;
 			case Var.Em.SuperFriendly:
 				return softFriendly;
@@ -1113,11 +1133,11 @@ public class Helpers : MonoBehaviour {
 	{
 		if (emotion == Var.Em.Confident || emotion == Var.Em.SuperConfident)
 			return new Vector2(currentStats.x, currentStats.y + magnitude);
-		if (emotion == Var.Em.Scared || emotion == Var.Em.SuperScared)
+		if (emotion == Var.Em.Cautious || emotion == Var.Em.SuperScared)
 			return new Vector2(currentStats.x, currentStats.y - magnitude);
-		if (emotion == Var.Em.Friendly || emotion == Var.Em.SuperFriendly)
+		if (emotion == Var.Em.Social || emotion == Var.Em.SuperFriendly)
 			return new Vector2(currentStats.x + magnitude, currentStats.y );
-		if (emotion == Var.Em.Lonely || emotion == Var.Em.SuperLonely)
+		if (emotion == Var.Em.Solitary || emotion == Var.Em.SuperLonely)
 			return new Vector2(currentStats.x - magnitude, currentStats.y);
 		return currentStats;
 	}

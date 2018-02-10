@@ -230,31 +230,31 @@ public class GameLogic : MonoBehaviour {
         Var.Em em1 = Bird1.emotion;
         Var.Em em2 = Bird2.emotion;
         //TODO: discuss super rules
-        if ((em1 == Var.Em.Friendly || em1 == Var.Em.SuperFriendly) && em2 == Var.Em.Neutral)
+        if ((em1 == Var.Em.Social || em1 == Var.Em.SuperFriendly) && em2 == Var.Em.Neutral)
             return true;
         if ((em1 == Var.Em.Confident || em1 == Var.Em.SuperConfident) && em2 == Var.Em.Neutral)
             return true;
-        if ((em1 == Var.Em.Lonely || em1 == Var.Em.SuperLonely)&& em2 == Var.Em.Neutral)
+        if ((em1 == Var.Em.Solitary || em1 == Var.Em.SuperLonely)&& em2 == Var.Em.Neutral)
             return true;
-        if ((em1 == Var.Em.Scared || em1 == Var.Em.SuperScared) && em2 == Var.Em.Neutral)
+        if ((em1 == Var.Em.Cautious || em1 == Var.Em.SuperScared) && em2 == Var.Em.Neutral)
             return true;
 
-        if (em1 == Var.Em.Friendly && em2 == Var.Em.Confident)
+        if (em1 == Var.Em.Social && em2 == Var.Em.Confident)
             return true;
-        if (em1 == Var.Em.Confident && em2 == Var.Em.Lonely)
+        if (em1 == Var.Em.Confident && em2 == Var.Em.Solitary)
             return true;
-        if (em1 == Var.Em.Lonely && em2 == Var.Em.Scared)
+        if (em1 == Var.Em.Solitary && em2 == Var.Em.Cautious)
             return true;
-        if (em1 == Var.Em.Scared && em2 == Var.Em.Friendly)
+        if (em1 == Var.Em.Cautious && em2 == Var.Em.Social)
             return true;
 
         if (em1 == Var.Em.SuperFriendly && em2 == Var.Em.Confident)
             return true;
-        if (em1 == Var.Em.SuperConfident && em2 == Var.Em.Lonely)
+        if (em1 == Var.Em.SuperConfident && em2 == Var.Em.Solitary)
             return true;
-        if (em1 == Var.Em.SuperLonely && em2 == Var.Em.Scared)
+        if (em1 == Var.Em.SuperLonely && em2 == Var.Em.Cautious)
             return true;
-        if (em1 == Var.Em.SuperScared && em2 == Var.Em.Friendly)
+        if (em1 == Var.Em.SuperScared && em2 == Var.Em.Social)
             return true;
 
         if (em1 == Var.Em.SuperFriendly && em2 == Var.Em.SuperConfident)

@@ -134,15 +134,15 @@ public class fillEnemy : MonoBehaviour {
                     enemy.confidence = 7;
                     enemy.friendliness = 0;
                     break;
-                case Var.Em.Scared:
+                case Var.Em.Cautious:
                     enemy.confidence = -7;
                     enemy.friendliness = 0;
                     break;
-                case Var.Em.Friendly:
+                case Var.Em.Social:
                     enemy.confidence = 0;
                     enemy.friendliness = 7;
                     break;
-                case Var.Em.Lonely:
+                case Var.Em.Solitary:
                     enemy.confidence = 0;
                     enemy.friendliness = -7;
                     break;
@@ -231,11 +231,11 @@ public class fillEnemy : MonoBehaviour {
                 case 1:
                     return Var.Em.Confident;
                 case 2:
-                    return Var.Em.Lonely;
+                    return Var.Em.Solitary;
                 case 3:
-                    return Var.Em.Scared;
+                    return Var.Em.Cautious;
                 case 4:
-                    return Var.Em.Friendly;
+                    return Var.Em.Social;
             }
         }
         return emotion;

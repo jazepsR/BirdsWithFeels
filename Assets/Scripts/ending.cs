@@ -198,11 +198,11 @@ public class ending : MonoBehaviour {
 		{
 			case Var.Em.Confident:
 				return bird.totalConfidence;
-			case Var.Em.Friendly:
+			case Var.Em.Social:
 				return bird.totalFriendliness;
-			case Var.Em.Lonely:
+			case Var.Em.Solitary:
 				return -bird.totalFriendliness;
-			case Var.Em.Scared:
+			case Var.Em.Cautious:
 				return -bird.totalConfidence;
 			default:
 				return 0;

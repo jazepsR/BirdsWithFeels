@@ -44,16 +44,16 @@ public class BattleData {
 			case Var.Em.Neutral:
 				SetBattleData(-5, 5, -5, 5);
 				break;
-			case Var.Em.Friendly:
+			case Var.Em.Social:
 				SetBattleData(-5, 5, 2, 8);
 				break;
-			case Var.Em.Lonely:
+			case Var.Em.Solitary:
 				SetBattleData(-5, 5, -8, -2);
 				break;
 			case Var.Em.Confident:
 				SetBattleData(2, 8, -5, 5);
 				break;
-			case Var.Em.Scared:
+			case Var.Em.Cautious:
 				SetBattleData(-8, 2, -5, 5);
 				break;
 			default:

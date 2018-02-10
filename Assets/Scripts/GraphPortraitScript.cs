@@ -127,7 +127,7 @@ public class GraphPortraitScript : MonoBehaviour {
 			{
 				//Scared
 				if (confidence <= -Var.lvl1+0.15f)
-					emotion = Var.Em.Scared;
+					emotion = Var.Em.Cautious;
 			}
 
 		}
@@ -139,13 +139,13 @@ public class GraphPortraitScript : MonoBehaviour {
 
 				//friendly				
 				if (friendliness >= Var.lvl1-0.15f)
-					emotion = Var.Em.Friendly;
+					emotion = Var.Em.Social;
 			}
 			else
 			{
 				//Lonely				
 				if (friendliness <= -Var.lvl1+0.15f)
-					emotion = Var.Em.Lonely;
+					emotion = Var.Em.Solitary;
 			}
 
 		}

@@ -58,12 +58,12 @@ public class SliderSwitcher : MonoBehaviour
         if (isConf)
         {
             NegativeCol = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
-            PositiveCol = Helpers.Instance.GetEmotionColor(Var.Em.Scared);           
+            PositiveCol = Helpers.Instance.GetEmotionColor(Var.Em.Cautious);           
         }
         else
         {
-            NegativeCol = Helpers.Instance.GetEmotionColor(Var.Em.Friendly);
-            PositiveCol = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
+            NegativeCol = Helpers.Instance.GetEmotionColor(Var.Em.Social);
+            PositiveCol = Helpers.Instance.GetEmotionColor(Var.Em.Solitary);
         }
         FadedPosCol = new Color(PositiveCol.r*0.8f, PositiveCol.g * 0.8f, PositiveCol.b* 0.8f, 0.65f);
         FadedNegCol = new Color(NegativeCol.r * 0.8f, NegativeCol.g * 0.8f, NegativeCol.b * 0.8f, 0.65f);

@@ -80,13 +80,13 @@ public class ObstacleGenerator : MonoBehaviour {
 					case Var.Em.Confident:
 						obj = CourageTile;
 						break;
-					case Var.Em.Friendly:
+					case Var.Em.Social:
 						obj = FirendTile;
 						break;
-					case Var.Em.Lonely:
+					case Var.Em.Solitary:
 						obj = LonelyTile;
 						break;
-					case Var.Em.Scared:
+					case Var.Em.Cautious:
 						obj = ScaredTile;
 						break;
 					default:

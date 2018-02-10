@@ -94,13 +94,13 @@ public class powerTile : MonoBehaviour {
 				case Var.Em.Confident:
 					bird.groundConfBoos = 1 * bird.groundMultiplier;
 					break;
-				case Var.Em.Friendly:
+				case Var.Em.Social:
 					bird.groundFriendBoos= 1 * bird.groundMultiplier;
 					break;
-				case Var.Em.Lonely:
+				case Var.Em.Solitary:
 					bird.groundFriendBoos = -1 * bird.groundMultiplier;
 					break;
-				case Var.Em.Scared:
+				case Var.Em.Cautious:
 					bird.groundConfBoos = -1 * bird.groundMultiplier;
 					break;
 			}

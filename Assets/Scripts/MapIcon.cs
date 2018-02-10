@@ -470,13 +470,13 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	{
 		List<Var.Em> list = new List<Var.Em>();
 		if (hasFirendlyPowerUps)
-			list.Add(Var.Em.Friendly);
+			list.Add(Var.Em.Social);
 		if (hasConfidentPowerUps)
-			list.Add(Var.Em.Lonely);
+			list.Add(Var.Em.Solitary);
 		if (hasLonelyPwerUps)
-			list.Add(Var.Em.Lonely);
+			list.Add(Var.Em.Solitary);
 		if (hasScaredPowerUps)
-			list.Add(Var.Em.Scared);
+			list.Add(Var.Em.Cautious);
 		return list;
 	}
 	List<Var.PowerUps> PowerList()

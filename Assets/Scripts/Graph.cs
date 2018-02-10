@@ -61,13 +61,13 @@ public class Graph : MonoBehaviour {
 				if (y > 0)
 					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Confident) + "Confidence: " + y + "</color>\n";
 				if (y < 0)
-					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Scared) + "Cautions: " + Mathf.Abs(y) + "</color>\n";
+					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Cautious) + "Cautions: " + Mathf.Abs(y) + "</color>\n";
 				if (y == 0)
 					tooltipText += "Confidence: 0\n";
 				if (x > 0)
-					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Friendly) + "Social: " + x + "</color>\n";
+					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Social) + "Social: " + x + "</color>\n";
 				if (x < 0)
-					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Lonely) + "Solitary: " + Mathf.Abs(x) + "</color>\n";
+					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Solitary) + "Solitary: " + Mathf.Abs(x) + "</color>\n";
 				if (x == 0)
 					tooltipText += "Solitude: 0\n";
 				info.tooltipText = "<b>" + tooltipText + "</b>";

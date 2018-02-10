@@ -81,7 +81,7 @@ public class Bird : MonoBehaviour
 	public bool inMap = false;
 	[HideInInspector]
 	public Sprite hatSprite;
-	public Levels.type startingLVL;
+	//public Levels.type startingLVL;
 	[HideInInspector]
 	public List<LevelData> levelList;
 	[HideInInspector]
@@ -198,13 +198,13 @@ public class Bird : MonoBehaviour
 			if (levelList.Count == 0 && !Var.isTutorial)
 			{
 				levelList = new List<LevelData>();
-				Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);     
+				/*Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);     
 				if(startingLVL != Levels.type.None)          
-					AddLevel(new LevelData(startingLVL, Var.Em.Neutral,icon));
+					AddLevel(new LevelData(startingLVL, Var.Em.Neutral,icon));*/
 			}
 			levelControler = GetComponent<Levels>();
-			if (startingLVL != Levels.type.None)
-				levelControler.ApplyStartLevel(this, levelList);       
+			/*if (startingLVL != Levels.type.None)
+				levelControler.ApplyStartLevel(this, levelList);      */ 
 		}
 		colorSprites = new List<SpriteRenderer>();
 		foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
@@ -291,7 +291,7 @@ public class Bird : MonoBehaviour
 			{
 				if(Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, levelList))
 				{
-					CooldownRing.color = Helpers.Instance.GetEmotionColor(Var.Em.Lonely);
+					CooldownRing.color = Helpers.Instance.GetEmotionColor(Var.Em.Solitary);
 					CooldownRing.gameObject.SetActive(active);
 				}
 				else
@@ -336,21 +336,21 @@ public class Bird : MonoBehaviour
 					else
 						friendliness = (int)Mathf.Max(-4, friendliness);
 					break;
-				case Var.Em.Scared:
+				case Var.Em.Cautious:
 					confidence = -4;
 					if (friendliness > 0)
 						friendliness = (int)Mathf.Min(4, friendliness);
 					else
 						friendliness = (int)Mathf.Max(-4, friendliness);
 					break;
-				case Var.Em.Friendly:
+				case Var.Em.Social:
 					friendliness = 4;
 					if (confidence > 0)
 						confidence = (int)Mathf.Min(4, confidence);
 					else
 						confidence = (int)Mathf.Max(-4, confidence);
 					break;
-				case Var.Em.Lonely:
+				case Var.Em.Solitary:
 					friendliness = -4;
 					if (confidence > 0)
 						confidence = (int)Mathf.Min(4, confidence);
@@ -938,7 +938,7 @@ public class Bird : MonoBehaviour
 		if ((Mathf.Abs(confidence) >= 12 || Mathf.Abs(friendliness) >= 12) && (Mathf.Abs(prevConf) >= 12 || Mathf.Abs(prevFriend) >= 12))
 		{//In danger zone
 			mentalHealth = Math.Max(mentalHealth - 1, 0);
-			if (mentalHealth == -1)
+			if (mentalHealth == 0)
 			{
 				//dont kill the player
 				if (health > 1)
@@ -947,8 +947,8 @@ public class Bird : MonoBehaviour
 					hadMentalPain = true;
 					health--;
 				}
-					
-				
+
+				mentalHealth = Var.maxMentalHealth;
 			}
 
 		}
@@ -1007,7 +1007,7 @@ public class Bird : MonoBehaviour
 			{
 				//Scared
 			   if (confidence <= -Var.lvl1)
-					emotion = Var.Em.Scared;				
+					emotion = Var.Em.Cautious;				
 			}
 
 		}
@@ -1019,13 +1019,13 @@ public class Bird : MonoBehaviour
 
 				//friendly				
 				if (friendliness >= Var.lvl1)
-					emotion = Var.Em.Friendly;				
+					emotion = Var.Em.Social;				
 			}
 			else
 			{
 				//Lonely				
 				if (friendliness <= -Var.lvl1)
-					emotion = Var.Em.Lonely;				
+					emotion = Var.Em.Solitary;				
 			}
 
 		}
@@ -1034,13 +1034,31 @@ public class Bird : MonoBehaviour
 			foreach (SpriteRenderer sp in colorSprites)
 				LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
 		}
-		catch { }        
-		DefaultCol = Helpers.Instance.GetEmotionColor(emotion);        
-		HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g +factor, DefaultCol.b + factor);
+		catch { }
+		if (isEnemy)
+		{
+			DefaultCol = Helpers.Instance.GetEmotionColor(emotion);
+			HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g + factor, DefaultCol.b + factor);
+		}else
+		{
+			float delay = 0;
+			if (Var.Infight)
+				delay = 5f;
+			LeanTween.delayedCall(delay, () => SetAnimation(emotion));
+		}
 		if (prevEmotion.Equals(Var.Em.finish))
 			prevEmotion = emotion;
+
+
 	}
 	
+	void SetAnimation(Var.Em emotionNum)
+	{
+
+		Animator anim = GetComponentInChildren<Animator>();
+		anim.SetInteger("emotion", Helpers.GetEmotionNumber(emotion));
+	}
+
 	public void showText()
 	{
 		if (ToString() != null)

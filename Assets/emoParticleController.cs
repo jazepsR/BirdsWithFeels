@@ -26,7 +26,7 @@ public class emoParticleController : MonoBehaviour {
 	{
 		switch(emotion)
 		{
-			case Var.Em.Friendly:
+			case Var.Em.Social:
 				particles_social.Emit(getNumber(intensity));
 				break;
 
@@ -34,11 +34,11 @@ public class emoParticleController : MonoBehaviour {
 				particles_confident.Emit(getNumber(intensity));
 				break;
 
-			case Var.Em.Lonely:
+			case Var.Em.Solitary:
 				particles_lonely.Emit(getNumber(intensity));
 				break;
 
-			case Var.Em.Scared:
+			case Var.Em.Cautious:
 				particles_cautious.Emit(getNumber(intensity));
 				break; 
 		}

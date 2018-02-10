@@ -129,7 +129,7 @@ public class battleAnim :MonoBehaviour {
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", false);
 			AudioControler.Instance.EnemySound();
 			battle.player.ChageHealth(-1);
-			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Scared);
+			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Cautious);
 			//battle.enemy.GetComponentInChildren<Animator>().SetBool("victory", true);
 			if (battle.player == GuiContoler.Instance.selectedBird)
 				battle.player.showText();

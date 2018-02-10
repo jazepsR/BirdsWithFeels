@@ -192,7 +192,7 @@ public class FillPlayer : MonoBehaviour {
 		target.portrait = template.portrait;
 		target.maxHealth = template.maxHealth;
 		target.levelList = template.levelList;
-		target.startingLVL = template.startingLVL;
+		//target.startingLVL = template.startingLVL;
 		target.battleCount = template.battleCount;
 		target.lastLevel = template.lastLevel;
 		target.level = template.level;
@@ -231,7 +231,7 @@ public class FillPlayer : MonoBehaviour {
 		target.dead = template.injured;
 		//target.portrait = template.portrait;
 		target.levelList = template.levelList;
-		target.startingLVL = template.startingLVL;
+		//target.startingLVL = template.startingLVL;
 		target.battleCount = template.battleCount;
 		target.lastLevel = template.lastLevel;
 		target.level = template.level;
@@ -259,7 +259,7 @@ public class FillPlayer : MonoBehaviour {
 		target.preferredEmotion = template.preferredEmotion;
 		target.injured = template.dead;//target.portrait = template.portrait;
 		target.levelList = template.levelList;
-		target.startingLVL = template.startingLVL;
+		//target.startingLVL = template.startingLVL;
 		target.battleCount = template.battleCount;
 		target.lastLevel = template.lastLevel;
 		target.level = template.level;

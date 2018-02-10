@@ -133,13 +133,13 @@ public class feedBack : MonoBehaviour {
 			return;        
 		switch (enemy.emotion)
 		{
-			case Var.Em.Lonely:
+			case Var.Em.Solitary:
 				player.wizardFrienBoos -= 2;
 				break;
-			case Var.Em.Friendly:
+			case Var.Em.Social:
 				player.wizardFrienBoos += 2;
 				break;
-			case Var.Em.Scared:
+			case Var.Em.Cautious:
 				player.wizardConfBoos -= 2;
 				break;
 			case Var.Em.Confident:
