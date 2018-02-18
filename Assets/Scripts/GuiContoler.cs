@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GuiContoler : MonoBehaviour {
 	public static GuiContoler Instance { get; private set; }
+	public Image dangerFollowHighlight;
 	public Image[] vingette;
 	public GameObject kingMouth;
 	public GameObject playerMouth;
@@ -493,6 +494,7 @@ public class GuiContoler : MonoBehaviour {
 		closeReportBtn.SetActive(false);
 		HideSmallGraph.gameObject.SetActive(true);
 		Var.activeBirds[0].showText();
+		dangerFollowHighlight.gameObject.SetActive(false);
 	}
 	public void CloseBirdStats()
 	{
@@ -533,6 +535,7 @@ public class GuiContoler : MonoBehaviour {
 		{
 			BirdsToGraph = Var.activeBirds;
 			ProgressGUI.Instance.ConditionsBG.transform.parent.gameObject.SetActive(false);
+			dangerFollowHighlight.gameObject.SetActive(false);
 		}
 		else
 		{
@@ -544,6 +547,7 @@ public class GuiContoler : MonoBehaviour {
 				AudioControler.Instance.PlaySound(AudioControler.Instance.applause);
 				return;
 			}
+			dangerFollowHighlight.gameObject.SetActive(true);
 		}
 
 		if (birdNum == -1)

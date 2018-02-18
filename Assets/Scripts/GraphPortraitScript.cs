@@ -34,6 +34,7 @@ public class GraphPortraitScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		GuiContoler.Instance.dangerFollowHighlight.transform.position = transform.position;
 		if ((Mathf.Abs(transform.localPosition.x / factor) >= 12 || Mathf.Abs(transform.localPosition.y / factor) >= 12) && !inDangerZone)
 		{
 

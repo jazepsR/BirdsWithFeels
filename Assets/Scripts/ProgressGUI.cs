@@ -39,6 +39,7 @@ public class ProgressGUI : MonoBehaviour {
 	public GameObject abilityHeading;
 	public Image ConditionsBG;
 	public GameObject mentalPainPopup;
+	internal bool CanLevel;
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -58,7 +59,7 @@ public class ProgressGUI : MonoBehaviour {
 	void UpdateLevelAreas(Bird bird, bool isFinal =false)
 	{
 		//bool HasSuper = (bird.level > 1);
-		bool CanLevel = false;
+		CanLevel = false;
 		levelStuffText.text = "<b>" + bird.charName+"</b> must grow emotionally to gain new abilites";
 		if(bird.levelList.Count ==0)
 		{
@@ -72,48 +73,7 @@ public class ProgressGUI : MonoBehaviour {
 		}
 		foreach (LevelArea lvl in levelAreas)
 		{
-			lvl.myImage.color = lvl.defaultColor;
-			lvl.gameObject.SetActive(true);
-			lvl.myImage.sprite = lvl.Default;
-			lvl.Unlock();
-			if (Helpers.Instance.ListContainsLevel(lvl.level, bird.levelList))
-			{
-				lvl.gameObject.SetActive(false);
-			}
-			/*else
-			{
-				if (lvl.gameObject.GetComponent<LevelArea>().isSmall)
-					lvl.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(140, 650);
-			}*/
-
-			if (bird.bannedLevels == lvl.emotion)
-				lvl.gameObject.SetActive(false);
-
-			float emotionRequirement = 7;
-			if (lvl.level.ToString().Contains("2"))
-			{
-				emotionRequirement = 10;
-				if (!Helpers.Instance.ListContainsEmotion(lvl.emotion, bird.levelList))
-					lvl.gameObject.SetActive(false);
-
-			}
-			if (Var.isTutorial || isFinal || !Var.gameSettings.shownLevelTutorial)
-				lvl.gameObject.SetActive(false);
-			if (lvl.gameObject.activeSelf && bird.emotion == lvl.emotion && Helpers.Instance.GetEmotionValue(bird, lvl.emotion) >= emotionRequirement)
-			{
-				CanLevel = true;
-				lvl.gameObject.GetComponent<Animator>().SetBool("active", true);
-				ConditionsBG.color = Helpers.Instance.GetSoftEmotionColor(lvl.emotion);
-				levelStuffText.text = "<b>" + Helpers.Instance.GetLevelTitle(lvl.level) +
-					"</b> available!<b>\nRequirements:</b>\n" + Helpers.Instance.GetLVLRequirements(lvl.level);
-			}
-			else
-			{
-				lvl.gameObject.GetComponent<Animator>().SetBool("active", false);
-			}
-
-			
-
+			lvl.SetAnimator(bird, isFinal);
 		}
 		ConditionsBG.transform.parent.gameObject.SetActive(CanLevel);
 		skillBG.color = skillDefaultCol;

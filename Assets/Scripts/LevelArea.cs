@@ -24,15 +24,12 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 	public bool isLocked = false;
 	[HideInInspector]
 	public Color defaultColor;
-	[HideInInspector]
-	public Image myImage;
 	public bool isSmall = false;
+	Animator anim;
 	// Use this for initialization
 	void Start () {
-		myImage = GetComponent<Image>();
 		defaultColor = Helpers.Instance.GetSoftEmotionColor(emotion);
-		myImage.color = defaultColor;
-		myImage.sprite = Default;
+		anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -46,7 +43,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 	}
 	public void OnPointerExit(PointerEventData eventData)
 	{
-		myImage.color = defaultColor;
+		//TODO: add pointerColors 
 	}
 	/*public void OnPointerExit(PointerEventData eventData)
 	{
@@ -58,14 +55,40 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
 	}*/
 
-	public void Lock()
+	public void SetAnimator(Bird bird, bool isFinal)
 	{
-		isLocked = true;       
-		myImage.color = Color.black;
-	}
-	public void Unlock()
-	{
-		isLocked = false;       
-		myImage.color = defaultColor;
+		int exitement = 1;
+		if (Helpers.Instance.ListContainsLevel(level, bird.levelList))
+		{
+			exitement = 0;
+		}
+
+		if (bird.bannedLevels == emotion)
+			exitement = 0;
+
+		float emotionRequirement = 7;
+		if (level.ToString().Contains("2"))
+		{
+			emotionRequirement = 10;
+			if (!Helpers.Instance.ListContainsEmotion(emotion, bird.levelList))
+				exitement = 0;
+
+		}
+		if (Var.isTutorial || isFinal || !Var.gameSettings.shownLevelTutorial)
+			exitement = 0;
+		if (bird.emotion == emotion && Helpers.Instance.GetEmotionValue(bird, emotion) >= emotionRequirement && exitement != 0)
+		{
+			ProgressGUI.Instance.CanLevel = true;
+			ProgressGUI.Instance.ConditionsBG.color = Helpers.Instance.GetSoftEmotionColor(emotion);
+			exitement = 3;
+			ProgressGUI.Instance.levelStuffText.text = "<b>" + Helpers.Instance.GetLevelTitle(level) +
+				"</b> available!<b>\nRequirements:</b>\n" + Helpers.Instance.GetLVLRequirements(level);
+		}
+		else if(Helpers.Instance.GetEmotionValue(bird, emotion) >= emotionRequirement-2 && exitement!=0)
+		{
+			exitement = 2;
+		}
+		anim.SetInteger("excitement", exitement);
+		print(level.ToString() + " excitement " + exitement);
 	}
 }
