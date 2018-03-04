@@ -26,7 +26,7 @@ public class Graph : MonoBehaviour {
 
 	public void PlotFull(Bird bird)
 	{
-        if (GuiContoler.Instance.winBanner.activeSelf)
+        if (!GuiContoler.Instance.inMap && GuiContoler.Instance.winBanner.activeSelf)
             return;
 		if (bird.health <= 0)
 			return;

@@ -243,6 +243,10 @@ public class Bird : MonoBehaviour
 				MapControler.Instance.CanLoadBattle();
 			}
 		}
+
+		if (inMap)
+			GetComponentInChildren<Animator>().SetBool("rest", true);
+
 		showText();
 	}
 
@@ -605,10 +609,12 @@ public class Bird : MonoBehaviour
 				if (MapControler.Instance.selectedBirds.Contains(this))
 				{
 					mapHighlight.SetActive(false);
+					GetComponentInChildren<Animator>().SetBool("rest", true);
 					MapControler.Instance.selectedBirds.Remove(this);
 				}else
 				{
 					mapHighlight.SetActive(true);
+					GetComponentInChildren<Animator>().SetBool("rest",false);
 					MapControler.Instance.selectedBirds.Add(this);
 				}
 				MapControler.Instance.CanLoadBattle();
@@ -1064,11 +1070,10 @@ public class Bird : MonoBehaviour
 		if (ToString() != null)
 		{
 			//Var.birdInfo.text = ToString();         
-			if (!inMap)
-			{
-				GuiContoler.Instance.clearSmallGraph();
-				GuiContoler.Instance.smallGraph.PlotFull(this);
-			}
+			
+			GuiContoler.Instance.clearSmallGraph();
+			GuiContoler.Instance.smallGraph.PlotFull(this);
+			
 			GuiContoler.Instance.selectedBird = this;
 			//SetRelationshipSliders(GuiContoler.Instance.relationshipSliders);
 			Var.birdInfoFeeling.text = emotion.ToString();

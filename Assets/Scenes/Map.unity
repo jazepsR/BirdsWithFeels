@@ -10339,7 +10339,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 503879763}
   m_OnClick:
     m_PersistentCalls:
@@ -13939,7 +13939,7 @@ MonoBehaviour:
   reportRelationshipSliders: {fileID: 0}
   levelinfoHideXValue: 0
   levelinfoshowXValue: 0
-  smallGraph: {fileID: 0}
+  smallGraph: {fileID: 1828801122}
   boss: {fileID: 0}
   graphAnime: {fileID: 0}
   minimap: {fileID: 0}
@@ -35606,6 +35606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1828801120}
   - component: {fileID: 1828801121}
+  - component: {fileID: 1828801122}
   m_Layer: 5
   m_Name: smallGraph
   m_TagString: Untagged
@@ -35656,6 +35657,25 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1828801122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1828801119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21053405e8ebe3d4d9af687a94459cb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphArea: {fileID: 404866767}
+  heart: {fileID: 0}
+  prevHeart: {fileID: 1673474852785688, guid: ce5d8cc27b9f12149b62eb91a3195e2f, type: 2}
+  graphParent: {fileID: 945051503}
+  graphSize: 275
+  portraits: []
+  factor: 8
+  isSmall: 1
 --- !u!1 &1830645270 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4,
