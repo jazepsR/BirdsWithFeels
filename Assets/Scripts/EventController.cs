@@ -83,6 +83,7 @@ public class EventController : MonoBehaviour {
 		{
 			text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
 			SetPortrait(currentText);
+
 			continueBtn.SetActive(false);
 			CreateChoices();
 			return;         
