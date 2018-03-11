@@ -48,6 +48,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	public bool hasWizards = false;
 	public bool hasDrills = false;
 	public bool hasSuper = false;
+	public bool firstCompletion = true;
 	public Bird birdToAdd;
 	public EventScript birdToAddScript;
 	ShowTooltip tooltipInfo;
@@ -56,6 +57,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	public Image unlockedRoad;
 	bool useline;
 	public int trialID;
+	[HideInInspector]
+	public Animator anim;
 	//[HideInInspector]
 	public TimedEventControl timedEventTrigger;
 	// Use this for initialization
@@ -95,7 +98,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		{
 			useline = false;
 		}
-		
+		anim = GetComponent<Animator>();
+		SetState();
 	}
 	int GetTargetID(MapIcon data)
 	{
@@ -107,7 +111,40 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			return GetTargetID(data.targets[0]);
 	}
 
+	public void SetState()
+	{
+		if (available)
+		{
+			if (completed)
+			{
+				if(ID == Var.currentStageID && firstCompletion)
+				{
+					firstCompletion = false;
+					anim.SetInteger("state", 1);
+					unlockedRoad.gameObject.SetActive(false);
+					LeanTween.delayedCall(0.2f, () => anim.SetInteger("state", 2));
+					LeanTween.delayedCall(1.7f,()=> unlockedRoad.gameObject.GetComponent<Animator>().SetBool("new", true));
+					LeanTween.delayedCall(1.7f, () => unlockedRoad.gameObject.SetActive(true));
+					foreach(MapIcon icon in targets)
+					{
+						LeanTween.delayedCall(2.7f, () => icon.anim.SetInteger("state", 1));
+					}
+					LeanTween.delayedCall(3f,SaveLoad.Save);
+				}
+				else
+				{
+					anim.SetInteger("state", 2);
+				}
+			}else
+			{
+				anim.SetInteger("state", 1);
+			}
+		}else
+		{
+			anim.SetInteger("state", 0);
+		}
 
+	}
 
 	void ValidateAll()
 	{
@@ -305,7 +342,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			{
 				targIDs.Add(targ.ID);
 			}
-			mySaveData = new MapSaveData(completed, available, ID, targIDs,type, trialID,levelName);
+			mySaveData = new MapSaveData(completed, available,firstCompletion, ID, targIDs,type, trialID,levelName);
 			Var.mapSaveData.Add(mySaveData);
 		}
 		else

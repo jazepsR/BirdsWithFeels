@@ -742,61 +742,69 @@ public class Bird : MonoBehaviour
 
 	public void ChageHealth(int change)
 	{
-		if (injured)
-			return;
-		if (health + roundHealthChange <= 0)
-			return;
-		if (change > 0)
+		try
 		{
-			if (health != maxHealth)
+			if (injured)
+				return;
+			if (health + roundHealthChange <= 0)
+				return;
+			if (change > 0)
 			{
-				GameObject healObj = Instantiate(healParticle, transform);
-				Destroy(healObj, 1.5f);
-			}
-		}else
-		{
-			if (Helpers.Instance.ListContainsLevel(Levels.type.Brave2, levelList) && (emotion == Var.Em.Confident || emotion == Var.Em.SuperConfident))
-			{
-				levelConfBoos -= 2;
-				GameObject shield = Resources.Load("shieldEffect") as GameObject;
-				Instantiate(shield, transform);
-
+				if (health != maxHealth)
+				{
+					GameObject healObj = Instantiate(healParticle, transform);
+					Destroy(healObj, 1.5f);
+				}
 			}
 			else
 			{
-				try
+				if (Helpers.Instance.ListContainsLevel(Levels.type.Brave2, levelList) && (emotion == Var.Em.Confident || emotion == Var.Em.SuperConfident))
 				{
-					List<Bird> birds = Helpers.Instance.GetAdjacentBirds(this);
-					if (birds != null && birds.Count>0)
+					levelConfBoos -= 2;
+					GameObject shield = Resources.Load("shieldEffect") as GameObject;
+					Instantiate(shield, transform);
+
+				}
+				else
+				{
+					try
 					{
-						foreach (Bird bird in birds)
+						List<Bird> birds = Helpers.Instance.GetAdjacentBirds(this);
+						if (birds != null && birds.Count > 0)
 						{
-							if (Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList) && bird.CoolDownLeft == 0)
+							foreach (Bird bird in birds)
 							{
-								bird.CoolDownLeft = bird.CoolDownLength;
-								change = 0;
-								GameObject shield = Resources.Load("shieldEffect") as GameObject;
-								Instantiate(shield, transform);
+								if (Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList) && bird.CoolDownLeft == 0)
+								{
+									bird.CoolDownLeft = bird.CoolDownLength;
+									change = 0;
+									GameObject shield = Resources.Load("shieldEffect") as GameObject;
+									Instantiate(shield, transform);
+								}
 							}
 						}
 					}
+					catch { }
 				}
-				catch { }
+			}
+
+			roundHealthChange += change;
+			Debug.Log(charName + " health change " + change);
+			if (GuiContoler.Instance.selectedBird == this)
+			{
+				showText();
+			}
+			if (health + roundHealthChange <= 0)
+			{
+				injured = true;
+				battleConfBoos -= 5;
+				GetComponentInChildren<Animator>().SetBool("injured", true);
+				TurnsInjured = 4;
 			}
 		}
-	   
-		roundHealthChange+= change;
-		Debug.Log(charName + " health change " + change);
-		if(GuiContoler.Instance.selectedBird == this)
+		catch(Exception ex)
 		{
-			showText();
-		}
-		if (health+ roundHealthChange <= 0)
-		{
-			injured = true;
-			battleConfBoos -= 5;
-			GetComponentInChildren<Animator>().SetBool("injured", true);
-			TurnsInjured = 4;
+			print("Error in add health: " + ex.Message);
 		}
 		
 	}

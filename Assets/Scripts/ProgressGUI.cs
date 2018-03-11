@@ -184,13 +184,6 @@ public class ProgressGUI : MonoBehaviour {
 		else
 		{
 			Helpers.Instance.setHearts(activeHearts, bird.health, bird.maxHealth, bird.prevRoundHealth);
-
-			foreach(Image mentalHeart in mentalHearts)
-			{
-
-
-
-			}
 			LeanTween.delayedCall(1f, () => SetMentalHearts(bird.mentalHealth, Var.maxMentalHealth, bird.prevRoundMentalHealth, bird));
 			if(bird.hadMentalPain)
 			{

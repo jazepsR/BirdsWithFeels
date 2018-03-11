@@ -185,6 +185,69 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 4325957}
+--- !u!1 &4360424 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1723098411713526, guid: 9640144b0402f6e49ae177bef4b08adc,
+    type: 2}
+  m_PrefabInternal: {fileID: 1437183693}
+--- !u!114 &4360426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 4360424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 4360427}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1661642004}
+        m_MethodName: ContinueBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &4360427 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114455913869864398, guid: 9640144b0402f6e49ae177bef4b08adc,
+    type: 2}
+  m_PrefabInternal: {fileID: 1437183693}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &8457205
 GameObject:
   m_ObjectHideFlags: 0
@@ -2269,7 +2332,7 @@ MonoBehaviour:
   totalConfidence: 0
   friendliness: 1
   health: 3
-  mentalHealth: 0
+  mentalHealth: 2
   GainedLVLHealth: 0
   foughtInRound: 0
   maxHealth: 3
@@ -7994,7 +8057,7 @@ MonoBehaviour:
   totalConfidence: 0
   friendliness: -2
   health: 3
-  mentalHealth: 0
+  mentalHealth: 3
   GainedLVLHealth: 0
   foughtInRound: 0
   maxHealth: 3
@@ -9617,6 +9680,7 @@ GameObject:
   - component: {fileID: 458727235}
   - component: {fileID: 458727237}
   - component: {fileID: 458727236}
+  - component: {fileID: 458727238}
   m_Layer: 0
   m_Name: road (6)
   m_TagString: Untagged
@@ -9675,6 +9739,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 458727234}
+--- !u!95 &458727238
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 458727234}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49c9bde523c3fe84ead0481e0f2e3061, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &466420183
 GameObject:
   m_ObjectHideFlags: 0
@@ -11698,6 +11779,12 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 544439170}
+--- !u!114 &547202812 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114344489934383190, guid: d382db0a803e5d141aac63dddf6ef2e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1070439729}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &548459961
 GameObject:
   m_ObjectHideFlags: 0
@@ -14040,7 +14127,10 @@ MonoBehaviour:
   - {fileID: 1016530710}
   - {fileID: 1807461950}
   - {fileID: 742961781}
-  BirdMentalHearts: []
+  BirdMentalHearts:
+  - {fileID: 2096128275}
+  - {fileID: 884458934}
+  - {fileID: 547202812}
   levelNumberText: {fileID: 1114999023}
   pause: {fileID: 912135980}
   deathMenu: {fileID: 0}
@@ -17536,6 +17626,12 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &884458934 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114365326108301844, guid: d382db0a803e5d141aac63dddf6ef2e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1070439729}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &885711299
 GameObject:
   m_ObjectHideFlags: 0
@@ -19553,7 +19649,7 @@ MonoBehaviour:
   totalConfidence: 0
   friendliness: 8
   health: 3
-  mentalHealth: 0
+  mentalHealth: 2
   GainedLVLHealth: 0
   foughtInRound: 0
   maxHealth: 3
@@ -19765,7 +19861,7 @@ MonoBehaviour:
   totalConfidence: 0
   friendliness: 5
   health: 2
-  mentalHealth: 0
+  mentalHealth: 3
   GainedLVLHealth: 0
   foughtInRound: 0
   maxHealth: 3
@@ -22882,6 +22978,7 @@ RectTransform:
   - {fileID: 1436692719}
   - {fileID: 1498607054}
   - {fileID: 2046980761}
+  - {fileID: 1343874002}
   m_Father: {fileID: 1513960782}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23551,7 +23648,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: available
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -26547,6 +26644,7 @@ GameObject:
   - component: {fileID: 1343874002}
   - component: {fileID: 1343874004}
   - component: {fileID: 1343874003}
+  - component: {fileID: 1343874005}
   m_Layer: 0
   m_Name: road
   m_TagString: Untagged
@@ -26561,15 +26659,15 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343874001}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6329599, y: 0.6329598, z: 0.6329598}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00024414062}
+  m_LocalScale: {x: 0.4176701, y: 0.41767025, z: 0.41767025}
   m_Children: []
-  m_Father: {fileID: 1751284425}
-  m_RootOrder: 1
+  m_Father: {fileID: 1136833999}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -524, y: -2141}
+  m_AnchoredPosition: {x: -345.77097, y: -1412.7786}
   m_SizeDelta: {x: 2092, y: 464}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1343874003
@@ -26605,6 +26703,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1343874001}
+--- !u!95 &1343874005
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1343874001}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49c9bde523c3fe84ead0481e0f2e3061, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &1349252704 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -26705,7 +26820,7 @@ MonoBehaviour:
   totalConfidence: 0
   friendliness: 2
   health: 3
-  mentalHealth: 0
+  mentalHealth: 3
   GainedLVLHealth: 0
   foughtInRound: 0
   maxHealth: 3
@@ -28317,6 +28432,7 @@ GameObject:
   - component: {fileID: 1436692719}
   - component: {fileID: 1436692718}
   - component: {fileID: 1436692717}
+  - component: {fileID: 1436692720}
   m_Layer: 0
   m_Name: road
   m_TagString: Untagged
@@ -28376,6 +28492,23 @@ RectTransform:
   m_AnchoredPosition: {x: -287.70255, y: -986.5034}
   m_SizeDelta: {x: 1113, y: 1029}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1436692720
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1436692716}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49c9bde523c3fe84ead0481e0f2e3061, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &1437183693
 Prefab:
   m_ObjectHideFlags: 0
@@ -29530,6 +29663,7 @@ GameObject:
   - component: {fileID: 1498607054}
   - component: {fileID: 1498607053}
   - component: {fileID: 1498607052}
+  - component: {fileID: 1498607055}
   m_Layer: 0
   m_Name: road
   m_TagString: Untagged
@@ -29588,6 +29722,23 @@ RectTransform:
   m_AnchoredPosition: {x: 88.42232, y: -1037.3132}
   m_SizeDelta: {x: 1113, y: 708}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1498607055
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1498607051}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49c9bde523c3fe84ead0481e0f2e3061, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1502677963
 GameObject:
   m_ObjectHideFlags: 0
@@ -32482,7 +32633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventFreq: 0
-  testEvent: {fileID: 1195925979}
+  testEvent: {fileID: 0}
   events:
   - {fileID: 0}
   inMap: 1
@@ -32494,7 +32645,7 @@ MonoBehaviour:
   portrait: {fileID: 508926383}
   portraitFill: {fileID: 189529948}
   customImage: {fileID: 1590420954}
-  continueBtn: {fileID: 0}
+  continueBtn: {fileID: 4360424}
   areaEvents: []
   areaStartPoints: 
   mouseOver: {fileID: 1582136945}
@@ -33212,7 +33363,7 @@ RectTransform:
   m_LocalScale: {x: 0.6328535, y: 0.6328532, z: 0.6328532}
   m_Children: []
   m_Father: {fileID: 1751284425}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -34314,7 +34465,6 @@ RectTransform:
   m_LocalScale: {x: 0.65986824, y: 0.65986854, z: 0.65986854}
   m_Children:
   - {fileID: 940691769}
-  - {fileID: 1343874002}
   - {fileID: 1684869674}
   m_Father: {fileID: 1513960782}
   m_RootOrder: 1
@@ -35820,6 +35970,7 @@ GameObject:
   - component: {fileID: 1827155682}
   - component: {fileID: 1827155681}
   - component: {fileID: 1827155680}
+  - component: {fileID: 1827155683}
   m_Layer: 0
   m_Name: road (5)
   m_TagString: Untagged
@@ -35878,6 +36029,23 @@ RectTransform:
   m_AnchoredPosition: {x: -183.29672, y: 260.72388}
   m_SizeDelta: {x: 652, y: 290}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &1827155683
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1827155679}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49c9bde523c3fe84ead0481e0f2e3061, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1828551675
 GameObject:
   m_ObjectHideFlags: 0
@@ -39697,6 +39865,7 @@ GameObject:
   - component: {fileID: 2046980761}
   - component: {fileID: 2046980760}
   - component: {fileID: 2046980759}
+  - component: {fileID: 2046980762}
   m_Layer: 0
   m_Name: road
   m_TagString: Untagged
@@ -39756,6 +39925,23 @@ RectTransform:
   m_AnchoredPosition: {x: -21.115845, y: -865.08765}
   m_SizeDelta: {x: 652, y: 401}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &2046980762
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2046980758}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 49c9bde523c3fe84ead0481e0f2e3061, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &2047031067
 GameObject:
   m_ObjectHideFlags: 0
@@ -41963,6 +42149,12 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2083882200}
+--- !u!114 &2096128275 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114374108067829816, guid: d382db0a803e5d141aac63dddf6ef2e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1070439729}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &2099006799
 GameObject:
   m_ObjectHideFlags: 0

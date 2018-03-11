@@ -91,8 +91,10 @@ public class MapSaveData
 	public bool completed;
 	public bool available;
 	public Var.Em emotion;
-	public MapSaveData(bool completed, bool available, int ID, List<int> targets, Var.Em emotion, int trialID, string areaName)
-	{ 
+	public bool firstCompletion;
+	public MapSaveData(bool completed, bool available,bool firstCompletion, int ID, List<int> targets, Var.Em emotion, int trialID, string areaName)
+	{
+		this.firstCompletion = firstCompletion;
 		this.completed = completed;
 		this.available = available;
 		this.ID = ID;
