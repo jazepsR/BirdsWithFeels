@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 
 public class fillEnemy : MonoBehaviour {
-    public GameObject[] Enemies;
+    public Bird[] Enemies;
     public enum enemyType {normal,wizard, drill,super };
     [Header("Debug")]
     public bool isDebug = false;
@@ -28,16 +28,16 @@ public class fillEnemy : MonoBehaviour {
     public void CreateTutorialEnemies(List<TutorialEnemy> enemies)
     {
         int index = 0;
-        foreach (GameObject enemy in Enemies)
+        foreach (Bird enemy in Enemies)
         {
-            Var.enemies[index] = enemy.GetComponent<Bird>();
+			Var.enemies[index] = enemy;
             foreach(feedBack fb in enemy.GetComponents<feedBack>())
             {
                 fb.myIndex = index % 4;
             }
-            enemy.GetComponent<Bird>().levelRollBonus = 0;
-            enemy.GetComponent<Bird>().inUse = false;
-            enemy.SetActive(false);
+            enemy.levelRollBonus = 0;
+            enemy.inUse = false;
+			enemy.gameObject.SetActive(false);
             index++;
         }
 
@@ -51,7 +51,7 @@ public class fillEnemy : MonoBehaviour {
                 enemy.confidence = en.confidence;
                 enemy.friendliness = en.firendliness;
                 CreateEnemy(enemy);             
-                Enemies[index].SetActive(true);
+                Enemies[index].gameObject.SetActive(true);
                 ApplyArt(enemy);
             }
             index++;
@@ -62,6 +62,7 @@ public class fillEnemy : MonoBehaviour {
 
     public void createEnemies(MapBattleData battleData, int birdLVL = 1, List<Bird.dir> dirList = null, int minEnemies = 3, int maxEnemies = 4, bool hasWizards = false, bool hasDrills = false, bool hasSuper= false)
     {
+		Reset();
         int index = 0;
         float wizardChance = 0.2f;
         float drillChance = 0.3f;
@@ -85,16 +86,17 @@ public class fillEnemy : MonoBehaviour {
         print("min: "+ minEnemies + " max: " + maxEnemies);
         if (dirList.Count == 1 && dirList.Contains(Bird.dir.front))
             max = (int)Mathf.Min( 3f,maxEnemies);
-        foreach(GameObject enemy in Enemies)
+        foreach(Bird enemy in Enemies)
         {
-            Var.enemies[index] = enemy.GetComponent<Bird>();
-            foreach (feedBack fb in enemy.GetComponents<feedBack>())
+			
+			Var.enemies[index] = enemy;
+            foreach (feedBack fb in enemy.gameObject.GetComponents<feedBack>())
             {
                 fb.myIndex = index % 4;
             }        
-            enemy.GetComponent<Bird>().levelRollBonus = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL))-1;
-            enemy.GetComponent<Bird>().inUse = false;
-            enemy.SetActive(false);
+            enemy.levelRollBonus = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL))-1;
+            enemy.inUse = false;
+            enemy.gameObject.SetActive(false);
             index++;
         }
         List<int> usedPos = new List<int>();
@@ -164,7 +166,7 @@ public class fillEnemy : MonoBehaviour {
                 CreateEnemy(enemy, enemyType.wizard);
             else
                 CreateEnemy(enemy);            
-            Enemies[enemyPos].SetActive(true);
+            Enemies[enemyPos].gameObject.SetActive(true);
 			newBirds.Add(enemy);
 		}
         if (hasDrills) {            
@@ -184,7 +186,9 @@ public class fillEnemy : MonoBehaviour {
 
     void ApplyArt(Bird enemy)
     {
-        enemy.EnemyArt = Instantiate(Helpers.Instance.GetEnemyVisual(enemy.position, enemy.emotion, enemy.enemyType), enemy.transform);
+		if (enemy.EnemyArt != null)
+			Destroy(enemy.EnemyArt);
+		enemy.EnemyArt = Instantiate(Helpers.Instance.GetEnemyVisual(enemy.position, enemy.emotion, enemy.enemyType), enemy.transform);
         enemy.EnemyArt.transform.localPosition = new Vector3(0, 0, 0);
         foreach (SpriteRenderer child in enemy.EnemyArt.transform.GetComponentsInChildren<SpriteRenderer>(true))
         {
@@ -261,15 +265,17 @@ public class fillEnemy : MonoBehaviour {
     {
        foreach(Bird enemy in Var.enemies)
         {
-            if (enemy.inUse)
+            if (enemy != null)
             {
-                enemy.gameObject.SetActive(true);
-                enemy.transform.localPosition = enemy.home;
-                enemy.GroundRollBonus = 0;
-                if (enemy.EnemyArt != null)
-                    Destroy(enemy.EnemyArt);
-
-            }
+				if (enemy.inUse)
+				{
+					enemy.gameObject.SetActive(true);
+					enemy.transform.localPosition = enemy.home;
+					enemy.GroundRollBonus = 0;					
+				}
+				if (enemy.EnemyArt != null)
+					Destroy(enemy.EnemyArt);
+			}
 
         }
     }

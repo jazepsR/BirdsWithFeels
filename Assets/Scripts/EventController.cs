@@ -83,8 +83,7 @@ public class EventController : MonoBehaviour {
 		{
 			text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
 			SetPortrait(currentText);
-
-			continueBtn.SetActive(false);
+			continueBtn.GetComponent<Animator>().SetBool("active",false);
 			CreateChoices();
 			return;         
 		}
@@ -238,8 +237,8 @@ public class EventController : MonoBehaviour {
 
 		eventObject.SetActive(true);		
 		heading.text = Helpers.Instance.ApplyTitle(currentBird, eventData.heading);
-		text.text = Helpers.Instance.ApplyTitle(currentBird, eventData.parts[0].text);             
-		continueBtn.SetActive(false);
+		text.text = Helpers.Instance.ApplyTitle(currentBird, eventData.parts[0].text);
+		continueBtn.GetComponent<Animator>().SetBool("active", false);
 		SetPortrait(0);
 	   
 		if (eventData.options.Length > 0 && eventData.parts.Count <=1 )
@@ -247,7 +246,7 @@ public class EventController : MonoBehaviour {
 			CreateChoices();
 		}else
 		{
-			continueBtn.SetActive(true);
+			continueBtn.GetComponent<Animator>().SetBool("active", true);
 		}
 	}
 
@@ -303,7 +302,7 @@ public class EventController : MonoBehaviour {
 		}
 		else
 		{
-			continueBtn.SetActive(true);
+			continueBtn.GetComponent<Animator>().SetBool("active", true);
 			ContinueBtn();
 		}
 		currentText++;       
@@ -329,8 +328,8 @@ public class EventController : MonoBehaviour {
 		{
 			Destroy(child.gameObject);
 		}
-		continueBtn.SetActive(true);
-		nextEvent= currentEvent.options[ID].onComplete;
+		continueBtn.GetComponent<Animator>().SetBool("active", true);
+		nextEvent = currentEvent.options[ID].onComplete;
 		heading.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionHeading);
 		text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionText);
 		if(currentEvent.options[ID].AfterImage!= null)

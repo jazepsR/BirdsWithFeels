@@ -141,7 +141,6 @@ public class Bird : MonoBehaviour
 	[HideInInspector]
 	public bool newRelationship = false;
 	public string birdPrefabName;
-	[HideInInspector]
 	public GameObject EnemyArt = null;
 	public GameObject GroundBonus;
 	public GameObject RelationshipParticles;
@@ -1049,17 +1048,15 @@ public class Bird : MonoBehaviour
 				LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
 		}
 		catch { }
-		if (isEnemy)
-		{
-			DefaultCol = Helpers.Instance.GetEmotionColor(emotion);
-			HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g + factor, DefaultCol.b + factor);
-		}else
+		DefaultCol = Helpers.Instance.GetEmotionColor(emotion);
+		HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g + factor, DefaultCol.b + factor);
+		if (!isEnemy)
 		{
 			float delay = 0;
 			if (Var.Infight)
 				delay = 5f;
 			LeanTween.delayedCall(delay, () => SetAnimation(emotion));
-		}
+		}		
 		if (prevEmotion.Equals(Var.Em.finish))
 			prevEmotion = emotion;
 
@@ -1068,9 +1065,15 @@ public class Bird : MonoBehaviour
 	
 	void SetAnimation(Var.Em emotionNum)
 	{
-
-		Animator anim = GetComponentInChildren<Animator>();
-		anim.SetInteger("emotion", Helpers.GetEmotionNumber(emotion));
+		try
+		{
+			Animator anim = GetComponentInChildren<Animator>();
+			anim.SetInteger("emotion", Helpers.GetEmotionNumber(emotion));
+		}
+		catch
+		{
+			print("couldnt set emotion");
+		}
 	}
 
 	public void showText()
