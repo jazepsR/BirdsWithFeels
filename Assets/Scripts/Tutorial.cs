@@ -193,7 +193,7 @@ public class Tutorial : MonoBehaviour {
                 break;
             case 1:
                 if(Var.activeBirds[0].FriendGainedInRound>0)
-                    GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Rebecca's such a nice person, I feel more <b>social!</b>");
+                    GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Huh, hanging out with other birds aint that bad! I feel more <b>social!</b>");
                 else
                 {
                     if (Var.activeBirds[0].FriendGainedInRound < 0)
