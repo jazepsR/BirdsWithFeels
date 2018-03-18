@@ -19,7 +19,8 @@ public class EventController : MonoBehaviour {
 	public Image portrait;
 	public Image portraitFill;
 	public Image customImage;
-	public GameObject continueBtn;    
+	public GameObject continueBtn;
+	public Text nameText; 
 	EventScript currentEvent;
 	GameObject currentPortrait;
 	Bird currentBird;
@@ -75,15 +76,20 @@ public class EventController : MonoBehaviour {
 		AudioControler.Instance.ClickSound();
 		if (currentText < currentEvent.parts.Count-1)
 		{
-			text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
+			string text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
+			IEnumerator coroutine = WaitAndPrint(text,true);
+			//nameText.text = currentBird.charName;
+			StartCoroutine(coroutine);
 			SetPortrait(currentText);
 
 		}
 		if (currentText == currentEvent.parts.Count-1)
 		{
-			text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
+			string text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
+			IEnumerator coroutine = WaitAndPrint(text, false);
+			//nameText.text = currentBird.charName;
+			StartCoroutine(coroutine);
 			SetPortrait(currentText);
-			continueBtn.GetComponent<Animator>().SetBool("active",false);
 			CreateChoices();
 			return;         
 		}
@@ -126,6 +132,21 @@ public class EventController : MonoBehaviour {
 		
 	   
 	}
+
+	private IEnumerator WaitAndPrint(string printText,bool shouldShowContinue)
+	{
+		continueBtn.GetComponent<Animator>().SetBool("active",false);
+		text.text = "";
+		foreach (char ch in printText)
+		{
+			text.text += ch;
+			yield return null;
+		}
+		continueBtn.GetComponent<Animator>().SetBool("active", shouldShowContinue);
+	}
+
+
+
 	public bool tryEvent()
 	{
 		if (GuiContoler.Instance.winBanner != null && GuiContoler.Instance.winBanner.activeSelf)
@@ -237,8 +258,10 @@ public class EventController : MonoBehaviour {
 
 		eventObject.SetActive(true);		
 		heading.text = Helpers.Instance.ApplyTitle(currentBird, eventData.heading);
-		text.text = Helpers.Instance.ApplyTitle(currentBird, eventData.parts[0].text);
-		continueBtn.GetComponent<Animator>().SetBool("active", false);
+		string text = Helpers.Instance.ApplyTitle(currentBird, eventData.parts[0].text);
+		//nameText.text = currentBird.charName;
+		IEnumerator coroutine = WaitAndPrint(text, false);
+		StartCoroutine(coroutine);
 		SetPortrait(0);
 	   
 		if (eventData.options.Length > 0 && eventData.parts.Count <=1 )
@@ -275,7 +298,9 @@ public class EventController : MonoBehaviour {
 				portraitFill.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird_color").GetComponent<Image>().sprite;
 				portraitFill.color = colors[currentEvent.parts[currentText].speakerId];
 				portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird").GetComponent<Image>().sprite;
-				
+				nameText.text = currentEvent.speakers[currentEvent.parts[currentText].speakerId].ToString().Replace('_', ' ');
+
+
 			}
 			catch
 			{
@@ -328,10 +353,14 @@ public class EventController : MonoBehaviour {
 		{
 			Destroy(child.gameObject);
 		}
-		continueBtn.GetComponent<Animator>().SetBool("active", true);
 		nextEvent = currentEvent.options[ID].onComplete;
 		heading.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionHeading);
-		text.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionText);
+		string text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionText);
+		//nameText.text = currentBird.charName;
+		if (currentEvent.options[ID].useAutoExplanation)
+			text += "\n" + consequences;
+		IEnumerator coroutine = WaitAndPrint(text, true);
+		StartCoroutine(coroutine);
 		if(currentEvent.options[ID].AfterImage!= null)
 		{
 			portrait.transform.parent.gameObject.SetActive(true);
@@ -340,8 +369,7 @@ public class EventController : MonoBehaviour {
 			portrait.gameObject.SetActive(false);
 			customImage.sprite = currentEvent.options[ID].AfterImage;
 		}
-		if (currentEvent.options[ID].useAutoExplanation)
-			text.text += "\n" + consequences;
+		
 
 	}
 
