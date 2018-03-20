@@ -495,6 +495,8 @@ public class GuiContoler : MonoBehaviour {
 		HideSmallGraph.gameObject.SetActive(true);
 		Var.activeBirds[0].showText();
 		dangerFollowHighlight.gameObject.SetActive(false);
+		foreach (Bird activeBird in Var.activeBirds)
+			activeBird.SetEmotion();
 	}
 	public void CloseBirdStats()
 	{

@@ -305,7 +305,7 @@ public class Bird : MonoBehaviour
 			}
 	}
 	public void AddLevel(LevelData data)
-	{		
+	{
 		if (data.emotion != Var.Em.Neutral)
 		{
 			hasNewLevel = true;            
@@ -1054,7 +1054,7 @@ public class Bird : MonoBehaviour
 		{
 			float delay = 0;
 			if (Var.Infight)
-				delay = 5f;
+				delay = 6f;
 			LeanTween.delayedCall(delay, () => SetAnimation(emotion));
 		}		
 		if (prevEmotion.Equals(Var.Em.finish))

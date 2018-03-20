@@ -240,7 +240,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			stageState = "<color=#2bd617ff>Available</color>";
 		tooltipText += stageState;
 		tooltipText += "\nLength: <b>" + length +"</b>";
-		tooltipText += "\nMain emotion: "+ Helpers.Instance.GetHexColor(type) + type.ToString() +"</color>";
+		tooltipText += "\nMain ENEMY emotion: "+ Helpers.Instance.GetHexColor(type) + type.ToString() +"</color>";
 
 		return tooltipText;
 	}
@@ -552,7 +552,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		string weakness = "All";
 		if (type != Var.Em.Neutral)
 			weakness = Helpers.Instance.GetWeakness(type).ToString();
-		stageInfo += ". Main emotion: " +Helpers.Instance.GetHexColor(type)+ type + "</color>. Weak to: " +
+		stageInfo += ". Main ENEMY emotion: " +Helpers.Instance.GetHexColor(type)+ type + "</color>. Weak to: " +
 			Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(type)) + weakness + "</color>.";
 		/*stageInfo += "\nEnemies attack from the: ";
 		if (hasFrontEnemyRow)

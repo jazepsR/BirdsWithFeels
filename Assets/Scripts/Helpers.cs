@@ -561,7 +561,7 @@ public class Helpers : MonoBehaviour {
 			case Levels.type.Friend2:
 				return "<name> has found a way to help their friends even more! Applying massage techniques passed down from the friendship gods, <name> can now fully heal team mates if given the time!".Replace("<name>", name);
 			case Levels.type.Lonely1:
-				return "Through deep soliditary meditation coupled with the rush of victory, <name> realizes that all emotions are just a result of circumstances.& <name> realizes they can intensify the emotions of their teammates!".Replace("<name>", name);
+				return "Through deep solidtary meditation coupled with the rush of victory, <name> realizes that all emotions are just a result of circumstances.& <name> realizes they can intensify the emotions of their teammates!".Replace("<name>", name);
 			case Levels.type.Lonely2:
 				return "All this alone time was a great chance for <name> to do some serious studying! Through careful observation, <name> has percieved that life is but a series of turns, which can be manipulated with the right tools. ".Replace("<name>", name);
 			case Levels.type.Scared1:
@@ -663,7 +663,7 @@ public class Helpers : MonoBehaviour {
 			case Levels.type.Friend2:
 				return "After an adventure fully heal one bird of your choice";
 			case Levels.type.Scared1:
-				return "Give all diagonal birds - 10% in combat (both friendly and enemy birds)";
+				return "Give all diagonal birds minus 10% in combat (both friendly and enemy birds)";
 			case Levels.type.Scared2:
 				return "If in hidden, this bird does not fight enemies. Instead, all enemies crossing this birds tile have -30% in combat. Hide the bird by left clicking them.";
 			case Levels.type.Lonely1:
