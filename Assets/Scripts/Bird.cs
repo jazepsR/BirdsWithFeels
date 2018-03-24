@@ -85,7 +85,7 @@ public class Bird : MonoBehaviour
 	[HideInInspector]
 	public List<LevelData> levelList;
 	[HideInInspector]
-	public int confLoseOnRest = 1;
+	public int confLoseOnRest = 2;
 	public int groundMultiplier = 1;
 	public GameObject healParticle;
 	[HideInInspector]
@@ -146,6 +146,7 @@ public class Bird : MonoBehaviour
 	public GameObject RelationshipParticles;
 	public GameObject CrushParticles;
 	public GameObject mapHighlight;
+	GameObject birdArtObj;
 	void Start()
 	{
 
@@ -191,7 +192,7 @@ public class Bird : MonoBehaviour
 			RelationshipScript.applyRelationship(this, false);
 			SetRealtionshipParticles();*/
 			var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
-			GameObject birdArtObj = Instantiate(BirdArt, transform) as GameObject;
+			birdArtObj = Instantiate(BirdArt, transform) as GameObject;
 			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
 	   
 			if (levelList.Count == 0 && !Var.isTutorial)
@@ -277,7 +278,23 @@ public class Bird : MonoBehaviour
 	
 	public void Speak(string text)
 	{
-		GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, text);
+		Transform mouth = transform;
+		try
+		{
+			birdArtObj.transform.Find("neutral").SetAsLastSibling();
+		}
+		catch { };
+		for (int i = 0; i < birdArtObj.transform.childCount; i++)
+		{
+			if (birdArtObj.transform.GetChild(i).gameObject.activeSelf)
+			{
+				mouth = birdArtObj.transform.GetChild(i).Find("mouth");
+				print(charName + " has emotion " + birdArtObj.transform.GetChild(i).name);
+				break;
+			}
+		}
+
+		GuiContoler.Instance.ShowSpeechBubble(mouth, text);
 
 	}
 

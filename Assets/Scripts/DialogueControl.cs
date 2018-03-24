@@ -43,7 +43,7 @@ public class DialogueControl : MonoBehaviour {
     {
         if(testDialog != null)
         {
-            CreateParticularDialog(testDialog);
+           CreateParticularDialog(testDialog);
         }
 
     }
@@ -53,7 +53,7 @@ public class DialogueControl : MonoBehaviour {
         Bird dialogueBird = Helpers.Instance.GetBirdFromEnum(dialog.speakers[0]);
         speakers = new List<Bird>();
         speakers.Add(dialogueBird);
-        CreateDialogue(dialog);
+		LeanTween.delayedCall(0.2f, () => CreateDialogue(dialog));
 
     }
 

@@ -92,6 +92,8 @@ public class GuiContoler : MonoBehaviour {
 	Transform lastSpeechPos = null;
 	public Animator graphAnime;
 	public GameObject minimap;
+	public GameObject dangerZoneBorder;
+	bool canChangeGraph = true;
 	void Awake()
 	{
 		if (!Var.StartedNormally)
@@ -200,6 +202,7 @@ public class GuiContoler : MonoBehaviour {
 			AudioControler.Instance.ClickSound();
 			Time.timeScale = 1.0f;
 			Var.fled = true;
+			LeanTween.cancelAll();
 			SceneManager.LoadScene("Map");
 		}else
 		{
@@ -355,12 +358,18 @@ public class GuiContoler : MonoBehaviour {
 
 	public void ShowNextGraph()
 	{
+		if (!canChangeGraph)
+			return;
+		canChangeGraph = false;
 		if (currentGraph == maxGraph)
 		{
-			CloseGraph();
+			CloseGraph();			
 			return;
 		}
+		
 		currentGraph++;
+		currentGraph = Mathf.Min(3, currentGraph);
+		print("currentGraph : " + currentGraph);
 		if (Var.isTutorial)
 		{
 			Tutorial.Instance.ShowGraphSpeech(currentGraph);
@@ -372,6 +381,8 @@ public class GuiContoler : MonoBehaviour {
 				Destroy(child.gameObject);
 			}
 			LeanTween.delayedCall(0.35f,()=>CreateGraph(-1));
+			
+			dangerZoneBorder.SetActive(false);
 			ProgressGUI.Instance.AllPortraitClick();
 		}
 		else
@@ -481,6 +492,7 @@ public class GuiContoler : MonoBehaviour {
 	public void CloseGraph()
 	{
 		AudioControler.Instance.PlayPaperSound();
+		canChangeGraph = true;
 		battlePanel.SetActive(true);
 		minimap.SetActive(true);
 		if (!Reset())
@@ -521,7 +533,8 @@ public class GuiContoler : MonoBehaviour {
 		}
 	}
 	public void CreateGraph(object o)
-	{		
+	{
+		canChangeGraph = true;
 		Helpers.Instance.HideTooltip();
 		battlePanel.SetActive(false);
 		minimap.SetActive(false);   
@@ -542,7 +555,7 @@ public class GuiContoler : MonoBehaviour {
 		else
 		{
 			BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
-			//CreateRelationshipEvent(birdNum);
+			dangerZoneBorder.SetActive(true);
 			if (Var.activeBirds[birdNum].hasNewLevel)
 			{
 				levelPopupScript.Instance.Setup(Var.activeBirds[birdNum], Var.activeBirds[birdNum].lastLevel, birdNum);
@@ -725,6 +738,9 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void InitiateGraph(Bird bird)
 	{
+		if (!canChangeGraph)
+			return;
+		canChangeGraph = false;
 		minimap.SetActive(false);
 		int index = -1;
 		for(int i= 0; i < Var.activeBirds.Count; i++)
@@ -954,6 +970,7 @@ public class GuiContoler : MonoBehaviour {
 		}
 		Var.currentWeek++;
 		Var.shouldDoMapEvent = true;
+		LeanTween.cancelAll();
 		SceneManager.LoadScene("Map");
 	}
 

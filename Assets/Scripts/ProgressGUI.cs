@@ -189,6 +189,7 @@ public class ProgressGUI : MonoBehaviour {
 			{
 				mentalPainPopup.SetActive(true);
 				bird.hadMentalPain = false;
+
 			}
 			portraitFillObj.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
 			if (bird.prevEmotion != bird.emotion && !bird.inMap)
@@ -233,33 +234,44 @@ public class ProgressGUI : MonoBehaviour {
 	{
 		for (int i = 0; i < mentalHearts.Length; i++)
 		{
+
 			Animator anim = mentalHearts[i].GetComponent<Animator>();
-			if (i < MHP)
+			anim.SetBool("indanger", false);
+			if (bird.hadMentalPain)
 			{
-				if (i >= prevMHP && prevMHP != -1)
-				{
-					anim.SetTrigger("gain");
-				}
-				else
-				{
-					anim.SetBool("active", true);
-				}
+				anim.SetBool("active", true);
 			}
 			else
 			{
-				if (i < prevMHP && prevMHP != -1)
+				if (i < MHP)
 				{
-					anim.SetTrigger("lose");
+					if (i >= prevMHP && prevMHP != -1)
+					{
+						anim.SetTrigger("gain");
+						LeanTween.delayedCall(0.3f, () => anim.SetBool("active", true)).setUseEstimatedTime(true);
+					}
+					else
+					{
+						anim.SetBool("active", true);
+					}
 				}
+				else
+				{
+					if (i < prevMHP && prevMHP != -1)
+					{
+						anim.SetTrigger("lose");
+						LeanTween.delayedCall(0.3f, () => anim.SetBool("active", false)).setUseEstimatedTime(true);
+					}
 
-				if (i < maxMHP)
-				{
-					anim.SetBool("active", false);
+					if (i < maxMHP)
+					{
+						anim.SetBool("active", false);
+					}
 				}
+				if (i == MHP - 1 && (Mathf.Abs(bird.confidence) >= 12 || Mathf.Abs(bird.friendliness) >= 12))
+					anim.SetBool("indanger", true);
+
 			}
-			if (i == MHP - 1 && (Mathf.Abs(bird.confidence) >= 12 || Mathf.Abs(bird.friendliness) >= 12))
-				anim.SetBool("indanger", true);
-			
 		}
 	}
 }

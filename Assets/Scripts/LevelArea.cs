@@ -86,9 +86,13 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 		}
 		else if(Helpers.Instance.GetEmotionValue(bird, emotion) >= emotionRequirement-2 && exitement!=0)
 		{
-			exitement = 2;
+			if(emotion == Var.Em.Cautious && bird.confidence <= -emotionRequirement +2)
+				exitement = 2;
+			if (emotion == Var.Em.Solitary && bird.friendliness <= -emotionRequirement + 2)
+				exitement = 2;
+			if (emotion == Var.Em.Social || emotion == Var.Em.Confident)
+				exitement = 2;
 		}
 		anim.SetInteger("excitement", exitement);
-		print(level.ToString() + " excitement " + exitement);
 	}
 }
