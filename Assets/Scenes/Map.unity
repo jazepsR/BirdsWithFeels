@@ -7394,12 +7394,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 314059900}
---- !u!114 &317212874 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114667945286850408, guid: e777ba048bee5404e97fc46ed5edbe6f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1553602831}
-  m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
 --- !u!1 &320305736
 GameObject:
   m_ObjectHideFlags: 0
@@ -10352,12 +10346,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcba0062914f46c4895397ffa376facf, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &498989983 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114150951801007776, guid: bcba0062914f46c4895397ffa376facf,
-    type: 2}
-  m_PrefabInternal: {fileID: 498989982}
-  m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
 --- !u!1 &500895072
 GameObject:
   m_ObjectHideFlags: 0
@@ -14093,6 +14081,7 @@ MonoBehaviour:
   boss: {fileID: 0}
   graphAnime: {fileID: 0}
   minimap: {fileID: 0}
+  dangerZoneBorder: {fileID: 0}
 --- !u!114 &685676510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19201,55 +19190,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!1 &952379321
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 952379322}
-  - component: {fileID: 952379323}
-  m_Layer: 5
-  m_Name: Area2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &952379322
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 952379321}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00022958597}
-  m_LocalScale: {x: 0.999702, y: 1.0000674, z: 1.0000674}
-  m_Children: []
-  m_Father: {fileID: 2005437285}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00012588501, y: -0.0000062435865}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &952379323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 952379321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dd381716cc3883418c398822b233976, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emotionType: 0a00000000000000
-  emotionPercentage:
-  - 0.55
-  - 0.45
 --- !u!224 &958420585 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224663541810946892, guid: 9640144b0402f6e49ae177bef4b08adc,
@@ -22711,7 +22651,7 @@ Prefab:
         type: 2}
       propertyPath: birdToAdd
       value: 
-      objectReference: {fileID: 1364067972}
+      objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: mainEmotionSpawnRate
@@ -22871,7 +22811,7 @@ Prefab:
         type: 2}
       propertyPath: birdToAddScript
       value: 
-      objectReference: {fileID: 317212874}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d0515ffbf52d5804da8193f0f1634be4, type: 2}
   m_IsPrefabParent: 0
@@ -23795,12 +23735,12 @@ Prefab:
         type: 2}
       propertyPath: birdToAdd
       value: 
-      objectReference: {fileID: 164446746}
+      objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: birdToAddScript
       value: 
-      objectReference: {fileID: 498989983}
+      objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: background
@@ -29118,55 +29058,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1452897953}
---- !u!1 &1458752707
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1458752708}
-  - component: {fileID: 1458752709}
-  m_Layer: 5
-  m_Name: Area1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1458752708
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1458752707}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2005437285}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1458752709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1458752707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dd381716cc3883418c398822b233976, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emotionType: 0300000001000000
-  emotionPercentage:
-  - 0.6
-  - 0.4
 --- !u!1 &1467915937
 GameObject:
   m_ObjectHideFlags: 0
@@ -30355,7 +30246,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 619, y: 1165}
+  m_AnchoredPosition: {x: 928, y: 2485}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1513960784
@@ -36516,8 +36407,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -725.22003}
   m_LocalScale: {x: 1.06704, y: 0.68759996, z: 0.79775995}
-  m_Children:
-  - {fileID: 2005437285}
+  m_Children: []
   m_Father: {fileID: 1513960782}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -36537,7 +36427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 548fd0068d2a05f479fc391538a5fa9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tooltipText: 'Birdtropolis is the '
+  tooltipText: Birdtropolis, where your journey started
 --- !u!114 &1858260676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38964,41 +38854,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
     type: 2}
   m_PrefabInternal: {fileID: 1158684536}
---- !u!1 &2005437284
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 2005437285}
-  m_Layer: 5
-  m_Name: Areas
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2005437285
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2005437284}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1458752708}
-  - {fileID: 952379322}
-  m_Father: {fileID: 1858260674}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &2005921162
 Transform:
   m_ObjectHideFlags: 0
