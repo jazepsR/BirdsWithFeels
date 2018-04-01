@@ -151,6 +151,7 @@ public class Bird : MonoBehaviour
 	{
 
 		wonLastBattle = -1;
+
 		if (!isEnemy && portrait == null)
 			portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
 	   /* if (!isEnemy && !inMap)
@@ -278,12 +279,16 @@ public class Bird : MonoBehaviour
 	
 	public void Speak(string text)
 	{
+		GuiContoler.Instance.ShowSpeechBubble(GetMouthTransform(), text);
+	}
+
+	public Transform GetMouthTransform()
+	{
 		Transform mouth = transform;
 		try
 		{
 			birdArtObj.transform.Find("neutral").SetAsLastSibling();
-		}
-		catch { };
+		
 		for (int i = 0; i < birdArtObj.transform.childCount; i++)
 		{
 			if (birdArtObj.transform.GetChild(i).gameObject.activeSelf)
@@ -293,12 +298,12 @@ public class Bird : MonoBehaviour
 				break;
 			}
 		}
-
-		GuiContoler.Instance.ShowSpeechBubble(mouth, text);
-
+		}
+		catch {
+			mouth = transform;
+		}
+		return mouth;
 	}
-
-
 
 	public void SetCoolDownRing(bool active)
 	{
@@ -1080,7 +1085,7 @@ public class Bird : MonoBehaviour
 
 	}
 	
-	void SetAnimation(Var.Em emotionNum)
+	public void SetAnimation(Var.Em emotionNum)
 	{
 		try
 		{

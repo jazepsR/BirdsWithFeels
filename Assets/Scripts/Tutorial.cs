@@ -40,8 +40,13 @@ public class Tutorial : MonoBehaviour {
         AddEnemiesToList(forthStageEnemies);
         AddEnemiesToList(fifthStageEnemies);
         AddEnemiesToList(sixthStageEnemies);
-        ShowtutorialStartingText(0);
     }
+	void Start()
+	{
+		if (!Var.isTutorial)
+			return;
+		ShowtutorialStartingText(0);
+	}
     public void jiggleGraph()
     {
         graphAnim.SetBool("shake", true);
@@ -108,32 +113,33 @@ public class Tutorial : MonoBehaviour {
         switch (stage)
         {
             case 0:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Hiya, I'm Terry! ");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "<b>DRAG</b> and place me ANYWHERE in front of that mean bird - I will prepare to fight them!");
+				
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hiya, I'm Terry! ");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "<b>DRAG</b> and place me ANYWHERE in front of that mean bird - I will prepare to fight them!");
                 break;
             case 1:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Hey, I’m Rebecca! Let's hang out!");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Alright sure whatever!");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Hey, I’m Rebecca! Let's hang out!");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Alright sure whatever!");
                 shouldShowFriendlyPopup = true;
                 break;
             case 2:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "These birds have <b>emotions</b> too! How will we beat them?");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "These birds have <b>emotions</b> too! How will we beat them?");
                 shouldShowEmotionPopup = true;
                 break;
             case 3:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "These battles are taking a toll on me..");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Hey no worries - I'll fight so that you can <b>rest</b> and regain some <b>health</b>");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You'll also gain some <b>cautiousness!</b>");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "These battles are taking a toll on me..");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hey no worries - I'll fight so that you can <b>rest</b> and regain some <b>health</b>");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "You'll also gain some <b>cautiousness!</b>");
                 break;
             case 4:
                 EventController.Instance.CreateEvent(AddAlexEvent);
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[2], "A Rock!");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Birds can't stand there, but vultures move right over the rocks!");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[2].GetMouthTransform(), "A Rock!");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Birds can't stand there, but vultures move right over the rocks!");
                 break;
             case 5:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "This looks dangerous!");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[2], "I've seen this before! These enemies will attack from multiple directions!");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "You guys can you let me fight <b>two at once?</b> I've always wanted to do that! ");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "This looks dangerous!");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[2].GetMouthTransform(), "I've seen this before! These enemies will attack from multiple directions!");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "You guys can you let me fight <b>two at once?</b> I've always wanted to do that! ");
                 break;
         }
     }
@@ -146,13 +152,13 @@ public class Tutorial : MonoBehaviour {
         switch (stage)
         {
             case 0:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Vultures will walk forward forever until they reach a fight! ");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "I may be <b>lonely</b>, but my independence makes me stronger than that emotionless vulture!");
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Any emotion beats a lack of emotion. Let's go! ");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Vultures will walk forward forever until they reach a fight! ");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "I may be <b>lonely</b>, but my independence makes me stronger than that emotionless vulture!");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Any emotion beats a lack of emotion. Let's go! ");
                 outlines.SetActive(false);
                 break;
             case 1:
-                GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "Since me and that mean bird have the <b>same emotion</b>, I have a <b>50% chance</b> of winning the fight!");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Since me and that mean bird have the <b>same emotion</b>, I have a <b>50% chance</b> of winning the fight!");
                 break;
             case 2:
                 int total = 0;
@@ -162,14 +168,14 @@ public class Tutorial : MonoBehaviour {
                 }
                 if (total > 100)
                 {
-                    GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Each emotional state <b>beats one</b> emotion and <b>loses to another</b>");
-                    GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "It's like<b> rock, paper, feelings!</b>");
+                    GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Each emotional state <b>beats one</b> emotion and <b>loses to another</b>");
+                    GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "It's like<b> rock, paper, feelings!</b>");
                     graphAnim.SetBool("shake", false);
                 }
                 else
                 {
-                    GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[0], "Hmm.. This seems risky");
-                    GuiContoler.Instance.ShowSpeechBubble(birdSpeechPos[1], "We should use our <b>emotions</b> to our advantage!");
+                    GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hmm.. This seems risky");
+                    GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "We should use our <b>emotions</b> to our advantage!");
                     graphAnim.SetBool("shake", true);
                 }
                 shownMapInfos[stage] = false;

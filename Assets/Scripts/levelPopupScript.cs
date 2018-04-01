@@ -95,7 +95,7 @@ public class levelPopupScript : MonoBehaviour {
 			firstPart.SetActive(false);
 			secondPart.SetActive(false);
 			thirdPart.SetActive(true);
-			activeBird.levelList.Add(data);
+			//activeBird.levelList.Add(data);
 			ProgressGUI.Instance.PortraitClick(activeBird);
 		}
 	}

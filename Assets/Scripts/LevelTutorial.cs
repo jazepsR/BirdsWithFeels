@@ -25,7 +25,6 @@ public class LevelTutorial : MonoBehaviour {
 			DialogueControl.Instance.CreateParticularDialog(abilityDialogue);
 		}
 
-
 		if (Var.currentStageID == 1 && !Var.gameSettings.shownLevelTutorial)
 		{
 			DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);

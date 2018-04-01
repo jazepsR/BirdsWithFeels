@@ -521,7 +521,8 @@ public class GuiContoler : MonoBehaviour {
 		{
 			Destroy(child.gameObject);
 		}
-
+		foreach (Bird bird in FillPlayer.Instance.playerBirds)
+			LeanTween.delayedCall(0.1f, () => bird.SetAnimation(bird.emotion));
 		LeanTween.delayedCall(0.2f,()=> selectedBird.showText());
 	}
 

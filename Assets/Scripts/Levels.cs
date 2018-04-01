@@ -411,6 +411,28 @@ public class Levels : MonoBehaviour {
 		return list;
 	}
 
+	int GetColumnCount()
+	{
+		int count = 0;
+		foreach(LayoutButton btn in GetColumn())
+		{
+			if (btn.hasBird)
+				count++;
+		}
+		return count;
+	}
+
+	int GetRowCount()
+	{
+		int count = 0;
+		foreach (LayoutButton btn in GetRow())
+		{
+			if (btn.hasBird)
+				count++;
+		}
+		return count;
+	}
+
 	public List<LayoutButton> GetAdjacent()
 	{
 		int x = myBird.x;
@@ -556,7 +578,8 @@ public class Levels : MonoBehaviour {
 			{
 				return "First " + Helpers.Instance.LonelyHexColor + "Lonely</color> level available! To level up: " + Helpers.Instance.GetLVLRequirements(type.Lonely1);
 			}
-			if ( Helpers.Instance.GetAdjacentBirds(myBird) != null && Helpers.Instance.GetAdjacentBirds(myBird).Count==0 && GetRow().Count==0 && GetColumn().Count == 0 && myBird.wonLastBattle>=1 && !Helpers.Instance.ListContainsLevel(type.Lonely1, myBird.levelList))
+			print("Rowcount: " + GetRowCount() + " ColumnCount: " + GetColumnCount() + " name: " + myBird.charName);
+			if (GetRowCount()==1 && GetColumnCount() == 1 && myBird.wonLastBattle>=1 && !Helpers.Instance.ListContainsLevel(type.Lonely1, myBird.levelList))
 			{
 				ApplyLevel(new LevelData(type.Lonely1, Var.Em.Solitary, Var.lvlSprites[3]), "Lonely 1");
 				return "did LVL";

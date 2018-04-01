@@ -44,12 +44,12 @@ public class GuiMap : MonoBehaviour {
 				{
 					MapBattleData BattleStuff = new MapBattleData();
 					BattleStuff.emotionPercentage.Add(1);
-					BattleStuff.emotionType.Add(Var.Em.Cautious);
+					BattleStuff.emotionType.Add(Var.Em.Confident);
 					Var.map.Add(new BattleData(Var.Em.Neutral, true, new List<Var.Em>() { Var.Em.Confident, Var.Em.Cautious, Var.Em.Solitary, Var.Em.Social }, BattleStuff, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
 
 					MapBattleData BattleStuff2 = new MapBattleData();
 					BattleStuff2.emotionPercentage.Add(1);
-					BattleStuff2.emotionType.Add(Var.Em.Confident);
+					BattleStuff2.emotionType.Add(Var.Em.Cautious);
 					Var.map.Add(new BattleData(Var.Em.Confident, true, new List<Var.Em>() { Var.Em.Confident }, BattleStuff2, 1, new List<Bird.dir>() { Bird.dir.front, Bird.dir.top }, new List<Var.PowerUps>() { Var.PowerUps.dmg, Var.PowerUps.heal }));
 
 
