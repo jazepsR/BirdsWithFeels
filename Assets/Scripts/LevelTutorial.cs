@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LevelTutorial : MonoBehaviour {
 	[Header("first level")]
-	public Dialogue abilityDialogue;
+	public Dialogue planningDialogue;
 	[Header("second level")]
 	public Dialogue firstBattleDailog;
 	public Dialogue graphDialog;
@@ -19,10 +19,10 @@ public class LevelTutorial : MonoBehaviour {
 	void Start ()
 	{
 		//Var.currentStageID = 1;
-		if(Var.currentStageID == 0 && !Var.gameSettings.shownBattlePlanningTutorial)
+		if(Var.currentStageID == 2 && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
 		{
 			Var.gameSettings.shownBattlePlanningTutorial = true;
-			DialogueControl.Instance.CreateParticularDialog(abilityDialogue);
+			DialogueControl.Instance.CreateParticularDialog(planningDialogue);
 		}
 
 		if (Var.currentStageID == 1 && !Var.gameSettings.shownLevelTutorial)
