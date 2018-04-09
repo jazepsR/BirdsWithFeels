@@ -15,6 +15,7 @@ public class LevelTutorial : MonoBehaviour {
 	bool shouldShowGraphDialog = false;
 	bool shouldShowGraphDiag2 = false;
 	bool shouldShowSecondBattleDialog = false;
+	float timeSinceStart = 1f;
 	// Use this for initialization
 	void Start ()
 	{
@@ -44,7 +45,7 @@ public class LevelTutorial : MonoBehaviour {
 	{
 		if (Var.currentStageID != 1)
 			return;
-		if (shouldShowFirstBattleDialog && !GuiContoler.Instance.speechBubbleObj.activeSelf)
+		if (shouldShowFirstBattleDialog && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad >0.5f)
 		{
 			Var.gameSettings.shownLevelTutorial = true;
 			GraphHighlight.SetActive(true);
@@ -68,7 +69,9 @@ public class LevelTutorial : MonoBehaviour {
 			GraphHighlight.SetActive(false);
 			DialogueControl.Instance.CreateParticularDialog(graphDialog);
 			shouldShowSecondBattleDialog = true;
-			shouldShowGraphDiag2 = true; try
+			shouldShowGraphDiag2 = true;
+			timeSinceStart = Time.timeSinceLevelLoad;
+			try
 			{
 				GuiContoler.Instance.speechBubbleObj.transform.Find("BG").gameObject.SetActive(true);
 
@@ -78,7 +81,7 @@ public class LevelTutorial : MonoBehaviour {
 				Debug.LogError("couldnt enable BG");
 			}
 		}
-		if (shouldShowGraphDiag2 && !GuiContoler.Instance.speechBubbleObj.activeSelf)
+		if (shouldShowGraphDiag2 && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad> 0.5f + timeSinceStart) 
 		{
 			GuiContoler.Instance.CloseBattleReport.interactable = true;
 			GuiContoler.Instance.ShowSpeechBubble(DialogueControl.Instance.portraitPoint, "Now let's get back out there and help me level up!");

@@ -137,6 +137,9 @@ public class GuiMap : MonoBehaviour {
 			lr.transform.localScale = Vector3.one * 30;
 			//HACK, its super terrible
 			point.transform.localPosition = new Vector3(count * dist*150, 0, 0);
+		}else
+		{
+			point.transform.localScale =Vector3.one* 30f;
 		}
 		lr.sortingOrder = 55;
 		lr.SetPosition(0, new Vector3(start.position.x + dist * count, start.position.y, start.position.z));
