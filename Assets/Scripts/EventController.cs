@@ -30,7 +30,8 @@ public class EventController : MonoBehaviour {
 	List<Color> colors;
 	EventScript nextEvent = null;
 	public ShowTooltip mouseOver;
-	[HideInInspector]
+	IEnumerator coroutine;
+	 [HideInInspector]
 	public List<EventScript> eventsToShow;
 	//List<string> texts;    
 	int currentText = 0;
@@ -77,7 +78,9 @@ public class EventController : MonoBehaviour {
 		if (currentText < currentEvent.parts.Count-1)
 		{
 			string text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
-			IEnumerator coroutine = WaitAndPrint(text,true);
+			if (coroutine != null)
+				StopCoroutine(coroutine);
+			coroutine = WaitAndPrint(text,true);
 			//nameText.text = currentBird.charName;
 			StartCoroutine(coroutine);
 			SetPortrait(currentText);
@@ -86,7 +89,9 @@ public class EventController : MonoBehaviour {
 		if (currentText == currentEvent.parts.Count-1)
 		{
 			string text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
-			IEnumerator coroutine = WaitAndPrint(text, false);
+			if (coroutine != null)
+				StopCoroutine(coroutine);
+			coroutine = WaitAndPrint(text, false);
 			//nameText.text = currentBird.charName;
 			StartCoroutine(coroutine);
 			SetPortrait(currentText);
@@ -260,7 +265,9 @@ public class EventController : MonoBehaviour {
 		heading.text = Helpers.Instance.ApplyTitle(currentBird, eventData.heading);
 		string text = Helpers.Instance.ApplyTitle(currentBird, eventData.parts[0].text);
 		//nameText.text = currentBird.charName;
-		IEnumerator coroutine = WaitAndPrint(text, false);
+		if(coroutine!=null)
+			StopCoroutine(coroutine);
+		coroutine = WaitAndPrint(text, false);
 		StartCoroutine(coroutine);
 		SetPortrait(0);
 	   
@@ -359,7 +366,9 @@ public class EventController : MonoBehaviour {
 		//nameText.text = currentBird.charName;
 		if (currentEvent.options[ID].useAutoExplanation)
 			text += "\n" + consequences;
-		IEnumerator coroutine = WaitAndPrint(text, true);
+		if (coroutine != null)
+			StopCoroutine(coroutine);
+		coroutine = WaitAndPrint(text, true);
 		StartCoroutine(coroutine);
 		if(currentEvent.options[ID].AfterImage!= null)
 		{

@@ -934,7 +934,7 @@ public class Bird : MonoBehaviour
 			{
 				consecutiveFightsWon = 0;
 				roundsRested++;				
-				battleConfBoos -= confLoseOnRest;
+				battleConfBoos -= 2;
 			}
 			else
 			{
