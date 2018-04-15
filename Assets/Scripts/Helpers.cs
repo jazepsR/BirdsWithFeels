@@ -492,7 +492,7 @@ public class Helpers : MonoBehaviour {
 		}
 		catch
 		{
-			Debug.LogError("Get close birds failed");
+			//Debug.LogError("Get close birds failed");
 			return new List<Bird>();
 		}
 	}

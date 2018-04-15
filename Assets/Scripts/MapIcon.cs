@@ -61,6 +61,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	public Animator anim;
 	//[HideInInspector]
 	public TimedEventControl timedEventTrigger;
+	bool birdAdded = false;
 	// Use this for initialization
 	void Start()
 	{
@@ -248,8 +249,9 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 
 	void AddNewBird()
 	{
-		if(completed && addBirdOnComplete)
+		if(completed && addBirdOnComplete && birdToAdd!= null && !birdAdded)
 		{
+			birdAdded = true;
 			bool canAdd = true;
 			foreach(Bird bird in Var.availableBirds)
 			{
@@ -263,8 +265,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			{
 				birdToAdd.gameObject.SetActive(true);
 				Var.availableBirds.Add(birdToAdd);
-				for(int i=0;i<2;i++)
-					EventController.Instance.CreateEvent(birdToAddScript);
+				EventController.Instance.CreateEvent(birdToAddScript);
 			}
 
 

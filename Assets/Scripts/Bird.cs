@@ -520,10 +520,18 @@ public class Bird : MonoBehaviour
 		wonLastBattle = -1;
 		x = -1;
 		y = -1;
-		levelControler.ApplyLevelOnPickup(this, levelList);
-		if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, levelList))       
-			levelControler.Halo.SetActive(false);
-		showText();
+		try
+		{
+			levelControler.ApplyLevelOnPickup(this, levelList);
+			if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, levelList))
+				levelControler.Halo.SetActive(false);
+			showText();
+		}
+		catch
+		{
+			Debug.LogError("failed to reset!");
+		}
+		
 	}
 	public string CheckLevels(bool toApply = true)
 	{
@@ -595,15 +603,8 @@ public class Bird : MonoBehaviour
 		SetCoolDownRing(true);
 	  
 		if (Input.GetMouseButtonUp(1))
-		{
-			if(!inMap && Helpers.Instance.ListContainsLevel(Levels.type.Scared2, levelList))
-			{
-				bush.SetActive(!bush.activeSelf);
-				isHiding = bush.activeSelf;
-				GameLogic.Instance.CanWeFight();
-				GameLogic.Instance.UpdateFeedback();
-				
-			}
+		{			
+			GuiContoler.Instance.GraphButton();
 		}
 		if (Input.GetMouseButtonUp(0))
 		{
@@ -619,6 +620,17 @@ public class Bird : MonoBehaviour
 					tile.baseColor = tile.defaultColor;
 					LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
 				}
+			}
+		}
+		if (Input.GetMouseButtonUp(2))
+		{
+			if(!inMap && Helpers.Instance.ListContainsLevel(Levels.type.Scared2, levelList))
+			{
+				bush.SetActive(!bush.activeSelf);
+				isHiding = bush.activeSelf;
+				GameLogic.Instance.CanWeFight();
+				GameLogic.Instance.UpdateFeedback();
+				
 			}
 		}
 		if (Input.GetMouseButtonDown(0))
