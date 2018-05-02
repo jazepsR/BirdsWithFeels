@@ -391,9 +391,12 @@ public class GuiContoler : MonoBehaviour {
 			{
 				Destroy(child.gameObject);
 			}
-			LeanTween.delayedCall(0.35f, () => CreateGraph(currentGraph));
+			LeanTween.delayedCall(0.35f, () =>
+            {
+                CreateGraph(currentGraph);
+                ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
+            });
 			ProgressGUI.Instance.SetOnePortrait();
-			ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
 		}
 		
 		
@@ -752,8 +755,11 @@ public class GuiContoler : MonoBehaviour {
 				break;
 			}
 		}
-		LeanTween.delayedCall(0.7f, () => CreateGraph(index));
-		ProgressGUI.Instance.PortraitClick(bird);
+		LeanTween.delayedCall(0.7f, () =>
+        {
+            CreateGraph(index);
+            ProgressGUI.Instance.PortraitClick(bird);
+        });
 		ProgressGUI.Instance.skillArea.SetActive(false);
 		//LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
 		graphAnime.SetBool("open", true);

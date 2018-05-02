@@ -26,6 +26,8 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 	public Color defaultColor;
 	public bool isSmall = false;
 	Animator anim;
+    public LevelBarScript levelBar;
+    public LevelBits[] levelBits;
 	// Use this for initialization
 	void Start () {
 		defaultColor = Helpers.Instance.GetSoftEmotionColor(emotion);
@@ -54,7 +56,41 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 		SkillImageHolder.gameObject.SetActive(false);
 
 	}*/
+    void SetLevelBits(Bird bird)
+    {
+        if (levelBar == null)
+            return;
+        float factor = 18.5f;
+        levelBar.maxPoints = levelBits.Length;
+        levelBar.ClearPoints();
+        foreach(LevelBits bit in levelBits)
+        {
+            if (!bird.recievedSeeds.Contains(bit.name))
+            {
+                GameObject toInstantiate = Helpers.Instance.seedFar;
+                if(bird.emotion == bit.emotion)
+                    toInstantiate = Helpers.Instance.seed;
+                GameObject obj = Instantiate(toInstantiate,Graph.Instance.graphParent.transform);
+                obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-factor * bit.social, factor * bit.conf, 0);
+                obj.name = bit.name;
+                obj.GetComponent<ShowTooltip>().tooltipText = "Social: " + bit.social + "\nConfidence: " + bit.conf;
+                if(bird.friendliness == bit.social && bird.confidence == bit.conf)
+                {
+                    LeanTween.delayedCall(1.7f, ()=>levelBar.AddPoints(bird));
+                    obj.GetComponent<Image>().color = Color.yellow;
+                    bird.recievedSeeds.Add(bit.name);
+                    LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, 0.7f).setEaseOutBack().setOnComplete(() => Destroy(obj)));
+                }
+                //obj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bit.emotion);
 
+            }
+            else
+            {
+                levelBar.AddPoints(bird);
+            }
+        }
+
+    }
 	public void SetAnimator(Bird bird, bool isFinal)
 	{
 		int exitement = 1;
@@ -94,5 +130,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 				exitement = 2;
 		}
 		anim.SetInteger("excitement", exitement);
-	}
+        if(!isFinal)
+            SetLevelBits(bird);
+    }
 }

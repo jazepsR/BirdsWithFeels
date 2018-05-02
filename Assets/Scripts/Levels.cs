@@ -524,20 +524,20 @@ public class Levels : MonoBehaviour {
 
 
 	//Level triggers
-	public void ApplyLevel(LevelData data, string levelName)
+	public static void ApplyLevel(LevelData data, string levelName , Bird bird)
 	{
-		if (data.emotion == myBird.bannedLevels)
+		if (data.emotion == bird.bannedLevels)
 			return;
-		if (!Helpers.Instance.ListContainsLevel(data.type, myBird.levelList))
+		if (!Helpers.Instance.ListContainsLevel(data.type, bird.levelList))
 		{
 			//GuiContoler.Instance.ShowMessage(Helpers.Instance.GetLevelUpText(myBird.charName,data.type));
-			myBird.battleCount = myBird.battlesToNextLVL-1;
-			myBird.AddLevel(data);
-			Debug.Log(myBird.charName + " Reached level " + levelName);
+			bird.battleCount = bird.battlesToNextLVL-1;
+			bird.AddLevel(data);
+			Debug.Log(bird.charName + " Reached level " + levelName);
 		}
 	}
 
-	public string CheckBrave1(bool tryingToApply = true)
+	/*public string CheckBrave1(bool tryingToApply = true)
 	{
 		if ( (myBird.emotion == Var.Em.Confident || myBird.emotion == Var.Em.SuperConfident) && myBird.confidence >= 7 && myBird.bannedLevels != Var.Em.Confident)
 		{
@@ -701,7 +701,7 @@ public class Levels : MonoBehaviour {
 			}
 		}
 		return null;
-	}
+	}*/
 
 }
 [Serializable]

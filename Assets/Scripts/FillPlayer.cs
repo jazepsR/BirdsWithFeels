@@ -216,6 +216,7 @@ public class FillPlayer : MonoBehaviour {
 	{
 
 		BirdSaveData target = new BirdSaveData();
+        target.recievedSeeds = template.recievedSeeds;
 		target.levelRollBonus = template.levelRollBonus;
 		target.bannedLevels = template.bannedLevels;
 		target.charName = template.charName;
@@ -248,6 +249,7 @@ public class FillPlayer : MonoBehaviour {
 	public static Bird LoadSavedBird(BirdSaveData template)
 	{
 		Bird target = new Bird("steve");
+        target.recievedSeeds = template.recievedSeeds;
 		target.levelRollBonus = template.levelRollBonus;
 		target.charName = template.charName;
 		target.friendliness = template.friendliness;

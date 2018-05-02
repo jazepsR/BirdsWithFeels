@@ -113,7 +113,8 @@ public class BirdSaveData
 	public Var.Em preferredEmotion;
 	public Var.Em bannedLevels;
 	public EventScript.Character relationshipBird;
-	//public GameObject portrait;
+    //public GameObject portrait;
+    public List<string> recievedSeeds;
 	public List<LevelData> levelList;
 	public Levels.type startingLVL;
 	public int battleCount;

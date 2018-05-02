@@ -146,12 +146,12 @@ public class Bird : MonoBehaviour
 	public GameObject RelationshipParticles;
 	public GameObject CrushParticles;
 	public GameObject mapHighlight;
+    public List<string> recievedSeeds;
 	GameObject birdArtObj;
 	void Start()
 	{
 
 		wonLastBattle = -1;
-
 		if (!isEnemy && portrait == null)
 			portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
 	   /* if (!isEnemy && !inMap)
@@ -248,7 +248,10 @@ public class Bird : MonoBehaviour
 		if (inMap)
 			GetComponentInChildren<Animator>().SetBool("rest", true);
 
-		showText();
+        if (recievedSeeds == null)
+            recievedSeeds = new List<string>();
+        showText();
+
 	}
 
 	public void publicStart()
@@ -509,8 +512,6 @@ public class Bird : MonoBehaviour
 	{
 		if (injured)
 			return;
-		if (Var.gameSettings.shownLevelTutorial)
-			CheckLevels();
 	}
 	public void ResetAfterLevel()
 	{
@@ -533,7 +534,7 @@ public class Bird : MonoBehaviour
 		}
 		
 	}
-	public string CheckLevels(bool toApply = true)
+	/*public string CheckLevels(bool toApply = true)
 	{
 		//TODO: make this look nice
 		string st = "";
@@ -565,7 +566,7 @@ public class Bird : MonoBehaviour
 			return st;
 
 		return null;
-	}
+	}*/
 	void OnMouseEnter()
 	{
 
@@ -1127,7 +1128,7 @@ public class Bird : MonoBehaviour
 			GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
 			GuiContoler.Instance.BirdCombatStr.text = "Combat strength: " + (getBonus()* 10f).ToString("+#;-#;0") + "%";
 			GuiContoler.Instance.BirdCombatStr.gameObject.GetComponent<ShowTooltip>().tooltipText = GetBonusText();
-			levelUpText = CheckLevels(false);
+			//levelUpText = CheckLevels(false);
 			//set progress to level bar
 			/*if (battleCount >= battlesToNextLVL)
 			{

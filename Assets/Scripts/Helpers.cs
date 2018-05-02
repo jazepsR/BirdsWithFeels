@@ -32,6 +32,9 @@ public class Helpers : MonoBehaviour {
 	public bool inMap;
 	List<Image> heartsToFill = new List<Image>();
 	public Transform relationshipDialogs;
+    public GameObject seed;
+    public GameObject seedFar;
+
 	enum friendState { alone, diagonal, oneFriend, twoFriends };
 	public void Awake()
 	{
@@ -42,6 +45,7 @@ public class Helpers : MonoBehaviour {
 		mentalHeart = Resources.Load<Sprite>("sprites/mentalHeart");
 		emptyMentalHeart = Resources.Load<Sprite>("sprites/mentalHeart_empty");
 		Instance = this;
+        Application.targetFrameRate = 60;
 	}
 	public EventScript.Character GetCharEnum(Bird bird)
 	{
@@ -115,8 +119,43 @@ public class Helpers : MonoBehaviour {
 		}
 	}
 
+    public static void ApplyLevel(Levels.type type, Bird bird)
+    {
 
-	public Bird GetBirdFromEnum(EventScript.Character ch, bool useAll = false)
+        switch(type)
+        {
+            case Levels.type.Brave1:
+                Levels.ApplyLevel(new LevelData(Levels.type.Brave1, Var.Em.Confident, Var.lvlSprites[1]), "Brave 1",bird);
+                break;
+            case Levels.type.Brave2:
+                Levels.ApplyLevel(new LevelData(Levels.type.Brave2, Var.Em.Confident, Var.lvlSprites[5]), "Brave 2", bird);
+                break;
+            case Levels.type.Friend1:
+                Levels.ApplyLevel(new LevelData(Levels.type.Friend1, Var.Em.Social, Var.lvlSprites[0]), "Friendly 1", bird);
+                break;
+            case Levels.type.Friend2:
+                Levels.ApplyLevel(new LevelData(Levels.type.Friend1, Var.Em.Social, Var.lvlSprites[4]), "Friendly 2", bird);
+                break;
+            case Levels.type.Lonely1:
+                Levels.ApplyLevel(new LevelData(Levels.type.Lonely1, Var.Em.Solitary, Var.lvlSprites[3]), "Lonely 1", bird);
+                break;
+            case Levels.type.Lonely2:
+                Levels.ApplyLevel(new LevelData(Levels.type.Lonely2, Var.Em.Solitary, Var.lvlSprites[7]), "Lonely 2", bird);
+                break;
+            case Levels.type.Scared1:
+                Levels.ApplyLevel(new LevelData(Levels.type.Scared1, Var.Em.Cautious, Var.lvlSprites[2]), "Scared 1", bird);
+                break;
+            case Levels.type.Scared2:
+                Levels.ApplyLevel(new LevelData(Levels.type.Scared2, Var.Em.Cautious, Var.lvlSprites[6]), "Scared 2", bird);
+                break;
+            default: break;
+
+        }
+
+
+    }
+
+    public Bird GetBirdFromEnum(EventScript.Character ch, bool useAll = false)
 	{
 		List<Bird> birds;
 		if ( useAll)
@@ -702,9 +741,18 @@ public class Helpers : MonoBehaviour {
 			return false;
 		}
 	}
-
-
-	public string GetLevelUpDialogs(Levels.type type, EventScript.Character character)
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+            Time.timeScale = 0.25f;
+        else if (Input.GetKey(KeyCode.RightShift))
+            Time.timeScale = 4f;
+        else
+            Time.timeScale = 1;
+    }
+#endif
+    public string GetLevelUpDialogs(Levels.type type, EventScript.Character character)
 	{
 		switch (character)
 		{

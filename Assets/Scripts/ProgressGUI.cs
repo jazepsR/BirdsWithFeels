@@ -118,7 +118,7 @@ public class ProgressGUI : MonoBehaviour {
 		{
 			PortraitClick(Var.activeBirds[i], i,false,false);
 		}
-		UpdateLevelAreas(Var.activeBirds[0], true);
+		//UpdateLevelAreas(Var.activeBirds[0], true);
 		levelArea.SetActive(false);
 	}
 
