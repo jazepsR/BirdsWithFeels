@@ -60,7 +60,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (levelBar == null)
             return;
-        float factor = 18.5f;
+        float factor = 16f;
         levelBar.maxPoints = levelBits.Length;
         levelBar.ClearPoints();
         foreach(LevelBits bit in levelBits)
@@ -74,8 +74,9 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-factor * bit.social, factor * bit.conf, 0);
                 obj.name = bit.name;
                 obj.GetComponent<ShowTooltip>().tooltipText = "Social: " + bit.social + "\nConfidence: " + bit.conf;
-                if(bird.friendliness == bit.social && bird.confidence == bit.conf)
-                {
+                //if(bird.friendliness == bit.social && bird.confidence == bit.conf)
+				if(Vector2.Distance(new Vector2(bird.friendliness,bird.confidence),new Vector2(bit.social,bit.conf))<=2)
+				{
                     LeanTween.delayedCall(1.7f, ()=>levelBar.AddPoints(bird));
                     obj.GetComponent<Image>().color = Color.yellow;
                     bird.recievedSeeds.Add(bit.name);

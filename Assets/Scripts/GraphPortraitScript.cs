@@ -12,7 +12,7 @@ public class GraphPortraitScript : MonoBehaviour {
 	Text activeText;
 	Var.Em targetEmotion;
 	bool inDangerZone = false;
-	float factor = 17.92f;
+	float factor = 16f;
 	void Starter () {
 		lr = gameObject.AddComponent<LineRenderer>();
 		//lr.sortingOrder = 120;
@@ -88,7 +88,7 @@ public class GraphPortraitScript : MonoBehaviour {
 	public void MovePoint(Vector3 pos)
 	{
 		
-		if (reachedTarget(-pos.x/17.92f, pos.y/17.92f))
+		if (reachedTarget(-pos.x/16f, pos.y/16f))
 		{
 			LeanTween.pause(gameObject);
 			GetComponent<Animator>().SetTrigger("NewEmotion");
