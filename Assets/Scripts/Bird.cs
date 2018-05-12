@@ -1167,9 +1167,9 @@ public class Bird : MonoBehaviour
 				index++;
 			}
 			
-			//set emotion bars
-			GuiContoler.Instance.confSlider.SetDist(confidence + battleConfBoos, this);
-			GuiContoler.Instance.firendSlider.SetDist(friendliness, this);
+			//set emotion bars, commented out by Seb since emotion bars are removed now
+			//GuiContoler.Instance.confSlider.SetDist(confidence + battleConfBoos, this); 
+			//GuiContoler.Instance.firendSlider.SetDist(friendliness, this);
 			//set hearts
 			//SetRelationshipText(GuiContoler.Instance.relationshipPortrait, GuiContoler.Instance.relationshipText);			
 			try
