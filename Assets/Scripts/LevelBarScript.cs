@@ -9,6 +9,7 @@ public class LevelBarScript : MonoBehaviour {
     [HideInInspector]
     public int maxPoints;
     public Levels.type type;
+	public bool isSecond;
 	// Use this for initialization
 	void Start () {
 		

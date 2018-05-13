@@ -374,23 +374,19 @@ public class GuiContoler : MonoBehaviour {
 		{
 			Tutorial.Instance.ShowGraphSpeech(currentGraph);
 		}
-		if (currentGraph == 3)
+		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
-			foreach (Transform child in graph.transform.Find("GraphParts").transform)
-			{
-				Destroy(child.gameObject);
-			}
+			Destroy(child.gameObject);
+		}
+		if (currentGraph == 3)
+		{			
 			LeanTween.delayedCall(0.35f,()=>CreateGraph(-1));
 			
 			dangerZoneBorder.SetActive(false);
 			ProgressGUI.Instance.AllPortraitClick();
 		}
 		else
-		{
-			foreach (Transform child in graph.transform.Find("GraphParts").transform)
-			{
-				Destroy(child.gameObject);
-			}
+		{			
 			LeanTween.delayedCall(0.35f, () =>
             {
                 CreateGraph(currentGraph);
@@ -536,7 +532,7 @@ public class GuiContoler : MonoBehaviour {
 			Destroy(child.gameObject);
 		}
 	}
-	public void CreateGraph(object o)
+	public void CreateGraph(object o,bool afterBattle = true)
 	{
 		canChangeGraph = true;
 		Helpers.Instance.HideTooltip();
@@ -583,7 +579,7 @@ public class GuiContoler : MonoBehaviour {
 				GameObject portrait = bird.portrait;
 				GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
 				//colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
-				Graph.Instance.PlotFull(bird);
+				Graph.Instance.PlotFull(bird,afterBattle);
 				//feedbackText.text = "";
 				winText.text = "";
 			}
@@ -734,13 +730,13 @@ public class GuiContoler : MonoBehaviour {
 			LevelTutorial.shouldShowFirstBattleDialog = false;
 			LeanTween.delayedCall(0.05f, CloseTutorialText);
 		}               
-		InitiateGraph(selectedBird);
+		InitiateGraph(selectedBird,false);
 	}
 	void CloseTutorialText()
 	{
 		speechBubbleObj.SetActive(false);       
 	}
-	public void InitiateGraph(Bird bird)
+	public void InitiateGraph(Bird bird,bool afterBattle = true)
 	{
 		if (!canChangeGraph)
 			return;
@@ -755,11 +751,11 @@ public class GuiContoler : MonoBehaviour {
 				break;
 			}
 		}
-		LeanTween.delayedCall(0.7f, () =>
-        {
-            CreateGraph(index);
+		//LeanTween.delayedCall(0.7f, () =>
+       // {
+            CreateGraph(index,afterBattle);
             ProgressGUI.Instance.PortraitClick(bird);
-        });
+       // });
 		ProgressGUI.Instance.skillArea.SetActive(false);
 		//LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
 		graphAnime.SetBool("open", true);

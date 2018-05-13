@@ -34,7 +34,8 @@ public class Helpers : MonoBehaviour {
 	public Transform relationshipDialogs;
     public GameObject seed;
     public GameObject seedFar;
-
+	[HideInInspector]
+	public List<LevelBits> levelBits;
 	enum friendState { alone, diagonal, oneFriend, twoFriends };
 	public void Awake()
 	{
@@ -45,6 +46,16 @@ public class Helpers : MonoBehaviour {
 		mentalHeart = Resources.Load<Sprite>("sprites/mentalHeart");
 		emptyMentalHeart = Resources.Load<Sprite>("sprites/mentalHeart_empty");
 		Instance = this;
+		if (levelBits.Count ==0)
+		{
+			levelBits = new List<LevelBits>();
+			levelBits.AddRange(Resources.LoadAll<LevelBits>("ScriptableOjbects/Cautious"));
+			levelBits.AddRange(Resources.LoadAll<LevelBits>("ScriptableOjbects/Confident"));
+			levelBits.AddRange(Resources.LoadAll<LevelBits>("ScriptableOjbects/Social"));
+			levelBits.AddRange(Resources.LoadAll<LevelBits>("ScriptableOjbects/Solitary"));
+
+
+		}
         Application.targetFrameRate = 60;
 	}
 	public EventScript.Character GetCharEnum(Bird bird)

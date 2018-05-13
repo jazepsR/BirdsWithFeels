@@ -41,7 +41,7 @@ public class Bird : MonoBehaviour
 	public List<SpriteRenderer> colorSprites;
 	public GameObject bush;    
 	[HideInInspector]
-	public GameObject portrait;	
+	public GameObject portrait, portraitTiny;	
 	[HideInInspector] 
 	public Vector3 target;
 	public Vector3 home;
@@ -153,7 +153,10 @@ public class Bird : MonoBehaviour
 
 		wonLastBattle = -1;
 		if (!isEnemy && portrait == null)
-			portrait = Resources.Load<GameObject>("prefabs/portrait_" + charName);
+		{
+			portrait = Resources.Load<GameObject>("prefabs/portraits/portrait_" + charName);
+			portraitTiny = Resources.Load<GameObject>("prefabs/portraits/tiny_portrait_" + charName);
+		}
 	   /* if (!isEnemy && !inMap)
 		{
 			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi!");
@@ -1118,7 +1121,7 @@ public class Bird : MonoBehaviour
 			//Var.birdInfo.text = ToString();         
 			
 			GuiContoler.Instance.clearSmallGraph();
-			GuiContoler.Instance.smallGraph.PlotFull(this);
+			GuiContoler.Instance.smallGraph.PlotFull(this,false);
 			
 			GuiContoler.Instance.selectedBird = this;
 			//SetRelationshipSliders(GuiContoler.Instance.relationshipSliders);

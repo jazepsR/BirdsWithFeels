@@ -15,6 +15,10 @@ public class Graph : MonoBehaviour {
 	public List<GameObject> portraits;
 	public float factor =2f;
 	public bool isSmall;
+	public LevelBarScript socialBar;
+	public LevelBarScript solitaryBar;
+	public LevelBarScript confidenceBar;
+	public LevelBarScript cautiousBar;
 	// Use this for initialization
 	void Start()
 	{
@@ -24,14 +28,18 @@ public class Graph : MonoBehaviour {
 		multiplier = graphSize / 15;
 	}
 
-	public void PlotFull(Bird bird)
+	public void PlotFull(Bird bird,bool afterBattle)
 	{
-        if (!GuiContoler.Instance.inMap && GuiContoler.Instance.winBanner.activeSelf)
-            return;
+		if (!GuiContoler.Instance.inMap && GuiContoler.Instance.winBanner.activeSelf)
+			return;
 		if (bird.health <= 0)
 			return;
 		//GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
-		GameObject tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait,true,bird);
+		GameObject tempHeart;
+		if (isSmall)
+			tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portraitTiny,true,bird);
+		else
+		tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait, true, bird);
 		if (!isSmall)
 		{		
 			GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();
@@ -40,7 +48,8 @@ public class Graph : MonoBehaviour {
 			if (bird.prevEmotion == bird.emotion)
 				emotion = Var.Em.finish;
 			portraitScript.StartGraph(secondPos, emotion, bird);
-		}  
+		}
+		CreateLevelSeeds(bird,afterBattle); 
 	}
 	
 	GameObject PlotPoint(int x,int y, GameObject obj, bool isPortrait, Bird bird=null )
@@ -54,7 +63,6 @@ public class Graph : MonoBehaviour {
 		{
 			if (isSmall)
 			{
-				heartt.transform.Find("BirdName").GetComponent<Text>().gameObject.SetActive(false);
 				heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
 				ShowTooltip info = heartt.gameObject.AddComponent<ShowTooltip>();
 				string tooltipText = "";
@@ -91,8 +99,79 @@ public class Graph : MonoBehaviour {
 		heartt.transform.localPosition = new Vector3(-x*factor, y*factor, 0);
 		return heartt;     
 	}
-	// Update is called once per frame
-	void Update () {
-		
+	void CreateLevelSeeds(Bird bird,bool afterBattle)
+	{
+		float factor =8f;
+		if(!isSmall)
+		{
+			factor = 16;
+			SetupLevelBar(Var.Em.Cautious, Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.levelList));
+			SetupLevelBar(Var.Em.Confident, Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.levelList));
+			SetupLevelBar(Var.Em.Social, Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.levelList));
+			SetupLevelBar(Var.Em.Solitary, Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.levelList));
+
+		}
+		foreach (LevelBits bit in Helpers.Instance.levelBits)
+		{
+			if (!bird.recievedSeeds.Contains(bit.name))
+			{
+				if (bird.bannedLevels != bit.emotion && Helpers.Instance.ListContainsEmotion(bit.emotion, bird.levelList)==bit.isSecond)
+				{
+					GameObject toInstantiate = Helpers.Instance.seedFar;
+					if (bird.emotion == bit.emotion)
+						toInstantiate = Helpers.Instance.seed;
+					GameObject obj = Instantiate(toInstantiate, graphParent.transform);
+					obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-factor * bit.social, factor * bit.conf, 0);
+					obj.name = bit.name;
+					obj.transform.localScale = Vector3.one *  factor/16f;
+					obj.GetComponent<ShowTooltip>().tooltipText = "Social: " + bit.social + "\nConfidence: " + bit.conf;
+					if (Vector2.Distance(new Vector2(bird.friendliness, bird.confidence), new Vector2(bit.social, bit.conf)) <= 2
+						&& !isSmall  && afterBattle)
+					{
+						LeanTween.delayedCall(1.7f, () => GetLevelBar(bit.emotion).AddPoints(bird));
+						obj.GetComponent<Image>().color = Color.yellow;
+						bird.recievedSeeds.Add(bit.name);
+						LeanTween.delayedCall(1f, () => LeanTween.move(obj, GetLevelBar(bit.emotion).transform.position, 0.7f).setEaseOutBack().setOnComplete(() => Destroy(obj)));
+					}
+					//obj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bit.emotion);
+				}
+			}
+			else
+			{
+				//levelBar.AddPoints(bird);
+			}
+		}
 	}
+
+	LevelBarScript GetLevelBar(Var.Em emotion)
+	{
+		switch(emotion)
+		{
+			case Var.Em.Cautious:
+				return cautiousBar;				
+			case Var.Em.Confident:
+				return confidenceBar;
+			case Var.Em.Social:
+				return socialBar;
+			case Var.Em.Solitary:
+				return solitaryBar;
+			default:
+				return null;
+
+
+		}
+	}
+	void SetupLevelBar(Var.Em emotion, bool isSecond)
+	{
+		GetLevelBar(emotion).ClearPoints();
+		int count = 0;
+		GetLevelBar(emotion).isSecond = isSecond;
+		foreach (LevelBits levelBit in Helpers.Instance.levelBits)
+		{
+			if (levelBit.emotion == emotion && levelBit.isSecond == isSecond)
+				count++;
+		}
+		GetLevelBar(emotion).maxPoints = count;
+	}
+
 }

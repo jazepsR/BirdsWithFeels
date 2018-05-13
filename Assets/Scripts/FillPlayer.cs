@@ -174,7 +174,8 @@ public class FillPlayer : MonoBehaviour {
 		}
 	}
 	public static void SetupBird(Bird target, Bird template)
-	{		
+	{
+		target.recievedSeeds = template.recievedSeeds;
 		target.charName = template.charName;
 		target.friendliness = template.friendliness;
 		target.confidence = template.confidence;
@@ -190,6 +191,7 @@ public class FillPlayer : MonoBehaviour {
 		target.bannedLevels = template.bannedLevels;
 		target.injured = template.injured;
 		target.portrait = template.portrait;
+		target.portraitTiny = template.portraitTiny;
 		target.maxHealth = template.maxHealth;
 		target.levelList = template.levelList;
 		//target.startingLVL = template.startingLVL;

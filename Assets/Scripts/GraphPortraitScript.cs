@@ -15,6 +15,8 @@ public class GraphPortraitScript : MonoBehaviour {
 	float factor = 16f;
 	void Starter () {
 		lr = gameObject.AddComponent<LineRenderer>();
+
+		lr.material = Resources.Load<Material>("mat");
 		//lr.sortingOrder = 120;
 		lr.sortingOrder = 3;
 		lr.sortingLayerName = "Front";
@@ -30,6 +32,7 @@ public class GraphPortraitScript : MonoBehaviour {
 			inDangerZone = false;
 		print("pos:" + transform.localPosition);
 		GetComponent<Animator>().SetBool("dangerzone",inDangerZone);
+		LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);
 	}
 	
 	// Update is called once per frame
@@ -52,10 +55,9 @@ public class GraphPortraitScript : MonoBehaviour {
 
 	public void StartGraph(Vector3 target, Var.Em targetEmotion, Bird bird)
 	{
-		Starter();
+		LeanTween.delayedCall(0.8f, Starter);
 		GuiContoler.Instance.clearSmallGraph();
 		this.targetEmotion = targetEmotion;
-		lr.material = Resources.Load<Material>("mat");
 		ShowTooltip info =gameObject.AddComponent<ShowTooltip>();
 		finish = target * factor;
 		if (Var.Infight)
@@ -70,8 +72,7 @@ public class GraphPortraitScript : MonoBehaviour {
 				info.tooltipText = Helpers.Instance.GetStatInfo((int)target.y, -(int)target.x);
 		}
 		else
-			info.tooltipText = Helpers.Instance.GetStatInfo((int)target.y, -(int)target.x);
-		LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);        
+			info.tooltipText = Helpers.Instance.GetStatInfo((int)target.y, -(int)target.x);    
 			
 	}
 	void ResumeMovement()

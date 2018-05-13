@@ -130,8 +130,8 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 			if (emotion == Var.Em.Social || emotion == Var.Em.Confident)
 				exitement = 2;
 		}
-		anim.SetInteger("excitement", exitement);
-        if(!isFinal)
-            SetLevelBits(bird);
+		//anim.SetInteger("excitement", exitement);
+       // if(!isFinal)
+        //    SetLevelBits(bird);
     }
 }
