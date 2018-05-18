@@ -129,7 +129,7 @@ public class Tutorial : MonoBehaviour {
             case 3:
                 GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "These battles are taking a toll on me..");
                 GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hey no worries - I'll fight so that you can <b>rest</b> and regain some <b>health</b>");
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "You'll also gain some <b>cautiousness!</b>");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "You'll also gain some <b>cautiion!</b>");
                 break;
             case 4:
                 EventController.Instance.CreateEvent(AddAlexEvent);
@@ -153,7 +153,7 @@ public class Tutorial : MonoBehaviour {
         {
             case 0:
                 GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Vultures will walk forward forever until they reach a fight! ");
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "I may be <b>lonely</b>, but my independence makes me stronger than that emotionless vulture!");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "I am <b>solitary</b>, my strong feelings makes me stronger than that emotionless vulture!");
                 GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Any emotion beats a lack of emotion. Let's go! ");
                 outlines.SetActive(false);
                 break;
@@ -195,7 +195,7 @@ public class Tutorial : MonoBehaviour {
             case 0:
                 GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "We birds are <b>affected emotionally</b> by what happens to us! Unlike you, you monster" );
                 GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I <b>won</b> the battle, my <b>confidence</b> is surging! ");
-                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "But there’s also no other birds to hang out with - making me more <b>lonely</b>.");
+                GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "But there’s also no other birds to hang out with - making me more <b>solitary</b>.");
                 break;
             case 1:
                 if(Var.activeBirds[0].FriendGainedInRound>0)
@@ -204,9 +204,9 @@ public class Tutorial : MonoBehaviour {
                 {
                     if (Var.activeBirds[0].FriendGainedInRound < 0)
                     {
-                        GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Being alone this battle made me more lonely..I mean independent! And strong. Strong and independent.");
+                        GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Being alone this battle made me more lonely..");
                         GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I mean independent! ");
-                        GuiContoler.Instance.ShowSpeechBubble(portraitPoint, " And strong."); 
+                        GuiContoler.Instance.ShowSpeechBubble(portraitPoint, " and strong"); 
                         GuiContoler.Instance.ShowSpeechBubble(portraitPoint, " Strong and independent.");
                     }
                     else

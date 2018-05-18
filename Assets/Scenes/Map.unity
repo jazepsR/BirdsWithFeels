@@ -2383,6 +2383,7 @@ MonoBehaviour:
   colorSprites: []
   bush: {fileID: 0}
   portrait: {fileID: 1721119984414660, guid: e348ca8dc85d8714f8135fd810be508e, type: 2}
+  portraitTiny: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 0, z: 0}
   dragged: 0
@@ -2450,6 +2451,7 @@ MonoBehaviour:
   RelationshipParticles: {fileID: 0}
   CrushParticles: {fileID: 0}
   mapHighlight: {fileID: 548520584}
+  recievedSeeds: []
 --- !u!1001 &165142832
 Prefab:
   m_ObjectHideFlags: 0
@@ -8109,6 +8111,7 @@ MonoBehaviour:
   colorSprites: []
   bush: {fileID: 0}
   portrait: {fileID: 1928740137827062, guid: 486812baba58fd748aa85e57f12d3bd1, type: 2}
+  portraitTiny: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 0, z: 0}
   dragged: 0
@@ -8176,6 +8179,7 @@ MonoBehaviour:
   RelationshipParticles: {fileID: 0}
   CrushParticles: {fileID: 0}
   mapHighlight: {fileID: 1694460957}
+  recievedSeeds: []
 --- !u!1 &369850573
 GameObject:
   m_ObjectHideFlags: 0
@@ -11596,7 +11600,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: background
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114998807013218296, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -14140,6 +14144,9 @@ MonoBehaviour:
   RandomHexColor: <color=#eede00ff>
   inMap: 1
   relationshipDialogs: {fileID: 0}
+  seed: {fileID: 0}
+  seedFar: {fileID: 0}
+  levelBits: []
 --- !u!114 &685676509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16462,7 +16469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 180, y: -11}
+  m_AnchoredPosition: {x: 180, y: -10.999939}
   m_SizeDelta: {x: 460, y: 411.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &803136198
@@ -19939,6 +19946,7 @@ MonoBehaviour:
   colorSprites: []
   bush: {fileID: 0}
   portrait: {fileID: 1846377576879270, guid: e8239ee5c1b84554f9803604453463ea, type: 2}
+  portraitTiny: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 0, z: 0}
   dragged: 0
@@ -20006,6 +20014,7 @@ MonoBehaviour:
   RelationshipParticles: {fileID: 0}
   CrushParticles: {fileID: 0}
   mapHighlight: {fileID: 537266036}
+  recievedSeeds: []
 --- !u!1 &977331984
 GameObject:
   m_ObjectHideFlags: 0
@@ -20151,6 +20160,7 @@ MonoBehaviour:
   colorSprites: []
   bush: {fileID: 0}
   portrait: {fileID: 1670458014247388, guid: 020fbec819ceb6e4db814084c4a5fd24, type: 2}
+  portraitTiny: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 0, z: 0}
   dragged: 0
@@ -20218,6 +20228,7 @@ MonoBehaviour:
   RelationshipParticles: {fileID: 0}
   CrushParticles: {fileID: 0}
   mapHighlight: {fileID: 1975005753}
+  recievedSeeds: []
 --- !u!1 &1002234246
 GameObject:
   m_ObjectHideFlags: 0
@@ -27171,6 +27182,7 @@ MonoBehaviour:
   colorSprites: []
   bush: {fileID: 0}
   portrait: {fileID: 1292122385422564, guid: 20575a8cd7b7e4846b28c250ff939581, type: 2}
+  portraitTiny: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   home: {x: 0, y: 0, z: 0}
   dragged: 0
@@ -27238,6 +27250,7 @@ MonoBehaviour:
   RelationshipParticles: {fileID: 0}
   CrushParticles: {fileID: 0}
   mapHighlight: {fileID: 1130995657}
+  recievedSeeds: []
 --- !u!1 &1366429281
 GameObject:
   m_ObjectHideFlags: 0
@@ -36951,6 +36964,10 @@ MonoBehaviour:
   portraits: []
   factor: 8
   isSmall: 1
+  socialBar: {fileID: 0}
+  solitaryBar: {fileID: 0}
+  confidenceBar: {fileID: 0}
+  cautiousBar: {fileID: 0}
 --- !u!1 &1830645270 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4,
