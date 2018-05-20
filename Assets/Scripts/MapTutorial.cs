@@ -14,13 +14,7 @@ public class MapTutorial : MonoBehaviour {
         {
             tutorialHighlight.gameObject.SetActive(true);
             DialogueControl.Instance.CreateParticularDialog(mapTutorialDialog);
-            print("Did map tutorial dialog");
         }
-		if (Var.gameSettings.shownMapTutorial && !Var.gameSettings.shownMapPlanningTutorial) //this needs to react to a specific level, not to whether it has shown the initial tutorial before. 
-		{
-			DialogueControl.Instance.CreateParticularDialog(mapPlanningTutorial);
-			Var.gameSettings.shownMapPlanningTutorial = true;
-		}
 	}
 	
 public void ShowDialog2()

@@ -13,9 +13,9 @@ public class GraphPortraitScript : MonoBehaviour {
 	Var.Em targetEmotion;
 	bool inDangerZone = false;
 	float factor = 16f;
+	Graph parent;
 	void Starter () {
 		lr = gameObject.AddComponent<LineRenderer>();
-
 		lr.material = Resources.Load<Material>("mat");
 		//lr.sortingOrder = 120;
 		lr.sortingOrder = 3;
@@ -37,7 +37,8 @@ public class GraphPortraitScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GuiContoler.Instance.dangerFollowHighlight.transform.position = transform.position;
+		if (parent != null && parent.dangerZoneHighlight != null)
+			parent.dangerZoneHighlight.transform.position = transform.position;
 		if ((Mathf.Abs(transform.localPosition.x / factor) >= 12 || Mathf.Abs(transform.localPosition.y / factor) >= 12) && !inDangerZone)
 		{
 
@@ -53,9 +54,10 @@ public class GraphPortraitScript : MonoBehaviour {
 
 	}
 
-	public void StartGraph(Vector3 target, Var.Em targetEmotion, Bird bird)
+	public void StartGraph(Vector3 target, Var.Em targetEmotion, Bird bird, Graph parent)
 	{
-		LeanTween.delayedCall(0.8f, Starter);
+		this.parent = parent;
+		LeanTween.delayedCall(0.5f, Starter);
 		GuiContoler.Instance.clearSmallGraph();
 		this.targetEmotion = targetEmotion;
 		ShowTooltip info =gameObject.AddComponent<ShowTooltip>();

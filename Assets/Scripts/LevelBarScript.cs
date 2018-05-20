@@ -10,9 +10,10 @@ public class LevelBarScript : MonoBehaviour {
     public int maxPoints;
     public Levels.type type;
 	public bool isSecond;
+	ShowTooltip tooltipScript;
 	// Use this for initialization
 	void Start () {
-		
+		tooltipScript = GetComponent<ShowTooltip>();
 	}
 	public void ClearPoints()
     {
@@ -31,6 +32,11 @@ public class LevelBarScript : MonoBehaviour {
         levelBar.rectTransform.localScale = temp;
         if (maxPoints == currentPoints)
             Helpers.ApplyLevel(type, bird);
-
+		SetText(bird);
     }
+	public void SetText(Bird bird)
+	{
+		string color = Helpers.Instance.GetHexColor(Helpers.Instance.GetLevelEmotion(type));
+		tooltipScript.tooltipText =color+ Helpers.Instance.GetLevelTitle(type) + ":</color> " + currentPoints + " / " + maxPoints + " seeds collected\n" + Helpers.Instance.GetLVLInfoText(type);
+	}
 }

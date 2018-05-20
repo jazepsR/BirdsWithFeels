@@ -70,7 +70,7 @@ public class MapControler : MonoBehaviour {
 			}
 		}
 		SaveLoad.Save();
-		if (!Var.gameSettings.shownMapTutorial || !Var.gameSettings.shownMapPlanningTutorial)
+		if (Var.currentWeek<3)
 			Var.shouldDoMapEvent = false;
 		//Var.shouldDoMapEvent = true;
 		if (Var.shouldDoMapEvent)

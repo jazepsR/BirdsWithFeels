@@ -97,6 +97,7 @@ public class battleAnim :MonoBehaviour {
 	IEnumerator ShowResult(battleData battle,float waitTime)
 	{
 		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyMove);
+		battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
 		yield return new WaitForSeconds(enemySpeed);
 		Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
 		GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
@@ -107,7 +108,7 @@ public class battleAnim :MonoBehaviour {
 
 	void ShowBattleResult(battleData battle)
 	{
-		   
+
 		//Player won
 		if (battle.result == 1)
 		{
@@ -125,7 +126,7 @@ public class battleAnim :MonoBehaviour {
 		else
 		{
 			battle.player.battleConfBoos += Var.confLoseFight;
-			battle.player.GetComponentInChildren<Animator>().SetTrigger("lose 0");
+			battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", false);
 			AudioControler.Instance.EnemySound();
 			battle.player.ChageHealth(-1);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class firendLine : MonoBehaviour {
 	//public GameObject LineObj;
 	public List<GameObject> activeLines = new List<GameObject>();
+	public GameObject lonelyParticleObj = null;
 	public Color thick;
 	public Color thin;
 	public Color crush;
@@ -15,6 +16,7 @@ public class firendLine : MonoBehaviour {
     public static GameObject verticalLine;
     public static GameObject diognalLineShort;
     public static GameObject diognalLineLong;
+	public static GameObject lonelyParticles;
 	// Use this for initialization
 	void Start () {
 		birdScript = GetComponent<Bird>(); 
@@ -24,7 +26,7 @@ public class firendLine : MonoBehaviour {
             verticalLine = Resources.Load<GameObject>("prefabs/lines/vertical");
             diognalLineShort = Resources.Load<GameObject>("prefabs/lines/diagShort");
             diognalLineLong =  Resources.Load<GameObject>("prefabs/lines/diagLong");
-
+			lonelyParticles = Resources.Load<GameObject>("prefabs/lines/lonely_effect");
 
         }
                
@@ -44,12 +46,20 @@ public class firendLine : MonoBehaviour {
 			return;
 		DrawLine(y, x + 1,horizontalLine);
 		DrawLine(y, x - 1,horizontalLine);
-		DrawLine(y + 1, x + 1,diognalLineLong);
 		DrawLine(y + 1, x,verticalLine);
-		DrawLine(y + 1, x - 1,diognalLineShort);
-		DrawLine(y - 1, x + 1,diognalLineShort);
 		DrawLine(y - 1, x,verticalLine);
-		DrawLine(y - 1, x-1,diognalLineLong);
+		DrawLine(y + 1, x - 1, null);
+		DrawLine(y - 1, x + 1, null);
+		DrawLine(y + 1, x + 1, null);
+		DrawLine(y - 1, x - 1, null);
+		/*DrawLine(y + 1, x - 1, diognalLineShort);
+		DrawLine(y - 1, x + 1, diognalLineShort);
+		DrawLine(y + 1, x + 1, diognalLineLong);
+		DrawLine(y - 1, x-1,diognalLineLong);*/
+		CheckIfLonely();
+		/*if (isLonely)
+			lonelyParticleObj = Instantiate(lonelyParticles, birdScript.transform);*/
+
 	}
 
 
@@ -63,13 +73,15 @@ public class firendLine : MonoBehaviour {
 			if (Var.playerPos[y, x] != null)
 			{
 
-
-                Vector3 pos = (birdScript.target + Var.playerPos[y,x].target)/ 2f;
-                Quaternion rot = line.transform.rotation;
-                GameObject LineObj = Instantiate(line,pos, rot);
-                activeLines.Add(LineObj);
-                Var.playerPos[y, x].lines.activeLines.Add(LineObj);
-
+				if (line != null)
+				{
+					Vector3 pos = (birdScript.target + Var.playerPos[y, x].target) / 2f;
+					Quaternion rot = line.transform.rotation;
+					GameObject LineObj = Instantiate(line, pos, rot);
+					activeLines.Add(LineObj);
+					Var.playerPos[y, x].lines.activeLines.Add(LineObj);
+				}
+				Destroy(Var.playerPos[y, x].gameObject.GetComponent<firendLine>().lonelyParticleObj);
                 //Deprecated code
                 /*
 			  
@@ -119,19 +131,39 @@ public class firendLine : MonoBehaviour {
 
 	}
 
-
+	public void CheckIfLonely()
+	{
+		if(birdScript.x < 0 || birdScript.y < 0)
+			return;
+		if (Helpers.Instance.GetAdjacentBirds(birdScript).Count == 0 && lonelyParticleObj == null)
+		{
+			lonelyParticleObj = Instantiate(lonelyParticles, birdScript.transform);
+			lonelyParticleObj.transform.localPosition = new Vector3(0.3f, 0, 0);
+		}
+	}
 
 
 	public void RemoveLines()
 	{
 		foreach(GameObject line in activeLines)
-		{
-		   
+		{		   
 			Destroy(line);
 		}
 		activeLines.Clear();
+		if (lonelyParticleObj != null)
+			Destroy(lonelyParticleObj);
+		try
+		{
+			foreach (Bird bird in Var.activeBirds)
+			{
+				if (bird != birdScript)
+					bird.lines.CheckIfLonely();
+			}
+		}
+		catch
+		{
 
-
+		}
 	}
 
 }

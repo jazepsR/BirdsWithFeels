@@ -311,6 +311,7 @@ public class EventController : MonoBehaviour {
 			}
 			catch
 			{
+				print("failed to show portrait");
 				portrait.transform.parent.gameObject.SetActive(false);
 			}
 		}

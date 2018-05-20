@@ -62,6 +62,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	//[HideInInspector]
 	public TimedEventControl timedEventTrigger;
 	bool birdAdded = false;
+	public EventScript firstCompleteEvent;
+	public Dialogue firstCompleteDialogue;
 	// Use this for initialization
 	void Start()
 	{
@@ -120,6 +122,10 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			{
 				if(ID == Var.currentStageID && firstCompletion)
 				{
+					if(firstCompleteEvent!= null)
+						EventController.Instance.CreateEvent(firstCompleteEvent);
+					if(firstCompleteDialogue != null)
+						DialogueControl.Instance.CreateParticularDialog(firstCompleteDialogue);
 					firstCompletion = false;
 					anim.SetInteger("state", 1);
 					unlockedRoad.gameObject.SetActive(false);
@@ -379,7 +385,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		{
 			MapTutorial tut = FindObjectOfType<MapTutorial>();
 			tut.tutorialHighlight.SetTrigger("off");
-			tut.ShowDialog2();
+			DialogueControl.Instance.CreateParticularDialog(tut.mapTutorialDialog2);
+			Var.gameSettings.shownMapTutorial = true;
 		}
 		SetupPieGraph();
 		active = true;
@@ -551,7 +558,9 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			stageState = "available";
 		stageInfo += "Stage " + (ID + 1) + ": " + stageState;
 		string weakness = "All";
-		if (type != Var.Em.Neutral)
+		if (type == Var.Em.Random)
+			weakness = "Unpredictable";
+		else if (type != Var.Em.Neutral)
 			weakness = Helpers.Instance.GetWeakness(type).ToString();
 		stageInfo += ". Main ENEMY emotion: " +Helpers.Instance.GetHexColor(type)+ type + "</color>. Weak to: " +
 			Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(type)) + weakness + "</color>.";

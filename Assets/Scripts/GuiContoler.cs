@@ -78,7 +78,8 @@ public class GuiContoler : MonoBehaviour {
 	[HideInInspector]
 	public Bird selectedBird;
 	public Button SelectDeathBirdBtn;
-	int currentGraph = -1;
+	[HideInInspector]
+	public int currentGraph = -1;
 	public Button nextGraph;
 	public Button prevGraph;
 	public Button HideSmallGraph;
@@ -94,6 +95,7 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject minimap;
 	public GameObject dangerZoneBorder;
 	bool canChangeGraph = true;
+	bool GraphActive = false;
 	void Awake()
 	{
 		if (!Var.StartedNormally)
@@ -268,6 +270,15 @@ public class GuiContoler : MonoBehaviour {
 		{
 			setPause();
 		}
+		if (GraphActive && Input.GetMouseButtonDown(1))
+		{
+			if (nextGraph.gameObject.activeInHierarchy)
+				nextGraph.onClick.Invoke();
+			else if (CloseBattleReport.gameObject.activeSelf)
+				CloseBattleReport.onClick.Invoke();
+
+
+		}
 	}
 	public void SpeechBubbleClicked()
 	{		
@@ -380,14 +391,14 @@ public class GuiContoler : MonoBehaviour {
 		}
 		if (currentGraph == 3)
 		{			
-			LeanTween.delayedCall(0.35f,()=>CreateGraph(-1));
+			LeanTween.delayedCall(0.2f,()=>CreateGraph(-1));
 			
 			dangerZoneBorder.SetActive(false);
 			ProgressGUI.Instance.AllPortraitClick();
 		}
 		else
 		{			
-			LeanTween.delayedCall(0.35f, () =>
+			LeanTween.delayedCall(0.2f, () =>
             {
                 CreateGraph(currentGraph);
                 ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
@@ -490,6 +501,7 @@ public class GuiContoler : MonoBehaviour {
 			
 	public void CloseGraph()
 	{
+		GraphActive = false;
 		AudioControler.Instance.PlayPaperSound();
 		canChangeGraph = true;
 		battlePanel.SetActive(true);
@@ -534,6 +546,7 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CreateGraph(object o,bool afterBattle = true)
 	{
+		GraphActive = true;
 		canChangeGraph = true;
 		Helpers.Instance.HideTooltip();
 		battlePanel.SetActive(false);

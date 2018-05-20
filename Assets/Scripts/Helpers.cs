@@ -269,7 +269,7 @@ public class Helpers : MonoBehaviour {
 			return GetBirdFromEnum(Char).portrait;
 		else
 		{
-			return Resources.Load<GameObject>("prefabs/portrait_" + Char.ToString());
+			return Resources.Load<GameObject>("prefabs/portraits/portrait_" + Char.ToString());
 		}
 
 	}
@@ -294,6 +294,31 @@ public class Helpers : MonoBehaviour {
 
 
 	}
+	public Var.Em GetLevelEmotion(Levels.type type)
+	{
+		switch (type)
+		{
+			case Levels.type.Brave1:
+				return Var.Em.Confident;
+			case Levels.type.Brave2:
+				return Var.Em.Confident;
+			case Levels.type.Friend1:
+				return Var.Em.Social;
+			case Levels.type.Friend2:
+				return Var.Em.Social;
+			case Levels.type.Lonely1:
+				return Var.Em.Solitary;
+			case Levels.type.Lonely2:
+				return Var.Em.Solitary;
+			case Levels.type.Scared1:
+				return Var.Em.Cautious;
+			case Levels.type.Scared2:
+				return Var.Em.Cautious;
+			default:
+				return Var.Em.Neutral;
+		}
+	}
+
 
 	public bool RandomBool()
 	{
@@ -717,7 +742,7 @@ public class Helpers : MonoBehaviour {
 			case Levels.type.Scared2:
 				return "If in hidden, this bird does not fight enemies. Instead, all enemies crossing this birds tile have -30% in combat. Hide the bird by left clicking them.";
 			case Levels.type.Lonely1:
-				return "Emotional changes increased by 2 for all teammates in this birds column.";
+				return "Emotional changes increased by 1 for all teammates in this birds column.";
 			case Levels.type.Lonely2:
 				return "If resting, the player can chosse to redo the last battle. 3 turn cooldown";
 			case Levels.type.Alexander:

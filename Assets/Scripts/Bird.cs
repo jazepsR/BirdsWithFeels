@@ -146,7 +146,7 @@ public class Bird : MonoBehaviour
 	public GameObject RelationshipParticles;
 	public GameObject CrushParticles;
 	public GameObject mapHighlight;
-    public List<string> recievedSeeds;
+	public List<string> recievedSeeds;
 	GameObject birdArtObj;
 	void Start()
 	{
@@ -251,9 +251,9 @@ public class Bird : MonoBehaviour
 		if (inMap)
 			GetComponentInChildren<Animator>().SetBool("rest", true);
 
-        if (recievedSeeds == null)
-            recievedSeeds = new List<string>();
-        showText();
+		if (recievedSeeds == null)
+			recievedSeeds = new List<string>();
+		showText();
 
 	}
 
@@ -356,7 +356,7 @@ public class Bird : MonoBehaviour
 			}
 			levelRollBonus++;
 			//Reset Emotions
-			prevConf = confidence;
+			/*prevConf = confidence;
 			prevFriend = friendliness;
 			switch (data.emotion)
 			{
@@ -390,7 +390,7 @@ public class Bird : MonoBehaviour
 					break;
 				default:
 					break;
-			}
+			}*/
 			ResetBonuses();
 		}
 		levelList.Add(data);
@@ -893,24 +893,24 @@ public class Bird : MonoBehaviour
 			if (friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos > 0)
 			{
 				if(shouldApply)
-					levelFriendBoos += 2;
-				toReturn.y = 2;
+					levelFriendBoos += 1;
+				toReturn.y = 1;
 				print(charName + " got influenced to friendly");
 			}
 			else
 			{
 				if (friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos < 0)
 				{
-					levelFriendBoos -= 2;
-					toReturn.y = -2;
+					levelFriendBoos -= 1;
+					toReturn.y = -1;
 					print(charName + " got influenced to lonely");
 				}
 			}
 			if (battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos > 0)
 			{
 				if (shouldApply)
-					levelConfBoos += 2;
-				toReturn.x = 2;
+					levelConfBoos += 1;
+				toReturn.x = 1;
 				print(charName + " got influenced to confident");
 
 			}
@@ -919,8 +919,8 @@ public class Bird : MonoBehaviour
 				if (battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos < 0)
 				{
 					if (shouldApply)
-						levelConfBoos -= 2;
-					toReturn.x = -2;
+						levelConfBoos -= 1;
+					toReturn.x = -1;
 					print(charName + " got influenced to scared");
 				}
 			}
@@ -999,7 +999,7 @@ public class Bird : MonoBehaviour
 					health--;
 				}
 
-				mentalHealth = Var.maxMentalHealth;
+				mentalHealth = 1;
 			}
 
 		}
