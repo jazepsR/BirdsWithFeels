@@ -60,7 +60,7 @@ public class powerTile : MonoBehaviour {
 		switch (type)
 		{
 			case Var.PowerUps.dmg:
-				info = "Birds on this tile recieve +10% fighting bouns";
+				info = "Birds on this tile recieve +10% fighting bonus";
 				break;
 			case Var.PowerUps.emotion:
 				info = "Gain one extra "+Helpers.Instance.GetHexColor(emotion) + emotion.ToString()+"</color>";
@@ -69,7 +69,7 @@ public class powerTile : MonoBehaviour {
 				info = "Birds on this tile will heal 1 heart after the battle";
 				break;
 			case Var.PowerUps.obstacle:
-				info = "You can't place birds here";     
+				info = "You can't place birds here - enemies will walk through";     
                 if(canKiss)           
                     GetComponent<Animator>().SetTrigger("kiss");
 				break;
