@@ -74,8 +74,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		else
 			trialID = GetTargetID(this);
 		LoadSaveData();
-		if (!Var.StartedNormally)
-			available = true;
+		//if (!Var.StartedNormally)
+			//available = true;
 		sr = GetComponent<Image>();
 		if (isTrial)
 			sr.sprite = MapControler.Instance.trialSprite;
@@ -443,6 +443,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			timedEventTrigger.TriggerActivationEvent();
 			return;
 		}
+		//Debug.LogError("loading battle scene");
 		if (available && MapControler.Instance.canFight)
 		{
 			SaveLoad.Save();

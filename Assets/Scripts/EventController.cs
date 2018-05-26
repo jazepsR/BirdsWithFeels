@@ -111,7 +111,6 @@ public class EventController : MonoBehaviour {
 			{
 				EventScript nextEvent = eventsToShow[0];
 				eventsToShow.RemoveAt(0);
-				currentEvent = null;
 				CreateEvent(nextEvent);
 
 			}
@@ -132,6 +131,7 @@ public class EventController : MonoBehaviour {
 					}
 				}
 			}
+			currentEvent = null;
 			nextEvent = null;
 		}
 		
