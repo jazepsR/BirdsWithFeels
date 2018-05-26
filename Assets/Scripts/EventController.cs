@@ -35,6 +35,7 @@ public class EventController : MonoBehaviour {
 	public List<EventScript> eventsToShow;
 	//List<string> texts;    
 	int currentText = 0;
+	bool activeChoices = false;
 	// Use this for initialization
 	void Awake () {
 		eventsToShow = new List<EventScript>();
@@ -71,7 +72,8 @@ public class EventController : MonoBehaviour {
 
 	public void ContinueBtn()
 	{
-		
+		if (activeChoices)
+			return;
 		currentText++;
 		print("currentText: " + currentText);
 		AudioControler.Instance.ClickSound();
@@ -111,7 +113,6 @@ public class EventController : MonoBehaviour {
 			{
 				EventScript nextEvent = eventsToShow[0];
 				eventsToShow.RemoveAt(0);
-				currentEvent = null;
 				CreateEvent(nextEvent);
 
 			}
@@ -127,11 +128,12 @@ public class EventController : MonoBehaviour {
 				{
 					if (GuiContoler.Instance.graph.transform.localPosition.y < -500)
 					{
-						GuiContoler.Instance.battlePanel.SetActive(true);
+						GuiContoler.Instance.GraphBlocker.SetActive(false);
 						DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
 					}
 				}
 			}
+			currentEvent = null;
 			nextEvent = null;
 		}
 		
@@ -213,6 +215,7 @@ public class EventController : MonoBehaviour {
 	}
 	public void CreateEvent(EventScript eventData)
 	{
+		
 		if (!eventData.canShowMultipleTimes)
 		{
 			Var.shownEvents.Add(eventData.heading);
@@ -226,7 +229,7 @@ public class EventController : MonoBehaviour {
 		currentText = 0;
 		if (!inMap)
 		{
-			GuiContoler.Instance.battlePanel.SetActive(false);
+			GuiContoler.Instance.GraphBlocker.SetActive(true);
 		}
 		
 
@@ -332,6 +335,7 @@ public class EventController : MonoBehaviour {
 				SetupChoice(choiceObj, i);
 				i++;
 			}
+			activeChoices = true;
 		}
 		else
 		{
@@ -343,7 +347,7 @@ public class EventController : MonoBehaviour {
 	}
 	void DisplayChoiceResult(int ID)
 	{
-		
+		activeChoices = false;
 		AudioControler.Instance.PlayPaperSound();
 		choiceList.gameObject.SetActive(false);
 		Helpers.Instance.HideTooltip();

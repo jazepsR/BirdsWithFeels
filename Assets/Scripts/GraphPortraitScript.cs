@@ -15,24 +15,31 @@ public class GraphPortraitScript : MonoBehaviour {
 	float factor = 16f;
 	Graph parent;
 	void Starter () {
-		lr = gameObject.AddComponent<LineRenderer>();
-		lr.material = Resources.Load<Material>("mat");
-		//lr.sortingOrder = 120;
-		lr.sortingOrder = 3;
-		lr.sortingLayerName = "Front";
-		lr.SetWidth(0.045f, 0.045f);
-		lr.textureMode = LineTextureMode.Tile;
-		lr.widthMultiplier = 3f;
-		firstPos = new Vector3(transform.position.x,transform.position.y, 0);
-		lr.SetPosition(0, firstPos);
-		lr.SetPosition(1, firstPos);
-		if (Mathf.Abs(transform.localPosition.x /factor) > 12 || Mathf.Abs(transform.localPosition.y / factor) > 12)
-			inDangerZone = true;
-		else
-			inDangerZone = false;
-		print("pos:" + transform.localPosition);
-		GetComponent<Animator>().SetBool("dangerzone",inDangerZone);
-		LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);
+		try
+		{
+			lr = gameObject.AddComponent<LineRenderer>();
+			lr.material = Resources.Load<Material>("mat");
+			//lr.sortingOrder = 120;
+			lr.sortingOrder = 3;
+			lr.sortingLayerName = "Front";
+			lr.SetWidth(0.045f, 0.045f);
+			lr.textureMode = LineTextureMode.Tile;
+			lr.widthMultiplier = 3f;
+			firstPos = new Vector3(transform.position.x, transform.position.y, 0);
+			lr.SetPosition(0, firstPos);
+			lr.SetPosition(1, firstPos);
+			if (Mathf.Abs(transform.localPosition.x / factor) > 12 || Mathf.Abs(transform.localPosition.y / factor) > 12)
+				inDangerZone = true;
+			else
+				inDangerZone = false;
+			print("pos:" + transform.localPosition);
+			GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);
+		}
+		catch
+		{
+			Debug.Log("graph starter error");
+		}
 	}
 	
 	// Update is called once per frame

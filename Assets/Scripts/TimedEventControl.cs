@@ -64,6 +64,9 @@ public class TimedEventControl : MonoBehaviour {
 				data.currentState = TimedEventData.state.failed;
 				EventController.Instance.CreateEvent(failEvent);
 				EventNotification.transform.parent.gameObject.SetActive(false);
+			}else if(endArea.available)
+			{
+				TriggerActivationEvent();
 			}
 		}
 	}
@@ -79,7 +82,7 @@ public class TimedEventControl : MonoBehaviour {
 	{
 		EventController.Instance.CreateEvent(activationEvent);
 		data.activationEventShown = true;
-		shouldTriggerBattle = true;
+		//shouldTriggerBattle = true;
 
 	}
 }

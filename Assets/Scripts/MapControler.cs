@@ -140,6 +140,8 @@ public class MapControler : MonoBehaviour {
 				}
 			}
 		}
+		//foreach (TimedEventControl timedEvent in FindObjectsOfType<TimedEventControl>())
+		//	timedEvent.CheckStatus();
 	}
 	public void HideSelectionMenu()
 	{

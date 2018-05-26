@@ -57,8 +57,12 @@ public class Graph : MonoBehaviour {
 				emotion = Var.Em.finish;
 			portraitScript.StartGraph(secondPos, emotion, bird,this);
 		}
-		if(!(GuiContoler.Instance.currentGraph == 3 && afterBattle))
-			CreateLevelSeeds(bird,afterBattle); 
+		if ((GuiContoler.Instance.currentGraph == 3 && afterBattle) || !Var.gameSettings.shownLevelTutorial)
+		{
+		}
+		else
+			CreateLevelSeeds(bird, afterBattle);
+		
 	}
 	
 	GameObject PlotPoint(int x,int y, GameObject obj, bool isPortrait, Bird bird=null )
@@ -142,7 +146,8 @@ public class Graph : MonoBehaviour {
 						obj.GetComponent<Image>().color = Color.yellow;
 						bird.recievedSeeds.Add(bit.name);
 						LeanTween.delayedCall(1f, () => LeanTween.move(obj, GetLevelBar(bit.emotion).transform.position, 0.7f).setEaseOutBack().setOnComplete(() => Destroy(obj)));
-
+						GuiContoler.Instance.canChangeGraph = false;
+						LeanTween.delayedCall(1.7f, () => GuiContoler.Instance.canChangeGraph = true);
 					}
 					//obj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bit.emotion);
 

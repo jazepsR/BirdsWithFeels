@@ -59,7 +59,8 @@ public class mainMenuScript : MonoBehaviour {
         Var.currentBG = 0;
         Var.currentStageID = -1;
         GuiContoler.mapPos = 0;
-        Var.mapSaveData = new List<MapSaveData>(); 
+        Var.mapSaveData = new List<MapSaveData>();
+		Var.timedEvents = new List<TimedEventData>();
         Var.activeBirds = new List<Bird>();
         Var.availableBirds = new List<Bird>();
         Var.map = new List<BattleData>();
