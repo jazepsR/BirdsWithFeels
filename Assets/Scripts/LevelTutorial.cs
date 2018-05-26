@@ -28,7 +28,9 @@ public class LevelTutorial : MonoBehaviour {
 
 		if (Var.currentStageID == 1 && !Var.gameSettings.shownLevelTutorial)
 		{
-			DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);
+			Var.gameSettings.shownLevelTutorial = true;
+			//Temporary disabled tutorial while making a new one for the new level system
+			/*DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);
 			shouldShowFirstBattleDialog = true;
 			shouldShowGraphDialog = true;
 			Var.CanShowHover = false;
@@ -36,7 +38,7 @@ public class LevelTutorial : MonoBehaviour {
 			{               
 				Helpers.Instance.GetBirdFromEnum(EventScript.Character.Rebecca).showText();
 			}
-			catch { }
+			catch { }*/
 		}
 	}
    
@@ -60,7 +62,7 @@ public class LevelTutorial : MonoBehaviour {
 				Debug.LogError("couldnt disable BG");
 			}
 		}
-		if(shouldShowGraphDialog && !GuiContoler.Instance.battlePanel.activeSelf)
+		if(shouldShowGraphDialog && GuiContoler.Instance.GraphBlocker.activeSelf)
 		{
 			Var.CanShowHover = true;
 			shouldShowFirstBattleDialog = false;
@@ -88,7 +90,7 @@ public class LevelTutorial : MonoBehaviour {
 			shouldShowGraphDiag2 = false;
 			
 		}
-		if (shouldShowSecondBattleDialog && GuiContoler.Instance.battlePanel.activeSelf)
+		if (shouldShowSecondBattleDialog && !GuiContoler.Instance.GraphBlocker.activeSelf)
 		{
 			shouldShowSecondBattleDialog = false;
 			DialogueControl.Instance.CreateParticularDialog(secondBattleDialog);

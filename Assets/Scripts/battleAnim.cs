@@ -83,6 +83,8 @@ public class battleAnim :MonoBehaviour {
 			else
 			{
 				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
+				foreach(Bird bird in Var.activeBirds)
+					bird.GetComponentInChildren<Animator>().SetBool("lose", false);
 				GuiContoler.Instance.CreateBattleReport();
 			}
 			if(Var.isTutorial)

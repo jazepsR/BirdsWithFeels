@@ -23,7 +23,6 @@ public class levelPopupScript : MonoBehaviour {
 	Sprite heart;
 	Sprite sword;
 	Bird activeBird;
-	int birdNum;
 	LevelData data;
 	// Use this for initialization
 	void Start () {
@@ -33,10 +32,9 @@ public class levelPopupScript : MonoBehaviour {
 		//Setup(FillPlayer.Instance.playerBirds[1], new LevelData(Levels.type.Brave1, Var.Em.Confident, Var.lvlSprites[2]));
 	}
 	
-	public void Setup(Bird bird, LevelData data,int birdNum)
+	public void Setup(Bird bird, LevelData data)
 	{
 		this.data = data;
-		this.birdNum = birdNum;
 		activeBird = bird;
 		firstPart.SetActive(true);
 		secondPart.SetActive(false);
@@ -108,11 +106,11 @@ public class levelPopupScript : MonoBehaviour {
 		LevelPopup.SetActive(false);
 		try
 		{
-			GuiContoler.Instance.CreateGraph(birdNum);
+			GuiContoler.Instance.CreateGraph(GuiContoler.Instance.currentGraph);
 		}
 		catch
 		{
-			Debug.LogError(" error in createGraph at levelPopupScript. BirdNum: " + birdNum);
+			Debug.LogError(" error in createGraph at levelPopupScript.");
 		}
 		if (!Var.gameSettings.shownFirstLevelUp)
 		{
