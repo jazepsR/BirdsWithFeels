@@ -139,7 +139,7 @@ public class Graph : MonoBehaviour {
 					obj.name = bit.name;
 					obj.transform.localScale = Vector3.one * factor / 16f;
 					obj.GetComponent<ShowTooltip>().tooltipText = "Social: " + bit.social + "\nConfidence: " + bit.conf;
-					if (Vector2.Distance(new Vector2(bird.friendliness, bird.confidence), new Vector2(bit.social, bit.conf)) <= 2
+					if (Vector2.Distance(new Vector2(bird.friendliness, bird.confidence), new Vector2(bit.social, bit.conf)) <= 3
 						&& !isSmall && afterBattle)
 					{
 						LeanTween.delayedCall(1.7f, () => GetLevelBar(bit.emotion).AddPoints(bird));
