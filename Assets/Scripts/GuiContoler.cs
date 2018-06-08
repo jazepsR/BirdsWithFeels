@@ -379,7 +379,7 @@ public class GuiContoler : MonoBehaviour {
 		canChangeGraph = false;
 		if (currentGraph == maxGraph)
 		{
-			CloseGraph();			
+			CloseGraph();
 			return;
 		}
 		
@@ -506,6 +506,9 @@ public class GuiContoler : MonoBehaviour {
 			
 	public void CloseGraph()
 	{
+		speechTexts = new List<string>();
+		speechPos = new List<Transform>();
+		speechBubbleObj.SetActive(false);
 		GraphActive = false;
 		AudioControler.Instance.PlayPaperSound();
 		canChangeGraph = true;
