@@ -14,6 +14,7 @@ public class LevelBarScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		tooltipScript = GetComponent<ShowTooltip>();
+		gameObject.SetActive(Var.tutorialCompleted);
 	}
 	public void ClearPoints()
     {

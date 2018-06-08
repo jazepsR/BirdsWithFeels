@@ -25,6 +25,8 @@ public class Graph : MonoBehaviour {
 	{
 		if(!isSmall)
 			Instance = this;
+		if (isSmall && !Var.tutorialCompleted)
+			graphArea.transform.parent.gameObject.SetActive(false);
 		//Sprite sp = Resources.Load<Sprite>("Icons/NewIcons_1");
 		multiplier = graphSize / 15;
 	}

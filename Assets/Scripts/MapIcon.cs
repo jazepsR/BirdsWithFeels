@@ -87,8 +87,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		AddNewBird();
 		tooltipInfo = gameObject.AddComponent<ShowTooltip>();
 		tooltipInfo.tooltipText = GetTooltipText();
-		if (!CheckTargetsAvailable() && available && Var.StartedNormally)
-			LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position + (transform.parent.transform.position - transform.position) + new Vector3(-3,0,0), 0.01f);
+		/*if (!CheckTargetsAvailable() && available && Var.StartedNormally)
+			LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position + (transform.parent.transform.position - transform.position) + new Vector3(-3,0,0), 0.01f);*/
 			//LeanTween.delayedCall(0.1f, mapBtnClick);
 		ValidateAll();
 		CalculateTotals();
@@ -282,10 +282,10 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 
 	void Update()
 	{
-		if(active)
+		/*if(active)
 		{
 			transform.parent.position = transform.position - offset;           
-		}
+		}*/
 	 
 		if(useline)
 		{

@@ -56,7 +56,10 @@ public class Tutorial : MonoBehaviour {
     {
         graphAnim.SetBool("shake", false);
     }
-
+	public void ShowSmallGraph(float waitTime)
+	{
+		LeanTween.delayedCall(waitTime, () => GuiContoler.Instance.smallGraph.graphArea.transform.parent.gameObject.SetActive(true));
+	}
     void Update()
     {
         if (!Var.isTutorial)
