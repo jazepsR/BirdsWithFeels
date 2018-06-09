@@ -132,7 +132,7 @@ public class Tutorial : MonoBehaviour {
             case 3:
                 GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "These battles are taking a toll on me..");
                 GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hey no worries - I'll fight so that you can <b>rest</b> and regain some <b>health</b>");
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "You'll also gain some <b>cautiion!</b>");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "You'll also gain some <b>caution!</b>");
                 break;
             case 4:
                 EventController.Instance.CreateEvent(AddAlexEvent);
