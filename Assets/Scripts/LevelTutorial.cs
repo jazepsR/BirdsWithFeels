@@ -86,7 +86,7 @@ public class LevelTutorial : MonoBehaviour {
 		if (shouldShowGraphDiag2 && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad> 0.5f + timeSinceStart) 
 		{
 			GuiContoler.Instance.CloseBattleReport.interactable = true;
-			GuiContoler.Instance.ShowSpeechBubble(DialogueControl.Instance.portraitPoint, "Now let's get back out there and help me level up!");
+			GuiContoler.Instance.ShowSpeechBubble(DialogueControl.Instance.portraitPoint, "Let's get back out there and get those seeds, leader!");
 			shouldShowGraphDiag2 = false;
 			
 		}
