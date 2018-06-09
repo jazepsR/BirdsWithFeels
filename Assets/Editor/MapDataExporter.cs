@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Linq;
 
 public class MapDataExporter : EditorWindow
 {
 	string exportPath = "CSV/mapData";
+	string importPath = "";
 	[MenuItem("Window/Map data exporter")]
 	public static void ShowWindow()
 	{
@@ -22,9 +24,24 @@ public class MapDataExporter : EditorWindow
 		if (GUILayout.Button("Export map data"))
 		{
 			ExcelExport.CreateExportTable();
-			foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+			List<MapIcon> icons = FindObjectsOfType<MapIcon>().ToList<MapIcon>();
+			var result = icons.OrderBy(a => a.ID);
+			foreach (MapIcon icon in result)
 				ExcelExport.AddMapNode(icon);
-			ExcelExport.Save("/"+exportPath+".csv");
+			ExcelExport.Save("/" + exportPath + ".csv");
+		}
+		if (GUILayout.Button("Select data file"))
+		{
+			importPath = EditorUtility.OpenFilePanel("Select data file", Application.dataPath, "csv");
+		}
+		if(importPath == "")
+			GUILayout.Label("no data file selected!", EditorStyles.boldLabel);
+		else
+			GUILayout.Label("file \""+importPath+"\" selected", EditorStyles.boldLabel);
+		if (GUILayout.Button("Import map data"))
+		{
+			if(importPath!= "")
+				ExcelExport.ImportExcelData();
 		}
 	}
 }

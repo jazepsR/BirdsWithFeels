@@ -39,7 +39,59 @@ public class ExcelExport : MonoBehaviour {
 		rowData.Add(row);
 
 	}
+	public static void ImportExcelData(string path= "/CSV/mapData2.csv")
+	{
+		int counter = 0;
+		string line;
 
+		// Read the file and display it line by line.  
+		StreamReader file =	new StreamReader(getPath()+path);
+		while ((line = file.ReadLine()) != null)
+		{
+			FindLine(line);
+		}
+		UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+		file.Close();
+	}
+	static void FindLine(string line)
+	{
+		string[] values = line.Split(';');
+		if (values[0] == "ID")
+			return;
+		foreach(MapIcon icon in FindObjectsOfType<MapIcon>())
+		{
+			if(icon.ID.ToString() == values[0])
+			{
+				ApplyLine(icon, values);
+				return;
+			}
+
+		}
+	}
+	static void ApplyLine(MapIcon icon, string[] values)
+	{
+		icon.levelName = values[1];
+		icon.levelDescription = values[2];
+		icon.type =(Var.Em)Enum.Parse(typeof(Var.Em), values[3]);
+		icon.background = Int32.Parse(values[4]);
+		icon.birdLVL = Int32.Parse(values[5]);
+		icon.minEnemies = Int32.Parse(values[6]);
+		icon.maxEnemies = Int32.Parse(values[7]);
+		icon.isBoss = Boolean.Parse(values[8]);
+		icon.hasObstacles = Boolean.Parse(values[10]);
+		icon.hasScaredPowerUps = Boolean.Parse(values[11]);
+		icon.hasFirendlyPowerUps = Boolean.Parse(values[12]);
+		icon.hasConfidentPowerUps = Boolean.Parse(values[13]);
+		icon.hasLonelyPwerUps = Boolean.Parse(values[14]);
+		icon.hasHealthPowerUps = Boolean.Parse(values[15]);
+		icon.hasDMGPowerUps = Boolean.Parse(values[16]);
+		icon.hasWizards = Boolean.Parse(values[18]);
+		icon.hasDrills = Boolean.Parse(values[19]);
+		icon.isTrial = Boolean.Parse(values[23]);
+		UnityEditor.EditorUtility.SetDirty(icon);
+		UnityEditor.Undo.RecordObject(icon, "test");
+
+	}	
 	public static void AddMapNode(MapIcon icon)
 	{
 
@@ -64,8 +116,6 @@ public class ExcelExport : MonoBehaviour {
 		row[14] = icon.hasLonelyPwerUps.ToString();
 		row[15] = icon.hasHealthPowerUps.ToString();
 		row[16] = icon.hasDMGPowerUps.ToString();
-		
-
 		string targetString = "";
 		foreach (MapIcon battle in icon.targets)
 			targetString += battle.name + ", ";
@@ -125,9 +175,9 @@ public class ExcelExport : MonoBehaviour {
 #if UNITY_EDITOR
 		return Application.dataPath ;
 #elif UNITY_ANDROID
-        return Application.persistentDataPath;
+		return Application.persistentDataPath;
 #elif UNITY_IPHONE
-        return Application.persistentDataPath+"/";
+		return Application.persistentDataPath+"/";
 #else
 		return Application.dataPath + "/" ";
 #endif
