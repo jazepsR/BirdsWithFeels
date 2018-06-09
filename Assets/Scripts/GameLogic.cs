@@ -161,11 +161,15 @@ public class GameLogic : MonoBehaviour {
 		}
 		else
 		{
-			if (Bird1Win(playerBird, enemyBird))
+			if (playerBird.emotion == enemyBird.emotion)
+				winBonus += 4;
+			if (Helpers.Instance.GetOppositeEmotion(playerBird.emotion) == enemyBird.emotion)
+				winBonus -= 4;
+			/*if (Bird1Win(playerBird, enemyBird))
 				winBonus += 4;
 
 			if (Bird1Win(enemyBird, playerBird))
-				winBonus -= 4;
+				winBonus -= 4;*/
 		}
         return 0.5f + winBonus * 0.1f;
     }

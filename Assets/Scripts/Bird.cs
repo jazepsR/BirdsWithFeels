@@ -605,7 +605,8 @@ public class Bird : MonoBehaviour
 		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
 			showText();
 		SetCoolDownRing(true);
-	  
+
+		Var.selectedBird = gameObject;
 		if (Input.GetMouseButtonUp(1))
 		{			
 			GuiContoler.Instance.GraphButton();
@@ -689,7 +690,6 @@ public class Bird : MonoBehaviour
 			}
 			
 			dragged = true;
-			Var.selectedBird = gameObject;
 			
 			if (!inMap)
 			{

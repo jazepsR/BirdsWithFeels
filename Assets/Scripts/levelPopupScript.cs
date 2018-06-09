@@ -104,6 +104,8 @@ public class levelPopupScript : MonoBehaviour {
 		thirdPart.SetActive(false);
 		activeBird.hasNewLevel = false;
 		LevelPopup.SetActive(false);
+		if (DebugMenu.Instance.debugMenu.activeSelf)
+			return;
 		try
 		{
 			GuiContoler.Instance.CreateGraph(GuiContoler.Instance.currentGraph);
@@ -112,6 +114,7 @@ public class levelPopupScript : MonoBehaviour {
 		{
 			Debug.LogError(" error in createGraph at levelPopupScript.");
 		}
+		
 		if (!Var.gameSettings.shownFirstLevelUp)
 		{
 			DialogueControl.Instance.CreateParticularDialog(firstLevelUpDialog);

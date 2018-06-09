@@ -101,9 +101,12 @@ public class battleAnim :MonoBehaviour {
 		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyMove);
 		battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
 		yield return new WaitForSeconds(enemySpeed);
-		Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
-		GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
-		Destroy(fightCloudObj, waitTime-enemySpeed);
+		//if (battle.result != 1)
+		{
+			Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
+			GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
+			Destroy(fightCloudObj, waitTime - enemySpeed);
+		}
 		yield return new WaitForSeconds(waitTime-enemySpeed);
 		ShowBattleResult(battle);
 	}
