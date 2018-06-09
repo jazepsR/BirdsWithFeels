@@ -30,7 +30,7 @@ public class LevelTutorial : MonoBehaviour {
 		{
 			Var.gameSettings.shownLevelTutorial = true;
 			//Temporary disabled tutorial while making a new one for the new level system
-			/*DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);
+			DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);
 			shouldShowFirstBattleDialog = true;
 			shouldShowGraphDialog = true;
 			Var.CanShowHover = false;
@@ -38,7 +38,7 @@ public class LevelTutorial : MonoBehaviour {
 			{               
 				Helpers.Instance.GetBirdFromEnum(EventScript.Character.Rebecca).showText();
 			}
-			catch { }*/
+			catch { }
 		}
 	}
    
