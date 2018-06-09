@@ -628,21 +628,29 @@ public class Helpers : MonoBehaviour {
 		switch (type)
 		{
 			case Levels.type.Brave1:
-				return "Successfully fending off two vultures at once, <name> feels a surge of confidence flow through them.& Nothing can stop <name> at this point! <name> promises to use their newfound confidence to shield their teammates from harm. ".Replace("<name>", name);
+				return "<name>'s confidence is surging! They feel like they can do anything!".Replace("<name>", name);
+				//return "Successfully fending off two vultures at once, <name> feels a surge of confidence flow through them.& Nothing can stop <name> at this point! <name> promises to use their newfound confidence to shield their teammates from harm. ".Replace("<name>", name);
 			case Levels.type.Brave2:
-				return "There's no stopping <name> now! Nothing can hurt them! (As long as they think so, that is)".Replace("<name>", name);
+				return "<name>'s confidence is surging! They feel like they can do anything!".Replace("<name>", name);
+				//return "There's no stopping <name> now! Nothing can hurt them! (As long as they think so, that is)".Replace("<name>", name);
 			case Levels.type.Friend1:
-				return "<name> smacks down the enemy! Surrounded by friends, <name> realizes they'd do almost anything for them. <name> promises themselves to help their team mates in any way possible".Replace("<name>", name);
+				return "<name> has realized the power of friendship!".Replace("<name>", name);
+			//return "<name> smacks down the enemy! Surrounded by friends, <name> realizes they'd do almost anything for them. <name> promises themselves to help their team mates in any way possible".Replace("<name>", name);
 			case Levels.type.Friend2:
-				return "<name> has found a way to help their friends even more! Applying massage techniques passed down from the friendship gods, <name> can now fully heal team mates if given the time!".Replace("<name>", name);
+				return "<name> has realized the power of friendship!".Replace("<name>", name);
+				//return "<name> has found a way to help their friends even more! Applying massage techniques passed down from the friendship gods, <name> can now fully heal team mates if given the time!".Replace("<name>", name);
 			case Levels.type.Lonely1:
-				return "Through deep solidtary meditation coupled with the rush of victory, <name> realizes that all emotions are just a result of circumstances.& <name> realizes they can intensify the emotions of their teammates!".Replace("<name>", name);
+				return "Through contemplation and solitude <name> has grown stronger!".Replace("<name>", name);
+				//return "Through deep solidtary meditation coupled with the rush of victory, <name> realizes that all emotions are just a result of circumstances.& <name> realizes they can intensify the emotions of their teammates!".Replace("<name>", name);
 			case Levels.type.Lonely2:
-				return "All this alone time was a great chance for <name> to do some serious studying! Through careful observation, <name> has percieved that life is but a series of turns, which can be manipulated with the right tools. ".Replace("<name>", name);
+				return "Through contemplation and solitude <name> has grown stronger!".Replace("<name>", name);
+				//return "All this alone time was a great chance for <name> to do some serious studying! Through careful observation, <name> has percieved that life is but a series of turns, which can be manipulated with the right tools. ".Replace("<name>", name);
 			case Levels.type.Scared1:
-				return "<name> realizes the depths of their incompetence. Were they ever fit for battle? They resolve to help the team with more cunning means - by weakening the enemy.  ".Replace("<name>", name);
+				return "<name> has found that there are more subtle ways to help his team teanmates direct combat".Replace("<name>", name);
+				//return "<name> realizes the depths of their incompetence. Were they ever fit for battle? They resolve to help the team with more cunning means - by weakening the enemy.  ".Replace("<name>", name);
 			case Levels.type.Scared2:
-				return "Direct combat is definetelly not for <name>! They prefer to attack their enemies from behind and let teammates finish the job! ".Replace("<name>", name);
+				return "<name> has found that there are more subtle ways to help his team teanmates direct combat".Replace("<name>", name);
+				//return "Direct combat is definetelly not for <name>! They prefer to attack their enemies from behind and let teammates finish the job! ".Replace("<name>", name);
 			default:
 				return "Error in level up text";        
 		}
