@@ -67,6 +67,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	// Use this for initialization
 	void Start()
 	{
+		
 		length = battles.Count;
 		offset = transform.position- transform.parent.position;
 		if (isTrial)
@@ -118,6 +119,9 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	{
 		if (available)
 		{
+
+			ExcelExport.CreateExportTable();
+			ExcelExport.AddMapNode(this);
 			if (completed)
 			{
 				if(ID == Var.currentStageID && firstCompletion)
