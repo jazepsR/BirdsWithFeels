@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 [Serializable]
 public class Bird : MonoBehaviour
 {
@@ -36,9 +38,11 @@ public class Bird : MonoBehaviour
 	public Var.Em bannedLevels = Var.Em.finish;
 	public string charName;	
 	public bool inUse = true;	
+    [NonSerialized]
 	public SpriteRenderer colorRenderer;    
-	[HideInInspector]
+	[HideInInspector,NonSerialized]
 	public List<SpriteRenderer> colorSprites;
+    [NonSerialized]
 	public GameObject bush;    
 	[HideInInspector]
 	public GameObject portrait, portraitTiny;	
@@ -48,6 +52,7 @@ public class Bird : MonoBehaviour
 	[HideInInspector]
 	public bool dragged = false;
 	//[HideInInspector]
+    [NonSerialized]
 	public firendLine lines;
 	public int level = 1;
 	bool needsReset = false; 
@@ -88,7 +93,7 @@ public class Bird : MonoBehaviour
 	public int confLoseOnRest = 2;
 	public int groundMultiplier = 1;
 	public GameObject healParticle;
-	[HideInInspector]
+	[HideInInspector, NonSerialized]
 	public Levels levelControler;
 	[HideInInspector]
 	public LevelData lastLevel;
@@ -121,7 +126,6 @@ public class Bird : MonoBehaviour
 	public int prevRoundHealth;
 	public int prevRoundMentalHealth;
 	public int levelRollBonus = 0;
-	public int relationshipBonus = 0;
 	[HideInInspector]
 	public string levelUpText;
 	Color DefaultCol;
@@ -130,24 +134,19 @@ public class Bird : MonoBehaviour
 	public Var.Em preferredEmotion;
 	public int birdIndex = 0;
 	public bool hasNewLevel = false;
-	//[HideInInspector]
-	public Bird relationshipBird;
 	[HideInInspector]
 	public Var.Em prevEmotion=  Var.Em.finish;
 	bool started = false;
-	public Dictionary<EventScript.Character, int> relationships;
-	[HideInInspector]
-	public List<Dialogue> relationshipDialogs;
-	[HideInInspector]
-	public bool newRelationship = false;
 	public string birdPrefabName;
-	public GameObject EnemyArt = null;
+    [NonSerialized]
+    public GameObject EnemyArt = null;
+    [NonSerialized]
 	public GameObject GroundBonus;
-	public GameObject RelationshipParticles;
-	public GameObject CrushParticles;
-	public GameObject mapHighlight;
+    [NonSerialized]
+    public GameObject mapHighlight;
 	public List<string> recievedSeeds;
-	GameObject birdArtObj;
+    [NonSerialized]
+    GameObject birdArtObj;
 	void Start()
 	{
 
@@ -870,19 +869,6 @@ public class Bird : MonoBehaviour
 			return null;
 		}
 	}
-	void setRelationshipDialogs()
-	{
-		if (relationshipBird == null)
-		{
-			relationshipDialogs = null;
-		}else
-		{
-		   Transform relationshipTransform= Helpers.Instance.relationshipDialogs.Find(charName).transform.Find(relationshipBird.charName);
-		   relationshipDialogs = new List<Dialogue>(relationshipTransform.GetComponentsInChildren<Dialogue>());
-		} 
-		
-
-	}
 	public Vector2 ApplyInfluence(bool shouldApply = true)
 	{
 
@@ -1241,6 +1227,16 @@ public class Bird : MonoBehaviour
 	
 	public void Update()
 	{
+        //if(Input.GetKeyDown(KeyCode.P))
+        {
+
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(charName+"saveGame.dat");            
+            bf.Serialize(file, this);
+            file.Close();
+            Debug.Log("saved bird!");
+        }
+
 
 		if (!isEnemy && !started)
 		{

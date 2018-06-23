@@ -102,8 +102,12 @@ public class battleAnim :MonoBehaviour {
 	{
 		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyMove);
 		battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
-		yield return new WaitForSeconds(enemySpeed);
-		battle.enemy.GetComponentInChildren<Animator>().SetTrigger("startListening");
+        yield return new WaitForSeconds(enemySpeed);
+        if (battle.enemy.position == Bird.dir.top)
+            battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_up");
+        else
+            battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_right");
+        battle.enemy.GetComponentInChildren<Animator>().SetTrigger("startListening");
 		yield return new WaitForSeconds(1.8f);
 		//lose
 		if (battle.result != 1)

@@ -44,10 +44,6 @@ public class battleFeedback : MonoBehaviour {
             text += "Player affected by friendly birds " + (10*fb.PlayerEnemyBird.PlayerRollBonus).ToString("+#;-#;0") + "%\n";
         if(fb.PlayerEnemyBird.GroundRollBonus != 0)
             text += "Player ground bonus " + (10 * fb.PlayerEnemyBird.GroundRollBonus).ToString("+#;-#;0") + "%\n";
-        if (fb.PlayerEnemyBird.relationshipBonus < 0)
-            text += "Player bird has unanswered crush " + (10 * fb.PlayerEnemyBird.relationshipBonus).ToString("+#;-#;0") + "%\n";
-        if (fb.PlayerEnemyBird.relationshipBonus > 0)
-            text += "Player bird is in a relationship " + (10 * fb.PlayerEnemyBird.relationshipBonus).ToString("+#;-#;0") + "%\n";
         return text;
 
 
