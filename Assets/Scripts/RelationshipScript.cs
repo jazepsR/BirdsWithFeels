@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RelationshipScript : MonoBehaviour {
-	static int minRelationship = 0;
+	/*static int minRelationship = 0;
 	static int maxRelationship = 15;
 	public static int treshold = 8;
 	static int likeGain = 4;
@@ -97,7 +97,7 @@ public class RelationshipScript : MonoBehaviour {
 
 		}
 
-	}
+	}*/
 
 
 }
