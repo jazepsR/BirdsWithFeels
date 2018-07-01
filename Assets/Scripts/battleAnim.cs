@@ -23,7 +23,7 @@ public class battleAnim :MonoBehaviour {
 	public void Battle()
 	{
 
-		StartCoroutine(DoBattles(2.2f));
+		StartCoroutine(DoBattles(3.5f));
 	}
 
 
@@ -104,6 +104,7 @@ public class battleAnim :MonoBehaviour {
 		battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
 		yield return new WaitForSeconds(enemySpeed);
 		battle.enemy.GetComponentInChildren<Animator>().SetTrigger("startListening");
+		battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking");
 		yield return new WaitForSeconds(1.8f);
 		//lose
 		if (battle.result != 1)
@@ -114,7 +115,7 @@ public class battleAnim :MonoBehaviour {
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
 			Destroy(fightCloudObj, waitTime - enemySpeed); LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
-			yield return new WaitForSeconds(waitTime - enemySpeed-0.5f);
+			yield return new WaitForSeconds(waitTime - enemySpeed-1f);
 		}else
 		{
 
