@@ -81,4 +81,8 @@ public class cutScene : MonoBehaviour {
         canClick = true;
 
     }
+	public void StartLevel()
+	{
+		SceneManager.LoadScene("NewMain");
+	}
 }

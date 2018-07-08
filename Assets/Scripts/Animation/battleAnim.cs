@@ -84,7 +84,8 @@ public class battleAnim :MonoBehaviour {
 			else
 			{
 				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
-				foreach(Bird bird in Var.activeBirds)
+				Debug.Log("ACTIVE BIRD COUNT: " + Var.activeBirds.Count);
+				foreach (Bird bird in Var.activeBirds)
 					bird.GetComponentInChildren<Animator>().SetBool("lose", false);
 				GuiContoler.Instance.CreateBattleReport();
 			}
@@ -101,12 +102,12 @@ public class battleAnim :MonoBehaviour {
 	{
 		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyMove);
 		battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
-        yield return new WaitForSeconds(enemySpeed);
-        if (battle.enemy.position == Bird.dir.top)
-            battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_up");
-        else
-            battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_right");
-        battle.enemy.GetComponentInChildren<Animator>().SetTrigger("startListening");
+		yield return new WaitForSeconds(enemySpeed);
+		if (battle.enemy.position == Bird.dir.top)
+			battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_up");
+		else
+			battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_right");
+		battle.enemy.GetComponentInChildren<Animator>().SetTrigger("startListening");
 		battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking");
 		yield return new WaitForSeconds(1.8f);
 		//lose

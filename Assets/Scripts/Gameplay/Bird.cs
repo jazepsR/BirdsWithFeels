@@ -54,7 +54,6 @@ public class Bird : MonoBehaviour
 	public bool isEnemy = true;
 	[HideInInspector]
 	public int friendBoost = 0;
-	[HideInInspector]
 	public int groundFriendBoos = 0;
 	[HideInInspector]
 	public int wizardFrienBoos = 0;
@@ -62,7 +61,6 @@ public class Bird : MonoBehaviour
 	public int levelFriendBoos = 0;
 	[HideInInspector]
 	public int battleConfBoos = 0;
-	[HideInInspector]
 	public int groundConfBoos = 0;
 	[HideInInspector]
 	public int wizardConfBoos = 0;
@@ -115,11 +113,12 @@ public class Bird : MonoBehaviour
 	public Image coolDownRing;
 	void Awake()
 	{
-		if(!isEnemy)
+		if(!isEnemy && !Var.isTutorial)
 			LoadBirdData();
 	}
 	void Start()
 	{
+	
 		wonLastBattle = -1;
 		if (!isEnemy && portrait == null)
 		{
@@ -224,6 +223,7 @@ public class Bird : MonoBehaviour
 			data.recievedSeeds = new List<string>();
 		showText();
 
+		gameObject.SetActive(data.unlocked);
 	}
 
 
@@ -237,6 +237,8 @@ public class Bird : MonoBehaviour
 			data = (BirdData)bf.Deserialize(file);
 			file.Close();
 		}
+		if (!isEnemy)
+			birdPrefabName = data.birdPrefabName;
 	}
 	public void SaveBirdData()
 	{
@@ -481,7 +483,7 @@ public class Bird : MonoBehaviour
 
 		if (!SaveDataCreated && (Var.activeBirds.Count<=3 || inMap))
 		{
-			Var.activeBirds.Add(this);
+			//Var.activeBirds.Add(this);
 		   // print("created something!");       
 		}
 		else
@@ -494,7 +496,8 @@ public class Bird : MonoBehaviour
 	}
 	
 	public void ResetBonuses()
-	{		
+	{
+		Debug.Log("Reset: " +charName +" ground bonus friend: " + groundFriendBoos + " conf: " + groundConfBoos);
 		battleConfBoos = 0;
 		friendBoost = 0;       
 		groundConfBoos = 0;

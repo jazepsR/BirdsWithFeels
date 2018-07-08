@@ -622,6 +622,8 @@ public class GuiContoler : MonoBehaviour {
 
 	 public string CreateEmotionChangeText(Bird bird)
 	{
+		Debug.Log("CHANGE TEXT " + bird.charName + " gorund conf: " + bird.groundConfBoos + " ground friend: " + bird.groundFriendBoos);
+
 		string fbText = "";
 		int ConfGainedInRound = bird.battleConfBoos + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
 		int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
@@ -769,8 +771,9 @@ public class GuiContoler : MonoBehaviour {
 			}
 		}
 		//LeanTween.delayedCall(0.7f, () =>
-	   // {
-			CreateGraph(index,afterBattle);
+		// {
+		Debug.Log("doing graph! " + bird.charName + " index: " + index);
+		CreateGraph(index,afterBattle);
 			ProgressGUI.Instance.PortraitClick(bird);
 	   // });
 		ProgressGUI.Instance.skillArea.SetActive(false);

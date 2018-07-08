@@ -14,8 +14,17 @@ public class SaveLoad : MonoBehaviour
 		FileStream file = File.Create(Application.persistentDataPath + "/saveGame.dat");
 		SaveData saveData = new SaveData();
 		bf.Serialize(file, saveData);
-		foreach (Bird bird in Var.activeBirds)
-			bird.SaveBirdData();
+		try
+		{
+			foreach (Bird bird in FillPlayer.Instance.playerBirds)
+				bird.SaveBirdData();
+		}
+		catch
+		{
+			foreach (Bird bird in Var.activeBirds)
+				bird.SaveBirdData();
+
+		}
 		file.Close();
 	}
 	public static bool Load()
@@ -100,6 +109,7 @@ public class SaveData
 [System.Serializable]
 public class BirdData 
 {
+	public bool unlocked = true;
 	public int TurnsInjured =0;
 	public int levelRollBonus=0;
 	public string charName;

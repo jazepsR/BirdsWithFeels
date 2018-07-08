@@ -263,6 +263,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		{
 			birdAdded = true;
 			bool canAdd = true;
+			birdToAdd.data.unlocked = true;
 			foreach(Bird bird in Var.availableBirds)
 			{
 				if(bird.charName == birdToAdd.charName)
@@ -278,7 +279,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 				EventController.Instance.CreateEvent(birdToAddScript);
 			}
 
-
+			birdToAdd.SaveBirdData();
 		}
 
 

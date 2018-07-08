@@ -104,6 +104,8 @@ public class powerTile : MonoBehaviour {
 					bird.groundConfBoos = -1 * bird.groundMultiplier;
 					break;
 			}
+
+			Debug.Log("Applying tile"+ bird.charName+ " ground emotion: " + emotion + " conf change: " + bird.groundConfBoos + " friend change: " + bird.groundFriendBoos);
 		}
 		if( type == Var.PowerUps.heal)
 		{
