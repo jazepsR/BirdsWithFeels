@@ -6,12 +6,14 @@ using UnityEngine.UI;
 
 public class buttonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
-    Animator anim;
+    public Animator anim;
     
 	// Use this for initialization
 	void Start () {
-        anim = GetComponent<Animator>();
-
+        if (anim == null)
+        {
+            anim = GetComponent<Animator>();
+        }
     }
 	
 	// Update is called once per frame

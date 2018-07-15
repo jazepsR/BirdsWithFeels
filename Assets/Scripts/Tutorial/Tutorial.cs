@@ -139,13 +139,11 @@ public class Tutorial : MonoBehaviour {
 				break;
 			case 1:
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Hey, I’m Rebecca! Let's hang out!");
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "That’s vulture looks social! I don’t think they’ll listen to a lone bird like me");
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Could you talk to them Rebecca? I’ll sit this one out!");
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Oh, um, right!! ");
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Alright sure whatever!");
                 shouldShowFriendlyPopup = true;
 				break;
 			case 2:
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Here's a confident and cautious vulture! Will they listen to us?");
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), " These birds are not just neutral, they're confident and cautious! Will they listen to us?");
 				shouldShowEmotionPopup = true;
 				break;
 			case 3:
@@ -175,11 +173,11 @@ public class Tutorial : MonoBehaviour {
 		{
 			case 0:
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Vultures will walk forward forever until they reach a confrontation! ");
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "We are both feeling solitary, so I should be able to get through to them!"); 
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Here goes nothing!!"); 
 				outlines.SetActive(false);
 				break;
 			case 1:
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "We're both super social, I should be bale to get through to them!");
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Hey you! Let's talk about life!!");
 				break;
 			case 2:
 				int total = 0;
@@ -214,7 +212,7 @@ public class Tutorial : MonoBehaviour {
 		{
 			case 0:
 				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "We birds are <b>affected emotionally</b> by what happens to us! Unlike you, you monster" );
-				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I communicated successfully, my <b>confidence</b> is surging! ");
+				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I befriended them, my <b>confidence</b> is surging! ");
 				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "But there’s also no other birds to hang out with - making me more <b>solitary</b>.");
 				break;
 			case 1:
