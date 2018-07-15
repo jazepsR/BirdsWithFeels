@@ -111,6 +111,7 @@ public class Bird : MonoBehaviour
 	public GameObject mapHighlight;
 	GameObject birdArtObj;
 	public Image coolDownRing;
+	GameObject selectionEffect;
 	void Awake()
 	{
 		if(!isEnemy && !Var.isTutorial)
@@ -589,6 +590,8 @@ public class Bird : MonoBehaviour
 				sp.color = HighlightCol;			
 			if (!dragged)
 				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.mouseOverBird);
+			if(selectionEffect == null && Time.timeSinceLevelLoad >1f && Helpers.Instance.selectionEffect != null)
+				selectionEffect = Instantiate(Helpers.Instance.selectionEffect, transform);
 		}
 		//if(inMap)
 			//ProgressGUI.Instance.PortraitClick(this);
@@ -744,6 +747,10 @@ public class Bird : MonoBehaviour
 		if (isEnemy)
 		{
 			GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
+		}else if( selectionEffect != null)
+		{
+			selectionEffect.GetComponent<Animator>().SetTrigger("deselected");
+			LeanTween.delayedCall(0.2f,()=> { if (selectionEffect != null) Destroy(selectionEffect); });
 		}
 	}
 	void UpdateFeedback()

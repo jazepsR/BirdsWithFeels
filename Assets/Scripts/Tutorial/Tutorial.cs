@@ -45,6 +45,8 @@ public class Tutorial : MonoBehaviour {
 	{
 		if (!Var.isTutorial)
 			return;
+
+		GuiContoler.Instance.smallGraph.graphArea.transform.parent.gameObject.SetActive(false);
 		ShowtutorialStartingText(0);
 		if (Var.isTutorial)
 		{

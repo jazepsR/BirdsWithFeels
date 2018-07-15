@@ -23,7 +23,7 @@ public class battleAnim :MonoBehaviour {
 	public void Battle()
 	{
 
-		StartCoroutine(DoBattles(3.5f));
+		StartCoroutine(DoBattles(Helpers.Instance.winWaitTime, Helpers.Instance.loseWaitTime));
 	}
 
 
@@ -39,16 +39,20 @@ public class battleAnim :MonoBehaviour {
 
 	}
 
-	IEnumerator DoBattles(float waitTime)
+	IEnumerator DoBattles(float waitTime, float loseWaitTime)
 	{
 		yield return new WaitForSeconds(waitTime/3f);
+		
 		//float extraWait = 0.8f;
 		foreach (battleData battle in battles)
 		{
 
 			StartBattle(battle.player,battle.enemy);
 			StartCoroutine(ShowResult(battle, waitTime+1f));
-			yield return new WaitForSeconds(waitTime+1f);
+			if (battle.result != 1)
+				yield return new WaitForSeconds(loseWaitTime + 1);
+			else
+				yield return new WaitForSeconds(waitTime + 1f);
 		}
 		battles = new List<battleData>();
 		bool canReroll = false;

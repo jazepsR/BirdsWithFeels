@@ -13,4 +13,8 @@ public class closePopup : MonoBehaviour {
 	{
 		gameObject.SetActive(false);
 	}
+	public void ShowSmallGraph()
+	{
+		GuiContoler.Instance.smallGraph.graphArea.transform.parent.gameObject.SetActive(true);
+	}
 }

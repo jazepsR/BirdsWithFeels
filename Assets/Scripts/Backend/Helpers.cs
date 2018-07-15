@@ -36,6 +36,11 @@ public class Helpers : MonoBehaviour {
     public GameObject seedFar;
 	[HideInInspector]
 	public List<LevelBits> levelBits;
+	public GameObject selectionEffect;
+	public GameObject selectionEffectGround;
+	[Header("Battle timing")]
+	public float winWaitTime = 4f;
+	public float loseWaitTime = 6f;
 	enum friendState { alone, diagonal, oneFriend, twoFriends };
 	public void Awake()
 	{
