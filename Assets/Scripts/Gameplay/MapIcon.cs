@@ -563,13 +563,13 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		if (available)
 			stageState = "available";
 		stageInfo += "Stage " + (ID + 1) + ": " + stageState;
-		string weakness = "All";
+		/*string weakness = "All";
 		if (type == Var.Em.Random)
 			weakness = "Unpredictable";
 		else if (type != Var.Em.Neutral)
-			weakness = Helpers.Instance.GetWeakness(type).ToString();
-		stageInfo += ". Main ENEMY emotion: " +Helpers.Instance.GetHexColor(type)+ type + "</color>. Weak to: " +
-			Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(type)) + weakness + "</color>.";
+			weakness = Helpers.Instance.GetWeakness(type).ToString();*/
+        stageInfo += ". Main ENEMY emotion: " + Helpers.Instance.GetHexColor(type) + type + "</color>.";
+           // " Weak to: " +	Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(type)) + weakness + "</color>.";
 		/*stageInfo += "\nEnemies attack from the: ";
 		if (hasFrontEnemyRow)
 			stageInfo += "\u2022Front ";
