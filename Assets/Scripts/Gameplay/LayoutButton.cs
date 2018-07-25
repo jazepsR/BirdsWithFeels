@@ -168,25 +168,32 @@ public class LayoutButton : MonoBehaviour
 		}
 		
 	}
-
+    void DestroySelectionEffect()
+    {
+        if (selectionEffect != null)
+        {
+            selectionEffect.GetComponent<Animator>().SetTrigger("disappear");
+            LeanTween.delayedCall(0.2f, () =>
+            {
+                if (selectionEffect != null)
+                    Destroy(selectionEffect);
+            });
+        }
+    }
 
 	void Update()
 	{
 
 			hasBird = (currentBird != null);
-			if (Input.GetMouseButtonUp(0) && currentBird != null)
+        if (Input.GetMouseButtonUp(0))
+                DestroySelectionEffect();
+
+
+        if (Input.GetMouseButtonUp(0) && currentBird != null)
 			{
 				if (currentBird.dragged)
 				{
-				if (selectionEffect != null)
-				{
-					selectionEffect.GetComponent<Animator>().SetTrigger("disappear");
-					LeanTween.delayedCall(0.25f, () =>
-					{
-						if (selectionEffect != null)
-							Destroy(selectionEffect);
-					});
-				}
+                DestroySelectionEffect();
 
 				if ((int)index.x == -1)
 					{

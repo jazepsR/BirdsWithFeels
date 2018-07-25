@@ -352,9 +352,9 @@ public class feedBack : MonoBehaviour {
 		string strength = "None";
 		string weakness = "All";
 		if (Helpers.Instance.GetStenght(birdScript.emotion) != Var.Em.Neutral)
-			strength = Helpers.Instance.GetHexColor(Helpers.Instance.GetStenght(birdScript.emotion)) + Helpers.Instance.GetStenght(birdScript.emotion).ToString() + "</color>";
+			strength = Helpers.Instance.GetHexColor(Helpers.Instance.GetOppositeEmotion(birdScript.emotion)) + Helpers.Instance.GetOppositeEmotion(birdScript.emotion).ToString() + "</color>";
 		if (Helpers.Instance.GetWeakness(birdScript.emotion) != Var.Em.Neutral)
-			weakness = Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(birdScript.emotion)) + Helpers.Instance.GetWeakness(birdScript.emotion).ToString() + "</color>";
+			weakness = Helpers.Instance.GetHexColor(birdScript.emotion) + birdScript.emotion.ToString() + "</color>";
 		toolTipText = name + "- " + Helpers.Instance.GetHexColor(birdScript.emotion) + birdScript.emotion + "</color>";
 		string abilityText = "";
 		if (birdScript.enemyType == fillEnemy.enemyType.drill)
