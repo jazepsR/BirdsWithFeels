@@ -248,6 +248,7 @@ public class Bird : MonoBehaviour
 		{
 			string path = Application.persistentDataPath + "/" + charName + ".dat";
 			File.Delete(path);
+            Debug.Log("savePath: " + path);
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Create(path);
 			bf.Serialize(file, data);

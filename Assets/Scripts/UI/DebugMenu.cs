@@ -24,7 +24,22 @@ public class DebugMenu : MonoBehaviour {
 		}
 		debugMenu.gameObject.SetActive(true);
 	}
+    public void DeleteSave()
+    {
+        SaveLoad.DeleteSave();
+        string path = Application.persistentDataPath + "/Terry.dat";
+        System.IO.File.Delete(path);
+        path = Application.persistentDataPath + "/Kim.dat";
+        System.IO.File.Delete(path);
+        path = Application.persistentDataPath + "/Alexander.dat";
+        System.IO.File.Delete(path);
+        path = Application.persistentDataPath + "/Rebecca.dat";
+        System.IO.File.Delete(path);
+        path = Application.persistentDataPath + "/Sophie.dat";
+        System.IO.File.Delete(path);
 
+
+    }
 	public void AddLevel(int level)
 	{
 		try
