@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 8
+  serializedVersion: 9
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -39,6 +39,7 @@ RenderSettings:
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -54,11 +55,10 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 10
     m_Resolution: 2
     m_BakeResolution: 40
-    m_TextureWidth: 1024
-    m_TextureHeight: 1024
+    m_AtlasSize: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -90,7 +90,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -219,7 +219,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.3, y: 0.9}
+  m_AnchoredPosition: {x: -0.30000305, y: 0.8999996}
   m_SizeDelta: {x: 1384.9, y: 201.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8457207
@@ -405,7 +405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000017166138, y: 154.09738}
+  m_AnchoredPosition: {x: -0.000015258789, y: 154.09738}
   m_SizeDelta: {x: 180, y: -68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &34787303
@@ -1833,6 +1833,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &113905732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,6 +2089,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &130730004
 GameObject:
   m_ObjectHideFlags: 0
@@ -2597,6 +2599,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -3640,6 +3643,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -4348,7 +4352,7 @@ Prefab:
     - target: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -215
+      value: -214.99997
       objectReference: {fileID: 0}
     - target: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
         type: 2}
@@ -4921,6 +4925,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &219738623 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -5512,6 +5517,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &236449833
 GameObject:
   m_ObjectHideFlags: 0
@@ -7842,6 +7848,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &294993786
 GameObject:
   m_ObjectHideFlags: 0
@@ -9210,6 +9217,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &320305736
 GameObject:
   m_ObjectHideFlags: 0
@@ -9373,6 +9381,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &321598744 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -10892,6 +10901,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &404288858 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -10914,6 +10924,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &404866765
 GameObject:
   m_ObjectHideFlags: 0
@@ -11513,7 +11524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000017166138, y: 134.08481}
+  m_AnchoredPosition: {x: -0.000015258789, y: 134.08481}
   m_SizeDelta: {x: 180, y: -68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &420989938
@@ -11968,6 +11979,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!224 &427908690 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
@@ -12191,6 +12203,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &432662207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12202,6 +12215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f86f5a5175e9724b85d75bb65644a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
 --- !u!1 &440335302
 GameObject:
   m_ObjectHideFlags: 0
@@ -12291,6 +12305,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &444830542
 GameObject:
   m_ObjectHideFlags: 0
@@ -12402,6 +12417,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &445295547 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -12759,6 +12775,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &466420183
 GameObject:
   m_ObjectHideFlags: 0
@@ -13717,7 +13734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000017166138, y: 67.04244}
+  m_AnchoredPosition: {x: -0.000015258789, y: 67.04244}
   m_SizeDelta: {x: 180, y: -68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &498989982
@@ -14449,6 +14466,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &519998516 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -14601,6 +14619,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &526933400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14612,6 +14631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f86f5a5175e9724b85d75bb65644a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
 --- !u!1 &527029991
 GameObject:
   m_ObjectHideFlags: 0
@@ -15123,6 +15143,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -15188,7 +15209,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.3, y: 0.9}
+  m_AnchoredPosition: {x: -0.30000305, y: 0.8999996}
   m_SizeDelta: {x: 1384.9, y: 201.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &544439172
@@ -15329,6 +15350,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -16079,7 +16101,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.3, y: 0.9}
+  m_AnchoredPosition: {x: -0.30000305, y: 0.8999996}
   m_SizeDelta: {x: 1384.9, y: 201.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &576532843
@@ -16295,6 +16317,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &582444553 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -16334,6 +16357,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &582444558 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -18192,6 +18216,10 @@ MonoBehaviour:
   seed: {fileID: 1436681578687316, guid: 880a3e6100e793641875f1def7932186, type: 2}
   seedFar: {fileID: 1986470873754588, guid: 6a28a54aaab9f7b42af40433743a9e02, type: 2}
   levelBits: []
+  selectionEffect: {fileID: 0}
+  selectionEffectGround: {fileID: 0}
+  winWaitTime: 4
+  loseWaitTime: 6
 --- !u!114 &685676509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18528,6 +18556,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &696285376
 GameObject:
   m_ObjectHideFlags: 0
@@ -18937,6 +18966,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!222 &713638416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19090,6 +19120,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &728473439 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -19170,6 +19201,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -19244,6 +19276,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &731877110 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -19283,6 +19316,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -19632,6 +19666,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -20195,8 +20230,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d5237eb55c0d740b3f8abfa883ddc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerID: 1
-  text: 'I trust you to prepare accordingly, leader! '
+  speakerID: 0
+  text: 'I trust you to get us emotionally ready, leader! '
 --- !u!1 &766947528
 GameObject:
   m_ObjectHideFlags: 0
@@ -20902,6 +20937,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &811603935
 GameObject:
   m_ObjectHideFlags: 0
@@ -20955,6 +20991,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &811603938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21416,6 +21453,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -22229,6 +22267,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &868641623 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1729963504872012, guid: 9640144b0402f6e49ae177bef4b08adc,
@@ -23084,6 +23123,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &910303710
 GameObject:
   m_ObjectHideFlags: 0
@@ -23892,6 +23932,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &940691768
 GameObject:
   m_ObjectHideFlags: 0
@@ -23993,6 +24034,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -24284,6 +24326,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!224 &958420585 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224663541810946892, guid: 9640144b0402f6e49ae177bef4b08adc,
@@ -24636,6 +24679,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &976363287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24647,6 +24691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f86f5a5175e9724b85d75bb65644a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
 --- !u!114 &976363288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26275,6 +26320,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1079793213
 GameObject:
   m_ObjectHideFlags: 0
@@ -27350,6 +27396,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1125985020
 Prefab:
   m_ObjectHideFlags: 0
@@ -27730,6 +27777,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -29143,7 +29191,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0.000016928}
+  m_AnchoredPosition: {x: 0, y: 0.000017166138}
   m_SizeDelta: {x: 0, y: 0.000017166}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1151426315
@@ -30014,6 +30062,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1192420157
 GameObject:
   m_ObjectHideFlags: 0
@@ -30271,7 +30320,7 @@ Prefab:
     - target: {fileID: 114766942080875872, guid: dfe09e5c8ef491d468dd7d57bbad5f95,
         type: 2}
       propertyPath: webpageLink
-      value: https://docs.google.com/forms/d/e/1FAIpQLSdzRy0vUJIge5YI1_4JDF7vQvSLtNCnHdrATMmEgTTG1kTkgQ/viewform?usp=sf_link
+      value: https://docs.google.com/forms/d/e/1FAIpQLScLJ7ay4ZsEInhGxZkB9mu-yC6b2cFBfNPEaSx_8DCmtxzxIw/viewform?usp=sf_link
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfe09e5c8ef491d468dd7d57bbad5f95, type: 2}
@@ -30512,6 +30561,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1207554360
 GameObject:
   m_ObjectHideFlags: 0
@@ -30600,6 +30650,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1209075293 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -32157,6 +32208,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1282160141
 GameObject:
   m_ObjectHideFlags: 0
@@ -33177,6 +33229,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1324796469
 GameObject:
   m_ObjectHideFlags: 0
@@ -33552,6 +33605,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1344964926
 Prefab:
   m_ObjectHideFlags: 0
@@ -34123,8 +34177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30d5237eb55c0d740b3f8abfa883ddc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerID: 2
-  text: 'I''ve heard a group of cautious vultures have set up camp there! '
+  speakerID: 1
+  text: 'And I''ve heard a group of solitary vultures have set up camp there! '
 --- !u!1 &1372024709
 GameObject:
   m_ObjectHideFlags: 0
@@ -34813,6 +34867,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1387634685 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -34847,6 +34902,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1396506637
 GameObject:
   m_ObjectHideFlags: 0
@@ -35462,7 +35518,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: type
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -35541,7 +35597,7 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: levelName
-      value: Spook cave
+      value: Lonely cave
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -35571,32 +35627,32 @@ Prefab:
         type: 2}
       propertyPath: battles.Array.data[0]
       value: 
-      objectReference: {fileID: 71626196}
+      objectReference: {fileID: 1814722680}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[1]
       value: 
-      objectReference: {fileID: 71626196}
+      objectReference: {fileID: 1814722680}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[2]
       value: 
-      objectReference: {fileID: 71626196}
+      objectReference: {fileID: 1814722680}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[3]
       value: 
-      objectReference: {fileID: 71626196}
+      objectReference: {fileID: 1814722680}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[4]
       value: 
-      objectReference: {fileID: 71626196}
+      objectReference: {fileID: 1814722680}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: battles.Array.data[5]
       value: 
-      objectReference: {fileID: 71626196}
+      objectReference: {fileID: 1814722680}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: targets.Array.data[1]
@@ -35615,8 +35671,8 @@ Prefab:
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
       propertyPath: levelDescription
-      value: 'To exit to the great plains, you must pass through the spooky mountain
-        filled to the brim with cautious vultures. Your worst nightmare! '
+      value: 'To exit to the great plains, you must pass through a cave inhabited
+        by solitary vultures! '
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 2}
@@ -36157,6 +36213,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1437183693
 Prefab:
   m_ObjectHideFlags: 0
@@ -36659,6 +36716,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1451640334 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -36941,6 +36999,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1475249992
 GameObject:
   m_ObjectHideFlags: 0
@@ -37520,6 +37579,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1502677963
 GameObject:
   m_ObjectHideFlags: 0
@@ -37662,6 +37722,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -39054,6 +39115,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!222 &1547638169
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -39362,7 +39424,7 @@ Prefab:
     - target: {fileID: 224181616036901884, guid: 03f36d854acd9714dadb899158544db5,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224181616036901884, guid: 03f36d854acd9714dadb899158544db5,
         type: 2}
@@ -39540,6 +39602,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1561232438 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -39991,6 +40054,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!222 &1595460550
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40145,7 +40209,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.000017166138, y: 201.12701}
+  m_AnchoredPosition: {x: -0.000015258789, y: 201.12701}
   m_SizeDelta: {x: 197, y: -34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1617672039
@@ -40740,6 +40804,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -40828,7 +40893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerID: 1
-  text: In that case, we better prepare ourselves for the cave on the way there
+  text: 'In that case, we better prepare ourselves for the cave on the way there! '
 --- !u!1 &1641337136 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -40863,6 +40928,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1643179450
 Prefab:
   m_ObjectHideFlags: 0
@@ -41205,6 +41271,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1645765667
 GameObject:
   m_ObjectHideFlags: 0
@@ -42431,6 +42498,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -43630,6 +43698,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -44299,6 +44368,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -44711,7 +44781,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.000017166138, y: 67.04244}
+  m_AnchoredPosition: {x: -0.000015258789, y: 67.04244}
   m_SizeDelta: {x: 197, y: -34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1800645135
@@ -44853,7 +44923,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0000097752, y: 0.0000085831}
+  m_AnchoredPosition: {x: 0.0000076293945, y: 0.000009536743}
   m_SizeDelta: {x: 153, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1802064972
@@ -45206,6 +45276,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!222 &1812150991
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -45860,6 +45931,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1826736139 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -45952,6 +46024,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1828551675
 GameObject:
   m_ObjectHideFlags: 0
@@ -46089,6 +46162,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1828801122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46135,6 +46209,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1836716490
 GameObject:
   m_ObjectHideFlags: 0
@@ -46291,6 +46366,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1852628237
 GameObject:
   m_ObjectHideFlags: 0
@@ -47466,6 +47542,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1898679291
 GameObject:
   m_ObjectHideFlags: 0
@@ -48278,7 +48355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.79999995, y: 0}
+  m_AnchoredPosition: {x: 0.80000305, y: 0}
   m_SizeDelta: {x: 184, y: 29.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1937089824
@@ -48426,6 +48503,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1953778718
 GameObject:
   m_ObjectHideFlags: 0
@@ -48980,6 +49058,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1972317556
 GameObject:
   m_ObjectHideFlags: 0
@@ -49090,6 +49169,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
@@ -50376,6 +50456,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!222 &2018275962
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -50541,6 +50622,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2027537489
 GameObject:
   m_ObjectHideFlags: 0
@@ -51431,6 +51513,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2047031067
 GameObject:
   m_ObjectHideFlags: 0
@@ -53871,6 +53954,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2085723521 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -54120,6 +54204,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2100440367 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -54298,7 +54383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.000017166138, y: 134.08481}
+  m_AnchoredPosition: {x: -0.000015258789, y: 134.08481}
   m_SizeDelta: {x: 197, y: -34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2102054912
@@ -54358,6 +54443,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2109177119
 Prefab:
   m_ObjectHideFlags: 0
@@ -54816,6 +54902,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2122106296
 GameObject:
   m_ObjectHideFlags: 0
@@ -55160,6 +55247,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2139384963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55171,6 +55259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f86f5a5175e9724b85d75bb65644a2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
 --- !u!1 &2140880087
 GameObject:
   m_ObjectHideFlags: 0
@@ -55348,6 +55437,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &2145966182 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
@@ -55388,7 +55478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -0.000017166138, y: 154.09738}
+  m_AnchoredPosition: {x: -0.000015258789, y: 154.09738}
   m_SizeDelta: {x: 197, y: -34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2146345406
