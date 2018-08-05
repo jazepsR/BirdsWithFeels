@@ -122,14 +122,14 @@ public class battleAnim :MonoBehaviour {
 			battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
-			Destroy(fightCloudObj, waitTime - enemySpeed); LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
+			Destroy(fightCloudObj, waitTime - enemySpeed);
+			LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
 			yield return new WaitForSeconds(waitTime - enemySpeed-1f);
 		}else
 		{
 
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("win", false);
 		}
-
 		ShowBattleResult(battle);
 	}
 
@@ -151,7 +151,8 @@ public class battleAnim :MonoBehaviour {
 		else
 		{
 			battle.player.battleConfBoos += Var.confLoseFight;
-			LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
+			if ( !(battle.enemy.enemyType == fillEnemy.enemyType.drill && !battle.enemy.foughtInRound))
+				LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
 				 , 3f).setEaseOutQuad());
 			AudioControler.Instance.EnemySound();
 			battle.player.ChageHealth(-1);
@@ -161,7 +162,7 @@ public class battleAnim :MonoBehaviour {
 				battle.player.showText();
 			print(battle.player.charName + " lost fight");
 		}
-
+		battle.enemy.foughtInRound = true;
 	}
 }
 

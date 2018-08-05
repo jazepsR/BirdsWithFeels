@@ -134,16 +134,16 @@ public class feedBack : MonoBehaviour {
 		switch (enemy.emotion)
 		{
 			case Var.Em.Solitary:
-				player.wizardFrienBoos -= 2;
+				player.wizardFrienBoos -= 4;
 				break;
 			case Var.Em.Social:
-				player.wizardFrienBoos += 2;
+				player.wizardFrienBoos += 4;
 				break;
 			case Var.Em.Cautious:
-				player.wizardConfBoos -= 2;
+				player.wizardConfBoos -= 4;
 				break;
 			case Var.Em.Confident:
-				player.wizardConfBoos += 2;
+				player.wizardConfBoos += 4;
 				break;
 			default:
 				break;
@@ -155,6 +155,7 @@ public class feedBack : MonoBehaviour {
 		lr.SetPosition(1, enemy.target);
 		lr.startColor = Helpers.Instance.GetEmotionColor(enemy.emotion);
 		lr.endColor = Helpers.Instance.GetEmotionColor(enemy.emotion);
+		lr.gameObject.SetActive(true);
 		player.lines.activeLines.Add(lineObj);
 
 	}

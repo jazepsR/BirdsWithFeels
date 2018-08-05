@@ -154,7 +154,7 @@ public class GameLogic : MonoBehaviour {
 
 		if (enemyBird.enemyType == fillEnemy.enemyType.super)
 		{
-			if (playerBird.emotion == Helpers.Instance.GetWeakness(enemyBird.emotion))
+			if (playerBird.emotion == enemyBird.emotion)
 				winBonus += 4;
 			else
 				winBonus -= 4;
