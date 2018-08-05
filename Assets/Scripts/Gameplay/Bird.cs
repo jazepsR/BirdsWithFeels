@@ -105,13 +105,14 @@ public class Bird : MonoBehaviour
 	public bool hasNewLevel = false;
 	public Var.Em prevEmotion=  Var.Em.finish;
 	bool started = false;
-	public string birdPrefabName;
-	public GameObject EnemyArt = null;
+    public string birdPrefabName;
+    public GameObject EnemyArt = null;
 	public GameObject GroundBonus;
 	public GameObject mapHighlight;
 	GameObject birdArtObj;
 	public Image coolDownRing;
 	GameObject selectionEffect;
+    bool selectionBeingDestroyed = false;
 	void Awake()
 	{
 		if(!isEnemy && !Var.isTutorial)
@@ -144,7 +145,7 @@ public class Bird : MonoBehaviour
 		if (!isEnemy)
 		{
 
-			/*if (relationships == null)
+            /*if (relationships == null)
 			{
 				relationships = new Dictionary<EventScript.Character, int>();
 				relationships.Add(EventScript.Character.Kim, 0);
@@ -164,7 +165,7 @@ public class Bird : MonoBehaviour
 		   
 			RelationshipScript.applyRelationship(this, false);
 			SetRealtionshipParticles();*/
-			var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
+            var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
 			birdArtObj = Instantiate(BirdArt, transform) as GameObject;
 			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
 	   
@@ -247,6 +248,7 @@ public class Bird : MonoBehaviour
 		{
 			string path = Application.persistentDataPath + "/" + charName + ".dat";
 			File.Delete(path);
+            Debug.Log("savePath: " + path);
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Create(path);
 			bf.Serialize(file, data);
@@ -590,8 +592,7 @@ public class Bird : MonoBehaviour
 				sp.color = HighlightCol;			
 			if (!dragged)
 				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.mouseOverBird);
-			if(selectionEffect == null && Time.timeSinceLevelLoad >1f && Helpers.Instance.selectionEffect != null)
-				selectionEffect = Instantiate(Helpers.Instance.selectionEffect, transform);
+			
 		}
 		//if(inMap)
 			//ProgressGUI.Instance.PortraitClick(this);
@@ -608,8 +609,9 @@ public class Bird : MonoBehaviour
 		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
 			showText();
 		SetCoolDownRing(true);
-
-		Var.selectedBird = gameObject;
+        if (selectionEffect == null && Time.timeSinceLevelLoad > 1f && Helpers.Instance.selectionEffect != null && !isEnemy && !dragged)
+            selectionEffect = Instantiate(Helpers.Instance.selectionEffect, transform);
+        Var.selectedBird = gameObject;
 		if (Input.GetMouseButtonUp(1))
 		{			
 			GuiContoler.Instance.GraphButton();
@@ -693,7 +695,8 @@ public class Bird : MonoBehaviour
 			}
 			
 			dragged = true;
-			
+            if (selectionEffect != null)
+                DestroySelection();
 			if (!inMap)
 			{
 				if (!Var.Infight)
@@ -743,16 +746,22 @@ public class Bird : MonoBehaviour
 					sp.color = DefaultCol;
 			}
 			
-		}       
-		if (isEnemy)
-		{
-			GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
-		}else if( selectionEffect != null)
-		{
-			selectionEffect.GetComponent<Animator>().SetTrigger("deselected");
-			LeanTween.delayedCall(0.2f,()=> { if (selectionEffect != null) Destroy(selectionEffect); });
 		}
+        if (isEnemy)
+        {
+            GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
+        }
+        else if (selectionEffect != null)
+            DestroySelection();
 	}
+    void DestroySelection()
+    {
+        selectionEffect.GetComponent<Animator>().SetTrigger("deselected");
+        selectionBeingDestroyed = true;
+        LeanTween.delayedCall(0.2f, () => { if (selectionEffect != null) Destroy(selectionEffect); selectionBeingDestroyed = false; });
+
+    }
+
 	void UpdateFeedback()
 	{
 		fighting = false;

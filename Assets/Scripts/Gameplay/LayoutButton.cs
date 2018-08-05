@@ -51,6 +51,7 @@ public class LayoutButton : MonoBehaviour
 	}
 	void OnTriggerEnter2D(Collider2D other)
 	{
+        //Debug.Log("entered!");
 		if (isActive && other.transform.parent.GetComponent<Bird>().dragged)
 		{
 			if (selectionEffect == null && index.x >=0)
@@ -168,25 +169,33 @@ public class LayoutButton : MonoBehaviour
 		}
 		
 	}
-
+    void DestroySelectionEffect()
+    {
+        if (selectionEffect != null)
+        {
+            selectionEffect.GetComponent<Animator>().SetTrigger("disappear");
+            LeanTween.delayedCall(0.2f, () =>
+            {
+                if (selectionEffect != null)
+                    Destroy(selectionEffect);
+            });
+        }
+    }
 
 	void Update()
 	{
 
 			hasBird = (currentBird != null);
-			if (Input.GetMouseButtonUp(0) && currentBird != null)
+        if (Input.GetMouseButtonUp(0))
+                DestroySelectionEffect();
+
+        if(currentBird!= null && currentBird.dragged && selectionEffect== null && index.x >= 0)
+            selectionEffect = Instantiate(Helpers.Instance.selectionEffectGround, transform);
+        if (Input.GetMouseButtonUp(0) && currentBird != null)
 			{
 				if (currentBird.dragged)
 				{
-				if (selectionEffect != null)
-				{
-					selectionEffect.GetComponent<Animator>().SetTrigger("disappear");
-					LeanTween.delayedCall(0.25f, () =>
-					{
-						if (selectionEffect != null)
-							Destroy(selectionEffect);
-					});
-				}
+                DestroySelectionEffect();
 
 				if ((int)index.x == -1)
 					{

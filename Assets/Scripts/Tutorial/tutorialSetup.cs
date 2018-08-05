@@ -23,6 +23,7 @@ public class tutorialSetup : MonoBehaviour {
 		Bird terry =FillPlayer.Instance.playerBirds[0];
 		terry.data.confidence = confidence1;
 		terry.data.friendliness = friendliness1;
+        terry.data.portraitOrder = 2;
 		//terry.startingLVL = startingLVL1;
 		terry.SetEmotion();
 		//AddLevel(terry, startingLVL1);
@@ -31,16 +32,19 @@ public class tutorialSetup : MonoBehaviour {
 		Bird rebecca = FillPlayer.Instance.playerBirds[1];
 		rebecca.data.confidence = confidence2;
 		rebecca.data.friendliness = friendliness2;
-		//rebecca.startingLVL = startingLVL2;
-		rebecca.SetEmotion();
+        rebecca.data.portraitOrder = 3;
+        //rebecca.startingLVL = startingLVL2;
+        rebecca.SetEmotion();
 		//AddLevel(rebecca, startingLVL2);
 
 		//Setup Alex
 		Bird alex = FillPlayer.Instance.playerBirds[2];
 		alex.data.confidence = confidence3;
 		alex.data.friendliness = friendlines3;
-		alex.SetEmotion();
-		//AddLevel(alex, startingLVL3);
+        alex.data.portraitOrder = 4;
+        alex.SetEmotion();
+        //AddLevel(alex, startingLVL3);
+        LeanTween.delayedCall(0.1f, terry.showText);
 	}
 	void AddLevel(Bird bird, Levels.type lvl)
 	{
