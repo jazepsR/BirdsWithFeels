@@ -81,6 +81,7 @@ public class ProgressGUI : MonoBehaviour {
 	
 	public void updateLevels(Bird bird)
 	{
+        return;
 		int index = 0;
 		foreach (levelElementFill element in lvlListElements)
 		{

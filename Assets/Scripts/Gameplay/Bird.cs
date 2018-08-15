@@ -1160,6 +1160,8 @@ public class Bird : MonoBehaviour
 				
 
 			///Set level icons
+            ///Currently removed
+            /*
 			foreach (LVLIconScript icon in GuiContoler.Instance.lvlIcons)
 			{
 				
@@ -1175,7 +1177,7 @@ public class Bird : MonoBehaviour
 				}
 				index++;
 			}
-			
+			*/
 			//set emotion bars, commented out by Seb since emotion bars are removed now
 			//GuiContoler.Instance.confSlider.SetDist(confidence + battleConfBoos, this); 
 			//GuiContoler.Instance.firendSlider.SetDist(friendliness, this);

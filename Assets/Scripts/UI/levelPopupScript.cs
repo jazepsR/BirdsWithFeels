@@ -89,12 +89,13 @@ public class levelPopupScript : MonoBehaviour {
 		}
 		else
 		{
-			title.text = "New skill: " + Helpers.Instance.GetLevelTitle(data.type);
+            ThirdBtn();
+			/*title.text = "New skill: " + Helpers.Instance.GetLevelTitle(data.type);
 			firstPart.SetActive(false);
 			secondPart.SetActive(false);
 			thirdPart.SetActive(true);
 			//activeBird.levelList.Add(data);
-			ProgressGUI.Instance.PortraitClick(activeBird);
+			ProgressGUI.Instance.PortraitClick(activeBird);*/
 		}
 	}
 	public void ThirdBtn()
