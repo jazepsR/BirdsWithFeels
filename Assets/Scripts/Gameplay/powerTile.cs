@@ -8,11 +8,23 @@ public class powerTile : MonoBehaviour {
 	public Var.PowerUps type;
 	public Color secondColor;
 	public Color firstColor;
-    bool canKiss = true;
+	bool canKiss = true;
 	// Use this for initialization
 	void Start () {
-		
-		
+		Vector3 offset;
+		switch (type)
+		{
+			case Var.PowerUps.dmg:
+				offset = new Vector3(0.15f, 0.21f, 0);
+				break;
+			case Var.PowerUps.heal:
+				offset = new Vector3(0.1f, 0.25f, 0);
+				break;
+			default:
+				offset = Vector3.zero;
+				break;
+		}
+		transform.position += offset;
 	}
 	
 
@@ -36,26 +48,26 @@ public class powerTile : MonoBehaviour {
 
 	}
    
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if(other.tag == "feet" && Var.selectedBird == null && type == Var.PowerUps.obstacle)
-        {
-            GetComponent<Animator>().SetTrigger("grump");
-            print("gtumper");
-            canKiss = false;
-            LeanTween.delayedCall(1f, AllowKiss);
-        }
-    }
-
-    void AllowKiss()
-    {
-        canKiss = true;
-    }
-
-    void OnMouseEnter()
+	void OnTriggerExit2D(Collider2D other)
 	{
-        if (Var.selectedBird != null)       
-            return;        
+		if(other.tag == "feet" && Var.selectedBird == null && type == Var.PowerUps.obstacle)
+		{
+			GetComponent<Animator>().SetTrigger("grump");
+			print("gtumper");
+			canKiss = false;
+			LeanTween.delayedCall(1f, AllowKiss);
+		}
+	}
+
+	void AllowKiss()
+	{
+		canKiss = true;
+	}
+
+	void OnMouseEnter()
+	{
+		if (Var.selectedBird != null)       
+			return;        
 		string info = "";
 		switch (type)
 		{
@@ -70,8 +82,8 @@ public class powerTile : MonoBehaviour {
 				break;
 			case Var.PowerUps.obstacle:
 				info = "You can't place birds here - enemies will walk through";     
-                if(canKiss)           
-                    GetComponent<Animator>().SetTrigger("kiss");
+				if(canKiss)           
+					GetComponent<Animator>().SetTrigger("kiss");
 				break;
 
 		}
@@ -83,7 +95,7 @@ public class powerTile : MonoBehaviour {
 	void OnMouseExit()
 	{
 		Helpers.Instance.HideTooltip();
-    }
+	}
 
 	public void ApplyPower(Bird bird)
 	{

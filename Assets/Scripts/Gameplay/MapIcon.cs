@@ -132,10 +132,13 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 						DialogueControl.Instance.CreateParticularDialog(firstCompleteDialogue);
 					firstCompletion = false;
 					anim.SetInteger("state", 1);
-					unlockedRoad.gameObject.SetActive(false);
 					LeanTween.delayedCall(0.2f, () => anim.SetInteger("state", 2));
-					LeanTween.delayedCall(1.7f,()=> unlockedRoad.gameObject.GetComponent<Animator>().SetBool("new", true));
-					LeanTween.delayedCall(1.7f, () => unlockedRoad.gameObject.SetActive(true));
+					if (unlockedRoad != null)
+					{
+						unlockedRoad.gameObject.SetActive(false);
+						LeanTween.delayedCall(1.7f, () => unlockedRoad.gameObject.GetComponent<Animator>().SetBool("new", true));
+						LeanTween.delayedCall(1.7f, () => unlockedRoad.gameObject.SetActive(true));
+					}
 					foreach(MapIcon icon in targets)
 					{
 						LeanTween.delayedCall(2.7f, () => icon.anim.SetInteger("state", 1));
@@ -400,7 +403,6 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		MapControler.Instance.SelectedIcon = null;
 		MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
 		MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero;
-		MapControler.Instance.selectionTiles.transform.localScale = Vector3.zero;
 		MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
 		ShowAreaDetails();
 		//LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position+(transform.parent.transform.position-transform.position), 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
@@ -413,7 +415,6 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		active = false;      
 		
 		MapControler.Instance.SelectionMenu.SetActive(true);
-		MapControler.Instance.selectionTiles.SetActive(true);
 		MapControler.Instance.SelectionTitle.text = levelName;
 		MapControler.Instance.SelectionText.text = ToString();
 		MapControler.Instance.SelectionDescription.text = levelDescription;
@@ -423,7 +424,6 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		MapControler.Instance.SelectedIcon = this;
 		if (available)
 		{
-			LeanTween.scale(MapControler.Instance.selectionTiles, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack);
 			MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);            
 			MapControler.Instance.startLvlBtn.gameObject.SetActive(true);
 			

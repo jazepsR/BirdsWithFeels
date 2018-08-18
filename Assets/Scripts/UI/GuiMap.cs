@@ -62,7 +62,7 @@ public class GuiMap : MonoBehaviour {
 				{
 					if (data.ID == Var.currentStageID)
 					{
-						if (data.trialID == data.ID)
+						if (data.trialID == data.ID && trialObj != null)
 						{
 							trialObj.SetActive(false);
 						}
@@ -105,7 +105,7 @@ public class GuiMap : MonoBehaviour {
 			if(part.type!= Var.Em.finish)
 				DrawCircles(part.type);
 		}
-		GameObject cupObj =  Instantiate(cup, finish.position,Quaternion.identity);
+		GameObject cupObj = Instantiate(cup, finish.position,Quaternion.identity);
 		cupObj.transform.parent = nodes;
 		print("created map");
 		if (inMap)
@@ -142,6 +142,7 @@ public class GuiMap : MonoBehaviour {
 			point.transform.localScale =Vector3.one* 30f;
 		}
 		lr.sortingOrder = 55;
+		lr.positionCount = 2;
 		lr.SetPosition(0, new Vector3(start.position.x + dist * count, start.position.y, start.position.z));
 		lr.SetPosition(1, new Vector3(start.position.x + dist * (count+1), start.position.y, start.position.z));
 		count++;

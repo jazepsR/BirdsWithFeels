@@ -17,7 +17,6 @@ public class MapControler : MonoBehaviour {
 	public Text SelectionText;
 	public Text SelectionDescription;
 	public Text SelectionTitle;
-	public GameObject selectionTiles;
 	public Button startLvlBtn;
 	public float scaleTime = 0.35f;
 	public Image[] pieChart;
@@ -35,8 +34,7 @@ public class MapControler : MonoBehaviour {
 	void Start () {
 		timedEvents = FindObjectsOfType<TimedEventControl>();
 		Var.isBoss = false;
-		timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);
-		selectionTiles.transform.localScale = Vector3.zero;
+		timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);		
 		SelectionMenu.transform.localScale = Vector3.zero;
 		canHeal = false;
 		int count = 0;
@@ -123,6 +121,7 @@ public class MapControler : MonoBehaviour {
 	{
 		Var.currentWeek++;
 		timerText.text = "Week: " + Var.currentWeek;
+		timerText.GetComponent<Animator>().SetTrigger("Increment");
 		foreach (TimedEventControl control in timedEvents)
 			control.CheckStatus();
 		foreach(Bird bird in FillPlayer.Instance.playerBirds)
@@ -130,15 +129,16 @@ public class MapControler : MonoBehaviour {
 			if (bird.data.injured)
 			{
 				bird.DecreaseTurnsInjured();
-			}else
-			{
-				if (bird.data.health < bird.data.maxHealth)
+				GameObject healObj = Instantiate(bird.healParticle, bird.transform);
+				Destroy(healObj, 1.5f);
+			}
+			else if (bird.data.health < bird.data.maxHealth)
 				{
 					bird.data.health++;
 					GameObject healObj = Instantiate(bird.healParticle, bird.transform);
 					Destroy(healObj, 1.5f);
 				}
-			}
+			
 		}
 		//foreach (TimedEventControl timedEvent in FindObjectsOfType<TimedEventControl>())
 		//	timedEvent.CheckStatus();
@@ -147,7 +147,6 @@ public class MapControler : MonoBehaviour {
 	{
 		canMove = true;
 		LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-		LeanTween.scale(MapControler.Instance.selectionTiles, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
 		MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
 		foreach (GuiMap map in FindObjectsOfType<GuiMap>())
 			map.Clear();
