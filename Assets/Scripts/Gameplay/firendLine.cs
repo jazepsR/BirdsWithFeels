@@ -17,6 +17,7 @@ public class firendLine : MonoBehaviour {
     public static GameObject diognalLineShort;
     public static GameObject diognalLineLong;
 	public static GameObject lonelyParticles;
+    public static GameObject cautiousParticles;
 	// Use this for initialization
 	void Start () {
 		birdScript = GetComponent<Bird>(); 
@@ -27,7 +28,7 @@ public class firendLine : MonoBehaviour {
             diognalLineShort = Resources.Load<GameObject>("prefabs/lines/diagShort");
             diognalLineLong =  Resources.Load<GameObject>("prefabs/lines/diagLong");
 			lonelyParticles = Resources.Load<GameObject>("prefabs/lines/lonely_effect");
-
+            cautiousParticles = Resources.Load<GameObject>("prefabs/lines/cautious_effect");
         }
                
 	}
@@ -56,7 +57,7 @@ public class firendLine : MonoBehaviour {
 		DrawLine(y - 1, x + 1, diognalLineShort);
 		DrawLine(y + 1, x + 1, diognalLineLong);
 		DrawLine(y - 1, x-1,diognalLineLong);*/
-		CheckIfLonely();
+		CheckParticles();
 		/*if (isLonely)
 			lonelyParticleObj = Instantiate(lonelyParticles, birdScript.transform);*/
 
@@ -131,7 +132,7 @@ public class firendLine : MonoBehaviour {
 
 	}
 
-	public void CheckIfLonely()
+	public void CheckParticles()
 	{
 		if(birdScript.x < 0 || birdScript.y < 0)
 			return;
@@ -140,7 +141,7 @@ public class firendLine : MonoBehaviour {
 			lonelyParticleObj = Instantiate(lonelyParticles, birdScript.transform);
 			lonelyParticleObj.transform.localPosition = new Vector3(0.3f, 0, 0);
 		}
-	}
+    }
 
 
 	public void RemoveLines()
@@ -156,8 +157,10 @@ public class firendLine : MonoBehaviour {
 		{
 			foreach (Bird bird in Var.activeBirds)
 			{
-				if (bird != birdScript)
-					bird.lines.CheckIfLonely();
+                if (bird != birdScript)
+                {
+                    bird.lines.CheckParticles();
+                }
 			}
 		}
 		catch

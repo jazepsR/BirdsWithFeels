@@ -11,8 +11,10 @@ public class Bird : MonoBehaviour
 {
 	public string charName;
 	public bool loadDataFromInspector = false;
-	public BirdData data;
-	public string birdBio;
+    public string birdPrefabName;
+    public int portraitOrder = 1;
+    public BirdData data;
+    public string birdBio;
 	[HideInInspector]
 	public int prevConf = 0;
 	[HideInInspector]
@@ -105,7 +107,6 @@ public class Bird : MonoBehaviour
 	public bool hasNewLevel = false;
 	public Var.Em prevEmotion=  Var.Em.finish;
 	bool started = false;
-    public string birdPrefabName;
     public GameObject EnemyArt = null;
 	public GameObject GroundBonus;
 	public GameObject mapHighlight;
@@ -113,7 +114,9 @@ public class Bird : MonoBehaviour
 	public Image coolDownRing;
 	GameObject selectionEffect;
     bool selectionBeingDestroyed = false;
-	void Awake()
+    [HideInInspector]
+    public GameObject cautiousParticleObj = null;
+    void Awake()
 	{
 		if(!isEnemy && !Var.isTutorial)
 			LoadBirdData();
@@ -239,8 +242,9 @@ public class Bird : MonoBehaviour
 			data = (BirdData)bf.Deserialize(file);
 			file.Close();
 		}
-		if (!isEnemy)
-			birdPrefabName = data.birdPrefabName;
+        portraitOrder = Helpers.GetPortraitNumber(charName);
+        if (!isEnemy)
+            birdPrefabName = Helpers.GetBirdArtName(charName);
 	}
 	public void SaveBirdData()
 	{
@@ -623,7 +627,7 @@ public class Bird : MonoBehaviour
 				child.sortingLayerName = "Default";
 			}
 			GetComponentInChildren<Animator>().SetBool("lift", false);
-			if (Var.isTutorial)
+            if (Var.isTutorial)
 			{
 				foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
 				{
@@ -701,8 +705,10 @@ public class Bird : MonoBehaviour
 			{
 				if (!Var.Infight)
 					ResetBonuses();
-				lines.RemoveLines();				
-				GuiContoler.Instance.HideLvlText();
+				lines.RemoveLines();
+                if (cautiousParticleObj != null)
+                    Destroy(cautiousParticleObj);
+                GuiContoler.Instance.HideLvlText();
 				GroundBonus.SetActive(false);
 				try
 				{
@@ -770,11 +776,16 @@ public class Bird : MonoBehaviour
 			if (GameLogic.Instance.CheckIfResting(this)&&!dragged)
 			{
 				levelControler.ApplyLevelOnDrop(this, data.levelList);
-			}
+               
+            }
 			else
-			{
-				levelControler.ApplyLevelOnPickup(this, data.levelList);
-			}
+            {
+                Debug.Log("not resting " + charName);
+                levelControler.ApplyLevelOnPickup(this, data.levelList);
+                if (cautiousParticleObj != null)
+                    Destroy(cautiousParticleObj);
+
+            }
 		}       
 		GameLogic.Instance.UpdateFeedback();
 		
@@ -1134,7 +1145,7 @@ public class Bird : MonoBehaviour
 				Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, data.lastLevel.title);
 			else
 				Var.birdInfoHeading.text = charName;          
-			GuiContoler.Instance.PortraitControl(data.portraitOrder, emotion);
+			GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
 			GuiContoler.Instance.BirdCombatStr.text = "Combat strength: " + (getBonus()* 10f).ToString("+#;-#;0") + "%";
 			GuiContoler.Instance.BirdCombatStr.gameObject.GetComponent<ShowTooltip>().tooltipText = GetBonusText();
 			//levelUpText = CheckLevels(false);

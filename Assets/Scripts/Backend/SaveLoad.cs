@@ -113,10 +113,8 @@ public class BirdData
 	public int TurnsInjured =0;
 	public int levelRollBonus=0;
 	public string charName;
-	public string birdPrefabName;
 	public int friendliness =0;
 	public int confidence =0;
-	public int portraitOrder=1;
 	public int health=3;
 	public int mentalHealth=3;
 	public int maxHealth=3;

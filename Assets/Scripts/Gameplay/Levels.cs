@@ -49,10 +49,17 @@ public class Levels : MonoBehaviour {
 		if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
 		{
 			myBird.GetComponentInChildren<Animator>().SetBool("rest", true);
-		}
+            if (myBird.cautiousParticleObj == null)
+            {
+                myBird.cautiousParticleObj = Instantiate(firendLine.cautiousParticles, transform);
+                myBird.cautiousParticleObj.transform.localPosition = new Vector3(0.3f, 0, 0);
+            }
+        }
 		else
-		{
-			myBird.GetComponentInChildren<Animator>().SetBool("rest", false);
+        {
+            myBird.GetComponentInChildren<Animator>().SetBool("rest", false);
+            if (myBird.cautiousParticleObj != null)
+                Destroy(myBird.cautiousParticleObj);
 		}
         return;
 		if (myBird.inMap || Var.isTutorial)

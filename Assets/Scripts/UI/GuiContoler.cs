@@ -100,8 +100,8 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject GraphBlocker;
 	void Awake()
 	{
-		if (!Var.StartedNormally)
-			Var.gameSettings.shownLevelTutorial = true;
+		//if (!Var.StartedNormally)
+			//Var.gameSettings.shownLevelTutorial = true;
 		LeanTween.init(1000);
 		Instance = this;
 		maxGraph = 3;
@@ -658,7 +658,7 @@ public class GuiContoler : MonoBehaviour {
 
 		//Friendship stuff
 		if (FriendGainedInRound > 0)
-			fbText += "\n" + Helpers.Instance.FriendlyHexColor + "<b>Friendliness gained: " + FriendGainedInRound + "</b></color>";
+			fbText += "\n" + Helpers.Instance.FriendlyHexColor + "<b>Social gained: " + FriendGainedInRound + "</b></color>";
 		if (FriendGainedInRound < 0)
 			fbText += "\n" + Helpers.Instance.LonelyHexColor + "<b>Solitude gained: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
 		if (bird.friendBoost > 0)

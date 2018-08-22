@@ -411,17 +411,17 @@ public class EventController : MonoBehaviour {
 				}
 				else
 				{
-					return currentBird.charName + "'s fear increased by " + Mathf.Abs(magnitude) + ".";
+					return currentBird.charName + "'s caution increased by " + Mathf.Abs(magnitude) + ".";
 				}
 			case EventConsequence.ConsequenceType.Friendliness:
 				currentBird.data.friendliness += magnitude;
 				if (magnitude > 0)
 				{
-					return currentBird.charName + "'s firendliness has increased by " + magnitude + ".";
+					return currentBird.charName + " gained " + magnitude + " social.";
 				}
 				else
 				{
-					return currentBird.charName + " gained " + Mathf.Abs(magnitude) + " loneliness.";
+					return currentBird.charName + " gained " + Mathf.Abs(magnitude) + " solitude.";
 				}               
 			case EventConsequence.ConsequenceType.Health:
 				currentBird.ChageHealth(magnitude);

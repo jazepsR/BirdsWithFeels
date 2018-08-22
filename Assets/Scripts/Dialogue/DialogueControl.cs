@@ -146,6 +146,7 @@ public class DialogueControl : MonoBehaviour {
                     if (j > 1000)
                     {
                         Debug.LogError("couldnt add dialogue speaker to list");
+                        speakers.Add(Var.activeBirds[0]);
                         break;
                     }
 

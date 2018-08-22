@@ -117,6 +117,40 @@ public class Helpers : MonoBehaviour {
 		}
 	}
 
+    public static int GetPortraitNumber(string birdName)
+    {
+        int portraitNum = 0;
+        birdName = birdName.ToLower();
+        if (birdName.Equals("terry"))
+            portraitNum = 2;
+        if (birdName.Equals("alexander"))
+            portraitNum = 4;
+        if (birdName.Equals("sophie"))
+            portraitNum = 0;
+        if (birdName.Equals("rebecca"))
+            portraitNum = 3;
+        if (birdName.Equals("kim"))
+            portraitNum = 1;
+        return portraitNum;
+    }
+
+    public static string GetBirdArtName(string birdName)
+    {
+        string birdArtName = "BirdArt3";
+        birdName = birdName.ToLower();
+        Debug.Log(birdName + "testing names:");
+        if (birdName.Equals("terry"))
+            birdArtName = "BirdArt3";
+        if (birdName.Equals("alexander"))
+            birdArtName = "BirdArt4";
+        if (birdName.Equals("sophie"))
+            birdArtName = "BirdArt5";
+        if (birdName.Equals("rebecca"))
+            birdArtName = "BirdArt2";
+        if (birdName.Equals("kim"))
+            birdArtName = "BirdArt1";
+        return birdArtName;
+    }
 
 	public int GetEmotionValue(Bird bird, Var.Em emotion)
 	{
