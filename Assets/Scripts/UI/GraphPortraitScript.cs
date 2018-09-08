@@ -69,7 +69,11 @@ public class GraphPortraitScript : MonoBehaviour {
 		this.targetEmotion = targetEmotion;
 		ShowTooltip info =gameObject.AddComponent<ShowTooltip>();
 		finish = target * factor;
-		if (Var.Infight)
+        if (Mathf.Abs(transform.localPosition.x / factor) > 12 || Mathf.Abs(transform.localPosition.y / factor) > 12)
+        {
+            info.tooltipText = "This bird is outside their <b>comfort zone</b>! Get them back in before they lose all mental HP and <b>take damage</b>!";
+        }
+		else if (Var.Infight)
 		{
 			info.tooltipText = "";
 			try

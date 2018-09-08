@@ -36,6 +36,7 @@ public class EventController : MonoBehaviour {
 	//List<string> texts;    
 	int currentText = 0;
 	bool activeChoices = false;
+    bool printing = false;
 	// Use this for initialization
 	void Awake () {
 		eventsToShow = new List<EventScript>();
@@ -71,10 +72,16 @@ public class EventController : MonoBehaviour {
 
 
 	public void ContinueBtn()
-	{
-		if (activeChoices)
+    {
+        if (printing)
+        {
+            printing = false;
+            return;
+        }
+        if (activeChoices)
 			return;
-		currentText++;
+       
+        currentText++;
 		print("currentText: " + currentText);
 		AudioControler.Instance.ClickSound();
 		if (currentText < currentEvent.parts.Count-1)
@@ -100,7 +107,8 @@ public class EventController : MonoBehaviour {
 			CreateChoices();
 			return;         
 		}
-		if (currentText > currentEvent.parts.Count-1)
+        
+        if (currentText > currentEvent.parts.Count-1)
 		{
 			eventObject.SetActive(false);
 			if(nextEvent!= null)
@@ -142,13 +150,21 @@ public class EventController : MonoBehaviour {
 
 	private IEnumerator WaitAndPrint(string printText,bool shouldShowContinue)
 	{
+
 		continueBtn.GetComponent<Animator>().SetBool("active",false);
 		text.text = "";
+        printing = true;
 		foreach (char ch in printText)
 		{
 			text.text += ch;
 			yield return null;
+            if(!printing)
+            {
+                text.text = printText;
+                break;
+            }
 		}
+        printing = false;
 		continueBtn.GetComponent<Animator>().SetBool("active", shouldShowContinue);
 	}
 

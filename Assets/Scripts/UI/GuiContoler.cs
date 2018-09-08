@@ -993,6 +993,7 @@ public class GuiContoler : MonoBehaviour {
 		}
 		Var.currentWeek++;
 		Var.shouldDoMapEvent = true;
+        Var.CanShowHover = true;
 		LeanTween.cancelAll();
 		SaveLoad.Save();
 		SceneManager.LoadScene("Map");

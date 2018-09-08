@@ -42,7 +42,26 @@ public class MapControler : MonoBehaviour {
 		{
 			if (bird.gameObject.activeSelf)
 				count++;
-		}
+            bool wasActive = false;
+            foreach(Bird activeBird in Var.activeBirds)
+            {
+                if(activeBird.charName == bird.charName)
+                {
+                    wasActive = true;
+                    break;
+                }
+            }
+            if (!wasActive && bird.gameObject.activeSelf)
+            {
+                if(bird.data.health<bird.data.maxHealth && !bird.data.injured)
+                {
+                    GameObject healObj = Instantiate(bird.healParticle, bird.transform);
+                    Destroy(healObj, 1.5F);
+                }
+                bird.data.health = Mathf.Min(bird.data.health + 1, bird.data.maxHealth);                
+                bird.data.mentalHealth = Mathf.Min(bird.data.mentalHealth + 1, Var.maxMentalHealth);
+            }
+        }
 		if (count == 3)
 		{
 			foreach (Bird bird in FillPlayer.Instance.playerBirds)
@@ -54,6 +73,7 @@ public class MapControler : MonoBehaviour {
 						bird.mapHighlight.SetActive(true);
 						selectedBirds.Add(bird);
 					}
+                    
 				}
 			}
 			CanLoadBattle();
