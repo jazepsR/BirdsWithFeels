@@ -55,6 +55,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	List<Var.Em> totalEmotions;
 	List<float> totalPercentages;
 	public Image unlockedRoad;
+	public MeshRenderer[] splineRoads;
 	bool useline;
 	public int trialID;
 	[HideInInspector]
@@ -93,8 +94,32 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			//LeanTween.delayedCall(0.1f, mapBtnClick);
 		ValidateAll();
 		CalculateTotals();
+		if(splineRoads.Length>0)
+		{
+			if (available)
+			{
+				if(completed)
+				{
+					foreach (MeshRenderer road in splineRoads)
+						road.material = MapControler.Instance.completedRoadMat;
+				}
+				else
+				{
+					foreach (MeshRenderer road in splineRoads)
+						road.material = MapControler.Instance.availableRoadMat;
+				}
+			}
+			else
+			{
+				foreach (MeshRenderer road in splineRoads)
+					road.material = MapControler.Instance.disabledRoadMat;
 
-		if (unlockedRoad == null)
+			}
+
+
+
+		}
+		if (unlockedRoad == null && splineRoads.Length ==0)
 		{
 			useline = true;
 		}
@@ -301,13 +326,14 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		}
 		else
 		{
-			if(completed)
+			if(completed && unlockedRoad != null)
 			{
 				unlockedRoad.gameObject.SetActive(true);
 			}
 			else
 			{
-				unlockedRoad.gameObject.SetActive(false);
+				if(unlockedRoad)
+					unlockedRoad.gameObject.SetActive(false);
 			}
 		}
 	}
@@ -568,8 +594,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			weakness = "Unpredictable";
 		else if (type != Var.Em.Neutral)
 			weakness = Helpers.Instance.GetWeakness(type).ToString();*/
-        stageInfo += ". Main ENEMY emotion: " + Helpers.Instance.GetHexColor(type) + type + "</color>.";
-           // " Weak to: " +	Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(type)) + weakness + "</color>.";
+		stageInfo += ". Main ENEMY emotion: " + Helpers.Instance.GetHexColor(type) + type + "</color>.";
+		   // " Weak to: " +	Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(type)) + weakness + "</color>.";
 		/*stageInfo += "\nEnemies attack from the: ";
 		if (hasFrontEnemyRow)
 			stageInfo += "\u2022Front ";

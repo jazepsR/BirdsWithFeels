@@ -96,7 +96,8 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject dangerZoneBorder;
 	[HideInInspector]
 	public bool canChangeGraph = true;
-	bool GraphActive = false;
+	[HideInInspector]
+	public bool GraphActive = false;
 	public GameObject GraphBlocker;
 	void Awake()
 	{
@@ -508,10 +509,11 @@ public class GuiContoler : MonoBehaviour {
 			
 	public void CloseGraph()
 	{
+		Debug.Log("Closing graph");
+		LeanTween.delayedCall(0.7f, () => GraphActive = false);
 		speechTexts = new List<string>();
 		speechPos = new List<Transform>();
 		speechBubbleObj.SetActive(false);
-		GraphActive = false;
 		AudioControler.Instance.PlayPaperSound();
 		canChangeGraph = true;
 		GraphBlocker.SetActive(false);
@@ -545,6 +547,7 @@ public class GuiContoler : MonoBehaviour {
 		foreach (Bird bird in FillPlayer.Instance.playerBirds)
 			LeanTween.delayedCall(0.1f, () => bird.SetAnimation(bird.emotion));
 		LeanTween.delayedCall(0.2f,()=> selectedBird.showText());
+		LeanTween.delayedCall(0.7f, () => GraphActive = false);
 	}
 
 	public void clearSmallGraph()
@@ -993,7 +996,7 @@ public class GuiContoler : MonoBehaviour {
 		}
 		Var.currentWeek++;
 		Var.shouldDoMapEvent = true;
-        Var.CanShowHover = true;
+		Var.CanShowHover = true;
 		LeanTween.cancelAll();
 		SaveLoad.Save();
 		SceneManager.LoadScene("Map");

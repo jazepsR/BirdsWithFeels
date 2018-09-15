@@ -26,6 +26,9 @@ public class MapControler : MonoBehaviour {
 	public List<Bird> selectedBirds;
 	public Sprite trialSprite;
 	TimedEventControl[] timedEvents;
+	public Material disabledRoadMat;
+	public Material availableRoadMat;
+	public Material completedRoadMat;
 	void Awake()
 	{
 		Instance = this;

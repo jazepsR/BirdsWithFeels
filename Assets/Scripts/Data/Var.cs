@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 public static class Var {
+	public static Bird clickedBird;
 	public static bool SophieUnlocked = false;
 	public static bool KimUnlocked = false;
 	public static bool yesFinalChoice = false;
