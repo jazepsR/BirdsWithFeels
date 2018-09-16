@@ -29,6 +29,7 @@ public class MapControler : MonoBehaviour {
 	public Material disabledRoadMat;
 	public Material availableRoadMat;
 	public Material completedRoadMat;
+	public Animator charInfoAnim;
 	void Awake()
 	{
 		Instance = this;

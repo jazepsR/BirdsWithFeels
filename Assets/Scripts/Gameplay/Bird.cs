@@ -593,7 +593,12 @@ public class Bird : MonoBehaviour
         }
         else
         {
-            foreach (SpriteRenderer sp in colorSprites)
+			if (inMap && Time.timeSinceLevelLoad >1)
+			{
+				MapControler.Instance.charInfoAnim.SetBool("show", true);
+				MapControler.Instance.charInfoAnim.SetBool("hide", false);
+			}
+			foreach (SpriteRenderer sp in colorSprites)
                 sp.color = HighlightCol;			
             if (!dragged)
                 AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.mouseOverBird);
@@ -611,6 +616,7 @@ public class Bird : MonoBehaviour
             return;
         if (isEnemy || GuiContoler.Instance.speechBubbleObj.activeSelf)
             return;
+		
         if (GuiContoler.Instance.speechBubbleObj.activeSelf)
             showText();
         SetCoolDownRing(true);
@@ -770,8 +776,12 @@ public class Bird : MonoBehaviour
             GuiContoler.Instance.HideLvlText();
             
         }
-
-        if (!dragged)
+		if (inMap)
+		{
+			MapControler.Instance.charInfoAnim.SetBool("hide", true);
+			MapControler.Instance.charInfoAnim.SetBool("show", false);
+		}
+		if (!dragged)
         {
             SetCoolDownRing(false);
             if (isEnemy)

@@ -110,7 +110,7 @@ public class GuiMap : MonoBehaviour {
 		print("created map");
 		if (inMap)
 		{
-			LeanTween.delayedCall(0.3f, CreateColor);
+			//LeanTween.delayedCall(0.3f, CreateColor);
 			cupObj.transform.localPosition = new Vector3(dist * count * 150, 0, 0);
 			cupObj.transform.localScale = Vector3.one * 40;
 		}
@@ -125,11 +125,20 @@ public class GuiMap : MonoBehaviour {
 	void DrawCircles(Var.Em emotion)
 	{
 		GameObject point = Instantiate(mapIcon, new Vector3(start.position.x + dist * count, start.position.y, start.position.z), Quaternion.identity,nodes);
+		point.GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetEmotionIcon(emotion);
 		if (!inMap)
 			point.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetHexColor(emotion) + emotion.ToString() + "</color>";
 		//point.transform.parent = nodes;
-		point.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
-		LineRenderer lr =point.GetComponent<LineRenderer>();
+		//point.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
+		Debug.Log("emotion: " + emotion.ToString());
+		if(inMap)
+		{ 
+			point.transform.localPosition = new Vector3(count * dist * 150, 0, 0);
+		}
+		point.transform.localScale =Vector3.one* 30f;
+		count++;
+		/*
+LineRenderer lr =point.GetComponent<LineRenderer>();
 		if (inMap)
 		{
 			lr.startColor = new Color(0, 0, 0, 0);
@@ -144,10 +153,9 @@ public class GuiMap : MonoBehaviour {
 		lr.sortingOrder = 55;
 		lr.positionCount = 2;
 		lr.SetPosition(0, new Vector3(start.position.x + dist * count, start.position.y, start.position.z));
-		lr.SetPosition(1, new Vector3(start.position.x + dist * (count+1), start.position.y, start.position.z));
-		count++;
+		lr.SetPosition(1, new Vector3(start.position.x + dist * (count+1), start.position.y, start.position.z));*/
 	}
-	void CreateColor()
+	/*void CreateColor()
 	{
 		foreach(LineRenderer lr in nodes.GetComponentsInChildren<LineRenderer>())
 		{
@@ -157,5 +165,5 @@ public class GuiMap : MonoBehaviour {
 		}
 
 
-	}
+	}*/
 }

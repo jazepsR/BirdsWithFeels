@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
 	public bool isTrial = false;
+	public GameObject fogObject;
 	public GameObject CompleteIcon;
 	public GameObject LockedIcon;
 	public int ID;    
@@ -80,8 +81,18 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			//available = true;
 		sr = GetComponent<Image>();
 		if (isTrial)
+		{
 			sr.sprite = MapControler.Instance.trialSprite;
-		sr.color = Helpers.Instance.GetEmotionColor(type);
+			sr.color = Helpers.Instance.GetEmotionColor(type);
+			if(fogObject)
+			{
+				fogObject.SetActive(!completed);
+			}
+		}
+		else
+		{
+			sr.sprite = Helpers.Instance.GetEmotionIcon(type);
+		}
 		//GetComponent<Button>().interactable = available;
 		CompleteIcon.SetActive(completed);
 		LockedIcon.SetActive(!available);        
@@ -168,6 +179,10 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 					{
 						LeanTween.delayedCall(2.7f, () => icon.anim.SetInteger("state", 1));
 					}
+					Vector2 dist = Camera.main.transform.position - transform.position;
+					Vector3 temp = FindObjectOfType<mapPan>().transform.position;
+					temp+= new Vector3(dist.x,dist.y,0);
+					FindObjectOfType<mapPan>().transform.position = temp;
 					LeanTween.delayedCall(3f,SaveLoad.Save);
 				}
 				else

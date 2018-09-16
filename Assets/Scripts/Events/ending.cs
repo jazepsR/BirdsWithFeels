@@ -137,7 +137,7 @@ public class ending : MonoBehaviour {
 		{
 			TimedEventData timedEventData = Helpers.Instance.GetTimedEvent(data.Bird.ToString());
 			//Result of timed event
-			if(timedEventData.currentState == TimedEventData.state.completed)
+			if(timedEventData.currentState == TimedEventData.state.completedSuccess)
 			{
 				cutscenePart part = new cutscenePart(data.completedTimedEventImage, data.completedTimedEventText);
 				endCutscene.parts.Add(part);

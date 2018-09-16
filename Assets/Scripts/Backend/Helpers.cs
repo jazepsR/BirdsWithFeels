@@ -29,6 +29,7 @@ public class Helpers : MonoBehaviour {
 	Sprite mentalHeart;
 	Sprite emptyHeart;
 	Sprite emptyMentalHeart;
+	Sprite[] emotionIcons;
 	public bool inMap;
 	List<Image> heartsToFill = new List<Image>();
 	public Transform relationshipDialogs;
@@ -50,6 +51,14 @@ public class Helpers : MonoBehaviour {
 		emptyHeart = Resources.Load<Sprite>("sprites/emptyHeart");
 		mentalHeart = Resources.Load<Sprite>("sprites/mentalHeart");
 		emptyMentalHeart = Resources.Load<Sprite>("sprites/mentalHeart_empty");
+		emotionIcons = Resources.LoadAll<Sprite>("Icons/emotional_icons");
+		/*socialIcon = Resources.Load<Sprite>("Icons/emotional_icons_0");
+		solitaryIcon = Resources.Load<Sprite>("Icons/emotional_icons_2");
+		confidentIcon = Resources.Load<Sprite>("Icons/emotional_icons_1");
+		cautiousIcon = Resources.Load<Sprite>("Icons/emotional_icons_3");
+		randomIcon = Resources.Load<Sprite>("Icons/emotional_icons_4");*/
+
+
 		Instance = this;
 		if (levelBits.Count ==0)
 		{
@@ -72,6 +81,26 @@ public class Helpers : MonoBehaviour {
 		catch
 		{
 			return EventScript.Character.None;
+		}
+	}
+
+	public Sprite GetEmotionIcon(Var.Em emotion)
+	{
+		switch (emotion)
+		{
+			case Var.Em.Cautious:
+				return emotionIcons[3];
+			case Var.Em.Confident:
+				return emotionIcons[1];
+			case Var.Em.Social:
+				return emotionIcons[0];
+			case Var.Em.Solitary:
+				return emotionIcons[2];
+			case Var.Em.Random:
+				return emotionIcons[4];
+			default:
+				return null;
+
 		}
 	}
 

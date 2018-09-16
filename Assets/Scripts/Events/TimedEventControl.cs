@@ -15,7 +15,8 @@ public class TimedEventControl : MonoBehaviour {
 	public EventScript activationEvent;
 	public EventScript completionEvent;
 	[Header("failure")]
-	public EventScript failEvent;
+	public EventScript initialFailEvent;
+	public EventScript completionAfterFailEvent;
 	public Text EventNotification;
 	[HideInInspector]
 	public TimedEventData data = null;
@@ -36,8 +37,7 @@ public class TimedEventControl : MonoBehaviour {
 				data.currentState = TimedEventData.state.active;
 				Var.timedEvents.Add(data);
 				EventController.Instance.CreateEvent(startEvent);
-				endArea.timedEventTrigger = this;
-				
+				endArea.timedEventTrigger = this;				
 			}
 		}
 		CheckStatus();
@@ -47,22 +47,29 @@ public class TimedEventControl : MonoBehaviour {
 
 	public void CheckStatus()
 	{
-		if (data.currentState == TimedEventData.state.active)
+		if (data.currentState == TimedEventData.state.active || data.currentState == TimedEventData.state.failed)
 		{
 			EventNotification.transform.parent.gameObject.SetActive(true);
-			EventNotification.text = (data.completeBy - Var.currentWeek).ToString();
+			EventNotification.text = (Mathf.Max(0,data.completeBy - Var.currentWeek)).ToString();
 			EventNotification.transform.parent.parent = endArea.transform;
 			EventNotification.transform.parent.localPosition = offset;
 			if (endArea.completed)
 			{
-				data.currentState = TimedEventData.state.completed;
-				EventController.Instance.CreateEvent(completionEvent);
+				if (Var.currentWeek< data.completeBy)
+				{
+					data.currentState = TimedEventData.state.completedSuccess;
+					EventController.Instance.CreateEvent(completionEvent);
+				}else
+				{
+					data.currentState = TimedEventData.state.completedFail;
+					EventController.Instance.CreateEvent(completionAfterFailEvent);
+				}
 				EventNotification.transform.parent.gameObject.SetActive(false);
 			}
 			if (Var.currentWeek >= data.completeBy)
 			{
 				data.currentState = TimedEventData.state.failed;
-				EventController.Instance.CreateEvent(failEvent);
+				EventController.Instance.CreateEvent(initialFailEvent);
 				EventNotification.transform.parent.gameObject.SetActive(false);
 			}else if(endArea.available)
 			{
@@ -92,7 +99,7 @@ public class TimedEventData
 {
 	public string eventName;
 	public int completeBy;
-	public enum state { notStarted,active,failed,completed};
+	public enum state { notStarted,active,failed,completedSuccess,completedFail};
 	public state currentState = state.notStarted;
 	public bool activationEventShown = false;
 	public TimedEventData(string eventName, int completeBy)
