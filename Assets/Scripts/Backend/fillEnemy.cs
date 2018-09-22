@@ -83,7 +83,6 @@ public class fillEnemy : MonoBehaviour {
 		if (dirList == null)
 			dirList = new List<Bird.dir>() { Bird.dir.front, Bird.dir.top};
 		int max = maxEnemies;
-		print("min: "+ minEnemies + " max: " + maxEnemies);
 		if (dirList.Count == 1 && dirList.Contains(Bird.dir.front))
 			max = (int)Mathf.Min( 3f,maxEnemies);
 		foreach(Bird enemy in Enemies)

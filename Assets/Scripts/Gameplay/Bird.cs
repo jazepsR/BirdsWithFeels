@@ -117,6 +117,7 @@ public class Bird : MonoBehaviour
     [HideInInspector]
     public GameObject cautiousParticleObj = null;
 	bool mouseHeld = false;
+	float clickTime = 0;
     void Awake()
     {
         if(!isEnemy && !Var.isTutorial)
@@ -303,7 +304,6 @@ public class Bird : MonoBehaviour
             if (birdArtObj.transform.GetChild(i).gameObject.activeSelf)
             {
                 mouth = birdArtObj.transform.GetChild(i).Find("mouth");
-                print(charName + " has emotion " + birdArtObj.transform.GetChild(i).name);
                 break;
             }
         }
@@ -630,35 +630,64 @@ public class Bird : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
-			mouseHeld = false;
-			if (!dragged)
+			if (Time.timeSinceLevelLoad - clickTime > 0.25f && !isEnemy && !inMap)
 			{
-				if (inMap)
-					return;
-				foreach(LayoutButton btn in ObstacleGenerator.Instance.tiles)
+				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
+				GetComponentInChildren<Animator>().SetBool("lift", true);
+				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 				{
-					LeanTween.delayedCall((btn.index.x+btn.index.y) * 0.05f+0.05f,()=> btn.ShowHighlight());
-					btn.gameObject.layer = LayerMask.NameToLayer("Default");
+					child.sortingLayerName = "Front";
 				}
+
+				for (int i = 0; i < Var.playerPos.GetLength(0); i++)
+				{
+					for (int j = 0; j < Var.playerPos.GetLength(1); j++)
+					{
+
+						if (Var.playerPos[i, j] == this)
+						{
+							Var.playerPos[i, j] = null;
+							break;
+						}
+					}
+				}
+
+				dragged = true;
+				if (selectionEffect != null)
+					DestroySelection();
 				ResetOnSelection();
-				Var.clickedBird = this;
-				foreach (Bird bird in Var.activeBirds)
-					bird.DestroySelection();
 			}
 			else
 			{
-
-				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+				if (!dragged)
 				{
-					child.sortingLayerName = "Default";
-				}
-				GetComponentInChildren<Animator>().SetBool("lift", false);
-				if (Var.isTutorial)
-				{
-					foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
+					if (inMap)
+						return;
+					foreach (LayoutButton btn in ObstacleGenerator.Instance.tiles)
 					{
-						tile.baseColor = tile.defaultColor;
-						LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
+						LeanTween.delayedCall((btn.index.x + btn.index.y) * 0.05f + 0.05f, () => btn.ShowHighlight());
+						btn.gameObject.layer = LayerMask.NameToLayer("Default");
+					}
+					ResetOnSelection();
+					Var.clickedBird = this;
+					foreach (Bird bird in Var.activeBirds)
+						bird.DestroySelection();
+				}
+				else
+				{
+
+					foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+					{
+						child.sortingLayerName = "Default";
+					}
+					GetComponentInChildren<Animator>().SetBool("lift", false);
+					if (Var.isTutorial)
+					{
+						foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
+						{
+							tile.baseColor = tile.defaultColor;
+							LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
+						}
 					}
 				}
 			}
@@ -705,36 +734,8 @@ public class Bird : MonoBehaviour
                     return;
                 }
             }
-			mouseHeld = true;
-			LeanTween.delayedCall(0.25f, () =>
-			{
-				if (!mouseHeld)
-					return;
-				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
-				GetComponentInChildren<Animator>().SetBool("lift", true);
-				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-				{
-					child.sortingLayerName = "Front";
-				}
+			clickTime = Time.timeSinceLevelLoad;
 
-				for (int i = 0; i < Var.playerPos.GetLength(0); i++)
-				{
-					for (int j = 0; j < Var.playerPos.GetLength(1); j++)
-					{
-
-						if (Var.playerPos[i, j] == this)
-						{
-							Var.playerPos[i, j] = null;
-							break;
-						}
-					}
-				}
-
-				dragged = true;
-				if (selectionEffect != null)
-					DestroySelection();
-				ResetOnSelection();
-			});
 
 		}	
     }
@@ -1068,10 +1069,7 @@ public class Bird : MonoBehaviour
         else if(Mathf.Abs(data.confidence)< 12 && Mathf.Abs(data.friendliness) < 12 && (Mathf.Abs(prevConf) < 12 && Mathf.Abs(prevFriend) <12))
         {//In comfort zone
             data.mentalHealth = Mathf.Min(Var.maxMentalHealth, data.mentalHealth + 1);
-        }
-
-
-        print(charName + " healthboost " + healthBoost + " round change " + roundHealthChange);			 
+        }	 
         roundHealthChange = 0;
         foughtInRound = false;        
         
@@ -1084,8 +1082,6 @@ public class Bird : MonoBehaviour
     {
         float factor = 0.13f;
         float transitionTime = 1.9f;
-        if(!isEnemy)
-            print(charName + " applied emotion");
         if (prevEmotion.Equals( Var.Em.finish)|| isEnemy)
         {
             transitionTime = 0.0f;

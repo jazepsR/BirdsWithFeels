@@ -68,7 +68,6 @@ public class LayoutButton : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0) && Var.clickedBird != null && isActive)
 		{
-			Debug.Log("GAYYYYYYY");
 			if (selectionEffect == null && index.x >= 0)
 				selectionEffect = Instantiate(Helpers.Instance.selectionEffectGround, transform);
 			LeanTween.color(gameObject, highlightColor, 0.3f);

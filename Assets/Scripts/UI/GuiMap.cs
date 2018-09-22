@@ -107,7 +107,6 @@ public class GuiMap : MonoBehaviour {
 		}
 		GameObject cupObj = Instantiate(cup, finish.position,Quaternion.identity);
 		cupObj.transform.parent = nodes;
-		print("created map");
 		if (inMap)
 		{
 			//LeanTween.delayedCall(0.3f, CreateColor);
@@ -130,7 +129,6 @@ public class GuiMap : MonoBehaviour {
 			point.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetHexColor(emotion) + emotion.ToString() + "</color>";
 		//point.transform.parent = nodes;
 		//point.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
-		Debug.Log("emotion: " + emotion.ToString());
 		if(inMap)
 		{ 
 			point.transform.localPosition = new Vector3(count * dist * 150, 0, 0);

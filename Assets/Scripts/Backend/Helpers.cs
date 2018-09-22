@@ -167,7 +167,6 @@ public class Helpers : MonoBehaviour {
     {
         string birdArtName = "BirdArt3";
         birdName = birdName.ToLower();
-        Debug.Log(birdName + "testing names:");
         if (birdName.Equals("terry"))
             birdArtName = "BirdArt3";
         if (birdName.Equals("alexander"))
