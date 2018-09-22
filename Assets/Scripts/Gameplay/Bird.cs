@@ -518,7 +518,8 @@ public class Bird : MonoBehaviour
         levelConfBoos = 0;
         healthBoost = 0;
         isInfluenced = false;
-    }
+		Destroy(cautiousParticleObj);
+	}
     public void TryLevelUp()
     {
         if (data.injured)

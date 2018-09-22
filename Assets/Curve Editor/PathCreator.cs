@@ -14,9 +14,10 @@ public class PathCreator : MonoBehaviour {
     public float anchorDiameter = .1f;
     public float controlDiameter = .075f;
     public bool displayControlPoints = true;
-
+	Vector3 lastPosition;
     public void CreatePath()
     {
+		lastPosition = transform.position;
         path = new Path(transform.position);
     }
 
@@ -24,4 +25,13 @@ public class PathCreator : MonoBehaviour {
     {
         CreatePath();
     }
+	public void UpdatePosition()
+	{
+		if (lastPosition == null)
+			lastPosition = transform.position;
+		Vector3 delta = transform.position - lastPosition;
+		transform.position = lastPosition;
+		path.UpdatePoints(delta);
+		lastPosition = transform.position;
+	}
 }

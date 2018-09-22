@@ -28,6 +28,11 @@ public class PathEditor : Editor {
             Undo.RecordObject(creator, "Create new");
             creator.CreatePath();
 		}
+		if(GUILayout.Button("Update Position"))
+		{
+			Undo.RecordObject(creator, "Update position");
+			creator.UpdatePosition();
+		}
 
         bool isClosed = GUILayout.Toggle(Path.IsClosed, "Closed");
         if (isClosed != Path.IsClosed)

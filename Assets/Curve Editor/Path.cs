@@ -64,6 +64,15 @@ public class Path {
             }
         }
     }
+	public void UpdatePoints(Vector3 newPosition)
+	{
+
+		for(int i=0; i<points.Count;i++)
+		{
+			points[i] += (Vector2)newPosition;
+		}
+	}
+
 
     public bool AutoSetControlPoints
     {
