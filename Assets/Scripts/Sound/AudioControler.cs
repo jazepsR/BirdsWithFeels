@@ -28,8 +28,8 @@ public class AudioControler : MonoBehaviour {
 	public AudioSource ambientAudioSource;
 	public AudioSource battleSource;
 	public AudioSource musicSource;
-	float musicVol;
-	float battleVol;
+	[HideInInspector]
+	public float defaultMusicVol, defaultSoundVol;
 	float pitch = 1;    
 	// Use this for initialization
 	void Awake ()
@@ -39,12 +39,25 @@ public class AudioControler : MonoBehaviour {
 		if (inBattle)
 		{
 			LeanTween.delayedCall(Random.Range(7, 20), AmbientControl);
-			musicVol = musicSource.volume;
-			battleVol = battleSource.volume;
 			battleSource.volume = 0.0f;
 		}
-
+		defaultSoundVol = PlayerPrefs.GetFloat("soundVol", 1);
+		defaultMusicVol = PlayerPrefs.GetFloat("musicVol", 1);
+		SetSoundVol();
 	}   
+
+
+
+	public void SetSoundVol()
+	{
+		mainAudioSource.volume = defaultSoundVol;
+		if(ambientAudioSource)
+			ambientAudioSource.volume = defaultSoundVol;
+		if(battleSource)
+			battleSource.volume = defaultSoundVol;
+		if(musicSource)
+			musicSource.volume = defaultMusicVol;
+	}
 	public void PlaySoundWithPitch(AudioClip clip)
 	{
 		mainAudioSource.pitch = Random.Range(0.6f, 1.6f);
@@ -56,6 +69,26 @@ public class AudioControler : MonoBehaviour {
 		mainAudioSource.pitch = 1f;
 		mainAudioSource.PlayOneShot(clip);
 	}
+
+	public void SetSoundVolume(float vol)
+	{
+		defaultSoundVol = vol;
+		SetSoundVol();
+	}
+
+	public void SetMusicVolume(float vol)
+	{
+		defaultMusicVol = vol;
+		SetSoundVol();
+	}
+	public void SaveVolumeSettings()
+	{
+		PlayerPrefs.SetFloat("soundVol", defaultSoundVol);
+		PlayerPrefs.SetFloat("musicVol", defaultMusicVol);
+		PlayerPrefs.Save();
+		SetSoundVol();
+	}
+
 	public void PlayVoice()
 	{
 		try
@@ -70,8 +103,8 @@ public class AudioControler : MonoBehaviour {
 
 	void battleVolumeToggle(float vol)
 	{
-		battleSource.volume = vol*battleVol;
-		musicSource.volume = (1 - vol)*musicVol;
+		battleSource.volume = vol*defaultSoundVol;
+		musicSource.volume = (1 - vol)*defaultMusicVol;
 	}
 
 

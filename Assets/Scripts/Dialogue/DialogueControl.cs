@@ -6,7 +6,7 @@ public class DialogueControl : MonoBehaviour {
 	List<Dialogue> dialogs;
 	[HideInInspector]
 	public List<Dialogue> relationshipDialogs = new List<Dialogue>();
-    public Dialogue testDialog;
+	public Dialogue testDialog;
 	public Transform portraitPoint;
 	public static DialogueControl Instance { get; private set; }
 	public List<Transform> areaDialogues;
@@ -40,22 +40,22 @@ public class DialogueControl : MonoBehaviour {
 		catch { }
 	}
 	void Start()
-    {
-        if(testDialog != null)
-        {
-           CreateParticularDialog(testDialog);
-        }
+	{
+		if(testDialog != null)
+		{
+		   CreateParticularDialog(testDialog);
+		}
 
-    }
+	}
 
-    public void CreateParticularDialog(Dialogue dialog)
-    {
-        Bird dialogueBird = Helpers.Instance.GetBirdFromEnum(dialog.speakers[0]);
-        speakers = new List<Bird>();
-        speakers.Add(dialogueBird);
+	public void CreateParticularDialog(Dialogue dialog)
+	{
+		Bird dialogueBird = Helpers.Instance.GetBirdFromEnum(dialog.speakers[0]);
+		speakers = new List<Bird>();
+		speakers.Add(dialogueBird);
 		LeanTween.delayedCall(0.2f, () => CreateDialogue(dialog));
 
-    }
+	}
 
 	public void TryDialogue(Dialogue.Location location, EventScript.Character Char = EventScript.Character.None)
 	{
@@ -130,33 +130,33 @@ public class DialogueControl : MonoBehaviour {
 		{
 			int j = 0;
 			EventScript.Character dialogBird = dialogue.speakers[i];
-            if (acceptableNpcs.Contains(dialogBird) && dialogue.location == Dialogue.Location.battle)
-                speakers.Add(null);
-            else
-            {
-                while (true)
-                {
-                    Bird enumBird = Helpers.Instance.GetBirdFromEnum(dialogBird);
-                    if (!speakers.Contains(enumBird))
-                    {
-                        speakers.Add(enumBird);
-                        break;
-                    }
-                    j++;
-                    if (j > 1000)
-                    {
-                        Debug.LogError("couldnt add dialogue speaker to list");
-                        speakers.Add(Var.activeBirds[0]);
-                        break;
-                    }
+			if (acceptableNpcs.Contains(dialogBird) && dialogue.location == Dialogue.Location.battle)
+				speakers.Add(null);
+			else
+			{
+				while (true)
+				{
+					Bird enumBird = Helpers.Instance.GetBirdFromEnum(dialogBird);
+					if (!speakers.Contains(enumBird))
+					{
+						speakers.Add(enumBird);
+						break;
+					}
+					j++;
+					if (j > 1000)
+					{
+						Debug.LogError("couldnt add dialogue speaker to list");
+						speakers.Add(Var.activeBirds[0]);
+						break;
+					}
 
-                }
-            }
+				}
+			}
 		}
 		if (dialogue.location == Dialogue.Location.battle) 
 			CreateBattleDialogue(dialogue);
-        if (dialogue.location == Dialogue.Location.map)
-            CreateMapDialogue(dialogue);
+		if (dialogue.location == Dialogue.Location.map)
+			CreateMapDialogue(dialogue);
 		if (dialogue.location == Dialogue.Location.graph)
 			CreateGraphDialogue(dialogue);
 	}   
@@ -170,39 +170,39 @@ public class DialogueControl : MonoBehaviour {
 			activeBird.Speak(partData.text);
 		}
 	}
-    void CreateBattleDialogue(Dialogue dialogue)
-    {
-        foreach (DialoguePart partData in dialogue.dialogueParts)
-        {
-            if (acceptableNpcs.Contains(dialogue.speakers[partData.speakerID]))
-            {
-                switch (dialogue.speakers[partData.speakerID])
-                {
-                    case EventScript.Character.the_Vulture_King:
-                        GuiContoler.Instance.boss.SetActive(true);
-                        GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.kingMouth.transform, partData.text);
-                        
-                        break;
-                    case EventScript.Character.player:
-                        GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.playerMouth.transform, partData.text);
-                        break;
-                    default:
-                        break;
+	void CreateBattleDialogue(Dialogue dialogue)
+	{
+		foreach (DialoguePart partData in dialogue.dialogueParts)
+		{
+			if (acceptableNpcs.Contains(dialogue.speakers[partData.speakerID]))
+			{
+				switch (dialogue.speakers[partData.speakerID])
+				{
+					case EventScript.Character.the_Vulture_King:
+						GuiContoler.Instance.boss.SetActive(true);
+						GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.kingMouth.transform, partData.text);
+						
+						break;
+					case EventScript.Character.player:
+						GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.playerMouth.transform, partData.text);
+						break;
+					default:
+						break;
 
-                }
+				}
 
 
-            }
-            else
-            {
-                Bird activeBird = speakers[partData.speakerID];
-                if (activeBird != null)
-                    activeBird.Speak(partData.text);
-            }
-        }
-    }
+			}
+			else
+			{
+				Bird activeBird = speakers[partData.speakerID];
+				if (activeBird != null)
+					activeBird.Speak(partData.text);
+			}
+		}
+	}
 
-    void CreateGraphDialogue(Dialogue dialogue)
+	void CreateGraphDialogue(Dialogue dialogue)
 	{
 		foreach (DialoguePart partData in dialogue.dialogueParts)
 		{
