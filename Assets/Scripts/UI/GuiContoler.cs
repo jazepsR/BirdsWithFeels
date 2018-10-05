@@ -98,6 +98,8 @@ public class GuiContoler : MonoBehaviour {
 	public bool canChangeGraph = true;
 	[HideInInspector]
 	public bool GraphActive = false;
+	public Slider soundSlider;
+	public Slider musicSlider;
 	public GameObject GraphBlocker;
 	void Awake()
 	{
@@ -165,10 +167,16 @@ public class GuiContoler : MonoBehaviour {
 	public void setPause()
 	{
 		AudioControler.Instance.ClickSound();
+		if (soundSlider)
+			soundSlider.value = AudioControler.Instance.defaultSoundVol;
+		if (musicSlider)
+			musicSlider.value = AudioControler.Instance.defaultMusicVol;
+
 		if (pause.activeSelf)
 		{
 			pause.SetActive(false);
 			Time.timeScale = 1.0f;
+			AudioControler.Instance.SaveVolumeSettings();
 		}
 		else
 		{

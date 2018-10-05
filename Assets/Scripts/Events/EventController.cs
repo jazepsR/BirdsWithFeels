@@ -36,7 +36,7 @@ public class EventController : MonoBehaviour {
 	//List<string> texts;    
 	int currentText = 0;
 	bool activeChoices = false;
-    bool printing = false;
+	bool printing = false;
 	// Use this for initialization
 	void Awake () {
 		eventsToShow = new List<EventScript>();
@@ -72,16 +72,18 @@ public class EventController : MonoBehaviour {
 
 
 	public void ContinueBtn()
-    {
-        if (printing)
-        {
-            printing = false;
-            return;
-        }
-        if (activeChoices)
+	{
+		if (printing)
+		{
+			printing = false;
+			if(currentText == currentEvent.parts.Count - 1)
+				CreateChoices();
 			return;
-       
-        currentText++;
+		}
+		if (activeChoices)
+			return;
+	   
+		currentText++;
 		print("currentText: " + currentText);
 		AudioControler.Instance.ClickSound();
 		if (currentText < currentEvent.parts.Count-1)
@@ -104,11 +106,10 @@ public class EventController : MonoBehaviour {
 			//nameText.text = currentBird.charName;
 			StartCoroutine(coroutine);
 			SetPortrait(currentText);
-			CreateChoices();
 			return;         
 		}
-        
-        if (currentText > currentEvent.parts.Count-1)
+		
+		if (currentText > currentEvent.parts.Count-1)
 		{
 			eventObject.SetActive(false);
 			if(nextEvent!= null)
@@ -153,19 +154,21 @@ public class EventController : MonoBehaviour {
 
 		continueBtn.GetComponent<Animator>().SetBool("active",false);
 		text.text = "";
-        printing = true;
+		printing = true;
 		foreach (char ch in printText)
 		{
 			text.text += ch;
 			yield return null;
-            if(!printing)
-            {
-                text.text = printText;
-                break;
-            }
+			if(!printing)
+			{
+				text.text = printText;
+				break;
+			}
 		}
-        printing = false;
+		printing = false;
 		continueBtn.GetComponent<Animator>().SetBool("active", shouldShowContinue);
+		if(currentText == currentEvent.parts.Count - 1)
+			CreateChoices();
 	}
 
 
@@ -384,6 +387,7 @@ public class EventController : MonoBehaviour {
 		nextEvent = currentEvent.options[ID].onComplete;
 		heading.text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionHeading);
 		string text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.options[ID].conclusionText);
+		nameText.text = "";
 		//nameText.text = currentBird.charName;
 		if (currentEvent.options[ID].useAutoExplanation)
 			text += "\n" + consequences;
