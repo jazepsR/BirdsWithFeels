@@ -62,7 +62,7 @@ public class Tutorial : MonoBehaviour {
 			}
 		}
 		tutorialSetup.TutorialSetup.SetupBirds();
-		LeanTween.delayedCall(0.1f,()=> ShowtutorialStartingText(0));
+		LeanTween.delayedCall(0.5f,()=> ShowtutorialStartingText(0));
 	}
 	public void jiggleGraph()
 	{
@@ -237,15 +237,19 @@ public class Tutorial : MonoBehaviour {
 				}
 				break;
 			case 2:
+				GuiContoler.Instance.nextGraph.interactable = true;
 				graphAnim.SetBool("shake", false);
 				break;
 			case 3:
-				if(Var.activeBirds[0].prevRoundHealth<Var.activeBirds[0].data.health)
+				GuiContoler.Instance.nextGraph.interactable = true;
+				if (Var.activeBirds[0].prevRoundHealth<Var.activeBirds[0].data.health)
 					GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Ahh, I needed that rest - back to full health!");
 				break;
-			case 4:                
+			case 4:
+				GuiContoler.Instance.nextGraph.interactable = true;
 				break;
-			case 5:                
+			case 5:
+				GuiContoler.Instance.nextGraph.interactable = true;
 				break;
 		}
 	}

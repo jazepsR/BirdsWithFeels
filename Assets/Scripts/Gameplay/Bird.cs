@@ -116,6 +116,7 @@ public class Bird : MonoBehaviour
 	bool selectionBeingDestroyed = false;
 	[HideInInspector]
 	public GameObject cautiousParticleObj = null;
+	public Transform restingMouth;
 	bool mouseHeld = false;
 	float clickTime = 0;
 	void Awake()
@@ -296,6 +297,10 @@ public class Bird : MonoBehaviour
 	public Transform GetMouthTransform()
 	{
 		Transform mouth = transform;
+		if (GetComponentInChildren<Animator>().GetBool("rest"))
+		{
+			return restingMouth;
+		}
 		try
 		{
 			birdArtObj.transform.Find("neutral").SetAsLastSibling();
@@ -635,7 +640,7 @@ public class Bird : MonoBehaviour
 				child.sortingLayerName = "Default";
 			}
 			GetComponentInChildren<Animator>().SetBool("lift", false);
-			if (Var.isTutorial)
+			if (Var.isTutorial && !GuiContoler.Instance.inMap)
 			{
 				foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
 				{

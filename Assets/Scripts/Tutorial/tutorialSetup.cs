@@ -27,6 +27,8 @@ public class tutorialSetup : MonoBehaviour {
 			return;
 		//Setup Terry
 		Bird terry =FillPlayer.Instance.playerBirds[0];
+		terry.prevConf = confidence1;
+		terry.prevFriend = friendliness1;
 		terry.data.confidence = confidence1;
 		terry.data.friendliness = friendliness1;
 		//terry.startingLVL = startingLVL1;

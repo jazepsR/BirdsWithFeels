@@ -421,6 +421,8 @@ public class EventController : MonoBehaviour {
 	{        
 		if (currentBird == null)
 			return "";
+		if (currentBird != null)
+			currentBird.SetEmotion();
 		switch (type)
 		{
 			case EventConsequence.ConsequenceType.Courage:
@@ -456,7 +458,7 @@ public class EventController : MonoBehaviour {
 			default:
 				return "";
 		}
-		
+
 	}
 	void SetupChoice(GameObject choiceObj,int ID)
 	{

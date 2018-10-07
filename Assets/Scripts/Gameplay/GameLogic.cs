@@ -318,7 +318,9 @@ public class GameLogic : MonoBehaviour {
 			}
 		}
 		if (Var.isTutorial && canFight && prevstate != canFight)
+		{
 			Tutorial.Instance.ShowTutorialBeforeBattleText(Tutorial.Instance.CurrentPos);
+		}
 		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
 		{
 			canFight = false;

@@ -42,9 +42,6 @@ public class GuiContoler : MonoBehaviour {
 	public static int mapPos = 0;
 	private int finalResult = 0;
 	public GameObject graph;
-	public Text winText;
-	public Text winDetails;
-	public Text feedbackText;
 	public GameObject battlePanel;   
 	public GameObject closeReportBtn;
 	public Button CloseBattleReport;
@@ -128,10 +125,10 @@ public class GuiContoler : MonoBehaviour {
 			catch { }
 		}
 		messages = new List<string>();
-		minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
 		if (!inMap)
-		{
-			foreach(GuiMap map in FindObjectsOfType<GuiMap>())
+			{
+				minimap.SetActive(Var.gameSettings.shownLevelTutorial);
+				foreach (GuiMap map in FindObjectsOfType<GuiMap>())
 				map.CreateMap(Var.map);            
 			setMapLocation(0);
 			LeanTween.delayedCall(0.05f,tryDialog);
@@ -525,7 +522,7 @@ public class GuiContoler : MonoBehaviour {
 		AudioControler.Instance.PlayPaperSound();
 		canChangeGraph = true;
 		GraphBlocker.SetActive(false);
-		minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
+		minimap.SetActive(Var.gameSettings.shownLevelTutorial);
 		if (!Reset())
 			return;
 		graphAnime.SetBool("open", false);
@@ -543,7 +540,7 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CloseBirdStats()
 	{
-		minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
+		minimap.SetActive(Var.gameSettings.shownLevelTutorial);
 		graphAnime.SetBool("open", false);
 		//graph.SetActive(false);
 		//		LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack); //seb
@@ -571,7 +568,9 @@ public class GuiContoler : MonoBehaviour {
 		canChangeGraph = true;
 		GraphBlocker.SetActive(true);
 		Helpers.Instance.HideTooltip();
-		minimap.SetActive(false);   
+		minimap.SetActive(false);
+		nextGraph.interactable = !Var.isTutorial;
+		prevGraph.interactable = !Var.isTutorial;
 		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
 			Destroy(child.gameObject);
@@ -609,11 +608,11 @@ public class GuiContoler : MonoBehaviour {
 				//colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
 				Graph.Instance.PlotFull(bird,afterBattle);
 				//feedbackText.text = "";
-				winText.text = "";
 			}
 			//winDetails.text = "";
 		}
-		CheckGraphNavBtns();
+		if(!Var.isTutorial || currentGraph>0)
+			CheckGraphNavBtns();
 		if (currentGraph != 3)
 		{
 			//Normal case
@@ -730,7 +729,7 @@ public class GuiContoler : MonoBehaviour {
 	{
 		
 		if (Var.isTutorial)
-			maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos]-1;
+			maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos]-1;		
 		nextGraph.interactable = (currentGraph <= maxGraph);
 		prevGraph.interactable = (currentGraph > 0);
 		//CloseBattleReport.interactable = (currentGraph == maxGraph);
@@ -771,7 +770,8 @@ public class GuiContoler : MonoBehaviour {
 		if (!canChangeGraph)
 			return;
 		canChangeGraph = false;
-		minimap.SetActive(false);
+		if(inMap)
+			minimap.SetActive(false);
 		int index = -1;
 		for(int i= 0; i < Var.activeBirds.Count; i++)
 		{
@@ -793,38 +793,12 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CreateBattleReport() {
 		clearSmallGraph();
-		feedbackText.gameObject.SetActive(true);
-		feedbackText.gameObject.SetActive(true);
 		closeReportBtn.SetActive(true);
 		HideSmallGraph.gameObject.SetActive(false);
 		if (finalResult < 0)
 		{
 			UpdateHearts(--Var.health);
 		}
-		string feedBackString = "";
-			if (currentMapArea != nextMapArea)
-			{
-				feedBackString += nextMapArea + " birds coming in " + mapPos + " battles!"; 
-			}
-			if(nextMapArea == Var.Em.finish)
-		{
-			feedBackString = "Victory in " + mapPos + " battles!";
-		}
-			feedbackText.text = feedBackString;
-
-			string winString = "You won!";
-			if (finalResult<0)
-			{
-				winString = "You lost :'(";
-			}
-			winText.text = winString;
-
-			int winNo = (finalResult-1)/2+2;
-
-			string winDetString = winNo + " / 3 Battles won!";
-			winDetails.text = winDetString;
-		if (Var.isTutorial)
-			winDetails.text = "";
 	}
 
 
