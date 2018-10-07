@@ -128,7 +128,7 @@ public class GuiContoler : MonoBehaviour {
 			catch { }
 		}
 		messages = new List<string>();
-		   
+		minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
 		if (!inMap)
 		{
 			foreach(GuiMap map in FindObjectsOfType<GuiMap>())
@@ -525,7 +525,7 @@ public class GuiContoler : MonoBehaviour {
 		AudioControler.Instance.PlayPaperSound();
 		canChangeGraph = true;
 		GraphBlocker.SetActive(false);
-		minimap.SetActive(true);
+		minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
 		if (!Reset())
 			return;
 		graphAnime.SetBool("open", false);
@@ -543,7 +543,7 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CloseBirdStats()
 	{
-		minimap.SetActive(true);
+		minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
 		graphAnime.SetBool("open", false);
 		//graph.SetActive(false);
 		//		LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack); //seb

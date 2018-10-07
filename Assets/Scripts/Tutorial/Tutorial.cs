@@ -47,7 +47,6 @@ public class Tutorial : MonoBehaviour {
 			return;
 
 		GuiContoler.Instance.smallGraph.graphArea.transform.parent.gameObject.SetActive(false);
-		ShowtutorialStartingText(0);
 		if (Var.isTutorial)
 		{
 			for (int i = 0; i < FillPlayer.Instance.playerBirds.Length; i++)
@@ -62,6 +61,8 @@ public class Tutorial : MonoBehaviour {
 				}
 			}
 		}
+		tutorialSetup.TutorialSetup.SetupBirds();
+		LeanTween.delayedCall(0.1f,()=> ShowtutorialStartingText(0));
 	}
 	public void jiggleGraph()
 	{
@@ -134,15 +135,15 @@ public class Tutorial : MonoBehaviour {
 			case 0:
 				
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hiya, I'm Terry! ");
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Looks like that vulture is itching for a fight!!  ");
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Honestly, I don’t know anything bout’ fighting. I’m a peaceful bird!   ");
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "But..maybe I can talk to them?   ");
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "<b>Drag</b> me <b>anywhere</b> in front of them and I’ll try to convince them to not beat us up! ");
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Looks like that vulture is itching for a fight!!  ");
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Honestly, I don’t know anything bout’ fighting. I’m a peaceful bird!   ");
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "But..maybe I can talk to them?   ");
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "<b>Drag</b> me <b>anywhere</b> in front of them and I’ll try to convince them to not beat us up! ");
 				break;
 			case 1:
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Hey, I’m Rebecca! Let's hang out!");
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Alright sure whatever!");
-                shouldShowFriendlyPopup = true;
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Alright sure whatever!");
+				shouldShowFriendlyPopup = true;
 				break;
 			case 2:
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), " These birds are not just neutral, they're confident and cautious! Will they listen to us?");

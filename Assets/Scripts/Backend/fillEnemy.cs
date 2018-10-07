@@ -198,11 +198,11 @@ public class fillEnemy : MonoBehaviour {
 		}
 		foreach (TextMesh text in enemy.transform.GetComponentsInChildren<TextMesh>())
 		{
-            if (text.gameObject.tag == "number")
-            {
-                text.text = (enemy.data.levelRollBonus + 1).ToString();
-                text.GetComponent<MeshRenderer>().sortingLayerName = "semi-front";
-            }
+			if (text.gameObject.tag == "number")
+			{
+				text.text = (enemy.data.levelRollBonus + 1).ToString();
+				text.GetComponent<MeshRenderer>().sortingLayerName = "semi-front";
+			}
 
 		}
 		enemy.GetComponent<feedBack>().SetEnemyHoverText();
