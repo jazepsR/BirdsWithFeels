@@ -44,17 +44,18 @@ public class LayoutButton : MonoBehaviour
 			defaultColor = sr.color;
 			baseColor = sr.color;
 		}
-		catch {
+		catch
+		{
 			defaultColor = sr.color;
 			baseColor = sr.color;
 		}
 	}
 	void OnTriggerEnter2D(Collider2D other)
 	{
-        //Debug.Log("entered!");
+		//Debug.Log("entered!");
 		if (isActive && other.transform.parent.GetComponent<Bird>().dragged)
 		{
-			if (selectionEffect == null && index.x >=0)
+			if (selectionEffect == null && index.x >= 0)
 				selectionEffect = Instantiate(Helpers.Instance.selectionEffectGround, transform);
 			LeanTween.color(gameObject, highlightColor, 0.3f);
 			if (currentBird == null)
@@ -62,38 +63,6 @@ public class LayoutButton : MonoBehaviour
 			else
 				swapBird = other.transform.parent.GetComponent<Bird>();
 
-		}
-	}	
-	void OnMouseOver()
-	{
-		if (Input.GetMouseButtonDown(0) && Var.clickedBird != null && isActive)
-		{
-			if (selectionEffect == null && index.x >= 0)
-				selectionEffect = Instantiate(Helpers.Instance.selectionEffectGround, transform);
-			LeanTween.color(gameObject, highlightColor, 0.3f);
-			if (currentBird == null)
-				currentBird =Var.clickedBird;
-			else
-				swapBird = Var.clickedBird;
-			Debug.Log("Clicked: " + Var.clickedBird.charName + " current: " + currentBird.charName);
-			Var.clickedBird.dragged = true;
-			Var.clickedBird = null;
-			foreach (LayoutButton btn in ObstacleGenerator.Instance.tiles)
-			{
-				DestroySelectionEffect();
-				btn.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-			}
-			}
-	}
-
-
-	public void ShowHighlight(float duration = -1)
-	{
-		if (selectionEffect == null && index.x >= 0)
-			selectionEffect = Instantiate(Helpers.Instance.selectionEffectGround, transform);
-		if(duration != -1)
-		{
-			LeanTween.delayedCall(duration, DestroySelectionEffect);
 		}
 	}
 	public void AddColor(Color color)
@@ -188,7 +157,7 @@ public class LayoutButton : MonoBehaviour
 						Destroy(selectionEffect);
 				});
 			}
-				//tempBird.target = tempBird.home;
+			//tempBird.target = tempBird.home;
 			if (swapBird == null)
 			{
 				currentBird = null;
@@ -199,90 +168,76 @@ public class LayoutButton : MonoBehaviour
 
 			}
 		}
-		
+
 	}
-    void DestroySelectionEffect()
-    {
-        if (selectionEffect != null)
-        {
-            selectionEffect.GetComponent<Animator>().SetTrigger("disappear");
-            LeanTween.delayedCall(0.2f, () =>
-            {
-                if (selectionEffect != null)
-                    Destroy(selectionEffect);
-            });
-        }
-    }
+	void DestroySelectionEffect()
+	{
+		if (selectionEffect != null)
+		{
+			selectionEffect.GetComponent<Animator>().SetTrigger("disappear");
+			LeanTween.delayedCall(0.2f, () =>
+			{
+				if (selectionEffect != null)
+					Destroy(selectionEffect);
+			});
+		}
+	}
 
 	void Update()
 	{
 
-			hasBird = (currentBird != null);
-        if (Input.GetMouseButtonUp(0))
-                DestroySelectionEffect();
+		hasBird = (currentBird != null);
+		if (Input.GetMouseButtonUp(0))
+			DestroySelectionEffect();
 
-        if(currentBird!= null && currentBird.dragged && selectionEffect== null && index.x >= 0)
-            selectionEffect = Instantiate(Helpers.Instance.selectionEffectGround, transform);
-        if (Input.GetMouseButtonUp(0) && currentBird != null)
+		if (currentBird != null && currentBird.dragged && selectionEffect == null && index.x >= 0)
+			selectionEffect = Instantiate(Helpers.Instance.selectionEffectGround, transform);
+		if (Input.GetMouseButtonUp(0) && currentBird != null)
+		{
+			if (currentBird.dragged)
 			{
-				if (currentBird.dragged)
-				{
-                DestroySelectionEffect();
+				DestroySelectionEffect();
 
 				if ((int)index.x == -1)
-					{
-						currentBird.target = currentBird.home;
-						currentBird.ReleaseBird((int)index.x, (int)index.y);
-						currentBird = null;
-						swapBird = null;
-						return;
-					}
-					Var.playerPos[(int)index.x, (int)index.y] = currentBird;
-					LeanTween.color(gameObject, baseColor, 0.3f);
-					currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
-					ApplyPower(currentBird);
-					currentBird.ReleaseBird((int)index.x, (int)index.y);
-
-
-				}
-				if (swapBird != null)
 				{
-
-					Var.playerPos[(int)index.x, (int)index.y] = swapBird;
-					if (swapBird.y != -1)
-					{
-						ObstacleGenerator.Instance.tiles[swapBird.y * 4 + swapBird.x].currentBird = currentBird;
-						currentBird.target = swapBird.target;
-						Var.playerPos[swapBird.x, swapBird.y] = currentBird;
-					} else
-					{
-						currentBird.target = currentBird.home;
-						print("swapped home");
-					}
-
-					currentBird.OnLevelPickup();
-					currentBird.ReleaseBird(swapBird.x, swapBird.y);
-					currentBird.GroundRollBonus = 0;
-					currentBird = swapBird;
-					currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
-					// currentBird.res
-					ApplyPower(currentBird);
+					currentBird.target = currentBird.home;
 					currentBird.ReleaseBird((int)index.x, (int)index.y);
-					if (!inMap)
-					{
-						GameLogic.Instance.CanWeFight();
-					}
-					else
-					{
-						MapControler.Instance.CanLoadBattle();
-					}
-				}
-				swapBird = null;
-				if (index.x == -1)
-				{
 					currentBird = null;
 					swapBird = null;
+					return;
 				}
+				Var.playerPos[(int)index.x, (int)index.y] = currentBird;
+				LeanTween.color(gameObject, baseColor, 0.3f);
+				currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
+				ApplyPower(currentBird);
+				currentBird.ReleaseBird((int)index.x, (int)index.y);
+
+
+			}
+			if (swapBird != null)
+			{
+
+				Var.playerPos[(int)index.x, (int)index.y] = swapBird;
+				if (swapBird.y != -1)
+				{
+					ObstacleGenerator.Instance.tiles[swapBird.y * 4 + swapBird.x].currentBird = currentBird;
+					currentBird.target = swapBird.target;
+					Var.playerPos[swapBird.x, swapBird.y] = currentBird;
+				}
+				else
+				{
+					currentBird.target = currentBird.home;
+					print("swapped home");
+				}
+
+				currentBird.OnLevelPickup();
+				currentBird.ReleaseBird(swapBird.x, swapBird.y);
+				currentBird.GroundRollBonus = 0;
+				currentBird = swapBird;
+				currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
+				// currentBird.res
+				ApplyPower(currentBird);
+				currentBird.ReleaseBird((int)index.x, (int)index.y);
 				if (!inMap)
 				{
 					GameLogic.Instance.CanWeFight();
@@ -292,7 +247,22 @@ public class LayoutButton : MonoBehaviour
 					MapControler.Instance.CanLoadBattle();
 				}
 			}
-
+			swapBird = null;
+			if (index.x == -1)
+			{
+				currentBird = null;
+				swapBird = null;
+			}
+			if (!inMap)
+			{
+				GameLogic.Instance.CanWeFight();
+			}
+			else
+			{
+				MapControler.Instance.CanLoadBattle();
+			}
 		}
+
 	}
+}
 
