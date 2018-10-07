@@ -75,7 +75,7 @@ public class Tutorial : MonoBehaviour {
 	}
 	public void ShowSmallGraph(float waitTime)
 	{
-		LeanTween.delayedCall(waitTime, () => GuiContoler.Instance.smallGraph.graphArea.transform.parent.gameObject.SetActive(true));
+		GuiContoler.Instance.smallGraph.graphArea.transform.parent.gameObject.SetActive(true);
 	}
 	void Update()
 	{
