@@ -66,8 +66,8 @@ public class powerTile : MonoBehaviour {
 
 	void OnMouseEnter()
 	{
-		if (Var.selectedBird != null)       
-			return;        
+		//if (Var.selectedBird != null)       
+		//	return;        
 		string info = "";
 		switch (type)
 		{

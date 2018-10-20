@@ -87,7 +87,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			if(fogObject)
 			{
 				fogObject.SetActive(!completed);
-				mapPan.Instance.activeFog = fogObject.transform;
+				if((mapPan.Instance.activeFog== null || mapPan.Instance.activeFog.transform.position.x > fogObject.transform.position.x) && !completed)
+					mapPan.Instance.activeFog = fogObject.transform;
 			}
 		}
 		else

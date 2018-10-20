@@ -6,7 +6,7 @@ public class battleFeedback : MonoBehaviour {
     [HideInInspector]
     public feedBack fb;
     public void OnMouseEnter()
-    {
+    {		
         string fbText = SetFeedbackText();
         if (fbText == "")
         {
@@ -26,15 +26,13 @@ public class battleFeedback : MonoBehaviour {
     public string SetFeedbackText()
     {
         string text = "";
-        if (GameLogic.Instance.Bird1Win(fb.PlayerEnemyBird, fb.birdScript))
-            text += "Winning emotion: +40%\n"; 
-        if (GameLogic.Instance.Bird1Win(fb.birdScript, fb.PlayerEnemyBird))
-            text += "Losing emotion: +40%\n";
-        if (Helpers.Instance.IsSuper(fb.birdScript.emotion))
-            text += "Enemy bird has super emotion -10%\n";
-        if (Helpers.Instance.IsSuper(fb.PlayerEnemyBird.emotion))
-            text += "Player bird has super emotion +10%\n";
-        if (fb.PlayerEnemyBird.data.levelRollBonus >= 1)
+		if(fb.PlayerEnemyBird.emotion == Var.Em.Neutral && fb.birdScript.emotion != Var.Em.Neutral)
+			text += "Emotion against neurtal: -40%\n";
+		if (fb.PlayerEnemyBird.emotion == fb.birdScript.emotion && fb.birdScript .emotion != Var.Em.Neutral)
+			text += "Winning emotion: +40%\n";
+		if (fb.PlayerEnemyBird.emotion ==Helpers.Instance.GetOppositeEmotion(fb.birdScript.emotion))
+				text += "Losing emotion: -40%\n";
+		if (fb.PlayerEnemyBird.data.levelRollBonus >= 1)
             text += "Player strength bonus +" + (fb.PlayerEnemyBird.data.levelRollBonus) * 10 + "%\n";
         if (fb.birdScript.data.levelRollBonus >= 1)
             text += "Enemy strength bonus -" +(fb.birdScript.data.levelRollBonus) * 10 + "%\n";

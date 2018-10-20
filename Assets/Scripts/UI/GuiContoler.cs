@@ -127,9 +127,9 @@ public class GuiContoler : MonoBehaviour {
 		messages = new List<string>();
 		if (!inMap)
 			{
-				minimap.SetActive(Var.gameSettings.shownLevelTutorial);
-				foreach (GuiMap map in FindObjectsOfType<GuiMap>())
-				map.CreateMap(Var.map);            
+			foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+				map.CreateMap(Var.map);
+			minimap.SetActive(Var.gameSettings.shownLevelTutorial);
 			setMapLocation(0);
 			LeanTween.delayedCall(0.05f,tryDialog);
 			boss.SetActive(Var.isBoss);
@@ -514,7 +514,6 @@ public class GuiContoler : MonoBehaviour {
 			
 	public void CloseGraph()
 	{
-		Debug.Log("Closing graph");
 		LeanTween.delayedCall(0.7f, () => GraphActive = false);
 		speechTexts = new List<string>();
 		speechPos = new List<Transform>();
@@ -672,19 +671,19 @@ public class GuiContoler : MonoBehaviour {
 		if (FriendGainedInRound < 0)
 			fbText += "\n" + Helpers.Instance.LonelyHexColor + "<b>Solitude gained: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
 		if (bird.friendBoost > 0)
-			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom interactions: " + bird.friendBoost.ToString("+#;-#;0") + " friendship</color>";
+			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom interactions: " + bird.friendBoost.ToString("+#;-#;0") + " social</color>";
 		if (bird.friendBoost < 0)
 			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom interactions: " + Mathf.Abs(bird.friendBoost).ToString("+#;-#;0") + " solitude</color>";
 		if (bird.groundFriendBoos > 0)
-			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom tiles: " + bird.groundFriendBoos.ToString("+#;-#;0") + " friendship</color>";
+			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom tiles: " + bird.groundFriendBoos.ToString("+#;-#;0") + " social</color>";
 		if (bird.groundFriendBoos < 0)
 			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundFriendBoos).ToString("+#;-#;0") + " solitude</color>";
 		if (bird.levelFriendBoos > 0)
-			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom level abilities: " + bird.levelFriendBoos.ToString("+#;-#;0") + " friendship</color>";
+			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom level abilities: " + bird.levelFriendBoos.ToString("+#;-#;0") + " social</color>";
 		if (bird.levelFriendBoos < 0)
 			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom level abilities: " + Mathf.Abs(bird.levelFriendBoos).ToString("+#;-#;0") + " solitude</color>";
 		if (bird.wizardFrienBoos > 0)
-			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom enemies: " + bird.wizardFrienBoos.ToString("+#;-#;0") + " friendship</color>";
+			fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom enemies: " + bird.wizardFrienBoos.ToString("+#;-#;0") + " social</color>";
 		if (bird.wizardFrienBoos < 0)
 			fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardFrienBoos).ToString("+#;-#;0") + " solitude</color>";
 		return fbText;

@@ -51,9 +51,24 @@ public class mainMenuScript : MonoBehaviour {
     {
         Application.Quit();
     }
+	public void DeleteSave()
+	{
+		SaveLoad.DeleteSave();
+		string path = Application.persistentDataPath + "/Terry.dat";
+		System.IO.File.Delete(path);
+		path = Application.persistentDataPath + "/Kim.dat";
+		System.IO.File.Delete(path);
+		path = Application.persistentDataPath + "/Alexander.dat";
+		System.IO.File.Delete(path);
+		path = Application.persistentDataPath + "/Rebecca.dat";
+		System.IO.File.Delete(path);
+		path = Application.persistentDataPath + "/Sophie.dat";
+		System.IO.File.Delete(path);
 
 
-    public void ResetGame()
+	}
+
+	public void ResetGame()
     {
         SaveLoad.DeleteSave();
         Var.currentWeek = -1;
@@ -72,6 +87,7 @@ public class mainMenuScript : MonoBehaviour {
         ContinueBtn.interactable = false;
         Var.tutorialCompleted = false;
         Var.gameSettings = new Settings();
+		DeleteSave();
     }
 }
 

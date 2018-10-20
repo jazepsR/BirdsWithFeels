@@ -16,7 +16,7 @@ public class GuiMap : MonoBehaviour {
 	public GameObject trialObj;
 	float dist;
 	int count = 0;
-	void Awake()
+	public void Awake()
 	{
 		//Instance = this;
 		if (inMap)

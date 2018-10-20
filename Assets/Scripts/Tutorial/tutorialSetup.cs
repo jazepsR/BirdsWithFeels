@@ -39,6 +39,8 @@ public class tutorialSetup : MonoBehaviour {
 		Bird rebecca = FillPlayer.Instance.playerBirds[1];
 		rebecca.data.confidence = confidence2;
 		rebecca.data.friendliness = friendliness2;
+		rebecca.prevConf = confidence2;
+		rebecca.prevFriend = friendliness2;
 		//rebecca.startingLVL = startingLVL2;
 		rebecca.SetEmotion();
 		//AddLevel(rebecca, startingLVL2);
@@ -47,6 +49,8 @@ public class tutorialSetup : MonoBehaviour {
 		Bird alex = FillPlayer.Instance.playerBirds[2];
 		alex.data.confidence = confidence3;
 		alex.data.friendliness = friendlines3;
+		alex.prevConf = confidence3;
+		alex.prevFriend = friendlines3;
 		alex.SetEmotion();
 		//AddLevel(alex, startingLVL3);
 		LeanTween.delayedCall(0.1f, terry.showText);

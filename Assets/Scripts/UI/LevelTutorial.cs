@@ -43,7 +43,7 @@ public class LevelTutorial : MonoBehaviour {
    
 	// Update is called once per frame
 	void Update()
-	{
+	{		
 		if (Var.currentStageID != 100)
 			return;
 		if (shouldShowFirstBattleDialog && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad >0.5f)
@@ -54,7 +54,7 @@ public class LevelTutorial : MonoBehaviour {
 			try
 			{
 				GuiContoler.Instance.speechBubbleObj.transform.Find("BG").gameObject.SetActive(false);
-
+				Helpers.Instance.GetBirdFromEnum(EventScript.Character.Rebecca).showText();
 			}
 			catch
 			{

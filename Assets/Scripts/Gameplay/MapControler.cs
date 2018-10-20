@@ -30,6 +30,8 @@ public class MapControler : MonoBehaviour {
 	public Material availableRoadMat;
 	public Material completedRoadMat;
 	public Animator charInfoAnim;
+	[HideInInspector]
+	public int count = 0;
 	void Awake()
 	{
 		Instance = this;
@@ -41,10 +43,10 @@ public class MapControler : MonoBehaviour {
 		timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);		
 		SelectionMenu.transform.localScale = Vector3.zero;
 		canHeal = false;
-		int count = 0;
+		
 		foreach(Bird bird in FillPlayer.Instance.playerBirds)
 		{
-			if (bird.gameObject.activeSelf)
+			if (bird.data.unlocked)
 				count++;
 			bool wasActive = false;
 			foreach(Bird activeBird in Var.activeBirds)
@@ -70,7 +72,7 @@ public class MapControler : MonoBehaviour {
 		{
 			foreach (Bird bird in FillPlayer.Instance.playerBirds)
 			{
-				if (bird.gameObject.activeSelf)
+				if (bird.data.unlocked)
 				{
 					if (!bird.data.injured)
 					{

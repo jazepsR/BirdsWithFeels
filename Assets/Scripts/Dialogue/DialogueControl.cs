@@ -60,7 +60,7 @@ public class DialogueControl : MonoBehaviour {
 	public void TryDialogue(Dialogue.Location location, EventScript.Character Char = EventScript.Character.None)
 	{
 
-		if (Var.isTutorial ||(GuiContoler.Instance.winBanner!= null && GuiContoler.Instance.winBanner.activeSelf ))
+		if (Var.isTutorial ||(GuiContoler.Instance.winBanner!= null && GuiContoler.Instance.winBanner.activeSelf ) || Var.currentStageID == 100)
 			return;
 		if (Random.Range(0, 1.0f) > dialogueFrequency)
 			return;

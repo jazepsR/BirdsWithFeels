@@ -224,7 +224,7 @@ public class Bird : MonoBehaviour
 			}
 		}
 
-		if (inMap)
+		if (inMap && MapControler.Instance.count != 3)
 			GetComponentInChildren<Animator>().SetBool("rest", true);
 
 		if (data.recievedSeeds == null)
@@ -239,6 +239,9 @@ public class Bird : MonoBehaviour
 	void LoadBirdData()
 	{
 		string path = Application.persistentDataPath + "/" + charName + ".dat";
+#if !UNITY_EDITOR		
+		loadDataFromInspector = false;
+#endif
 		if (File.Exists(path) && !loadDataFromInspector)
 		{
 			BinaryFormatter bf = new BinaryFormatter();
@@ -629,7 +632,7 @@ public class Bird : MonoBehaviour
 		if (selectionEffect == null && Time.timeSinceLevelLoad > 1f && Helpers.Instance.selectionEffect != null && !isEnemy && !dragged)
 			selectionEffect = Instantiate(Helpers.Instance.selectionEffect, transform);
 		Var.selectedBird = gameObject;
-		if (Input.GetMouseButtonUp(1))
+		if (Input.GetMouseButtonUp(1) && !dragged)
 		{
 			GuiContoler.Instance.GraphButton();
 		}
@@ -1104,10 +1107,7 @@ public class Bird : MonoBehaviour
 			catch { }        
 			DefaultCol = Helpers.Instance.GetEmotionColor(emotion);            
 			HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g + factor, DefaultCol.b + factor);
-			return;
-		}
-		
-		if (Mathf.Abs((float)data.confidence) > Mathf.Abs((float)data.friendliness))
+		}else if (Mathf.Abs((float)data.confidence) > Mathf.Abs((float)data.friendliness))
 		{
 			if (data.confidence > 0)
 			{

@@ -75,7 +75,7 @@ public class Tutorial : MonoBehaviour {
 	}
 	public void ShowSmallGraph(float waitTime)
 	{
-		GuiContoler.Instance.smallGraph.graphArea.transform.parent.gameObject.SetActive(true);
+		GuiContoler.Instance.GraphBlocker.SetActive(false);
 	}
 	void Update()
 	{
@@ -89,11 +89,13 @@ public class Tutorial : MonoBehaviour {
 		if (shouldShowFriendlyPopup && !GuiContoler.Instance.speechBubbleObj.activeSelf)
 		{
 			FirendlinessPopUp.SetActive(true);
+			GuiContoler.Instance.GraphBlocker.SetActive(true);
 			shouldShowFriendlyPopup = false;
 		}
 		if (shouldShowEmotionPopup && !GuiContoler.Instance.speechBubbleObj.activeSelf)
 		{
 			EmotionalWheelPopUp.SetActive(true);
+			GuiContoler.Instance.GraphBlocker.SetActive(true);
 			shouldShowEmotionPopup = false;
 		}
 	   
