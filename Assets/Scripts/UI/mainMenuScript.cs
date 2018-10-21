@@ -10,16 +10,40 @@ public class mainMenuScript : MonoBehaviour {
     Color titleColor;
     public Button ContinueBtn;
     public cutScene cutsceneScript;
-    void Start()
+	public SaveSlot saveSlotTemplate;
+	public Transform saveSlotParent;
+	public GameObject buttonPanel;
+	public GameObject saveSlotPanel;
+	// Use this for initialization
+	void Start()
     {
         Var.StartedNormally = true;
         titleColor = title.color;
         TweenForward();       
         
         ContinueBtn.interactable = SaveLoad.Load();
+		buttonPanel.SetActive(true);
+		saveSlotPanel.SetActive(false);
+	}
+	public void OpenSaveSlots(bool isNewGame)
+	{
+		foreach (Transform slot in saveSlotParent)
+			Destroy(slot.gameObject);
+		for (int i = 0; i < 3; i++)
+		{
+			SaveSlot slot = Instantiate(saveSlotTemplate, saveSlotParent);
+			slot.Setup(isNewGame, "Save"+(i+1).ToString());
+		}
+		buttonPanel.SetActive(false);
+		saveSlotPanel.SetActive(true);
 
-    }
-    void TweenForward()
+	}
+	public void CloseSaveSlots()
+	{
+		buttonPanel.SetActive(true);
+		saveSlotPanel.SetActive(false);
+	}
+	void TweenForward()
     {
         LeanTween.textColor(title.rectTransform, titleColor2, 2f).setEase(LeanTweenType.easeInBack).setOnComplete(TweenBack);
     }

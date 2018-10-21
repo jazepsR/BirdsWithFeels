@@ -11,7 +11,8 @@ public class SaveLoad : MonoBehaviour
 	{
 		DeleteSave();
 		BinaryFormatter bf = new BinaryFormatter();
-		FileStream file = File.Create(Application.persistentDataPath + "/saveGame.dat");
+		Directory.CreateDirectory(Application.persistentDataPath + "/" + Var.currentSaveSlot);
+		FileStream file = File.Create(Application.persistentDataPath +"/" +Var.currentSaveSlot + "/saveGame.dat");
 		SaveData saveData = new SaveData();
 		bf.Serialize(file, saveData);
 		try
@@ -29,10 +30,10 @@ public class SaveLoad : MonoBehaviour
 	}
 	public static bool Load()
 	{
-		if (File.Exists(Application.persistentDataPath + "/saveGame.dat"))
+		if (File.Exists(Application.persistentDataPath + "/" + Var.currentSaveSlot + "/saveGame.dat"))
 		{
 			BinaryFormatter bf = new BinaryFormatter();
-			FileStream file = File.Open(Application.persistentDataPath + "/saveGame.dat", FileMode.Open);
+			FileStream file = File.Open(Application.persistentDataPath + "/" + Var.currentSaveSlot + "/saveGame.dat", FileMode.Open);
 			SaveData data = (SaveData)bf.Deserialize(file);
 			file.Close();
 			ApplyLoadedFile(data);
@@ -43,9 +44,16 @@ public class SaveLoad : MonoBehaviour
 			return false;
 		}
 	}
-	public static void DeleteSave()
+	public static void DeleteSave(string slotName = "")
 	{
-		File.Delete(Application.persistentDataPath + "/saveGame.dat");
+		string path;
+		if(slotName == "")
+			path = Application.persistentDataPath + "/" + Var.currentSaveSlot + "/saveGame.dat";
+		else
+			path =Application.persistentDataPath + "/" + slotName + "/saveGame.dat";
+		if (File.Exists(path))
+			File.Delete(path);
+
 	}
 	private static void ApplyLoadedFile(SaveData data)
 	{

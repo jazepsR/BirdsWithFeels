@@ -238,7 +238,7 @@ public class Bird : MonoBehaviour
 
 	void LoadBirdData()
 	{
-		string path = Application.persistentDataPath + "/" + charName + ".dat";
+		string path = Application.persistentDataPath + "/" + Var.currentSaveSlot + "/" + charName + ".dat";
 #if !UNITY_EDITOR		
 		loadDataFromInspector = false;
 #endif
@@ -257,7 +257,7 @@ public class Bird : MonoBehaviour
 	{
 		if (!isEnemy)
 		{
-			string path = Application.persistentDataPath + "/" + charName + ".dat";
+			string path = Application.persistentDataPath + "/" + Var.currentSaveSlot + "/" + charName + ".dat";
 			File.Delete(path);
 			Debug.Log("savePath: " + path);
 			BinaryFormatter bf = new BinaryFormatter();
