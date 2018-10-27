@@ -65,6 +65,40 @@ public class LayoutButton : MonoBehaviour
 
 		}
 	}
+
+	void OnMouseOver()
+	{
+		if (!Var.isDragControls && Input.GetMouseButtonDown(0) && Var.clickedBird != null && isActive)
+		{
+			if (selectionEffect == null && index.x >= 0)
+				selectionEffect = Instantiate(Helpers.Instance.selectionEffectGround, transform);
+			LeanTween.color(gameObject, highlightColor, 0.3f);
+			if (currentBird == null)
+				currentBird = Var.clickedBird;
+			else
+				swapBird = Var.clickedBird;
+			Debug.Log("Clicked: " + Var.clickedBird.charName + " current: " + currentBird.charName);
+			Var.clickedBird.dragged = true;
+			Var.clickedBird = null;
+			foreach (LayoutButton btn in ObstacleGenerator.Instance.tiles)
+			{
+				DestroySelectionEffect();
+				btn.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+			}
+		}
+	}
+
+
+	public void ShowHighlight(float duration = -1)
+	{
+		if (selectionEffect == null && index.x >= 0)
+			selectionEffect = Instantiate(Helpers.Instance.highlightGroundEffect, transform);
+		if (duration != -1)
+		{
+			LeanTween.delayedCall(duration, DestroySelectionEffect);
+		}
+	}
+
 	public void AddColor(Color color)
 	{
 		if (!tileColors.Contains(color))

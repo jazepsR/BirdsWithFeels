@@ -638,7 +638,54 @@ public class Bird : MonoBehaviour
 		}
 		if (Input.GetMouseButtonUp(0))
 		{
-			foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+			if (Time.timeSinceLevelLoad - clickTime > 0.25f && !isEnemy && !inMap && !Var.isDragControls)
+			{
+				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
+				GetComponentInChildren<Animator>().SetBool("lift", true);
+				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+				{
+					child.sortingLayerName = "Front";
+				}
+
+				for (int i = 0; i < Var.playerPos.GetLength(0); i++)
+				{
+					for (int j = 0; j < Var.playerPos.GetLength(1); j++)
+					{
+
+						if (Var.playerPos[i, j] == this)
+						{
+							Var.playerPos[i, j] = null;
+							break;
+						}
+					}
+				}
+
+				dragged = true;
+				if (selectionEffect != null)
+					DestroySelection();
+				ResetOnSelection();
+			}
+			else
+			{
+				if (!dragged)
+				{
+					if (inMap)
+						return;
+					foreach (LayoutButton btn in ObstacleGenerator.Instance.tiles)
+					{
+						LeanTween.delayedCall((btn.index.x + btn.index.y) * 0.05f + 0.05f, () => btn.ShowHighlight());
+						btn.gameObject.layer = LayerMask.NameToLayer("Default");
+					}
+					ResetOnSelection();
+					Var.clickedBird = this;
+					foreach (Bird bird in Var.activeBirds)
+						bird.DestroySelection();
+				}
+				else
+				{
+
+
+					foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 			{
 				child.sortingLayerName = "Default";
 			}
@@ -649,6 +696,8 @@ public class Bird : MonoBehaviour
 				{
 					tile.baseColor = tile.defaultColor;
 					LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
+				}
+			}
 				}
 			}
 		}
@@ -684,13 +733,15 @@ public class Bird : MonoBehaviour
 				MapControler.Instance.CanLoadBattle();
 				return;
 			}
-			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
-			GetComponentInChildren<Animator>().SetBool("lift", true);
-			foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+			if (Var.isDragControls)
 			{
-				child.sortingLayerName = "Front";
+				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
+				GetComponentInChildren<Animator>().SetBool("lift", true);
+				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+				{
+					child.sortingLayerName = "Front";
+				}
 			}
-
 			if (inMap)
 			{
 				if (MapControler.Instance.canHeal)
@@ -702,48 +753,55 @@ public class Bird : MonoBehaviour
 					return;
 				}
 			}
-			for (int i = 0; i < Var.playerPos.GetLength(0); i++)
+			if (Var.isDragControls)
 			{
-				for (int j = 0; j < Var.playerPos.GetLength(1); j++)
+				for (int i = 0; i < Var.playerPos.GetLength(0); i++)
 				{
-
-					if (Var.playerPos[i, j] == this)
+					for (int j = 0; j < Var.playerPos.GetLength(1); j++)
 					{
-						Var.playerPos[i, j] = null;
-						break;
-					}
-				}
-			}
 
-			dragged = true;
-			if (selectionEffect != null)
-				DestroySelection();
-			if (!inMap)
-			{
-				if (!Var.Infight)
-					ResetBonuses();
-				lines.RemoveLines();
-				if (cautiousParticleObj != null)
-					Destroy(cautiousParticleObj);
-				GuiContoler.Instance.HideLvlText();
-				GroundBonus.SetActive(false);
-				try
-				{
-					foreach (Bird bird in FillPlayer.Instance.playerBirds)
-					{
-						if (bird.charName != charName)
+						if (Var.playerPos[i, j] == this)
 						{
-							bird.levelControler.ApplyLevelOnPickup(bird, bird.data.levelList);
-							bird.levelControler.ApplyLevelOnDrop(bird, bird.data.levelList);
+							Var.playerPos[i, j] = null;
+							break;
 						}
 					}
 				}
-				catch
+
+				dragged = true;
+				if (selectionEffect != null)
+					DestroySelection();
+				if (!inMap)
 				{
+					if (!Var.Infight)
+						ResetBonuses();
+					lines.RemoveLines();
+					if (cautiousParticleObj != null)
+						Destroy(cautiousParticleObj);
+					GuiContoler.Instance.HideLvlText();
+					GroundBonus.SetActive(false);
+					try
+					{
+						foreach (Bird bird in FillPlayer.Instance.playerBirds)
+						{
+							if (bird.charName != charName)
+							{
+								bird.levelControler.ApplyLevelOnPickup(bird, bird.data.levelList);
+								bird.levelControler.ApplyLevelOnDrop(bird, bird.data.levelList);
+							}
+						}
+					}
+					catch
+					{
+						levelControler.ApplyLevelOnPickup(this, data.levelList);
+					}
 					levelControler.ApplyLevelOnPickup(this, data.levelList);
+					UpdateFeedback();
 				}
-				levelControler.ApplyLevelOnPickup(this, data.levelList);
-				UpdateFeedback();
+			}
+				else
+			{
+				clickTime = Time.timeSinceLevelLoad;
 			}
 		}
 	}

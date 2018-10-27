@@ -39,6 +39,7 @@ public class Helpers : MonoBehaviour {
 	public List<LevelBits> levelBits;
 	public GameObject selectionEffect;
 	public GameObject selectionEffectGround;
+	public GameObject highlightGroundEffect;
 	[Header("Battle timing")]
 	public float winWaitTime = 4f;
 	public float loseWaitTime = 6f;

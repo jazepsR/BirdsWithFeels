@@ -7,7 +7,7 @@ using System;
 
 public class SaveLoad : MonoBehaviour
 {
-	public static void Save()
+	public static void Save(bool saveBirds = true)
 	{
 		DeleteSave();
 		BinaryFormatter bf = new BinaryFormatter();
@@ -15,16 +15,19 @@ public class SaveLoad : MonoBehaviour
 		FileStream file = File.Create(Application.persistentDataPath +"/" +Var.currentSaveSlot + "/saveGame.dat");
 		SaveData saveData = new SaveData();
 		bf.Serialize(file, saveData);
-		try
+		if (saveBirds)
 		{
-			foreach (Bird bird in FillPlayer.Instance.playerBirds)
-				bird.SaveBirdData();
-		}
-		catch
-		{
-			foreach (Bird bird in Var.activeBirds)
-				bird.SaveBirdData();
+			try
+			{
+				foreach (Bird bird in FillPlayer.Instance.playerBirds)
+					bird.SaveBirdData();
+			}
+			catch
+			{
+				foreach (Bird bird in Var.activeBirds)
+					bird.SaveBirdData();
 
+			}
 		}
 		file.Close();
 	}
@@ -66,6 +69,7 @@ public class SaveLoad : MonoBehaviour
 		Var.currentStageID = data.currentStageID;
 		Var.SophieUnlocked = data.SophieUnlocked;
 		Var.KimUnlocked = data.KimUnlocked;
+		Var.isDragControls = data.isDragControls;
 		//List<Bird> activeBirds = new List<Bird>();
 		List<Bird> availableBirds = new List<Bird>();
 		foreach (BirdData birdData in data.availableBirds)
@@ -89,6 +93,7 @@ public class SaveData
 	public int currentStageID;
 	public bool SophieUnlocked = false;
 	public bool KimUnlocked = false;
+	public bool isDragControls = true;
 	public SaveData()
 	{
 		SophieUnlocked = Var.SophieUnlocked;
@@ -99,7 +104,7 @@ public class SaveData
 		mapSaveData = Var.mapSaveData;
 		gameSettings = Var.gameSettings;
 		currentStageID = Var.currentStageID;
-		
+		isDragControls = Var.isDragControls;
 		activeBirds = new List<BirdData>();
 		foreach(Bird bird in Var.activeBirds)
 		{
@@ -129,7 +134,7 @@ public class BirdData
 	public bool injured= false;
 	public Var.Em preferredEmotion= Var.Em.Cautious;
 	public Var.Em bannedLevels= Var.Em.finish;
-    public List<string> recievedSeeds = new List<string>();
+	public List<string> recievedSeeds = new List<string>();
 	public List<LevelData> levelList = new List<LevelData>();
 	public LevelData lastLevel = null;
 	public int level=1;

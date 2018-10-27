@@ -98,6 +98,7 @@ public class GuiContoler : MonoBehaviour {
 	public Slider soundSlider;
 	public Slider musicSlider;
 	public GameObject GraphBlocker;
+	public Text controlButtonText;
 	void Awake()
 	{
 		//if (!Var.StartedNormally)
@@ -161,6 +162,20 @@ public class GuiContoler : MonoBehaviour {
 
 
 	}
+	public void ChangeControls()
+	{
+		Var.isDragControls = !Var.isDragControls;
+		SetControlButtonText();
+		SaveLoad.Save(false);
+	}
+	public void SetControlButtonText()
+	{
+		if (Var.isDragControls)
+			controlButtonText.text = "Drag controls";
+		else
+			controlButtonText.text = "Click controls";
+	}
+
 	public void setPause()
 	{
 		AudioControler.Instance.ClickSound();
@@ -178,6 +193,7 @@ public class GuiContoler : MonoBehaviour {
 		else
 		{
 			pause.SetActive(true);
+			SetControlButtonText();
 			Time.timeScale = 0.0f;
 		}
 	}
