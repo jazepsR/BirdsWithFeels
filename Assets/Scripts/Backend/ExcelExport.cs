@@ -50,9 +50,9 @@ public class ExcelExport : MonoBehaviour {
 			FindLine(line);
 		}
 #if UNITY_EDITOR
-        UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+		UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
 #endif
-        file.Close();
+		file.Close();
 	}
 	static void FindLine(string line)
 	{
@@ -69,32 +69,32 @@ public class ExcelExport : MonoBehaviour {
 
 		}
 	}
-    static void ApplyLine(MapIcon icon, string[] values)
-    {
-        icon.levelName = values[1];
-        icon.levelDescription = values[2];
-        icon.type = (Var.Em)Enum.Parse(typeof(Var.Em), values[3]);
-        icon.background = Int32.Parse(values[4]);
-        icon.birdLVL = Int32.Parse(values[5]);
-        icon.minEnemies = Int32.Parse(values[6]);
-        icon.maxEnemies = Int32.Parse(values[7]);
-        icon.isBoss = Boolean.Parse(values[8]);
-        icon.hasObstacles = Boolean.Parse(values[10]);
-        icon.hasScaredPowerUps = Boolean.Parse(values[11]);
-        icon.hasFirendlyPowerUps = Boolean.Parse(values[12]);
-        icon.hasConfidentPowerUps = Boolean.Parse(values[13]);
-        icon.hasLonelyPwerUps = Boolean.Parse(values[14]);
-        icon.hasHealthPowerUps = Boolean.Parse(values[15]);
-        icon.hasDMGPowerUps = Boolean.Parse(values[16]);
-        icon.hasWizards = Boolean.Parse(values[18]);
-        icon.hasDrills = Boolean.Parse(values[19]);
-        icon.isTrial = Boolean.Parse(values[23]);
+	static void ApplyLine(MapIcon icon, string[] values)
+	{
+		icon.levelName = values[1];
+		icon.levelDescription = values[2];
+		icon.type = (Var.Em)Enum.Parse(typeof(Var.Em), values[3]);
+		icon.background = Int32.Parse(values[4]);
+		icon.birdLVL = Int32.Parse(values[5]);
+		icon.minEnemies = Int32.Parse(values[6]);
+		icon.maxEnemies = Int32.Parse(values[7]);
+		icon.isBoss = Boolean.Parse(values[8]);
+		icon.hasObstacles = Boolean.Parse(values[10]);
+		icon.hasScaredPowerUps = Boolean.Parse(values[11]);
+		icon.hasFirendlyPowerUps = Boolean.Parse(values[12]);
+		icon.hasConfidentPowerUps = Boolean.Parse(values[13]);
+		icon.hasLonelyPwerUps = Boolean.Parse(values[14]);
+		icon.hasHealthPowerUps = Boolean.Parse(values[15]);
+		icon.hasDMGPowerUps = Boolean.Parse(values[16]);
+		icon.hasWizards = Boolean.Parse(values[18]);
+		icon.hasDrills = Boolean.Parse(values[19]);
+		icon.isTrial = Boolean.Parse(values[23]);
 #if UNITY_EDITOR
-        UnityEditor.EditorUtility.SetDirty(icon);
-        UnityEditor.Undo.RecordObject(icon, "test");
+		UnityEditor.EditorUtility.SetDirty(icon);
+		UnityEditor.Undo.RecordObject(icon, "test");
 #endif
 
-    }	
+	}	
 	public static void AddMapNode(MapIcon icon)
 	{
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class EventConsequence :MonoBehaviour{
 	public EventScript onComplete = null;
 	public ConsequenceType consequenceType1 = ConsequenceType.Nothing;

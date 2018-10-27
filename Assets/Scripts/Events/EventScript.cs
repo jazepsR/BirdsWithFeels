@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class EventScript:MonoBehaviour{
     public enum Character  { Terry,Rebecca,Sophie,Kim,Alexander,Random,None, the_Queen, the_Vulture_King, a_vulture, a_bird, player };
     public List<Character> speakers;
@@ -11,10 +12,13 @@ public class EventScript:MonoBehaviour{
     [TextArea(1, 3)]
     public string heading;
     [HideInInspector]
+	[SerializeField]
     public List<EventPart> parts;
     public EventConsequence[] options;
     public bool canShowMultipleTimes = false;
     public Dialogue afterEventDialog;
+
+
     public EventScript(Character speaker, string heading, string text1, string text2="",string text3 = "",string text4 ="",string text5= "")
     {
         this.speakers = new List<Character>() { speaker };

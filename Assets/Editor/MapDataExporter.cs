@@ -18,7 +18,7 @@ public class MapDataExporter : EditorWindow
 	private void OnGUI()
 	{
 
-		GUILayout.Label("Tile editor", EditorStyles.boldLabel);
+		GUILayout.Label("Map node editor", EditorStyles.boldLabel);
 
 		exportPath = EditorGUILayout.TextField("Export path", exportPath);
 		if (GUILayout.Button("Export map data"))
