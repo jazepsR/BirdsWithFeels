@@ -132,6 +132,8 @@ public class EventController : MonoBehaviour {
 				if (inMap)
 				{
 					DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
+					foreach(MapIcon icon in FindObjectsOfType<MapIcon>())
+						icon.SetState();
 				}
 				else
 				{

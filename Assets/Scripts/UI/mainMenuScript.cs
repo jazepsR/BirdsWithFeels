@@ -14,13 +14,20 @@ public class mainMenuScript : MonoBehaviour {
 	public Transform saveSlotParent;
 	public GameObject buttonPanel;
 	public GameObject saveSlotPanel;
+	public GameObject deleteSaveDialog;
+	string toDelete = "debug";
+	public static mainMenuScript Instance;
 	// Use this for initialization
+	void Awake()
+	{
+		Instance = this;
+	}
 	void Start()
     {
         Var.StartedNormally = true;
         titleColor = title.color;
-        TweenForward();       
-        
+        TweenForward();
+		deleteSaveDialog.SetActive(false);
         ContinueBtn.interactable = SaveLoad.Load();
 		buttonPanel.SetActive(true);
 		saveSlotPanel.SetActive(false);
@@ -75,22 +82,40 @@ public class mainMenuScript : MonoBehaviour {
     {
         Application.Quit();
     }
-	public void DeleteSave()
+	public void DeleteSave(string name)
 	{
-		SaveLoad.DeleteSave();
-		string path = Application.persistentDataPath + "/Terry.dat";
+		SaveLoad.DeleteSave(name);
+		string path = Application.persistentDataPath + "/" +name+"/Terry.dat";
 		System.IO.File.Delete(path);
-		path = Application.persistentDataPath + "/Kim.dat";
+		path = Application.persistentDataPath + "/" + name + "/Kim.dat";
 		System.IO.File.Delete(path);
-		path = Application.persistentDataPath + "/Alexander.dat";
+		path = Application.persistentDataPath + "/" + name + "/Alexander.dat";
 		System.IO.File.Delete(path);
-		path = Application.persistentDataPath + "/Rebecca.dat";
+		path = Application.persistentDataPath + "/" + name + "/Rebecca.dat";
 		System.IO.File.Delete(path);
-		path = Application.persistentDataPath + "/Sophie.dat";
+		path = Application.persistentDataPath + "/" + name + "/Sophie.dat";
 		System.IO.File.Delete(path);
-
+		foreach (SaveSlot slot in FindObjectsOfType<SaveSlot>())
+			slot.Refresh();
 
 	}
+
+	public void OpenDeleteDialog(string name)
+	{
+		deleteSaveDialog.SetActive(true);
+		toDelete = name;
+
+	}
+	public void yesDelete()
+	{
+		DeleteSave(toDelete);
+		CloseDeleteDialog();
+	}
+	public void CloseDeleteDialog()
+	{
+		deleteSaveDialog.SetActive(false);
+	}
+
 
 	public void ResetGame()
     {
@@ -111,7 +136,7 @@ public class mainMenuScript : MonoBehaviour {
         ContinueBtn.interactable = false;
         Var.tutorialCompleted = false;
         Var.gameSettings = new Settings();
-		DeleteSave();
+		DeleteSave("debug");
     }
 }
 

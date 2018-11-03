@@ -20,7 +20,7 @@ public class LevelTutorial : MonoBehaviour {
 	void Start ()
 	{
 		//Var.currentStageID = 1;
-		if(Var.currentStageID == 160 && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
+		if(Var.currentStageID == 120 && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
 		{
 			Var.gameSettings.shownBattlePlanningTutorial = true;
 			DialogueControl.Instance.CreateParticularDialog(planningDialogue);

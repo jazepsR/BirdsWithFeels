@@ -10,7 +10,7 @@ public class DialogueControl : MonoBehaviour {
 	public Transform portraitPoint;
 	public static DialogueControl Instance { get; private set; }
 	public List<Transform> areaDialogues;
-	List<EventScript.Character> acceptableNpcs= new List<EventScript.Character>() { EventScript.Character.the_Vulture_King, EventScript.Character.player };
+	List<EventScript.Character> acceptableNpcs = new List<EventScript.Character>();// { EventScript.Character.the_Vulture_King, EventScript.Character.player };
 	public Transform anyAreaDialogues;
 	[Range(0f, 1f)]
 	public float dialogueFrequency = 0.2f;
@@ -128,6 +128,14 @@ public class DialogueControl : MonoBehaviour {
 		
 		for(int i=1;i<dialogue.speakers.Count;i++)
 		{
+			if(dialogue.canUseRandomBirds)
+			{
+
+				speakers.Add(Var.activeBirds[i-1]);
+			}
+			else
+			{
+
 			int j = 0;
 			EventScript.Character dialogBird = dialogue.speakers[i];
 			if (acceptableNpcs.Contains(dialogBird) && dialogue.location == Dialogue.Location.battle)
@@ -150,6 +158,7 @@ public class DialogueControl : MonoBehaviour {
 						break;
 					}
 
+				}
 				}
 			}
 		}

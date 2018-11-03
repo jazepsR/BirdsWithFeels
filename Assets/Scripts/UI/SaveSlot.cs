@@ -31,22 +31,44 @@ public class SaveSlot : MonoBehaviour {
 		public void DeleteSave()
 	{
 		Debug.Log("CLICKED DELETE!");
-		if (saveExtists)
-			SaveLoad.DeleteSave(saveSlot);
-		Refresh();
+		mainMenuScript.Instance.OpenDeleteDialog(saveSlot);
 	}
 	public void Refresh()
 	{
 		saveExtists = File.Exists(Application.persistentDataPath + "/" + saveSlot + "/saveGame.dat");
 		activeContents.SetActive(saveExtists);
 		emptyContents.SetActive(!saveExtists);
+		Image bg = GetComponent<Image>();
 		if (saveExtists)
 		{
 			lastDateText.text = "Last played: " + File.GetLastAccessTime(Application.persistentDataPath + "/" + saveSlot + "/saveGame.dat").ToShortDateString();
 			background.color = fullSlotColor;
+			if (isNewGame)
+				bg.color = Color.white;
+			else
+			{
+				bg.color = new Color(1, 0.78f, 0);
+				try
+				{
+					emptyContents.GetComponent<Text>().gameObject.GetComponent<Shadow>().enabled = true;
+				}
+				catch { }
+			}
 		}else
 		{
 			background.color = emptySlotColor;
+			if (isNewGame)
+				bg.color = new Color(1, 0.78f, 0);
+			else
+			{
+				bg.color = Color.white;
+				GetComponent<Button>().interactable = false;
+				try
+				{
+					emptyContents.GetComponent<Text>().gameObject.GetComponent<Shadow>().enabled = false;
+				}
+				catch { }
+			}
 		}
 
 	}

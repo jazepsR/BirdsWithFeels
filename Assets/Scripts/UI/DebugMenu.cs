@@ -26,16 +26,16 @@ public class DebugMenu : MonoBehaviour {
 	}
 	public void DeleteSave()
 	{
-		SaveLoad.DeleteSave();
-		string path = Application.persistentDataPath + "/Terry.dat";
+		SaveLoad.DeleteSave("debug");
+		string path = Application.persistentDataPath + "/debug/Terry.dat";
 		System.IO.File.Delete(path);
-		path = Application.persistentDataPath + "/Kim.dat";
+		path = Application.persistentDataPath + "/debug/Kim.dat";
 		System.IO.File.Delete(path);
-		path = Application.persistentDataPath + "/Alexander.dat";
+		path = Application.persistentDataPath + "/debug/Alexander.dat";
 		System.IO.File.Delete(path);
-		path = Application.persistentDataPath + "/Rebecca.dat";
+		path = Application.persistentDataPath + "/debug/Rebecca.dat";
 		System.IO.File.Delete(path);
-		path = Application.persistentDataPath + "/Sophie.dat";
+		path = Application.persistentDataPath + "/debug/Sophie.dat";
 		System.IO.File.Delete(path);
 
 

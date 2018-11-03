@@ -66,6 +66,9 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	bool birdAdded = false;
 	public EventScript firstCompleteEvent;
 	public Dialogue firstCompleteDialogue;
+	bool stateSet = false;
+	bool eventShown = false;
+	bool dialogueShown = false;
 	// Use this for initialization
 	void Start()
 	{
@@ -141,7 +144,11 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			useline = false;
 		}
 		anim = GetComponent<Animator>();
-		SetState();
+		LeanTween.delayedCall(0.2f, () =>
+		{
+			if (EventController.Instance.eventsToShow.Count == 0 && !GuiContoler.Instance.speechBubble.activeInHierarchy)
+				SetState();
+		});
 	}
 	int GetTargetID(MapIcon data)
 	{
@@ -155,19 +162,27 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 
 	public void SetState()
 	{
-		if (available)
+		if (available && !stateSet)
 		{
-
 			ExcelExport.CreateExportTable();
 			ExcelExport.AddMapNode(this);
 			if (completed)
 			{
 				if(ID == Var.currentStageID && firstCompletion)
 				{
-					if(firstCompleteEvent!= null)
+					if (firstCompleteEvent != null && !eventShown)
+					{
+						eventShown = true;
 						EventController.Instance.CreateEvent(firstCompleteEvent);
-					if(firstCompleteDialogue != null)
+						return;
+					}
+					if (firstCompleteDialogue != null && !dialogueShown)
+					{
+						dialogueShown = true;
 						DialogueControl.Instance.CreateParticularDialog(firstCompleteDialogue);
+						return;
+					}
+					stateSet = true;
 					firstCompletion = false;
 					anim.SetInteger("state", 1);
 					LeanTween.delayedCall(0.2f, () => anim.SetInteger("state", 2));

@@ -327,15 +327,22 @@ public class GuiContoler : MonoBehaviour {
 
 					}
 
-					if (!inMap)
+				if (inMap)
+				{
+
+					foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+						icon.SetState();
+				}
+				else
+				{
+
+					foreach (Image img in vingette)
 					{
-						foreach (Image img in vingette)
-						{
-							LeanTween.alpha(img.rectTransform, 0, 0.5f);
-						}
-						CheckGraphNavBtns();
-						GameLogic.Instance.CanWeFight();
+						LeanTween.alpha(img.rectTransform, 0, 0.5f);
 					}
+					CheckGraphNavBtns();
+					GameLogic.Instance.CanWeFight();
+				}
 
 				}
 				else
