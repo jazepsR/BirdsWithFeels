@@ -48,11 +48,6 @@ public class SaveSlot : MonoBehaviour {
 			else
 			{
 				bg.color = new Color(1, 0.78f, 0);
-				try
-				{
-					emptyContents.GetComponent<Text>().gameObject.GetComponent<Shadow>().enabled = true;
-				}
-				catch { }
 			}
 		}else
 		{
@@ -63,11 +58,6 @@ public class SaveSlot : MonoBehaviour {
 			{
 				bg.color = Color.white;
 				GetComponent<Button>().interactable = false;
-				try
-				{
-					emptyContents.GetComponent<Text>().gameObject.GetComponent<Shadow>().enabled = false;
-				}
-				catch { }
 			}
 		}
 
