@@ -86,15 +86,20 @@ public class mainMenuScript : MonoBehaviour {
 	{
 		SaveLoad.DeleteSave(name);
 		string path = Application.persistentDataPath + "/" +name+"/Terry.dat";
-		System.IO.File.Delete(path);
+        if (System.IO.File.Exists(path))
+		    System.IO.File.Delete(path);
 		path = Application.persistentDataPath + "/" + name + "/Kim.dat";
-		System.IO.File.Delete(path);
+        if (System.IO.File.Exists(path))
+            System.IO.File.Delete(path);
 		path = Application.persistentDataPath + "/" + name + "/Alexander.dat";
-		System.IO.File.Delete(path);
+        if (System.IO.File.Exists(path))
+            System.IO.File.Delete(path);
 		path = Application.persistentDataPath + "/" + name + "/Rebecca.dat";
-		System.IO.File.Delete(path);
+        if (System.IO.File.Exists(path))
+            System.IO.File.Delete(path);
 		path = Application.persistentDataPath + "/" + name + "/Sophie.dat";
-		System.IO.File.Delete(path);
+        if (System.IO.File.Exists(path))
+            System.IO.File.Delete(path);
 		foreach (SaveSlot slot in FindObjectsOfType<SaveSlot>())
 			slot.Refresh();
 
