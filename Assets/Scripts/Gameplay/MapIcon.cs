@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
+	
 	public bool isTrial = false;
 	public GameObject fogObject;
 	public GameObject CompleteIcon;
@@ -72,7 +73,12 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	// Use this for initialization
 	void Start()
 	{
-		
+		if(MapControler.Instance.allIDs.Contains(ID))
+		{
+			Debug.LogError("Duplicate ID found! ID: " + ID + " node name: " + name);
+		}
+		MapControler.Instance.allIDs.Add(ID);
+
 		length = battles.Count;
 		offset = transform.position- transform.parent.position;
 		if (isTrial)

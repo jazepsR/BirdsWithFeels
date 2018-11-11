@@ -591,8 +591,8 @@ public class GuiContoler : MonoBehaviour {
 		GraphBlocker.SetActive(true);
 		Helpers.Instance.HideTooltip();
 		minimap.SetActive(false);
-		nextGraph.interactable = !Var.isTutorial;
-		prevGraph.interactable = !Var.isTutorial;
+		//nextGraph.interactable = !Var.isTutorial;
+		//prevGraph.interactable = !Var.isTutorial;
 		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
 			Destroy(child.gameObject);

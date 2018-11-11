@@ -30,8 +30,7 @@ public class SaveSlot : MonoBehaviour {
 	}
 		public void DeleteSave()
 	{
-		Debug.Log("CLICKED DELETE!");
-		mainMenuScript.Instance.OpenDeleteDialog(saveSlot);
+		mainMenuScript.Instance.OpenDeleteDialog(saveSlot, true);
 	}
 	public void Refresh()
 	{
@@ -68,7 +67,10 @@ public class SaveSlot : MonoBehaviour {
 		mainMenuScript mainMenu = FindObjectOfType<mainMenuScript>();
 		if (isNewGame)
 		{
-			mainMenu.StartClick();
+			if(saveExtists)
+				mainMenuScript.Instance.OpenDeleteDialog(saveSlot, false);
+			else
+				mainMenu.StartClick();
 		}
 		else if(saveExtists)
 		{			

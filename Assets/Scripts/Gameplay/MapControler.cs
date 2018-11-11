@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class MapControler : MonoBehaviour {
 	public static MapControler Instance { get; private set; }
+	public List<int> allIDs = new List<int>();
 	[HideInInspector]
 	public bool canFight= false;
 	[HideInInspector]

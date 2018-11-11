@@ -80,20 +80,7 @@ public class Graph : MonoBehaviour {
 			{
 				heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
 				ShowTooltip info = heartt.gameObject.AddComponent<ShowTooltip>();
-				string tooltipText = "";
-				if (y > 0)
-					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Confident) + "Confidence: " + y + "</color>\n";
-				if (y < 0)
-					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Cautious) + "Cautions: " + Mathf.Abs(y) + "</color>\n";
-				if (y == 0)
-					tooltipText += "Confidence: 0\n";
-				if (x > 0)
-					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Social) + "Social: " + x + "</color>\n";
-				if (x < 0)
-					tooltipText += Helpers.Instance.GetHexColor(Var.Em.Solitary) + "Solitary: " + Mathf.Abs(x) + "</color>\n";
-				if (x == 0)
-					tooltipText += "Solitude: 0\n";
-				info.tooltipText = "<b>" + tooltipText + "</b>";
+				info.tooltipText = "<b>" +Helpers.Instance.GetStatInfo(y,x) + "</b>";
 			}
 			else
 			{
@@ -140,16 +127,24 @@ public class Graph : MonoBehaviour {
 					obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-factor * bit.social, factor * bit.conf, 0);
 					obj.name = bit.name;
 					obj.transform.localScale = Vector3.one * factor / 16f;
-					obj.GetComponent<ShowTooltip>().tooltipText = "Social: " + bit.social + "\nConfidence: " + bit.conf;
+					obj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetStatInfo(bit.conf, bit.social);
 					if (Vector2.Distance(new Vector2(bird.data.friendliness, bird.data.confidence), new Vector2(bit.social, bit.conf)) <= 3
 						&& !isSmall && afterBattle)
 					{
+						Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
 						LeanTween.delayedCall(1.7f, () => GetLevelBar(bit.emotion).AddPoints(bird));
 						obj.GetComponent<Image>().color = Color.yellow;
 						bird.data.recievedSeeds.Add(bit.name);
-						LeanTween.delayedCall(1f, () => LeanTween.move(obj, GetLevelBar(bit.emotion).transform.position, 0.7f).setEaseOutBack().setOnComplete(() => Destroy(obj)));
+
+						LeanTween.delayedCall(1f, () => LeanTween.move(obj, GetLevelBar(bit.emotion).transform.position, 0.7f).setEaseOutBack().setOnComplete(() =>
+						{
+							LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
+							setEaseOutBack().setOnComplete(() => Destroy(obj));
+							Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
+						}
+						));						
 						GuiContoler.Instance.canChangeGraph = false;
-						LeanTween.delayedCall(1.7f, () => GuiContoler.Instance.canChangeGraph = true);
+						LeanTween.delayedCall(2.1f, () => GuiContoler.Instance.canChangeGraph = true);
 					}
 					//obj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bit.emotion);
 

@@ -43,7 +43,7 @@ public class ObstacleGenerator : MonoBehaviour {
 	{
 		if (Var.isTutorial)
 		{
-			if (Tutorial.Instance.CurrentPos == 4) {
+			/*if (Tutorial.Instance.CurrentPos == 4) {
 				LayoutButton tile = tiles[7];
 				Vector3 pos = new Vector3(tile.transform.position.x + 0.05f, tile.transform.position.y + 0.3f, 20);
 				tile.isActive = false;
@@ -51,7 +51,7 @@ public class ObstacleGenerator : MonoBehaviour {
 				rockObj.transform.parent = BattleArea.transform;
 				tile.gameObject.SetActive(false);
 				obstacles.Add(rockObj);
-			}
+			}*/
 			return;
 		}
 			

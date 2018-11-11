@@ -24,6 +24,8 @@ public class Helpers : MonoBehaviour {
 	public string FriendlyHexColor;
 	public string RandomHexColor;
 	GameObject heartBreak;
+	[HideInInspector]
+	public GameObject pickupExplosion;
 	GameObject heartGain;
 	Sprite fullHeart;
 	Sprite mentalHeart;
@@ -33,8 +35,8 @@ public class Helpers : MonoBehaviour {
 	public bool inMap;
 	List<Image> heartsToFill = new List<Image>();
 	public Transform relationshipDialogs;
-    public GameObject seed;
-    public GameObject seedFar;
+	public GameObject seed;
+	public GameObject seedFar;
 	[HideInInspector]
 	public List<LevelBits> levelBits;
 	public GameObject selectionEffect;
@@ -46,6 +48,7 @@ public class Helpers : MonoBehaviour {
 	enum friendState { alone, diagonal, oneFriend, twoFriends };
 	public void Awake()
 	{
+		pickupExplosion = Resources.Load<GameObject>("prefabs/pickupExplosion");
 		heartBreak = Resources.Load<GameObject>("prefabs/heartBreak");
 		heartGain = Resources.Load<GameObject>("prefabs/heartGain");
 		fullHeart = Resources.Load<Sprite>("sprites/heart");
@@ -71,7 +74,7 @@ public class Helpers : MonoBehaviour {
 
 
 		}
-        Application.targetFrameRate = 60;
+		Application.targetFrameRate = 60;
 	}
 	public EventScript.Character GetCharEnum(Bird bird)
 	{
@@ -147,39 +150,39 @@ public class Helpers : MonoBehaviour {
 		}
 	}
 
-    public static int GetPortraitNumber(string birdName)
-    {
-        int portraitNum = 0;
-        birdName = birdName.ToLower();
-        if (birdName.Equals("terry"))
-            portraitNum = 2;
-        if (birdName.Equals("alexander"))
-            portraitNum = 4;
-        if (birdName.Equals("sophie"))
-            portraitNum = 0;
-        if (birdName.Equals("rebecca"))
-            portraitNum = 3;
-        if (birdName.Equals("kim"))
-            portraitNum = 1;
-        return portraitNum;
-    }
+	public static int GetPortraitNumber(string birdName)
+	{
+		int portraitNum = 0;
+		birdName = birdName.ToLower();
+		if (birdName.Equals("terry"))
+			portraitNum = 2;
+		if (birdName.Equals("alexander"))
+			portraitNum = 4;
+		if (birdName.Equals("sophie"))
+			portraitNum = 0;
+		if (birdName.Equals("rebecca"))
+			portraitNum = 3;
+		if (birdName.Equals("kim"))
+			portraitNum = 1;
+		return portraitNum;
+	}
 
-    public static string GetBirdArtName(string birdName)
-    {
-        string birdArtName = "BirdArt3";
-        birdName = birdName.ToLower();
-        if (birdName.Equals("terry"))
-            birdArtName = "BirdArt3";
-        if (birdName.Equals("alexander"))
-            birdArtName = "BirdArt4";
-        if (birdName.Equals("sophie"))
-            birdArtName = "BirdArt5";
-        if (birdName.Equals("rebecca"))
-            birdArtName = "BirdArt2";
-        if (birdName.Equals("kim"))
-            birdArtName = "BirdArt1";
-        return birdArtName;
-    }
+	public static string GetBirdArtName(string birdName)
+	{
+		string birdArtName = "BirdArt3";
+		birdName = birdName.ToLower();
+		if (birdName.Equals("terry"))
+			birdArtName = "BirdArt3";
+		if (birdName.Equals("alexander"))
+			birdArtName = "BirdArt4";
+		if (birdName.Equals("sophie"))
+			birdArtName = "BirdArt5";
+		if (birdName.Equals("rebecca"))
+			birdArtName = "BirdArt2";
+		if (birdName.Equals("kim"))
+			birdArtName = "BirdArt1";
+		return birdArtName;
+	}
 
 	public int GetEmotionValue(Bird bird, Var.Em emotion)
 	{
@@ -198,43 +201,43 @@ public class Helpers : MonoBehaviour {
 		}
 	}
 
-    public static void ApplyLevel(Levels.type type, Bird bird)
-    {
+	public static void ApplyLevel(Levels.type type, Bird bird)
+	{
 
-        switch(type)
-        {
-            case Levels.type.Brave1:
-                Levels.ApplyLevel(new LevelData(Levels.type.Brave1, Var.Em.Confident, Var.lvlSprites[1]), "Brave 1",bird);
-                break;
-            case Levels.type.Brave2:
-                Levels.ApplyLevel(new LevelData(Levels.type.Brave2, Var.Em.Confident, Var.lvlSprites[5]), "Brave 2", bird);
-                break;
-            case Levels.type.Friend1:
-                Levels.ApplyLevel(new LevelData(Levels.type.Friend1, Var.Em.Social, Var.lvlSprites[0]), "Friendly 1", bird);
-                break;
-            case Levels.type.Friend2:
-                Levels.ApplyLevel(new LevelData(Levels.type.Friend1, Var.Em.Social, Var.lvlSprites[4]), "Friendly 2", bird);
-                break;
-            case Levels.type.Lonely1:
-                Levels.ApplyLevel(new LevelData(Levels.type.Lonely1, Var.Em.Solitary, Var.lvlSprites[3]), "Lonely 1", bird);
-                break;
-            case Levels.type.Lonely2:
-                Levels.ApplyLevel(new LevelData(Levels.type.Lonely2, Var.Em.Solitary, Var.lvlSprites[7]), "Lonely 2", bird);
-                break;
-            case Levels.type.Scared1:
-                Levels.ApplyLevel(new LevelData(Levels.type.Scared1, Var.Em.Cautious, Var.lvlSprites[2]), "Scared 1", bird);
-                break;
-            case Levels.type.Scared2:
-                Levels.ApplyLevel(new LevelData(Levels.type.Scared2, Var.Em.Cautious, Var.lvlSprites[6]), "Scared 2", bird);
-                break;
-            default: break;
+		switch(type)
+		{
+			case Levels.type.Brave1:
+				Levels.ApplyLevel(new LevelData(Levels.type.Brave1, Var.Em.Confident, Var.lvlSprites[1]), "Brave 1",bird);
+				break;
+			case Levels.type.Brave2:
+				Levels.ApplyLevel(new LevelData(Levels.type.Brave2, Var.Em.Confident, Var.lvlSprites[5]), "Brave 2", bird);
+				break;
+			case Levels.type.Friend1:
+				Levels.ApplyLevel(new LevelData(Levels.type.Friend1, Var.Em.Social, Var.lvlSprites[0]), "Friendly 1", bird);
+				break;
+			case Levels.type.Friend2:
+				Levels.ApplyLevel(new LevelData(Levels.type.Friend1, Var.Em.Social, Var.lvlSprites[4]), "Friendly 2", bird);
+				break;
+			case Levels.type.Lonely1:
+				Levels.ApplyLevel(new LevelData(Levels.type.Lonely1, Var.Em.Solitary, Var.lvlSprites[3]), "Lonely 1", bird);
+				break;
+			case Levels.type.Lonely2:
+				Levels.ApplyLevel(new LevelData(Levels.type.Lonely2, Var.Em.Solitary, Var.lvlSprites[7]), "Lonely 2", bird);
+				break;
+			case Levels.type.Scared1:
+				Levels.ApplyLevel(new LevelData(Levels.type.Scared1, Var.Em.Cautious, Var.lvlSprites[2]), "Scared 1", bird);
+				break;
+			case Levels.type.Scared2:
+				Levels.ApplyLevel(new LevelData(Levels.type.Scared2, Var.Em.Cautious, Var.lvlSprites[6]), "Scared 2", bird);
+				break;
+			default: break;
 
-        }
+		}
 
 
-    }
+	}
 
-    public Bird GetBirdFromEnum(EventScript.Character ch, bool useAll = false)
+	public Bird GetBirdFromEnum(EventScript.Character ch, bool useAll = false)
 	{
 		List<Bird> birds;
 		if ( useAll)
@@ -262,16 +265,34 @@ public class Helpers : MonoBehaviour {
 	public string GetStatInfo(int confidence, int social)
 	{
 		string statText = "";
-		if (confidence > 0)
-			statText += Helpers.Instance.GetHexColor(Var.Em.Confident) + "Confidence: " + confidence + "</color>\n";
-		if (confidence < 0)
-			statText += Helpers.Instance.GetHexColor(Var.Em.Cautious) + "Cautions: " + Mathf.Abs(confidence) + "</color>\n";
+		string confColor = GetHexColor(Var.Em.Neutral);
+		string socialColor = GetHexColor(Var.Em.Neutral);
+		if(Mathf.Abs(confidence)>Mathf.Abs(social))
+		{
+			if (confidence >= Var.lvl1)
+				confColor = GetHexColor(Var.Em.Confident);
+			else if (confidence <= -Var.lvl1)
+				confColor = GetHexColor(Var.Em.Cautious);
+		}
+		else
+		{
+			if (social >= Var.lvl1)
+				socialColor = GetHexColor(Var.Em.Social);
+			else if (social <= -Var.lvl1)
+				socialColor = GetHexColor(Var.Em.Solitary);
+
+		}
+
+		if (confidence >0)
+			statText += confColor + "Confidence: " + confidence + "</color>\n";
+		if (confidence <0)
+			statText += confColor + "Cautions: " + Mathf.Abs(confidence) + "</color>\n";
 		if (confidence == 0)
 			statText += "Confidence: 0\n";
 		if (social > 0)
-			statText += Helpers.Instance.GetHexColor(Var.Em.Social) + "Social: " + social+ "</color>\n";
-		if (social < 0)
-				statText += Helpers.Instance.GetHexColor(Var.Em.Solitary) + "Solitary: " + Mathf.Abs(social) + "</color>\n";
+			statText += socialColor + "Social: " + social+ "</color>\n";
+		if (social <0)
+				statText += socialColor + "Solitary: " + Mathf.Abs(social) + "</color>\n";
 		if (social == 0)
 			statText += "Solitude: 0\n";
 		statText = "<b>" + statText + "</b>";
@@ -854,17 +875,17 @@ public class Helpers : MonoBehaviour {
 		}
 	}
 #if UNITY_EDITOR
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.LeftShift))
-            Time.timeScale = 0.25f;
-        else if (Input.GetKey(KeyCode.RightShift))
-            Time.timeScale = 4f;
-        else
-            Time.timeScale = 1;
-    }
+	private void Update()
+	{
+		if (Input.GetKey(KeyCode.LeftShift))
+			Time.timeScale = 0.25f;
+		else if (Input.GetKey(KeyCode.RightShift))
+			Time.timeScale = 4f;
+		else
+			Time.timeScale = 1;
+	}
 #endif
-    public string GetLevelUpDialogs(Levels.type type, EventScript.Character character)
+	public string GetLevelUpDialogs(Levels.type type, EventScript.Character character)
 	{
 		switch (character)
 		{
