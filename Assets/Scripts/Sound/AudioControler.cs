@@ -8,6 +8,8 @@ public class AudioControler : MonoBehaviour {
 	[Header("Sound cilps")]
 	public AudioClip applause;   
 	public AudioClip click;
+    public AudioClip mapNodeClick;
+    public AudioClip fightButtonClick;
 	public AudioClip pickupBird;
 	public AudioClip dropBird;
 	public AudioClip enemyMove;
@@ -17,10 +19,21 @@ public class AudioControler : MonoBehaviour {
 	public AudioClip enemyMouseover1;
 	public AudioClip enemyMouseover2;
 	public AudioClip paperSound;
-	public AudioClip battleStart;
 	public AudioClip newEmotion;
 	public AudioClip[] birdTalk;
-	[Header("Ambient sounds")]
+    [Header("Particle sounds")]
+    public AudioClip createLines;
+    public AudioClip SolitaryAppear;
+    public AudioClip BirdSitDown;
+    public AudioClip SocialInfoAppear;
+    public AudioClip SolitaryInfoAppear;
+    [Header("combat sounds")]
+    public AudioClip conflictWin;
+    public AudioClip conflictLose;
+    public AudioClip enemyRun;
+    public AudioClip considerSound;
+    public AudioClip fightCloudSound;
+    [Header("Ambient sounds")]
 	public AudioClip[] AmbientSounds;
 	public AudioClip[] battleTracks;
 	[Header("Audio sources")]

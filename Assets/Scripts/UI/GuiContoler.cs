@@ -847,7 +847,7 @@ public class GuiContoler : MonoBehaviour {
 		GameLogic.Instance.FightButton.interactable = false;
 		AudioControler.Instance.ClickSound();
 		AudioControler.Instance.setBattleVolume(0.85f);
-		AudioControler.Instance.ambientAudioSource.PlayOneShot(AudioControler.Instance.battleStart);
+		AudioControler.Instance.ambientAudioSource.PlayOneShot(AudioControler.Instance.fightButtonClick);
 		feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
 		foreach (feedBack fb in feedBackObj)
 		{
@@ -950,9 +950,13 @@ public class GuiContoler : MonoBehaviour {
 					Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social,true,2);
 				else
 					Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social);
+                AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
 			}
-			if(friendGain<0)
-				Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Solitary);
+            if (friendGain < 0)
+            {
+                Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Solitary);
+                AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
+            }
 
 			bird.friendBoost += friendGain;			
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();

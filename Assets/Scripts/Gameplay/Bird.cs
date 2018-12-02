@@ -641,7 +641,7 @@ public class Bird : MonoBehaviour
 			if (Time.timeSinceLevelLoad - clickTime > 0.25f && !isEnemy && !inMap && !Var.isDragControls)
 			{
 				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
-				GetComponentInChildren<Animator>().SetBool("lift", true);
+                GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 				{
 					child.sortingLayerName = "Front";
@@ -722,6 +722,7 @@ public class Bird : MonoBehaviour
 				{
 					mapHighlight.SetActive(false);
 					GetComponentInChildren<Animator>().SetBool("rest", true);
+                    AudioControler.Instance.PlaySound(AudioControler.Instance.BirdSitDown);
 					MapControler.Instance.selectedBirds.Remove(this);
 				}
 				else
@@ -736,7 +737,7 @@ public class Bird : MonoBehaviour
 			if (Var.isDragControls)
 			{
 				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
-				GetComponentInChildren<Animator>().SetBool("lift", true);
+                GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 				{
 					child.sortingLayerName = "Front";
@@ -1417,7 +1418,6 @@ public class Bird : MonoBehaviour
 		dragged = false;
 		this.x = x;
 		this.y = y;
-		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.dropBird);
 		GetComponentInChildren<Animator>().SetBool("lift", false);
 		foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 		{
@@ -1429,8 +1429,9 @@ public class Bird : MonoBehaviour
 		if (!inMap)
 		{
 			LeanTween.delayedCall(0.15f, drawLines);
-			//lines.DrawLines();
-			showText();
+            AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.dropBird);
+            //lines.DrawLines();
+            showText();
 			try
 			{
 				levelControler.ApplyLevelOnDrop(this, data.levelList);

@@ -449,7 +449,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			return;
 		try
 		{
-			AudioControler.Instance.ClickSound();
+            AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
 		}
 		catch { }
 		//map tutorial
