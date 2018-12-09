@@ -17,7 +17,10 @@ public class EventScript:MonoBehaviour{
 	public EventConsequence[] options;
 	public bool canShowMultipleTimes = false;
 	public Dialogue afterEventDialog;
+	public EventScript()
+	{
 
+	}
 
 	public EventScript(Character speaker, string heading, string text1, string text2="",string text3 = "",string text4 ="",string text5= "")
 	{

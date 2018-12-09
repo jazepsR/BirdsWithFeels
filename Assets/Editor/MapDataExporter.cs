@@ -30,6 +30,8 @@ public class MapDataExporter : EditorWindow
 				ExcelExport.AddMapNode(icon);
 			ExcelExport.Save("/" + exportPath + ".csv");
 		}
+
+		
 		if (GUILayout.Button("Select data file"))
 		{
 			importPath = EditorUtility.OpenFilePanel("Select data file", Application.dataPath, "csv");

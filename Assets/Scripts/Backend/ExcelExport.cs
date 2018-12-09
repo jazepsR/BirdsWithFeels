@@ -173,7 +173,7 @@ public class ExcelExport : MonoBehaviour {
 	}
 
 	// Following method is used to retrive the relative path as device platform
-	private static string getPath()
+	public static string getPath()
 	{
 #if UNITY_EDITOR
 		return Application.dataPath ;

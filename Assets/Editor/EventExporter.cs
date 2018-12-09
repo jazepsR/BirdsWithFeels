@@ -10,6 +10,7 @@ public class EventExporter : EditorWindow
 	string exportPath = "CSV/eventData";
 	string dialogueExportPath = "CSV/dialogueData";
 	string importPath = "";
+	GameObject importedEventParent;
 	[MenuItem("Window/Event exporter")]
 	public static void ShowWindow()
 	{
@@ -20,12 +21,11 @@ public class EventExporter : EditorWindow
 	{
 
 		GUILayout.Label("Event exporter", EditorStyles.boldLabel);
-
 		exportPath = EditorGUILayout.TextField("Event export path", exportPath);
 		if (GUILayout.Button("Export events data"))
 		{
 			EventDataExport.CreateEventExportFile();
-			EventDataExport.SaveEvents("/" + exportPath + ".json");
+			EventDataExport.SaveEvents("/" + exportPath);
 		}
 
 		dialogueExportPath = EditorGUILayout.TextField("Dialogue export path", dialogueExportPath);
@@ -33,6 +33,15 @@ public class EventExporter : EditorWindow
 		{
 			EventDataExport.CreateDialogueExportFile();
 			EventDataExport.SaveDialogues("/" + dialogueExportPath + ".json");
+		}
+		GUILayout.Label("Event importer", EditorStyles.boldLabel);
+
+		string importPath = EditorGUILayout.TextField("Event import path", exportPath);
+		if (GUILayout.Button("Import events data"))
+		{
+			if(importPath != "")
+			importedEventParent = new GameObject("Imported Events");
+			EventDataExport.LoadEvents(importedEventParent.transform, importPath);
 		}
 	}
 }

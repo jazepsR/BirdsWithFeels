@@ -11,28 +11,15 @@ public class EventDataExport : MonoBehaviour {
 	public static void SaveEvents(string path)
 	{
 		string filePath = getPath() + path;
-		string jsonString = "{events:[";
-		foreach(SerializedEvent obj in serializedEvents.events)
-		{
-			jsonString += "{\"mainEvent\":" + obj.mainEvent + ",\"eventParts\":[";
-			foreach(string part in obj.eventParts)
-			{
-				jsonString += part + ",";
-			}
-			jsonString = jsonString.Substring(0, jsonString.Length - 1);
+		Directory.CreateDirectory(filePath);
+		foreach (SerializedEvent obj in serializedEvents.events)
+		{			
+			string jsonString = JsonUtility.ToJson(obj);
+			FileStream fs =File.Create(filePath + "/" + obj.evName + ".json");
+			fs.Close();
+			File.WriteAllText(filePath + "/" + obj.evName + ".json", jsonString);
 
-			jsonString += " ],\"eventConsequence\":[";
-
-			foreach (string part in obj.eventConsequence)
-			{
-				jsonString += part + ",";
-			}
-			jsonString = jsonString.Substring(0, jsonString.Length - 1);
-			jsonString += "],\"afterEventDialog\":"+obj.afterEventDialog +"},";
 		}
-		jsonString = jsonString.Substring(0,jsonString.Length - 1);
-		jsonString += "]}";
-		File.WriteAllText(filePath, jsonString);
 	}
 
 	public static void SaveDialogues(string path)
@@ -77,26 +64,78 @@ public class EventDataExport : MonoBehaviour {
 		Debug.Log("started serizalizing events!");
 		List<EventScript> eventsToExport = new List<EventScript>(FindObjectsOfType<EventScript>());
 		serializedEvents = new SerializedEvents();
-		foreach (EventScript eventObj in eventsToExport)
+		foreach (EventScript ev in eventsToExport)
 		{
-			SerializedEvent ev = new SerializedEvent();
-			ev.mainEvent = JsonUtility.ToJson(eventObj);
-			List<EventPart> parts = new List<EventPart>(eventObj.GetComponentsInChildren<EventPart>(true));
+			SerializedEvent eventObj = new SerializedEvent(ev.speakers,
+				ev.condition,
+				ev.magnitude,
+				ev.targetEmotion,
+				ev.heading,
+				ev.canShowMultipleTimes,
+				ev.name);
+			
+			List<EventPart> parts = new List<EventPart>(ev.GetComponentsInChildren<EventPart>(true));
 			foreach (EventPart part in parts)
 			{
-				ev.eventParts.Add(JsonUtility.ToJson(part));
+				eventObj.eventParts.Add(new SerializedEventPart(part.speakerId,part.text,part.useCustomPic,part.customPic));
 			}
-			foreach (EventConsequence consequence in eventObj.options)
+			foreach (EventConsequence con in ev.options)
 			{
-				ev.eventConsequence.Add(JsonUtility.ToJson(consequence));
+				eventObj.eventConsequence.Add(new SerializedEventConsequence(con.consequenceType1, con.consequenceType2, con.consequenceType3, con.magnitude1,
+					con.magnitude2, con.magnitude3, con.useAutoExplanation, con.AfterImage, con.icon, con.selectionTooltip, con.conclusionHeading, con.conclusionText));
 			}
 			if (ev.afterEventDialog == null)
-				ev.afterEventDialog = "none";
+				eventObj.afterEventDialog = "none";
 			else
-				ev.afterEventDialog = eventObj.afterEventDialog.name;
-			serializedEvents.events.Add(ev);
+				eventObj.afterEventDialog = ev.afterEventDialog.name;
+			serializedEvents.events.Add(eventObj);
 		}
 		Debug.Log("Serialized " + serializedEvents.events.Count + " events!");
+	}
+	public static void LoadEvents(Transform parent, string path)
+	{
+
+		string fullPath = ExcelExport.getPath()+ "/"+ "CSV/eventData" + ".json";
+		if (!File.Exists(fullPath))
+		{			
+			Debug.LogError("file not found in path!");
+			return;
+		}
+
+		string allText = File.ReadAllText(fullPath);
+		SerializedEvent ev= JsonUtility.FromJson<SerializedEvent>(allText);
+		CreateLoadedEvent(ev, parent);
+
+	}
+	public static void CreateLoadedEvent(SerializedEvent evData, Transform parent)
+	{
+		GameObject evObj = new GameObject(evData.evName);
+		evObj.transform.parent = parent;
+		EventScript evScript = evObj.AddComponent<EventScript>();
+		evData.GetEventScript(evScript);
+		//Generate event parts
+		GameObject parts = new GameObject(evData.evName);
+		parts.transform.parent = evObj.transform.parent;
+		foreach (SerializedEventPart part in evData.eventParts)
+		{
+			GameObject partObj = new GameObject("part");
+			partObj.transform.parent = parts.transform.parent;
+			EventPart evPart = evObj.AddComponent<EventPart>();
+			part.GetEventPart(evPart);		
+		}
+		//Generate event consequences
+		evScript.options = new EventConsequence[evData.eventConsequence.Count];
+		int i = 0;
+		foreach (SerializedEventConsequence part in evData.eventConsequence)
+		{
+			GameObject partObj = new GameObject("consequence");
+			partObj.transform.parent = evObj.transform;
+			EventConsequence evPart = evObj.AddComponent<EventConsequence>();
+			part.GetEventConsequence(evPart);
+			evScript.options[i] = evPart;
+			i++;
+		}
+
 	}
 	// Following method is used to retrive the relative path as device platform
 	private static string getPath()
@@ -126,18 +165,118 @@ public class SerializedEvents
 [System.Serializable]
 public class SerializedEvent
 {
-	public string mainEvent;
-	public List<string> eventParts;
-	public List<string> eventConsequence;
+	public List<EventScript.Character> speakers;
+	public ConditionCheck.Condition condition;
+	public int magnitude = 0;
+	public Var.Em targetEmotion;
+	public string heading;
+	public bool canShowMultipleTimes = false;
+	public List<SerializedEventPart> eventParts;
+	public List<SerializedEventConsequence> eventConsequence;
 	public string afterEventDialog;
-
-	public SerializedEvent()
+	public string evName;
+	public SerializedEvent(List<EventScript.Character> speakers,ConditionCheck.Condition condition,int magnitude, Var.Em targetEmotion,
+		string heading, bool canShowMultipleTimes,string evName)
 	{
-		eventParts = new List<string>();
-		eventConsequence = new List<string>();
+		this.speakers = speakers;
+		this.condition = condition;
+		this.magnitude = magnitude;
+		this.targetEmotion = targetEmotion;
+		this.heading = heading;
+		this.canShowMultipleTimes = canShowMultipleTimes;
+		this.evName = evName;
+		eventParts = new List<SerializedEventPart>();
+		eventConsequence = new List<SerializedEventConsequence>();
+	}
+	public EventScript GetEventScript(EventScript ev)
+	{
+		ev.speakers = speakers;
+		ev.condition = condition;
+		ev.magnitude = magnitude;
+		ev.targetEmotion = targetEmotion;
+		ev.heading = heading;
+		ev.canShowMultipleTimes = canShowMultipleTimes;
+		ev.parts = new List<EventPart>();
+		ev.options = new EventConsequence[0];
+		return ev;
 	}
 }
+[System.Serializable]
+public class SerializedEventPart
+{
 
+	public int speakerId = 0;
+	public string text;
+	public bool useCustomPic = false;
+	public Sprite customPic;
+
+	public SerializedEventPart(int speakerId, string text, bool useCustomPic, Sprite customPic)
+	{
+		this.speakerId = speakerId;
+		this.text = text;
+		this.useCustomPic = useCustomPic;
+		this.customPic = customPic;
+	}
+	public EventPart GetEventPart(EventPart ep)
+	{
+		ep.speakerId = speakerId;
+		ep.text = text;
+		ep.useCustomPic = useCustomPic;
+		ep.customPic = customPic;
+		return ep;
+	}
+
+}
+[Serializable]
+public class SerializedEventConsequence
+{
+	public ConsequenceType consequenceType1 = ConsequenceType.Nothing;
+	public int magnitude1;
+	public ConsequenceType consequenceType2 = ConsequenceType.Nothing;
+	public int magnitude2;
+	public ConsequenceType consequenceType3 = ConsequenceType.Nothing;
+	public int magnitude3;
+	public bool useAutoExplanation;
+	public Sprite AfterImage = null;
+	public Sprite icon;
+	public string selectionText;
+	public string selectionTooltip;
+	public string conclusionHeading;
+	public string conclusionText;
+
+	public SerializedEventConsequence(ConsequenceType consequenceType1, ConsequenceType consequenceType2, ConsequenceType consequenceType3,
+		int magnitude1, int magnitude2, int magnitude3, bool useAutoExplanation, Sprite AfterImage, Sprite icon, string selectionTooltip,
+		string conclusionHeading, string conclusionText)
+	{
+		this.consequenceType1 = consequenceType1;
+		this.consequenceType2 = consequenceType2;
+		this.consequenceType3 = consequenceType3;
+		this.magnitude2 = magnitude2;
+		this.magnitude3 = magnitude3;
+		this.useAutoExplanation = useAutoExplanation;
+		this.AfterImage = AfterImage;
+		this.icon = icon;
+		this.selectionTooltip = selectionTooltip;
+		this.conclusionHeading = conclusionHeading;
+		this.conclusionText = conclusionText;
+	}
+	public EventConsequence GetEventConsequence(EventConsequence ec)
+	{
+		ec.consequenceType1 = consequenceType1;
+		ec.consequenceType2 = consequenceType2;
+		ec.consequenceType3 = consequenceType3;
+		ec.magnitude2 = magnitude2;
+		ec.magnitude3 = magnitude3;
+		ec.useAutoExplanation = useAutoExplanation;
+		ec.AfterImage = AfterImage;
+		ec.icon = icon;
+		ec.selectionTooltip = selectionTooltip;
+		ec.conclusionHeading = conclusionHeading;
+		ec.conclusionText = conclusionText;
+		return ec;
+	}
+
+}
 [System.Serializable]
 public class SerializedDialogues
 {

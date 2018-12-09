@@ -419,7 +419,7 @@ public class EventController : MonoBehaviour {
 		return ConsequenceText;
 
 	}
-	string ApplyConsequence(EventConsequence.ConsequenceType type, int magnitude)
+	string ApplyConsequence(ConsequenceType type, int magnitude)
 	{        
 		if (currentBird == null)
 			return "";
@@ -427,7 +427,7 @@ public class EventController : MonoBehaviour {
 			currentBird.SetEmotion();
 		switch (type)
 		{
-			case EventConsequence.ConsequenceType.Courage:
+			case ConsequenceType.Courage:
 				currentBird.data.confidence += magnitude;
 				if (magnitude > 0)
 				{
@@ -437,7 +437,7 @@ public class EventController : MonoBehaviour {
 				{
 					return currentBird.charName + "'s caution increased by " + Mathf.Abs(magnitude) + ".";
 				}
-			case EventConsequence.ConsequenceType.Friendliness:
+			case ConsequenceType.Friendliness:
 				currentBird.data.friendliness += magnitude;
 				if (magnitude > 0)
 				{
@@ -447,7 +447,7 @@ public class EventController : MonoBehaviour {
 				{
 					return currentBird.charName + " gained " + Mathf.Abs(magnitude) + " solitude.";
 				}               
-			case EventConsequence.ConsequenceType.Health:
+			case ConsequenceType.Health:
 				currentBird.ChageHealth(magnitude);
 				if (magnitude > 0)
 				{

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum ConsequenceType { Health, Friendliness, Courage, Nothing };
 [System.Serializable]
 public class EventConsequence :MonoBehaviour{
 	public EventScript onComplete = null;
@@ -24,8 +26,6 @@ public class EventConsequence :MonoBehaviour{
 	[TextArea(3, 20)]
 	public string conclusionText;
    
-	
-	public enum ConsequenceType { Health,Friendliness,Courage,Nothing};
 	
 
 }
