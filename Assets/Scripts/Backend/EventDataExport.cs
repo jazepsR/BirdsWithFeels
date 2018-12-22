@@ -8,6 +8,7 @@ using System;
 public class EventDataExport : MonoBehaviour {
 	static SerializedEvents serializedEvents;
 	static SerializedDialogues serializedDialogues;
+	static Sprite[] emotionIcons;
 	public static void SaveEvents(string path)
 	{
 		string filePath = getPath() + path;
@@ -82,7 +83,8 @@ public class EventDataExport : MonoBehaviour {
 			foreach (EventConsequence con in ev.options)
 			{
 				eventObj.eventConsequence.Add(new SerializedEventConsequence(con.consequenceType1, con.consequenceType2, con.consequenceType3, con.magnitude1,
-					con.magnitude2, con.magnitude3, con.useAutoExplanation, con.AfterImage, con.icon, con.selectionTooltip, con.conclusionHeading, con.conclusionText));
+					con.magnitude2, con.magnitude3, con.useAutoExplanation, con.AfterImage, con.icon,con.selectionText,
+					con.selectionTooltip, con.conclusionHeading, con.conclusionText));
 			}
 			if (ev.afterEventDialog == null)
 				eventObj.afterEventDialog = "none";
@@ -95,16 +97,22 @@ public class EventDataExport : MonoBehaviour {
 	public static void LoadEvents(Transform parent, string path)
 	{
 
-		string fullPath = ExcelExport.getPath()+ "/"+ "CSV/eventData" + ".json";
-		if (!File.Exists(fullPath))
-		{			
-			Debug.LogError("file not found in path!");
-			return;
+		string fullPath = ExcelExport.getPath() + "/" + path;
+		string[] files = Directory.GetFiles(fullPath, "*.json", SearchOption.TopDirectoryOnly);
+		emotionIcons = Resources.LoadAll<Sprite>("Icons/icons_startingabilties");
+		foreach (string file in files)
+		{
+			if (!File.Exists(file))
+			{
+				Debug.LogError("file not found in path!");
+			}
+			else
+			{
+				string allText = File.ReadAllText(file);
+				SerializedEvent ev = JsonUtility.FromJson<SerializedEvent>(allText);
+				CreateLoadedEvent(ev, parent);
+			}
 		}
-
-		string allText = File.ReadAllText(fullPath);
-		SerializedEvent ev= JsonUtility.FromJson<SerializedEvent>(allText);
-		CreateLoadedEvent(ev, parent);
 
 	}
 	public static void CreateLoadedEvent(SerializedEvent evData, Transform parent)
@@ -114,26 +122,30 @@ public class EventDataExport : MonoBehaviour {
 		EventScript evScript = evObj.AddComponent<EventScript>();
 		evData.GetEventScript(evScript);
 		//Generate event parts
-		GameObject parts = new GameObject(evData.evName);
-		parts.transform.parent = evObj.transform.parent;
+		GameObject parts = new GameObject("parts");
+		parts.transform.parent = evObj.transform;
+		int i = 1;
 		foreach (SerializedEventPart part in evData.eventParts)
 		{
-			GameObject partObj = new GameObject("part");
-			partObj.transform.parent = parts.transform.parent;
-			EventPart evPart = evObj.AddComponent<EventPart>();
-			part.GetEventPart(evPart);		
+			GameObject partObj = new GameObject("Part "+ i);
+			partObj.transform.parent = parts.transform;
+			EventPart evPart = partObj.AddComponent<EventPart>();
+			part.GetEventPart(evPart);
+			i++;
 		}
 		//Generate event consequences
 		evScript.options = new EventConsequence[evData.eventConsequence.Count];
-		int i = 0;
+		i = 0;
 		foreach (SerializedEventConsequence part in evData.eventConsequence)
 		{
-			GameObject partObj = new GameObject("consequence");
+			GameObject partObj = new GameObject("Option " +(i+1));
 			partObj.transform.parent = evObj.transform;
-			EventConsequence evPart = evObj.AddComponent<EventConsequence>();
+			EventConsequence evPart = partObj.AddComponent<EventConsequence>();
 			part.GetEventConsequence(evPart);
 			evScript.options[i] = evPart;
 			i++;
+			evPart.AfterImage = null;
+			evPart.icon = emotionIcons[5];
 		}
 
 	}
@@ -245,8 +257,8 @@ public class SerializedEventConsequence
 	public string conclusionText;
 
 	public SerializedEventConsequence(ConsequenceType consequenceType1, ConsequenceType consequenceType2, ConsequenceType consequenceType3,
-		int magnitude1, int magnitude2, int magnitude3, bool useAutoExplanation, Sprite AfterImage, Sprite icon, string selectionTooltip,
-		string conclusionHeading, string conclusionText)
+		int magnitude1, int magnitude2, int magnitude3, bool useAutoExplanation, Sprite AfterImage, Sprite icon, string selectionText,
+		string selectionTooltip, string conclusionHeading, string conclusionText)
 	{
 		this.consequenceType1 = consequenceType1;
 		this.consequenceType2 = consequenceType2;
@@ -256,6 +268,7 @@ public class SerializedEventConsequence
 		this.useAutoExplanation = useAutoExplanation;
 		this.AfterImage = AfterImage;
 		this.icon = icon;
+		this.selectionText = selectionText;
 		this.selectionTooltip = selectionTooltip;
 		this.conclusionHeading = conclusionHeading;
 		this.conclusionText = conclusionText;
@@ -270,6 +283,7 @@ public class SerializedEventConsequence
 		ec.useAutoExplanation = useAutoExplanation;
 		ec.AfterImage = AfterImage;
 		ec.icon = icon;
+		ec.selectionText = selectionText;
 		ec.selectionTooltip = selectionTooltip;
 		ec.conclusionHeading = conclusionHeading;
 		ec.conclusionText = conclusionText;
