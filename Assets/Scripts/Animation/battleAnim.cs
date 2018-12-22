@@ -32,7 +32,7 @@ public class battleAnim :MonoBehaviour {
 		enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
 		enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
 		enemy.GetComponentInChildren<Animator>().SetBool("win", false);
-        AudioControler.Instance.PlaySound(AudioControler.Instance.enemyMove);
+        AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
         LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position)*2, enemySpeed).setEase(LeanTweenType.easeInBack).setOnComplete(()=>
 			enemy.GetComponentInChildren<Animator>().SetBool("walk", false)
 		); 
@@ -105,7 +105,7 @@ public class battleAnim :MonoBehaviour {
 
 	IEnumerator ShowResult(battleData battle,float waitTime)
 	{
-		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyMove);
+		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyRun);
 		battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
 		yield return new WaitForSeconds(enemySpeed);
 		if (battle.enemy.position == Bird.dir.top)
@@ -158,7 +158,7 @@ public class battleAnim :MonoBehaviour {
 			if ( !(battle.enemy.enemyType == fillEnemy.enemyType.drill && !battle.enemy.foughtInRound))
 				LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
 				 , 3f).setEaseOutQuad());
-            AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.conflictLose);
+            AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.combatLose);
             battle.player.ChageHealth(-1);
 			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Cautious);
 			//battle.enemy.GetComponentInChildren<Animator>().SetBool("victory", true);

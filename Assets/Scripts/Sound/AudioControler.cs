@@ -5,35 +5,28 @@ using UnityEngine;
 public class AudioControler : MonoBehaviour {
 	public static AudioControler Instance { get; private set; }
 	public bool inBattle = false;
-	[Header("Sound cilps")]
-	public AudioClip applause;   
+	[Header("Sound clips")]
+	public AudioClip playerWin;
+	public AudioClip combatLose;
+	public AudioClip[] birdTalk;
+	public AudioClip pickupBird;
+	public AudioClip dropBird;
+	public AudioClip newEmotion;
+	public AudioClip levelUp;
+	public AudioClip enemyRun;
+	public AudioClip considerSound;
+	public AudioClip fightCloudSound;
+	public AudioClip createLines;
+	public AudioClip SolitaryAppear;
+	public AudioClip BirdSitDown;
+	public AudioClip SocialInfoAppear;
+	public AudioClip SolitaryInfoAppear;
 	public AudioClip click;
     public AudioClip mapNodeClick;
     public AudioClip fightButtonClick;
-	public AudioClip pickupBird;
-	public AudioClip dropBird;
-	public AudioClip enemyMove;
-	public AudioClip playerWin;
-	public AudioClip mouseOverBird;
-	public AudioClip expand;    
-	public AudioClip enemyMouseover1;
-	public AudioClip enemyMouseover2;
 	public AudioClip paperSound;
-	public AudioClip newEmotion;
-	public AudioClip[] birdTalk;
-    [Header("Particle sounds")]
-    public AudioClip createLines;
-    public AudioClip SolitaryAppear;
-    public AudioClip BirdSitDown;
-    public AudioClip SocialInfoAppear;
-    public AudioClip SolitaryInfoAppear;
-    [Header("combat sounds")]
-    public AudioClip conflictWin;
-    public AudioClip conflictLose;
-    public AudioClip enemyRun;
-    public AudioClip considerSound;
-    public AudioClip fightCloudSound;
-    [Header("Ambient sounds")]
+
+	[Header("Ambient sounds")]
 	public AudioClip[] AmbientSounds;
 	public AudioClip[] battleTracks;
 	[Header("Audio sources")]
@@ -41,6 +34,14 @@ public class AudioControler : MonoBehaviour {
 	public AudioSource ambientAudioSource;
 	public AudioSource battleSource;
 	public AudioSource musicSource;
+
+	[Header("Additional sounds (not planned in docment")]
+	public AudioClip conflictWin;
+	public AudioClip applause;
+	public AudioClip mouseOverBird;
+	public AudioClip expand;    
+	public AudioClip enemyMouseover1;
+	public AudioClip enemyMouseover2;
 	[HideInInspector]
 	public float defaultMusicVol, defaultSoundVol;
 	float pitch = 1;    
