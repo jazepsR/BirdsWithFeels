@@ -8,6 +8,8 @@ public class DebugMenu : MonoBehaviour {
 	// Use this for initialization
 	public Text currentBird;
 	public GameObject debugMenu;
+    public static bool cameraControl = false;
+    public Toggle cameraToggle;
 	void Awake()
 	{
 		Instance = this;
@@ -22,6 +24,7 @@ public class DebugMenu : MonoBehaviour {
 		{
 			currentBird.text = "<color=#FF0000>Select bird first!</color>";
 		}
+        cameraToggle.isOn = cameraControl;
 		debugMenu.gameObject.SetActive(true);
 	}
 	public void DeleteSave()
@@ -49,4 +52,9 @@ public class DebugMenu : MonoBehaviour {
 		catch
 		{ }
 	}
+    public void ToggleCamControls(bool enabled)
+    {
+        cameraControl = enabled;
+        cameraToggle.isOn = enabled;
+    }
 }

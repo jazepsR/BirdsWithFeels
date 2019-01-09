@@ -61,7 +61,7 @@ public static class Var {
 	public static GameObject emotionParticles = null;
 	public static bool Infight = false;
 	public static bool shouldDoMapEvent = false;
-	public static Settings gameSettings = new Settings();
+	public static Settings gameSettings = new Settings(true);
 	public static List<TimedEventData> timedEvents = new List<TimedEventData>();
 	public static string[] maleNames = {"Noah", "Liam", "Mason", "Jacob", "William","Ethan", "James","Alexander","Michael","Benjamin","Elijah",
 		"Daniel", "Aiden", "Logan", "Matthew","Lucas","Jackson","David","Oliver","Jayden","Joseph","Gabriel","Samuel","Carter","Anthony","John",
@@ -78,10 +78,18 @@ public static class Var {
 public class Settings
 {
    public bool shownFirstLevelUp = true;
-   public bool shownBattlePlanningTutorial = false;
-   public bool shownLevelTutorial = false;
-   public bool shownMapTutorial = false;
-   public bool shownMapPlanningTutorial = false;
+   public bool shownBattlePlanningTutorial = true;
+   public bool shownLevelTutorial = true;
+   public bool shownMapTutorial = true;
+   public bool shownMapPlanningTutorial = true;
+   public Settings(bool tutorialsCompleted)
+   {
+        shownFirstLevelUp = tutorialsCompleted;
+        shownBattlePlanningTutorial = tutorialsCompleted;
+        shownLevelTutorial = tutorialsCompleted;
+        shownMapTutorial = tutorialsCompleted;
+        shownMapPlanningTutorial = tutorialsCompleted;
+   }
 }
 
 

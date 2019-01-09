@@ -297,9 +297,29 @@ public class GuiContoler : MonoBehaviour {
 		{
 			setPause();
 		}
-		if (Input.GetKeyDown(KeyCode.O))
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.O))
 			ReturnToMap();
-		if (GraphActive && Input.GetMouseButtonDown(1) && canChangeGraph)
+        if (Input.GetKeyDown(KeyCode.T))
+            canvasRect.gameObject.SetActive(!canvasRect.gameObject.activeSelf);
+
+        if (DebugMenu.cameraControl)
+        {
+            Camera.main.orthographicSize += Input.mouseScrollDelta.y * 0.25f;
+            Vector2 moveBy = Vector2.zero;
+            float moveSpeed = 7f;
+            if (Input.GetKey(KeyCode.UpArrow))
+                moveBy.y += moveSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.DownArrow))
+                moveBy.y -= moveSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.LeftArrow))
+                moveBy.x -= moveSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.RightArrow))
+                moveBy.x += moveSpeed * Time.deltaTime;
+            Camera.main.transform.position += (Vector3)moveBy;
+        }
+#endif
+        if (GraphActive && Input.GetMouseButtonDown(1) && canChangeGraph)
 		{
 			if (nextGraph.gameObject.activeInHierarchy)
 				nextGraph.onClick.Invoke();
