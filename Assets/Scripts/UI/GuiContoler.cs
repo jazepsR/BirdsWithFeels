@@ -300,11 +300,13 @@ public class GuiContoler : MonoBehaviour {
 #if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.O))
 			ReturnToMap();
-        if (Input.GetKeyDown(KeyCode.T))
-            canvasRect.gameObject.SetActive(!canvasRect.gameObject.activeSelf);
 
+
+#endif
         if (DebugMenu.cameraControl)
         {
+            if (Input.GetKeyDown(KeyCode.T))
+                canvasRect.gameObject.SetActive(!canvasRect.gameObject.activeSelf);
             Camera.main.orthographicSize += Input.mouseScrollDelta.y * 0.25f;
             Vector2 moveBy = Vector2.zero;
             float moveSpeed = 7f;
@@ -318,7 +320,6 @@ public class GuiContoler : MonoBehaviour {
                 moveBy.x += moveSpeed * Time.deltaTime;
             Camera.main.transform.position += (Vector3)moveBy;
         }
-#endif
         if (GraphActive && Input.GetMouseButtonDown(1) && canChangeGraph)
 		{
 			if (nextGraph.gameObject.activeInHierarchy)
