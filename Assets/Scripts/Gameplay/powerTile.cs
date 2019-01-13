@@ -53,7 +53,6 @@ public class powerTile : MonoBehaviour {
 		if(other.tag == "feet" && Var.selectedBird == null && type == Var.PowerUps.obstacle)
 		{
 			GetComponent<Animator>().SetTrigger("grump");
-			print("gtumper");
 			canKiss = false;
 			LeanTween.delayedCall(1f, AllowKiss);
 		}
@@ -76,18 +75,19 @@ public class powerTile : MonoBehaviour {
 				break;
 			case Var.PowerUps.emotion:
 				info = "Gain one extra "+Helpers.Instance.GetHexColor(emotion) + emotion.ToString()+"</color>";
+				AudioControler.Instance.PlayRandomSound(AudioControler.Instance.effectTileMouseover);
 				break;
 			case Var.PowerUps.heal:
 				info = "Birds on this tile will heal 1 heart after the battle";
 				break;
 			case Var.PowerUps.obstacle:
-				info = "You can't place birds here - enemies will walk through";     
+				info = "You can't place birds here - enemies will walk through";
+				AudioControler.Instance.PlayRandomSound(AudioControler.Instance.rockMouseover);    
 				if(canKiss)           
 					GetComponent<Animator>().SetTrigger("kiss");
 				break;
 
 		}
-
 		Helpers.Instance.ShowTooltip(info);
 
 	}

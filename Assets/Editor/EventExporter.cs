@@ -10,7 +10,10 @@ public class EventExporter : EditorWindow
 	string exportPath = "CSV/eventData";
 	string dialogueExportPath = "CSV/dialogueData";
 	string importPath = "";
+	string dialogueImportPath = "";
+	string eventImportPath = "";
 	GameObject importedEventParent;
+	GameObject importedDialogueParent;
 	[MenuItem("Window/Event exporter")]
 	public static void ShowWindow()
 	{
@@ -32,16 +35,23 @@ public class EventExporter : EditorWindow
 		if (GUILayout.Button("Export dialogue data"))
 		{
 			EventDataExport.CreateDialogueExportFile();
-			EventDataExport.SaveDialogues("/" + dialogueExportPath + ".json");
+			EventDataExport.SaveDialogues("/" + dialogueExportPath);
 		}
 		GUILayout.Label("Event importer", EditorStyles.boldLabel);
 
-		string importPath = EditorGUILayout.TextField("Event import path", exportPath);
+		eventImportPath= EditorGUILayout.TextField("Event import path", eventImportPath);
 		if (GUILayout.Button("Import events data"))
 		{
-			if(importPath != "")
-			importedEventParent = new GameObject("Imported Events");
-			EventDataExport.LoadEvents(importedEventParent.transform, importPath);
+			if(eventImportPath != "")
+				importedEventParent = new GameObject("Imported Events");
+			EventDataExport.LoadEvents(importedEventParent.transform, eventImportPath);
+		}
+		dialogueImportPath = EditorGUILayout.TextField("Dialogue import path", dialogueImportPath);
+		if (GUILayout.Button("Import dialog data"))
+		{
+			if (dialogueImportPath != "")
+				importedDialogueParent = new GameObject("Imported Dialogues");
+			EventDataExport.LoadDialogues(importedDialogueParent.transform, dialogueImportPath);
 		}
 	}
 }

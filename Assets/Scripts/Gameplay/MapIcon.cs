@@ -357,7 +357,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		{
 			transform.parent.position = transform.position - offset;           
 		}*/
-	 
+		
 		if(useline)
 		{
 			renderLine();
@@ -449,7 +449,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			return;
 		try
 		{
-            AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
+			AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
 		}
 		catch { }
 		//map tutorial

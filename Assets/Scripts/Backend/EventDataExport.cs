@@ -19,30 +19,24 @@ public class EventDataExport : MonoBehaviour {
 			FileStream fs =File.Create(filePath + "/" + obj.evName + ".json");
 			fs.Close();
 			File.WriteAllText(filePath + "/" + obj.evName + ".json", jsonString);
-
 		}
 	}
 
 	public static void SaveDialogues(string path)
 	{
 		string filePath = getPath() + path;
-		string jsonString = "{dialogues:[";
+		Directory.CreateDirectory(filePath);
+
 		foreach (SerializedDialogue obj in serializedDialogues.dialogues)
 		{
-			jsonString += "{\"mainDialogue\":" + obj.mainDialogue + ",\"dialogueParts\":[";
-			foreach (string part in obj.dialogueParts)
-			{
-				jsonString += part + ",";
-			}
-			jsonString = jsonString.Substring(0, jsonString.Length - 1);
-			jsonString += "]},";
+			string jsonString = JsonUtility.ToJson(obj);
+			FileStream fs = File.Create(filePath + "/" + obj.dialogueName + ".json");
+			fs.Close();
+			File.WriteAllText(filePath + "/" + obj.dialogueName + ".json", jsonString);
 		}
-		jsonString = jsonString.Substring(0, jsonString.Length - 1);
-		jsonString += "]}";
-		File.WriteAllText(filePath, jsonString);
 	}
 
-	public static void CreateDialogueExportFile()
+	/*public static void CreateDialogueExportFile()
 	{
 		Debug.Log("started serizalizing dialogues!");
 		List<Dialogue> eventsToExport = new List<Dialogue>(FindObjectsOfType<Dialogue>());
@@ -57,6 +51,26 @@ public class EventDataExport : MonoBehaviour {
 				dialog.dialogueParts.Add(JsonUtility.ToJson(part));
 			}
 			serializedDialogues.dialogues.Add(dialog);
+		}
+		Debug.Log("Serialized " + serializedDialogues.dialogues.Count + " dialogues!");
+	}*/
+
+	public static void CreateDialogueExportFile()
+	{
+		Debug.Log("started serizalizing dialogues!");
+		serializedDialogues = new SerializedDialogues();
+		List<Dialogue> eventsToExport = new List<Dialogue>(FindObjectsOfType<Dialogue>());
+		foreach (Dialogue dia in eventsToExport)
+		{
+			SerializedDialogue dialogueObj = new SerializedDialogue(dia.name, dia.condition, dia.magnitude, dia.targetEmotion, dia.canUseRandomBirds,
+				dia.location, dia.speakers, dia.canShowMultipleTimes);
+
+			List<DialoguePart> parts = new List<DialoguePart>(dia.GetComponentsInChildren<DialoguePart>(true));
+			foreach (DialoguePart part in parts)
+			{
+				dialogueObj.dialogueParts.Add(new SerializedDialoguePart(part.speakerID,part.text));
+			}
+			serializedDialogues.dialogues.Add(dialogueObj);
 		}
 		Debug.Log("Serialized " + serializedDialogues.dialogues.Count + " dialogues!");
 	}
@@ -96,7 +110,6 @@ public class EventDataExport : MonoBehaviour {
 	}
 	public static void LoadEvents(Transform parent, string path)
 	{
-
 		string fullPath = ExcelExport.getPath() + "/" + path;
 		string[] files = Directory.GetFiles(fullPath, "*.json", SearchOption.TopDirectoryOnly);
 		emotionIcons = Resources.LoadAll<Sprite>("Icons/icons_startingabilties");
@@ -113,7 +126,41 @@ public class EventDataExport : MonoBehaviour {
 				CreateLoadedEvent(ev, parent);
 			}
 		}
-
+	}
+	public static void LoadDialogues(Transform parent, string path)
+	{
+		string fullPath = ExcelExport.getPath() + "/" + path;
+		string[] files = Directory.GetFiles(fullPath, "*.json", SearchOption.TopDirectoryOnly);
+		emotionIcons = Resources.LoadAll<Sprite>("Icons/icons_startingabilties");
+		foreach (string file in files)
+		{
+			if (!File.Exists(file))
+			{
+				Debug.LogError("file not found in path!");
+			}
+			else
+			{
+				string allText = File.ReadAllText(file);
+				SerializedDialogue dialogue = JsonUtility.FromJson<SerializedDialogue>(allText);
+				CreateLoadedDialogue(dialogue, parent);
+			}
+		}
+	}
+	public static void CreateLoadedDialogue(SerializedDialogue dialog, Transform parent)
+	{
+		GameObject dialogObj = new GameObject(dialog.dialogueName);
+		dialogObj.transform.parent = parent;
+		Dialogue dialogueScript = dialogObj.AddComponent<Dialogue>();
+		dialog.GetDialogue(dialogueScript);
+		int i = 1;
+		foreach (SerializedDialoguePart part in dialog.dialogueParts)
+		{
+			GameObject partObj = new GameObject("Part " + i);
+			partObj.transform.parent = dialogObj.transform;
+			DialoguePart diaPart = partObj.AddComponent<DialoguePart>();
+			part.GetSerializedDialoguePart(diaPart);
+			i++;
+		}
 	}
 	public static void CreateLoadedEvent(SerializedEvent evData, Transform parent)
 	{
@@ -304,11 +351,54 @@ public class SerializedDialogues
 [System.Serializable]
 public class SerializedDialogue
 {
-	public string mainDialogue;
-	public List<string> dialogueParts;
-
-	public SerializedDialogue()
+	public string dialogueName = "";
+	public ConditionCheck.Condition condition = ConditionCheck.Condition.none;
+	public int magnitude;
+	public Var.Em targetEmotion;
+	public bool canUseRandomBirds = false;
+	public Dialogue.Location location = Dialogue.Location.battle;
+	public List<EventScript.Character> speakers;
+	public bool canShowMultipleTimes = false;
+	public List<SerializedDialoguePart> dialogueParts = new List<SerializedDialoguePart>();
+	public Dialogue GetDialogue(Dialogue dialog)
 	{
-		dialogueParts = new List<string>();
+		dialog.condition = condition;
+		dialog.magnitude = magnitude;
+		dialog.targetEmotion = targetEmotion;
+		dialog.canUseRandomBirds = canUseRandomBirds;
+		dialog.location = location;
+		dialog.speakers = speakers;
+		dialog.canShowMultipleTimes = canShowMultipleTimes;
+		return dialog;
+	}
+	public SerializedDialogue(string dialogueName, ConditionCheck.Condition condition, int magnitude, Var.Em targetEmotion, bool canUseRandomBirds,
+		Dialogue.Location location,	List<EventScript.Character> speakers, bool canShowMultipleTimes)
+	{
+		this.dialogueName = dialogueName;
+		this.condition = condition;
+		this.magnitude = magnitude;
+		this.targetEmotion = targetEmotion;
+		this.canUseRandomBirds = canUseRandomBirds;
+		this.location = location;
+		this.speakers = speakers;
+		this.canShowMultipleTimes = canShowMultipleTimes;
+	}
+	
+}
+[System.Serializable]
+public class SerializedDialoguePart
+{
+	public int speakerID = 0;
+	public string text;
+	public SerializedDialoguePart(int speakerID, string text)
+	{
+		this.speakerID = speakerID;
+		this.text = text;
+	}
+	public DialoguePart GetSerializedDialoguePart(DialoguePart part)
+	{
+		part.speakerID = speakerID;
+		part.text = text;
+		return part;
 	}
 }

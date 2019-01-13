@@ -1178,7 +1178,7 @@ public class Helpers : MonoBehaviour {
 		GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(true);
 		GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<Image>().enabled = false;
 		GuiContoler.Instance.tooltipText.text = text;
-		AudioControler.Instance.PlaySound(AudioControler.Instance.expand);       
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.expand);       
 		//LeanTween.delayedCall(0.05f, GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<tooltipScript>().SetPos);
 	}
 	public void HideTooltip()

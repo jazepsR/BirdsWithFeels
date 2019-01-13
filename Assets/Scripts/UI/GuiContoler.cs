@@ -168,12 +168,24 @@ public class GuiContoler : MonoBehaviour {
 		SetControlButtonText();
 		SaveLoad.Save(false);
 	}
+	public void UnlockAllMap()
+	{
+		MapIcon[] icons = FindObjectsOfType<MapIcon>();
+		foreach(MapIcon icon in icons)
+		{
+			icon.available = true;
+			icon.SetState();
+		}
+	}
 	public void SetControlButtonText()
 	{
-		if (Var.isDragControls)
-			controlButtonText.text = "Drag controls";
-		else
-			controlButtonText.text = "Click controls";
+		if (controlButtonText)
+		{
+			if (Var.isDragControls)
+				controlButtonText.text = "Drag controls";
+			else
+				controlButtonText.text = "Click controls";
+		}
 	}
 
 	public void setPause()
@@ -298,29 +310,29 @@ public class GuiContoler : MonoBehaviour {
 			setPause();
 		}
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.O))
+		if (Input.GetKeyDown(KeyCode.O))
 			ReturnToMap();
 
 
 #endif
-        if (DebugMenu.cameraControl)
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-                canvasRect.gameObject.SetActive(!canvasRect.gameObject.activeSelf);
-            Camera.main.orthographicSize += Input.mouseScrollDelta.y * 0.25f;
-            Vector2 moveBy = Vector2.zero;
-            float moveSpeed = 7f;
-            if (Input.GetKey(KeyCode.UpArrow))
-                moveBy.y += moveSpeed * Time.deltaTime;
-            if (Input.GetKey(KeyCode.DownArrow))
-                moveBy.y -= moveSpeed * Time.deltaTime;
-            if (Input.GetKey(KeyCode.LeftArrow))
-                moveBy.x -= moveSpeed * Time.deltaTime;
-            if (Input.GetKey(KeyCode.RightArrow))
-                moveBy.x += moveSpeed * Time.deltaTime;
-            Camera.main.transform.position += (Vector3)moveBy;
-        }
-        if (GraphActive && Input.GetMouseButtonDown(1) && canChangeGraph)
+		if (DebugMenu.cameraControl)
+		{
+			if (Input.GetKeyDown(KeyCode.T))
+				canvasRect.gameObject.SetActive(!canvasRect.gameObject.activeSelf);
+			Camera.main.orthographicSize += Input.mouseScrollDelta.y * 0.25f;
+			Vector2 moveBy = Vector2.zero;
+			float moveSpeed = 7f;
+			if (Input.GetKey(KeyCode.UpArrow))
+				moveBy.y += moveSpeed * Time.deltaTime;
+			if (Input.GetKey(KeyCode.DownArrow))
+				moveBy.y -= moveSpeed * Time.deltaTime;
+			if (Input.GetKey(KeyCode.LeftArrow))
+				moveBy.x -= moveSpeed * Time.deltaTime;
+			if (Input.GetKey(KeyCode.RightArrow))
+				moveBy.x += moveSpeed * Time.deltaTime;
+			Camera.main.transform.position += (Vector3)moveBy;
+		}
+		if (GraphActive && Input.GetMouseButtonDown(1) && canChangeGraph)
 		{
 			if (nextGraph.gameObject.activeInHierarchy)
 				nextGraph.onClick.Invoke();
@@ -434,7 +446,8 @@ public class GuiContoler : MonoBehaviour {
 			CloseGraph();
 			return;
 		}
-		
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookRight);
+		AudioControler.Instance.ClickSound();
 		currentGraph++;
 		currentGraph = Mathf.Min(3, currentGraph);
 		print("currentGraph : " + currentGraph);
@@ -472,9 +485,8 @@ public class GuiContoler : MonoBehaviour {
 		CreateGraph(currentGraph);
 		ProgressGUI.Instance.SetOnePortrait();
 		ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
-		
-	   
-		
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookLeft);
+		AudioControler.Instance.ClickSound();
 	}
 
 	public void ShowLvlText(string text)
@@ -562,7 +574,7 @@ public class GuiContoler : MonoBehaviour {
 		speechTexts = new List<string>();
 		speechPos = new List<Transform>();
 		speechBubbleObj.SetActive(false);
-		AudioControler.Instance.PlayPaperSound();
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookClose);
 		canChangeGraph = true;
 		GraphBlocker.SetActive(false);
 		minimap.SetActive(Var.gameSettings.shownLevelTutorial);
@@ -585,8 +597,6 @@ public class GuiContoler : MonoBehaviour {
 	{
 		minimap.SetActive(Var.gameSettings.shownLevelTutorial);
 		graphAnime.SetBool("open", false);
-		//graph.SetActive(false);
-		//		LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack); //seb
 		GraphBlocker.SetActive(false);
 		foreach (Transform child in graph.transform.Find("GraphParts").transform)
 		{
@@ -596,6 +606,7 @@ public class GuiContoler : MonoBehaviour {
 			LeanTween.delayedCall(0.1f, () => bird.SetAnimation(bird.emotion));
 		LeanTween.delayedCall(0.2f,()=> selectedBird.showText());
 		LeanTween.delayedCall(0.7f, () => GraphActive = false);
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookClose);
 	}
 
 	public void clearSmallGraph()
@@ -803,6 +814,7 @@ public class GuiContoler : MonoBehaviour {
 			LeanTween.delayedCall(0.05f, CloseTutorialText);
 		}               
 		InitiateGraph(selectedBird,false);
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookOpen);
 	}
 	void CloseTutorialText()
 	{
@@ -828,7 +840,7 @@ public class GuiContoler : MonoBehaviour {
 		// {
 		Debug.Log("doing graph! " + bird.charName + " index: " + index);
 		CreateGraph(index,afterBattle);
-			ProgressGUI.Instance.PortraitClick(bird);
+		ProgressGUI.Instance.PortraitClick(bird);
 	   // });
 		ProgressGUI.Instance.skillArea.SetActive(false);
 		//LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
@@ -971,13 +983,13 @@ public class GuiContoler : MonoBehaviour {
 					Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social,true,2);
 				else
 					Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social);
-                AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
+				AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
 			}
-            if (friendGain < 0)
-            {
-                Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Solitary);
-                AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
-            }
+			if (friendGain < 0)
+			{
+				Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Solitary);
+				AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
+			}
 
 			bird.friendBoost += friendGain;			
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();

@@ -21,10 +21,16 @@ public class AudioControler : MonoBehaviour {
 	public AudioClip BirdSitDown;
 	public AudioClip SocialInfoAppear;
 	public AudioClip SolitaryInfoAppear;
-	public AudioClip click;
-    public AudioClip mapNodeClick;
-    public AudioClip fightButtonClick;
+	public AudioClip[] clicks;
+	public AudioClip mapNodeClick;
+	public AudioClip fightButtonClick;
 	public AudioClip paperSound;
+	public AudioClip[] notebookOpen;
+	public AudioClip[] notebookClose;
+	public AudioClip[] notebookLeft;
+	public AudioClip[] notebookRight;
+	public AudioClip[] rockMouseover;
+	public AudioClip[] effectTileMouseover;
 
 	[Header("Ambient sounds")]
 	public AudioClip[] AmbientSounds;
@@ -39,7 +45,7 @@ public class AudioControler : MonoBehaviour {
 	public AudioClip conflictWin;
 	public AudioClip applause;
 	public AudioClip mouseOverBird;
-	public AudioClip expand;    
+	public AudioClip[] expand;    
 	public AudioClip enemyMouseover1;
 	public AudioClip enemyMouseover2;
 	[HideInInspector]
@@ -82,6 +88,10 @@ public class AudioControler : MonoBehaviour {
 	{
 		mainAudioSource.pitch = 1f;
 		mainAudioSource.PlayOneShot(clip);
+	}
+	public void PlayRandomSound(AudioClip[] clips)
+	{
+		PlaySound(clips[Random.Range(0, clips.Length)]);
 	}
 
 	public void SetSoundVolume(float vol)
@@ -151,7 +161,7 @@ public class AudioControler : MonoBehaviour {
 	}
 	public void ClickSound()
 	{
-		PlaySound(click);
+		PlaySound(clicks[Random.Range(0,clicks.Length)]);
 	}
 	public void EnemySound()
 	{
