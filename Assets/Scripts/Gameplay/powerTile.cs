@@ -72,13 +72,18 @@ public class powerTile : MonoBehaviour {
 		{
 			case Var.PowerUps.dmg:
 				info = "Birds on this tile recieve +10% fighting bonus";
+				AudioControler.Instance.powerTileCombat.Play();
 				break;
 			case Var.PowerUps.emotion:
 				info = "Gain one extra "+Helpers.Instance.GetHexColor(emotion) + emotion.ToString()+"</color>";
-				AudioControler.Instance.PlayRandomSound(AudioControler.Instance.effectTileMouseover);
+				if(emotion == Var.Em.Solitary || emotion == Var.Em.Cautious)
+					AudioControler.Instance.powerTileNegative.Play();
+				else
+					AudioControler.Instance.powerTilePositive.Play();
 				break;
 			case Var.PowerUps.heal:
 				info = "Birds on this tile will heal 1 heart after the battle";
+				AudioControler.Instance.powerTileHeart.Play();
 				break;
 			case Var.PowerUps.obstacle:
 				info = "You can't place birds here - enemies will walk through";

@@ -5,10 +5,10 @@ using UnityEngine.EventSystems;
 
 public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-	public AudioClip mapSwoosh;
 	public float mouseSensitivity;
 	private Vector3 lastPosition;
 	public Vector2 screenSize;
+	public float moveSoundDist = 25;
 	public float zoomFactor = 1;
 	public float maxScale = 2;
 	public float minScale = 0.5f;
@@ -18,6 +18,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	//[HideInInspector]
 	public Transform activeFog;
 	public static mapPan Instance;
+	Vector2 lastSoundPosition;
 	Vector3 startingScale;
 	Rect maxPos;
 	void Awake()
@@ -52,10 +53,11 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			if (Input.GetMouseButtonDown(0))
 			{
 				lastPosition = Input.mousePosition;
-				AudioControler.Instance.PlaySound(mapSwoosh);
+				AudioControler.Instance.mapPanGrab.Play();
 				MapControler.Instance.HideSelectionMenu();
 				MapControler.Instance.SelectedIcon = null;
 				MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
+				lastSoundPosition = lastPosition;
 			}
 
 			if (Input.GetMouseButton(0))
@@ -66,6 +68,12 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				{
 					delta.x = Mathf.Max(0, delta.x);
 				}
+				if(Vector2.Distance(Input.mousePosition, lastSoundPosition)> moveSoundDist)
+				{
+					lastSoundPosition = Input.mousePosition;
+					AudioControler.Instance.mapPan.Play();
+
+				}
 				transform.Translate(delta.x * mouseSensitivity, delta.y * mouseSensitivity, 0);
 				Vector3 temp = transform.position;
 				temp.y = Mathf.Clamp(temp.y, minY * transform.localScale.y / startingScale.y, maxY*transform.localScale.y/startingScale.y);
@@ -74,6 +82,10 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				//float x = Mathf.Clamp(transform.localPosition.x, maxPos.xMin + screenSize.x / 2, maxPos.xMax - screenSize.x / 2 - 1100);//- 551f/0.66f);// *map.localScale.x;
 				//float y = Mathf.Clamp(transform.localPosition.y, maxPos.yMin + screenSize.y / 2 + 1140, 30);// maxPos.yMax - screenSize.y / 2 - 1140);// *map.localScale.y;
 				// transform.localPosition = new Vector3(x, y, transform.localPosition.z);
+			}
+			if(Input.GetMouseButtonUp(0))
+			{
+				AudioControler.Instance.mapPanRelease.Play();
 			}
 		}
 	}

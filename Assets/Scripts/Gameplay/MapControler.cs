@@ -140,13 +140,16 @@ public class MapControler : MonoBehaviour {
 		if (SelectedIcon != null)
 		{
 			SelectedIcon.LoadBattleScene();
-			
+			AudioControler.Instance.buttonSoundMap.Play();
 		}
 	}
 
 	public void Rest()
 	{
 		Var.currentWeek++;
+
+		AudioControler.Instance.buttonSoundMap.Play();
+		LeanTween.delayedCall(0.3f, () => AudioControler.Instance.restSound.Play());
 		timerText.text = "Week: " + Var.currentWeek;
 		timerText.GetComponent<Animator>().SetTrigger("Increment");
 		foreach (TimedEventControl control in timedEvents)

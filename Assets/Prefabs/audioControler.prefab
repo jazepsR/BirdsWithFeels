@@ -568,13 +568,21 @@ MonoBehaviour:
   fightCloudSound: {fileID: 8300000, guid: aeb4854d63331774c81536b387845d60, type: 3}
   createLines: {fileID: 8300000, guid: 59db53898214dcd478aab26215e00217, type: 3}
   SolitaryAppear: {fileID: 8300000, guid: 2fa518d4dbdc53647a4821e1d8710198, type: 3}
-  BirdSitDown: {fileID: 8300000, guid: d81b466da0e74054981f1e6c7b4676d1, type: 3}
+  BirdSitDown:
+    clips:
+    - {fileID: 8300000, guid: a21221b20b17b0345bb0bd110f2466c5, type: 3}
+    usePitchVariation: 1
+    minPitch: 1.2
+    maxPitch: 0.8
   SocialInfoAppear: {fileID: 8300000, guid: e2bbed1c4e474e24296ecf71e1675149, type: 3}
   SolitaryInfoAppear: {fileID: 8300000, guid: 603f7ca7161b48b4d84febf2f8e8f62d, type: 3}
   clicks:
-  - {fileID: 8300000, guid: 717d7a20f08f0d24e918823435779ce4, type: 3}
-  - {fileID: 8300000, guid: 9d0746ed6d9c46a439b341e9a7aabbae, type: 3}
-  mapNodeClick: {fileID: 8300000, guid: a997c7317765e7344b49737f30385ba4, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 717d7a20f08f0d24e918823435779ce4, type: 3}
+    - {fileID: 8300000, guid: 9d0746ed6d9c46a439b341e9a7aabbae, type: 3}
+    usePitchVariation: 0
+    minPitch: 1
+    maxPitch: 1
   fightButtonClick: {fileID: 8300000, guid: 62112f5c81b633140b2d825d4a034576, type: 3}
   paperSound: {fileID: 8300000, guid: 62349a00f88e1e74896519bbc882a3a4, type: 3}
   notebookOpen:
@@ -600,6 +608,110 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 61113a33a4f59ec4f81c74b5f0e782ee, type: 3}
   effectTileMouseover:
   - {fileID: 8300000, guid: c184aaa1238c5d94c864d82e26369183, type: 3}
+  birdSelect:
+    clips:
+    - {fileID: 8300000, guid: a21221b20b17b0345bb0bd110f2466c5, type: 3}
+    usePitchVariation: 0
+    minPitch: 1
+    maxPitch: 1
+  smallGraphAppear:
+    clips:
+    - {fileID: 8300000, guid: cf23a26ab4635474e81cd68fbbc0a30a, type: 3}
+    usePitchVariation: 0
+    minPitch: 0
+    maxPitch: 0
+  smallGraphDisappear:
+    clips:
+    - {fileID: 8300000, guid: 642b64a267b11e146aa2c8fc4b3dd1a1, type: 3}
+    usePitchVariation: 0
+    minPitch: 0
+    maxPitch: 0
+  returnButton:
+    clips: []
+    usePitchVariation: 0
+    minPitch: 0
+    maxPitch: 0
+  graphHighlight:
+    clips: []
+    usePitchVariation: 0
+    minPitch: 0
+    maxPitch: 0
+  graphMove:
+    clips: []
+    usePitchVariation: 0
+    minPitch: 0
+    maxPitch: 0
+  mapNodeClick:
+    clips:
+    - {fileID: 8300000, guid: df83e2410b4b10b49ad6ecff08ed3866, type: 3}
+    usePitchVariation: 0
+    minPitch: 1
+    maxPitch: 1
+  buttonSoundMap:
+    clips:
+    - {fileID: 8300000, guid: 66a3543d5d4684e428cfe906b5b04922, type: 3}
+    usePitchVariation: 1
+    minPitch: 1
+    maxPitch: 1
+  restSound:
+    clips:
+    - {fileID: 8300000, guid: 756c83a8ad2e6bd4c9464e2f81ac7c0d, type: 3}
+    usePitchVariation: 0
+    minPitch: 1
+    maxPitch: 1
+  mapPanGrab:
+    clips:
+    - {fileID: 8300000, guid: 62349a00f88e1e74896519bbc882a3a4, type: 3}
+    usePitchVariation: 0
+    minPitch: 1
+    maxPitch: 1
+  mapPan:
+    clips:
+    - {fileID: 8300000, guid: 0a18277127694fa498da4afa772b8e78, type: 3}
+    usePitchVariation: 0
+    minPitch: 0
+    maxPitch: 0
+  mapPanRelease:
+    clips:
+    - {fileID: 8300000, guid: fc2746cb404b01e458eb0d7c522d3af0, type: 3}
+    usePitchVariation: 0
+    minPitch: 1
+    maxPitch: 1
+  mouseOverLockedNode:
+    clips:
+    - {fileID: 8300000, guid: 5ce01af3f186b1b4fb0dc8b7d6ea851c, type: 3}
+    usePitchVariation: 0
+    minPitch: 0
+    maxPitch: 0
+  hoverSounds:
+    clips: []
+    usePitchVariation: 0
+    minPitch: 0
+    maxPitch: 0
+  powerTilePositive:
+    clips:
+    - {fileID: 8300000, guid: 2a678c78826ab86468f82b53aae95e0a, type: 3}
+    usePitchVariation: 1
+    minPitch: 0.83
+    maxPitch: 0.7
+  powerTileNegative:
+    clips:
+    - {fileID: 8300000, guid: 2a678c78826ab86468f82b53aae95e0a, type: 3}
+    usePitchVariation: 1
+    minPitch: 1.18
+    maxPitch: 1.27
+  powerTileHeart:
+    clips:
+    - {fileID: 8300000, guid: 1d8ca7f9a280f464ca0691303ec00a6e, type: 3}
+    usePitchVariation: 0
+    minPitch: 0
+    maxPitch: 0
+  powerTileCombat:
+    clips:
+    - {fileID: 8300000, guid: 1d8ca7f9a280f464ca0691303ec00a6e, type: 3}
+    usePitchVariation: 1
+    minPitch: 1.25
+    maxPitch: 1.32
   AmbientSounds:
   - {fileID: 8300000, guid: e06b7f081e81ab941aa865daf2093498, type: 3}
   - {fileID: 8300000, guid: cb7261a6b91aef2488ccab1aaa8d2c02, type: 3}
@@ -612,7 +724,7 @@ MonoBehaviour:
   mainAudioSource: {fileID: 82326723610273584}
   ambientAudioSource: {fileID: 82871914456528426}
   battleSource: {fileID: 82916566876739374}
-  musicSource: {fileID: 0}
+  musicSource: {fileID: 82506597007506474}
   conflictWin: {fileID: 8300000, guid: 1afa9a642caeab74fbaaeca0aef2e8f5, type: 3}
   applause: {fileID: 8300000, guid: e2c1b218fe62cc74f82b000c833c21ad, type: 3}
   mouseOverBird: {fileID: 8300000, guid: fe82b2e3ce1fd1a459173f1420666dcb, type: 3}

@@ -42,6 +42,8 @@ public class Graph : MonoBehaviour {
 		if (isSmall)
 		{
 			tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portraitTiny, true, bird);
+			if (Time.timeSinceLevelLoad > 0.5f)
+				AudioControler.Instance.smallGraphAppear.Play();
 			try
 			{
 				dangerZoneHighlight.transform.position = tempHeart.transform.position;

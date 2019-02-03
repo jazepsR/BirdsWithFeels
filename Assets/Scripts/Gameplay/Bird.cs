@@ -603,15 +603,20 @@ public class Bird : MonoBehaviour
 		}
 		else
 		{
-			if (inMap && Time.timeSinceLevelLoad >1)
+
+			if(Time.timeSinceLevelLoad > 1)
 			{
-				MapControler.Instance.charInfoAnim.SetBool("show", true);
-				MapControler.Instance.charInfoAnim.SetBool("hide", false);
+				AudioControler.Instance.birdSelect.Play();				
+				if (inMap)
+				{
+					MapControler.Instance.charInfoAnim.SetBool("show", true);
+					MapControler.Instance.charInfoAnim.SetBool("hide", false);
+				}
 			}
 			foreach (SpriteRenderer sp in colorSprites)
 				sp.color = HighlightCol;			
 			if (!dragged)
-				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.mouseOverBird);
+				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.mouseOverBird,1);
 			
 		}
 		//if(inMap)
@@ -640,7 +645,7 @@ public class Bird : MonoBehaviour
 		{
 			if (Time.timeSinceLevelLoad - clickTime > 0.25f && !isEnemy && !inMap && !Var.isDragControls)
 			{
-				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
+				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird,0);
                 GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 				{
@@ -736,7 +741,7 @@ public class Bird : MonoBehaviour
 			}
 			if (Var.isDragControls)
 			{
-				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird);
+				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird,2);
                 GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 				{
@@ -842,7 +847,8 @@ public class Bird : MonoBehaviour
 		if (!inMap && !isEnemy)
 		{
 			GuiContoler.Instance.HideLvlText();
-			
+
+			//AudioControler.Instance.smallGraphDisappear.Play();
 		}
 		if (inMap)
 		{
@@ -1429,7 +1435,7 @@ public class Bird : MonoBehaviour
 		if (!inMap)
 		{
 			LeanTween.delayedCall(0.15f, drawLines);
-            AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.dropBird);
+            AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.dropBird,1);
             //lines.DrawLines();
             showText();
 			try

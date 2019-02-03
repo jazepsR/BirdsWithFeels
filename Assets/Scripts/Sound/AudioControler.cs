@@ -1,7 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[System.Serializable]
+public class AudioGroup
+{
+	public AudioClip[] clips;
+	public bool usePitchVariation = false;
+	[Range(0, 2f)]
+	public float minPitch=1f;
+	[Range(0, 2f)]
+	public float maxPitch=1f;
+	public void Play()
+	{
+		AudioControler.Instance.PlaySound(this);
+	}
+}
 public class AudioControler : MonoBehaviour {
 	public static AudioControler Instance { get; private set; }
 	public bool inBattle = false;
@@ -18,11 +31,10 @@ public class AudioControler : MonoBehaviour {
 	public AudioClip fightCloudSound;
 	public AudioClip createLines;
 	public AudioClip SolitaryAppear;
-	public AudioClip BirdSitDown;
+	public AudioGroup BirdSitDown;
 	public AudioClip SocialInfoAppear;
 	public AudioClip SolitaryInfoAppear;
-	public AudioClip[] clicks;
-	public AudioClip mapNodeClick;
+	public AudioGroup clicks;
 	public AudioClip fightButtonClick;
 	public AudioClip paperSound;
 	public AudioClip[] notebookOpen;
@@ -31,6 +43,28 @@ public class AudioControler : MonoBehaviour {
 	public AudioClip[] notebookRight;
 	public AudioClip[] rockMouseover;
 	public AudioClip[] effectTileMouseover;
+	public AudioGroup birdSelect;
+	[Header("Graph effects")]
+	public AudioGroup smallGraphAppear;
+	public AudioGroup smallGraphDisappear;
+	public AudioGroup returnButton;
+	public AudioGroup graphHighlight;
+	public AudioGroup graphMove;
+	[Header("Map effects")]
+	public AudioGroup mapNodeClick;
+	public AudioGroup buttonSoundMap;
+	public AudioGroup restSound;
+	public AudioGroup mapPanGrab;
+	public AudioGroup mapPan;
+	public AudioGroup mapPanRelease;
+	public AudioGroup mouseOverLockedNode;
+	[Header("UI effects")]
+	public AudioGroup hoverSounds;
+	[Header("Powerup effects")]
+	public AudioGroup powerTilePositive;
+	public AudioGroup powerTileNegative;
+	public AudioGroup powerTileHeart;
+	public AudioGroup powerTileCombat;
 
 	[Header("Ambient sounds")]
 	public AudioClip[] AmbientSounds;
@@ -70,6 +104,7 @@ public class AudioControler : MonoBehaviour {
 
 	public void SetSoundVol()
 	{
+		ClickSound();
 		mainAudioSource.volume = defaultSoundVol;
 		if(ambientAudioSource)
 			ambientAudioSource.volume = defaultSoundVol;
@@ -78,9 +113,10 @@ public class AudioControler : MonoBehaviour {
 		if(musicSource)
 			musicSource.volume = defaultMusicVol;
 	}
-	public void PlaySoundWithPitch(AudioClip clip)
+	public void PlaySoundWithPitch(AudioClip clip, int pitchRange=0)
 	{
-		mainAudioSource.pitch = Random.Range(0.6f, 1.6f);
+		//PitchRange range = pitchRanges[System.Math.Min(pitchRanges.Length - 1, pitchRange)];
+		//mainAudioSource.pitch = Random.Range(range.minPitch, range.maxPitch);
 		mainAudioSource.PlayOneShot(clip);       
 	}
 
@@ -88,6 +124,19 @@ public class AudioControler : MonoBehaviour {
 	{
 		mainAudioSource.pitch = 1f;
 		mainAudioSource.PlayOneShot(clip);
+	}
+	public void PlaySound(AudioGroup group)
+	{
+		if (group.usePitchVariation)
+			mainAudioSource.pitch = Random.Range(group.minPitch, group.maxPitch);
+		else
+			mainAudioSource.pitch = 1f;
+		if(group.clips.Length ==0)
+		{
+			Debug.LogError("Audio clip has no sound assigned!");
+			return;
+		}
+		mainAudioSource.PlayOneShot(group.clips[Random.Range(0, group.clips.Length)]);
 	}
 	public void PlayRandomSound(AudioClip[] clips)
 	{
@@ -161,7 +210,7 @@ public class AudioControler : MonoBehaviour {
 	}
 	public void ClickSound()
 	{
-		PlaySound(clicks[Random.Range(0,clicks.Length)]);
+		clicks.Play();
 	}
 	public void EnemySound()
 	{
