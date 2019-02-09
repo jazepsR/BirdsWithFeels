@@ -172,7 +172,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.9614142
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -456,7 +456,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -584,7 +584,7 @@ MonoBehaviour:
     minPitch: 1
     maxPitch: 1
   fightButtonClick: {fileID: 8300000, guid: 1d484faf6516d21498428e347dff20ee, type: 3}
-  paperSound: {fileID: 8300000, guid: 62349a00f88e1e74896519bbc882a3a4, type: 3}
+  paperSound: {fileID: 8300000, guid: ec0260622e39ba143a0022973a9f44a9, type: 3}
   notebookOpen:
   - {fileID: 8300000, guid: 5d4e798f6f73ae0489f55cb2caaecb0e, type: 3}
   - {fileID: 8300000, guid: 02f3eae3c8ecd5f41b8c703172646a15, type: 3}
@@ -664,22 +664,24 @@ MonoBehaviour:
     maxPitch: 1
   mapPanGrab:
     clips:
-    - {fileID: 8300000, guid: 62349a00f88e1e74896519bbc882a3a4, type: 3}
-    usePitchVariation: 0
-    minPitch: 1
-    maxPitch: 1
+    - {fileID: 8300000, guid: a35d68b0524132f4da1a0977cc0739ee, type: 3}
+    usePitchVariation: 1
+    minPitch: 0.95
+    maxPitch: 1.05
   mapPan:
     clips:
-    - {fileID: 8300000, guid: 0a18277127694fa498da4afa772b8e78, type: 3}
-    usePitchVariation: 0
-    minPitch: 0
-    maxPitch: 0
+    - {fileID: 8300000, guid: 416e0145783072448a7973438f198807, type: 3}
+    - {fileID: 8300000, guid: 424d42f52954795438f3e29c31473966, type: 3}
+    - {fileID: 8300000, guid: 162c1887f60b4d743a53c2cd23eb0a6d, type: 3}
+    usePitchVariation: 1
+    minPitch: 0.9
+    maxPitch: 1.05
   mapPanRelease:
     clips:
-    - {fileID: 8300000, guid: fc2746cb404b01e458eb0d7c522d3af0, type: 3}
-    usePitchVariation: 0
-    minPitch: 1
-    maxPitch: 1
+    - {fileID: 8300000, guid: b68c6c7e99f3f55438bd017063ef41cc, type: 3}
+    usePitchVariation: 1
+    minPitch: 0.952
+    maxPitch: 1.034
   mouseOverLockedNode:
     clips:
     - {fileID: 8300000, guid: 9b630b2e9b105134a8e6e8a09362a045, type: 3}
