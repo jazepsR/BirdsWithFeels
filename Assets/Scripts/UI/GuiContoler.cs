@@ -446,7 +446,7 @@ public class GuiContoler : MonoBehaviour {
 			CloseGraph();
 			return;
 		}
-		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookRight);
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookRight, audioSourceType.ui);
 		AudioControler.Instance.ClickSound();
 		currentGraph++;
 		currentGraph = Mathf.Min(3, currentGraph);
@@ -485,7 +485,7 @@ public class GuiContoler : MonoBehaviour {
 		CreateGraph(currentGraph);
 		ProgressGUI.Instance.SetOnePortrait();
 		ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
-		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookLeft);
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookLeft, audioSourceType.ui);
 		AudioControler.Instance.ClickSound();
 	}
 
@@ -574,7 +574,7 @@ public class GuiContoler : MonoBehaviour {
 		speechTexts = new List<string>();
 		speechPos = new List<Transform>();
 		speechBubbleObj.SetActive(false);
-		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookClose);
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookClose, audioSourceType.ui);
 		canChangeGraph = true;
 		GraphBlocker.SetActive(false);
 		minimap.SetActive(Var.gameSettings.shownLevelTutorial);
@@ -606,7 +606,7 @@ public class GuiContoler : MonoBehaviour {
 			LeanTween.delayedCall(0.1f, () => bird.SetAnimation(bird.emotion));
 		LeanTween.delayedCall(0.2f,()=> selectedBird.showText());
 		LeanTween.delayedCall(0.7f, () => GraphActive = false);
-		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookClose);
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookClose, audioSourceType.ui);
 	}
 
 	public void clearSmallGraph()
@@ -814,7 +814,7 @@ public class GuiContoler : MonoBehaviour {
 			LeanTween.delayedCall(0.05f, CloseTutorialText);
 		}               
 		InitiateGraph(selectedBird,false);
-		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookOpen);
+		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.notebookOpen, audioSourceType.ui);
 	}
 	void CloseTutorialText()
 	{
@@ -983,12 +983,12 @@ public class GuiContoler : MonoBehaviour {
 					Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social,true,2);
 				else
 					Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social);
-				AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
+				AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear, audioSourceType.particles);
 			}
 			if (friendGain < 0)
 			{
 				Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Solitary);
-				AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
+				AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear, audioSourceType.particles);
 			}
 
 			bird.friendBoost += friendGain;			

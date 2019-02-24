@@ -37,7 +37,7 @@ public class LevelBarScript : MonoBehaviour {
 		temp.y = currentPoints /(float) maxPoints;
 		levelBar.rectTransform.localScale = temp;
 		id =LeanTween.value(gameObject, (float val) => levelBar.rectTransform.localScale = new Vector3(temp.x, val, temp.z), (currentPoints - 1) / ((float)maxPoints), temp.y, 0.5f).setEaseOutQuad().setOnComplete(()=>
-		AudioControler.Instance.PlaySound(AudioControler.Instance.levelUp)).id;
+		AudioControler.Instance.PlaySound(AudioControler.Instance.levelUp, audioSourceType.ui)).id;
 		if (maxPoints == currentPoints)
 		{
 			Helpers.ApplyLevel(type, bird);

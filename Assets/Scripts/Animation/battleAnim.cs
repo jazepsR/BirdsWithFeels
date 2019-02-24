@@ -32,7 +32,7 @@ public class battleAnim :MonoBehaviour {
 		enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
 		enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
 		enemy.GetComponentInChildren<Animator>().SetBool("win", false);
-        AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
+        AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun,audioSourceType.birdVoices);
         LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position)*2, enemySpeed).setEase(LeanTweenType.easeInBack).setOnComplete(()=>
 			enemy.GetComponentInChildren<Animator>().SetBool("walk", false)
 		); 
@@ -105,7 +105,7 @@ public class battleAnim :MonoBehaviour {
 
 	IEnumerator ShowResult(battleData battle,float waitTime)
 	{
-		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyRun,1);
+		AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.enemyRun, audioSourceType.birdVoices, 1);
 		battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
 		yield return new WaitForSeconds(enemySpeed);
 		if (battle.enemy.position == Bird.dir.top)
@@ -115,12 +115,12 @@ public class battleAnim :MonoBehaviour {
 		battle.enemy.GetComponentInChildren<Animator>().SetTrigger("startListening");
 		battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking");
         yield return new WaitForSeconds(0.8f);
-        AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.considerSound,1);
+        AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.considerSound, audioSourceType.birdVoices,1);
         yield return new WaitForSeconds(1.0f);
 		//lose
 		if (battle.result != 1)
 		{
-            AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.fightCloudSound);
+            AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.fightCloudSound, audioSourceType.ambient);
             Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
 			GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
 			battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
@@ -143,7 +143,7 @@ public class battleAnim :MonoBehaviour {
 		//Player won
 		if (battle.result == 1)
 		{
-			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.conflictWin,1);            
+			AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.conflictWin,audioSourceType.birdVoices, 1);            
 			battle.player.GetComponentInChildren<Animator>().SetTrigger("victory 0");   
 			battle.player.battleConfBoos += Var.confWinFight;
 			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Confident);
@@ -158,7 +158,7 @@ public class battleAnim :MonoBehaviour {
 			if ( !(battle.enemy.enemyType == fillEnemy.enemyType.drill && !battle.enemy.foughtInRound))
 				LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
 				 , 3f).setEaseOutQuad());
-            AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.combatLose,1);
+            AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.combatLose,audioSourceType.birdVoices ,1);
             battle.player.ChageHealth(-1);
 			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Cautious);
 			//battle.enemy.GetComponentInChildren<Animator>().SetBool("victory", true);
