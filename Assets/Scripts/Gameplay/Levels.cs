@@ -544,7 +544,7 @@ public class Levels : MonoBehaviour {
 			//GuiContoler.Instance.ShowMessage(Helpers.Instance.GetLevelUpText(myBird.charName,data.type));
 			bird.AddLevel(data);
 			levelPopupScript.Instance.Setup(bird, bird.data.lastLevel);
-			AudioControler.Instance.PlaySound(AudioControler.Instance.applause);
+			AudioControler.Instance.PlaySound(AudioControler.Instance.applause, audioSourceType.other);
 			Debug.Log(bird.charName + " Reached level " + levelName);
 		}
 	}

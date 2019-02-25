@@ -6,6 +6,7 @@ public class AudioGroup
 {
 	public AudioClip[] clips;
 	public bool usePitchVariation = false;
+    public audioSourceType sourceType = audioSourceType.main;
 	[Range(0, 2f)]
 	public float minPitch=1f;
 	[Range(0, 2f)]
@@ -15,6 +16,7 @@ public class AudioGroup
 		AudioControler.Instance.PlaySound(this);
 	}
 }
+public enum audioSourceType { main,ambient,birdVoices,ui,particles, other};
 public class AudioControler : MonoBehaviour {
 	public static AudioControler Instance { get; private set; }
 	public bool inBattle = false;
@@ -74,6 +76,10 @@ public class AudioControler : MonoBehaviour {
 	public AudioSource ambientAudioSource;
 	public AudioSource battleSource;
 	public AudioSource musicSource;
+    public AudioSource UiEffects;
+    public AudioSource birdVoices;
+    public AudioSource otherEffects;
+    public AudioSource particleSounds;
 
 	[Header("Additional sounds (not planned in docment")]
 	public AudioClip conflictWin;
@@ -113,34 +119,55 @@ public class AudioControler : MonoBehaviour {
 		if(musicSource)
 			musicSource.volume = defaultMusicVol;
 	}
-	public void PlaySoundWithPitch(AudioClip clip, int pitchRange=0)
+	public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int pitchRange=0)
 	{
 		//PitchRange range = pitchRanges[System.Math.Min(pitchRanges.Length - 1, pitchRange)];
 		//mainAudioSource.pitch = Random.Range(range.minPitch, range.maxPitch);
-		mainAudioSource.PlayOneShot(clip);       
+		GetAudioSource(sourceType).PlayOneShot(clip);       
 	}
 
-	public void PlaySound(AudioClip clip)
+	public void PlaySound(AudioClip clip, audioSourceType sourceType)
 	{
-		mainAudioSource.pitch = 1f;
-		mainAudioSource.PlayOneShot(clip);
+        GetAudioSource(sourceType).pitch = 1f;
+        GetAudioSource(sourceType).PlayOneShot(clip);
 	}
 	public void PlaySound(AudioGroup group)
 	{
+        AudioSource source = GetAudioSource(group.sourceType);
 		if (group.usePitchVariation)
-			mainAudioSource.pitch = Random.Range(group.minPitch, group.maxPitch);
+            source.pitch = Random.Range(group.minPitch, group.maxPitch);
 		else
-			mainAudioSource.pitch = 1f;
+            source.pitch = 1f;
 		if(group.clips.Length ==0)
 		{
 			Debug.LogError("Audio clip has no sound assigned!");
 			return;
 		}
-		mainAudioSource.PlayOneShot(group.clips[Random.Range(0, group.clips.Length)]);
+        source.PlayOneShot(group.clips[Random.Range(0, group.clips.Length)]);
 	}
-	public void PlayRandomSound(AudioClip[] clips)
+    public AudioSource GetAudioSource(audioSourceType sourceType)
+    {
+        switch(sourceType)
+        {
+            case audioSourceType.ui:
+                return UiEffects;
+            case audioSourceType.particles:
+                return particleSounds;
+            case audioSourceType.birdVoices:
+               return birdVoices;
+            case audioSourceType.main:
+                return mainAudioSource;
+            case audioSourceType.other:
+                return otherEffects;
+            case audioSourceType.ambient:
+                return ambientAudioSource;
+            default:
+                return mainAudioSource;
+        }
+    }
+	public void PlayRandomSound(AudioClip[] clips, audioSourceType sourceType)
 	{
-		PlaySound(clips[Random.Range(0, clips.Length)]);
+		PlaySound(clips[Random.Range(0, clips.Length)],sourceType);
 	}
 
 	public void SetSoundVolume(float vol)
@@ -166,7 +193,7 @@ public class AudioControler : MonoBehaviour {
 	{
 		try
 		{
-			PlaySoundWithPitch(birdTalk[Random.Range(0, birdTalk.Length)]);
+			PlaySoundWithPitch(birdTalk[Random.Range(0, birdTalk.Length)],audioSourceType.birdVoices);
 		}
 		catch {
 			print("ddd");
@@ -215,12 +242,12 @@ public class AudioControler : MonoBehaviour {
 	public void EnemySound()
 	{
 		if (Helpers.Instance.RandomBool())
-			PlaySoundWithPitch(enemyMouseover1);
+			PlaySoundWithPitch(enemyMouseover1,audioSourceType.birdVoices);
 		else
-			PlaySoundWithPitch(enemyMouseover2);
+			PlaySoundWithPitch(enemyMouseover2,audioSourceType.birdVoices);
 	}
 	public void PlayPaperSound()
 	{
-		PlaySound(paperSound);
+		PlaySound(paperSound,audioSourceType.ui);
 	}
 }
