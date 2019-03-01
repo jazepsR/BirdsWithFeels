@@ -182,7 +182,7 @@ public class ProgressGUI : MonoBehaviour {
             portraitFillObj.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
             if (bird.prevEmotion != bird.emotion && !bird.inMap)
             {
-                AudioControler.Instance.PlaySound(AudioControler.Instance.newEmotion);
+                AudioControler.Instance.PlaySound(AudioControler.Instance.newEmotion, audioSourceType.particles);
                 if(useEmoHeader)
                     LeanTween.scale(portrait.transform.parent.GetComponent<RectTransform>(), Vector3.one * 1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownEmoHeaderPortrait);
                 else

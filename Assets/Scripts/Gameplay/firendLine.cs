@@ -81,7 +81,7 @@ public class firendLine : MonoBehaviour {
 					GameObject LineObj = Instantiate(line, pos, rot);
 					activeLines.Add(LineObj);
 					Var.playerPos[y, x].lines.activeLines.Add(LineObj);
-                    AudioControler.Instance.PlaySound(AudioControler.Instance.createLines);
+                    AudioControler.Instance.PlaySound(AudioControler.Instance.createLines, audioSourceType.particles);
 				}
 				Destroy(Var.playerPos[y, x].gameObject.GetComponent<firendLine>().lonelyParticleObj);
                 //Deprecated code
@@ -140,7 +140,7 @@ public class firendLine : MonoBehaviour {
 		if (Helpers.Instance.GetAdjacentBirds(birdScript).Count == 0 && lonelyParticleObj == null)
 		{
 			lonelyParticleObj = Instantiate(lonelyParticles, birdScript.transform);
-            AudioControler.Instance.PlaySound(AudioControler.Instance.SolitaryAppear);
+            AudioControler.Instance.PlaySound(AudioControler.Instance.SolitaryAppear, audioSourceType.particles);
 			lonelyParticleObj.transform.localPosition = new Vector3(0.3f, 0, 0);
 		}
     }
