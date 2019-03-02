@@ -103,7 +103,7 @@ public class Helpers : MonoBehaviour {
 			case Var.Em.Random:
 				return emotionIcons[4];
 			default:
-				return null;
+				return emotionIcons[4]; 
 
 		}
 	}
@@ -1175,10 +1175,13 @@ public class Helpers : MonoBehaviour {
 
 	public void ShowTooltip(String text)
 	{
-		GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(true);
-		GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<Image>().enabled = false;
-		GuiContoler.Instance.tooltipText.text = text;
-		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.expand, audioSourceType.ui);       
+		if (!GuiContoler.Instance.pause.activeSelf)
+		{
+			GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(true);
+			GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<Image>().enabled = false;
+			GuiContoler.Instance.tooltipText.text = text;
+			AudioControler.Instance.PlaySound(AudioControler.Instance.showTooltip);
+		}   
 		//LeanTween.delayedCall(0.05f, GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<tooltipScript>().SetPos);
 	}
 	public void HideTooltip()

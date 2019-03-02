@@ -616,7 +616,7 @@ public class Bird : MonoBehaviour
 			foreach (SpriteRenderer sp in colorSprites)
 				sp.color = HighlightCol;			
 			if (!dragged)
-				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.mouseOverBird, audioSourceType.birdVoices ,1);
+				AudioControler.Instance.PlaySound(AudioControler.Instance.mouseOverBird);
 			
 		}
 		//if(inMap)
@@ -645,7 +645,7 @@ public class Bird : MonoBehaviour
 		{
 			if (Time.timeSinceLevelLoad - clickTime > 0.25f && !isEnemy && !inMap && !Var.isDragControls)
 			{
-				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird,0);
+				AudioControler.Instance.PlaySound(AudioControler.Instance.pickupBird);
                 GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 				{
@@ -741,7 +741,7 @@ public class Bird : MonoBehaviour
 			}
 			if (Var.isDragControls)
 			{
-				AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.pickupBird, audioSourceType.birdVoices,2);
+				AudioControler.Instance.PlaySound(AudioControler.Instance.pickupBird);
                 GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 				{
@@ -1435,7 +1435,7 @@ public class Bird : MonoBehaviour
 		if (!inMap)
 		{
 			LeanTween.delayedCall(0.15f, drawLines);
-            AudioControler.Instance.PlaySoundWithPitch(AudioControler.Instance.dropBird, audioSourceType.birdVoices,1);
+            AudioControler.Instance.PlaySound(AudioControler.Instance.dropBird);
             //lines.DrawLines();
             showText();
 			try

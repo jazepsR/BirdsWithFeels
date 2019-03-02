@@ -99,11 +99,18 @@ public class GuiMap : MonoBehaviour {
 	public void CreateMap(List<BattleData> map)
 	{
 		Clear();
-		dist = Mathf.Abs(start.position.x - finish.position.x)/((map.Count-1));
+		if (inMap)
+		{
+			dist = 0.5f * Mathf.Abs(start.position.x - finish.position.x) / ((map.Count - 1));
+		}
+		else
+		{
+			dist = Mathf.Abs(start.position.x - finish.position.x) / ((map.Count - 1));
+		}
 		foreach (BattleData part in map)
 		{
 			if(part.type!= Var.Em.finish)
-				DrawCircles(part.type);
+				DrawCircles(part.type , 22.5f);
 		}
 		GameObject cupObj = Instantiate(cup, finish.position,Quaternion.identity);
 		cupObj.transform.parent = nodes;
@@ -111,7 +118,7 @@ public class GuiMap : MonoBehaviour {
 		{
 			//LeanTween.delayedCall(0.3f, CreateColor);
 			cupObj.transform.localPosition = new Vector3(dist * count * 150, 0, 0);
-			cupObj.transform.localScale = Vector3.one * 40;
+			cupObj.transform.localScale = Vector3.one * 25;
 		}
 	}
 	public void Clear()
@@ -121,7 +128,7 @@ public class GuiMap : MonoBehaviour {
 			Destroy(child.gameObject);
 
 	}
-	void DrawCircles(Var.Em emotion)
+	void DrawCircles(Var.Em emotion, float scale = 30)
 	{
 		GameObject point = Instantiate(mapIcon, new Vector3(start.position.x + dist * count, start.position.y, start.position.z), Quaternion.identity,nodes);
 		point.GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetEmotionIcon(emotion);
@@ -133,7 +140,7 @@ public class GuiMap : MonoBehaviour {
 		{ 
 			point.transform.localPosition = new Vector3(count * dist * 150, 0, 0);
 		}
-		point.transform.localScale =Vector3.one* 30f;
+		point.transform.localScale =Vector3.one* scale;
 		count++;
 		/*
 LineRenderer lr =point.GetComponent<LineRenderer>();
