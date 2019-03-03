@@ -6,7 +6,7 @@ public class AudioGroup
 {
 	public AudioClip[] clips;
 	public bool usePitchVariation = false;
-    public audioSourceType sourceType = audioSourceType.main;
+	public audioSourceType sourceType = audioSourceType.main;
 	[Range(0, 2f)]
 	public float minPitch=1f;
 	[Range(0, 2f)]
@@ -21,30 +21,30 @@ public class AudioControler : MonoBehaviour {
 	public static AudioControler Instance { get; private set; }
 	public bool inBattle = false;
 	[Header("Sound clips")]
-	public AudioClip playerWin;
-	public AudioClip combatLose;
-	public AudioClip[] birdTalk;
-	public AudioClip pickupBird;
-	public AudioClip dropBird;
-	public AudioClip newEmotion;
-	public AudioClip levelUp;
-	public AudioClip enemyRun;
-	public AudioClip considerSound;
-	public AudioClip fightCloudSound;
-	public AudioClip createLines;
-	public AudioClip SolitaryAppear;
+	public AudioGroup playerWin;
+	public AudioGroup combatLose;
+	public AudioGroup birdTalk;
+	public AudioGroup pickupBird;
+	public AudioGroup dropBird;
+	public AudioGroup newEmotion;
+	public AudioGroup levelUp;
+	public AudioGroup enemyRun;
+	public AudioGroup considerSound;
+	public AudioGroup fightCloudSound;
+	public AudioGroup createLines;
+	public AudioGroup SolitaryAppear;
 	public AudioGroup BirdSitDown;
-	public AudioClip SocialInfoAppear;
-	public AudioClip SolitaryInfoAppear;
+	public AudioGroup SocialInfoAppear;
+	public AudioGroup SolitaryInfoAppear;
 	public AudioGroup clicks;
-	public AudioClip fightButtonClick;
-	public AudioClip paperSound;
-	public AudioClip[] notebookOpen;
-	public AudioClip[] notebookClose;
-	public AudioClip[] notebookLeft;
-	public AudioClip[] notebookRight;
-	public AudioClip[] rockMouseover;
-	public AudioClip[] effectTileMouseover;
+	public AudioGroup fightButtonClick;
+	public AudioGroup paperSound;
+	public AudioGroup notebookOpen;
+	public AudioGroup notebookClose;
+	public AudioGroup notebookLeft;
+	public AudioGroup notebookRight;
+	public AudioGroup rockMouseover;
+	public AudioGroup effectTileMouseover;
 	public AudioGroup birdSelect;
 	[Header("Graph effects")]
 	public AudioGroup smallGraphAppear;
@@ -69,25 +69,25 @@ public class AudioControler : MonoBehaviour {
 	public AudioGroup powerTileCombat;
 
 	[Header("Ambient sounds")]
-	public AudioClip[] AmbientSounds;
-	public AudioClip[] battleTracks;
+	public AudioGroup AmbientSounds;
+	public AudioGroup battleTracks;
 	[Header("Audio sources")]
 	public AudioSource mainAudioSource;
 	public AudioSource ambientAudioSource;
 	public AudioSource battleSource;
 	public AudioSource musicSource;
-    public AudioSource UiEffects;
-    public AudioSource birdVoices;
-    public AudioSource otherEffects;
-    public AudioSource particleSounds;
+	public AudioSource UiEffects;
+	public AudioSource birdVoices;
+	public AudioSource otherEffects;
+	public AudioSource particleSounds;
 
 	[Header("Additional sounds (not planned in docment")]
-	public AudioClip conflictWin;
-	public AudioClip applause;
-	public AudioClip mouseOverBird;
-	public AudioClip[] expand;    
-	public AudioClip enemyMouseover1;
-	public AudioClip enemyMouseover2;
+	public AudioGroup conflictWin;
+	public AudioGroup applause;
+	public AudioGroup mouseOverBird;
+	public AudioGroup enterLevelUiArea;
+	public AudioGroup showTooltip;
+	public AudioGroup enemyMouseover;
 	[HideInInspector]
 	public float defaultMusicVol, defaultSoundVol;
 	float pitch = 1;    
@@ -128,43 +128,43 @@ public class AudioControler : MonoBehaviour {
 
 	public void PlaySound(AudioClip clip, audioSourceType sourceType)
 	{
-        GetAudioSource(sourceType).pitch = 1f;
-        GetAudioSource(sourceType).PlayOneShot(clip);
+		GetAudioSource(sourceType).pitch = 1f;
+		GetAudioSource(sourceType).PlayOneShot(clip);
 	}
 	public void PlaySound(AudioGroup group)
 	{
-        AudioSource source = GetAudioSource(group.sourceType);
+		AudioSource source = GetAudioSource(group.sourceType);
 		if (group.usePitchVariation)
-            source.pitch = Random.Range(group.minPitch, group.maxPitch);
+			source.pitch = Random.Range(group.minPitch, group.maxPitch);
 		else
-            source.pitch = 1f;
+			source.pitch = 1f;
 		if(group.clips.Length ==0)
 		{
 			Debug.LogError("Audio clip has no sound assigned!");
 			return;
 		}
-        source.PlayOneShot(group.clips[Random.Range(0, group.clips.Length)]);
+		source.PlayOneShot(group.clips[Random.Range(0, group.clips.Length)]);
 	}
-    public AudioSource GetAudioSource(audioSourceType sourceType)
-    {
-        switch(sourceType)
-        {
-            case audioSourceType.ui:
-                return UiEffects;
-            case audioSourceType.particles:
-                return particleSounds;
-            case audioSourceType.birdVoices:
-               return birdVoices;
-            case audioSourceType.main:
-                return mainAudioSource;
-            case audioSourceType.other:
-                return otherEffects;
-            case audioSourceType.ambient:
-                return ambientAudioSource;
-            default:
-                return mainAudioSource;
-        }
-    }
+	public AudioSource GetAudioSource(audioSourceType sourceType)
+	{
+		switch(sourceType)
+		{
+			case audioSourceType.ui:
+				return UiEffects;
+			case audioSourceType.particles:
+				return particleSounds;
+			case audioSourceType.birdVoices:
+			   return birdVoices;
+			case audioSourceType.main:
+				return mainAudioSource;
+			case audioSourceType.other:
+				return otherEffects;
+			case audioSourceType.ambient:
+				return ambientAudioSource;
+			default:
+				return mainAudioSource;
+		}
+	}
 	public void PlayRandomSound(AudioClip[] clips, audioSourceType sourceType)
 	{
 		PlaySound(clips[Random.Range(0, clips.Length)],sourceType);
@@ -193,7 +193,7 @@ public class AudioControler : MonoBehaviour {
 	{
 		try
 		{
-			PlaySoundWithPitch(birdTalk[Random.Range(0, birdTalk.Length)],audioSourceType.birdVoices);
+			PlaySound(birdTalk);
 		}
 		catch {
 			print("ddd");
@@ -211,16 +211,16 @@ public class AudioControler : MonoBehaviour {
 	public void setBattleVolume(float vol)
 	{
 		if (vol != 0.0f)
-			battleSource.PlayOneShot(battleTracks[Random.Range(0, battleTracks.Length)]);
+			PlaySound(battleTracks);
 		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol, 2.6f);
 	}
 	void AmbientControl()
 	{
 		if (!inBattle || ambientAudioSource== null)
 			return;        
-		ambientAudioSource.PlayOneShot(AmbientSounds[Random.Range(0, AmbientSounds.Length)]);
+		PlaySound(AmbientSounds);
 		if(Helpers.Instance.RandomBool())
-			ambientAudioSource.PlayOneShot(AmbientSounds[Random.Range(0, AmbientSounds.Length)]);        
+			PlaySound(AmbientSounds);        
 		LeanTween.delayedCall(Random.Range(7, 45), AmbientControl);
 	}
 
@@ -241,13 +241,10 @@ public class AudioControler : MonoBehaviour {
 	}
 	public void EnemySound()
 	{
-		if (Helpers.Instance.RandomBool())
-			PlaySoundWithPitch(enemyMouseover1,audioSourceType.birdVoices);
-		else
-			PlaySoundWithPitch(enemyMouseover2,audioSourceType.birdVoices);
+		PlaySound(enemyMouseover);
 	}
 	public void PlayPaperSound()
 	{
-		PlaySound(paperSound,audioSourceType.ui);
+		PlaySound(paperSound);
 	}
 }

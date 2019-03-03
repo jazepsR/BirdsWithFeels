@@ -387,7 +387,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
-  m_Pitch: 0.9614142
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -1052,22 +1052,100 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inBattle: 0
-  playerWin: {fileID: 8300000, guid: 567dd3477a739924faa6b03f69e4af1f, type: 3}
-  combatLose: {fileID: 8300000, guid: e9b475995623e0b439a85002a9ba86a0, type: 3}
+  playerWin:
+    clips:
+    - {fileID: 8300000, guid: 567dd3477a739924faa6b03f69e4af1f, type: 3}
+    usePitchVariation: 1
+    sourceType: 2
+    minPitch: 0.95
+    maxPitch: 1.05
+  combatLose:
+    clips:
+    - {fileID: 8300000, guid: e9b475995623e0b439a85002a9ba86a0, type: 3}
+    usePitchVariation: 1
+    sourceType: 1
+    minPitch: 0.91
+    maxPitch: 1.11
   birdTalk:
-  - {fileID: 8300000, guid: b3d72612033153244a14c604bda2b60b, type: 3}
-  - {fileID: 8300000, guid: 06fdac6956f8b9843845c745a4cb5f2d, type: 3}
-  - {fileID: 8300000, guid: d5600f5075fcff54d9390a116fe2de66, type: 3}
-  - {fileID: 8300000, guid: 08afaa9fe2a11f249b37bc0aeb7556b1, type: 3}
-  pickupBird: {fileID: 8300000, guid: cca726f24c691cf4599c22a884e05b91, type: 3}
-  dropBird: {fileID: 8300000, guid: 81e4a833b78fdaa4083f56a1a2e7dc29, type: 3}
-  newEmotion: {fileID: 8300000, guid: 96d76e395697465498318eb1da2ab528, type: 3}
-  levelUp: {fileID: 8300000, guid: 54fdd4b4f6da66b4289e03593331ec56, type: 3}
-  enemyRun: {fileID: 0}
-  considerSound: {fileID: 8300000, guid: ccf831e187aaabc4d95132e66d11b19e, type: 3}
-  fightCloudSound: {fileID: 8300000, guid: aeb4854d63331774c81536b387845d60, type: 3}
-  createLines: {fileID: 8300000, guid: f95048c3839a18943b8e13f682d40f73, type: 3}
-  SolitaryAppear: {fileID: 8300000, guid: 91d7f04c658fedd468cbf9b17aad33d4, type: 3}
+    clips:
+    - {fileID: 8300000, guid: b3d72612033153244a14c604bda2b60b, type: 3}
+    - {fileID: 8300000, guid: 06fdac6956f8b9843845c745a4cb5f2d, type: 3}
+    - {fileID: 8300000, guid: d5600f5075fcff54d9390a116fe2de66, type: 3}
+    - {fileID: 8300000, guid: 08afaa9fe2a11f249b37bc0aeb7556b1, type: 3}
+    usePitchVariation: 1
+    sourceType: 2
+    minPitch: 0.93
+    maxPitch: 1.03
+  pickupBird:
+    clips:
+    - {fileID: 8300000, guid: cca726f24c691cf4599c22a884e05b91, type: 3}
+    usePitchVariation: 0
+    sourceType: 1
+    minPitch: 1
+    maxPitch: 1
+  dropBird:
+    clips:
+    - {fileID: 8300000, guid: 81e4a833b78fdaa4083f56a1a2e7dc29, type: 3}
+    usePitchVariation: 0
+    sourceType: 1
+    minPitch: 1
+    maxPitch: 1
+  newEmotion:
+    clips:
+    - {fileID: 8300000, guid: dd6b7ab7b5b071546943749395994d0b, type: 3}
+    usePitchVariation: 0
+    sourceType: 4
+    minPitch: 1
+    maxPitch: 1
+  levelUp:
+    clips:
+    - {fileID: 8300000, guid: b8c63109341d5d94a90490be7773af74, type: 3}
+    usePitchVariation: 0
+    sourceType: 1
+    minPitch: 1
+    maxPitch: 1
+  enemyRun:
+    clips:
+    - {fileID: 8300000, guid: 01ac482001dba5641874149d19c4a4b4, type: 3}
+    usePitchVariation: 0
+    sourceType: 2
+    minPitch: 1
+    maxPitch: 1
+  considerSound:
+    clips:
+    - {fileID: 8300000, guid: ccf831e187aaabc4d95132e66d11b19e, type: 3}
+    usePitchVariation: 0
+    sourceType: 2
+    minPitch: 1
+    maxPitch: 1
+  fightCloudSound:
+    clips:
+    - {fileID: 8300000, guid: 95c5b2c218e224e46a7a9ae7d8a3265d, type: 3}
+    - {fileID: 8300000, guid: 7cbc8d823ec39bf42bce2a0e6fa1f9b7, type: 3}
+    - {fileID: 8300000, guid: ddfad42ed3c39974fb7e042138aa36da, type: 3}
+    - {fileID: 8300000, guid: e741f3db38314b64daed97a8bfb0076c, type: 3}
+    - {fileID: 8300000, guid: 8c1f896954094dc49a59430587f173f0, type: 3}
+    usePitchVariation: 0
+    sourceType: 1
+    minPitch: 1
+    maxPitch: 1
+  createLines:
+    clips:
+    - {fileID: 8300000, guid: d7b46c17095f6f14eaa2a939c523d898, type: 3}
+    - {fileID: 8300000, guid: a245fe3bd5b593b46b8f03816fc815ed, type: 3}
+    - {fileID: 8300000, guid: 4cf9363acb95141498e5cad86f8b932e, type: 3}
+    usePitchVariation: 1
+    sourceType: 4
+    minPitch: 0.89
+    maxPitch: 1.07
+  SolitaryAppear:
+    clips:
+    - {fileID: 8300000, guid: 34cfc55f6b6e05e428a34059b7043107, type: 3}
+    - {fileID: 8300000, guid: 44aaafde47aebbc42aa427dd4fac971f, type: 3}
+    usePitchVariation: 1
+    sourceType: 4
+    minPitch: 0.93
+    maxPitch: 1.07
   BirdSitDown:
     clips:
     - {fileID: 8300000, guid: d81b466da0e74054981f1e6c7b4676d1, type: 3}
@@ -1075,8 +1153,20 @@ MonoBehaviour:
     sourceType: 2
     minPitch: 0.8
     maxPitch: 1.15
-  SocialInfoAppear: {fileID: 8300000, guid: 96d76e395697465498318eb1da2ab528, type: 3}
-  SolitaryInfoAppear: {fileID: 8300000, guid: 1d835dca0b3aaef46b3d5c01cb33acc0, type: 3}
+  SocialInfoAppear:
+    clips:
+    - {fileID: 8300000, guid: 1d8ca7f9a280f464ca0691303ec00a6e, type: 3}
+    usePitchVariation: 0
+    sourceType: 4
+    minPitch: 1
+    maxPitch: 1
+  SolitaryInfoAppear:
+    clips:
+    - {fileID: 8300000, guid: 1d8ca7f9a280f464ca0691303ec00a6e, type: 3}
+    usePitchVariation: 1
+    sourceType: 4
+    minPitch: 0.81
+    maxPitch: 0.82
   clicks:
     clips:
     - {fileID: 8300000, guid: 717d7a20f08f0d24e918823435779ce4, type: 3}
@@ -1085,48 +1175,92 @@ MonoBehaviour:
     sourceType: 3
     minPitch: 1
     maxPitch: 1
-  fightButtonClick: {fileID: 8300000, guid: 1d484faf6516d21498428e347dff20ee, type: 3}
-  paperSound: {fileID: 8300000, guid: ec0260622e39ba143a0022973a9f44a9, type: 3}
+  fightButtonClick:
+    clips:
+    - {fileID: 8300000, guid: f84567101ab1c084aa73748ddb6dcb93, type: 3}
+    usePitchVariation: 0
+    sourceType: 4
+    minPitch: 1
+    maxPitch: 1
+  paperSound:
+    clips:
+    - {fileID: 8300000, guid: f8346feaed19ef0449de25d1698da377, type: 3}
+    - {fileID: 8300000, guid: ec0260622e39ba143a0022973a9f44a9, type: 3}
+    - {fileID: 8300000, guid: 7ae35e1802dfd7547ab3eb6a726a8023, type: 3}
+    usePitchVariation: 0
+    sourceType: 3
+    minPitch: 1
+    maxPitch: 1
   notebookOpen:
-  - {fileID: 8300000, guid: 5d4e798f6f73ae0489f55cb2caaecb0e, type: 3}
-  - {fileID: 8300000, guid: 02f3eae3c8ecd5f41b8c703172646a15, type: 3}
-  - {fileID: 8300000, guid: 362d0ebe292962541acc461ac361ef53, type: 3}
-  - {fileID: 8300000, guid: ec7cbaf82d3706a40aef63069424eca5, type: 3}
-  - {fileID: 8300000, guid: 3764968e551c256429ba700107501eaa, type: 3}
-  - {fileID: 8300000, guid: fc2746cb404b01e458eb0d7c522d3af0, type: 3}
-  - {fileID: 8300000, guid: 05631faab869e444c83fc3cac64fcccd, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 5d4e798f6f73ae0489f55cb2caaecb0e, type: 3}
+    - {fileID: 8300000, guid: 02f3eae3c8ecd5f41b8c703172646a15, type: 3}
+    - {fileID: 8300000, guid: 362d0ebe292962541acc461ac361ef53, type: 3}
+    - {fileID: 8300000, guid: ec7cbaf82d3706a40aef63069424eca5, type: 3}
+    - {fileID: 8300000, guid: 3764968e551c256429ba700107501eaa, type: 3}
+    - {fileID: 8300000, guid: fc2746cb404b01e458eb0d7c522d3af0, type: 3}
+    - {fileID: 8300000, guid: 05631faab869e444c83fc3cac64fcccd, type: 3}
+    usePitchVariation: 0
+    sourceType: 3
+    minPitch: 1
+    maxPitch: 1
   notebookClose:
-  - {fileID: 8300000, guid: 6b37d97ca434f544fbae871fd18f58ca, type: 3}
-  - {fileID: 8300000, guid: 402c9af4bc196c3438397e79f2f8418d, type: 3}
-  - {fileID: 8300000, guid: dbbddc1195e23a7459e9796f28e34f8b, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 6b37d97ca434f544fbae871fd18f58ca, type: 3}
+    - {fileID: 8300000, guid: 402c9af4bc196c3438397e79f2f8418d, type: 3}
+    - {fileID: 8300000, guid: dbbddc1195e23a7459e9796f28e34f8b, type: 3}
+    usePitchVariation: 0
+    sourceType: 3
+    minPitch: 1
+    maxPitch: 1
   notebookLeft:
-  - {fileID: 8300000, guid: 96b37c6549fcfb541970a6aa53448d99, type: 3}
-  - {fileID: 8300000, guid: 0a18277127694fa498da4afa772b8e78, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 96b37c6549fcfb541970a6aa53448d99, type: 3}
+    - {fileID: 8300000, guid: 0a18277127694fa498da4afa772b8e78, type: 3}
+    usePitchVariation: 0
+    sourceType: 3
+    minPitch: 1
+    maxPitch: 1
   notebookRight:
-  - {fileID: 8300000, guid: 838d11be3aeaa8044b0b6ac3293d9caa, type: 3}
-  - {fileID: 8300000, guid: d90d2f525aaf37e45af0fcbd642e65da, type: 3}
+    clips:
+    - {fileID: 8300000, guid: d90d2f525aaf37e45af0fcbd642e65da, type: 3}
+    - {fileID: 8300000, guid: 838d11be3aeaa8044b0b6ac3293d9caa, type: 3}
+    usePitchVariation: 0
+    sourceType: 3
+    minPitch: 1
+    maxPitch: 1
   rockMouseover:
-  - {fileID: 8300000, guid: b7a8b12183c79b641bb8dfde21d95d87, type: 3}
-  - {fileID: 8300000, guid: 2cbb947a1f70a6b45b0672c36d768775, type: 3}
+    clips:
+    - {fileID: 8300000, guid: b7a8b12183c79b641bb8dfde21d95d87, type: 3}
+    usePitchVariation: 0
+    sourceType: 1
+    minPitch: 1
+    maxPitch: 1
   effectTileMouseover:
-  - {fileID: 8300000, guid: 139fd70cb76903747a8f85382f65678d, type: 3}
+    clips:
+    - {fileID: 8300000, guid: a245fe3bd5b593b46b8f03816fc815ed, type: 3}
+    usePitchVariation: 1
+    sourceType: 4
+    minPitch: 1.15
+    maxPitch: 1.08
   birdSelect:
     clips:
-    - {fileID: 8300000, guid: a9028a172fd342a45ae7f0bee31d2206, type: 3}
+    - {fileID: 8300000, guid: 01ac482001dba5641874149d19c4a4b4, type: 3}
     usePitchVariation: 0
     sourceType: 2
     minPitch: 0.994
     maxPitch: 1.006
   smallGraphAppear:
     clips:
-    - {fileID: 8300000, guid: a2cf0d5b3bf68194699b6582a7939e32, type: 3}
+    - {fileID: 8300000, guid: 445b78983b099784fab9ef9a2648914e, type: 3}
     usePitchVariation: 1
     sourceType: 3
     minPitch: 0.98
     maxPitch: 1.09
   smallGraphDisappear:
     clips:
-    - {fileID: 8300000, guid: 263655048c9405641ae6fd831d0caedc, type: 3}
+    - {fileID: 8300000, guid: dbbddc1195e23a7459e9796f28e34f8b, type: 3}
+    - {fileID: 8300000, guid: 6b37d97ca434f544fbae871fd18f58ca, type: 3}
     usePitchVariation: 1
     sourceType: 3
     minPitch: 0.9
@@ -1141,6 +1275,7 @@ MonoBehaviour:
   graphHighlight:
     clips:
     - {fileID: 8300000, guid: ddfec0562e73ea742b913da1ea43a4bf, type: 3}
+    - {fileID: 8300000, guid: 15d58e12e1f256c4594e07c3093a8cd0, type: 3}
     usePitchVariation: 0
     sourceType: 3
     minPitch: 0
@@ -1161,37 +1296,39 @@ MonoBehaviour:
     maxPitch: 1
   buttonSoundMap:
     clips:
-    - {fileID: 8300000, guid: d2f80b672e733b8458e6d0905a6544f0, type: 3}
+    - {fileID: 8300000, guid: f84567101ab1c084aa73748ddb6dcb93, type: 3}
     usePitchVariation: 1
     sourceType: 3
     minPitch: 1
     maxPitch: 1
   restSound:
     clips:
-    - {fileID: 8300000, guid: 0092bb73bb86cc249b3382cc163cca0e, type: 3}
-    usePitchVariation: 0
-    sourceType: 3
-    minPitch: 1
-    maxPitch: 1
-  mapPanGrab:
-    clips:
-    - {fileID: 8300000, guid: a35d68b0524132f4da1a0977cc0739ee, type: 3}
+    - {fileID: 8300000, guid: f84567101ab1c084aa73748ddb6dcb93, type: 3}
     usePitchVariation: 1
     sourceType: 3
-    minPitch: 0.95
-    maxPitch: 1.05
-  mapPan:
+    minPitch: 0.73
+    maxPitch: 0.79
+  mapPanGrab:
     clips:
     - {fileID: 8300000, guid: 416e0145783072448a7973438f198807, type: 3}
     - {fileID: 8300000, guid: 424d42f52954795438f3e29c31473966, type: 3}
     - {fileID: 8300000, guid: 162c1887f60b4d743a53c2cd23eb0a6d, type: 3}
     usePitchVariation: 1
     sourceType: 3
+    minPitch: 0.95
+    maxPitch: 1.05
+  mapPan:
+    clips:
+    - {fileID: 8300000, guid: 85b63a48591f4b34194c9b10e4ff71cf, type: 3}
+    - {fileID: 8300000, guid: a11dcc082b38eb948a1b908fae2b37b3, type: 3}
+    - {fileID: 8300000, guid: 4bdbcc77fe29ea342ac906506befac30, type: 3}
+    usePitchVariation: 1
+    sourceType: 3
     minPitch: 0.9
     maxPitch: 1.05
   mapPanRelease:
     clips:
-    - {fileID: 8300000, guid: b68c6c7e99f3f55438bd017063ef41cc, type: 3}
+    - {fileID: 8300000, guid: 85b63a48591f4b34194c9b10e4ff71cf, type: 3}
     usePitchVariation: 1
     sourceType: 3
     minPitch: 0.952
@@ -1205,22 +1342,21 @@ MonoBehaviour:
     maxPitch: 0
   hoverSounds:
     clips:
-    - {fileID: 8300000, guid: 3f125163330252c48ae40cba96433ff9, type: 3}
-    - {fileID: 8300000, guid: 829a46b34b05ae3448c4203ba09f6e15, type: 3}
+    - {fileID: 8300000, guid: ddfec0562e73ea742b913da1ea43a4bf, type: 3}
     usePitchVariation: 1
     sourceType: 3
     minPitch: 1.085
     maxPitch: 0.975
   powerTilePositive:
     clips:
-    - {fileID: 8300000, guid: 374c24615470f4a46984c8282dc62f7b, type: 3}
+    - {fileID: 8300000, guid: dd6b7ab7b5b071546943749395994d0b, type: 3}
     usePitchVariation: 1
     sourceType: 4
     minPitch: 0.83
     maxPitch: 0.7
   powerTileNegative:
     clips:
-    - {fileID: 8300000, guid: 21120afc9d68a4648836e10b20101cb9, type: 3}
+    - {fileID: 8300000, guid: dd6b7ab7b5b071546943749395994d0b, type: 3}
     usePitchVariation: 1
     sourceType: 4
     minPitch: 1.18
@@ -1228,26 +1364,38 @@ MonoBehaviour:
   powerTileHeart:
     clips:
     - {fileID: 8300000, guid: 9150893ece15b1140b5980870f686f87, type: 3}
+    - {fileID: 8300000, guid: 220db1a47afb0564093d65ee64d575bd, type: 3}
+    - {fileID: 8300000, guid: 0092bb73bb86cc249b3382cc163cca0e, type: 3}
     usePitchVariation: 0
     sourceType: 4
-    minPitch: 0
-    maxPitch: 0
+    minPitch: 0.95
+    maxPitch: 0.91
   powerTileCombat:
     clips:
-    - {fileID: 8300000, guid: cad6e8af7f9c7ef4aa235e23d6009874, type: 3}
+    - {fileID: 8300000, guid: 445b78983b099784fab9ef9a2648914e, type: 3}
     usePitchVariation: 1
     sourceType: 4
     minPitch: 1.25
     maxPitch: 1.32
   AmbientSounds:
-  - {fileID: 8300000, guid: e06b7f081e81ab941aa865daf2093498, type: 3}
-  - {fileID: 8300000, guid: cb7261a6b91aef2488ccab1aaa8d2c02, type: 3}
+    clips:
+    - {fileID: 8300000, guid: e06b7f081e81ab941aa865daf2093498, type: 3}
+    - {fileID: 8300000, guid: cb7261a6b91aef2488ccab1aaa8d2c02, type: 3}
+    usePitchVariation: 0
+    sourceType: 1
+    minPitch: 1
+    maxPitch: 1
   battleTracks:
-  - {fileID: 8300000, guid: 81219ee77ca50da49aabaa243b19b608, type: 3}
-  - {fileID: 8300000, guid: 4c847391855c715439b5fa2204831ca0, type: 3}
-  - {fileID: 8300000, guid: 34492ebae63b0ad419508f8e3d2f79d5, type: 3}
-  - {fileID: 8300000, guid: 5dcc7db05d85cbc498227b2e0ffc542e, type: 3}
-  - {fileID: 8300000, guid: 9b3415a10330d184ab6cf7ed983a826e, type: 3}
+    clips:
+    - {fileID: 8300000, guid: 81219ee77ca50da49aabaa243b19b608, type: 3}
+    - {fileID: 8300000, guid: 4c847391855c715439b5fa2204831ca0, type: 3}
+    - {fileID: 8300000, guid: 34492ebae63b0ad419508f8e3d2f79d5, type: 3}
+    - {fileID: 8300000, guid: 5dcc7db05d85cbc498227b2e0ffc542e, type: 3}
+    - {fileID: 8300000, guid: 9b3415a10330d184ab6cf7ed983a826e, type: 3}
+    usePitchVariation: 0
+    sourceType: 1
+    minPitch: 1
+    maxPitch: 1
   mainAudioSource: {fileID: 82326723610273584}
   ambientAudioSource: {fileID: 82871914456528426}
   battleSource: {fileID: 82916566876739374}
@@ -1256,12 +1404,48 @@ MonoBehaviour:
   birdVoices: {fileID: 82272072149844258}
   otherEffects: {fileID: 82959546991212600}
   particleSounds: {fileID: 82971078709043774}
-  conflictWin: {fileID: 8300000, guid: 1afa9a642caeab74fbaaeca0aef2e8f5, type: 3}
-  applause: {fileID: 8300000, guid: e2c1b218fe62cc74f82b000c833c21ad, type: 3}
-  mouseOverBird: {fileID: 0}
-  expand:
-  - {fileID: 8300000, guid: 5c358e67a28065940b0aa88d0f92c09f, type: 3}
-  enemyMouseover1: {fileID: 8300000, guid: c4266ee648519254a9ec5b1cf25b4841, type: 3}
-  enemyMouseover2: {fileID: 8300000, guid: 896b813a38cd50d4ca30d77541be04cf, type: 3}
+  conflictWin:
+    clips:
+    - {fileID: 8300000, guid: fe82b2e3ce1fd1a459173f1420666dcb, type: 3}
+    usePitchVariation: 0
+    sourceType: 2
+    minPitch: 1
+    maxPitch: 1
+  applause:
+    clips:
+    - {fileID: 8300000, guid: e2c1b218fe62cc74f82b000c833c21ad, type: 3}
+    usePitchVariation: 0
+    sourceType: 0
+    minPitch: 1
+    maxPitch: 1
+  mouseOverBird:
+    clips:
+    - {fileID: 8300000, guid: e39251b915f53d142a8cf12ab53d61f8, type: 3}
+    usePitchVariation: 1
+    sourceType: 2
+    minPitch: 1.2
+    maxPitch: 1.22
+  enterLevelUiArea:
+    clips:
+    - {fileID: 8300000, guid: c184aaa1238c5d94c864d82e26369183, type: 3}
+    usePitchVariation: 0
+    sourceType: 3
+    minPitch: 1
+    maxPitch: 1
+  showTooltip:
+    clips:
+    - {fileID: 8300000, guid: 1d835dca0b3aaef46b3d5c01cb33acc0, type: 3}
+    usePitchVariation: 0
+    sourceType: 0
+    minPitch: 1
+    maxPitch: 1
+  enemyMouseover:
+    clips:
+    - {fileID: 8300000, guid: 896b813a38cd50d4ca30d77541be04cf, type: 3}
+    - {fileID: 8300000, guid: c4266ee648519254a9ec5b1cf25b4841, type: 3}
+    usePitchVariation: 0
+    sourceType: 2
+    minPitch: 1
+    maxPitch: 1
   defaultMusicVol: 1
   defaultSoundVol: 1

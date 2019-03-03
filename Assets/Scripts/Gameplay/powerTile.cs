@@ -87,7 +87,7 @@ public class powerTile : MonoBehaviour {
 				break;
 			case Var.PowerUps.obstacle:
 				info = "You can't place birds here - enemies will walk through";
-				AudioControler.Instance.PlayRandomSound(AudioControler.Instance.rockMouseover, audioSourceType.other);    
+				AudioControler.Instance.PlaySound(AudioControler.Instance.rockMouseover);    
 				if(canKiss)           
 					GetComponent<Animator>().SetTrigger("kiss");
 				break;

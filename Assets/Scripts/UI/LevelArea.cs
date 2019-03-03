@@ -41,7 +41,7 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		//Color col = Helpers.Instance.GetEmotionColor(emotion);
-		AudioControler.Instance.PlayRandomSound(AudioControler.Instance.expand, audioSourceType.ui);
+		AudioControler.Instance.PlaySound(AudioControler.Instance.enterLevelUiArea);
 	}
 	public void OnPointerExit(PointerEventData eventData)
 	{
