@@ -103,12 +103,15 @@ public class AudioControler : MonoBehaviour {
 		}
 		defaultSoundVol = PlayerPrefs.GetFloat("soundVol", 1);
 		defaultMusicVol = PlayerPrefs.GetFloat("musicVol", 1);
+	}
+
+    private void Start()
+    {
 		SetSoundVol();
-	}   
 
+    }
 
-
-	public void SetSoundVol()
+    public void SetSoundVol()
 	{
 		ClickSound();
 		mainAudioSource.volume = defaultSoundVol;
@@ -118,8 +121,17 @@ public class AudioControler : MonoBehaviour {
 			battleSource.volume = defaultSoundVol;
 		if(musicSource)
 			musicSource.volume = defaultMusicVol;
-	}
-	public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int pitchRange=0)
+        if(UiEffects)
+            UiEffects.volume = defaultSoundVol;
+        if(birdVoices)
+            birdVoices.volume = defaultSoundVol;
+        if(otherEffects)
+            otherEffects.volume = defaultSoundVol;
+        if(particleSounds)
+            particleSounds.volume = defaultSoundVol;
+
+    }
+public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int pitchRange=0)
 	{
 		//PitchRange range = pitchRanges[System.Math.Min(pitchRanges.Length - 1, pitchRange)];
 		//mainAudioSource.pitch = Random.Range(range.minPitch, range.maxPitch);

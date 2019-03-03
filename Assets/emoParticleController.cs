@@ -27,19 +27,31 @@ public class emoParticleController : MonoBehaviour {
 		switch(emotion)
 		{
 			case Var.Em.Social:
-				particles_social.Emit(getNumber(intensity));
-				break;
+                if(particles_social)
+				    particles_social.Emit(getNumber(intensity));
+                else
+                    Debug.LogError("Particle reference missing!");
+                break;
 
 			case Var.Em.Confident:
-				particles_confident.Emit(getNumber(intensity));
-				break;
+                if(particles_confident)                
+				    particles_confident.Emit(getNumber(intensity));
+                else
+                    Debug.LogError("Particle reference missing!");
+                break;
 
 			case Var.Em.Solitary:
-				particles_lonely.Emit(getNumber(intensity));
-				break;
+                if(particles_lonely)
+				    particles_lonely.Emit(getNumber(intensity));
+                else
+                    Debug.LogError("Particle reference missing!");
+                break;
 
 			case Var.Em.Cautious:
-				particles_cautious.Emit(getNumber(intensity));
+                if (particles_cautious)
+                    particles_cautious.Emit(getNumber(intensity));
+                else
+                    Debug.LogError("Particle reference missing!");
 				break; 
 		}
 	}
