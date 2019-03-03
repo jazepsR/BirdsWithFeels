@@ -32,7 +32,7 @@ public class cutScene : MonoBehaviour {
 		}
 		else
 		{
-			LeanTween.move(mainMenu, panToPoint, 4f).setOnComplete(startTexts).setEase(LeanTweenType.easeOutQuad);
+			LeanTween.move(mainMenu, panToPoint, 11f).setOnComplete(startTexts).setEase(LeanTweenType.easeOutQuad);
 		}
 
     }
