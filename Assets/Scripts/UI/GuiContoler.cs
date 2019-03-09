@@ -42,6 +42,8 @@ public class GuiContoler : MonoBehaviour {
 	public static int mapPos = 0;
 	private int finalResult = 0;
 	public GameObject graph;
+	public Animator graphAnimator;
+	public Animator graphPageAnimator;
 	public GameObject battlePanel;   
 	public GameObject closeReportBtn;
 	public Button CloseBattleReport;
@@ -446,6 +448,8 @@ public class GuiContoler : MonoBehaviour {
 			CloseGraph();
 			return;
 		}
+		graphAnimator.SetTrigger("turn");
+		graphPageAnimator.SetTrigger("turnright");
 		AudioControler.Instance.PlaySound(AudioControler.Instance.notebookRight);
 		AudioControler.Instance.ClickSound();
 		currentGraph++;
@@ -481,12 +485,17 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void ShowPrevGraph()
 	{
+		if (!canChangeGraph)
+			return;
+		canChangeGraph = false;
 		currentGraph--;
 		CreateGraph(currentGraph);
 		ProgressGUI.Instance.SetOnePortrait();
 		ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
 		AudioControler.Instance.PlaySound(AudioControler.Instance.notebookLeft);
 		AudioControler.Instance.ClickSound();
+		graphAnimator.SetTrigger("turn");
+		graphPageAnimator.SetTrigger("turnleft");
 	}
 
 	public void ShowLvlText(string text)

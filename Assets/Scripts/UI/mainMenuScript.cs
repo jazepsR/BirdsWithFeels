@@ -121,8 +121,6 @@ public class mainMenuScript : MonoBehaviour {
     public void yesDelete()
     {
         DeleteSave(toDelete);
-		if (!isDelete)
-			StartClick();
 		CloseDeleteDialog();
     }
     public void CloseDeleteDialog()
@@ -148,8 +146,8 @@ public class mainMenuScript : MonoBehaviour {
         Var.isTutorial = false;
         Var.isBoss = false;
         ContinueBtn.interactable = false;
-        Var.tutorialCompleted = false;
-        Var.gameSettings = new Settings(true);
+        Var.tutorialCompleted = false;   
+        Var.gameSettings = new Settings(false);
         DeleteSave("debug");
     }
 }
