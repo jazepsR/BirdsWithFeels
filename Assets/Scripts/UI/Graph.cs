@@ -42,7 +42,7 @@ public class Graph : MonoBehaviour {
 		if (isSmall)
 		{
 			tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portraitTiny, true, bird);
-			if (Time.timeSinceLevelLoad > 0.5f)
+			if (Time.timeSinceLevelLoad > 0.5f && GuiContoler.Instance.inMap)
 				AudioControler.Instance.smallGraphAppear.Play();
 			try
 			{

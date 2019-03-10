@@ -188,7 +188,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1583182956697712}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.96, y: 1.65, z: 0}
+  m_LocalPosition: {x: -1.4932411, y: -2.2339716, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4840648321344632}
@@ -1175,9 +1175,16 @@ MonoBehaviour:
     sourceType: 3
     minPitch: 1
     maxPitch: 1
-  fightButtonClick:
+  fightButtonAppear:
     clips:
     - {fileID: 8300000, guid: 9fdb2956ef32810468f0a7ddb83cc71b, type: 3}
+    usePitchVariation: 0
+    sourceType: 0
+    minPitch: 1
+    maxPitch: 1
+  fightButtonClick:
+    clips:
+    - {fileID: 8300000, guid: 18519e435083e4045ab766637275294e, type: 3}
     usePitchVariation: 0
     sourceType: 4
     minPitch: 1
@@ -1345,6 +1352,20 @@ MonoBehaviour:
     sourceType: 3
     minPitch: 1.085
     maxPitch: 0.975
+  speechBubbleAppear:
+    clips:
+    - {fileID: 8300000, guid: 18519e435083e4045ab766637275294e, type: 3}
+    usePitchVariation: 0
+    sourceType: 0
+    minPitch: 1
+    maxPitch: 1
+  speechBubbleContinue:
+    clips:
+    - {fileID: 8300000, guid: 18519e435083e4045ab766637275294e, type: 3}
+    usePitchVariation: 0
+    sourceType: 0
+    minPitch: 1
+    maxPitch: 1
   powerTilePositive:
     clips:
     - {fileID: 8300000, guid: 4caa81db09de50b44b59bff53473bcd1, type: 3}
