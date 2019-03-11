@@ -44,7 +44,7 @@ public class Helpers : MonoBehaviour {
 	public GameObject highlightGroundEffect;
 	[Header("Battle timing")]
 	public float winWaitTime = 4f;
-	public float loseWaitTime = 6f;
+	public float loseWaitTime = 2f;
 	enum friendState { alone, diagonal, oneFriend, twoFriends };
 	public void Awake()
 	{

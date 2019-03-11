@@ -37,7 +37,8 @@ public class AudioControler : MonoBehaviour {
 	public AudioGroup SocialInfoAppear;
 	public AudioGroup SolitaryInfoAppear;
 	public AudioGroup clicks;
-	public AudioGroup fightButtonClick;
+	public AudioGroup fightButtonAppear;
+    public AudioGroup fightButtonClick;
 	public AudioGroup paperSound;
 	public AudioGroup notebookOpen;
 	public AudioGroup notebookClose;
@@ -52,7 +53,7 @@ public class AudioControler : MonoBehaviour {
 	public AudioGroup returnButton;
 	public AudioGroup graphHighlight;
 	public AudioGroup graphMove;
-	[Header("Map effects")]
+    [Header("Map effects")]
 	public AudioGroup mapNodeClick;
 	public AudioGroup buttonSoundMap;
 	public AudioGroup restSound;
@@ -62,7 +63,9 @@ public class AudioControler : MonoBehaviour {
 	public AudioGroup mouseOverLockedNode;
 	[Header("UI effects")]
 	public AudioGroup hoverSounds;
-	[Header("Powerup effects")]
+    public AudioGroup speechBubbleAppear;
+    public AudioGroup speechBubbleContinue;
+    [Header("Powerup effects")]
 	public AudioGroup powerTilePositive;
 	public AudioGroup powerTileNegative;
 	public AudioGroup powerTileHeart;

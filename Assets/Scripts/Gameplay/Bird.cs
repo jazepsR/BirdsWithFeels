@@ -669,10 +669,10 @@ public class Bird : MonoBehaviour
 				if (selectionEffect != null)
 					DestroySelection();
 				ResetOnSelection();
-			}
+			}			
 			else
 			{
-				if (!dragged)
+				if (!dragged && !Var.isDragControls)
 				{
 					if (inMap)
 						return;
@@ -681,6 +681,7 @@ public class Bird : MonoBehaviour
 						LeanTween.delayedCall((btn.index.x + btn.index.y) * 0.05f + 0.05f, () => btn.ShowHighlight());
 						btn.gameObject.layer = LayerMask.NameToLayer("Default");
 					}
+					Debug.LogError("MOOMOS " + name);
 					ResetOnSelection();
 					Var.clickedBird = this;
 					foreach (Bird bird in Var.activeBirds)

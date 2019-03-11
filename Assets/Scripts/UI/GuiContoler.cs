@@ -42,6 +42,8 @@ public class GuiContoler : MonoBehaviour {
 	public static int mapPos = 0;
 	private int finalResult = 0;
 	public GameObject graph;
+	public Animator graphAnimator;
+	public Animator graphPageAnimator;
 	public GameObject battlePanel;   
 	public GameObject closeReportBtn;
 	public Button CloseBattleReport;
@@ -343,8 +345,10 @@ public class GuiContoler : MonoBehaviour {
 		}
 	}
 	public void SpeechBubbleClicked()
-	{		
-			if (speechBubbleObj != null)
+	{
+
+        AudioControler.Instance.speechBubbleContinue.Play();
+        if (speechBubbleObj != null)
 			{
 				if (speechTexts.Count == 0)
 				{
@@ -406,6 +410,7 @@ public class GuiContoler : MonoBehaviour {
 		if (speechBubbleObj.activeSelf) {            
 			speechTexts.Add(text);
 			speechPos.Add(pos);
+            AudioControler.Instance.speechBubbleContinue.Play();
 		}
 		else
 		{
@@ -416,7 +421,7 @@ public class GuiContoler : MonoBehaviour {
 			}
 			SpeechBubbleText.text = text;
 			speechBubbleObj.SetActive(true);
-			foreach (Image img in vingette)
+            foreach (Image img in vingette)
 			{
 				LeanTween.alpha(img.rectTransform, 0.5f, 0.5f);
 			}
@@ -446,6 +451,9 @@ public class GuiContoler : MonoBehaviour {
 			CloseGraph();
 			return;
 		}
+
+		graphAnimator.SetTrigger("turn");
+		graphPageAnimator.SetTrigger("turnright");
 		AudioControler.Instance.PlaySound(AudioControler.Instance.notebookRight);
 		AudioControler.Instance.ClickSound();
 		currentGraph++;
@@ -481,12 +489,17 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void ShowPrevGraph()
 	{
+		if (!canChangeGraph)
+			return;
+		canChangeGraph = false;
 		currentGraph--;
 		CreateGraph(currentGraph);
 		ProgressGUI.Instance.SetOnePortrait();
 		ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
 		AudioControler.Instance.PlaySound(AudioControler.Instance.notebookLeft);
 		AudioControler.Instance.ClickSound();
+		graphAnimator.SetTrigger("turn");
+		graphPageAnimator.SetTrigger("turnleft");
 	}
 
 	public void ShowLvlText(string text)
@@ -880,7 +893,7 @@ public class GuiContoler : MonoBehaviour {
 		GameLogic.Instance.FightButton.interactable = false;
 		AudioControler.Instance.ClickSound();
 		AudioControler.Instance.setBattleVolume(0.85f);
-		AudioControler.Instance.PlaySound(AudioControler.Instance.fightButtonClick);
+		AudioControler.Instance.PlaySound(AudioControler.Instance.clicks);
 		feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
 		foreach (feedBack fb in feedBackObj)
 		{
