@@ -14,7 +14,8 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	public float minScale = 0.5f;
 	public float minY;
 	public float maxY;
-	public RectTransform map;
+    public float minX;
+    public RectTransform map;
 	//[HideInInspector]
 	public Transform activeFog;
 	public static mapPan Instance;
@@ -77,6 +78,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				transform.Translate(delta.x * mouseSensitivity, delta.y * mouseSensitivity, 0);
 				Vector3 temp = transform.position;
 				temp.y = Mathf.Clamp(temp.y, minY * transform.localScale.y / startingScale.y, maxY*transform.localScale.y/startingScale.y);
+                temp.x = Mathf.Min(temp.x, minX * transform.localScale.x / startingScale.x);
 				transform.position = temp;
 				lastPosition = Input.mousePosition;
 				//float x = Mathf.Clamp(transform.localPosition.x, maxPos.xMin + screenSize.x / 2, maxPos.xMax - screenSize.x / 2 - 1100);//- 551f/0.66f);// *map.localScale.x;
