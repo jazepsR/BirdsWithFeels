@@ -611,12 +611,12 @@ public class Bird : MonoBehaviour
 				{
 					MapControler.Instance.charInfoAnim.SetBool("show", true);
 					MapControler.Instance.charInfoAnim.SetBool("hide", false);
-				}
-			}
+                }
+                if (!dragged)
+                    AudioControler.Instance.PlaySound(AudioControler.Instance.mouseOverBird);
+            }
 			foreach (SpriteRenderer sp in colorSprites)
 				sp.color = HighlightCol;			
-			if (!dragged)
-				AudioControler.Instance.PlaySound(AudioControler.Instance.mouseOverBird);
 			
 		}
 		//if(inMap)

@@ -127,7 +127,11 @@ public class mainMenuScript : MonoBehaviour {
     {
         deleteSaveDialog.SetActive(false);
     }
-
+    public void LoadMap()
+    {
+        Var.gameSettings = new Settings(true);
+        SceneManager.LoadScene("Map");
+    }
 
     public void ResetGame()
     {
