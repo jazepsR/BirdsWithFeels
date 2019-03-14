@@ -47,7 +47,8 @@ public class AudioControler : MonoBehaviour {
 	public AudioGroup rockMouseover;
 	public AudioGroup effectTileMouseover;
 	public AudioGroup birdSelect;
-	[Header("Graph effects")]
+    public AudioGroup mouseOverBird;
+    [Header("Graph effects")]
 	public AudioGroup smallGraphAppear;
 	public AudioGroup smallGraphDisappear;
 	public AudioGroup returnButton;
@@ -87,7 +88,6 @@ public class AudioControler : MonoBehaviour {
 	[Header("Additional sounds (not planned in docment")]
 	public AudioGroup conflictWin;
 	public AudioGroup applause;
-	public AudioGroup mouseOverBird;
 	public AudioGroup enterLevelUiArea;
 	public AudioGroup showTooltip;
 	public AudioGroup enemyMouseover;

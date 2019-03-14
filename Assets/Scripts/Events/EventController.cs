@@ -111,39 +111,46 @@ public class EventController : MonoBehaviour {
 		
 		if (currentText > currentEvent.parts.Count-1)
 		{
-			eventObject.SetActive(false);
+            if (currentEvent.quitAfterLevel)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("mainMenu");
+                return;
+            }
+            eventObject.SetActive(false);
 			if(nextEvent!= null)
 			{
 				CreateEvent(nextEvent);
 				return;
 			}
 
-			if (eventsToShow.Count>0)
-			{
-				EventScript nextEvent = eventsToShow[0];
-				eventsToShow.RemoveAt(0);
-				CreateEvent(nextEvent);
+            if (eventsToShow.Count > 0)
+            {
+                EventScript nextEvent = eventsToShow[0];
+                eventsToShow.RemoveAt(0);
+                CreateEvent(nextEvent);
 
-			}
-			else if (currentEvent.afterEventDialog != null)
-				DialogueControl.Instance.CreateParticularDialog(currentEvent.afterEventDialog);
-			else
-			{
-				if (inMap)
-				{
-					DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
-					foreach(MapIcon icon in FindObjectsOfType<MapIcon>())
-						icon.SetState();
-				}
-				else
-				{
-					if (GuiContoler.Instance.graph.transform.localPosition.y < -500)
-					{
-						GuiContoler.Instance.GraphBlocker.SetActive(false);
-						DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
-					}
-				}
-			}
+            }
+            else if (currentEvent.afterEventDialog != null)
+            {
+                DialogueControl.Instance.CreateParticularDialog(currentEvent.afterEventDialog);
+            }
+            else
+            {
+                if (inMap)
+                {
+                    DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
+                    foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+                        icon.SetState();
+                }
+                else
+                {
+                    if (GuiContoler.Instance.graph.transform.localPosition.y < -500)
+                    {
+                        GuiContoler.Instance.GraphBlocker.SetActive(false);
+                        DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+                    }
+                }
+            }
 			currentEvent = null;
 			nextEvent = null;
 		}
@@ -465,10 +472,16 @@ public class EventController : MonoBehaviour {
 	void SetupChoice(GameObject choiceObj,int ID)
 	{
 		EventConsequence choiceData = currentEvent.options[ID];
-		choiceObj.GetComponent<Button>().onClick.AddListener(delegate { DisplayChoiceResult(ID); });        
-		choiceObj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
-		choiceObj.transform.Find("Description").GetComponent<Text>().text = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionText);
-		
+		choiceObj.GetComponent<Button>().onClick.AddListener(delegate { DisplayChoiceResult(ID); });
+        try
+        {
+            choiceObj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
+            choiceObj.transform.Find("Description").GetComponent<Text>().text = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionText);
+        }
+        catch
+        {
+
+        }
 		if (choiceData.icon != null)
 			choiceObj.transform.Find("Icon").GetComponent<Image>().sprite = choiceData.icon;
 		else

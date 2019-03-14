@@ -1,7 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class DebugMenu : MonoBehaviour {
 
 	public static DebugMenu Instance;
@@ -10,10 +11,37 @@ public class DebugMenu : MonoBehaviour {
 	public GameObject debugMenu;
     public static bool cameraControl = false;
     public Toggle cameraToggle;
-	void Awake()
+    private Vector3 mousePos = new Vector3(-1,-1,-1);
+    private Coroutine resetCoroutine = null;
+    public float secondsWaitTime = 240;
+    private bool resetGame = true;
+
+    
+    private void Update()
+    {
+        if (resetGame && Vector3.Distance(Input.mousePosition, mousePos) > 50f)
+        {
+            if(resetCoroutine!= null)
+            {
+                StopCoroutine(resetCoroutine);
+            }
+            mousePos = Input.mousePosition;
+            StartCoroutine(ResetSceneCoroutine());
+        }
+    }
+
+    private IEnumerator ResetSceneCoroutine()
+    {
+        yield return new WaitForSecondsRealtime(secondsWaitTime);
+        SaveLoad.DeleteSave(Var.currentSaveSlot);
+        SceneManager.LoadScene("mainMenu");
+    }
+    void Awake()
 	{
 		Instance = this;
-	}
+        mousePos = Input.mousePosition;
+        StartCoroutine(ResetSceneCoroutine());
+    }
 	public void OpenDebug()
 	{
 		try

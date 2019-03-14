@@ -17,6 +17,7 @@ public class EventScript:MonoBehaviour{
 	public EventConsequence[] options;
 	public bool canShowMultipleTimes = false;
 	public Dialogue afterEventDialog;
+    public bool quitAfterLevel = false;
 	public EventScript()
 	{
 
