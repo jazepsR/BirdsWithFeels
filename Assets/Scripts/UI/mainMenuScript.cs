@@ -79,6 +79,7 @@ public class mainMenuScript : MonoBehaviour {
     {
         ResetGame();
         Var.isTutorial = true;
+        AudioControler.Instance.fightButtonAppear.Play();
         cutsceneScript.StartCutscene();
         //SceneManager.LoadScene("NewMain");
     }

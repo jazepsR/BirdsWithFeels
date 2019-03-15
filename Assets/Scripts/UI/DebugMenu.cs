@@ -12,7 +12,7 @@ public class DebugMenu : MonoBehaviour {
     public static bool cameraControl = false;
     public Toggle cameraToggle;
     private Vector3 mousePos = new Vector3(-1,-1,-1);
-    private Coroutine resetCoroutine = null;
+    private System.DateTime resetTime;
     private float secondsWaitTime = 200;
     private bool resetGame = true;
 
@@ -21,26 +21,21 @@ public class DebugMenu : MonoBehaviour {
     {
         if (resetGame && Vector3.Distance(Input.mousePosition, mousePos) > 50f)
         {
-            if(resetCoroutine != null)
-            {
-                StopCoroutine(resetCoroutine);
-            }
+            resetTime = System.DateTime.Now.AddSeconds(secondsWaitTime);
             mousePos = Input.mousePosition;
-            resetCoroutine = StartCoroutine(ResetSceneCoroutine());
+        }
+        if(System.DateTime.Compare(System.DateTime.Now,resetTime)>0)
+        {
+            SaveLoad.DeleteSave(Var.currentSaveSlot);
+            SceneManager.LoadScene("mainMenu");
         }
     }
 
-    private IEnumerator ResetSceneCoroutine()
-    {
-        yield return new WaitForSecondsRealtime(secondsWaitTime);
-        SaveLoad.DeleteSave(Var.currentSaveSlot);
-        SceneManager.LoadScene("mainMenu");
-    }
     void Awake()
 	{
 		Instance = this;
         mousePos = Input.mousePosition;
-        StartCoroutine(ResetSceneCoroutine());
+        resetTime = System.DateTime.Now.AddSeconds(secondsWaitTime);
     }
 	public void OpenDebug()
 	{

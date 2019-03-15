@@ -64,7 +64,7 @@ public class SaveSlot : MonoBehaviour {
 	public void Select()
 	{
 		Var.currentSaveSlot = saveSlot;
-		mainMenuScript mainMenu = FindObjectOfType<mainMenuScript>();
+        mainMenuScript mainMenu = FindObjectOfType<mainMenuScript>();
 		if (isNewGame)
 		{
 			if(saveExtists)
