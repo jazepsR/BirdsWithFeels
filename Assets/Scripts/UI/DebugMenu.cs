@@ -13,7 +13,7 @@ public class DebugMenu : MonoBehaviour {
     public Toggle cameraToggle;
     private Vector3 mousePos = new Vector3(-1,-1,-1);
     private Coroutine resetCoroutine = null;
-    public float secondsWaitTime = 240;
+    private float secondsWaitTime = 200;
     private bool resetGame = true;
 
     
@@ -21,12 +21,12 @@ public class DebugMenu : MonoBehaviour {
     {
         if (resetGame && Vector3.Distance(Input.mousePosition, mousePos) > 50f)
         {
-            if(resetCoroutine!= null)
+            if(resetCoroutine != null)
             {
                 StopCoroutine(resetCoroutine);
             }
             mousePos = Input.mousePosition;
-            StartCoroutine(ResetSceneCoroutine());
+            resetCoroutine = StartCoroutine(ResetSceneCoroutine());
         }
     }
 

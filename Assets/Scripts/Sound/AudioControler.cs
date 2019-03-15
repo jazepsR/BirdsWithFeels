@@ -227,7 +227,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	{
 		if (vol != 0.0f)
 			PlaySound(battleTracks);
-		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol, 2.6f);
+		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol, 1f);
 	}
 	void AmbientControl()
 	{

@@ -20,13 +20,13 @@ public class LevelTutorial : MonoBehaviour {
 	void Start ()
 	{
 		//Var.currentStageID = 1;
-		if(Var.currentStageID == 120 && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
+		if((Var.currentStageID == 10 || Var.currentStageID == 15) && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
 		{
 			Var.gameSettings.shownBattlePlanningTutorial = true;
 			DialogueControl.Instance.CreateParticularDialog(planningDialogue);
 		}
 
-		if (Var.currentStageID == 100 && !Var.gameSettings.shownLevelTutorial)
+		if (Var.currentStageID == 5 && !Var.gameSettings.shownLevelTutorial)
 		{
 			Var.gameSettings.shownLevelTutorial = true;
 			DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);
@@ -44,7 +44,7 @@ public class LevelTutorial : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{		
-		if (Var.currentStageID != 100)
+		if (Var.currentStageID != 5)
 			return;
 		if (shouldShowFirstBattleDialog && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad >0.5f)
 		{

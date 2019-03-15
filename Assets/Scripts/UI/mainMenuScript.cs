@@ -47,6 +47,13 @@ public class mainMenuScript : MonoBehaviour {
         saveSlotPanel.SetActive(true);
 
     }
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Quit();
+        }
+    }
     public void CloseSaveSlots()
     {
         buttonPanel.SetActive(true);
