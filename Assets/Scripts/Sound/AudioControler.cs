@@ -8,6 +8,8 @@ public class AudioGroup
 	public bool usePitchVariation = false;
 	public audioSourceType sourceType = audioSourceType.main;
 	[Range(0, 2f)]
+	public float volume=1f;
+	[Range(0, 2f)]
 	public float minPitch=1f;
 	[Range(0, 2f)]
 	public float maxPitch=1f;
@@ -23,9 +25,6 @@ public class AudioControler : MonoBehaviour {
 	[Header("Sound clips")]
 	public AudioGroup playerWin;
 	public AudioGroup combatLose;
-	public AudioGroup birdTalk;
-	public AudioGroup pickupBird;
-	public AudioGroup dropBird;
 	public AudioGroup newEmotion;
 	public AudioGroup levelUp;
 	public AudioGroup enemyRun;
@@ -46,8 +45,6 @@ public class AudioControler : MonoBehaviour {
 	public AudioGroup notebookRight;
 	public AudioGroup rockMouseover;
 	public AudioGroup effectTileMouseover;
-	public AudioGroup birdSelect;
-    public AudioGroup mouseOverBird;
     [Header("Graph effects")]
 	public AudioGroup smallGraphAppear;
 	public AudioGroup smallGraphDisappear;
@@ -84,7 +81,13 @@ public class AudioControler : MonoBehaviour {
 	public AudioSource birdVoices;
 	public AudioSource otherEffects;
 	public AudioSource particleSounds;
-
+	[Header("Individual bird sounds")]
+	public BirdSound TerrySounds;
+	public BirdSound RebeccaSounds;
+	public BirdSound AlexSound;
+	public BirdSound KimSound;
+	public BirdSound SophieSound;
+	public BirdSound DefaultBirdSound;
 	[Header("Additional sounds (not planned in docment")]
 	public AudioGroup conflictWin;
 	public AudioGroup applause;
@@ -106,14 +109,41 @@ public class AudioControler : MonoBehaviour {
 		}
 		defaultSoundVol = PlayerPrefs.GetFloat("soundVol", 1);
 		defaultMusicVol = PlayerPrefs.GetFloat("musicVol", 1);
+		
 	}
 
     private void Start()
     {
+		if(Var.ambientSounds != null)
+		{
+			AmbientSounds = Var.ambientSounds;
+		}
 		SetSoundVol();
 
     }
+	public BirdSound GetBirdSoundGroup(string charName)	
+	{
+		charName = charName.ToLower();
+		switch(charName)
+		{
+			case "terry":
+				return TerrySounds;
+			case "kim":
+				return KimSound;
+				case "rebecca":
+				return RebeccaSounds;
+				case "alex":
+				return AlexSound;
+				case "alexander":
+				return AlexSound;
+				case "sophie":
+				return SophieSound;
+				default:
+				return DefaultBirdSound;
 
+		}
+
+	}
     public void SetSoundVol()
 	{
 		ClickSound();
@@ -149,16 +179,17 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	public void PlaySound(AudioGroup group)
 	{
 		AudioSource source = GetAudioSource(group.sourceType);
+
 		if (group.usePitchVariation)
 			source.pitch = Random.Range(group.minPitch, group.maxPitch);
 		else
 			source.pitch = 1f;
 		if(group.clips.Length ==0)
 		{
-			Debug.LogError("Audio clip has no sound assigned!");
+			Debug.Log("Audio clip has no sound assigned!");
 			return;
 		}
-		source.PlayOneShot(group.clips[Random.Range(0, group.clips.Length)]);
+		source.PlayOneShot(group.clips[Random.Range(0, group.clips.Length)],group.volume);
 	}
 	public AudioSource GetAudioSource(audioSourceType sourceType)
 	{
@@ -203,18 +234,6 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 		PlayerPrefs.Save();
 		SetSoundVol();
 	}
-
-	public void PlayVoice()
-	{
-		try
-		{
-			PlaySound(birdTalk);
-		}
-		catch {
-			print("ddd");
-		}
-	}
-
 
 	void battleVolumeToggle(float vol)
 	{

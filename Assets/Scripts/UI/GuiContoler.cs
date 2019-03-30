@@ -59,6 +59,7 @@ public class GuiContoler : MonoBehaviour {
 	public GameObject speechBubble;
 	List<string> speechTexts = new List<string>();
 	List<Transform> speechPos = new List<Transform>();
+	List<AudioGroup> speechAudioGroup = new List<AudioGroup>();
 	public Text SpeechBubbleText;
 	public Text SpeechBubbleReminderText;
 	public GameObject speechBubbleObj;
@@ -384,7 +385,7 @@ public class GuiContoler : MonoBehaviour {
 				}
 				else
 				{
-					AudioControler.Instance.PlayVoice();
+					speechAudioGroup[0].Play();
 					SpeechBubbleText.text = speechTexts[0];
 					speechBubble.GetComponent<UIFollow>().target = speechPos[0];
 					if (lastSpeechPos != null && lastSpeechPos.Equals(speechPos[0]))
@@ -394,6 +395,7 @@ public class GuiContoler : MonoBehaviour {
 					lastSpeechPos = speechPos[0];
 					speechPos.RemoveAt(0);
 					speechTexts.RemoveAt(0);
+					speechAudioGroup.RemoveAt(0);
 					if (!inMap)
 					{
 						prevGraph.interactable = false;
@@ -405,11 +407,12 @@ public class GuiContoler : MonoBehaviour {
 
 
 
-	public void ShowSpeechBubble(Transform pos,string text)
+	public void ShowSpeechBubble(Transform pos,string text, AudioGroup birdTalk)
 	{
 		if (speechBubbleObj.activeSelf) {            
 			speechTexts.Add(text);
 			speechPos.Add(pos);
+			speechAudioGroup.Add(birdTalk);
             AudioControler.Instance.speechBubbleContinue.Play();
 		}
 		else
@@ -428,7 +431,8 @@ public class GuiContoler : MonoBehaviour {
 			speechBubble.GetComponent<UIFollow>().target = pos;
 			try
 			{
-				AudioControler.Instance.PlayVoice();
+				speechAudioGroup[0].Play();
+				speechAudioGroup.RemoveAt(0);
 			}
 			catch { print("voice issue"); }
 		   // LeanTween.delayedCall(6f, ShowSpeechBubbleReminder);
