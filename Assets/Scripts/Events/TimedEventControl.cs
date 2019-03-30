@@ -31,7 +31,7 @@ public class TimedEventControl : MonoBehaviour {
 		}
 		else
 		{
-			if (startArea.completed)
+			if (startArea && startArea.completed)
 			{
 				data = new TimedEventData(eventName, Var.currentWeek + timeToComplete);
 				data.currentState = TimedEventData.state.active;
