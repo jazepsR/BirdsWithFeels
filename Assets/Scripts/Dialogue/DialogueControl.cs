@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DialogueControl : MonoBehaviour {
 	List<Dialogue> dialogs;
+	public AudioGroup kingAudioGroup;
 	[HideInInspector]
 	public List<Dialogue> relationshipDialogs = new List<Dialogue>();
 	public Dialogue testDialog;
@@ -189,11 +190,11 @@ public class DialogueControl : MonoBehaviour {
 				{
 					case EventScript.Character.the_Vulture_King:
 						GuiContoler.Instance.boss.SetActive(true);
-						GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.kingMouth.transform, partData.text);
+						GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.kingMouth.transform, partData.text,kingAudioGroup);
 						
 						break;
 					case EventScript.Character.player:
-						GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.playerMouth.transform, partData.text);
+						GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.playerMouth.transform, partData.text,kingAudioGroup);
 						break;
 					default:
 						break;
@@ -213,9 +214,10 @@ public class DialogueControl : MonoBehaviour {
 
 	void CreateGraphDialogue(Dialogue dialogue)
 	{
+		AudioGroup birdTalk = AudioControler.Instance.GetBirdSoundGroup("default").birdTalk;
 		foreach (DialoguePart partData in dialogue.dialogueParts)
 		{
-			GuiContoler.Instance.ShowSpeechBubble(portraitPoint, partData.text);
+			GuiContoler.Instance.ShowSpeechBubble(portraitPoint,partData.text, birdTalk);
 		}
 	}
 }

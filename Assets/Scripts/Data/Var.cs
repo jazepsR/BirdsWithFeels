@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 public static class Var {
+	public static AudioGroup ambientSounds;
 	public static Bird clickedBird;
 	public static string currentSaveSlot = "debug";
 	public static bool SophieUnlocked = false;

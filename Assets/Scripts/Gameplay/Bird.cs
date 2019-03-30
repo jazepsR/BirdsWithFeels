@@ -6,6 +6,20 @@ using UnityEngine.EventSystems;
 using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+
+[Serializable]
+public class BirdSound
+{
+	public AudioGroup birdSelect;
+    public AudioGroup mouseOverBird;
+	public AudioGroup considerSound;
+	public AudioGroup BirdSitDown;
+	public AudioGroup pickupBird;
+	public AudioGroup dropBird;
+	public AudioGroup birdTalk;
+}
+
+
 [Serializable]
 public class Bird : MonoBehaviour
 {
@@ -119,6 +133,7 @@ public class Bird : MonoBehaviour
 	public Transform restingMouth;
 	bool mouseHeld = false;
 	float clickTime = 0;
+	public BirdSound birdSounds;
 	void Awake()
 	{
 		if(!isEnemy && !Var.isTutorial)
@@ -132,6 +147,7 @@ public class Bird : MonoBehaviour
 		{
 			portrait = Resources.Load<GameObject>("prefabs/portraits/portrait_" + charName);
 			portraitTiny = Resources.Load<GameObject>("prefabs/portraits/tiny_portrait_" + charName);
+			birdSounds = AudioControler.Instance.GetBirdSoundGroup(charName);
 		}
 	   /* if (!isEnemy && !inMap)
 		{
@@ -294,7 +310,7 @@ public class Bird : MonoBehaviour
 	
 	public void Speak(string text)
 	{
-		GuiContoler.Instance.ShowSpeechBubble(GetMouthTransform(), text);
+		GuiContoler.Instance.ShowSpeechBubble(GetMouthTransform(), text, birdSounds.birdTalk);
 	}
 
 	public Transform GetMouthTransform()
@@ -606,14 +622,14 @@ public class Bird : MonoBehaviour
 
 			if(Time.timeSinceLevelLoad > 1)
 			{
-				AudioControler.Instance.birdSelect.Play();				
+				birdSounds.birdSelect.Play();				
 				if (inMap)
 				{
 					MapControler.Instance.charInfoAnim.SetBool("show", true);
 					MapControler.Instance.charInfoAnim.SetBool("hide", false);
                 }
                 if (!dragged)
-                    AudioControler.Instance.PlaySound(AudioControler.Instance.mouseOverBird);
+                   birdSounds.mouseOverBird.Play();
             }
 			foreach (SpriteRenderer sp in colorSprites)
 				sp.color = HighlightCol;			
@@ -645,7 +661,7 @@ public class Bird : MonoBehaviour
 		{
 			if (Time.timeSinceLevelLoad - clickTime > 0.25f && !isEnemy && !inMap && !Var.isDragControls)
 			{
-				AudioControler.Instance.PlaySound(AudioControler.Instance.pickupBird);
+				birdSounds.pickupBird.Play();
                 GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 				{
@@ -742,7 +758,7 @@ public class Bird : MonoBehaviour
 			}
 			if (Var.isDragControls)
 			{
-				AudioControler.Instance.PlaySound(AudioControler.Instance.pickupBird);
+				birdSounds.pickupBird.Play();
                 GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 				{
@@ -1436,7 +1452,7 @@ public class Bird : MonoBehaviour
 		if (!inMap)
 		{
 			LeanTween.delayedCall(0.15f, drawLines);
-            AudioControler.Instance.PlaySound(AudioControler.Instance.dropBird);
+			birdSounds.dropBird.Play();
             //lines.DrawLines();
             showText();
 			try

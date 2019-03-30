@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
-	
+	public AudioGroup ambientSounds;
 	public bool isTrial = false;
 	public GameObject fogObject;
 	public GameObject CompleteIcon;
@@ -524,6 +524,10 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			Var.map = CreateMap();
 			Var.currentStageID = ID;
 			Var.activeBirds = new List<Bird>();
+			if(ambientSounds.clips.Length>0)
+			{
+				Var.ambientSounds = ambientSounds;
+			}
 			GuiContoler.mapPos = 0;
 			for (int i = 0; i < 3; i++)
 			{

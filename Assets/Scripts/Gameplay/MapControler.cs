@@ -33,6 +33,7 @@ public class MapControler : MonoBehaviour {
 	public Animator charInfoAnim;
 	[HideInInspector]
 	public int count = 0;
+	public AudioGroup ambientSounds;
 	void Awake()
 	{
 		Instance = this;
@@ -44,7 +45,11 @@ public class MapControler : MonoBehaviour {
 		timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);		
 		SelectionMenu.transform.localScale = Vector3.zero;
 		canHeal = false;
-		
+		if(ambientSounds.clips.Length>0)
+		{
+			Var.ambientSounds = ambientSounds;
+			AudioControler.Instance.AmbientSounds = ambientSounds;
+		}
 		foreach(Bird bird in FillPlayer.Instance.playerBirds)
 		{
 			if (bird.data.unlocked)
