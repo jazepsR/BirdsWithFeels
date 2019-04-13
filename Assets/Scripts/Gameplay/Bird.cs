@@ -17,8 +17,14 @@ public class BirdSound
 	public AudioGroup pickupBird;
 	public AudioGroup dropBird;
 	public AudioGroup birdTalk;
+	public EventAudio eventAudio;
 }
-
+[Serializable]
+public class EventAudio
+{
+	public AudioClip birdTalk;
+	public float[] startPoints;
+}
 
 [Serializable]
 public class Bird : MonoBehaviour

@@ -75,9 +75,10 @@ public class EventController : MonoBehaviour {
 	{
 		if (printing)
 		{
-			printing = false;
+			printing = false;			
 			if(currentText == currentEvent.parts.Count - 1)
 				CreateChoices();
+				AudioControler.Instance.FadeOutBirdTalk();
 			return;
 		}
 		if (activeChoices)
@@ -86,6 +87,7 @@ public class EventController : MonoBehaviour {
 		currentText++;
 		print("currentText: " + currentText);
 		AudioControler.Instance.ClickSound();
+		AudioControler.Instance.PlaySound(currentBird.birdSounds.eventAudio);
 		if (currentText < currentEvent.parts.Count-1)
 		{
 			string text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
@@ -177,7 +179,8 @@ public class EventController : MonoBehaviour {
 		printing = false;
 		continueBtn.GetComponent<Animator>().SetBool("active", shouldShowContinue);
 		if(currentText == currentEvent.parts.Count - 1)
-			CreateChoices();
+			CreateChoices();			
+		AudioControler.Instance.FadeOutBirdTalk();
 	}
 
 

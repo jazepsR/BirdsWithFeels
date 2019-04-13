@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using System;
 public static class Var {
 	public static AudioGroup ambientSounds;
+	public static AudioMixerSnapshot snapshot;
 	public static Bird clickedBird;
 	public static string currentSaveSlot = "debug";
 	public static bool SophieUnlocked = false;

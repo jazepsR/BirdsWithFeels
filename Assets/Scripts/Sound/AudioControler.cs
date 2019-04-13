@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 [System.Serializable]
 public class AudioGroup
 {
@@ -23,6 +24,7 @@ public class AudioControler : MonoBehaviour {
 	public static AudioControler Instance { get; private set; }
 	public bool inBattle = false;
 	[Header("Sound clips")]
+	public AudioMixerSnapshot defaultSnapshot;
 	public AudioGroup playerWin;
 	public AudioGroup combatLose;
 	public AudioGroup newEmotion;
@@ -144,6 +146,17 @@ public class AudioControler : MonoBehaviour {
 		}
 
 	}
+	private void SetAudioSnapshot()
+	{
+		if(Var.snapshot==null)
+		{
+			defaultSnapshot.TransitionTo(0.2f);
+		}
+		else
+		{
+			Var.snapshot.TransitionTo(0.2f);
+		}
+	}
     public void SetSoundVol()
 	{
 		ClickSound();
@@ -175,6 +188,26 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	{
 		GetAudioSource(sourceType).pitch = 1f;
 		GetAudioSource(sourceType).PlayOneShot(clip);
+	}
+	public void PlaySound(EventAudio eventSound)
+	{
+		Debug.Log("Playing event sound");
+		if(eventSound.birdTalk == null)
+		{
+			return;
+		}
+		AudioSource source = GetAudioSource(audioSourceType.birdVoices);
+		source.Stop();
+		LeanTween.value(gameObject, (float val)=> source.volume = val,0f,1f, 0.3f);
+		source.pitch = 1f;
+		source.PlayOneShot(eventSound.birdTalk);
+		if(eventSound.startPoints.Length != 0)
+			source.time = eventSound.startPoints[Random.Range(0,eventSound.startPoints.Length)];
+	}
+	public void FadeOutBirdTalk()
+	{
+		AudioSource source = GetAudioSource(audioSourceType.birdVoices);		
+		LeanTween.value(gameObject, (float val)=> source.volume = val, source.volume,0f, 0.3f);
 	}
 	public void PlaySound(AudioGroup group)
 	{

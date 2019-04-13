@@ -37,6 +37,7 @@ public class MapControler : MonoBehaviour {
 	void Awake()
 	{
 		Instance = this;
+		Var.snapshot = null;
 	}
 	// Use this for initialization
 	void Start () {

@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using UnityEngine.Audio;
 public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
 {
+	public AudioMixerSnapshot nodeSnapshot;
 	public AudioGroup ambientSounds;
 	public bool isTrial = false;
 	public GameObject fogObject;
@@ -528,6 +529,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			{
 				Var.ambientSounds = ambientSounds;
 			}
+			Var.snapshot = nodeSnapshot;
 			GuiContoler.mapPos = 0;
 			for (int i = 0; i < 3; i++)
 			{
