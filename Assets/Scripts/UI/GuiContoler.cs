@@ -178,7 +178,12 @@ public class GuiContoler : MonoBehaviour {
 		{
 			icon.available = true;
 			icon.SetState();
+			if(icon.fogObject)
+			{
+				icon.fogObject.SetActive(false);
+			}
 		}
+		mapPan.Instance.activeFog = null;
 	}
 	public void SetControlButtonText()
 	{

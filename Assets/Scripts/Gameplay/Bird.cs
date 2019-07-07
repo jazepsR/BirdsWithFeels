@@ -1136,7 +1136,7 @@ public class Bird : MonoBehaviour
 
 			}
 		}
-		if (!hasNewLevel)
+		if (!hasNewLevel && !Var.freezeEmotions)
 		{
 			data.friendliness += friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos;
 			data.confidence += battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
@@ -1145,7 +1145,7 @@ public class Bird : MonoBehaviour
 		}
 		data.health = Mathf.Min(data.health + healthBoost + roundHealthChange, data.maxHealth);
 		//Mental health
-		if ((Mathf.Abs(data.confidence) >= 12 || Mathf.Abs(data.friendliness) >= 12) && (Mathf.Abs(prevConf) >= 12 || Mathf.Abs(prevFriend) >= 12))
+		if ((Mathf.Abs(data.confidence) >= 12 || Mathf.Abs(data.friendliness) >= 12) && (Mathf.Abs(prevConf) >= 12 || Mathf.Abs(prevFriend) >= 12) && !Var.freezeEmotions)
 		{//In danger zone
 			data.mentalHealth = Math.Max(data.mentalHealth - 1, 0);
 			if (data.mentalHealth == 0)

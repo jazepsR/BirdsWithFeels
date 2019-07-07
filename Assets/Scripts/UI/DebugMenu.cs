@@ -15,7 +15,7 @@ public class DebugMenu : MonoBehaviour {
     private System.DateTime resetTime;
     private float secondsWaitTime = 200;
     private bool resetGame = true;
-
+	public Toggle freezeToggle;
     
     private void Update()
     {
@@ -48,6 +48,7 @@ public class DebugMenu : MonoBehaviour {
 			currentBird.text = "<color=#FF0000>Select bird first!</color>";
 		}
         cameraToggle.isOn = cameraControl;
+		freezeToggle.isOn = Var.freezeEmotions;
 		debugMenu.gameObject.SetActive(true);
 	}
 	public void DeleteSave()
@@ -64,7 +65,6 @@ public class DebugMenu : MonoBehaviour {
 		path = Application.persistentDataPath + "/debug/Sophie.dat";
 		System.IO.File.Delete(path);
 
-
 	}
 	public void AddLevel(int level)
 	{
@@ -75,9 +75,63 @@ public class DebugMenu : MonoBehaviour {
 		catch
 		{ }
 	}
+
+	public void IncreaseConfidence()
+	{
+		if(Var.selectedBird)
+		{
+			Var.selectedBird.GetComponent<Bird>().prevConf++;
+		Var.selectedBird.GetComponent<Bird>().data.confidence++;
+		UpdateBirdStats();
+		}
+
+	}
+
+	public void DecreaseConfidence()
+	{
+		if(Var.selectedBird)
+		{
+		Var.selectedBird.GetComponent<Bird>().prevConf--;
+		Var.selectedBird.GetComponent<Bird>().data.confidence--;
+		UpdateBirdStats();
+			}
+	}
+
+	public void IncreaseSocial()
+	{
+	if(Var.selectedBird)
+		{
+		Var.selectedBird.GetComponent<Bird>().prevFriend++;
+		Var.selectedBird.GetComponent<Bird>().data.friendliness++;
+		UpdateBirdStats();
+			}
+	}
+
+	public void DecreaseSocial()
+	{
+	if(Var.selectedBird)
+		{
+		Var.selectedBird.GetComponent<Bird>().prevFriend--;
+		Var.selectedBird.GetComponent<Bird>().data.friendliness--;
+		UpdateBirdStats();
+			}
+	}
+	private void UpdateBirdStats()
+	{
+		Var.selectedBird.GetComponent<Bird>().SetEmotion();
+		GuiContoler.Instance.clearSmallGraph();
+		GuiContoler.Instance.smallGraph.PlotFull(Var.selectedBird.GetComponent<Bird>(),false);
+	}
+
     public void ToggleCamControls(bool enabled)
     {
         cameraControl = enabled;
         cameraToggle.isOn = enabled;
     }
+
+	public void ToogleFreeze(bool enabled)
+	{
+		Var.freezeEmotions = enabled;
+		freezeToggle.isOn = enabled;
+	}
 }

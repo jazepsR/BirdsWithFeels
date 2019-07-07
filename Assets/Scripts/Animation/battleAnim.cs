@@ -88,11 +88,18 @@ public class battleAnim :MonoBehaviour {
 			}
 			else
 			{
-				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
-				Debug.Log("ACTIVE BIRD COUNT: " + Var.activeBirds.Count);
+				if(Var.freezeEmotions)
+				{
+//SHOW TARNSITION AND CREATE NEXT BATTLE
+					GuiContoler.Instance.CloseGraph();
+				}
+				else
+				{
+				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);				
+				GuiContoler.Instance.CreateBattleReport();
+				}
 				foreach (Bird bird in Var.activeBirds)
 					bird.GetComponentInChildren<Animator>().SetBool("lose", false);
-				GuiContoler.Instance.CreateBattleReport();
 			}
 			if(Var.isTutorial)
 			{

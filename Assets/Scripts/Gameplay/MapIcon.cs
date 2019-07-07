@@ -541,6 +541,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 				if (bird.gameObject.activeSelf)
 					Var.availableBirds.Add(bird);
 			}
+			Var.freezeEmotions = isTrial;
 			SaveLoad.Save();
 			SceneManager.LoadScene("NewMain");
 		}

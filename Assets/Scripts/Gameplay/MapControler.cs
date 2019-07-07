@@ -43,6 +43,7 @@ public class MapControler : MonoBehaviour {
 	void Start () {
 		timedEvents = FindObjectsOfType<TimedEventControl>();
 		Var.isBoss = false;
+		Var.freezeEmotions = false;
 		timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);		
 		SelectionMenu.transform.localScale = Vector3.zero;
 		canHeal = false;
