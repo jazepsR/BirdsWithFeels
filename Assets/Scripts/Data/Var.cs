@@ -74,7 +74,7 @@ public static class Var {
 		"Elizabeth","Sofia","Evelyn","Chloe","Ella","Grace","Victoria","Aubrey","Scarlett","Zoey","Addison","Lily","Lillian","Natalie","Hannah","Aria","Layla"};
 	public static string[] deathSignoffs = { "Get well soon, <name>!", "Tis but a scratch!", "I'm sure <name> won't be down for long!" };
 	public static bool isDragControls = true;
-	public static bool freezeEmotions = true;
+	public static bool freezeEmotions = false;
 }
 
 [Serializable]
