@@ -322,6 +322,16 @@ public class Bird : MonoBehaviour
 	public Transform GetMouthTransform()
 	{
 		Transform mouth = transform;
+		if(isEnemy)
+		{			
+			Debug.LogError("WHERES THE MOUTH?!");
+			mouth =EnemyArt.transform.Find("mouth");
+			if(mouth != null)
+			{
+			Debug.LogError("GOT TEH MOUTH!!!");
+				return mouth;
+			}
+		}
 		if (GetComponentInChildren<Animator>().GetBool("rest"))
 		{
 			return restingMouth;

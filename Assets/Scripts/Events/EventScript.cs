@@ -4,7 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 public class EventScript:MonoBehaviour{
-	public enum Character  { Terry,Rebecca,Sophie,Kim,Alexander,Random,None, the_Queen, the_Vulture_King, a_vulture, a_bird, player };
+	public enum Character  { Terry,Rebecca,Sophie,Kim,Alexander,Random,None, the_Queen, the_Vulture_King, a_vulture, a_bird, player, a_vulture2 };
 	public List<Character> speakers;
 	public ConditionCheck.Condition condition;
 	public int magnitude = 0;

@@ -253,6 +253,33 @@ public class Helpers : MonoBehaviour {
 		{
 			return birds[UnityEngine.Random.Range(0, birds.Count)];
 		}
+		if(ch == EventScript.Character.a_vulture && fillEnemy.Instance != null)
+		{
+			foreach(Bird enemy in fillEnemy.Instance.Enemies)
+			{
+				if(enemy.gameObject.activeSelf)
+				{
+					return enemy;
+				}
+			}
+		}	
+		if(ch == EventScript.Character.a_vulture2 && fillEnemy.Instance != null)
+		{
+			bool vultureFound = false;
+			foreach(Bird enemy in fillEnemy.Instance.Enemies)
+			{
+				if(enemy.gameObject.activeSelf)
+				{
+					if(vultureFound)
+					{
+						return enemy;
+					}else
+					{
+						vultureFound = true;
+					}
+				}
+			}
+		}
 		foreach (Bird bird in birds)
 		{
 			if (bird.charName == ch.ToString())

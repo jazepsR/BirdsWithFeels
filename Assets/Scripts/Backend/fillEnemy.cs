@@ -12,6 +12,11 @@ public class fillEnemy : MonoBehaviour {
 	public bool hasDrillsDebug = false;
 	public bool hasWizardsDebug = false;
 	List<Bird> newBirds;
+	public static fillEnemy Instance;
+	void Awake()
+	{
+		Instance = this;
+	}
 	// Use this for initialization
 	void Start ()
 	{
