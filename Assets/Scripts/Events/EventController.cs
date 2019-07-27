@@ -85,7 +85,7 @@ public class EventController : MonoBehaviour {
 			return;
 	   
 		currentText++;
-		print("currentText: " + currentText);
+		print("currentText: " + currentText + " bird: "+ currentBird.data.charName);
 		AudioControler.Instance.ClickSound();
 		AudioControler.Instance.PlaySound(currentBird.birdSounds.eventAudio);
 		if (currentText < currentEvent.parts.Count-1)
@@ -317,7 +317,10 @@ public class EventController : MonoBehaviour {
 
 	void SetPortrait(int id)
 	{
+		if(mouseOver)
+		{
 		mouseOver.tooltipText = "";
+		}
 		if (currentEvent.parts[id].useCustomPic && currentEvent.parts[id].customPic != null)
 		{
 			portrait.transform.parent.gameObject.SetActive(true);

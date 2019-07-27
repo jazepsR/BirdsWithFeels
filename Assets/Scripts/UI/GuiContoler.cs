@@ -442,6 +442,7 @@ public class GuiContoler : MonoBehaviour {
 			catch { print("voice issue"); }
 		   // LeanTween.delayedCall(6f, ShowSpeechBubbleReminder);
 		}
+		Debug.LogError("talk: "+ birdTalk.clips.Length);
 	   
  
 	}

@@ -16,8 +16,41 @@ public class BirdSound
 	public AudioGroup BirdSitDown;
 	public AudioGroup pickupBird;
 	public AudioGroup dropBird;
-	public AudioGroup birdTalk;
+	public AudioGroup birdTalkDefault;
+	public AudioGroup birdTalkConfident;
+	public AudioGroup birdTalkCautious;
+	public AudioGroup birdTalkSocial;
+	public AudioGroup birdTalkLonely;
 	public EventAudio eventAudio;
+
+	public AudioGroup GetTalkGroup(Var.Em emotion)
+	{
+		AudioGroup talkGroup = null;
+		switch(emotion)
+		{
+			case Var.Em.Cautious:
+				talkGroup= birdTalkCautious;
+				break;
+			case Var.Em.Confident:
+				talkGroup = birdTalkConfident;
+				break;
+			case Var.Em.Social:
+				talkGroup = birdTalkSocial;
+				break;
+			case Var.Em.Solitary:
+				talkGroup = birdTalkLonely;
+				break;
+			default:
+				talkGroup = birdTalkDefault;
+				break;
+		}
+		if(talkGroup == null)
+		{
+			talkGroup = birdTalkDefault;
+		}
+		return talkGroup;
+
+	}
 }
 [Serializable]
 public class EventAudio
@@ -316,7 +349,7 @@ public class Bird : MonoBehaviour
 	
 	public void Speak(string text)
 	{
-		GuiContoler.Instance.ShowSpeechBubble(GetMouthTransform(), text, birdSounds.birdTalk);
+		GuiContoler.Instance.ShowSpeechBubble(GetMouthTransform(), text, birdSounds.GetTalkGroup(emotion));
 	}
 
 	public Transform GetMouthTransform()
@@ -324,11 +357,9 @@ public class Bird : MonoBehaviour
 		Transform mouth = transform;
 		if(isEnemy)
 		{			
-			Debug.LogError("WHERES THE MOUTH?!");
 			mouth =EnemyArt.transform.Find("mouth");
 			if(mouth != null)
 			{
-			Debug.LogError("GOT TEH MOUTH!!!");
 				return mouth;
 			}
 		}

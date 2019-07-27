@@ -99,6 +99,10 @@ public class GuiMap : MonoBehaviour {
 	public void CreateMap(List<BattleData> map)
 	{
 		Clear();
+		if(map!= null)
+		{
+			return;
+		}
 		if (inMap)
 		{
 			dist = 0.5f * Mathf.Abs(start.position.x - finish.position.x) / ((map.Count - 1));

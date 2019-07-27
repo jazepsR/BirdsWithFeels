@@ -48,9 +48,9 @@ public class Tutorial : MonoBehaviour {
 	{
 		if (!Var.isTutorial)
 			return;
-		TerrySounds = AudioControler.Instance.TerrySounds.birdTalk;
-		RebeccaSounds = AudioControler.Instance.RebeccaSounds.birdTalk;
-		AlexSounds = AudioControler.Instance.AlexSound.birdTalk;
+		TerrySounds = AudioControler.Instance.TerrySounds.birdTalkDefault;
+		RebeccaSounds = AudioControler.Instance.RebeccaSounds.birdTalkDefault;
+		AlexSounds = AudioControler.Instance.AlexSound.birdTalkDefault;
 		GuiContoler.Instance.smallGraph.graphArea.transform.parent.gameObject.SetActive(false);
 		if (Var.isTutorial)
 		{

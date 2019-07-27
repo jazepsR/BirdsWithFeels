@@ -191,7 +191,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	}
 	public void PlaySound(EventAudio eventSound)
 	{
-		Debug.Log("Playing event sound");
+		Debug.Log("Playing event sound. Points: "+ eventSound.startPoints.Length );
 		if(eventSound.birdTalk == null)
 		{
 			return;

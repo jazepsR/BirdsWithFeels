@@ -214,7 +214,7 @@ public class DialogueControl : MonoBehaviour {
 
 	void CreateGraphDialogue(Dialogue dialogue)
 	{
-		AudioGroup birdTalk = AudioControler.Instance.GetBirdSoundGroup("default").birdTalk;
+		AudioGroup birdTalk = AudioControler.Instance.GetBirdSoundGroup("default").GetTalkGroup(Var.Em.Neutral);
 		foreach (DialoguePart partData in dialogue.dialogueParts)
 		{
 			GuiContoler.Instance.ShowSpeechBubble(portraitPoint,partData.text, birdTalk);

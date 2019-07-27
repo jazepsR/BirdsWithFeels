@@ -124,7 +124,7 @@ public class levelPopupScript : MonoBehaviour {
 		{
 			string[] texts = Helpers.Instance.GetLevelUpDialogs(data.type, Helpers.Instance.GetCharEnum(activeBird)).Split('&');
 			foreach (string text in texts)
-				GuiContoler.Instance.ShowSpeechBubble(Tutorial.Instance.portraitPoint, text,activeBird.birdSounds.birdTalk);
+				GuiContoler.Instance.ShowSpeechBubble(Tutorial.Instance.portraitPoint, text,activeBird.birdSounds.GetTalkGroup(activeBird.emotion));
 		}
 	}
 	// Update is called once per frame
