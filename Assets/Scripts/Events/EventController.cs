@@ -85,9 +85,7 @@ public class EventController : MonoBehaviour {
 			return;
 	   
 		currentText++;
-		print("currentText: " + currentText + " bird: "+ currentBird.data.charName);
 		AudioControler.Instance.ClickSound();
-		AudioControler.Instance.PlaySound(currentBird.birdSounds.eventAudio);
 		if (currentText < currentEvent.parts.Count-1)
 		{
 			string text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
@@ -334,8 +332,8 @@ public class EventController : MonoBehaviour {
 			customImage.gameObject.SetActive(false);
 			try
 			{
-				if (currentBird != null)
-					mouseOver.tooltipText = Helpers.Instance.GetStatInfo(currentBird.data.confidence, currentBird.data.friendliness);
+				//if (currentBird != null)
+				//	mouseOver.tooltipText = Helpers.Instance.GetStatInfo(currentBird.data.confidence, currentBird.data.friendliness);
 				portrait.transform.parent.gameObject.SetActive(true);
 				portraitFill.gameObject.SetActive(true);
 				portrait.gameObject.SetActive(true);
@@ -343,8 +341,13 @@ public class EventController : MonoBehaviour {
 				portraitFill.color = colors[currentEvent.parts[currentText].speakerId];
 				portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird").GetComponent<Image>().sprite;
 				nameText.text = currentEvent.speakers[currentEvent.parts[currentText].speakerId].ToString().Replace('_', ' ');
-
-
+				try{
+					Bird birdToTalk = Helpers.Instance.GetBirdFromEnum(currentEvent.speakers[currentEvent.parts[currentText].speakerId]);
+					AudioControler.Instance.PlaySound(AudioControler.Instance.GetBirdSoundGroup(birdToTalk.data.charName).eventAudio);
+				//AudioControler.Instance.PlaySound(Helpers.Instance.GetBirdFromEnum(currentEvent.speakers[currentEvent.parts[currentText].speakerId]).birdSounds.eventAudio);
+				}catch{
+					Debug.Log("audio not found!");
+				}
 			}
 			catch
 			{

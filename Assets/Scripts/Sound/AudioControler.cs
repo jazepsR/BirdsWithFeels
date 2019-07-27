@@ -200,9 +200,15 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 		source.Stop();
 		LeanTween.value(gameObject, (float val)=> source.volume = val,0f,1f, 0.3f);
 		source.pitch = 1f;
-		source.PlayOneShot(eventSound.birdTalk);
+		source.clip =(eventSound.birdTalk);
 		if(eventSound.startPoints.Length != 0)
-			source.time = eventSound.startPoints[Random.Range(0,eventSound.startPoints.Length)];
+		{
+			int number= Random.Range(0,eventSound.startPoints.Length);
+			Debug.Log("numbre: "+ number);
+			source.time = eventSound.startPoints[number];
+
+		}
+		source.Play();
 	}
 	public void FadeOutBirdTalk()
 	{
