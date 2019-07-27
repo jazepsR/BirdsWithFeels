@@ -21,6 +21,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	public static mapPan Instance;
 	Vector2 lastSoundPosition;
 	Vector3 startingScale;
+	public mapScrolHeight[] mapScrollPoints;
 	Rect maxPos;
 	void Awake()
 	{
@@ -65,6 +66,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			{
 				float horizontalExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
 				var delta = Input.mousePosition - lastPosition;
+				FindMapBoundaries();
 				if (activeFog != null && activeFog.gameObject.activeSelf && Camera.main.transform.position.x + horizontalExtent > activeFog.transform.position.x)
 				{
 					delta.x = Mathf.Max(0, delta.x);
@@ -91,6 +93,21 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			}
 		}
 	}
+	private void FindMapBoundaries()
+	{
+		float currentPointDist = -Mathf.Infinity;
+		foreach(mapScrolHeight height in mapScrollPoints)
+		{
+			if(height.transform.position.x<0f && height.transform.position.x >currentPointDist)
+			{
+				minY = height.minY;
+				maxY = height.maxY;
+				currentPointDist = height.transform.position.x;
+			}
+		}
+
+	}
+
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		//MapControler.Instance.canMove = true;
