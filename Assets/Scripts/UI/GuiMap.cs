@@ -99,7 +99,7 @@ public class GuiMap : MonoBehaviour {
 	public void CreateMap(List<BattleData> map)
 	{
 		Clear();
-		if(map!= null)
+		if(map == null)
 		{
 			return;
 		}

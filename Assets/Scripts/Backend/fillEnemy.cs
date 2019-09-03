@@ -222,7 +222,7 @@ public class fillEnemy : MonoBehaviour {
 		float currentVal = 0;
 		for (int i = 0; i < data.emotionType.Count; i++)
 		{
-			if (rand < data.emotionPercentage[i])
+			if (rand < currentVal+data.emotionPercentage[i])
 			{
 				emotion = data.emotionType[i];
 				break;

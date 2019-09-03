@@ -906,7 +906,7 @@ public class Helpers : MonoBehaviour {
 	{
 		if (Input.GetKey(KeyCode.LeftShift))
 			Time.timeScale = 0.25f;
-		else if (Input.GetKey(KeyCode.RightShift))
+		else if (Input.GetKey(KeyCode.RightShift) || Input.GetMouseButton(1))
 			Time.timeScale = 4f;
 		else
 			Time.timeScale = 1;
