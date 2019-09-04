@@ -48,7 +48,7 @@ public class BirdConversationMatcher : MonoBehaviour
                 
 
             case 4:
-                return returnRandomSpriteInCollection(ConfidentConversationSymbols);
+                return returnRandomSpriteInCollection(SolitaryConversationSymbols);
                
 
         }
@@ -60,9 +60,10 @@ public class BirdConversationMatcher : MonoBehaviour
 
     Sprite returnRandomSpriteInCollection(Sprite[] spriteCollection)
     {
- 
 
-        return spriteCollection[0];
+        int randomNumber = Random.Range(0, spriteCollection.Length);
+
+        return spriteCollection[randomNumber];
 
     }
     // Update is called once per frame
