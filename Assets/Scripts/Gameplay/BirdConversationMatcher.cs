@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class script_birdAnim_makeTopicMatchMood : MonoBehaviour
+public class BirdConversationMatcher : MonoBehaviour
 {
+    public static BirdConversationMatcher Instance { get; private set; }
 
     public Sprite[] neutralConversationSymbols;
-    public  Sprite[] ConfidentConversationSymbols;
+    public Sprite[] ConfidentConversationSymbols;
     public Sprite[] CautiousConversationSymbols;
     public Sprite[] SolitaryConversationSymbols;
     public Sprite[] SocialConversationSymbols;
     
     int emotion;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
