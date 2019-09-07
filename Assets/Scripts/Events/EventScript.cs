@@ -22,7 +22,20 @@ public class EventScript:MonoBehaviour{
 	{
 
 	}
-
+	public void Awake()
+	{
+		if(Application.isEditor)
+		{
+			EventPart[] parts = transform.GetComponentsInChildren<EventPart>();
+			foreach(EventPart part in parts)
+			{
+				if(part.text.Length> Var.eventTextCharLimit)
+				{
+					Debug.LogWarning("Event \"" + name +"\" part " + part.name+ " text might be too long to display correctly ("+ part.text.Length+" characters)");
+				}
+			}
+		}
+	}
 	public EventScript(Character speaker, string heading, string text1, string text2="",string text3 = "",string text4 ="",string text5= "")
 	{
 		this.speakers = new List<Character>() { speaker };

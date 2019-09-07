@@ -71,6 +71,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	bool stateSet = false;
 	bool eventShown = false;
 	bool dialogueShown = false;
+	[HideInInspector] public TimedEventControl timedEvent;
 	// Use this for initialization
 	void Start()
 	{
@@ -237,6 +238,12 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		
 	void Validate(int id, MapBattleData data)
 	{
+		//Debug.LogError(levelName + " battle " + id + " starting validation");
+		if(data.emotionPercentage.Count==0 && data.emotionType.Count==0)
+		{
+			Debug.LogError(levelName + " battle " + id + " dosent have any battles added!");
+		}else
+		{
 		if (data.emotionPercentage.Count != data.emotionType.Count)
 			Debug.LogError(levelName + " battle " + id + " dosent have the same number of percentages and types");
 		float total = 0;
@@ -244,6 +251,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			total += percentage;
 		if(total != 1.0f)
 			Debug.LogError(levelName + " battle " + id + " dont add up to 100%");
+		}
 		
 	}
 		
@@ -462,6 +470,10 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			Var.gameSettings.shownMapTutorial = true;
 		}
 		SetupPieGraph();
+		if(timedEvent!= null)
+		{
+			timedEvent.TriggerActivationEvent();
+		}
 		active = true;
 		foreach (GuiMap map in FindObjectsOfType<GuiMap>())
 			map.Clear();

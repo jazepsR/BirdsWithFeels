@@ -75,6 +75,7 @@ public static class Var {
 	public static string[] deathSignoffs = { "Get well soon, <name>!", "Tis but a scratch!", "I'm sure <name> won't be down for long!" };
 	public static bool isDragControls = true;
 	public static bool freezeEmotions = false;
+	public static int eventTextCharLimit = 200;
 }
 
 [Serializable]

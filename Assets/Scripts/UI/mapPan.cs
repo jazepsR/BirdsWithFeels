@@ -66,7 +66,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			{
 				float horizontalExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
 				var delta = Input.mousePosition - lastPosition;
-				FindMapBoundaries();
+				Vector3 boundaryPos= FindMapBoundaries();
 				if (activeFog != null && activeFog.gameObject.activeSelf && Camera.main.transform.position.x + horizontalExtent > activeFog.transform.position.x)
 				{
 					delta.x = Mathf.Max(0, delta.x);
@@ -76,10 +76,37 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					lastSoundPosition = Input.mousePosition;
 					AudioControler.Instance.mapPan.Play();
 
-				}
+				}				
 				transform.Translate(delta.x * mouseSensitivity, delta.y * mouseSensitivity, 0);
-				Vector3 temp = transform.position;
-				temp.y = Mathf.Clamp(temp.y, minY * transform.localScale.y / startingScale.y, maxY*transform.localScale.y/startingScale.y);
+				Vector3 temp = transform.position;//+ new Vector3(delta.x * mouseSensitivity, delta.y * mouseSensitivity, 0);
+				if(temp.y > maxY*transform.localScale.y/startingScale.y ||temp.y < minY * transform.localScale.y / startingScale.y)
+				{
+					
+					transform.Translate(-delta.x * mouseSensitivity, -delta.y * mouseSensitivity, 0);
+					temp = transform.position;
+					if(temp.y-1f > maxY*transform.localScale.y/startingScale.y ||temp.y+1f < minY * transform.localScale.y / startingScale.y)
+					{
+						if(boundaryPos.x<-5)
+						{
+							//Debug.LogError("Subtracting! Cant move too high! Boundary: "+ boundaryPos.x+" extendo: "+  Camera.main.transform.position.x);
+							temp.x -=0.1f;
+						}
+							else
+						{
+							//Debug.LogError("Adding! Cant move too high! Boundary: "+ boundaryPos.x+" extendo: " +Camera.main.transform.position.x);							
+							temp.x +=0.1f;
+							//boundaryPos.x > temp.x
+							
+						}
+					}
+					//Debug.LogError("Cant move too high!");
+				}
+				else
+				{
+					//temp = transform.position;
+					//Debug.LogError("MOVING AS PLANNED");
+				}
+				//temp.y = Mathf.Clamp(temp.y, minY * transform.localScale.y / startingScale.y, maxY*transform.localScale.y/startingScale.y);
                 temp.x = Mathf.Min(temp.x, minX * transform.localScale.x / startingScale.x);
 				transform.position = temp;
 				lastPosition = Input.mousePosition;
@@ -93,9 +120,10 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			}
 		}
 	}
-	private void FindMapBoundaries()
+	private Vector3 FindMapBoundaries()
 	{
 		float currentPointDist = -Mathf.Infinity;
+		Vector3 boundaryPos = Vector3.zero;
 		foreach(mapScrolHeight height in mapScrollPoints)
 		{
 			if(height.transform.position.x<0f && height.transform.position.x >currentPointDist)
@@ -103,8 +131,11 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				minY = height.minY;
 				maxY = height.maxY;
 				currentPointDist = height.transform.position.x;
+				boundaryPos = height.transform.position;
+				//Debug.LogError("current height: "+ height.name);
 			}
 		}
+		return boundaryPos;
 
 	}
 

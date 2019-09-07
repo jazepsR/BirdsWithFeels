@@ -270,14 +270,22 @@ public class fillEnemy : MonoBehaviour {
 
 	public void Reset()
 	{
+		 foreach(Bird enemy in Enemies)
+		{
+			enemy.transform.localPosition = enemy.home;
+			enemy.gameObject.SetActive(false);
+			Debug.Log("resetting enemy "+ enemy.charName+ " pos: "+ enemy.transform.localPosition);
+		}
 	   foreach(Bird enemy in Var.enemies)
 		{
 			if (enemy != null)
 			{
+				
+				enemy.transform.localPosition = enemy.home;
 				if (enemy.inUse)
 				{
 					enemy.gameObject.SetActive(true);
-					enemy.transform.localPosition = enemy.home;
+					//enemy.transform.localPosition = enemy.home;
 					enemy.GroundRollBonus = 0;					
 				}
 				if (enemy.EnemyArt != null)

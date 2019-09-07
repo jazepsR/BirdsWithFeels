@@ -133,5 +133,10 @@ public class DebugMenu : MonoBehaviour {
 	{
 		Var.freezeEmotions = enabled;
 		freezeToggle.isOn = enabled;
+		Graph[] graphs = FindObjectsOfType<Graph>();
+		foreach(Graph graph in graphs)
+		{
+			graph.CheckEmotionLock();
+		}
 	}
 }

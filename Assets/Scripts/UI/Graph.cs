@@ -20,6 +20,7 @@ public class Graph : MonoBehaviour {
 	public LevelBarScript confidenceBar;
 	public LevelBarScript cautiousBar;
 	public Image dangerZoneHighlight;
+	public Image lockImage;
 	// Use this for initialization
 	void Start()
 	{
@@ -29,13 +30,27 @@ public class Graph : MonoBehaviour {
 			graphArea.transform.parent.gameObject.SetActive(false);
 		//Sprite sp = Resources.Load<Sprite>("Icons/NewIcons_1");
 		multiplier = graphSize / 15;
+		CheckEmotionLock();
 	}
+	public void CheckEmotionLock()
+	{
+		if(isSmall && lockImage!= null && Var.freezeEmotions)
+		{
+			lockImage.gameObject.SetActive(true);
+		}
+			else if(lockImage!= null)
+		{
+			lockImage.gameObject.SetActive(false);			
+		}
 
+	}
 	public void PlotFull(Bird bird,bool afterBattle)
 	{
 		if (!GuiContoler.Instance.inMap && GuiContoler.Instance.winBanner.activeSelf)
 			return;
 		if (bird.data.health <= 0)
+			return;
+		if(isSmall && Var.freezeEmotions)
 			return;
 		//GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
 		GameObject tempHeart;

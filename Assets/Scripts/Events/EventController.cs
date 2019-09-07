@@ -445,6 +445,7 @@ public class EventController : MonoBehaviour {
 		{
 			case ConsequenceType.Courage:
 				currentBird.data.confidence += magnitude;
+				currentBird.prevConf += magnitude;
 				if (magnitude > 0)
 				{
 					return currentBird.charName + " gained " + magnitude + " confidence.";
@@ -455,6 +456,7 @@ public class EventController : MonoBehaviour {
 				}
 			case ConsequenceType.Friendliness:
 				currentBird.data.friendliness += magnitude;
+				currentBird.prevFriend += magnitude;
 				if (magnitude > 0)
 				{
 					return currentBird.charName + " gained " + magnitude + " social.";

@@ -71,11 +71,12 @@ public class TimedEventControl : MonoBehaviour {
 				data.currentState = TimedEventData.state.failed;
 				EventController.Instance.CreateEvent(initialFailEvent);
 				EventNotification.transform.parent.gameObject.SetActive(false);
-			}else if(endArea.available)
-			{
-				TriggerActivationEvent();
 			}
-		}
+			if(endArea)
+			{
+				endArea.timedEvent = this;
+			}
+		}	
 	}
 	// Update is called once per frame
 	void Update () {
@@ -87,8 +88,11 @@ public class TimedEventControl : MonoBehaviour {
 	}
 	public void TriggerActivationEvent()
 	{
+		if(!data.activationEventShown)
+		{
 		EventController.Instance.CreateEvent(activationEvent);
 		data.activationEventShown = true;
+		}
 		//shouldTriggerBattle = true;
 
 	}
