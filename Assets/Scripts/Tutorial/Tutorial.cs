@@ -144,18 +144,20 @@ public class Tutorial : MonoBehaviour {
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hiya, I'm Terry!",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Looks like that vulture is itching for a fight!!  ",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Honestly, I don’t know anything bout’ fighting. I’m a peaceful bird!   ",TerrySounds);
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "But..maybe I can talk to them?   ",TerrySounds);
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "<b>Drag</b> me <b>anywhere</b> in front of them and I’ll try to convince them to not beat us up! ",TerrySounds);
-				break;
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "But..maybe I can talk to them? That vulture is <b>neutral</b>, so they should be easy to convince!  ",TerrySounds);
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "<b>Drag</b> me <b>anywhere</b> in front of them and I’ll try to convince them to not beat us up! ", TerrySounds);
+        
+                break;
 			case 1:
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Hey, I’m Rebecca! Let's hang out!",RebeccaSounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Alright sure whatever!",TerrySounds);
 				shouldShowFriendlyPopup = true;
 				break;
 			case 2:
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), " These birds are not just neutral, they're confident and cautious! Will they listen to us?",RebeccaSounds);
-				shouldShowEmotionPopup = true;
-				break;
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), " These birds are not just neutral, they're solitary and cautious! Will they listen to us?",RebeccaSounds);
+                shouldShowEmotionPopup = true;
+
+                break;
 			case 3:
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "These encounters are taking a toll on me..",RebeccaSounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hey no worries - I'll fight so that you can <b>rest</b> and regain some <b>health</b>",TerrySounds);
