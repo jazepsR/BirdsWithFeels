@@ -7,7 +7,8 @@ public class Tutorial : MonoBehaviour {
 	public GameObject outlines;
 	public GameObject FirendlinessPopUp;
 	public GameObject EmotionalWheelPopUp;
-	public Animator graphAnim;
+    public GameObject mHPTutorialPopup;
+    public Animator graphAnim;
 	public Var.Em[] firstStageEnemies;
 	public Var.Em[] secondStageEnemies;
 	public Var.Em[] thirdStageEnemies;
@@ -23,6 +24,7 @@ public class Tutorial : MonoBehaviour {
 	public Transform portraitPoint;
 	bool shouldShowFriendlyPopup = false;
 	bool shouldShowEmotionPopup = false;
+    bool shouldShowMHPTutorial = false;
 	bool shouldShowOutlines = true;
 	bool showedSecondBirdReportText = false;
 	bool showedThirdBirdReportText = false;
@@ -103,8 +105,14 @@ public class Tutorial : MonoBehaviour {
 			GuiContoler.Instance.GraphBlocker.SetActive(true);
 			shouldShowEmotionPopup = false;
 		}
-	   
-	}
+        if(shouldShowMHPTutorial&& !GuiContoler.Instance.speechBubbleObj.activeSelf)
+        {
+            mHPTutorialPopup.SetActive(true);
+            GuiContoler.Instance.GraphBlocker.SetActive(true);
+            shouldShowMHPTutorial = false;
+        }
+
+    }
 
 	public void SetCurrenPos(int pos)
 	{
@@ -165,9 +173,15 @@ public class Tutorial : MonoBehaviour {
 				break;
 			case 4:
 				EventController.Instance.CreateEvent(AddAlexEvent);
-			 //   GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[2].GetMouthTransform(), "A Rock!");
-			 //   GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Birds can't stand there, but vultures move right over the rocks!");
-				break;
+                shouldShowMHPTutorial = true;
+
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), " Ahh I feel so PUMPED UP!! Nothing can stop me!", TerrySounds);
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Just don’t let it get to your head", RebeccaSounds);
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "  Pffft, what’s the worst that could happen? ", TerrySounds);
+
+                //   GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[2].GetMouthTransform(), "A Rock!");
+                //   GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Birds can't stand there, but vultures move right over the rocks!");
+                break;
 			case 5:
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "This looks dangerous!",RebeccaSounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[2].GetMouthTransform(), "I've seen this before! These enemies will attack from multiple directions!",AlexSounds);
