@@ -14,6 +14,8 @@ public class GuiMap : MonoBehaviour {
 	public Text nextAreaInfo;
 	public Image nextAdventureIcon;
 	public GameObject trialObj;
+//	[HideInInspector]
+	public List<SpriteRenderer> nodeList;
 	float dist;
 	int count = 0;
 	public void Awake()
@@ -92,6 +94,14 @@ public class GuiMap : MonoBehaviour {
 	{
 		//transform.localPosition = new Vector3(-578 + pos * 95,transform.localPosition.y,transform.localPosition.z);
 		transform.position = new Vector3(start.position.x + dist * pos, transform.position.y, start.position.z);
+		for(int i=0;i<nodeList.Count;i++)
+		{
+			if(pos>i)
+			{
+				Color color= nodeList[i].color;
+				nodeList[i].color = new Color(color.r,color.g,color.b,0.4f);
+			}
+		}
 	}
 
 
@@ -130,6 +140,7 @@ public class GuiMap : MonoBehaviour {
 		count = 0;
 		foreach (Transform child in nodes)
 			Destroy(child.gameObject);
+		nodeList.Clear();
 
 	}
 	void DrawCircles(Var.Em emotion, float scale = 30)
@@ -138,6 +149,7 @@ public class GuiMap : MonoBehaviour {
 		point.GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetEmotionIcon(emotion);
 		if (!inMap)
 			point.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetHexColor(emotion) + emotion.ToString() + "</color>";
+		nodeList.Add(point.GetComponent<SpriteRenderer>());
 		//point.transform.parent = nodes;
 		//point.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
 		if(inMap)
