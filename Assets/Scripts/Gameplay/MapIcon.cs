@@ -479,11 +479,11 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			map.Clear();
 		MapControler.Instance.SelectedIcon = null;
 		MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
-		MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero;
+		//MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero; //seb
 		MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
 		ShowAreaDetails();
 		//LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position+(transform.parent.transform.position-transform.position), 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
-
+       
 	}
 
 	public void ShowAreaDetails()
@@ -497,7 +497,9 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		MapControler.Instance.SelectionDescription.text = levelDescription;
 		AudioControler.Instance.ClickSound();
 		FindObjectOfType<GuiMap>().CreateMap(CreateMap());
-		LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack);
+       // LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack); //seb
+        
+        MapControler.Instance.ShowSelectionMenuAnimation();
 		MapControler.Instance.SelectedIcon = this;
 		if (available)
 		{

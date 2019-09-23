@@ -21,6 +21,7 @@ public class MapControler : MonoBehaviour {
 	public Button startLvlBtn;
 	public float scaleTime = 0.35f;
 	public Image[] pieChart;
+    Animator SelectionMenuAnimator;
 	[HideInInspector]
 	public MapIcon SelectedIcon;
 	public Text timerText;
@@ -38,6 +39,7 @@ public class MapControler : MonoBehaviour {
 	{
 		Instance = this;
 		Var.snapshot = null;
+       
 	}
 	// Use this for initialization
 	void Start () {
@@ -45,7 +47,7 @@ public class MapControler : MonoBehaviour {
 		Var.isBoss = false;
 		Var.freezeEmotions = false;
 		timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);		
-		SelectionMenu.transform.localScale = Vector3.zero;
+		//SelectionMenu.transform.localScale = Vector3.zero;
 		canHeal = false;
 		if(ambientSounds.clips.Length>0)
 		{
@@ -111,10 +113,14 @@ public class MapControler : MonoBehaviour {
 				DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
 			Var.shouldDoMapEvent = false;
 		}
-		//foreach (Bird bird in FillPlayer.Instance.playerBirds)
-		  //  bird.publicStart();
-		//ProgressGUI.Instance.PortraitClick(Var.availableBirds[0]);
-	}
+        //foreach (Bird bird in FillPlayer.Instance.playerBirds)
+        //  bird.publicStart();
+        //ProgressGUI.Instance.PortraitClick(Var.availableBirds[0]);
+
+        SelectionMenuAnimator = SelectionMenu.GetComponent<Animator>();
+     
+
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -183,11 +189,17 @@ public class MapControler : MonoBehaviour {
 	public void HideSelectionMenu()
 	{
 		canMove = true;
-		LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
+        //	LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
+        SelectionMenuAnimator.SetBool("active", false);
 		MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
 		foreach (GuiMap map in FindObjectsOfType<GuiMap>())
 			map.Clear();
 	}
+
+    public void ShowSelectionMenuAnimation()
+    {
+        SelectionMenuAnimator.SetBool("active", true);
+    }
 
 	
 	public void ScaleSelectedBirds(float time, Vector3 to)
