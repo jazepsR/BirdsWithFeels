@@ -22,6 +22,7 @@ public class MapControler : MonoBehaviour {
 	public float scaleTime = 0.35f;
 	public Image[] pieChart;
     Animator SelectionMenuAnimator;
+    public Animator SelectionMenuBlurAnimator;
 	[HideInInspector]
 	public MapIcon SelectedIcon;
 	public Text timerText;
@@ -191,14 +192,18 @@ public class MapControler : MonoBehaviour {
 		canMove = true;
         //	LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
         SelectionMenuAnimator.SetBool("active", false);
-		MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
-		foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+        SelectionMenuBlurAnimator.SetBool("active", false);
+
+        MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
+        
+        foreach (GuiMap map in FindObjectsOfType<GuiMap>())
 			map.Clear();
 	}
 
     public void ShowSelectionMenuAnimation()
     {
         SelectionMenuAnimator.SetBool("active", true);
+        SelectionMenuBlurAnimator.SetBool("active", true);
     }
 
 	
