@@ -10381,6 +10381,16 @@ PrefabInstance:
       propertyPath: levelDescription
       value: maybe so that we can live again
       objectReference: {fileID: 0}
+    - target: {fileID: 4469545945995120445, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: targets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469545945995120445, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: targets.Array.data[0]
+      value: 
+      objectReference: {fileID: 1796090582}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6038d5b60e6bf0f4cbe40cbc070b7589, type: 3}
 --- !u!1 &323943746
@@ -22286,10 +22296,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventName: Terry's farm is in trouble
-  startArea: {fileID: 0}
+  startArea: {fileID: 1796090582}
   startEvent: {fileID: 1220457404}
   timeToComplete: 5
-  endArea: {fileID: 0}
+  endArea: {fileID: 1417035996}
   activationEvent: {fileID: 822444944}
   completionEvent: {fileID: 1144649183}
   initialFailEvent: {fileID: 1872594598}
@@ -51945,6 +51955,18 @@ MonoBehaviour:
   text: Yeah, just dump all the books over here. Does anyvulture have a match?
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!114 &1796090582 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3961438258276554745, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+    type: 3}
+  m_PrefabInstance: {fileID: 8782073427488628664}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a613d3738b784f882023685cb836d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1799530490
 GameObject:
   m_ObjectHideFlags: 0
@@ -62723,7 +62745,7 @@ PrefabInstance:
     - target: {fileID: 8679887015624432380, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: isTrial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8679887015964956020, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
@@ -62739,6 +62761,31 @@ PrefabInstance:
         type: 3}
       propertyPath: levelDescription
       value: we all love descriptions!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679887015462586534, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: available
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679887016917171427, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: type
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679887015371048286, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: background
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3961438258276554745, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: levelDescription
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125217463920781974, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: available
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1021d4f7acba6a943b1a6c6a3340be03, type: 3}
