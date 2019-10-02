@@ -11,6 +11,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	public AudioGroup ambientSounds;
 	public bool isTrial = false;
 	public GameObject fogObject;
+    public GameObject[] hiddenThingsWhenTrialActive;
 	public GameObject CompleteIcon;
 	public GameObject LockedIcon;
 	public int ID;    
@@ -101,6 +102,14 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 				if((mapPan.Instance.activeFog== null || mapPan.Instance.activeFog.transform.position.x > fogObject.transform.position.x) && !completed)
 					mapPan.Instance.activeFog = fogObject.transform;
 			}
+
+            for(int i=0;i<hiddenThingsWhenTrialActive.Length;i++)
+            {
+
+                hiddenThingsWhenTrialActive[i].SetActive(completed);
+                
+            }
+
 		}
 		else
 		{
