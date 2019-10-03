@@ -797,6 +797,18 @@ Transform:
   m_Father: {fileID: 165253487}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &17413303 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4078207399232111623, guid: cd877a5ad3252324883b3e1ec6efa003,
+    type: 3}
+  m_PrefabInstance: {fileID: 1943453701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a613d3738b784f882023685cb836d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &20871101
 GameObject:
   m_ObjectHideFlags: 0
@@ -6611,7 +6623,7 @@ PrefabInstance:
     - target: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -215.00003
+      value: -215
       objectReference: {fileID: 0}
     - target: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
         type: 3}
@@ -8928,6 +8940,67 @@ MonoBehaviour:
   text: Dad!
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!1 &279099125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 279099126}
+  - component: {fileID: 279099127}
+  m_Layer: 0
+  m_Name: completeAfterFail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &279099126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279099125}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.4588151, y: 1.8028734, z: -86.12242}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1605584837}
+  - {fileID: 805227276}
+  - {fileID: 765475976}
+  - {fileID: 1122044772}
+  - {fileID: 1858730073}
+  - {fileID: 937415678}
+  m_Father: {fileID: 1167346551}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &279099127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279099125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakers: 010000000000000004000000
+  condition: 2
+  magnitude: 0
+  targetEmotion: 0
+  heading: Smoke
+  parts: []
+  options:
+  - {fileID: 937415679}
+  - {fileID: 0}
+  canShowMultipleTimes: 0
+  afterEventDialog: {fileID: 0}
+  quitAfterLevel: 0
 --- !u!1 &281397030
 GameObject:
   m_ObjectHideFlags: 0
@@ -12829,7 +12902,7 @@ GameObject:
   - component: {fileID: 420721858}
   - component: {fileID: 420721859}
   m_Layer: 0
-  m_Name: SophieEvent
+  m_Name: World 3 - SophieEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12852,7 +12925,7 @@ Transform:
   - {fileID: 1847045929}
   - {fileID: 1838345461}
   m_Father: {fileID: 1282160142}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &420721859
 MonoBehaviour:
@@ -22293,7 +22366,7 @@ GameObject:
   - component: {fileID: 712404155}
   - component: {fileID: 712404156}
   m_Layer: 0
-  m_Name: TerryEvent
+  m_Name: World 1 - TerryEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23804,6 +23877,53 @@ MonoBehaviour:
   text: I see. Well, I suppose we could use all the help we can get.
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!1 &765475975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 765475976}
+  - component: {fileID: 765475977}
+  m_Layer: 0
+  m_Name: part3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &765475976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765475975}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 279099126}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &765475977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765475975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 0
+  text: We got through!
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &765754914
 GameObject:
   m_ObjectHideFlags: 0
@@ -25228,7 +25348,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -220.00003, y: -135}
+  m_AnchoredPosition: {x: -220, y: -135}
   m_SizeDelta: {x: 460, y: 411.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &803136198
@@ -25310,6 +25430,53 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 11
   m_TargetDisplay: 0
+--- !u!1 &805227275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 805227276}
+  - component: {fileID: 805227277}
+  m_Layer: 0
+  m_Name: part2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &805227276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805227275}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 279099126}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &805227277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805227275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 2
+  text: "I\u2019m sorry, Rebecca, it seems like this place has been abandoned."
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &809451530
 GameObject:
   m_ObjectHideFlags: 0
@@ -25817,7 +25984,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 7
   m_TargetDisplay: 0
 --- !u!114 &827790624
 MonoBehaviour:
@@ -26485,6 +26652,18 @@ MonoBehaviour:
     know what to do."
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!114 &862242347 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3581931690837705399, guid: 9ab489193ef088b4a89eaba2db11be74,
+    type: 3}
+  m_PrefabInstance: {fileID: 434924973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a613d3738b784f882023685cb836d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &862365988
 GameObject:
   m_ObjectHideFlags: 0
@@ -28329,6 +28508,64 @@ MonoBehaviour:
   canShowMultipleTimes: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+--- !u!1 &937415677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 937415678}
+  - component: {fileID: 937415679}
+  m_Layer: 0
+  m_Name: option 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &937415678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937415677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 279099126}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &937415679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 937415677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onComplete: {fileID: 0}
+  consequenceType1: 2
+  magnitude1: -5
+  consequenceType2: 1
+  magnitude2: -3
+  consequenceType3: 3
+  magnitude3: 0
+  useAutoExplanation: 1
+  AfterImage: {fileID: 0}
+  icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
+  selectionText: Your family is safe, and that's what matters. We have to move on.
+  selectionTooltip: 
+  conclusionHeading: Leaving
+  conclusionText: 'Rebecca said goodbye to what was once her family''s store, and
+    then set out to continue the mission. '
 --- !u!1 &940046726
 GameObject:
   m_ObjectHideFlags: 0
@@ -33252,6 +33489,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120973437}
   m_CullTransparentMesh: 0
+--- !u!1 &1122044771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1122044772}
+  - component: {fileID: 1122044773}
+  m_Layer: 0
+  m_Name: part4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1122044772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122044771}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 279099126}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1122044773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122044771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 1
+  text: But we did not get thru in time. Family's gone
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &1130995657
 GameObject:
   m_ObjectHideFlags: 0
@@ -34645,7 +34929,7 @@ GameObject:
   - component: {fileID: 1167346551}
   - component: {fileID: 1167346552}
   m_Layer: 0
-  m_Name: RebeccaEvent
+  m_Name: World 2 RebeccaEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34665,6 +34949,7 @@ Transform:
   - {fileID: 1918244136}
   - {fileID: 552178610}
   - {fileID: 1824205019}
+  - {fileID: 279099126}
   m_Father: {fileID: 1282160142}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34681,14 +34966,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventName: Rebecca's family is leaving
-  startArea: {fileID: 0}
+  startArea: {fileID: 1699827720}
   startEvent: {fileID: 1918244137}
   timeToComplete: 5
-  endArea: {fileID: 0}
+  endArea: {fileID: 862242347}
   activationEvent: {fileID: 552178611}
   completionEvent: {fileID: 0}
   initialFailEvent: {fileID: 1824205020}
-  completionAfterFailEvent: {fileID: 0}
+  completionAfterFailEvent: {fileID: 279099127}
   EventNotification: {fileID: 466420184}
   data:
     eventName: 
@@ -37609,9 +37894,9 @@ Transform:
   m_Children:
   - {fileID: 712404155}
   - {fileID: 1167346551}
+  - {fileID: 420721858}
   - {fileID: 1533006489}
   - {fileID: 1378131997}
-  - {fileID: 420721858}
   - {fileID: 88578795}
   m_Father: {fileID: 0}
   m_RootOrder: 11
@@ -40126,7 +40411,7 @@ GameObject:
   - component: {fileID: 1378131997}
   - component: {fileID: 1378131998}
   m_Layer: 0
-  m_Name: KimEvent
+  m_Name: World 5 Kim event
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40148,7 +40433,7 @@ Transform:
   - {fileID: 1302558291}
   - {fileID: 962132265}
   m_Father: {fileID: 1282160142}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1378131998
 MonoBehaviour:
@@ -40163,10 +40448,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventName: Commission for Kim
-  startArea: {fileID: 0}
+  startArea: {fileID: 1472819259}
   startEvent: {fileID: 351266381}
   timeToComplete: 5
-  endArea: {fileID: 0}
+  endArea: {fileID: 17413303}
   activationEvent: {fileID: 405752728}
   completionEvent: {fileID: 1302558292}
   initialFailEvent: {fileID: 962132266}
@@ -42715,6 +43000,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1472819259 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4081641656520266473, guid: cd877a5ad3252324883b3e1ec6efa003,
+    type: 3}
+  m_PrefabInstance: {fileID: 1943453701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a613d3738b784f882023685cb836d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1475249992
 GameObject:
   m_ObjectHideFlags: 0
@@ -44961,7 +45258,7 @@ GameObject:
   - component: {fileID: 1533006489}
   - component: {fileID: 1533006490}
   m_Layer: 0
-  m_Name: AlexEvent
+  m_Name: World 4 Alex Event
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44984,7 +45281,7 @@ Transform:
   - {fileID: 1217063367}
   - {fileID: 13362619}
   m_Father: {fileID: 1282160142}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1533006490
 MonoBehaviour:
@@ -44999,10 +45296,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventName: Talonport under siege
-  startArea: {fileID: 0}
+  startArea: {fileID: 1046051763}
   startEvent: {fileID: 794523497}
   timeToComplete: 5
-  endArea: {fileID: 0}
+  endArea: {fileID: 1996589028}
   activationEvent: {fileID: 1148481753}
   completionEvent: {fileID: 1725126222}
   initialFailEvent: {fileID: 1217063368}
@@ -47220,6 +47517,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerId: 0
   text: "But Alex, you\u2019re a military bird, aren\u2019t you?"
+  useCustomPic: 0
+  customPic: {fileID: 0}
+--- !u!1 &1605584836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1605584837}
+  - component: {fileID: 1605584838}
+  m_Layer: 0
+  m_Name: part1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1605584837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605584836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 279099126}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1605584838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605584836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 0
+  text: 'PLACEHOLDER REPLACE ME
+
+'
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1608258959
@@ -53762,6 +54108,53 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1858730072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1858730073}
+  - component: {fileID: 1858730074}
+  m_Layer: 0
+  m_Name: part5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1858730073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858730072}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 279099126}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1858730074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858730072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 0
+  text: Oh no
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &1859521366
 GameObject:
   m_ObjectHideFlags: 0
@@ -55169,7 +55562,7 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
@@ -57952,6 +58345,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995892492}
   m_CullTransparentMesh: 0
+--- !u!114 &1996589028 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4189619367261943727, guid: cd877a5ad3252324883b3e1ec6efa003,
+    type: 3}
+  m_PrefabInstance: {fileID: 1943453701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a613d3738b784f882023685cb836d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1998299430
 GameObject:
   m_ObjectHideFlags: 0
@@ -62642,7 +63047,7 @@ PrefabInstance:
     - target: {fileID: 8679887015624432380, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: available
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8679887015624432380, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
@@ -62654,11 +63059,31 @@ PrefabInstance:
       propertyPath: targets.Array.data[0]
       value: 
       objectReference: {fileID: 1699827720}
+    - target: {fileID: 8679887015624432380, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: levelDescription
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679887015624432380, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: levelName
+      value: Terry's family farm
+      objectReference: {fileID: 0}
+    - target: {fileID: 3961438258276554745, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: targets.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3961438258276554745, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: levelDescription
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3961438258276554745, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: targets.Array.data[2]
+      value: 
+      objectReference: {fileID: 1417035996}
     - target: {fileID: 8679887015964956020, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: battles.Array.size
