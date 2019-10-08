@@ -54,7 +54,10 @@ public class TrialTutorialScript : MonoBehaviour
 
     public void playerClickedTrialLevel()
     {
-        anime.SetTrigger("trialLevelClicked");
+        if (anime)
+        {
+            anime.SetTrigger("trialLevelClicked");
+        }
         continueButton.gameObject.SetActive(true);
     }
 

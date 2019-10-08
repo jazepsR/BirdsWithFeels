@@ -93,7 +93,7 @@ public class Settings
         shownLevelTutorial = tutorialsCompleted;
         shownMapTutorial = tutorialsCompleted;
         shownMapPlanningTutorial = tutorialsCompleted;
-   }
+}
 }
 
 

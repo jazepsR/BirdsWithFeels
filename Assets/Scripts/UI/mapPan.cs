@@ -22,6 +22,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	Vector2 lastSoundPosition;
 	Vector3 startingScale;
 	public mapScrolHeight[] mapScrollPoints;
+    public bool scrollingEnabled = false;
 	Rect maxPos;
 	void Awake()
 	{
@@ -36,6 +37,9 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	{
 		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
 			return;
+        if (!scrollingEnabled)
+            return;
+
 		if (Input.GetAxis("Mouse ScrollWheel") != 0)
 		{
 			Vector3 targetpos = transform.position;

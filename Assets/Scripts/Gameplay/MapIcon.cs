@@ -109,8 +109,12 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
                 hiddenThingsWhenTrialActive[i].SetActive(completed);
                 
             }
+            if(completed)
+            {
+                mapPan.Instance.scrollingEnabled = true;
+            }
 
-		}
+        }
 		else
 		{
 			sr.sprite = Helpers.Instance.GetEmotionIcon(type);

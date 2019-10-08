@@ -184,6 +184,7 @@ public class GuiContoler : MonoBehaviour {
 			}
 		}
 		mapPan.Instance.activeFog = null;
+        mapPan.Instance.scrollingEnabled = true;
 	}
 	public void SetControlButtonText()
 	{

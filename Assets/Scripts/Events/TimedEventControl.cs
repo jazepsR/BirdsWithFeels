@@ -55,7 +55,7 @@ public class TimedEventControl : MonoBehaviour {
 			EventNotification.transform.parent.localPosition = offset;
 			if (endArea.completed)
 			{
-				if (Var.currentWeek< data.completeBy)
+				if (Var.currentWeek<= data.completeBy)
 				{
 					data.currentState = TimedEventData.state.completedSuccess;
 					EventController.Instance.CreateEvent(completionEvent);
@@ -68,7 +68,7 @@ public class TimedEventControl : MonoBehaviour {
 			}
 			if (Var.currentWeek >= data.completeBy)
 			{
-				data.currentState = TimedEventData.state.failed;
+				data.currentState = TimedEventData.state.completedFail;
 				EventController.Instance.CreateEvent(initialFailEvent);
 				EventNotification.transform.parent.gameObject.SetActive(false);
 			}
@@ -76,7 +76,9 @@ public class TimedEventControl : MonoBehaviour {
 			{
 				endArea.timedEvent = this;
 			}
-		}	
+            foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+                icon.SetState();
+        }	
 	}
 	// Update is called once per frame
 	void Update () {
