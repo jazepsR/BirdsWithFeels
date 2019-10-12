@@ -1003,21 +1003,30 @@ public class GuiContoler : MonoBehaviour {
 			int friendGain = Helpers.Instance.Findfirendlieness(bird);
 			if (friendGain > 0)
 			{
-				if(friendGain>2)
-					Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social,true,2);
-				else
-					Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social);
+                if (friendGain > 2)
+                {
+                    Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social, true, 2);
+                }
+                else
+                {
+                    Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social);
+
+                }
 				AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
 			}
 			if (friendGain < 0)
 			{
 				Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Solitary);
-				AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
+                AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
 			}
 
 			bird.friendBoost += friendGain;			
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();
-		}
+            if (bird.indicator)
+            {
+                bird.indicator.Hide();
+            }
+        }
 
 
 
@@ -1083,8 +1092,8 @@ public class GuiContoler : MonoBehaviour {
 		ProgressGUI.Instance.SetOnePortrait();       
 		foreach (Bird bird in players)
 		{
-			bird.ResetBonuses();       	
-			foreach(Bird activeBird in Var.activeBirds)
+			bird.ResetBonuses(); 
+            foreach (Bird activeBird in Var.activeBirds)
 			{
 				if (activeBird.data.injured)
 				{

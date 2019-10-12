@@ -173,6 +173,7 @@ public class Bird : MonoBehaviour
 	bool mouseHeld = false;
 	float clickTime = 0;
 	public BirdSound birdSounds;
+    public EmoIndicator indicator;
 	void Awake()
 	{
 		if(!isEnemy && !Var.isTutorial)
@@ -229,6 +230,7 @@ public class Bird : MonoBehaviour
 			var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
 			birdArtObj = Instantiate(BirdArt, transform) as GameObject;
 			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
+            birdArtObj.transform.SetAsFirstSibling();
 	   
 			if (data.levelList.Count == 0 && !Var.isTutorial)
 			{
@@ -279,8 +281,10 @@ public class Bird : MonoBehaviour
 			}
 		}
 
-		if (inMap && MapControler.Instance.count != 3)
-			GetComponentInChildren<Animator>().SetBool("rest", true);
+        if (inMap && MapControler.Instance.count != 3)
+        {
+            GetComponentInChildren<Animator>().SetBool("rest", true);
+        }
 
 		if (data.recievedSeeds == null)
 			data.recievedSeeds = new List<string>();
@@ -592,7 +596,16 @@ public class Bird : MonoBehaviour
 		isInfluenced = false;
 		Destroy(cautiousParticleObj);
 	}
-	public void TryLevelUp()
+
+    public int GetFriendlinessBonus()
+    {
+        return friendBoost + groundFriendBoos + wizardFrienBoos + levelFriendBoos;
+    }
+    public int GetConfBoost()
+    {
+        return battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
+    }
+    public void TryLevelUp()
 	{
 		if (data.injured)
 			return;
@@ -654,8 +667,9 @@ public class Bird : MonoBehaviour
 	void OnMouseEnter()
 	{
 
-		//if(!Var.Infight)
-		if(GuiContoler.Instance.speechBubbleObj.activeSelf)
+       // Debug.LogError("friendly: " + prevFriend + " gain friendly " + GetFriendlinessBonus() + " conf: " + prevConf + " prev conf: " + GetFriendlinessBonus());
+        //if(!Var.Infight)
+        if (GuiContoler.Instance.speechBubbleObj.activeSelf)
 			return;
 		if (Var.CanShowHover)
 			showText();
@@ -689,7 +703,6 @@ public class Bird : MonoBehaviour
 	}
 	void OnMouseOver()
 	{
-
 		if (Var.Infight)
 			return;
 		if (isEnemy || GuiContoler.Instance.speechBubbleObj.activeSelf)
@@ -798,7 +811,7 @@ public class Bird : MonoBehaviour
 				{
 					mapHighlight.SetActive(true);
 					GetComponentInChildren<Animator>().SetBool("rest", false);
-					MapControler.Instance.selectedBirds.Add(this);
+                    MapControler.Instance.selectedBirds.Add(this);
 				}
 				MapControler.Instance.CanLoadBattle();
 				return;
@@ -972,8 +985,24 @@ public class Bird : MonoBehaviour
 					Destroy(cautiousParticleObj);
 
 			}
-		}       
-		GameLogic.Instance.UpdateFeedback();
+		}
+
+        if (indicator)
+        {
+            if (dragged)
+            {
+                indicator.Hide();
+            }
+            else
+            {
+                GetFriendlinessBonus();
+                GetConfBoost();
+                Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(this).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
+                Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
+                indicator.Show(emo1,emo2);
+            }
+        }
+        GameLogic.Instance.UpdateFeedback();
 		
 	}
 	public Bird(string name,int confidence =0,int friendliness = 0)
@@ -1480,7 +1509,13 @@ public class Bird : MonoBehaviour
 	void drawLines()
 	{
 		lines.DrawLines();
-	}
+        if(indicator)
+        {
+            Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(this).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
+            Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
+            indicator.SetEmotions(emo1, emo2);
+        }
+    }
 	public void ReleaseBird(int x, int y)
 	{
 		
