@@ -78,7 +78,8 @@ public class GraphPortraitScript : MonoBehaviour {
 			info.tooltipText = "";
 			try
 			{
-				info.tooltipText = GuiContoler.Instance.CreateEmotionChangeText(bird).Substring(1);
+                //TODO: restore functionality
+				//info.tooltipText = GuiContoler.Instance.CreateEmotionChangeText(bird).Substring(1);
 			}
 			catch { }
 			if (info.tooltipText == "")
