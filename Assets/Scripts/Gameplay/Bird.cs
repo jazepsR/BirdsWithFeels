@@ -319,6 +319,14 @@ public class Bird : MonoBehaviour
 			string path = Application.persistentDataPath + "/" + Var.currentSaveSlot + "/" + charName + ".dat";
 			File.Delete(path);
 			Debug.Log("savePath: " + path);
+            if(charName.ToLower() == "Kim")
+            {
+                data.unlocked = Var.KimUnlocked;
+            }
+            if(charName.ToLower() == "Sophie")
+            {
+                data.unlocked = Var.SophieUnlocked;
+            }
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Create(path);
 			bf.Serialize(file, data);

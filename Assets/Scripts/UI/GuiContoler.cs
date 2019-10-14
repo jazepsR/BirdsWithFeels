@@ -1298,6 +1298,11 @@ public class GuiContoler : MonoBehaviour {
 		if (nextMapArea == Var.Em.finish)
 		{
 			mapPos = 0;
+            if(Var.isTutorial)
+            {
+                Var.KimUnlocked = false;
+                Var.SophieUnlocked = false;
+            }
 			Var.isTutorial = false;
 			Var.tutorialCompleted = true;
 			Var.isBoss = false;
