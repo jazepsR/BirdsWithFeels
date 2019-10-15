@@ -32,6 +32,8 @@ public class EmoIndicator : MonoBehaviour
         anim.ResetTrigger("hide");
         anim.SetTrigger("show");
         SetEmotions(emo1, emo2);
+
+ 
     }
 
     public void SetEmotions(Var.Em emo1, Var.Em emo2)

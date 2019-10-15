@@ -173,11 +173,7 @@ public class Tutorial : MonoBehaviour {
 				break;
 			case 4:
 				EventController.Instance.CreateEvent(AddAlexEvent);
-                shouldShowMHPTutorial = true;
-
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), " Ahh I feel so PUMPED UP!! Nothing can stop me!", TerrySounds);
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Just don’t let it get to your head", RebeccaSounds);
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "  Pffft, what’s the worst that could happen? ", TerrySounds);
+                
 
                 //   GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[2].GetMouthTransform(), "A Rock!");
                 //   GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Birds can't stand there, but vultures move right over the rocks!");
@@ -187,6 +183,14 @@ public class Tutorial : MonoBehaviour {
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[2].GetMouthTransform(), "I've seen this before! These enemies will attack from multiple directions!",AlexSounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "You guys can you let me fight <b>two at once?</b> I've always wanted to do that! ",TerrySounds);
 				break;
+            case 6:
+                shouldShowMHPTutorial = true;
+
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), " Ahh I feel so PUMPED UP!! Nothing can stop me!", TerrySounds);
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Just don’t let it get to your head", RebeccaSounds);
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "  Pffft, what’s the worst that could happen? ", TerrySounds);
+
+                break; 
 		}
 	}
 	public void ShowTutorialBeforeBattleText(int stage)
