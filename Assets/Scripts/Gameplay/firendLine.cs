@@ -82,7 +82,14 @@ public class firendLine : MonoBehaviour {
 					activeLines.Add(LineObj);
 					Var.playerPos[y, x].lines.activeLines.Add(LineObj);
                     AudioControler.Instance.PlaySound(AudioControler.Instance.createLines);
-				}
+                    if (Var.playerPos[y, x].indicator)
+                    {
+                        Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(Var.playerPos[y, x]).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
+                        Var.Em emo2 = Var.playerPos[y, x].fighting ? Var.Em.Neutral : Var.Em.Cautious;
+                        Var.playerPos[y, x].indicator.SetEmotions(emo1, emo2);
+                    }
+
+                }
 				Destroy(Var.playerPos[y, x].gameObject.GetComponent<firendLine>().lonelyParticleObj);
                 //Deprecated code
                 /*
@@ -143,6 +150,14 @@ public class firendLine : MonoBehaviour {
             AudioControler.Instance.PlaySound(AudioControler.Instance.SolitaryAppear);
 			lonelyParticleObj.transform.localPosition = new Vector3(0.3f, 0, 0);
 		}
+        if (birdScript.indicator)
+        {
+            Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(birdScript).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
+            Var.Em emo2 = birdScript.fighting ? Var.Em.Neutral : Var.Em.Cautious;
+            birdScript.indicator.SetEmotions(emo1, emo2);
+        }
+
+
     }
 
 
