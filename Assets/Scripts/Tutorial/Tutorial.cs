@@ -15,7 +15,8 @@ public class Tutorial : MonoBehaviour {
 	public Var.Em[] forthStageEnemies;
 	public Var.Em[] fifthStageEnemies;
 	public Var.Em[] sixthStageEnemies;
-	public EventScript AddAlexEvent;
+
+    public EventScript AddAlexEvent;
 	public List<List<TutorialEnemy>> TutorialMap = new List<List<TutorialEnemy>>();
 	public List<int> BirdCount;
 	[HideInInspector]
@@ -45,6 +46,7 @@ public class Tutorial : MonoBehaviour {
 		AddEnemiesToList(forthStageEnemies);
 		AddEnemiesToList(fifthStageEnemies);
 		AddEnemiesToList(sixthStageEnemies);
+
 	}
 	void Start()
 	{
