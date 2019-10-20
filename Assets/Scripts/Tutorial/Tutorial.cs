@@ -39,6 +39,7 @@ public class Tutorial : MonoBehaviour {
 		Instance = this;
 		if (!Var.isTutorial)
 			return;
+        Var.currentBG = 0;
 		CurrentPos = 0;
 		AddEnemiesToList(firstStageEnemies);
 		AddEnemiesToList(secondStageEnemies);

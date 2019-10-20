@@ -198,7 +198,9 @@ public class MapControler : MonoBehaviour {
         
         foreach (GuiMap map in FindObjectsOfType<GuiMap>())
 			map.Clear();
-	}
+        MapControler.Instance.SelectedIcon = null;
+
+    }
 
     public void ShowSelectionMenuAnimation()
     {

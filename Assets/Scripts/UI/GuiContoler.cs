@@ -143,7 +143,7 @@ public class GuiContoler : MonoBehaviour {
         {
             foreach (GuiMap map in FindObjectsOfType<GuiMap>())
                 map.CreateMap(Var.map);
-            minimap.SetActive(Var.gameSettings.shownLevelTutorial);
+            minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
             setMapLocation(0);
             LeanTween.delayedCall(0.05f, tryDialog);
             boss.SetActive(Var.isBoss);
@@ -611,7 +611,7 @@ public class GuiContoler : MonoBehaviour {
         AudioControler.Instance.PlaySound(AudioControler.Instance.notebookClose);
         canChangeGraph = true;
         GraphBlocker.SetActive(false);
-        minimap.SetActive(Var.gameSettings.shownLevelTutorial);
+        minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
         if (!Reset())
             return;
         graphAnime.SetBool("open", false);
@@ -629,7 +629,7 @@ public class GuiContoler : MonoBehaviour {
     }
     public void CloseBirdStats()
     {
-        minimap.SetActive(Var.gameSettings.shownLevelTutorial);
+        minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
         graphAnime.SetBool("open", false);
         GraphBlocker.SetActive(false);
         foreach (Transform child in graph.transform.Find("GraphParts").transform)
@@ -766,17 +766,24 @@ public class GuiContoler : MonoBehaviour {
 		int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
         SetupTotal(confTotalReportParent, Var.Em.Confident, Var.Em.Cautious, ConfGainedInRound, confTotalReportIcon, confTotalReportCount);
         SetupTotal(socialTotalReportParent, Var.Em.Social, Var.Em.Solitary, FriendGainedInRound, socialTotalReportIcon, socialTotalReportCount);
-		//Confidence stuff
-		//if (ConfGainedInRound > 0)
-		//	fbText += "\n"+Helpers.Instance.BraveHexColor+"<b>Confidence gained: " + ConfGainedInRound +"</b></color>";
-		//if (ConfGainedInRound < 0)
-		//	fbText += "\n" + Helpers.Instance.ScaredHexColor + "<b>Caution gained: " + Mathf.Abs(ConfGainedInRound) + "</b></color>";
-        if (bird.battleConfBoos > 0)
-            CreateEmoBit(topParent, bird.battleConfBoos, Var.Em.Confident, "Confronting vultures");
-			//fbText += Helpers.Instance.BraveHexColor + "\n\tFrom combat: " + bird.battleConfBoos.ToString("+#;-#;0") + " confidence</color>";
-		if (bird.battleConfBoos < 0)
-            CreateEmoBit(topParent, bird.battleConfBoos, Var.Em.Cautious, "Getting hurt by vultures");
+        //Confidence stuff
+        //if (ConfGainedInRound > 0)
+        //	fbText += "\n"+Helpers.Instance.BraveHexColor+"<b>Confidence gained: " + ConfGainedInRound +"</b></color>";
+        //if (ConfGainedInRound < 0)
+        //	fbText += "\n" + Helpers.Instance.ScaredHexColor + "<b>Caution gained: " + Mathf.Abs(ConfGainedInRound) + "</b></color>";
 
+        if (bird.data.roundsRested != 0)
+        {
+            CreateEmoBit(topParent, 2, Var.Em.Cautious, "Resting");
+        }
+        else
+        {
+            if (bird.battleConfBoos > 0)
+                CreateEmoBit(topParent, bird.battleConfBoos, Var.Em.Confident, "Confronting vultures");
+            //fbText += Helpers.Instance.BraveHexColor + "\n\tFrom combat: " + bird.battleConfBoos.ToString("+#;-#;0") + " confidence</color>";
+            if (bird.battleConfBoos < 0)
+                CreateEmoBit(topParent, bird.battleConfBoos, Var.Em.Cautious, "Getting hurt by vultures");
+        }
         //fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs(bird.battleConfBoos).ToString("+#;-#;0") + " caution</color>";
         if (bird.data.injured)
             CreateEmoBit(topParent, 5, Var.Em.Cautious, "Suffered injury");

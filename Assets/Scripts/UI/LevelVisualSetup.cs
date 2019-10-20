@@ -18,10 +18,10 @@ public class LevelVisualSetup : MonoBehaviour {
                 Var.currentBG = debugSelection;
 
               
-            if(Var.currentBG==0) //Seb hates the swamp
+          /*  if(Var.currentBG==0) //Seb hates the swamp
             {
                 Var.currentBG=1;
-            }         
+            }   */      
               
             backgrounds[i].SetActive(i == Var.currentBG);
         }       

@@ -22,14 +22,16 @@ public class LevelTutorial : MonoBehaviour {
 		//Var.currentStageID = 1;
 		if((Var.currentStageID == 1000) && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
 		{
-			Var.gameSettings.shownBattlePlanningTutorial = true;
-			DialogueControl.Instance.CreateParticularDialog(planningDialogue);
+            LeanTween.delayedCall(0.1f, () =>
+             Var.gameSettings.shownBattlePlanningTutorial = true);
+            GuiContoler.Instance.minimap.SetActive(true);
+            DialogueControl.Instance.CreateParticularDialog(planningDialogue);
 		}
 
-		if (Var.currentStageID == 4 && !Var.gameSettings.shownLevelTutorial)
+		if (Var.currentStageID == 4&& !Var.gameSettings.shownLevelTutorial)
 		{
 			Var.gameSettings.shownLevelTutorial = true;
-			DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);
+            DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);
 			shouldShowFirstBattleDialog = true;
 			shouldShowGraphDialog = true;
 			Var.CanShowHover = false;
@@ -44,9 +46,9 @@ public class LevelTutorial : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{		
-		if (Var.currentStageID != 5)
-			return;
-		if (shouldShowFirstBattleDialog && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad >0.5f)
+		//if (Var.currentStageID != 5)
+		//	return;
+		if (shouldShowFirstBattleDialog && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad >0.1f)
 		{
 			Var.gameSettings.shownLevelTutorial = true;
 			GraphHighlight.SetActive(true);

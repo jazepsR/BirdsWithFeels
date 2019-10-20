@@ -464,11 +464,13 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 
 	public void mapBtnClick()
 	{
-	 
 
 
-		if (MapControler.Instance.SelectedIcon == this)
-			return;
+
+        if (MapControler.Instance.SelectedIcon == this)
+        {
+            return;
+        }
 		try
 		{
 			AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
