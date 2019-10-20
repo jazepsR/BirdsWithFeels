@@ -24,11 +24,11 @@ public class DebugMenu : MonoBehaviour {
             resetTime = System.DateTime.Now.AddSeconds(secondsWaitTime);
             mousePos = Input.mousePosition;
         }
-        if(System.DateTime.Compare(System.DateTime.Now,resetTime)>0)
+      /*  if(System.DateTime.Compare(System.DateTime.Now,resetTime)>0)
         {
             SaveLoad.DeleteSave(Var.currentSaveSlot);
             SceneManager.LoadScene("mainMenu");
-        }
+        }*/
     }
 
     void Awake()
