@@ -7,7 +7,10 @@ public class bossBattleVultureVisuals : MonoBehaviour
     public GameObject[] rightVultures;
     public GameObject[] leftVultures;
 
-    public GameObject[] twoVulturekINGS;
+    public GameObject vultureKing;
+    Animator vultureKingAnimator;
+
+    public bool debugFinalBattleActive;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +23,19 @@ public class bossBattleVultureVisuals : MonoBehaviour
         {
             rightVultures[i].gameObject.SetActive(false);
         }
+        vultureKingAnimator = vultureKing.GetComponent<Animator>();
+        vultureKing.SetActive(false);
 
-
+        if(debugFinalBattleActive)
+        {
+            setupLastBattle();
+        }
     }
 
-    void setupLastBattle()
+    public void setupLastBattle()
     {
+
+        vultureKing.SetActive(true);
         for (int i = 0; i < leftVultures.Length; i++)
         {
             leftVultures[i].gameObject.SetActive(false);
@@ -35,19 +45,29 @@ public class bossBattleVultureVisuals : MonoBehaviour
         {
             rightVultures[i].gameObject.SetActive(true);
         }
+        vultureKing.SetActive(true);
     }
 
+    public void vultureKingFistPumps()
+    {
+        vultureKingAnimator.SetTrigger("charge");
+    }
 
     // Update is called once per frame
     void Update()
     {
 
-
-if(        Input.GetKeyDown(KeyCode.A))
+        if (debugFinalBattleActive)
+        { 
+    if( Input.GetKeyDown(KeyCode.A))
         {
             addVulturesToLeftSide();
         }
-
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            vultureKingFistPumps();
+        }
+        }
     }
 
     
