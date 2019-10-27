@@ -15,6 +15,8 @@ public class EmoIndicator : MonoBehaviour
     //public SpriteRenderer firstIcon;
     //public SpriteRenderer secondIcon;
     public Bird bird;
+    bool hidden = false;
+    int hideCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,15 +27,19 @@ public class EmoIndicator : MonoBehaviour
     {
         anim.ResetTrigger("show");
         anim.SetTrigger("hide");
+        hidden = true;
     }
 
-    public void Show(Var.Em emo1, Var.Em emo2)
+    public void Show(Var.Em emo1, Var.Em emo2, bool setEmos = true)
     {
         anim.ResetTrigger("hide");
         anim.SetTrigger("show");
-        SetEmotions(emo1, emo2);
-
- 
+        if (setEmos)
+        {
+            SetEmotions(emo1, emo2);
+        }
+        hidden = false;
+        hideCount++;
     }
 
     public void SetEmotions(Var.Em emo1, Var.Em emo2)
@@ -43,6 +49,16 @@ public class EmoIndicator : MonoBehaviour
         confidentIcon.SetActive(emo2 == Var.Em.Confident);
         cautiousIcon.SetActive(emo2 == Var.Em.Cautious);
        //Debug.LogError(bird.charName + " emo1: " + emo1 + " emo2: " + emo2);
+         if(emo1 == Var.Em.Neutral && emo2 == Var.Em.Neutral)
+         {
+           //  Debug.Log("hiding");
+             Hide();
+         }
+        else
+         {
+            // Debug.Log("showing");
+             Show(emo1, emo2,false);
+         }
     }
 
     public void Update()

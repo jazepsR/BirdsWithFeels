@@ -1521,6 +1521,10 @@ public class Bird : MonoBehaviour
         {
             Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(this).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
             Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
+            if (emo1 == Var.Em.Social)
+            {
+                emo1 = lines.activeLines.Count == 0 ? Var.Em.Neutral : Var.Em.Social;
+            }
             indicator.SetEmotions(emo1, emo2);
         }
     }

@@ -51,7 +51,7 @@ public class Levels : MonoBehaviour {
 			myBird.GetComponentInChildren<Animator>().SetBool("rest", true);
             if (myBird.cautiousParticleObj == null)
             {
-                myBird.cautiousParticleObj = Instantiate(firendLine.cautiousParticles, transform);
+               // myBird.cautiousParticleObj = Instantiate(firendLine.cautiousParticles, transform);
                 myBird.cautiousParticleObj.transform.localPosition = new Vector3(0.3f, 0, 0);
             }
         }

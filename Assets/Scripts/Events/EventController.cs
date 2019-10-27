@@ -427,57 +427,78 @@ public class EventController : MonoBehaviour {
 
 	string ApplyConsequences(int ID)
 	{
-		string ConsequenceText = ApplyConsequence(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1);
-		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2);
-		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3);
+		string ConsequenceText = ApplyConsequence(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1, currentEvent.options[ID].applyToAll);
+		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2, currentEvent.options[ID].applyToAll);
+		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3, currentEvent.options[ID].applyToAll);
 		if(currentBird!= null)
 			currentBird.SetEmotion();        
 		return ConsequenceText;
 
 	}
-	string ApplyConsequence(ConsequenceType type, int magnitude)
+	string ApplyConsequence(ConsequenceType type, int magnitude, bool applyToAll)
 	{        
 		if (currentBird == null)
 			return "";
-		if (currentBird != null)
-			currentBird.SetEmotion();
-		switch (type)
-		{
-			case ConsequenceType.Courage:
-				currentBird.data.confidence += magnitude;
-				currentBird.prevConf += magnitude;
-				if (magnitude > 0)
-				{
-					return currentBird.charName + " gained " + magnitude + " confidence.";
-				}
-				else
-				{
-					return currentBird.charName + "'s caution increased by " + Mathf.Abs(magnitude) + ".";
-				}
-			case ConsequenceType.Friendliness:
-				currentBird.data.friendliness += magnitude;
-				currentBird.prevFriend += magnitude;
-				if (magnitude > 0)
-				{
-					return currentBird.charName + " gained " + magnitude + " social.";
-				}
-				else
-				{
-					return currentBird.charName + " gained " + Mathf.Abs(magnitude) + " solitude.";
-				}               
-			case ConsequenceType.Health:
-				currentBird.ChageHealth(magnitude);
-				if (magnitude > 0)
-				{
-					return currentBird.charName+" gained "+ magnitude + " health.";
-				}else
-				{
-					return currentBird.charName + " lost " + Mathf.Abs(magnitude) + " health.";
-				}
-				
-			default:
-				return "";
-		}
+        List<Bird> birdsToApply = new List<Bird>();
+        if(applyToAll)
+        {
+            foreach(Bird bird in Var.activeBirds)
+            {
+                birdsToApply.Add(bird);
+            }
+        }
+        else
+        {
+            birdsToApply.Add(currentBird);
+        }
+
+        string infoString = "";
+        foreach (Bird bird in birdsToApply)
+        {
+            if (bird != null)
+                bird.SetEmotion();
+            switch (type)
+            {
+                case ConsequenceType.Courage:
+                    bird.data.confidence += magnitude;
+                    bird.prevConf += magnitude;
+                    if (magnitude > 0)
+                    {
+                        infoString += bird.charName + " gained " + magnitude + " confidence\n";
+                    }
+                    else
+                    {
+                        infoString += bird.charName + "'s caution increased by " + Mathf.Abs(magnitude) + "\n";
+                    }
+                    break;
+                case ConsequenceType.Friendliness:
+                    bird.data.friendliness += magnitude;
+                    bird.prevFriend += magnitude;
+                    if (magnitude > 0)
+                    {
+                        infoString += bird.charName + " gained " + magnitude + " social\n";
+                    }
+                    else
+                    {
+                        infoString += bird.charName + " gained " + Mathf.Abs(magnitude) + " solitude\n";
+                    }
+                    break;
+                case ConsequenceType.Health:
+                    currentBird.ChageHealth(magnitude);
+                    if (magnitude > 0)
+                    {
+                        infoString+= bird.charName + " gained " + magnitude + " health\n";
+                    }
+                    else
+                    {
+                        infoString += bird.charName + " lost " + Mathf.Abs(magnitude) + " health\n";
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        return infoString;
 
 	}
 	void SetupChoice(GameObject choiceObj,int ID)
