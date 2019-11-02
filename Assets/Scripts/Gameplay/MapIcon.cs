@@ -167,7 +167,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		anim = GetComponent<Animator>();
 		LeanTween.delayedCall(0.2f, () =>
 		{
-			if (EventController.Instance.eventsToShow.Count == 0 && !GuiContoler.Instance.speechBubble.activeInHierarchy)
+			if (EventController.Instance.eventsToShow.Count == 0 && !GuiContoler.Instance.activeSpeechBubble.activeInHierarchy)
 				SetState();
 		});
 	}

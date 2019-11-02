@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueControl : MonoBehaviour {
-	List<Dialogue> dialogs;
-	public AudioGroup kingAudioGroup;
-	[HideInInspector]
-	public List<Dialogue> relationshipDialogs = new List<Dialogue>();
-	public Dialogue testDialog;
-	public Transform portraitPoint;
-	public static DialogueControl Instance { get; private set; }
-	public List<Transform> areaDialogues;
-	List<EventScript.Character> acceptableNpcs = new List<EventScript.Character>();// { EventScript.Character.the_Vulture_King, EventScript.Character.player };
+    List<Dialogue> dialogs;
+    public AudioGroup kingAudioGroup;
+    [HideInInspector]
+    public List<Dialogue> relationshipDialogs = new List<Dialogue>();
+    public Dialogue testDialog;
+    public Transform portraitPoint;
+    public static DialogueControl Instance { get; private set; }
+    public List<Transform> areaDialogues;
+    List<EventScript.Character> acceptableNpcs = new List<EventScript.Character>() {EventScript.Character.the_Vulture_King};//, EventScript.Character.player };
 	public Transform anyAreaDialogues;
 	[Range(0f, 1f)]
 	public float dialogueFrequency = 0.2f;
 	[Range(0f, 1f)]
 	public float relationshipDialogueFrequency = 1f;
-	List<Bird> speakers;
+	List<Bird> speakers = new List<Bird>();
 	Dialogue afterEventDialog= null;
 	// Use this for initialization
 	/*public void GetRelationshipDialogs()
@@ -51,9 +51,19 @@ public class DialogueControl : MonoBehaviour {
 
 	public void CreateParticularDialog(Dialogue dialog)
 	{
-		Bird dialogueBird = Helpers.Instance.GetBirdFromEnum(dialog.speakers[0]);
-		speakers = new List<Bird>();
-		speakers.Add(dialogueBird);
+
+        speakers = new List<Bird>();
+        if (acceptableNpcs.Contains(dialog.speakers[0]) && dialog.location == Dialogue.Location.battle)
+        {
+            speakers.Add(null);
+            Debug.LogError("Addded firsrt speaker: " + dialog.speakers[0] + " count: " + speakers.Count);
+        }
+        else
+        {
+            Bird dialogueBird = Helpers.Instance.GetBirdFromEnum(dialog.speakers[0]);
+            speakers.Add(dialogueBird);
+            Debug.LogError("Addded firsrt speaker: " + dialogueBird.charName + " count: " + speakers.Count);
+        }
 		LeanTween.delayedCall(0.2f, () => CreateDialogue(dialog));
 
 	}
@@ -61,7 +71,7 @@ public class DialogueControl : MonoBehaviour {
 	public void TryDialogue(Dialogue.Location location, EventScript.Character Char = EventScript.Character.None)
 	{
 
-        if (Var.isTutorial || (GuiContoler.Instance.winBanner != null
+        if (Var.isTutorial || Var.isEnding || (GuiContoler.Instance.winBanner != null
         && GuiContoler.Instance.winBanner.activeSelf) || Var.currentStageID == 100 || Var.gameSettings.shownBattlePlanningTutorial == false)
         {
             return;
@@ -132,18 +142,29 @@ public class DialogueControl : MonoBehaviour {
 		
 		for(int i=1;i<dialogue.speakers.Count;i++)
 		{
-			if(dialogue.canUseRandomBirds)
-			{
+            if (dialogue.canUseRandomBirds)
+            {
+                /* if(dialogue.speakers[i-1]== EventScript.Character.the_Vulture_King)
+                 {
+                     speakers.Add(new Bird("King",3,3));
+                 }
+                 else*/
+                {
+                    speakers.Add(Var.activeBirds[i - 1]);
+                    Debug.LogError("speaker count: " + speakers.Count + " added " + Var.activeBirds[i - 1].charName);
+                }
+            }
+            else
+            {
 
-				speakers.Add(Var.activeBirds[i-1]);
-			}
-			else
-			{
+                int j = 0;
+                EventScript.Character dialogBird = dialogue.speakers[i];
+                if (acceptableNpcs.Contains(dialogBird) && dialogue.location == Dialogue.Location.battle)
+                { 
+                    speakers.Add(null);
+                    Debug.LogError("NPC! speaker count: " + speakers.Count + " added " + dialogBird);
 
-			int j = 0;
-			EventScript.Character dialogBird = dialogue.speakers[i];
-			if (acceptableNpcs.Contains(dialogBird) && dialogue.location == Dialogue.Location.battle)
-				speakers.Add(null);
+                }
 			else
 			{
 				while (true)
@@ -152,7 +173,8 @@ public class DialogueControl : MonoBehaviour {
 					if (!speakers.Contains(enumBird))
 					{
 						speakers.Add(enumBird);
-						break;
+                        Debug.LogError("ENUM speaker count: " + speakers.Count + " added " + enumBird);
+                            break;
 					}
 					j++;
 					if (j > 1000)
@@ -193,8 +215,7 @@ public class DialogueControl : MonoBehaviour {
 				{
 					case EventScript.Character.the_Vulture_King:
 						GuiContoler.Instance.boss.SetActive(true);
-						GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.kingMouth.transform, partData.text,kingAudioGroup);
-						
+						GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.kingMouth.transform, partData.text,kingAudioGroup,false);
 						break;
 					case EventScript.Character.player:
 						GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.playerMouth.transform, partData.text,kingAudioGroup);
@@ -208,6 +229,7 @@ public class DialogueControl : MonoBehaviour {
 			}
 			else
 			{
+                Debug.LogError("speaker count: " + speakers.Count + " ID: " + partData.speakerID);
 				Bird activeBird = speakers[partData.speakerID];
 				if (activeBird != null)
 					activeBird.Speak(partData.text);

@@ -71,7 +71,7 @@ public class bossBattleVultureVisuals : MonoBehaviour
     }
 
     
-    void addVulturesToLeftSide()
+    public void addVulturesToLeftSide()
     {
 
 

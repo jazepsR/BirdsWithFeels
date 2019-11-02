@@ -106,7 +106,12 @@ public class battleAnim :MonoBehaviour {
 				yield return new WaitForSeconds(1.0f);
 				Tutorial.Instance.ShowTutorialFirstGridText(Tutorial.Instance.CurrentPos);
 			}
-		}
+            if (Var.isEnding)
+            {
+                yield return new WaitForSeconds(1.0f);
+                Ending.Instance.ShowEndingFirstGridText(Tutorial.Instance.CurrentPos);
+            }
+        }
 	   
 	}
 

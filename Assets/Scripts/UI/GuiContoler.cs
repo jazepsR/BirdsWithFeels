@@ -66,10 +66,13 @@ public class GuiContoler : MonoBehaviour {
     public int activePortrait = 0;
     public Text tooltipText;
     public GameObject speechBubble;
+    public GameObject speechBubble2;
     List<string> speechTexts = new List<string>();
     List<Transform> speechPos = new List<Transform>();
+    List<bool> speechPivotIsFirst = new List<bool>();
     List<AudioGroup> speechAudioGroup = new List<AudioGroup>();
     public Text SpeechBubbleText;
+    public Text SpeechBubbleText2;
     public Text SpeechBubbleReminderText;
     public GameObject speechBubbleObj;
     public SliderSwitcher confSlider;
@@ -112,6 +115,9 @@ public class GuiContoler : MonoBehaviour {
     public GameObject GraphBlocker;
     public Text controlButtonText;
     private List<emoReportBit> bits = new List<emoReportBit>();
+    private Text activeSpeechText;
+    [HideInInspector]
+    public GameObject activeSpeechBubble;
     void Awake()
     {
         //if (!Var.StartedNormally)
@@ -124,6 +130,8 @@ public class GuiContoler : MonoBehaviour {
         Var.birdInfoFeeling = infoFeeling;
         Var.powerBar = powerBarTemp;
         Var.powerText = powerTextTemp;
+        activeSpeechText = SpeechBubbleText;
+        activeSpeechBubble = speechBubble;
     }
     void Start()
     {
@@ -401,9 +409,11 @@ public class GuiContoler : MonoBehaviour {
             }
             else
             {
+                speechBubbleObj.gameObject.SetActive(true);
                 speechAudioGroup[0].Play();
-                SpeechBubbleText.text = speechTexts[0];
-                speechBubble.GetComponent<UIFollow>().target = speechPos[0];
+                SetupSpeechBubbles(speechPivotIsFirst[0]);
+                activeSpeechText.text = speechTexts[0];
+                activeSpeechBubble.GetComponent<UIFollow>().target = speechPos[0];
                 if (lastSpeechPos != null && lastSpeechPos.Equals(speechPos[0]))
                 {
                     speechBubbleObj.GetComponent<Animator>().SetTrigger("newline");
@@ -411,6 +421,7 @@ public class GuiContoler : MonoBehaviour {
                 lastSpeechPos = speechPos[0];
                 speechPos.RemoveAt(0);
                 speechTexts.RemoveAt(0);
+                speechPivotIsFirst.RemoveAt(0);
                 speechAudioGroup.RemoveAt(0);
                 if (!inMap)
                 {
@@ -420,14 +431,30 @@ public class GuiContoler : MonoBehaviour {
             }
         }
     }
-
-
-
-    public void ShowSpeechBubble(Transform pos, string text, AudioGroup birdTalk)
+    void SetupSpeechBubbles(bool useFirst)
     {
+        if (useFirst)
+        {
+            activeSpeechText = SpeechBubbleText;
+            activeSpeechBubble = speechBubble;
+            speechBubble2.SetActive(false);
+        }
+        else
+        {
+            activeSpeechText = SpeechBubbleText2;
+            activeSpeechBubble = speechBubble2;
+            speechBubble.SetActive(false);
+        }
+        activeSpeechBubble.SetActive(true);
+    }
+
+    public void ShowSpeechBubble(Transform pos, string text, AudioGroup birdTalk, bool useFirst = true)
+    {
+        Debug.LogError("pos: " + pos.position);
         if (speechBubbleObj.activeSelf) {
             speechTexts.Add(text);
             speechPos.Add(pos);
+            speechPivotIsFirst.Add(useFirst);
             speechAudioGroup.Add(birdTalk);
             AudioControler.Instance.speechBubbleContinue.Play();
         }
@@ -438,13 +465,14 @@ public class GuiContoler : MonoBehaviour {
                 prevGraph.interactable = false;
                 nextGraph.interactable = false;
             }
-            SpeechBubbleText.text = text;
-            speechBubbleObj.SetActive(true);
             foreach (Image img in vingette)
             {
                 LeanTween.alpha(img.rectTransform, 0.5f, 0.5f);
             }
-            speechBubble.GetComponent<UIFollow>().target = pos;
+            SetupSpeechBubbles(useFirst);
+            speechBubbleObj.gameObject.SetActive(true);
+            activeSpeechText.text = text;
+            activeSpeechBubble.GetComponent<UIFollow>().target = pos;
             try
             {
                 speechAudioGroup[0].Play();
@@ -987,7 +1015,11 @@ public class GuiContoler : MonoBehaviour {
 		{
 			fb.HideFeedBack(true);
 		}
-		Debug.Log("Fight selected");
+        if(Var.isEnding)
+        {
+            Ending.Instance.visuals.vultureKingFistPumps();
+        }
+        Debug.Log("Fight selected");
 		int result = 0;
 		Var.Infight = true;
 		Bird playerBird = null;
@@ -1229,7 +1261,11 @@ public class GuiContoler : MonoBehaviour {
 			}
 			Tutorial.Instance.ShowtutorialStartingText(mapPos);
 		}
-		BattleData Area = Var.map[mapPos];
+        if(Var.isEnding)
+        {
+            Ending.Instance.ShowEndingStartingText(mapPos);
+        }
+        BattleData Area = Var.map[mapPos];
 		if (Area.type != Var.Em.finish)
 		{
 			if (Var.isTutorial)

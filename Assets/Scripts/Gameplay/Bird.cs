@@ -1015,6 +1015,7 @@ public class Bird : MonoBehaviour
 	}
 	public Bird(string name,int confidence =0,int friendliness = 0)
 	{
+        this.data = new BirdData();
 		this.data.confidence = confidence;
 		this.data.friendliness = friendliness;
 		this.charName = name;

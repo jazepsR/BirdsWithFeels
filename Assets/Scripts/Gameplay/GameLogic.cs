@@ -321,7 +321,11 @@ public class GameLogic : MonoBehaviour {
 		{
 			Tutorial.Instance.ShowTutorialBeforeBattleText(Tutorial.Instance.CurrentPos);
 		}
-		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
+        if (Var.isEnding && canFight && prevstate != canFight)
+        {
+            Ending.Instance.ShowEndingBeforeBattleText(Tutorial.Instance.CurrentPos);
+        }
+        if (GuiContoler.Instance.speechBubbleObj.activeSelf)
 		{
 			canFight = false;
 			tooltipText = "Fight availabe after the dialogue is completed";
