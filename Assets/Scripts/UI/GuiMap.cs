@@ -37,7 +37,20 @@ public class GuiMap : MonoBehaviour {
 				Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
 				nextAreaInfo.text = "";
 			}
-		}
+        }
+        else if(Var.isEnding)
+        {
+            Var.map = new List<BattleData>(); 
+            for (int i = 0; i < 7; i++)
+            {
+                MapBattleData BattleStuff = new MapBattleData();
+                BattleStuff.emotionPercentage.Add(1);
+                BattleStuff.emotionType.Add(Var.Em.Neutral);
+                Var.map.Add(new BattleData(Var.Em.Neutral, false, new List<Var.Em>(), BattleStuff));
+            }
+            Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
+            nextAreaInfo.text = "";
+        }
 		else
 		{
 			if (Var.map.Count == 0)

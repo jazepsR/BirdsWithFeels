@@ -361,7 +361,7 @@ public class Bird : MonoBehaviour
 	
 	public void Speak(string text)
 	{
-		GuiContoler.Instance.ShowSpeechBubble(GetMouthTransform(), text, birdSounds.GetTalkGroup(emotion));
+		GuiContoler.Instance.ShowSpeechBubble(GetMouthTransform(), text, birdSounds.GetTalkGroup(emotion),!isEnemy);
 	}
 
 	public Transform GetMouthTransform()

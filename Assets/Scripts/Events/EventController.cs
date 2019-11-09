@@ -189,7 +189,7 @@ public class EventController : MonoBehaviour {
 			return false;
 		if (eventObject.activeSelf)
 		   return false;
-		if (Var.isTutorial)
+		if (Var.isTutorial || Var.isEnding)
 			return false;
 		currentBird = null;
 		currentPortrait = null;
@@ -431,7 +431,8 @@ public class EventController : MonoBehaviour {
 		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2, currentEvent.options[ID].applyToAll);
 		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3, currentEvent.options[ID].applyToAll);
 		if(currentBird!= null)
-			currentBird.SetEmotion();        
+			currentBird.SetEmotion();
+        GameLogic.Instance.UpdateFeedback();
 		return ConsequenceText;
 
 	}

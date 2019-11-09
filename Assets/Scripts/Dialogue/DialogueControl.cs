@@ -17,7 +17,7 @@ public class DialogueControl : MonoBehaviour {
 	public float dialogueFrequency = 0.2f;
 	[Range(0f, 1f)]
 	public float relationshipDialogueFrequency = 1f;
-	List<Bird> speakers = new List<Bird>();
+	public List<Bird> speakers = new List<Bird>();
 	Dialogue afterEventDialog= null;
 	// Use this for initialization
 	/*public void GetRelationshipDialogs()
@@ -56,15 +56,19 @@ public class DialogueControl : MonoBehaviour {
         if (acceptableNpcs.Contains(dialog.speakers[0]) && dialog.location == Dialogue.Location.battle)
         {
             speakers.Add(null);
-            Debug.LogError("Addded firsrt speaker: " + dialog.speakers[0] + " count: " + speakers.Count);
+          // Debug.LogError("Addded firsrt speaker: " + dialog.speakers[0] + " count: " + speakers.Count);
         }
         else
         {
             Bird dialogueBird = Helpers.Instance.GetBirdFromEnum(dialog.speakers[0]);
+            if(dialogueBird == null)
+            {
+                dialogueBird = Var.activeBirds[0];
+            }
             speakers.Add(dialogueBird);
-            Debug.LogError("Addded firsrt speaker: " + dialogueBird.charName + " count: " + speakers.Count);
+            //Debug.LogError("Addded firsrt speaker: " + dialogueBird.charName + " count: " + speakers.Count);
         }
-		LeanTween.delayedCall(0.2f, () => CreateDialogue(dialog));
+        LeanTween.delayedCall(0.2f, () => CreateDialogue(dialog));
 
 	}
 
@@ -142,16 +146,22 @@ public class DialogueControl : MonoBehaviour {
 		
 		for(int i=1;i<dialogue.speakers.Count;i++)
 		{
-            if (dialogue.canUseRandomBirds)
+            if (dialogue.canUseRandomBirds && !acceptableNpcs.Contains(dialogue.speakers[i]))
             {
-                /* if(dialogue.speakers[i-1]== EventScript.Character.the_Vulture_King)
-                 {
-                     speakers.Add(new Bird("King",3,3));
-                 }
-                 else*/
+                Bird bird = Helpers.Instance.GetBirdFromEnum(dialogue.speakers[i]);
+                /*if(dialogue.speakers[i-1]== EventScript.Character.the_Vulture_King)
                 {
-                    speakers.Add(Var.activeBirds[i - 1]);
-                    Debug.LogError("speaker count: " + speakers.Count + " added " + Var.activeBirds[i - 1].charName);
+                    speakers.Add(new Bird("King",3,3));
+                }
+                else*/
+                if(bird == null)
+                {
+                    speakers.Add(Var.activeBirds[i]);
+                    // Debug.LogError("speaker count: " + speakers.Count + " added " + Var.activeBirds[i - 1].charName);
+                }
+                else
+                {
+                    speakers.Add(bird);
                 }
             }
             else
@@ -162,7 +172,7 @@ public class DialogueControl : MonoBehaviour {
                 if (acceptableNpcs.Contains(dialogBird) && dialogue.location == Dialogue.Location.battle)
                 { 
                     speakers.Add(null);
-                    Debug.LogError("NPC! speaker count: " + speakers.Count + " added " + dialogBird);
+                  // Debug.LogError("NPC! speaker count: " + speakers.Count + " added " + dialogBird);
 
                 }
 			else
@@ -173,13 +183,13 @@ public class DialogueControl : MonoBehaviour {
 					if (!speakers.Contains(enumBird))
 					{
 						speakers.Add(enumBird);
-                        Debug.LogError("ENUM speaker count: " + speakers.Count + " added " + enumBird);
+                     //   Debug.LogError("ENUM speaker count: " + speakers.Count + " added " + enumBird);
                             break;
 					}
 					j++;
 					if (j > 1000)
 					{
-						Debug.LogError("couldnt add dialogue speaker to list");
+						//Debug.LogError("couldnt add dialogue speaker to list");
 						speakers.Add(Var.activeBirds[0]);
 						break;
 					}
@@ -229,7 +239,7 @@ public class DialogueControl : MonoBehaviour {
 			}
 			else
 			{
-                Debug.LogError("speaker count: " + speakers.Count + " ID: " + partData.speakerID);
+               //Debug.LogError("speaker count: " + speakers.Count + " ID: " + partData.speakerID);
 				Bird activeBird = speakers[partData.speakerID];
 				if (activeBird != null)
 					activeBird.Speak(partData.text);

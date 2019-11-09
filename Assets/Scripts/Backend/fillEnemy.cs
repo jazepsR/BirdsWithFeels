@@ -23,7 +23,9 @@ public class fillEnemy : MonoBehaviour {
 		newBirds = new List<Bird>();
 		if (Var.isTutorial)
 			CreateTutorialEnemies(Tutorial.Instance.TutorialMap[0]);
-		else
+        else if (Var.isEnding)
+            CreateTutorialEnemies(Ending.Instance.TutorialMap[0]);
+        else
 		{
 			BattleData Area = Var.map[0];
 			createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies, Area.hasWizards, Area.hasDrills,Area.hasSuper);

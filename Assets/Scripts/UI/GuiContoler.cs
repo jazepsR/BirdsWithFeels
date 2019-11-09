@@ -450,7 +450,7 @@ public class GuiContoler : MonoBehaviour {
 
     public void ShowSpeechBubble(Transform pos, string text, AudioGroup birdTalk, bool useFirst = true)
     {
-        Debug.LogError("pos: " + pos.position);
+       // Debug.LogError("pos: " + pos.position);
         if (speechBubbleObj.activeSelf) {
             speechTexts.Add(text);
             speechPos.Add(pos);
@@ -1273,9 +1273,17 @@ public class GuiContoler : MonoBehaviour {
 				Tutorial.Instance.SetCurrenPos(mapPos);
 				GetComponent<fillEnemy>().CreateTutorialEnemies(Tutorial.Instance.TutorialMap[mapPos]);
 			}
-			else
-			{
-				GetComponent<fillEnemy>().createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
+            else
+            {
+                Ending.Instance.SetCurrenPos(mapPos);
+                if (Var.isEnding)
+                {
+                    GetComponent<fillEnemy>().CreateTutorialEnemies(Ending.Instance.TutorialMap[mapPos]);
+                }
+                else
+                {
+                    GetComponent<fillEnemy>().createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
+                }
 				if (!EventController.Instance.tryEvent())
 					DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
 			}
