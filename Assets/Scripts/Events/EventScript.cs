@@ -4,7 +4,30 @@ using UnityEngine;
 
 [System.Serializable]
 public class EventScript:MonoBehaviour{
-	public enum Character  { Terry,Rebecca,Sophie,Kim,Alexander,Random,None, the_Queen, the_Vulture_King, a_vulture, a_bird, player, a_vulture2 };
+	public enum Character  { Terry,Rebecca,Sophie,Kim,Alexander,Random,None, the_Queen, the_Vulture_King, a_vulture, a_bird, player, a_vulture2,
+        Vulture_King0_1neutral, Vulture_King0_2angry, Vulture_King0_3coy, Vulture_King0_4lookAtPlayer, Vulture_King0_5Solitary, Vulture_King0_6Social, Vulture_King0_7Confident, Vulture_King0_8Cautious, Terrys_Dad,
+Rebeccas_Mom,
+Percy,
+Auntie_Judy,
+Jerry,
+Anna_Penelope,
+Emma,
+Jennifer,
+Vulture_Stranger,
+Librarian,
+Military_leader,
+Military_Bird,
+Another_Military_bird,
+Bird_adventurer,
+Bird_traveler,
+Another_Bird_traveler,
+SadBird,
+another_vulture,
+Merchant,
+Aggressive_bird,
+Injured_Vulture,
+Messenger
+    };
 	public List<Character> speakers;
 	public ConditionCheck.Condition condition;
 	public int magnitude = 0;

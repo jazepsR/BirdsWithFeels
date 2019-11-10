@@ -313,7 +313,8 @@ public class EventController : MonoBehaviour {
 	}
 
 
-	void SetPortrait(int id)
+
+    void SetPortrait(int id)
 	{
 		if(mouseOver)
 		{
@@ -340,8 +341,22 @@ public class EventController : MonoBehaviour {
 				portraitFill.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird_color").GetComponent<Image>().sprite;
 				portraitFill.color = colors[currentEvent.parts[currentText].speakerId];
 				portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird").GetComponent<Image>().sprite;
+                
 				nameText.text = currentEvent.speakers[currentEvent.parts[currentText].speakerId].ToString().Replace('_', ' ');
-				try{
+
+                string characterNameText = nameText.text;
+
+                int index = characterNameText.IndexOf("0");
+                if (index > 0)
+                {
+                    characterNameText = characterNameText.Substring(0, index);
+                }
+
+                nameText.text=characterNameText;
+
+
+                    try
+                {
 					Bird birdToTalk = Helpers.Instance.GetBirdFromEnum(currentEvent.speakers[currentEvent.parts[currentText].speakerId]);
 					AudioControler.Instance.PlaySound(AudioControler.Instance.GetBirdSoundGroup(birdToTalk.data.charName).eventAudio);
 				//AudioControler.Instance.PlaySound(Helpers.Instance.GetBirdFromEnum(currentEvent.speakers[currentEvent.parts[currentText].speakerId]).birdSounds.eventAudio);
@@ -358,7 +373,7 @@ public class EventController : MonoBehaviour {
 
 	}
 
-
+  
 	void CreateChoices()
 	{
 		
