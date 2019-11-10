@@ -18,19 +18,16 @@ public class Ending : MonoBehaviour
     public Var.Em[] ninethStageEnemies;
     public Var.Em[] tenthStageEnemies;
     [Header("ENDING EVENTS")]
-    public EventScript EndingEvent0;
-    public EventScript EndingEvent1;
-    public EventScript EndingEvent2;
-    public EventScript EndingEvent3;
-    public EventScript EndingEvent4;
+    public EventScript EndingEvent0_Introduction;
+    public EventScript EndingEvent_PlayerManipulateEmotions1;
+    public EventScript EndingEvent_PlayerManipulateEmotions2;
+    public EventScript EndingEvent_VultureKingCallsPlayerOut;
+    public EventScript EndingEvent_PercySaysNo;
+    public EventScript EndingEvent4_FinalTalk;
     [Header("ENDING DIALOGUES")]
     public Dialogue EndingDialogue1;
     public Dialogue EndingDialogue2;
     public Dialogue EndingDialogue3;
-    public Dialogue EndingDialogue4a;
-    public Dialogue EndingDialogue4b;
-    public Dialogue EndingDialogue4c;
-    public Dialogue EndingDialogue4d;
 
     public bossBattleVultureVisuals visuals;
 
@@ -95,7 +92,7 @@ public class Ending : MonoBehaviour
                     settingStuffUp = false;
                 });
                 settingStuffUp = true;
-                DialogueControl.Instance.CreateParticularDialog(EndingDialogue4b);
+                //DialogueControl.Instance.CreateParticularDialog(EndingDialogue4b);
                 kingAnimator.SetInteger("emotion", 2);
                 Debug.LogError("second");
             }
@@ -107,7 +104,7 @@ public class Ending : MonoBehaviour
                     settingStuffUp = false;
                 });
                 settingStuffUp = true;
-                DialogueControl.Instance.CreateParticularDialog(EndingDialogue4c);
+               // DialogueControl.Instance.CreateParticularDialog(EndingDialogue4c);
                 kingAnimator.SetInteger("emotion", 3);
                 Debug.LogError("third");
             }else if (showedThirdKingColor && !showedForthKingColor && !GuiContoler.Instance.speechBubbleObj.activeSelf)
@@ -118,13 +115,13 @@ public class Ending : MonoBehaviour
                     settingStuffUp = false;
                 });
                 settingStuffUp = true;
-                DialogueControl.Instance.CreateParticularDialog(EndingDialogue4d);
+               // DialogueControl.Instance.CreateParticularDialog(EndingDialogue4d);
                 kingAnimator.SetInteger("emotion", 4);
                 Debug.LogError("forth");
             }
             if(showedForthKingColor && !showedFinalEvent&& !GuiContoler.Instance.speechBubbleObj.activeSelf)
             {
-                EventController.Instance.CreateEvent(EndingEvent4);
+               // EventController.Instance.CreateEvent(EndingEvent4);
                 showedFinalEvent = true;
             }
             if(showedFinalEvent && !EventController.Instance.eventObject.activeSelf)
@@ -174,37 +171,40 @@ public class Ending : MonoBehaviour
         switch (stage)
         {
             case 0:
-                EventController.Instance.CreateEvent(EndingEvent0);
+                EventController.Instance.CreateEvent(EndingEvent0_Introduction);
                 break;
+
             case 1:
                 LeanTween.delayedCall(0.2f,()=> DialogueControl.Instance.CreateParticularDialog(EndingDialogue1));
-                visuals.addVulturesToLeftSide();
+                
+
                 break;
+
             case 2:
 
                 visuals.addVulturesToLeftSide();
                 LeanTween.delayedCall(0.2f, () => DialogueControl.Instance.CreateParticularDialog(EndingDialogue2));
+
                 break;
             case 3:
-                EventController.Instance.CreateEvent(EndingEvent3);
+                visuals.addVulturesToLeftSide();
+                //percy says no once birds have been placed
 
                 break;
             case 4:
                 visuals.addVulturesToLeftSide();
-                LeanTween.delayedCall(0.2f, () => DialogueControl.Instance.CreateParticularDialog(EndingDialogue3));
-
-                //   GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[2].GetMouthTransform(), "A Rock!");
-                //   GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Birds can't stand there, but vultures move right over the rocks!");
+              //  LeanTween.delayedCall(0.2f, () => DialogueControl.Instance.CreateParticularDialog(EndingDialogue3));
+                
                 break;
             case 5:
-
+                EventController.Instance.CreateEvent(EndingEvent4_FinalTalk);
                 visuals.addVulturesToLeftSide();
                 break;
             case 6:
 
                 if (!showedFirstKingColor)
                 {
-                    DialogueControl.Instance.CreateParticularDialog(EndingDialogue4a);
+                  //  DialogueControl.Instance.CreateParticularDialog(EndingDialogue4a);
                     showedFirstKingColor = true;
                     kingAnimator.SetInteger("emotion", 1);
                 }
@@ -221,19 +221,32 @@ public class Ending : MonoBehaviour
         switch (stage)
         {
             case 0:
-                LeanTween.delayedCall(0.3f, () => { EventController.Instance.CreateEvent(EndingEvent1);
-                });
+
+               
+                LeanTween.delayedCall(0.2f, () => EventController.Instance.CreateEvent(EndingEvent_PlayerManipulateEmotions1));
+
                 break;
             case 1:
-                  break;
-            case 2:
+                LeanTween.delayedCall(0.2f, () => EventController.Instance.CreateEvent(EndingEvent_PlayerManipulateEmotions2));
 
-                LeanTween.delayedCall(0.3f, () => EventController.Instance.CreateEvent(EndingEvent1));
+                break;
+            case 2:
+                LeanTween.delayedCall(0.2f, () => EventController.Instance.CreateEvent(EndingEvent_VultureKingCallsPlayerOut));
+
+              
+                
+
                 break;
             case 3:
+
+                LeanTween.delayedCall(0.2f, () => EventController.Instance.CreateEvent(EndingEvent_PercySaysNo));
+
+              
+                
+
                 break;
             case 4:
-                LeanTween.delayedCall(0.3f, () => EventController.Instance.CreateEvent(EndingEvent1));
+                
                 break;
             case 5:
                 break;

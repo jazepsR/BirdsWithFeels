@@ -26,7 +26,8 @@ another_vulture,
 Merchant,
 Aggressive_bird,
 Injured_Vulture,
-Messenger
+Messenger,
+You
     };
 	public List<Character> speakers;
 	public ConditionCheck.Condition condition;
