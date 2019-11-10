@@ -117,9 +117,11 @@ public class EventController : MonoBehaviour {
                 return;
             }
             eventObject.SetActive(false);
+            nextEvent.canShowMultipleTimes = true;
 			if(nextEvent!= null)
-			{
-				CreateEvent(nextEvent);
+            {
+                currentEvent = null;
+                CreateEvent(nextEvent);
 				return;
 			}
 
@@ -436,9 +438,8 @@ public class EventController : MonoBehaviour {
 			portrait.gameObject.SetActive(false);
 			customImage.sprite = currentEvent.options[ID].AfterImage;
 		}
-		
 
-	}
+    }
 
 	string ApplyConsequences(int ID)
 	{
