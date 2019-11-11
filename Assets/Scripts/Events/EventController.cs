@@ -117,10 +117,10 @@ public class EventController : MonoBehaviour {
                 return;
             }
             eventObject.SetActive(false);
-            nextEvent.canShowMultipleTimes = true;
 			if(nextEvent!= null)
             {
-               // currentEvent = null;
+                // currentEvent = null;
+                nextEvent.canShowMultipleTimes = true;
                 CreateEvent(nextEvent);
 				return;
 			}
