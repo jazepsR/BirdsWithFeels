@@ -323,7 +323,7 @@ public class GameLogic : MonoBehaviour {
 		}
         if (Var.isEnding && canFight && prevstate != canFight)
         {
-            Ending.Instance.ShowEndingBeforeBattleText(Tutorial.Instance.CurrentPos);
+            Ending.Instance.ShowEndingBeforeBattleText(Ending.Instance.CurrentPos);
         }
         if (GuiContoler.Instance.speechBubbleObj.activeSelf)
 		{
