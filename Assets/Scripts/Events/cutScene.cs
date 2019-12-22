@@ -62,7 +62,7 @@ public class cutScene : MonoBehaviour {
                 {
 					if (isEnd)
 					{
-						SceneManager.LoadScene("mainMenu");
+						SceneManager.LoadScene("Credits");
 					}
 					else
 					{
