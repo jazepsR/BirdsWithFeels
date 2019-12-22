@@ -74,7 +74,11 @@ public class ending : MonoBehaviour {
 		}
 		foreach (birdEnding data in birdEndings)
 		{   //Result of timed event
-			if (data.completedTimedEvent)
+
+
+            TimedEventData evData = Helpers.Instance.GetTimedEvent(data.timedEventName);
+
+            if (evData != null && evData.currentState == TimedEventData.state.completedSuccess)
 			{
 				cutscenePart part = new cutscenePart(data.completedTimedEventImage, data.completedTimedEventText);
 				endCutscene.parts.Add(part);
@@ -85,6 +89,7 @@ public class ending : MonoBehaviour {
 				endCutscene.parts.Add(part);
 			}
 			//Emotional developement
+            /*
 			if (data.developementType == 0)
 			{
 				cutscenePart part = new cutscenePart(data.NoEmotionDominantImage, data.NoEmotionDominantText);
@@ -100,7 +105,7 @@ public class ending : MonoBehaviour {
 			{
 				cutscenePart part = new cutscenePart(data.EmotionTwoDominantImage, data.EmotionTwoDominantText);
 				endCutscene.parts.Add(part);
-			}
+			}*/
 		}
 	}
 	public void BuildCutsceneReal(cutScene endCutscene)
@@ -137,17 +142,19 @@ public class ending : MonoBehaviour {
 		{
 			TimedEventData timedEventData = Helpers.Instance.GetTimedEvent(data.Bird.ToString());
 			//Result of timed event
-			if(timedEventData.currentState == TimedEventData.state.completedSuccess)
+			if(timedEventData != null && timedEventData.currentState == TimedEventData.state.completedSuccess)
 			{
 				cutscenePart part = new cutscenePart(data.completedTimedEventImage, data.completedTimedEventText);
 				endCutscene.parts.Add(part);
-			}else
+			}
+            else
 			{
 				cutscenePart part = new cutscenePart(data.failedTimedEventImage, data.failedTimedEvent);
 				endCutscene.parts.Add(part);
 			}
 			//Emotional developement
 			Bird bird = Helpers.Instance.GetBirdFromEnum(data.Bird);
+            /*
 			int firstEmotionLvlCount = 0;
 			int secondEmotionLvlCount = 0;
 			foreach(LevelData lvl in bird.data.levelList)
@@ -186,7 +193,7 @@ public class ending : MonoBehaviour {
 				cutscenePart part = new cutscenePart(data.NoEmotionDominantImage, data.NoEmotionDominantText);
 				endCutscene.parts.Add(part);
 			}
-
+            */
 
 
 		}

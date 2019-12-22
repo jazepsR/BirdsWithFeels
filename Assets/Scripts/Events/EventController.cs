@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+[System.Serializable]
+public class EventSegment
+{
+    public int minID;
+    public int maxID;
+    public Transform eventParent;
+}
 
 public class EventController : MonoBehaviour {	
 	[Range(0.0f, 1.0f)]
@@ -10,6 +17,9 @@ public class EventController : MonoBehaviour {
 	public EventScript testEvent;
 	public List<EventScript> events;
 	public bool inMap;
+    [Header("Event segments")]
+    [SerializeField]
+    public List<EventSegment> eventSegments;
 	[Header("References")]
 	public GameObject eventObject;
 	public Text heading;
@@ -24,8 +34,6 @@ public class EventController : MonoBehaviour {
 	EventScript currentEvent;
 	GameObject currentPortrait;
 	Bird currentBird;
-	public List<Transform> areaEvents;
-	public List<int> areaStartPoints;
 	List<GameObject> portraits;
 	List<Color> colors;
 	EventScript nextEvent = null;
@@ -46,21 +54,20 @@ public class EventController : MonoBehaviour {
 	{
 		try
 		{
-			if (!inMap)
-			{
-				int area = -1;
-				foreach (int id in areaStartPoints)
-				{
-					if (Var.currentStageID < id)
-						break;
-					else
-						area++;
-				}
+            if (!inMap)
+            {
 
-
-				events.AddRange(areaEvents[area].GetComponentsInChildren<EventScript>());
-			}
-		}
+                foreach (EventSegment segment in eventSegments)
+                {
+                    int id = Var.currentStageID % 1000;
+                    if (id >= segment.minID && id <= segment.maxID)
+                    {
+                        events.AddRange(segment.eventParent.GetComponentsInChildren<EventScript>());
+                        break;
+                    }
+                }
+            }
+        }
 		catch
 		{
 
@@ -75,10 +82,12 @@ public class EventController : MonoBehaviour {
 	{
 		if (printing)
 		{
-			printing = false;			
-			if(currentText == currentEvent.parts.Count - 1)
-				CreateChoices();
-				AudioControler.Instance.FadeOutBirdTalk();
+			printing = false;
+            if (currentText == currentEvent.parts.Count - 1)
+            {
+                CreateChoices();
+                AudioControler.Instance.FadeOutBirdTalk();
+            }
 			return;
 		}
 		if (activeChoices)
@@ -449,6 +458,7 @@ public class EventController : MonoBehaviour {
 		if(currentBird!= null)
 			currentBird.SetEmotion();
         GameLogic.Instance.UpdateFeedback();
+        GuiContoler.Instance.GraphBlocker.SetActive(false);
 		return ConsequenceText;
 
 	}

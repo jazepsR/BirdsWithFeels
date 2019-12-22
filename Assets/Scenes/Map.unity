@@ -3458,6 +3458,7 @@ MonoBehaviour:
   anyAreaDialogues: {fileID: 0}
   dialogueFrequency: 0
   relationshipDialogueFrequency: 0
+  speakers: []
 --- !u!4 &133129185
 Transform:
   m_ObjectHideFlags: 0
@@ -12377,12 +12378,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio
       objectReference: {fileID: 0}
-    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
-        type: 3}
-      propertyPath: defaultSnapshot
-      value: 
-      objectReference: {fileID: 24500006, guid: ed6994bbaccc80e428f51f4073518c74,
-        type: 2}
     - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.96
@@ -12415,6 +12410,12 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: defaultSnapshot
+      value: 
+      objectReference: {fileID: 24500006, guid: ed6994bbaccc80e428f51f4073518c74,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 3}
 --- !u!1 &402096227
@@ -21530,7 +21531,9 @@ MonoBehaviour:
   activePortrait: 0
   tooltipText: {fileID: 1259036233}
   speechBubble: {fileID: 1544652355}
+  speechBubble2: {fileID: 0}
   SpeechBubbleText: {fileID: 1560182614}
+  SpeechBubbleText2: {fileID: 0}
   SpeechBubbleReminderText: {fileID: 2100784909}
   speechBubbleObj: {fileID: 440344710}
   confSlider: {fileID: 384798759}
@@ -21572,6 +21575,7 @@ MonoBehaviour:
   musicSlider: {fileID: 152342637}
   GraphBlocker: {fileID: 0}
   controlButtonText: {fileID: 0}
+  activeSpeechBubble: {fileID: 0}
 --- !u!114 &685676510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35001,7 +35005,7 @@ GameObject:
   - component: {fileID: 1167346551}
   - component: {fileID: 1167346552}
   m_Layer: 0
-  m_Name: World 2 RebeccaEvent
+  m_Name: World 2-RebeccaEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49006,9 +49010,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventFreq: 0
   testEvent: {fileID: 0}
-  events:
-  - {fileID: 0}
+  events: []
   inMap: 1
+  eventSegments: []
   eventObject: {fileID: 1975439755}
   heading: {fileID: 2126341844}
   text: {fileID: 412595055}
@@ -49019,9 +49023,6 @@ MonoBehaviour:
   customImage: {fileID: 1590420954}
   continueBtn: {fileID: 868641623}
   nameText: {fileID: 345711711}
-  areaEvents:
-  - {fileID: 0}
-  areaStartPoints: 
   mouseOver: {fileID: 1582136945}
   eventsToShow: []
 --- !u!4 &1661642005

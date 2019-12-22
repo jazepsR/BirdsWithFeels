@@ -242,7 +242,7 @@ public class Helpers : MonoBehaviour {
 		List<Bird> birds;
 		if ( useAll)
 			birds = Var.availableBirds;
-		else
+		else 
 		{
 			birds = new List<Bird>();
 			birds.AddRange(FillPlayer.Instance.playerBirds);
