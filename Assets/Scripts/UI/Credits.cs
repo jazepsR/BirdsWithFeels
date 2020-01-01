@@ -7,12 +7,18 @@ using UnityEngine.SceneManagement;
 public class Credits : MonoBehaviour
 {
     public RectTransform rect;
-    public float waitTime = 1.5f;
-    public float speed = 0.5f;
-    public float endPos = 332;
+    public float waitTime;
+    public float speed;
+    public float FastSpeed;
+    public float endPos;
+    float acceleration =1f;
+
+    float currentSpeed = 0;
     // Start is called before the first frame update
     void Start()
     {
+        currentSpeed = speed;
+
         StartCoroutine(ScrollCredits());
     }
     private void Update()
@@ -21,6 +27,27 @@ public class Credits : MonoBehaviour
         {
             SceneManager.LoadScene("mainMenu");
         }
+
+
+        if (Input.GetMouseButton(0))
+        {
+            if(currentSpeed<FastSpeed)
+            { currentSpeed = currentSpeed + acceleration; }
+            
+            
+        }
+        else
+        {
+            if(currentSpeed>speed)
+            {
+                currentSpeed = currentSpeed - acceleration * 5;
+            }
+            else
+            {
+                currentSpeed = speed;
+            }
+
+        }
     }
     IEnumerator ScrollCredits()
     {
@@ -28,7 +55,7 @@ public class Credits : MonoBehaviour
         while(rect.position.y<endPos)
         {
             float posY = rect.position.y;
-            posY += speed * Time.deltaTime;
+            posY += currentSpeed * Time.deltaTime;
             rect.position = new Vector3(rect.position.x, posY);
             yield return null;
         }
