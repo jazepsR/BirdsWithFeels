@@ -17,6 +17,9 @@ public class Tutorial : MonoBehaviour {
 	public Var.Em[] sixthStageEnemies;
 
     public EventScript AddAlexEvent;
+    public EventScript AddRebeccaEvent;
+    public EventScript introduction;
+
 	public List<List<TutorialEnemy>> TutorialMap = new List<List<TutorialEnemy>>();
 	public List<int> BirdCount;
 	[HideInInspector]
@@ -151,8 +154,10 @@ public class Tutorial : MonoBehaviour {
 		switch (stage)
 		{
 			case 0:
-				
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hiya, I'm Terry!",TerrySounds);
+
+                EventController.Instance.CreateEvent(introduction);
+
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), " Oh feathers, there are vultures here! In the city!", TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Looks like that vulture is itching for a fight!!  ",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Honestly, I don’t know anything bout’ fighting. I’m a peaceful bird!   ",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "But..maybe I can talk to them? That vulture is <b>neutral</b>, so they should be easy to convince!  ",TerrySounds);
@@ -160,7 +165,10 @@ public class Tutorial : MonoBehaviour {
         
                 break;
 			case 1:
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Hey, I’m Rebecca! Let's hang out!",RebeccaSounds);
+
+                EventController.Instance.CreateEvent(AddRebeccaEvent);
+
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Hey, I’m Rebecca! Let's hang out!",RebeccaSounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Alright sure whatever!",TerrySounds);
 				shouldShowFriendlyPopup = true;
 				break;
