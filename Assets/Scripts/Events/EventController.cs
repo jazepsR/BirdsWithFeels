@@ -349,11 +349,20 @@ public class EventController : MonoBehaviour {
 				portrait.transform.parent.gameObject.SetActive(true);
 				portraitFill.gameObject.SetActive(true);
 				portrait.gameObject.SetActive(true);
-				portraitFill.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird_color").GetComponent<Image>().sprite;
+				portraitFill.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird_color").GetComponent<Image>().sprite;
 				portraitFill.color = colors[currentEvent.parts[currentText].speakerId];
-				portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bird").GetComponent<Image>().sprite;
-                
-				nameText.text = currentEvent.speakers[currentEvent.parts[currentText].speakerId].ToString().Replace('_', ' ');
+				portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird").GetComponent<Image>().sprite;
+
+
+                //SEB ADD ON - take the local scale of relevant portrait 
+                portrait.rectTransform.localScale = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird").localScale;
+                portraitFill.rectTransform.localScale = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird_color").localScale;
+
+                //SEB ADD ON - take the position of the relevant portrait and apply it 
+                portrait.rectTransform.localPosition = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird").localPosition;
+                portraitFill.rectTransform.localPosition = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird_color").localPosition;
+
+                nameText.text = currentEvent.speakers[currentEvent.parts[currentText].speakerId].ToString().Replace('_', ' ');
 
                 string characterNameText = nameText.text;
 
