@@ -720,7 +720,7 @@ public class GuiContoler : MonoBehaviour {
                 //Normalize bird stats
                 Helpers.Instance.NormalizeStats(bird);
                 GameObject portrait = bird.portrait;
-                GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
+               // GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
                 //colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
                 Graph.Instance.PlotFull(bird, afterBattle);
                 //feedbackText.text = "";
@@ -1358,6 +1358,7 @@ public class GuiContoler : MonoBehaviour {
 			Var.tutorialCompleted = true;
 			Var.isBoss = false;
 			winBanner.SetActive(true);
+            AudioControler.Instance.PlayWinMusic();
 			clearSmallGraph();		
 		}
 

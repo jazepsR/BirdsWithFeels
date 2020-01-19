@@ -92,7 +92,6 @@ public class Bird : MonoBehaviour
 	public List<SpriteRenderer> colorSprites;
 	[NonSerialized]
 	public GameObject bush;    
-	[HideInInspector]
 	public GameObject portrait, portraitTiny;	
 	[HideInInspector] 
 	public Vector3 target;

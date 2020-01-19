@@ -101,8 +101,8 @@ public class Graph : MonoBehaviour {
 			}
 			else
 			{
-				heartt.transform.Find("BirdName").GetComponent<Text>().text = bird.charName;
-				heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
+				//heartt.transform.Find("BirdName").GetComponent<Text>().text = bird.charName;
+				heartt.transform.Find("bg").Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
 			}
 			portraits.Add(heartt);
 			Canvas dummy = heartt.AddComponent<Canvas>();
