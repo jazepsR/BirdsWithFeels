@@ -33,7 +33,10 @@ public class GraphPortraitScript : MonoBehaviour {
 			else
 				inDangerZone = false;
 			print("pos:" + transform.localPosition);
-			GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+            if (GetComponent<Animator>() != null)
+            {
+                GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+            }
 			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);
 		}
 		catch
@@ -50,13 +53,19 @@ public class GraphPortraitScript : MonoBehaviour {
 		{
 
 			inDangerZone = true;
-			GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+            if (GetComponent<Animator>() != null)
+            {
+                GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+            }
 		}
 		if ((Mathf.Abs(transform.localPosition.x / factor) < 12 && Mathf.Abs(transform.localPosition.y / factor) < 12) && inDangerZone)
 		{
 
 			inDangerZone = false;
-			GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+            if (GetComponent<Animator>() != null)
+            {
+                GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+            }
 		}
 
 	}
@@ -106,7 +115,10 @@ public class GraphPortraitScript : MonoBehaviour {
 		if (reachedTarget(-pos.x/16f, pos.y/16f))
 		{
 			LeanTween.pause(gameObject);
-			GetComponent<Animator>().SetTrigger("NewEmotion");
+            if (GetComponent<Animator>() != null)
+            {
+                GetComponent<Animator>().SetTrigger("NewEmotion");
+            }
 			activeText = Instantiate(Resources.Load<GameObject>("prefabs/emotionText"), transform).GetComponent<Text>();
 			activeText.color = Helpers.Instance.GetEmotionColor(targetEmotion);
 			activeText.rectTransform.localScale = Vector3.one;

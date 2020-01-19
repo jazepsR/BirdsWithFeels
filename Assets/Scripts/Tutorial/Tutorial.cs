@@ -9,6 +9,9 @@ public class Tutorial : MonoBehaviour {
 	public GameObject EmotionalWheelPopUp;
     public GameObject mHPTutorialPopup;
     public Animator graphAnim;
+    public Dialogue tutorialFirstDialogue;
+    public Dialogue tutorialSecondDialogue;
+
 	public Var.Em[] firstStageEnemies;
 	public Var.Em[] secondStageEnemies;
 	public Var.Em[] thirdStageEnemies;
@@ -90,16 +93,20 @@ public class Tutorial : MonoBehaviour {
 	{
 		GuiContoler.Instance.GraphBlocker.SetActive(false);
 	}
-	void Update()
+	void LateUpdate()
 	{
 		if (!Var.isTutorial)
 			return;
+
+
+
+
 		if (shouldShowOutlines && !GuiContoler.Instance.speechBubbleObj.activeSelf)
 		{
 			outlines.SetActive(true);
 			shouldShowOutlines = false;
 		}
-		if (shouldShowFriendlyPopup && !GuiContoler.Instance.speechBubbleObj.activeSelf)
+		if (shouldShowFriendlyPopup && !GuiContoler.Instance.speechBubbleObj.activeSelf && !EventController.Instance.eventObject.activeSelf)
 		{
 			FirendlinessPopUp.SetActive(true);
 			GuiContoler.Instance.GraphBlocker.SetActive(true);
@@ -156,21 +163,23 @@ public class Tutorial : MonoBehaviour {
 			case 0:
 
                 EventController.Instance.CreateEvent(introduction);
-
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), " Oh feathers, there are vultures here! In the city!", TerrySounds);
+              //  DialogueControl.Instance.CreateDialogue(tutorialFirstDialogue);
+                DialogueControl.Instance.CreateParticularDialog(tutorialFirstDialogue);
+                /*GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), " Oh feathers, there are vultures here! In the city!", TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Looks like that vulture is itching for a fight!!  ",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Honestly, I don’t know anything bout’ fighting. I’m a peaceful bird!   ",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "But..maybe I can talk to them? That vulture is <b>neutral</b>, so they should be easy to convince!  ",TerrySounds);
                 GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "<b>Drag</b> me <b>anywhere</b> in front of them and I’ll try to convince them to not beat us up! ", TerrySounds);
-        
+        */
                 break;
 			case 1:
 
                 EventController.Instance.CreateEvent(AddRebeccaEvent);
-
+                DialogueControl.Instance.CreateParticularDialog(tutorialSecondDialogue);
+                /*
                 GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Hey, I’m Rebecca! Let's hang out!",RebeccaSounds);
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Alright sure whatever!",TerrySounds);
-				shouldShowFriendlyPopup = true;
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Alright sure whatever!",TerrySounds);*/
+                shouldShowFriendlyPopup = true;
 				break;
 			case 2:
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), " These birds are not just neutral, they're solitary and cautious! Will they listen to us?",RebeccaSounds);

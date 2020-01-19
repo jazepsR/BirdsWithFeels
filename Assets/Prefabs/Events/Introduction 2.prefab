@@ -27,7 +27,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8186852835272527811}
   - {fileID: 8186852836015426962}
   - {fileID: 8186852836460369003}
   - {fileID: 8186852835430340882}
@@ -35,57 +34,9 @@ Transform:
   - {fileID: 8186852835300772150}
   - {fileID: 8186852835460463731}
   - {fileID: 8186852835318051550}
-  - {fileID: 8186852835819257462}
   m_Father: {fileID: 8186852836144343726}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8186852835272527812
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8186852835272527811}
-  - component: {fileID: 8186852835272527810}
-  m_Layer: 0
-  m_Name: Part 1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8186852835272527811
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8186852835272527812}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8186852834760533390}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8186852835272527810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8186852835272527812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerId: 1
-  text: 'You must travel to the vulture king to negotiate terms of peace with him. '
-  useCustomPic: 0
-  customPic: {fileID: 0}
 --- !u!1 &8186852835300772151
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +66,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8186852834760533390}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8186852835300772149
 MonoBehaviour:
@@ -163,7 +114,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8186852834760533390}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8186852835318051549
 MonoBehaviour:
@@ -236,10 +187,10 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300010, guid: b7029f9ef86eeec458bb956efa9df87b, type: 3}
-  selectionText: Right, let's do the thing!
+  selectionText: "Alright! I guess we\x19re setting off then, leader?"
   selectionTooltip: 
   conclusionHeading: 
-  conclusionText: 
+  conclusionText: Right, let's do the thing!
 --- !u!1 &8186852835430340883
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +220,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8186852834760533390}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8186852835430340881
 MonoBehaviour:
@@ -317,7 +268,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8186852834760533390}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8186852835460463730
 MonoBehaviour:
@@ -333,53 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerId: 2
   text: 'Yes, of course, your sky highness! I would be honored to help! '
-  useCustomPic: 0
-  customPic: {fileID: 0}
---- !u!1 &8186852835819257463
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8186852835819257462}
-  - component: {fileID: 8186852835819257461}
-  m_Layer: 0
-  m_Name: Part 9
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8186852835819257462
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8186852835819257463}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8186852834760533390}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8186852835819257461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8186852835819257463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerId: 3
-  text: "Alright! I guess we\u2019re setting off then, leader?"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &8186852836015426963
@@ -411,7 +315,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8186852834760533390}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8186852836015426961
 MonoBehaviour:
@@ -516,7 +420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8186852834760533390}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8186852836154075594
 MonoBehaviour:
@@ -564,7 +468,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8186852834760533390}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8186852836460369002
 MonoBehaviour:
