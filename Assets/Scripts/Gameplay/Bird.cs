@@ -731,9 +731,10 @@ public class Bird : MonoBehaviour
 				birdSounds.pickupBird.Play();
                 GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-				{
-					child.sortingLayerName = "Front";
+				{                   
+                    child.sortingLayerName = "Front";
 				}
+                indicator.ResetLayer();
 
 				for (int i = 0; i < Var.playerPos.GetLength(0); i++)
 				{
@@ -762,7 +763,7 @@ public class Bird : MonoBehaviour
 					foreach (LayoutButton btn in ObstacleGenerator.Instance.tiles)
 					{
 						LeanTween.delayedCall((btn.index.x + btn.index.y) * 0.05f + 0.05f, () => btn.ShowHighlight());
-						btn.gameObject.layer = LayerMask.NameToLayer("Default");
+						btn.gameObject.layer = LayerMask.NameToLayer(charName.Substring(0,1).ToUpper() + charName.Substring(1));
 					}
 				
 					ResetOnSelection();
@@ -774,11 +775,13 @@ public class Bird : MonoBehaviour
 				{
 
 
-			foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-			{
-				child.sortingLayerName = charName.Substring(0,1).ToUpper() + charName.Substring(1);
-			}
-			GetComponentInChildren<Animator>().SetBool("lift", false);
+                    foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+                    {
+                        child.sortingLayerName = charName.Substring(0, 1).ToUpper() + charName.Substring(1);
+                    }
+
+                    indicator.ResetLayer();
+                    GetComponentInChildren<Animator>().SetBool("lift", false);
 			if (Var.isTutorial && !GuiContoler.Instance.inMap)
 			{
 				foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
@@ -827,11 +830,12 @@ public class Bird : MonoBehaviour
 			{
 				birdSounds.pickupBird.Play();
                 GetComponentInChildren<Animator>().SetBool("lift", true);
-				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-				{
-					child.sortingLayerName = "Front";
-				}
-			}
+                foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+                {
+                    child.sortingLayerName = "Front";
+                }
+                indicator.ResetLayer();
+            }
 			if (inMap)
 			{
 				if (MapControler.Instance.canHeal)
@@ -1536,10 +1540,11 @@ public class Bird : MonoBehaviour
 		this.x = x;
 		this.y = y;
 		GetComponentInChildren<Animator>().SetBool("lift", false);
-		foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-		{
-			child.sortingLayerName = charName.Substring(0, 1).ToUpper() + charName.Substring(1);
-		}
+        foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            child.sortingLayerName = charName.Substring(0, 1).ToUpper() + charName.Substring(1);
+        }
+        indicator.ResetLayer();
 		GameObject dustObj = Instantiate(Var.dustCloud, transform.Find("feet"));
 		dustObj.transform.localPosition = Vector3.zero;
 		Destroy(dustObj, 1.0f);
