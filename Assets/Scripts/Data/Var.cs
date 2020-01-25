@@ -20,7 +20,7 @@ public static class Var {
 	public static List<string> shownEvents = new List<string>();
 	public enum Em { Neutral,Solitary,SuperLonely, Social, SuperFriendly,Confident,SuperConfident,Cautious, SuperScared,finish,Random};
 	public enum PowerUps { heal,dmg,emotion,obstacle};
-	public static bool isTutorial = true;
+	public static bool isTutorial = false;
     public static bool isEnding = false;
     public static bool tutorialCompleted = true;
 	public static bool isBoss = false;

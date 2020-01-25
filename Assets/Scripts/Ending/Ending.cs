@@ -66,6 +66,7 @@ public class Ending : MonoBehaviour
         AddEnemiesToList(eightStageEnemies);
         AddEnemiesToList(ninethStageEnemies);
         AddEnemiesToList(tenthStageEnemies);
+        visuals.gameObject.SetActive(true);
         visuals.debugFinalBattleActive = true;
         visuals.setupLastBattle();
         Var.currentBG = 13;
