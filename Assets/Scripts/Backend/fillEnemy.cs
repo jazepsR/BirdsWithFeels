@@ -28,7 +28,7 @@ public class fillEnemy : MonoBehaviour {
         else
 		{
 			BattleData Area = Var.map[0];
-			createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies, Area.hasWizards, Area.hasDrills,Area.hasSuper);
+			CreateEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies, Area.hasWizards, Area.hasDrills,Area.hasSuper);
 		}
 	} 
 
@@ -67,7 +67,7 @@ public class fillEnemy : MonoBehaviour {
 
 
 
-	public void createEnemies(MapBattleData battleData, int birdLVL = 1, List<Bird.dir> dirList = null, int minEnemies = 3, int maxEnemies = 4, bool hasWizards = false, bool hasDrills = false, bool hasSuper= false)
+	public void CreateEnemies(MapBattleData battleData, int birdLVL = 1, List<Bird.dir> dirList = null, int minEnemies = 3, int maxEnemies = 4, bool hasWizards = false, bool hasDrills = false, bool hasSuper= false)
 	{
 		Reset();
 		int index = 0;
@@ -264,11 +264,12 @@ public class fillEnemy : MonoBehaviour {
 		if (enemy.EnemyArt != null)
 			Destroy(enemy.EnemyArt);       
 		enemy.enemyType = type;
-		if (enemy.emotion == Var.Em.Neutral && (enemy.enemyType == enemyType.wizard || enemy.enemyType == enemyType.super))
+        if (enemy.emotion == Var.Em.Neutral && (enemy.enemyType == enemyType.wizard || enemy.enemyType == enemyType.super))
 			enemy.enemyType = enemyType.normal;
 		enemy.inUse = true;
-		enemy.transform.localPosition = enemy.home;       
-	}
+		enemy.transform.localPosition = enemy.home;
+       // enemy.EnemyArt.transform.localPosition = new Vector3(0, 0, 0);
+    }
 
 	public void Reset()
 	{

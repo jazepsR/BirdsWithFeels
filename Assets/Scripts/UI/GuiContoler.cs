@@ -1282,7 +1282,7 @@ public class GuiContoler : MonoBehaviour {
                 }
                 else
                 {
-                    GetComponent<fillEnemy>().createEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
+                    GetComponent<fillEnemy>().CreateEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
                 }
 				if (!EventController.Instance.tryEvent())
 					DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
