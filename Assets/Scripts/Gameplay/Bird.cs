@@ -764,7 +764,7 @@ public class Bird : MonoBehaviour
 						LeanTween.delayedCall((btn.index.x + btn.index.y) * 0.05f + 0.05f, () => btn.ShowHighlight());
 						btn.gameObject.layer = LayerMask.NameToLayer("Default");
 					}
-					Debug.LogError("MOOMOS " + name);
+				
 					ResetOnSelection();
 					Var.clickedBird = this;
 					foreach (Bird bird in Var.activeBirds)
@@ -774,9 +774,9 @@ public class Bird : MonoBehaviour
 				{
 
 
-					foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+			foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 			{
-				child.sortingLayerName = "Default";
+				child.sortingLayerName = charName.Substring(0,1).ToUpper() + charName.Substring(1);
 			}
 			GetComponentInChildren<Animator>().SetBool("lift", false);
 			if (Var.isTutorial && !GuiContoler.Instance.inMap)
@@ -1538,7 +1538,7 @@ public class Bird : MonoBehaviour
 		GetComponentInChildren<Animator>().SetBool("lift", false);
 		foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 		{
-			child.sortingLayerName = "Default";
+			child.sortingLayerName = charName.Substring(0, 1).ToUpper() + charName.Substring(1);
 		}
 		GameObject dustObj = Instantiate(Var.dustCloud, transform.Find("feet"));
 		dustObj.transform.localPosition = Vector3.zero;

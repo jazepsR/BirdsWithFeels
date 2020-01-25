@@ -123,7 +123,7 @@ public class GraphPortraitScript : MonoBehaviour {
 			activeText.color = Helpers.Instance.GetEmotionColor(targetEmotion);
 			activeText.rectTransform.localScale = Vector3.one;
 			LeanTween.scale(activeText.gameObject.GetComponent<RectTransform>(), Vector3.one * 1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownText);
-			LeanTween.color(transform.Find("bg\bird_color").GetComponent<Image>().rectTransform, Helpers.Instance.GetEmotionColor(targetEmotion), 0.7f).setEaseInBack();                                
+			LeanTween.color(transform.Find("bg").Find("bird_color").GetComponent<Image>().rectTransform, Helpers.Instance.GetEmotionColor(targetEmotion), 0.7f).setEaseInBack();                                
 			LeanTween.delayedCall(0.7f,ResumeMovement);
 		}else
 		{
