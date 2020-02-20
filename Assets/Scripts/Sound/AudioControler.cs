@@ -74,6 +74,10 @@ public class AudioControler : MonoBehaviour {
 	[Header("Ambient sounds")]
 	public AudioGroup AmbientSounds;
 	public AudioGroup battleTracks;
+    [Header("Music")]
+    public AudioClip defaultThinkingMusic;
+    public AudioClip bossThinkinkingMusic;
+    public AudioClip levelCompleteMusic;
 	[Header("Audio sources")]
 	public AudioSource mainAudioSource;
 	public AudioSource ambientAudioSource;
@@ -120,7 +124,16 @@ public class AudioControler : MonoBehaviour {
 		{
 			AmbientSounds = Var.ambientSounds;
 		}
-		SetSoundVol();
+        if(Var.isBoss)
+        {
+            musicSource.clip = bossThinkinkingMusic;
+            musicSource.Play();
+        }
+        else
+        {
+            musicSource.clip = defaultThinkingMusic;
+        }
+        SetSoundVol();
 
     }
 	public BirdSound GetBirdSoundGroup(string charName)	
@@ -280,8 +293,14 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 		musicSource.volume = (1 - vol)*defaultMusicVol;
 	}
 
+    public void PlayWinMusic()
+    { 
+        LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume, 1, 1f);
+        battleSource.clip = levelCompleteMusic;
+        battleSource.Play();
+    }
 
-	public void setBattleVolume(float vol)
+    public void setBattleVolume(float vol)
 	{
 		if (vol != 0.0f)
 			PlaySound(battleTracks);

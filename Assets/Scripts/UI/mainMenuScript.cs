@@ -30,7 +30,7 @@ public class mainMenuScript : MonoBehaviour {
         titleColor = title.color;
         TweenForward();
         deleteSaveDialog.SetActive(false);
-        ContinueBtn.interactable = SaveLoad.Load();
+        ContinueBtn.interactable = SaveLoad.CheckIfContinueAvailable();
         buttonPanel.SetActive(true);
         saveSlotPanel.SetActive(false);
     }
@@ -76,7 +76,7 @@ public class mainMenuScript : MonoBehaviour {
     public void ContinueClick()
     {
         Var.fled = true;
-        SaveLoad.Save();
+        SaveLoad.Load();
         SceneManager.LoadScene("Map");
     }
 

@@ -130,6 +130,7 @@ public class EventController : MonoBehaviour {
             {
                 // currentEvent = null;
                 nextEvent.canShowMultipleTimes = true;
+                currentEvent = null;
                 CreateEvent(nextEvent);
 				return;
 			}

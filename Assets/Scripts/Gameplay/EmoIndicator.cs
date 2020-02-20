@@ -42,6 +42,15 @@ public class EmoIndicator : MonoBehaviour
         hideCount++;
     }
 
+    public void ResetLayer()
+    {
+        foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+
+            child.sortingLayerName = "Default";
+        }
+    }
+
     public void SetEmotions(Var.Em emo1, Var.Em emo2)
     {
         socialIcon.SetActive(emo1 == Var.Em.Social);

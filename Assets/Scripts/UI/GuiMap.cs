@@ -36,7 +36,9 @@ public class GuiMap : MonoBehaviour {
 				}
 				Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
 				nextAreaInfo.text = "";
-			}
+
+            }
+            nextAreaInfo.gameObject.SetActive(false);
         }
         else if(Var.isEnding)
         {
@@ -75,28 +77,29 @@ public class GuiMap : MonoBehaviour {
 				return;
 				foreach (MapSaveData data in Var.mapSaveData)
 				{
-					if (data.ID == Var.currentStageID)
-					{
-						if (data.trialID == data.ID && trialObj != null)
-						{
-							trialObj.SetActive(false);
-						}
-						else
-						{
+                if (data.ID == Var.currentStageID)
+                {
+                    if (data.trialID == data.ID && trialObj != null)
+                    {
+                        trialObj.SetActive(false);
+                    }
+                }
+                else
+                {
 
-							foreach (MapSaveData targ in Var.mapSaveData)
-							{
-								if (targ.ID == data.trialID)
-								{
-									nextAdventureIcon.color = Helpers.Instance.GetEmotionColor(targ.emotion);
-									nextAreaInfo.text = targ.areaName;
-									nextAdventureIcon.GetComponent<ShowTooltip>().tooltipText = targ.areaName + " is the next big challenge. Main emotion: " + targ.emotion.ToString();
-									break;
-								}
-							}
+                    foreach (MapSaveData targ in Var.mapSaveData)
+                    {
+                        if (targ.ID == data.trialID)
+                        {
+                            nextAdventureIcon.color = Helpers.Instance.GetEmotionColor(targ.emotion);
+                            nextAreaInfo.text = targ.areaName;
+                            nextAdventureIcon.GetComponent<ShowTooltip>().tooltipText = targ.areaName + " is the next big challenge. Main emotion: " + targ.emotion.ToString();
+                            break;
+                        }
+                    }
 
-						}
-					}
+                }
+					
 				}
 					
 			

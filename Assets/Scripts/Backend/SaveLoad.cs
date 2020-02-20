@@ -47,7 +47,20 @@ public class SaveLoad : MonoBehaviour
 			return false;
 		}
 	}
-	public static void DeleteSave(string slotName = "")
+
+    public static bool CheckIfContinueAvailable()
+    {
+        if (File.Exists(Application.persistentDataPath + "/" + Var.currentSaveSlot + "/saveGame.dat"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+        public static void DeleteSave(string slotName = "")
 	{
 		string path;
 		if(slotName == "")
@@ -61,7 +74,7 @@ public class SaveLoad : MonoBehaviour
 	private static void ApplyLoadedFile(SaveData data)
 	{
 		Var.timedEvents = data.timedEvents;
-		Var.mapSaveData = data.mapSaveData;       
+		Var.mapSaveData = data.mapSaveData;
 		Var.map = data.map;
 		Var.shownDialogs = data.usedDialogs;
 		Var.shownEvents = data.usedEvents;

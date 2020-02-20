@@ -179,7 +179,7 @@ public class ProgressGUI : MonoBehaviour {
                 bird.hadMentalPain = false;
 
             }
-            portraitFillObj.sprite = bird.portrait.transform.Find("bird_color").GetComponent<Image>().sprite;
+            portraitFillObj.sprite = bird.portrait.transform.Find("bg").Find("bird_color").GetComponent<Image>().sprite;
             if (bird.prevEmotion != bird.emotion && !bird.inMap)
             {
                 AudioControler.Instance.PlaySound(AudioControler.Instance.newEmotion);
@@ -188,7 +188,7 @@ public class ProgressGUI : MonoBehaviour {
                 else
                     LeanTween.scale(portrait.transform.parent.GetComponent<RectTransform>(), Vector3.one * 1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownPortrait).setOnCompleteParam(portraitNum as object);
                 portraitFillObj.color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
-                bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
+                bird.portrait.transform.Find("bg").Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
                 LeanTween.color(portraitFillObj.rectTransform, Helpers.Instance.GetEmotionColor(bird.emotion), 2.25f);
                 Debug.Log("had emotional change! From: " + bird.prevEmotion.ToString() + " to: " + bird.emotion.ToString());
                 if (useEmoHeader)
@@ -205,11 +205,11 @@ public class ProgressGUI : MonoBehaviour {
             }
             else
             {
-                bird.portrait.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+                bird.portrait.transform.Find("bg").Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
                 portraitFillObj.color = Helpers.Instance.GetEmotionColor(bird.emotion);
             }
-            bird.portrait.transform.Find("bird").GetComponent<Image>().color = Color.white;
-            portrait.sprite = bird.portrait.transform.Find("bird").GetComponent<Image>().sprite;
+            bird.portrait.transform.Find("bg").Find("bird").GetComponent<Image>().color = Color.white;
+            portrait.sprite = bird.portrait.transform.Find("bg").Find("bird").GetComponent<Image>().sprite;
             updateLevels(bird);
             if (!bird.inMap)
             {
