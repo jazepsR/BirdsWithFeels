@@ -84,7 +84,7 @@ public class mainMenuScript : MonoBehaviour {
     {
         ResetGame();
         Var.isTutorial = true;
-        AudioControler.Instance.fightButtonAppear.Play();
+        AudioControler.Instance.PlaySound(AudioControler.Instance.mainMenuFreeSaveBtnClick);
         cutsceneScript.StartCutscene();
         //SceneManager.LoadScene("NewMain");
     }

@@ -158,8 +158,9 @@ public class battleAnim :MonoBehaviour {
 			battle.player.GetComponentInChildren<Animator>().SetTrigger("victory 0");   
 			battle.player.battleConfBoos += Var.confWinFight;
 			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Confident);
-			//battle.enemy.GetComponentInChildren<Animator>().SetBool("lose", true);
-			if (battle.player == GuiContoler.Instance.selectedBird)
+            AudioControler.Instance.PlaySound(AudioControler.Instance.confidentParticlePostBattle);
+            //battle.enemy.GetComponentInChildren<Animator>().SetBool("lose", true);
+            if (battle.player == GuiContoler.Instance.selectedBird)
 				battle.player.showText();
 			print(battle.player.charName + " won fight");
 		}

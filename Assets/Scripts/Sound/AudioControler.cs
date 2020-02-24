@@ -47,13 +47,22 @@ public class AudioControler : MonoBehaviour {
 	public AudioGroup notebookRight;
 	public AudioGroup rockMouseover;
 	public AudioGroup effectTileMouseover;
-    [Header("Graph effects")]
+    public AudioGroup tileHighlightBirdHover;
+    public AudioGroup confidentParticlePostBattle;
+    public AudioGroup heartParticlePostBattle;
+[Header("Graph effects")]
 	public AudioGroup smallGraphAppear;
 	public AudioGroup smallGraphDisappear;
 	public AudioGroup returnButton;
 	public AudioGroup graphHighlight;
 	public AudioGroup graphMove;
-    [Header("Map effects")]
+    public AudioGroup enterDangerZone;
+    public AudioGroup exitDangerZone;
+    public AudioGroup collectEmoSeed;
+    public AudioGroup emoBarFill;
+    public AudioGroup iconMove;
+    public AudioGroup birdInjuredPopup;
+[Header("Map effects")]
 	public AudioGroup mapNodeClick;
 	public AudioGroup buttonSoundMap;
 	public AudioGroup restSound;
@@ -61,10 +70,20 @@ public class AudioControler : MonoBehaviour {
 	public AudioGroup mapPan;
 	public AudioGroup mapPanRelease;
 	public AudioGroup mouseOverLockedNode;
+    public AudioGroup tutorialButtonClick;
+    public AudioGroup mapSelectBtnClick;
+    public AudioGroup startGameBtnClick;
 	[Header("UI effects")]
 	public AudioGroup hoverSounds;
     public AudioGroup speechBubbleAppear;
     public AudioGroup speechBubbleContinue;
+    [Header("Main menu clips")]
+    public AudioGroup mainMenuNewGameHighlight;
+    public AudioGroup mainMenuLoadGameHighlight;
+    public AudioGroup mainMenuFreeSaveBtnClick;
+    public AudioGroup hoverOnMultipleChoiceBtn;
+    public AudioGroup StartGameBtnClick;
+    
     [Header("Powerup effects")]
 	public AudioGroup powerTilePositive;
 	public AudioGroup powerTileNegative;
@@ -136,7 +155,19 @@ public class AudioControler : MonoBehaviour {
         SetSoundVol();
 
     }
-	public BirdSound GetBirdSoundGroup(string charName)	
+    public void PlayStartGameHover()
+    {
+        PlaySound(mainMenuNewGameHighlight); 
+    }
+    public void PlayLoadGameHover()
+    {
+        PlaySound(mainMenuLoadGameHighlight);
+    }
+    public void PlayTutorialBtnClick()
+    {
+        PlaySound(tutorialButtonClick);
+    }
+    public BirdSound GetBirdSoundGroup(string charName)	
 	{
 		charName = charName.ToLower();
 		switch(charName)

@@ -83,6 +83,7 @@ public class cutScene : MonoBehaviour {
     }
 	public void StartLevel()
 	{
-		SceneManager.LoadScene("NewMain");
+        AudioControler.Instance.PlaySound(AudioControler.Instance.startGameBtnClick);
+        SceneManager.LoadScene("NewMain");
 	}
 }

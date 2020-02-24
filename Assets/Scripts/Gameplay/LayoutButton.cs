@@ -62,7 +62,7 @@ public class LayoutButton : MonoBehaviour
 				currentBird = other.transform.parent.GetComponent<Bird>();
 			else
 				swapBird = other.transform.parent.GetComponent<Bird>();
-
+            AudioControler.Instance.PlaySound(AudioControler.Instance.tileHighlightBirdHover);
 		}
 	}
 

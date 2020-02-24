@@ -779,12 +779,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
-        type: 3}
-      propertyPath: defaultSnapshot
-      value: 
-      objectReference: {fileID: 24500006, guid: ed6994bbaccc80e428f51f4073518c74,
-        type: 2}
     - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.4932411
@@ -815,6 +809,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 3}
       propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: mainMenuNewGameHighlight.clips.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: mainMenuLoadGameHighlight.clips.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: defaultSnapshot
+      value: 
+      objectReference: {fileID: 24500006, guid: ed6994bbaccc80e428f51f4073518c74,
+        type: 2}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: mainMenuNewGameHighlight.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: e2c1b218fe62cc74f82b000c833c21ad, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: mainMenuLoadGameHighlight.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: e77294dfc4c885c4eaf3f2bfd0f9d175, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: mainMenuNewGameHighlight.sourceType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: mainMenuLoadGameHighlight.sourceType
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 82506597007506474, guid: d2e1b6db1ca414e418db27bcd0f93516,
@@ -1588,6 +1618,7 @@ GameObject:
   - component: {fileID: 921483363}
   - component: {fileID: 921483362}
   - component: {fileID: 921483361}
+  - component: {fileID: 921483366}
   m_Layer: 5
   m_Name: Load game
   m_TagString: Untagged
@@ -1751,6 +1782,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921483359}
   m_CullTransparentMesh: 0
+--- !u!114 &921483366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921483359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 68482748}
+          m_MethodName: PlayStartGameHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &943459470
 GameObject:
   m_ObjectHideFlags: 0
@@ -3680,6 +3741,7 @@ GameObject:
   - component: {fileID: 1778781659}
   - component: {fileID: 1778781662}
   - component: {fileID: 1778781663}
+  - component: {fileID: 1778781664}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -3843,6 +3905,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+--- !u!114 &1778781664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778781657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 68482748}
+          m_MethodName: PlayLoadGameHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!1 &1805952579
 GameObject:
   m_ObjectHideFlags: 0

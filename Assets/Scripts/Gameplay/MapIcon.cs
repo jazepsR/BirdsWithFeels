@@ -207,6 +207,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 					firstCompletion = false;
 					anim.SetInteger("state", 1);
 					LeanTween.delayedCall(0.2f, () => anim.SetInteger("state", 2));
+                    AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
 					if (unlockedRoad != null)
 					{
 						unlockedRoad.gameObject.SetActive(false);
