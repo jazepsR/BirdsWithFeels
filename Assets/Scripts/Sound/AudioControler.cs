@@ -235,7 +235,6 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	}
 	public void PlaySound(EventAudio eventSound)
 	{
-        Debug.LogError("started talkiong");
 		if(eventSound.sylables.Length == 0)
 		{
 			return;
