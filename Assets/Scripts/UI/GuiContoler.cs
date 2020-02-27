@@ -456,6 +456,7 @@ public class GuiContoler : MonoBehaviour {
             speechPos.Add(pos);
             speechPivotIsFirst.Add(useFirst);
             speechAudioGroup.Add(birdTalk);
+            speechAudioGroup[0].Play();
             AudioControler.Instance.speechBubbleContinue.Play();
         }
         else

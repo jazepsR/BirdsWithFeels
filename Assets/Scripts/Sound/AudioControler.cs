@@ -235,29 +235,38 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	}
 	public void PlaySound(EventAudio eventSound)
 	{
-		Debug.Log("Playing event sound. Points: "+ eventSound.startPoints.Length );
-		if(eventSound.birdTalk == null)
+        Debug.LogError("started talkiong");
+		if(eventSound.sylables.Length == 0)
 		{
 			return;
 		}
-		AudioSource source = GetAudioSource(audioSourceType.birdVoices);
-		source.Stop();
-		LeanTween.value(gameObject, (float val)=> source.volume = val,0f,1f, 0.3f);
-		source.pitch = 1f;
-		source.clip =(eventSound.birdTalk);
-		if(eventSound.startPoints.Length != 0)
+       eventTalk = StartCoroutine(PlayNextBirdTalk(eventSound));      
+	}
+    private Coroutine eventTalk = null;
+    private IEnumerator PlayNextBirdTalk(EventAudio eventAudio)
+    {
+        AudioSource source = GetAudioSource(audioSourceType.birdVoices);
+        source.Stop();
+       // LeanTween.value(gameObject, (float val) => source.volume = val, 0f, 1f, 0.3f);
+        source.pitch = 1f;
+        source.clip = (eventAudio.sylables[Random.Range(0, eventAudio.sylables.Length)]);
+        /*if(eventSound.startPoints.Length != 0)
 		{
 			int number= Random.Range(0,eventSound.startPoints.Length);
 			Debug.Log("numbre: "+ number);
 			source.time = eventSound.startPoints[number];
 
-		}
-		source.Play();
-	}
+		}*/
+        source.Play();
+        yield return new WaitForSeconds(source.clip.length + 0.15f);
+        eventTalk = StartCoroutine(PlayNextBirdTalk(eventAudio));
+    }
 	public void FadeOutBirdTalk()
-	{
-		AudioSource source = GetAudioSource(audioSourceType.birdVoices);		
-		LeanTween.value(gameObject, (float val)=> source.volume = val, source.volume,0f, 0.3f);
+    {
+        if (eventTalk != null)
+        {
+            StopCoroutine(eventTalk);
+        }
 	}
 	public void PlaySound(AudioGroup group)
 	{
@@ -269,7 +278,6 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 			source.pitch = 1f;
 		if(group.clips.Length ==0)
 		{
-			Debug.Log("Audio clip has no sound assigned!");
 			return;
 		}
 		source.PlayOneShot(group.clips[Random.Range(0, group.clips.Length)],group.volume);

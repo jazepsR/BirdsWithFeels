@@ -16,37 +16,17 @@ public class BirdSound
 	public AudioGroup BirdSitDown;
 	public AudioGroup pickupBird;
 	public AudioGroup dropBird;
-	public AudioGroup birdTalkDefault;
-	public AudioGroup birdTalkConfident;
-	public AudioGroup birdTalkCautious;
-	public AudioGroup birdTalkSocial;
-	public AudioGroup birdTalkLonely;
-	public EventAudio eventAudio;
+	public AudioGroup birdDialogueTalk;
+    public AudioGroup birdSelectSound;
+    public EventAudio eventAudio;
 
 	public AudioGroup GetTalkGroup(Var.Em emotion)
 	{
-		AudioGroup talkGroup = null;
-		switch(emotion)
+		AudioGroup talkGroup = null;		
+		talkGroup = birdDialogueTalk;
+		if(talkGroup.clips.Length == 0)
 		{
-			case Var.Em.Cautious:
-				talkGroup= birdTalkCautious;
-				break;
-			case Var.Em.Confident:
-				talkGroup = birdTalkConfident;
-				break;
-			case Var.Em.Social:
-				talkGroup = birdTalkSocial;
-				break;
-			case Var.Em.Solitary:
-				talkGroup = birdTalkLonely;
-				break;
-			default:
-				talkGroup = birdTalkDefault;
-				break;
-		}
-		if(talkGroup == null)
-		{
-			talkGroup = birdTalkDefault;
+			talkGroup = AudioControler.Instance.DefaultBirdSound.birdDialogueTalk;
 		}
 		return talkGroup;
 
@@ -55,8 +35,7 @@ public class BirdSound
 [Serializable]
 public class EventAudio
 {
-	public AudioClip birdTalk;
-	public float[] startPoints;
+	public AudioClip[] sylables;
 }
 
 [Serializable]
@@ -690,7 +669,7 @@ public class Bird : MonoBehaviour
 
 			if(Time.timeSinceLevelLoad > 1)
 			{
-				birdSounds.birdSelect.Play();				
+               
 				if (inMap)
 				{
 					MapControler.Instance.charInfoAnim.SetBool("show", true);
@@ -808,7 +787,15 @@ public class Bird : MonoBehaviour
 		{
 			if (Var.Infight || data.injured || GuiContoler.Instance.speechBubbleObj.activeSelf)
 				return;
-			if (inMap)
+            if (birdSounds.birdSelect.clips.Length > 0)
+            {
+                birdSounds.birdSelect.Play();
+            }
+            else
+            {
+                AudioControler.Instance.DefaultBirdSound.birdSelect.Play();
+            }
+            if (inMap)
 			{
 				if (MapControler.Instance.selectedBirds.Contains(this))
 				{

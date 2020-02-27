@@ -374,26 +374,39 @@ public class EventController : MonoBehaviour {
                 }
 
                 nameText.text=characterNameText;
+                StartBirdTalk(Helpers.Instance.GetBirdFromEnum(currentEvent.speakers[currentEvent.parts[currentText].speakerId]));
+             
 
-
-                    try
-                {
-					Bird birdToTalk = Helpers.Instance.GetBirdFromEnum(currentEvent.speakers[currentEvent.parts[currentText].speakerId]);
-					AudioControler.Instance.PlaySound(AudioControler.Instance.GetBirdSoundGroup(birdToTalk.data.charName).eventAudio);
-				//AudioControler.Instance.PlaySound(Helpers.Instance.GetBirdFromEnum(currentEvent.speakers[currentEvent.parts[currentText].speakerId]).birdSounds.eventAudio);
-				}catch{
-					Debug.Log("audio not found!");
-				}
-			}
+            }
 			catch
 			{
 				print("failed to show portrait");
 				portrait.transform.parent.gameObject.SetActive(false);
 			}
 		}
+       
 
-	}
+    }
+    private void StartBirdTalk(Bird birdToTalk)
+    {
+        try
+        {
+            try
+            {
+                AudioControler.Instance.PlaySound(AudioControler.Instance.GetBirdSoundGroup(birdToTalk.data.charName).eventAudio);
+            }
+            catch
+            {
+                AudioControler.Instance.PlaySound(AudioControler.Instance.DefaultBirdSound.eventAudio);
 
+            }
+            //AudioControler.Instance.PlaySound(Helpers.Instance.GetBirdFromEnum(currentEvent.speakers[currentEvent.parts[currentText].speakerId]).birdSounds.eventAudio);
+        }
+        catch
+        {
+            Debug.LogError("audio not found!");
+        }
+    }
   
 	void CreateChoices()
 	{
@@ -431,7 +444,9 @@ public class EventController : MonoBehaviour {
 			{
 				currentBird.AddRoundBonuses(false);
 				currentBird.showText();
-			}
+                StartBirdTalk(currentBird);
+
+            }
 			catch { }
 		}
 		foreach (Transform child in choiceList)
