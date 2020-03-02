@@ -1553,6 +1553,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1993745425}
     m_Modifications:
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_Name
+      value: Trailer asset - map (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1657,14 +1665,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1083776
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_Name
-      value: Trailer asset - map (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
@@ -3822,6 +3822,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1993745425}
     m_Modifications:
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_Name
+      value: Trailer asset - map
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3926,14 +3934,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1083772
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_Name
-      value: Trailer asset - map
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
@@ -5263,35 +5263,14 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
-    birdTalkDefault:
+    birdDialogueTalk:
       clips: []
       usePitchVariation: 0
       sourceType: 0
       volume: 1
       minPitch: 1
       maxPitch: 1
-    birdTalkConfident:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkCautious:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkSocial:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkLonely:
+    birdSelectSound:
       clips: []
       usePitchVariation: 0
       sourceType: 0
@@ -5299,8 +5278,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
-      birdTalk: {fileID: 0}
-      startPoints: []
+      sylables: []
   indicator: {fileID: 0}
 --- !u!1 &165253486
 GameObject:
@@ -11573,35 +11551,14 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
-    birdTalkDefault:
+    birdDialogueTalk:
       clips: []
       usePitchVariation: 0
       sourceType: 0
       volume: 1
       minPitch: 1
       maxPitch: 1
-    birdTalkConfident:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkCautious:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkSocial:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkLonely:
+    birdSelectSound:
       clips: []
       usePitchVariation: 0
       sourceType: 0
@@ -11609,8 +11566,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
-      birdTalk: {fileID: 0}
-      startPoints: []
+      sylables: []
   indicator: {fileID: 0}
 --- !u!1 &369850573
 GameObject:
@@ -12472,17 +12428,18 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
-        type: 3}
-      propertyPath: defaultSnapshot
-      value: 
-      objectReference: {fileID: 24500006, guid: ed6994bbaccc80e428f51f4073518c74,
-        type: 2}
-    - target: {fileID: 82506597007506474, guid: d2e1b6db1ca414e418db27bcd0f93516,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 964e35961058341039ca79f2ce4aa03c, type: 3}
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 3}
 --- !u!1 &402096227
@@ -17617,6 +17574,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1993745425}
     m_Modifications:
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_Name
+      value: Trailer asset - map (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17721,14 +17686,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1083776
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_Name
-      value: Trailer asset - map (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
@@ -19845,6 +19802,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1993745425}
     m_Modifications:
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_Name
+      value: Trailer asset - map (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19949,14 +19914,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1083776
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_Name
-      value: Trailer asset - map (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
@@ -30161,35 +30118,14 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
-    birdTalkDefault:
+    birdDialogueTalk:
       clips: []
       usePitchVariation: 0
       sourceType: 0
       volume: 1
       minPitch: 1
       maxPitch: 1
-    birdTalkConfident:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkCautious:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkSocial:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkLonely:
+    birdSelectSound:
       clips: []
       usePitchVariation: 0
       sourceType: 0
@@ -30197,8 +30133,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
-      birdTalk: {fileID: 0}
-      startPoints: []
+      sylables: []
   indicator: {fileID: 0}
 --- !u!1 &977331984
 GameObject:
@@ -30460,35 +30395,14 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
-    birdTalkDefault:
+    birdDialogueTalk:
       clips: []
       usePitchVariation: 0
       sourceType: 0
       volume: 1
       minPitch: 1
       maxPitch: 1
-    birdTalkConfident:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkCautious:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkSocial:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkLonely:
+    birdSelectSound:
       clips: []
       usePitchVariation: 0
       sourceType: 0
@@ -30496,8 +30410,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
-      birdTalk: {fileID: 0}
-      startPoints: []
+      sylables: []
   indicator: {fileID: 0}
 --- !u!1 &1000938695
 GameObject:
@@ -31633,6 +31546,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1993745425}
     m_Modifications:
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_Name
+      value: Trailer asset - map (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -31737,14 +31658,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1083776
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_Name
-      value: Trailer asset - map (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
@@ -39866,35 +39779,14 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
-    birdTalkDefault:
+    birdDialogueTalk:
       clips: []
       usePitchVariation: 0
       sourceType: 0
       volume: 1
       minPitch: 1
       maxPitch: 1
-    birdTalkConfident:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkCautious:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkSocial:
-      clips: []
-      usePitchVariation: 0
-      sourceType: 0
-      volume: 1
-      minPitch: 1
-      maxPitch: 1
-    birdTalkLonely:
+    birdSelectSound:
       clips: []
       usePitchVariation: 0
       sourceType: 0
@@ -39902,8 +39794,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
-      birdTalk: {fileID: 0}
-      startPoints: []
+      sylables: []
   indicator: {fileID: 0}
 --- !u!1 &1365462083 stripped
 GameObject:
@@ -46974,6 +46865,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1993745425}
     m_Modifications:
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_Name
+      value: Trailer asset - map (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -47078,14 +46977,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1083776
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_Name
-      value: Trailer asset - map (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
@@ -51020,6 +50911,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1993745425}
     m_Modifications:
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_Name
+      value: Trailer asset - map (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -51124,14 +51023,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.1083776
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_Name
-      value: Trailer asset - map (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
@@ -62529,6 +62420,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1513960782}
     m_Modifications:
+    - target: {fileID: 5287016698689333592, guid: 6b60d1fdd32268e40adc6e6b485e5f6e,
+        type: 3}
+      propertyPath: m_Name
+      value: Collection of feel battles
+      objectReference: {fileID: 0}
     - target: {fileID: 5287016698689333595, guid: 6b60d1fdd32268e40adc6e6b485e5f6e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -62633,11 +62529,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5287016698689333592, guid: 6b60d1fdd32268e40adc6e6b485e5f6e,
-        type: 3}
-      propertyPath: m_Name
-      value: Collection of feel battles
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b60d1fdd32268e40adc6e6b485e5f6e, type: 3}
