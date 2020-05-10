@@ -28,7 +28,7 @@ public class LevelTutorial : MonoBehaviour {
             DialogueControl.Instance.CreateParticularDialog(planningDialogue);
 		}
 
-		if (Var.currentStageID == 4&& !Var.gameSettings.shownLevelTutorial)
+		if (Var.currentStageID == 4 && !Var.gameSettings.shownLevelTutorial)
 		{
 			Var.gameSettings.shownLevelTutorial = true;
             DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);

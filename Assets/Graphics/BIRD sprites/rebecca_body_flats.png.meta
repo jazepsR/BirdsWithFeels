@@ -1,31 +1,72 @@
 fileFormatVersion: 2
 guid: aa47b8b8fea42fb47a90d5064cc93020
-timeCreated: 1504796502
-licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: birdfriend_body_flat
-    21300002: birdfriend_butt_flat
-    21300004: birdfriend_hals_flat
-    21300006: birdfriend_headtemp_flat
-    21300008: birdfriend_body__nowrings_flat
-    21300010: birdfriend_wings_flat
-    21300012: birdfriend_dead_flat
-    21300014: birdfriend_body
-    21300016: birdfriend_butt
-    21300018: birdfriend_hals
-    21300020: birdfriend_headtemp
-    21300022: birdfriend_legs
-    21300024: birdfriend_feet
-    21300026: birdfriend_legsright
-    21300028: birdfriend_eye_left
-    21300030: birdfriend_eye_right
-    21300032: birdfriend_body_nowings
-    21300034: birdfriend_wing
-    21300036: birdfriend_extraeyes
-    21300038: birdfriend_Xeyes
-    21300040: birdfriend_dead
-  serializedVersion: 4
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: birdfriend_body_flat
+  - first:
+      213: 21300002
+    second: birdfriend_butt_flat
+  - first:
+      213: 21300004
+    second: birdfriend_hals_flat
+  - first:
+      213: 21300006
+    second: birdfriend_headtemp_flat
+  - first:
+      213: 21300008
+    second: birdfriend_body__nowrings_flat
+  - first:
+      213: 21300010
+    second: birdfriend_wings_flat
+  - first:
+      213: 21300012
+    second: birdfriend_dead_flat
+  - first:
+      213: 21300014
+    second: birdfriend_body
+  - first:
+      213: 21300016
+    second: birdfriend_butt
+  - first:
+      213: 21300018
+    second: birdfriend_hals
+  - first:
+      213: 21300020
+    second: birdfriend_headtemp
+  - first:
+      213: 21300022
+    second: birdfriend_legs
+  - first:
+      213: 21300024
+    second: birdfriend_feet
+  - first:
+      213: 21300026
+    second: birdfriend_legsright
+  - first:
+      213: 21300028
+    second: birdfriend_eye_left
+  - first:
+      213: 21300030
+    second: birdfriend_eye_right
+  - first:
+      213: 21300032
+    second: birdfriend_body_nowings
+  - first:
+      213: 21300034
+    second: birdfriend_wing
+  - first:
+      213: 21300036
+    second: birdfriend_extraeyes
+  - first:
+      213: 21300038
+    second: birdfriend_Xeyes
+  - first:
+      213: 21300040
+    second: birdfriend_dead
+  externalObjects: {}
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -33,6 +74,8 @@ TextureImporter:
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -41,6 +84,8 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -48,10 +93,13 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
+    serializedVersion: 2
     filterMode: -1
     aniso: -1
-    mipBias: -1
-    wrapMode: 1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -60,25 +108,32 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
+  singleChannelComponent: 0
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  applyGammaDecoding: 1
   platformSettings:
-  - buildTarget: DefaultTexturePlatform
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -94,7 +149,15 @@ TextureImporter:
       pivot: {x: 0.51107025, y: 0.41517895}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: e2305410000000000800000000000000
+      internalID: 21300014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_butt
       rect:
@@ -107,7 +170,15 @@ TextureImporter:
       pivot: {x: 0.8523591, y: 0.18659648}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 03305410000000000800000000000000
+      internalID: 21300016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_hals
       rect:
@@ -120,7 +191,15 @@ TextureImporter:
       pivot: {x: 0.47943494, y: 0.29650542}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 23305410000000000800000000000000
+      internalID: 21300018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_headtemp
       rect:
@@ -133,7 +212,15 @@ TextureImporter:
       pivot: {x: 0.43882418, y: 0.19199932}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 43305410000000000800000000000000
+      internalID: 21300020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_legs
       rect:
@@ -146,7 +233,15 @@ TextureImporter:
       pivot: {x: 0.58460444, y: 0.08798438}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 63305410000000000800000000000000
+      internalID: 21300022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_feet
       rect:
@@ -159,7 +254,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 83305410000000000800000000000000
+      internalID: 21300024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_legsright
       rect:
@@ -172,7 +275,15 @@ TextureImporter:
       pivot: {x: 0.28420502, y: 0.15556255}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: a3305410000000000800000000000000
+      internalID: 21300026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_eye_left
       rect:
@@ -185,7 +296,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: c3305410000000000800000000000000
+      internalID: 21300028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_eye_right
       rect:
@@ -198,7 +317,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: e3305410000000000800000000000000
+      internalID: 21300030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_body_nowings
       rect:
@@ -211,7 +338,15 @@ TextureImporter:
       pivot: {x: 0.5081444, y: 0.46469453}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 04305410000000000800000000000000
+      internalID: 21300032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_wing
       rect:
@@ -224,7 +359,15 @@ TextureImporter:
       pivot: {x: 0.9133232, y: 0.33991447}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 24305410000000000800000000000000
+      internalID: 21300034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_extraeyes
       rect:
@@ -237,7 +380,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 44305410000000000800000000000000
+      internalID: 21300036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_Xeyes
       rect:
@@ -250,7 +401,15 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 64305410000000000800000000000000
+      internalID: 21300038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     - serializedVersion: 2
       name: birdfriend_dead
       rect:
@@ -263,9 +422,28 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
+      physicsShape: []
       tessellationDetail: -1
+      bones: []
+      spriteID: 84305410000000000800000000000000
+      internalID: 21300040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

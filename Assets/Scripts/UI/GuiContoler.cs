@@ -543,7 +543,7 @@ public class GuiContoler : MonoBehaviour {
             return;
         canChangeGraph = false;
         currentGraph--;
-        CreateGraph(currentGraph);
+        CreateGraph(Mathf.Max(0, currentGraph));
         ProgressGUI.Instance.SetOnePortrait();
         ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
         AudioControler.Instance.PlaySound(AudioControler.Instance.notebookLeft);

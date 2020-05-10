@@ -12,6 +12,7 @@ public class closePopup : MonoBehaviour {
 	public void Hide()
 	{
 		gameObject.SetActive(false);
+        GuiContoler.Instance.GraphBlocker.SetActive(false);
 	}
 	public void ShowSmallGraph()
 	{
