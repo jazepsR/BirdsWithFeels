@@ -797,7 +797,7 @@ public class Helpers : MonoBehaviour {
 				deathTxt = "This is why <name> didn't want to rely on the other birds! Things like this often lead to injury";
 				break;
 			case Levels.type.Scared1:
-				deathTxt = "<name> wasn't cut out for fighting. It turned out their clever tricks could'nt portect them.";
+				deathTxt = "<name> wasn't cut out for fighting. It turned out their clever tricks could'nt protect them.";
 				break;
 			case Levels.type.Scared2:
 				deathTxt = "For all their attempts do avoid fighting, violence eventually found <name>. ";
