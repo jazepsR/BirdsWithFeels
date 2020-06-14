@@ -15,7 +15,8 @@ public class mainMenuScript : MonoBehaviour {
     public GameObject buttonPanel;
     public GameObject saveSlotPanel;
     public GameObject deleteSaveDialog;
-	public Text deleteSaveText;
+    public GameObject quitGameButton;
+    public Text deleteSaveText;
     string toDelete = "debug";
     public static mainMenuScript Instance;
 	bool isDelete = false;
@@ -33,6 +34,7 @@ public class mainMenuScript : MonoBehaviour {
         ContinueBtn.interactable = SaveLoad.CheckIfContinueAvailable();
         buttonPanel.SetActive(true);
         saveSlotPanel.SetActive(false);
+        quitGameButton.SetActive(false);
     }
     public void OpenSaveSlots(bool isNewGame)
     {
@@ -45,6 +47,7 @@ public class mainMenuScript : MonoBehaviour {
         }
         buttonPanel.SetActive(false);
         saveSlotPanel.SetActive(true);
+        quitGameButton.SetActive(false);
 
     }
     public void Update()
@@ -54,9 +57,16 @@ public class mainMenuScript : MonoBehaviour {
             Quit();
         }
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void CloseSaveSlots()
     {
         buttonPanel.SetActive(true);
+        quitGameButton.SetActive(true);
         saveSlotPanel.SetActive(false);
     }
     void TweenForward()

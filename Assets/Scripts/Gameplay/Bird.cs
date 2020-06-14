@@ -787,9 +787,9 @@ public class Bird : MonoBehaviour
 		{
 			if (Var.Infight || data.injured || GuiContoler.Instance.speechBubbleObj.activeSelf)
 				return;
-            if (birdSounds.birdSelect.clips.Length > 0)
+            if (birdSounds.pickupBird.clips.Length > 0)
             {
-                birdSounds.birdSelect.Play();
+                birdSounds.pickupBird.Play();
             }
             else
             {
