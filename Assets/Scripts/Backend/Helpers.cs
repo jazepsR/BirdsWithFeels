@@ -901,7 +901,6 @@ public class Helpers : MonoBehaviour {
 			return false;
 		}
 	}
-#if UNITY_EDITOR
 	private void Update()
 	{
 		if (Input.GetKey(KeyCode.LeftShift))
@@ -911,7 +910,7 @@ public class Helpers : MonoBehaviour {
 		else
 			Time.timeScale = 1;
 	}
-#endif
+
 	public string GetLevelUpDialogs(Levels.type type, EventScript.Character character)
 	{
 		switch (character)
