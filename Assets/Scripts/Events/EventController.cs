@@ -349,8 +349,17 @@ public class EventController : MonoBehaviour {
 				//	mouseOver.tooltipText = Helpers.Instance.GetStatInfo(currentBird.data.confidence, currentBird.data.friendliness);
 				portrait.transform.parent.gameObject.SetActive(true);
 
+
+                if(portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird_color").GetComponent<Image>().sprite==null)
+                {
+                    portraitFill.gameObject.SetActive(false);
+                }
+                else
+                {
+                    portraitFill.gameObject.SetActive(true);
+                }
                 
-                portraitFill.gameObject.SetActive(true);
+              
 				portrait.gameObject.SetActive(true);
 				portraitFill.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird_color").GetComponent<Image>().sprite;
 				portraitFill.color = colors[currentEvent.parts[currentText].speakerId];
