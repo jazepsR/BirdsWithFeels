@@ -16,6 +16,7 @@ public class AudioGroup
 	public float maxPitch=1f;
 	public void Play()
 	{
+        Debug.LogError("Playing sound: "+clips[0].name );
 		AudioControler.Instance.PlaySound(this);
 	}
 }
@@ -121,7 +122,9 @@ public class AudioControler : MonoBehaviour {
 	public AudioGroup enemyMouseover;
 	[HideInInspector]
 	public float defaultMusicVol, defaultSoundVol;
-	float pitch = 1;    
+	float pitch = 1;
+    public float lastSoundTickTime = 0;
+
 	// Use this for initialization
 	void Awake ()
 	{      
@@ -203,7 +206,11 @@ public class AudioControler : MonoBehaviour {
 	}
     public void SetSoundVol()
 	{
-		ClickSound();
+        if (Time.timeSinceLevelLoad > lastSoundTickTime + 0.3f)
+        {
+            ClickSound();
+            lastSoundTickTime = Time.timeSinceLevelLoad;
+        }
 		mainAudioSource.volume = defaultSoundVol;
 		if(ambientAudioSource)
 			ambientAudioSource.volume = defaultSoundVol;
