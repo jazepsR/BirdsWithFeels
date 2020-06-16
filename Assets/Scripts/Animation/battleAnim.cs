@@ -22,7 +22,6 @@ public class battleAnim :MonoBehaviour {
 
 	public void Battle()
 	{
-
 		StartCoroutine(DoBattles(Helpers.Instance.winWaitTime, Helpers.Instance.loseWaitTime));
 	}
 
