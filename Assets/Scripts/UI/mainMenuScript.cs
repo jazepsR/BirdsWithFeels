@@ -35,6 +35,7 @@ public class mainMenuScript : MonoBehaviour {
         buttonPanel.SetActive(true);
         saveSlotPanel.SetActive(false);
         quitGameButton.SetActive(false);
+        AudioControler.Instance.musicSource.Play();
     }
     public void OpenSaveSlots(bool isNewGame)
     {
