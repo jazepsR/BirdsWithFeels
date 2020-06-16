@@ -16,7 +16,7 @@ public class AudioGroup
 	public float maxPitch=1f;
 	public void Play()
 	{
-        Debug.LogError("Playing sound: "+clips[0].name );
+       // Debug.LogError("Playing sound: "+clips[0].name );
 		AudioControler.Instance.PlaySound(this);
 	}
 }
@@ -179,15 +179,15 @@ public class AudioControler : MonoBehaviour {
 				return TerrySounds;
 			case "kim":
 				return KimSound;
-				case "rebecca":
+			case "rebecca":
 				return RebeccaSounds;
-				case "alex":
-				return AlexSound;
-				case "alexander":
-				return AlexSound;
-				case "sophie":
+			case "alex":
+			    return AlexSound;
+			case "alexander":
+			    return AlexSound;
+			case "sophie":
 				return SophieSound;
-				default:
+			default:
 				return DefaultBirdSound;
 
 		}
@@ -242,6 +242,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	}
 	public void PlaySound(EventAudio eventSound)
 	{
+        Debug.LogError(eventSound.sylables[0].name);
 		if(eventSound.sylables.Length == 0)
 		{
 			return;

@@ -655,7 +655,7 @@ public class Bird : MonoBehaviour
 
        // Debug.LogError("friendly: " + prevFriend + " gain friendly " + GetFriendlinessBonus() + " conf: " + prevConf + " prev conf: " + GetFriendlinessBonus());
         //if(!Var.Infight)
-        if (GuiContoler.Instance.speechBubbleObj.activeSelf)
+        if (!Var.CanShowHover || GuiContoler.Instance.speechBubbleObj.activeSelf || Var.Infight || EventController.Instance.eventObject.activeSelf)
 			return;
 		if (Var.CanShowHover)
 			showText();
@@ -689,7 +689,7 @@ public class Bird : MonoBehaviour
 	}
 	void OnMouseOver()
 	{
-		if (Var.Infight)
+		if (Var.Infight || EventController.Instance.eventObject.activeSelf)
 			return;
 		if (isEnemy || GuiContoler.Instance.speechBubbleObj.activeSelf)
 			return;

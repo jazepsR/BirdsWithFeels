@@ -1218,6 +1218,9 @@ public class Helpers : MonoBehaviour {
 
 	public void EmitEmotionParticles(Transform parent,Var.Em emotion, bool useText= true, int intensity = 1)
 	{
+        if (Var.freezeEmotions)
+            return;
+
 		var emParticleObject = Instantiate(Var.emotionParticles, parent);
 
 		emoParticleController emoParticleCtrl = emParticleObject.GetComponent<emoParticleController>();

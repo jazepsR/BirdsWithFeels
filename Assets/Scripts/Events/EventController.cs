@@ -404,7 +404,7 @@ public class EventController : MonoBehaviour {
         {
             try
             {
-                AudioControler.Instance.PlaySound(AudioControler.Instance.GetBirdSoundGroup(birdToTalk.data.charName).eventAudio);
+                AudioControler.Instance.PlaySound(AudioControler.Instance.GetBirdSoundGroup(birdToTalk.charName).eventAudio);
             }
             catch
             {

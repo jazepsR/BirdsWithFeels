@@ -65,9 +65,11 @@ public class powerTile : MonoBehaviour {
 
 	void OnMouseEnter()
 	{
-		//if (Var.selectedBird != null)       
-		//	return;        
-		string info = "";
+        if (!Var.CanShowHover || GuiContoler.Instance.speechBubbleObj.activeSelf || Var.Infight || EventController.Instance.eventObject.activeSelf)
+            return;
+        //if (Var.selectedBird != null)       
+        //	return;        
+        string info = "";
 		switch (type)
 		{
 			case Var.PowerUps.dmg:

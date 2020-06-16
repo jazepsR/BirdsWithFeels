@@ -343,8 +343,9 @@ public class feedBack : MonoBehaviour {
 	}
 
 	public void SetEnemyHoverText()
-	{
-		if (!isMain)
+    {
+        
+        if (!isMain)
 			return;
 		BelowBirdIndicator.gameObject.SetActive(true);
 		BelowBirdIndicator.color = new Color(1, 1, 1, 1f);
