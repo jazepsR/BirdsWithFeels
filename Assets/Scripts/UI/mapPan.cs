@@ -32,6 +32,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	void Start()
 	{
 		maxPos = map.rect;
+        AudioControler.Instance.musicSource.Stop();
 	}
 	void Update()
 	{
