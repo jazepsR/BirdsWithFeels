@@ -20,7 +20,7 @@ public class LevelTutorial : MonoBehaviour {
 	void Start ()
 	{
 		//Var.currentStageID = 1;
-		if((Var.currentStageID == 1000) && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
+		if((Var.currentStageID == 11) && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
 		{
             LeanTween.delayedCall(0.1f, () =>
              Var.gameSettings.shownBattlePlanningTutorial = true);
@@ -28,7 +28,7 @@ public class LevelTutorial : MonoBehaviour {
             DialogueControl.Instance.CreateParticularDialog(planningDialogue);
 		}
 
-		if (Var.currentStageID == 4 && !Var.gameSettings.shownLevelTutorial)
+		if (Var.currentStageID == 21 && !Var.gameSettings.shownLevelTutorial)
 		{
 			Var.gameSettings.shownLevelTutorial = true;
             DialogueControl.Instance.CreateParticularDialog(firstBattleDailog);
