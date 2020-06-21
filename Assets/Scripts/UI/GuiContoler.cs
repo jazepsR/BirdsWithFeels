@@ -118,6 +118,7 @@ public class GuiContoler : MonoBehaviour {
     private Text activeSpeechText;
     [HideInInspector]
     public GameObject activeSpeechBubble;
+
     void Awake()
     {
         //if (!Var.StartedNormally)
