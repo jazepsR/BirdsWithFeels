@@ -1,5 +1,53 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1511663746751925409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 679478031785423516}
+  - component: {fileID: 4461744269022385885}
+  m_Layer: 0
+  m_Name: Part 3_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &679478031785423516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511663746751925409}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.583815, y: 0.5304599, z: -1.03125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7980923976777718400}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4461744269022385885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511663746751925409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 0
+  text: "I know you said it was dangerous, but I simply couldn\u2019t stay away knowing
+    that Talonport might be lost to the vultures."
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &7980923974787013202
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,7 +77,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7980923976777718400}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7980923974787013204
 MonoBehaviour:
@@ -69,7 +117,7 @@ GameObject:
   - component: {fileID: 7980923974966596575}
   - component: {fileID: 7980923974966596560}
   m_Layer: 0
-  m_Name: Part 15 (1)
+  m_Name: Part 15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +135,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7980923975248436528}
-  m_RootOrder: 12
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7980923974966596560
 MonoBehaviour:
@@ -223,7 +271,7 @@ GameObject:
   - component: {fileID: 7980923975120897543}
   - component: {fileID: 7980923975120897592}
   m_Layer: 0
-  m_Name: Part 3 (1)
+  m_Name: Part 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,9 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "We have, while traveling here. I apologize, I know you said it was dangerous,
-    but I simply couldn\u2019t stay away knowing that Talonport might be lost to
-    the vultures."
+  text: We have, while traveling here. I apologize.
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &7980923975177941356
@@ -319,7 +365,7 @@ GameObject:
   - component: {fileID: 7980923975203273323}
   - component: {fileID: 7980923975203273324}
   m_Layer: 0
-  m_Name: Part 6 (1)
+  m_Name: Part 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,9 +441,9 @@ Transform:
   - {fileID: 7980923975374299047}
   - {fileID: 7980923975940975985}
   - {fileID: 7980923975325703506}
-  - {fileID: 7980923974966596575}
   - {fileID: 7980923976895086864}
   - {fileID: 7980923976047924978}
+  - {fileID: 7980923974966596575}
   - {fileID: 7980923975526596371}
   - {fileID: 7980923975959031468}
   - {fileID: 7980923976847202756}
@@ -416,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 0000000001000000040000000a000000
+  speakers: 00000000010000000400000020000000
   condition: 2
   magnitude: 0
   targetEmotion: 0
@@ -438,7 +484,7 @@ GameObject:
   - component: {fileID: 7980923975286586177}
   - component: {fileID: 7980923975286586178}
   m_Layer: 0
-  m_Name: Part 2 (1)
+  m_Name: Part 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -486,7 +532,7 @@ GameObject:
   - component: {fileID: 7980923975294048492}
   - component: {fileID: 7980923975294048493}
   m_Layer: 0
-  m_Name: Part 6 (1)
+  m_Name: Part 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -504,7 +550,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7980923976777718400}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7980923975294048493
 MonoBehaviour:
@@ -593,7 +639,7 @@ GameObject:
   - component: {fileID: 7980923975325703506}
   - component: {fileID: 7980923975325703507}
   m_Layer: 0
-  m_Name: Part 12 (1)
+  m_Name: Part 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -641,7 +687,7 @@ GameObject:
   - component: {fileID: 7980923975353642682}
   - component: {fileID: 7980923975353642683}
   m_Layer: 0
-  m_Name: Part 2 (1)
+  m_Name: Part 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -689,7 +735,7 @@ GameObject:
   - component: {fileID: 7980923975354068648}
   - component: {fileID: 7980923975354068649}
   m_Layer: 0
-  m_Name: Part 5 (1)
+  m_Name: Part 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -736,7 +782,7 @@ GameObject:
   - component: {fileID: 7980923975374299047}
   - component: {fileID: 7980923975374298200}
   m_Layer: 0
-  m_Name: Part 10 (1)
+  m_Name: Part 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -831,7 +877,7 @@ GameObject:
   - component: {fileID: 7980923975387140083}
   - component: {fileID: 7980923975387140084}
   m_Layer: 0
-  m_Name: Part 9 (1)
+  m_Name: Part 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -926,7 +972,7 @@ GameObject:
   - component: {fileID: 7980923975448414530}
   - component: {fileID: 7980923975448414531}
   m_Layer: 0
-  m_Name: Part 1 (1)
+  m_Name: Part 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -973,7 +1019,7 @@ GameObject:
   - component: {fileID: 7980923975451172090}
   - component: {fileID: 7980923975451172091}
   m_Layer: 0
-  m_Name: Part 6 (1)
+  m_Name: Part 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1116,7 +1162,7 @@ GameObject:
   - component: {fileID: 7980923975526596371}
   - component: {fileID: 7980923975526596372}
   m_Layer: 0
-  m_Name: Part 15
+  m_Name: Part 15_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1314,7 +1360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 0000000001000000040000000a000000
+  speakers: 00000000010000000400000020000000
   condition: 2
   magnitude: 0
   targetEmotion: 0
@@ -1336,7 +1382,7 @@ GameObject:
   - component: {fileID: 7980923975659239975}
   - component: {fileID: 7980923975659240152}
   m_Layer: 0
-  m_Name: Part 8 (1)
+  m_Name: Part 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1385,7 +1431,7 @@ GameObject:
   - component: {fileID: 7980923975662000254}
   - component: {fileID: 7980923975662000255}
   m_Layer: 0
-  m_Name: Part 4 (1)
+  m_Name: Part 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1403,7 +1449,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7980923976777718400}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7980923975662000255
 MonoBehaviour:
@@ -1432,7 +1478,7 @@ GameObject:
   - component: {fileID: 7980923975732201908}
   - component: {fileID: 7980923975732201909}
   m_Layer: 0
-  m_Name: Part 1 (1)
+  m_Name: Part 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1479,7 +1525,7 @@ GameObject:
   - component: {fileID: 7980923975741481265}
   - component: {fileID: 7980923975741481266}
   m_Layer: 0
-  m_Name: Part 5 (1)
+  m_Name: Part 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1669,7 +1715,7 @@ GameObject:
   - component: {fileID: 7980923975864240723}
   - component: {fileID: 7980923975864240724}
   m_Layer: 0
-  m_Name: Part 8 (1)
+  m_Name: Part 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1687,7 +1733,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7980923976777718400}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7980923975864240724
 MonoBehaviour:
@@ -1716,7 +1762,7 @@ GameObject:
   - component: {fileID: 7980923975940975985}
   - component: {fileID: 7980923975940975986}
   m_Layer: 0
-  m_Name: Part 11 (1)
+  m_Name: Part 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1763,7 +1809,7 @@ GameObject:
   - component: {fileID: 7980923975959031468}
   - component: {fileID: 7980923975959031469}
   m_Layer: 0
-  m_Name: Part 16 (1)
+  m_Name: Part 16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1810,7 +1856,7 @@ GameObject:
   - component: {fileID: 7980923975994299047}
   - component: {fileID: 7980923975994299224}
   m_Layer: 0
-  m_Name: Part 9 (1)
+  m_Name: Part 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1906,7 +1952,7 @@ GameObject:
   - component: {fileID: 7980923976032849257}
   - component: {fileID: 7980923976032849258}
   m_Layer: 0
-  m_Name: Part 4 (1)
+  m_Name: Part 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1954,7 +2000,7 @@ GameObject:
   - component: {fileID: 7980923976047924978}
   - component: {fileID: 7980923976047924979}
   m_Layer: 0
-  m_Name: Part 14 (1)
+  m_Name: Part 14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1972,7 +2018,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7980923975248436528}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7980923976047924979
 MonoBehaviour:
@@ -2002,7 +2048,7 @@ GameObject:
   - component: {fileID: 7980923976145432953}
   - component: {fileID: 7980923976145432954}
   m_Layer: 0
-  m_Name: Part 2 (1)
+  m_Name: Part 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2049,7 +2095,7 @@ GameObject:
   - component: {fileID: 7980923976190646813}
   - component: {fileID: 7980923976190646814}
   m_Layer: 0
-  m_Name: Part 3 (1)
+  m_Name: Part 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2138,7 +2184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 0a00000004000000
+  speakers: 1f00000004000000
   condition: 2
   magnitude: 0
   targetEmotion: 0
@@ -2256,7 +2302,7 @@ GameObject:
   - component: {fileID: 7980923976242348226}
   - component: {fileID: 7980923976242348227}
   m_Layer: 0
-  m_Name: Part 7 (1)
+  m_Name: Part 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2304,7 +2350,7 @@ GameObject:
   - component: {fileID: 7980923976245209591}
   - component: {fileID: 7980923976245209576}
   m_Layer: 0
-  m_Name: Part 1 (1)
+  m_Name: 'Part 1 '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2398,7 +2444,7 @@ GameObject:
   - component: {fileID: 7980923976359728947}
   - component: {fileID: 7980923976359728948}
   m_Layer: 0
-  m_Name: Part 7 (1)
+  m_Name: Part 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2445,7 +2491,7 @@ GameObject:
   - component: {fileID: 7980923976426821043}
   - component: {fileID: 7980923976426821044}
   m_Layer: 0
-  m_Name: Part 7 (1)
+  m_Name: Part 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2463,7 +2509,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7980923976777718400}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7980923976426821044
 MonoBehaviour:
@@ -2539,7 +2585,7 @@ GameObject:
   - component: {fileID: 7980923976487519732}
   - component: {fileID: 7980923976487519733}
   m_Layer: 0
-  m_Name: Part 3 (1)
+  m_Name: Part 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2650,7 +2696,7 @@ GameObject:
   - component: {fileID: 7980923976558388709}
   - component: {fileID: 7980923976558388710}
   m_Layer: 0
-  m_Name: Part 4 (1)
+  m_Name: Part 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2746,7 +2792,7 @@ GameObject:
   - component: {fileID: 7980923976672700082}
   - component: {fileID: 7980923976672700083}
   m_Layer: 0
-  m_Name: Part 5 (1)
+  m_Name: Part 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2764,7 +2810,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7980923976777718400}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7980923976672700083
 MonoBehaviour:
@@ -2908,6 +2954,7 @@ Transform:
   - {fileID: 7980923976245209591}
   - {fileID: 7980923975353642682}
   - {fileID: 7980923975120897543}
+  - {fileID: 679478031785423516}
   - {fileID: 7980923975662000254}
   - {fileID: 7980923976672700082}
   - {fileID: 7980923975294048492}
@@ -2929,7 +2976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 040000000a0000000900000009000000
+  speakers: 0400000020000000090000000c000000
   condition: 2
   magnitude: 0
   targetEmotion: 0
@@ -2951,7 +2998,7 @@ GameObject:
   - component: {fileID: 7980923976795263836}
   - component: {fileID: 7980923976795263837}
   m_Layer: 0
-  m_Name: Part 8 (1)
+  m_Name: Part 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3099,7 +3146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 04000000000000000a00000001000000
+  speakers: 04000000000000002000000001000000
   condition: 2
   magnitude: 0
   targetEmotion: 0
@@ -3216,7 +3263,7 @@ GameObject:
   - component: {fileID: 7980923976895086864}
   - component: {fileID: 7980923976895086865}
   m_Layer: 0
-  m_Name: Part 13 (1)
+  m_Name: Part 13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3234,7 +3281,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7980923975248436528}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7980923976895086865
 MonoBehaviour:
