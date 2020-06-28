@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 010000000a0000000000000004000000
+  speakers: 010000002200000000000000040000001c000000
   condition: 0
   magnitude: 0
   targetEmotion: 0
@@ -139,6 +139,7 @@ Transform:
   - {fileID: 4381041335559606126}
   - {fileID: 4381041336419032350}
   - {fileID: 4381041335981336948}
+  - {fileID: 1165188211930808944}
   - {fileID: 4381041337510482906}
   - {fileID: 4381041337015071201}
   - {fileID: 4381041336247982198}
@@ -189,10 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: "We\u2019ve been out for weeks! A lot has happened. I used to be a scholar,
-    but now I think I want to be in law enforcement instead. You never know how you
-    might change!"
+  speakerId: 4
+  text: "We\u2019ve been out for weeks! A lot has happened."
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &4381041336247982201
@@ -224,7 +223,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4381041335918826402}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4381041336247982199
 MonoBehaviour:
@@ -377,7 +376,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4381041335918826402}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4381041336536238087
 MonoBehaviour:
@@ -533,7 +532,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4381041335918826402}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4381041337015071230
 MonoBehaviour:
@@ -674,7 +673,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4381041335918826402}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4381041337510482907
 MonoBehaviour:
@@ -693,5 +692,53 @@ MonoBehaviour:
     works out for you! Bye!
 
 '
+  useCustomPic: 0
+  customPic: {fileID: 0}
+--- !u!1 &8843937090700264938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1165188211930808944}
+  - component: {fileID: 8775875887444463193}
+  m_Layer: 0
+  m_Name: Part 6_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1165188211930808944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843937090700264938}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4381041335918826402}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8775875887444463193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843937090700264938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 4
+  text: I used to be a scholar, but now I think I want to be in law enforcement instead.
+    You never know how you might change!
   useCustomPic: 0
   customPic: {fileID: 0}

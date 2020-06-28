@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6501428221940135910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5071987998612094566}
+  - component: {fileID: 4993198101408151487}
+  m_Layer: 0
+  m_Name: Part 7_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5071987998612094566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6501428221940135910}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8067995893946870324}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4993198101408151487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6501428221940135910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 0
+  text: "He gave the pot to me as a joke, but I\u2019ve had it ever since. \r\n"
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &8067995892009300985
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,7 +170,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8067995893946870324}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8067995892270705248
 MonoBehaviour:
@@ -278,7 +325,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8067995893946870324}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8067995892991586012
 MonoBehaviour:
@@ -494,8 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerId: 0
   text: "Yeah, my dad gave it to me. He\u2019s got this really cool hat and when
-    I was a kid I always wanted one of those myself. He gave the pot to me as a joke,
-    but I\u2019ve had it ever since. \r\n"
+    I was a kid I always wanted one of those myself."
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &8067995893860099818
@@ -638,6 +684,7 @@ Transform:
   - {fileID: 8067995893523350991}
   - {fileID: 8067995892356969631}
   - {fileID: 8067995893726560062}
+  - {fileID: 5071987998612094566}
   - {fileID: 8067995892991586015}
   - {fileID: 8067995892270705251}
   m_Father: {fileID: 8067995893564165138}

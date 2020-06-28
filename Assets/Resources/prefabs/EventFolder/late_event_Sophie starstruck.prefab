@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 801787970085536528}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &801787969700493130
 MonoBehaviour:
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 3
+  speakerId: 4
   text: 'Oh my beak, it really is them!! Oh feathers! Terry! You really DO have a
     pot on your head!!
 
@@ -295,8 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerId: 3
   text: "I know right! Everything\u2019s been terrible ever since everybirdy went
-    confident! Vultures are acting crazy and nobirdy\u2019s happy! I really hope
-    you can talk some sense into the king!"
+    confident!"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &801787970029595417
@@ -395,6 +394,7 @@ Transform:
   - {fileID: 801787971105063673}
   - {fileID: 801787970724760617}
   - {fileID: 801787970018840313}
+  - {fileID: 8940330912035799907}
   - {fileID: 801787969700493125}
   - {fileID: 801787971501597515}
   m_Father: {fileID: 801787970111643285}
@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 02000000000000000100000009000000
+  speakers: 020000000000000001000000090000001a000000
   condition: 0
   magnitude: 0
   targetEmotion: 0
@@ -643,7 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 3
+  speakerId: 4
   text: "We\u2019ve heard so much about you guys! Everybirdy are saying that you\u2019re
     going to the king to make him change his way!"
   useCustomPic: 0
@@ -677,7 +677,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 801787970085536528}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &801787971501597512
 MonoBehaviour:
@@ -693,5 +693,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerId: 0
   text: 'How curious! I didn''t realize we had vulture supporters. '
+  useCustomPic: 0
+  customPic: {fileID: 0}
+--- !u!1 &6302753798342838834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8940330912035799907}
+  - component: {fileID: 5926864239485606527}
+  m_Layer: 0
+  m_Name: Part 8_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8940330912035799907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6302753798342838834}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 801787970085536528}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5926864239485606527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6302753798342838834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 4
+  text: "Vultures are acting crazy and nobirdy\u2019s happy! I really hope you can
+    talk some sense into the king!"
   useCustomPic: 0
   customPic: {fileID: 0}

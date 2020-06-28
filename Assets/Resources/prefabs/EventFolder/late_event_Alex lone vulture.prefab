@@ -1,5 +1,100 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4890029067435240838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4197241871494849412}
+  - component: {fileID: 2836551704432872975}
+  m_Layer: 0
+  m_Name: Part 7_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4197241871494849412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4890029067435240838}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6374784431108824467}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2836551704432872975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4890029067435240838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 3
+  text: 'I was just trying to get out. But my squad caught me and beat me up. '
+  useCustomPic: 0
+  customPic: {fileID: 0}
+--- !u!1 &6155561624053025596
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3486855169986535871}
+  - component: {fileID: 4360411718140910365}
+  m_Layer: 0
+  m_Name: Part 9_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3486855169986535871
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6155561624053025596}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6374784431108824467}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4360411718140910365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6155561624053025596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 0
+  text: "What if he\u2019s a scout? Or what if his squad is waiting to ambush us
+    right now?"
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &6374784430071178170
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,8 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerId: 3
   text: "I, uh\u2026 I tried to sneak off from my squad when they weren\u2019t looking.
-    I don\u2019t want to hurt birds and destroy their homes. I was just trying to
-    get out. But my squad caught me and beat me up. "
+    I don\u2019t want to hurt birds and destroy their homes."
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &6374784430899973800
@@ -219,7 +313,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6374784431108824467}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6374784430899973806
 MonoBehaviour:
@@ -234,8 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "Wait! He could be lying for all we know. What if he\u2019s a scout? Or what
-    if his squad is waiting to ambush us right now?"
+  text: 'Wait! He could be lying for all we know. '
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &6374784431005818431
@@ -427,8 +520,10 @@ Transform:
   - {fileID: 6374784431065062119}
   - {fileID: 6374784431200126496}
   - {fileID: 6374784430786281984}
+  - {fileID: 4197241871494849412}
   - {fileID: 6374784431480078740}
   - {fileID: 6374784430899973807}
+  - {fileID: 3486855169986535871}
   m_Father: {fileID: 6374784431837585713}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -568,7 +663,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6374784431108824467}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6374784431480078731
 MonoBehaviour:
@@ -632,7 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 04000000030000000100000009000000
+  speakers: 04000000030000000100000029000000
   condition: 0
   magnitude: 0
   targetEmotion: 0
