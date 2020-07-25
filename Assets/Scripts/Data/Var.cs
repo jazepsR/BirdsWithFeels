@@ -77,6 +77,9 @@ public static class Var {
 	public static bool isDragControls = true;
 	public static bool freezeEmotions = false;
 	public static int eventTextCharLimit = 200;
+    /// Tutorial IDs
+    public static int battlePlanningTutorialID = 11;
+    public static int levelTutorialID = 21;
 }
 
 [Serializable]
@@ -86,14 +89,12 @@ public class Settings
    public bool shownBattlePlanningTutorial = true;
    public bool shownLevelTutorial = true;
    public bool shownMapTutorial = true;
-   public bool shownMapPlanningTutorial = true;
    public Settings(bool tutorialsCompleted)
    {
         shownFirstLevelUp = tutorialsCompleted;
         shownBattlePlanningTutorial = tutorialsCompleted;
         shownLevelTutorial = tutorialsCompleted;
         shownMapTutorial = tutorialsCompleted;
-        shownMapPlanningTutorial = tutorialsCompleted;
 }
 }
 
