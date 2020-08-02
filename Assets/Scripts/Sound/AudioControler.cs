@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -22,60 +23,60 @@ public class AudioGroup
 }
 public enum audioSourceType { main,ambient,birdVoices,ui,particles, other};
 public class AudioControler : MonoBehaviour {
-	public static AudioControler Instance { get; private set; }
-	public bool inBattle = false;
-	[Header("Sound clips")]
-	public AudioMixerSnapshot defaultSnapshot;
-	public AudioGroup playerWin;
-	public AudioGroup combatLose;
-	public AudioGroup newEmotion;
-	public AudioGroup levelUp;
-	public AudioGroup enemyRun;
-	public AudioGroup considerSound;
-	public AudioGroup fightCloudSound;
-	public AudioGroup createLines;
-	public AudioGroup SolitaryAppear;
-	public AudioGroup BirdSitDown;
-	public AudioGroup SocialInfoAppear;
-	public AudioGroup SolitaryInfoAppear;
-	public AudioGroup clicks;
-	public AudioGroup fightButtonAppear;
+    public static AudioControler Instance { get; private set; }
+    public bool inBattle = false;
+    [Header("Sound clips")]
+    public AudioMixerSnapshot defaultSnapshot;
+    public AudioGroup playerWin;
+    public AudioGroup combatLose;
+    public AudioGroup newEmotion;
+    public AudioGroup levelUp;
+    public AudioGroup enemyRun;
+    public AudioGroup considerSound;
+    public AudioGroup fightCloudSound;
+    public AudioGroup createLines;
+    public AudioGroup SolitaryAppear;
+    public AudioGroup BirdSitDown;
+    public AudioGroup SocialInfoAppear;
+    public AudioGroup SolitaryInfoAppear;
+    public AudioGroup clicks;
+    public AudioGroup fightButtonAppear;
     public AudioGroup fightButtonClick;
-	public AudioGroup paperSound;
-	public AudioGroup notebookOpen;
-	public AudioGroup notebookClose;
-	public AudioGroup notebookLeft;
-	public AudioGroup notebookRight;
-	public AudioGroup rockMouseover;
-	public AudioGroup effectTileMouseover;
+    public AudioGroup paperSound;
+    public AudioGroup notebookOpen;
+    public AudioGroup notebookClose;
+    public AudioGroup notebookLeft;
+    public AudioGroup notebookRight;
+    public AudioGroup rockMouseover;
+    public AudioGroup effectTileMouseover;
     public AudioGroup tileHighlightBirdHover;
     public AudioGroup confidentParticlePostBattle;
     public AudioGroup heartParticlePostBattle;
-[Header("Graph effects")]
-	public AudioGroup smallGraphAppear;
-	public AudioGroup smallGraphDisappear;
-	public AudioGroup returnButton;
-	public AudioGroup graphHighlight;
-	public AudioGroup graphMove;
+    [Header("Graph effects")]
+    public AudioGroup smallGraphAppear;
+    public AudioGroup smallGraphDisappear;
+    public AudioGroup returnButton;
+    public AudioGroup graphHighlight;
+    public AudioGroup graphMove;
     public AudioGroup enterDangerZone;
     public AudioGroup exitDangerZone;
     public AudioGroup collectEmoSeed;
     public AudioGroup emoBarFill;
     public AudioGroup iconMove;
     public AudioGroup birdInjuredPopup;
-[Header("Map effects")]
-	public AudioGroup mapNodeClick;
-	public AudioGroup buttonSoundMap;
-	public AudioGroup restSound;
-	public AudioGroup mapPanGrab;
-	public AudioGroup mapPan;
-	public AudioGroup mapPanRelease;
-	public AudioGroup mouseOverLockedNode;
+    [Header("Map effects")]
+    public AudioGroup mapNodeClick;
+    public AudioGroup buttonSoundMap;
+    public AudioGroup restSound;
+    public AudioGroup mapPanGrab;
+    public AudioGroup mapPan;
+    public AudioGroup mapPanRelease;
+    public AudioGroup mouseOverLockedNode;
     public AudioGroup tutorialButtonClick;
     public AudioGroup mapSelectBtnClick;
     public AudioGroup startGameBtnClick;
-	[Header("UI effects")]
-	public AudioGroup hoverSounds;
+    [Header("UI effects")]
+    public AudioGroup hoverSounds;
     public AudioGroup speechBubbleAppear;
     public AudioGroup speechBubbleContinue;
     [Header("Main menu clips")]
@@ -84,69 +85,71 @@ public class AudioControler : MonoBehaviour {
     public AudioGroup mainMenuFreeSaveBtnClick;
     public AudioGroup hoverOnMultipleChoiceBtn;
     public AudioGroup StartGameBtnClick;
-    
-    [Header("Powerup effects")]
-	public AudioGroup powerTilePositive;
-	public AudioGroup powerTileNegative;
-	public AudioGroup powerTileHeart;
-	public AudioGroup powerTileCombat;
 
-	[Header("Ambient sounds")]
-	public AudioGroup AmbientSounds;
-	public AudioGroup battleTracks;
+    [Header("Powerup effects")]
+    public AudioGroup powerTilePositive;
+    public AudioGroup powerTileNegative;
+    public AudioGroup powerTileHeart;
+    public AudioGroup powerTileCombat;
+
+    [Header("Ambient sounds")]
+    public AudioGroup AmbientSounds;
+    public AudioGroup battleTracks;
     [Header("Music")]
     public AudioClip defaultThinkingMusic;
     public AudioClip bossThinkinkingMusic;
     public AudioClip levelCompleteMusic;
-	[Header("Audio sources")]
-	public AudioSource mainAudioSource;
-	public AudioSource ambientAudioSource;
-	public AudioSource battleSource;
-	public AudioSource musicSource;
-	public AudioSource UiEffects;
-	public AudioSource birdVoices;
-	public AudioSource otherEffects;
-	public AudioSource particleSounds;
-	[Header("Individual bird sounds")]
-	public BirdSound TerrySounds;
-	public BirdSound RebeccaSounds;
-	public BirdSound AlexSound;
-	public BirdSound KimSound;
-	public BirdSound SophieSound;
-	public BirdSound DefaultBirdSound;
-	[Header("Additional sounds (not planned in docment")]
-	public AudioGroup conflictWin;
-	public AudioGroup applause;
-	public AudioGroup enterLevelUiArea;
-	public AudioGroup showTooltip;
-	public AudioGroup enemyMouseover;
-	[HideInInspector]
-	public float defaultMusicVol, defaultSoundVol;
-	float pitch = 1;
+    [Header("Audio sources")]
+    public AudioSource mainAudioSource;
+    public AudioSource ambientAudioSource;
+    public AudioSource battleSource;
+    public AudioSource musicSource;
+    public AudioSource UiEffects;
+    public AudioSource birdVoices;
+    public AudioSource otherEffects;
+    public AudioSource particleSounds;
+    [Header("Individual bird sounds")]
+    public BirdSound TerrySounds;
+    public BirdSound RebeccaSounds;
+    public BirdSound AlexSound;
+    public BirdSound KimSound;
+    public BirdSound SophieSound;
+    public BirdSound DefaultBirdSound;
+    [Header("Bird event sounds")]
+    public List<EventAudio> eventCharacterAudio;
+    [Header("Additional sounds (not planned in docment")]
+    public AudioGroup conflictWin;
+    public AudioGroup applause;
+    public AudioGroup enterLevelUiArea;
+    public AudioGroup showTooltip;
+    public AudioGroup enemyMouseover;
+    [HideInInspector]
+    public float defaultMusicVol, defaultSoundVol;
+    float pitch = 1;
     public float lastSoundTickTime = 0;
 
-	// Use this for initialization
-	void Awake ()
-	{      
-		Instance = this;
-		LeanTween.delayedCall(0.2f, StartSound);
-		if (inBattle)
-		{
-			LeanTween.delayedCall(Random.Range(7, 20), AmbientControl);
-			battleSource.volume = 0.0f;
-		}
-		defaultSoundVol = PlayerPrefs.GetFloat("soundVol", 1);
-		defaultMusicVol = PlayerPrefs.GetFloat("musicVol", 1);
-		
-	}
+    // Use this for initialization
+    void Awake()
+    {
+        Instance = this;
+        LeanTween.delayedCall(0.2f, StartSound);
+        if (inBattle)
+        {
+            LeanTween.delayedCall(UnityEngine.Random.Range(7, 20), AmbientControl);
+            battleSource.volume = 0.0f;
+        }
+        defaultSoundVol = PlayerPrefs.GetFloat("soundVol", 1);
+        defaultMusicVol = PlayerPrefs.GetFloat("musicVol", 1);
+
+    }
 
     private void Start()
     {
-		if(Var.ambientSounds != null)
-		{
-			AmbientSounds = Var.ambientSounds;
-		}
-        if(Var.isBoss)
+        if (Var.ambientSounds != null)
+        {
+            AmbientSounds = Var.ambientSounds;
+        }
+        if (Var.isBoss)
         {
             musicSource.clip = bossThinkinkingMusic;
             musicSource.Play();
@@ -160,7 +163,7 @@ public class AudioControler : MonoBehaviour {
     }
     public void PlayStartGameHover()
     {
-        PlaySound(mainMenuNewGameHighlight); 
+        PlaySound(mainMenuNewGameHighlight);
     }
     public void PlayLoadGameHover()
     {
@@ -170,30 +173,57 @@ public class AudioControler : MonoBehaviour {
     {
         PlaySound(tutorialButtonClick);
     }
-    public BirdSound GetBirdSoundGroup(string charName)	
-	{
-		charName = charName.ToLower();
-		switch(charName)
-		{
-			case "terry":
-				return TerrySounds;
-			case "kim":
-				return KimSound;
-			case "rebecca":
-				return RebeccaSounds;
-			case "alex":
-			    return AlexSound;
-			case "alexander":
-			    return AlexSound;
-			case "sophie":
-				return SophieSound;
-			default:
-				return DefaultBirdSound;
+    public BirdSound GetBirdSoundGroup(string charName)
+    {
+        charName = charName.ToLower();
+        switch (charName)
+        {
+            case "terry":
+                return TerrySounds;
+            case "kim":
+                return KimSound;
+            case "rebecca":
+                return RebeccaSounds;
+            case "alex":
+                return AlexSound;
+            case "alexander":
+                return AlexSound;
+            case "sophie":
+                return SophieSound;
+            default:
+                return DefaultBirdSound;
+        }
+    }
 
-		}
+    public EventAudio GetEventAudio(EventScript.Character character)
+    {
+        foreach(EventAudio evAudio in eventCharacterAudio)
+        {
+            if (evAudio.character == character)
+            {
+                return evAudio;
+            }
+        }
+        switch (character)
+        {
+            case EventScript.Character.Terry:
+                return TerrySounds.eventAudio;
+            case EventScript.Character.Kim:
+                return KimSound.eventAudio;
+            case EventScript.Character.Rebecca:
+                return RebeccaSounds.eventAudio;
+            case EventScript.Character.Alexander:
+                return AlexSound.eventAudio;
+            case EventScript.Character.Sophie:
+                return SophieSound.eventAudio;
+            default:
+                return DefaultBirdSound.eventAudio;
+        }
+    }
 
-	}
-	private void SetAudioSnapshot()
+
+
+    private void SetAudioSnapshot()
 	{
 		if(Var.snapshot==null)
 		{
@@ -256,7 +286,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
         source.Stop();
        // LeanTween.value(gameObject, (float val) => source.volume = val, 0f, 1f, 0.3f);
         source.pitch = 1f;
-        source.clip = (eventAudio.sylables[Random.Range(0, eventAudio.sylables.Length)]);
+        source.clip = (eventAudio.sylables[UnityEngine.Random.Range(0, eventAudio.sylables.Length)]);
         /*if(eventSound.startPoints.Length != 0)
 		{
 			int number= Random.Range(0,eventSound.startPoints.Length);
@@ -280,14 +310,14 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 		AudioSource source = GetAudioSource(group.sourceType);
 
 		if (group.usePitchVariation)
-			source.pitch = Random.Range(group.minPitch, group.maxPitch);
+			source.pitch = UnityEngine.Random.Range(group.minPitch, group.maxPitch);
 		else
 			source.pitch = 1f;
 		if(group.clips.Length ==0)
 		{
 			return;
 		}
-		source.PlayOneShot(group.clips[Random.Range(0, group.clips.Length)],group.volume);
+		source.PlayOneShot(group.clips[UnityEngine.Random.Range(0, group.clips.Length)],group.volume);
 	}
 	public AudioSource GetAudioSource(audioSourceType sourceType)
 	{
@@ -311,7 +341,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	}
 	public void PlayRandomSound(AudioClip[] clips, audioSourceType sourceType)
 	{
-		PlaySound(clips[Random.Range(0, clips.Length)],sourceType);
+		PlaySound(clips[UnityEngine.Random.Range(0, clips.Length)],sourceType);
 	}
 
 	public void SetSoundVolume(float vol)
@@ -359,7 +389,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 		PlaySound(AmbientSounds);
 		if(Helpers.Instance.RandomBool())
 			PlaySound(AmbientSounds);        
-		LeanTween.delayedCall(Random.Range(7, 45), AmbientControl);
+		LeanTween.delayedCall(UnityEngine.Random.Range(7, 45), AmbientControl);
 	}
 
 

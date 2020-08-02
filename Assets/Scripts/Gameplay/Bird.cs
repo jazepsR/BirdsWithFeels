@@ -35,6 +35,7 @@ public class BirdSound
 [Serializable]
 public class EventAudio
 {
+    public EventScript.Character character;
 	public AudioClip[] sylables;
 }
 
