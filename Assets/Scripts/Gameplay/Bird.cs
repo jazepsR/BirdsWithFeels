@@ -676,7 +676,7 @@ public class Bird : MonoBehaviour
 					MapControler.Instance.charInfoAnim.SetBool("show", true);
 					MapControler.Instance.charInfoAnim.SetBool("hide", false);
                 }
-                if (!dragged)
+                if (!dragged  && birdSounds.mouseOverBird.clips.Length >0)
                    birdSounds.mouseOverBird.Play();
             }
 			foreach (SpriteRenderer sp in colorSprites)
@@ -790,13 +790,16 @@ public class Bird : MonoBehaviour
 		{
 			if (Var.Infight || data.injured || GuiContoler.Instance.speechBubbleObj.activeSelf)
 				return;
-            if (birdSounds.pickupBird.clips.Length > 0)
+            if (!inMap)
             {
-                birdSounds.pickupBird.Play();
-            }
-            else
-            {
-                AudioControler.Instance.DefaultBirdSound.birdSelect.Play();
+                if (birdSounds.pickupBird.clips.Length > 0)
+                {
+                    birdSounds.pickupBird.Play();
+                }
+                else
+                {
+                    AudioControler.Instance.DefaultBirdSound.birdSelect.Play();
+                }
             }
             if (inMap)
 			{
@@ -811,6 +814,7 @@ public class Bird : MonoBehaviour
 				{
 					mapHighlight.SetActive(true);
 					GetComponentInChildren<Animator>().SetBool("rest", false);
+                    birdSounds.birdSelect.Play();
                     MapControler.Instance.selectedBirds.Add(this);
 				}
 				MapControler.Instance.CanLoadBattle();
