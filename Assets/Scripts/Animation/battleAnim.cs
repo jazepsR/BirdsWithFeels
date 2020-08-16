@@ -35,8 +35,6 @@ public class battleAnim :MonoBehaviour {
         LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position)*2, enemySpeed).setEase(LeanTweenType.easeInBack).setOnComplete(()=>
 			enemy.GetComponentInChildren<Animator>().SetBool("walk", false)
 		); 
-		
-
 	}
 
 	IEnumerator DoBattles(float waitTime, float loseWaitTime)
@@ -96,10 +94,15 @@ public class battleAnim :MonoBehaviour {
 				{
 				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);				
 				GuiContoler.Instance.CreateBattleReport();
-				}
+                
+                }
 				foreach (Bird bird in Var.activeBirds)
 					bird.GetComponentInChildren<Animator>().SetBool("lose", false);
 			}
+            foreach(Bird enemy in Var.enemies)
+            {
+                LeanTween.cancel(enemy.gameObject);
+            }
 			if(Var.isTutorial)
 			{
 				yield return new WaitForSeconds(1.0f);
@@ -111,7 +114,6 @@ public class battleAnim :MonoBehaviour {
                 Ending.Instance.ShowEndingFirstGridText(Tutorial.Instance.CurrentPos);
             }
         }
-	   
 	}
 
 	IEnumerator ShowResult(battleData battle,float waitTime)
@@ -167,8 +169,8 @@ public class battleAnim :MonoBehaviour {
 		{
 			battle.player.battleConfBoos += Var.confLoseFight;
 			if ( !(battle.enemy.enemyType == fillEnemy.enemyType.drill && !battle.enemy.foughtInRound))
-				LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
-				 , 3f).setEaseOutQuad());
+				LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.transform.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
+				 , 2.75f).setEaseOutQuad());
             AudioControler.Instance.PlaySound(AudioControler.Instance.combatLose);
             battle.player.ChageHealth(-1);
 			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Cautious);

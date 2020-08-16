@@ -385,7 +385,7 @@ public class EventController : MonoBehaviour {
                 }
 
                 nameText.text=characterNameText;
-                StartBirdTalk(Helpers.Instance.GetBirdFromEnum(currentEvent.speakers[currentEvent.parts[currentText].speakerId]));
+                StartBirdTalk(currentEvent.speakers[currentEvent.parts[currentText].speakerId]);
              
 
             }
@@ -398,13 +398,13 @@ public class EventController : MonoBehaviour {
        
 
     }
-    private void StartBirdTalk(Bird birdToTalk)
+    private void StartBirdTalk(EventScript.Character birdToTalk)
     {
         try
         {
             try
             {
-                AudioControler.Instance.PlaySound(AudioControler.Instance.GetBirdSoundGroup(birdToTalk.charName).eventAudio);
+                AudioControler.Instance.PlaySound(AudioControler.Instance.GetEventAudio(birdToTalk));
             }
             catch
             {
@@ -455,7 +455,7 @@ public class EventController : MonoBehaviour {
 			{
 				currentBird.AddRoundBonuses(false);
 				currentBird.showText();
-                StartBirdTalk(currentBird);
+                StartBirdTalk(Helpers.Instance.GetCharEnum(currentBird));
 
             }
 			catch { }

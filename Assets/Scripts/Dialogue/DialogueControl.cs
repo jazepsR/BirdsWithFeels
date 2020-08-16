@@ -11,7 +11,7 @@ public class DialogueControl : MonoBehaviour {
     public Transform portraitPoint;
     public static DialogueControl Instance { get; private set; }
     public List<Transform> areaDialogues;
-    List<EventScript.Character> acceptableNpcs = new List<EventScript.Character>() {EventScript.Character.the_Vulture_King};//, EventScript.Character.player };
+    List<EventScript.Character> acceptableNpcs = new List<EventScript.Character>() {EventScript.Character.The_Vulture_King};//, EventScript.Character.player };
 	public Transform anyAreaDialogues;
 	[Range(0f, 1f)]
 	public float dialogueFrequency = 0.2f;
@@ -223,7 +223,7 @@ public class DialogueControl : MonoBehaviour {
 			{
 				switch (dialogue.speakers[partData.speakerID])
 				{
-					case EventScript.Character.the_Vulture_King:
+					case EventScript.Character.The_Vulture_King:
 						GuiContoler.Instance.boss.SetActive(true);
 						GuiContoler.Instance.ShowSpeechBubble(GuiContoler.Instance.kingMouth.transform, partData.text,kingAudioGroup,false);
 						break;
