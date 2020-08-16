@@ -190,9 +190,12 @@ public class MapControler : MonoBehaviour {
 	public void HideSelectionMenu()
 	{
 		canMove = true;
-        //	LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-   //     SelectionMenuAnimator.SetBool("active", false);
-   //     SelectionMenuBlurAnimator.SetBool("active", false);
+
+        	LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
+        LeanTween.value(gameObject, (float alpha) => MapControler.Instance.SelectionMenu.GetComponent<CanvasGroup>().alpha = alpha, 1, 0, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
+
+        // SelectionMenuAnimator.SetBool("active", false);
+        // SelectionMenuBlurAnimator.SetBool("active", false);
 
         MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
         

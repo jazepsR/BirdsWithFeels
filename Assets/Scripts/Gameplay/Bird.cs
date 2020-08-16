@@ -759,8 +759,10 @@ public class Bird : MonoBehaviour
                     {
                         child.sortingLayerName = charName.Substring(0, 1).ToUpper() + charName.Substring(1);
                     }
-
-                    indicator.ResetLayer();
+                    if (indicator)
+                    {
+                        indicator.ResetLayer();
+                    }
                     GetComponentInChildren<Animator>().SetBool("lift", false);
 			if (Var.isTutorial && !GuiContoler.Instance.inMap)
 			{

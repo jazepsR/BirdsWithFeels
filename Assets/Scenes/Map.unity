@@ -4617,6 +4617,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
+      character: 0
       sylables: []
   indicator: {fileID: 0}
 --- !u!1 &165253486
@@ -6051,7 +6052,7 @@ PrefabInstance:
     - target: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -214.99997
+      value: -215
       objectReference: {fileID: 0}
     - target: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
         type: 3}
@@ -9670,6 +9671,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
+      character: 0
       sylables: []
   indicator: {fileID: 0}
 --- !u!114 &372313899 stripped
@@ -20625,7 +20627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -219.99997, y: -134.99997}
+  m_AnchoredPosition: {x: -220, y: -135}
   m_SizeDelta: {x: 460, y: 411.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &803136198
@@ -21137,6 +21139,8 @@ GameObject:
   - component: {fileID: 827790624}
   - component: {fileID: 827790625}
   - component: {fileID: 827790626}
+  - component: {fileID: 827790628}
+  - component: {fileID: 827790627}
   m_Layer: 5
   m_Name: Map selection part
   m_TagString: Untagged
@@ -21241,6 +21245,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827790621}
   m_CullTransparentMesh: 0
+--- !u!114 &827790627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827790621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!225 &827790628
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827790621}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &829950460
 GameObject:
   m_ObjectHideFlags: 0
@@ -24937,6 +24970,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
+      character: 0
       sylables: []
   indicator: {fileID: 0}
 --- !u!1 &977331984
@@ -25214,6 +25248,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
+      character: 0
       sylables: []
   indicator: {fileID: 0}
 --- !u!1 &996819510
@@ -32937,6 +32972,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
+      character: 0
       sylables: []
   indicator: {fileID: 0}
 --- !u!1 &1365462083 stripped
@@ -33268,7 +33304,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1.6000061, y: 452}
-  m_SizeDelta: {x: 649.85, y: 69.677414}
+  m_SizeDelta: {x: 649.85, y: 71.25249}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1375557926
 MonoBehaviour:
@@ -44306,7 +44342,7 @@ RectTransform:
   m_GameObject: {fileID: 1859521366}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.0002450943}
-  m_LocalScale: {x: 1, y: 2.4703119, z: 1}
+  m_LocalScale: {x: 3, y: 7.5, z: 1}
   m_Children: []
   m_Father: {fileID: 827790622}
   m_RootOrder: 0
@@ -45402,7 +45438,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -790476637
+  m_SortingLayerID: -1987811989
   m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!1 &1922688376
