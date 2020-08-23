@@ -144,19 +144,23 @@ public class AudioControler : MonoBehaviour {
     }
 
     private void Start()
-    {
+    {        
         if (Var.ambientSounds != null)
         {
             AmbientSounds = Var.ambientSounds;
         }
-        if (Var.isBoss)
+        if (mainMenuScript.Instance == null)
         {
-            musicSource.clip = bossThinkinkingMusic;
-            musicSource.Play();
-        }
-        else
-        {
-            musicSource.clip = defaultThinkingMusic;
+            if (Var.isBoss)
+            {
+                musicSource.clip = bossThinkinkingMusic;
+                musicSource.Play();
+            }
+            else
+            {
+                musicSource.clip = defaultThinkingMusic;
+                musicSource.Play();
+            }
         }
         SetSoundVol();
 
