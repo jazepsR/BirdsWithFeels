@@ -11,8 +11,16 @@ public class MapTutorial : MonoBehaviour {
 
     private bool shouldShowMapTutPopup = false;
     public GameObject mapTutPopup;
-	// Use this for initialization
-	void Start () {
+    public static MapTutorial instance;
+    // Use this for initialization
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+
+    void Start () {
 		if (!Var.gameSettings.shownMapTutorial)
 		{
 			tutorialHighlight.gameObject.SetActive(true);

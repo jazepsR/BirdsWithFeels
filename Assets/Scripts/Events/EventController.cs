@@ -493,8 +493,14 @@ public class EventController : MonoBehaviour {
 		ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3, currentEvent.options[ID].applyToAll);
 		if(currentBird!= null)
 			currentBird.SetEmotion();
-        GameLogic.Instance.UpdateFeedback();
-        GuiContoler.Instance.GraphBlocker.SetActive(false);
+        if (GameLogic.Instance)
+        {
+            GameLogic.Instance.UpdateFeedback();
+        }
+        if (GuiContoler.Instance.GraphBlocker)
+        {
+            GuiContoler.Instance.GraphBlocker.SetActive(false);
+        }
 		return ConsequenceText;
 
 	}

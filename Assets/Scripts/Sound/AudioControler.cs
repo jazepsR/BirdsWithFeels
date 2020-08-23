@@ -276,7 +276,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	}
 	public void PlaySound(EventAudio eventSound)
 	{
-        Debug.LogError(eventSound.sylables[0].name);
+       // Debug.LogError(eventSound.sylables[0].name);
 		if(eventSound.sylables.Length == 0)
 		{
 			return;

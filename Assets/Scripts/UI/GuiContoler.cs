@@ -438,7 +438,10 @@ public class GuiContoler : MonoBehaviour {
         {
             activeSpeechText = SpeechBubbleText;
             activeSpeechBubble = speechBubble;
-            speechBubble2.SetActive(false);
+            if (speechBubble2)
+            {
+                speechBubble2.SetActive(false);
+            }
         }
         else
         {

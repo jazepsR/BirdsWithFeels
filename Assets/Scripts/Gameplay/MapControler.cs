@@ -189,6 +189,11 @@ public class MapControler : MonoBehaviour {
 	}
 	public void HideSelectionMenu()
 	{
+        if(MapTutorial.instance && MapTutorial.instance.mapTutPopup.activeSelf)
+        {
+            return;
+        }
+
 		canMove = true;
 
         	LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
