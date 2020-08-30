@@ -34,7 +34,7 @@ public class Graph : MonoBehaviour {
 	}
 	public void CheckEmotionLock()
 	{
-		if(isSmall && lockImage!= null && Var.freezeEmotions && Var.gameSettings.shownLevelTutorial)
+		if(isSmall && lockImage!= null && Var.freezeEmotions)
 		{
 			lockImage.gameObject.SetActive(true);
 		}
