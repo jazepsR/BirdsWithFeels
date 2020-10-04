@@ -364,7 +364,7 @@ public class EventController : MonoBehaviour {
 				portraitFill.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird_color").GetComponent<Image>().sprite;
 				portraitFill.color = colors[currentEvent.parts[currentText].speakerId];
 				portrait.sprite = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird").GetComponent<Image>().sprite;
-
+				//Debug.LogError("portriat name: " + portrait.sprite.name);
 
                 //SEB ADD ON - take the local scale of relevant portrait 
                 portrait.rectTransform.localScale = portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird").localScale;

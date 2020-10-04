@@ -97,6 +97,7 @@ public class AudioControler : MonoBehaviour {
     public AudioGroup battleTracks;
     [Header("Music")]
     public AudioClip defaultThinkingMusic;
+    public AudioClip TrialThinkingMusic;
     public AudioClip bossThinkinkingMusic;
     public AudioClip levelCompleteMusic;
     [Header("Audio sources")]
@@ -151,17 +152,23 @@ public class AudioControler : MonoBehaviour {
         }
         if (mainMenuScript.Instance == null)
         {
-            if (Var.isBoss)
+            if (inBattle)
             {
-                musicSource.clip = bossThinkinkingMusic;
-                musicSource.Play();
-            }
-            else
-            {
-                musicSource.clip = defaultThinkingMusic;
-                musicSource.Play();
+                if (Var.isBoss)
+                {
+                    musicSource.clip = bossThinkinkingMusic;
+                }
+                else if (Var.freezeEmotions)
+				{
+                    musicSource.clip = TrialThinkingMusic;
+				}
+                else
+                {
+                    musicSource.clip = defaultThinkingMusic;
+                }
             }
         }
+        musicSource.Play();
         SetSoundVol();
 
     }
@@ -382,9 +389,10 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
     public void setBattleVolume(float vol)
 	{
+        Debug.LogError("setting battle vol: " + vol);
 		if (vol != 0.0f)
 			PlaySound(battleTracks);
-		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol, 1f);
+		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol, 0.5f);
 	}
 	void AmbientControl()
 	{

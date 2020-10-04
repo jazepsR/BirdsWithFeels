@@ -77,8 +77,8 @@ public class battleAnim :MonoBehaviour {
 					bird.SetEmotion();
 				}
 			}
-			yield return new WaitForSeconds(2.0f);
 			AudioControler.Instance.setBattleVolume(0f);
+			yield return new WaitForSeconds(2.0f);
 			if (Var.isBoss)
 			{
 				GuiContoler.Instance.Reset();
