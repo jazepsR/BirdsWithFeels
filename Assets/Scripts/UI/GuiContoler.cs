@@ -1014,6 +1014,7 @@ public class GuiContoler : MonoBehaviour {
 		GameLogic.Instance.FightButton.interactable = false;
 		AudioControler.Instance.ClickSound();
 		AudioControler.Instance.setBattleVolume(0.85f);
+        AudioControler.Instance.battleSource.Play();
 		AudioControler.Instance.PlaySound(AudioControler.Instance.clicks);
 		feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
 		foreach (feedBack fb in feedBackObj)

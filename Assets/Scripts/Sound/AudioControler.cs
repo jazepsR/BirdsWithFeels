@@ -278,6 +278,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
 	public void PlaySound(AudioClip clip, audioSourceType sourceType)
 	{
+        Debug.LogError("Playing sound: " + clip.name);
 		GetAudioSource(sourceType).pitch = 1f;
 		GetAudioSource(sourceType).PlayOneShot(clip);
 	}
@@ -389,7 +390,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
     public void setBattleVolume(float vol)
 	{
-        Debug.LogError("setting battle vol: " + vol);
+        //Debug.LogError("setting battle vol: " + vol);
 		if (vol != 0.0f)
 			PlaySound(battleTracks);
 		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol, 0.5f);
