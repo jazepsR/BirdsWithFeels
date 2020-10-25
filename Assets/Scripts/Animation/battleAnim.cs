@@ -144,6 +144,7 @@ public class battleAnim :MonoBehaviour {
 			yield return new WaitForSeconds(waitTime - enemySpeed-2.3f);
 		}else
 		{
+			AudioControler.Instance.PlaySound(battle.player.birdSounds.birdWinSound);
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("win", false);
 		}
 		ShowBattleResult(battle);

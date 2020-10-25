@@ -811,7 +811,7 @@ MonoBehaviour:
     maxPitch: 0
   graphMove:
     clips:
-    - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
+    - {fileID: 8300000, guid: 9b630b2e9b105134a8e6e8a09362a045, type: 3}
     usePitchVariation: 0
     sourceType: 3
     volume: 1
@@ -1044,11 +1044,10 @@ MonoBehaviour:
     maxPitch: 1
   AmbientSounds:
     clips:
-    - {fileID: 8300000, guid: e06b7f081e81ab941aa865daf2093498, type: 3}
     - {fileID: 8300000, guid: cb7261a6b91aef2488ccab1aaa8d2c02, type: 3}
     usePitchVariation: 0
     sourceType: 1
-    volume: 1
+    volume: 0.33
     minPitch: 1
     maxPitch: 1
   battleTracks:
@@ -1061,6 +1060,7 @@ MonoBehaviour:
     maxPitch: 1
   defaultThinkingMusic: {fileID: 8300000, guid: 125d74aafa86b2149a9e6a4ded527331,
     type: 3}
+  TrialThinkingMusic: {fileID: 0}
   bossThinkinkingMusic: {fileID: 8300000, guid: 87f678775278a4dd681146c7b6af6613,
     type: 3}
   levelCompleteMusic: {fileID: 8300000, guid: 0561723bf9dcf454781beebf9ab552ac, type: 3}
@@ -1148,6 +1148,14 @@ MonoBehaviour:
       maxPitch: 1
     birdSelectSound:
       clips: []
+      usePitchVariation: 0
+      sourceType: 0
+      volume: 1
+      minPitch: 1
+      maxPitch: 1
+    birdWinSound:
+      clips:
+      - {fileID: 8300000, guid: dcd72e5dccc198d42a08da08e79e8ea2, type: 3}
       usePitchVariation: 0
       sourceType: 0
       volume: 1
@@ -1253,6 +1261,14 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
+    birdWinSound:
+      clips:
+      - {fileID: 8300000, guid: 8abf475ae9f9811408834c0a64f0eb1f, type: 3}
+      usePitchVariation: 0
+      sourceType: 0
+      volume: 1
+      minPitch: 1
+      maxPitch: 1
     eventAudio:
       character: 1
       sylables:
@@ -1340,6 +1356,14 @@ MonoBehaviour:
       maxPitch: 1
     birdSelectSound:
       clips: []
+      usePitchVariation: 0
+      sourceType: 0
+      volume: 1
+      minPitch: 1
+      maxPitch: 1
+    birdWinSound:
+      clips:
+      - {fileID: 8300000, guid: eb583fc1ea3184a4396b55965cd596c6, type: 3}
       usePitchVariation: 0
       sourceType: 0
       volume: 1
@@ -1439,6 +1463,14 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
+    birdWinSound:
+      clips:
+      - {fileID: 8300000, guid: 0e1d681c01bc7cb46a24ae4ab171cb09, type: 3}
+      usePitchVariation: 0
+      sourceType: 0
+      volume: 1
+      minPitch: 1
+      maxPitch: 1
     eventAudio:
       character: 3
       sylables:
@@ -1530,6 +1562,14 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
+    birdWinSound:
+      clips:
+      - {fileID: 8300000, guid: 54d6aa1e7b8c8a0418a132cb2f0ba345, type: 3}
+      usePitchVariation: 0
+      sourceType: 0
+      volume: 1
+      minPitch: 1
+      maxPitch: 1
     eventAudio:
       character: 2
       sylables:
@@ -1615,6 +1655,14 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
+    birdWinSound:
+      clips:
+      - {fileID: 8300000, guid: dcd72e5dccc198d42a08da08e79e8ea2, type: 3}
+      usePitchVariation: 1
+      sourceType: 0
+      volume: 1
+      minPitch: 1.1
+      maxPitch: 1.29
     eventAudio:
       character: 3
       sylables:
@@ -2291,7 +2339,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.202
   m_Pitch: 1
   Loop: 0
   Mute: 0
