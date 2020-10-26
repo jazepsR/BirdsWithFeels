@@ -18,7 +18,9 @@ public class BirdSound
 	public AudioGroup dropBird;
 	public AudioGroup birdDialogueTalk;
     public AudioGroup birdSelectSound;
-    public EventAudio eventAudio;
+	public AudioGroup birdWinSound;
+	public EventAudio eventAudio;
+	
 
 	public AudioGroup GetTalkGroup(Var.Em emotion)
 	{

@@ -256,7 +256,7 @@ public class AudioControler : MonoBehaviour {
 		if(ambientAudioSource)
 			ambientAudioSource.volume = defaultSoundVol;
 		if(battleSource)
-			battleSource.volume = defaultSoundVol;
+			battleSource.volume = defaultMusicVol;
 		if(musicSource)
 			musicSource.volume = defaultMusicVol;
         if(UiEffects)
@@ -390,19 +390,18 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
     public void setBattleVolume(float vol)
 	{
+        
         //Debug.LogError("setting battle vol: " + vol);
 		if (vol != 0.0f)
 			PlaySound(battleTracks);
-		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol, 0.5f);
+		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol*defaultMusicVol, 0.5f);
 	}
 	void AmbientControl()
 	{
 		if (!inBattle || ambientAudioSource== null)
 			return;        
-		PlaySound(AmbientSounds);
-		if(Helpers.Instance.RandomBool())
-			PlaySound(AmbientSounds);        
-		LeanTween.delayedCall(UnityEngine.Random.Range(7, 45), AmbientControl);
+		PlaySound(AmbientSounds);     
+		LeanTween.delayedCall(UnityEngine.Random.Range(20, 45), AmbientControl);
 	}
 
 

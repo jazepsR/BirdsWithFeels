@@ -14,6 +14,8 @@ public class GraphPortraitScript : MonoBehaviour {
 	bool inDangerZone = false;
 	float factor = 16f;
 	Graph parent;
+	float delayBetweenTicks = 0.2f;
+	float lastTickTime = 0;
 	void Starter () {
 		try
 		{
@@ -129,6 +131,11 @@ public class GraphPortraitScript : MonoBehaviour {
 		{
 			transform.localPosition = new Vector3(pos.x, pos.y, 0);
 			lr.SetPosition(1, (new Vector3(transform.position.x, transform.position.y, 0)));
+			if(lastTickTime + delayBetweenTicks < Time.timeSinceLevelLoad)
+			{
+				lastTickTime = Time.timeSinceLevelLoad;
+				AudioControler.Instance.PlaySound(AudioControler.Instance.graphMove);
+			}
 		}
 	   
 	}
