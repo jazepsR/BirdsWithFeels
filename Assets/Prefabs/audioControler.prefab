@@ -742,7 +742,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: ce84f2fc0bb828648b567d7372c97fdd, type: 3}
     usePitchVariation: 0
     sourceType: 1
-    volume: 0.36
+    volume: 0.6
     minPitch: 1
     maxPitch: 1
   effectTileMouseover:
@@ -782,7 +782,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 2be166a183cbc5e438c5c7be5c397db8, type: 3}
     usePitchVariation: 1
     sourceType: 3
-    volume: 0.27
+    volume: 0
     minPitch: 0.98
     maxPitch: 1.09
   smallGraphDisappear:
@@ -790,7 +790,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 4412d9fd8694b12459e2c0205f180aae, type: 3}
     usePitchVariation: 1
     sourceType: 3
-    volume: 0.38
+    volume: 0
     minPitch: 0.9
     maxPitch: 1
   returnButton:
@@ -811,27 +811,27 @@ MonoBehaviour:
     maxPitch: 0
   graphMove:
     clips:
-    - {fileID: 8300000, guid: 9b630b2e9b105134a8e6e8a09362a045, type: 3}
-    usePitchVariation: 0
+    - {fileID: 8300000, guid: 703501a032cd0bf47b402314e0481969, type: 3}
+    usePitchVariation: 1
     sourceType: 3
-    volume: 1
-    minPitch: 0
-    maxPitch: 0
+    volume: 0.7
+    minPitch: 0.75
+    maxPitch: 1
   enterDangerZone:
     clips:
-    - {fileID: 8300000, guid: c19f83f9221fc2546acbf26659dd0bda, type: 3}
-    usePitchVariation: 0
+    - {fileID: 8300000, guid: ad4aefd5309274848bb4ec5f94a1e192, type: 3}
+    usePitchVariation: 1
     sourceType: 0
     volume: 1
-    minPitch: 1
+    minPitch: 0.8
     maxPitch: 1
   exitDangerZone:
     clips:
-    - {fileID: 8300000, guid: 81361cbdf9c36a942912c7127b951119, type: 3}
+    - {fileID: 8300000, guid: bf79974bb8ed475458d14e9520dbb7f7, type: 3}
     usePitchVariation: 0
     sourceType: 0
     volume: 0.62
-    minPitch: 1
+    minPitch: 0.8
     maxPitch: 1
   collectEmoSeed:
     clips:
@@ -850,8 +850,7 @@ MonoBehaviour:
     minPitch: 1
     maxPitch: 1
   iconMove:
-    clips:
-    - {fileID: 8300000, guid: 6c083bcda9bce9b49a479d0980bf8b98, type: 3}
+    clips: []
     usePitchVariation: 0
     sourceType: 0
     volume: 0.74
@@ -1013,18 +1012,18 @@ MonoBehaviour:
     maxPitch: 1
   powerTilePositive:
     clips:
-    - {fileID: 8300000, guid: 1b2cdad6d1d7fbe4296613b93202b379, type: 3}
+    - {fileID: 8300000, guid: a2cf66588e730104aa64bd8f68a4146f, type: 3}
     usePitchVariation: 0
     sourceType: 4
-    volume: 0.52
+    volume: 0.8
     minPitch: 1
     maxPitch: 1
   powerTileNegative:
     clips:
-    - {fileID: 8300000, guid: 7aac2007fd3f2c6409e7a25c74cafeb0, type: 3}
+    - {fileID: 8300000, guid: 90b681af473248c4b941985bd92350a0, type: 3}
     usePitchVariation: 0
     sourceType: 4
-    volume: 0.52
+    volume: 0.7
     minPitch: 1
     maxPitch: 1
   powerTileHeart:
@@ -1084,15 +1083,16 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 4ebf07960e30db44e89c1ffd83e09dfc, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 1
+      volume: 0.85
       minPitch: 1
       maxPitch: 1
     mouseOverBird:
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 1
-      minPitch: 1
+      volume: 0.3
+      minPitch: 0.9
       maxPitch: 1
     considerSound:
       clips: []
@@ -1114,7 +1114,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: e6254ad05ae3d5746beb3b945a2141bd, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.3
+      volume: 0.2
       minPitch: 1
       maxPitch: 1
     dropBird:
@@ -1156,7 +1156,7 @@ MonoBehaviour:
       maxPitch: 1
     birdWinSound:
       clips:
-      - {fileID: 8300000, guid: dcd72e5dccc198d42a08da08e79e8ea2, type: 3}
+      - {fileID: 0}
       usePitchVariation: 0
       sourceType: 0
       volume: 1
@@ -1197,15 +1197,16 @@ MonoBehaviour:
       - {fileID: 8300000, guid: dbcb4931e9d67254ab2e6401ce0b33d7, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 1
+      volume: 1.25
       minPitch: 1
       maxPitch: 1
     mouseOverBird:
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 1
-      minPitch: 1
+      volume: 0.3
+      minPitch: 0.9
       maxPitch: 1
     considerSound:
       clips: []
@@ -1227,7 +1228,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: e6254ad05ae3d5746beb3b945a2141bd, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.3
+      volume: 0.2
       minPitch: 1
       maxPitch: 1
     dropBird:
@@ -1298,15 +1299,16 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     mouseOverBird:
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 1
-      minPitch: 1
+      volume: 0.3
+      minPitch: 0.9
       maxPitch: 1
     considerSound:
       clips: []
-      usePitchVariation: 0
+      usePitchVariation: 1
       sourceType: 0
       volume: 1
       minPitch: 1
@@ -1324,7 +1326,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: e6254ad05ae3d5746beb3b945a2141bd, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.3
+      volume: 0.2
       minPitch: 1
       maxPitch: 1
     dropBird:
@@ -1404,11 +1406,12 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     mouseOverBird:
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 1
-      minPitch: 1
+      volume: 0.3
+      minPitch: 0.9
       maxPitch: 1
     considerSound:
       clips: []
@@ -1430,7 +1433,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: e6254ad05ae3d5746beb3b945a2141bd, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.3
+      volume: 0.2
       minPitch: 1
       maxPitch: 1
     dropBird:
@@ -1505,11 +1508,12 @@ MonoBehaviour:
       minPitch: 0.83
       maxPitch: 0.93
     mouseOverBird:
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 1
-      minPitch: 1
+      volume: 0.3
+      minPitch: 0.9
       maxPitch: 1
     considerSound:
       clips: []
@@ -1531,7 +1535,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: e6254ad05ae3d5746beb3b945a2141bd, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.3
+      volume: 0.2
       minPitch: 1
       maxPitch: 1
     dropBird:
@@ -1591,7 +1595,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 0b3173a9d808fb14da04a1ebf6b64d5c, type: 3}
       usePitchVariation: 0
       sourceType: 2
-      volume: 1
+      volume: 0
       minPitch: 1
       maxPitch: 1
     mouseOverBird:
@@ -1646,7 +1650,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 49fa23e33616d02479ccf53a26e74602, type: 3}
       usePitchVariation: 0
       sourceType: 2
-      volume: 1
+      volume: 0
       minPitch: 1
       maxPitch: 1
     birdSelectSound:
@@ -1661,7 +1665,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: dcd72e5dccc198d42a08da08e79e8ea2, type: 3}
       usePitchVariation: 1
       sourceType: 0
-      volume: 1
+      volume: 0
       minPitch: 1.1
       maxPitch: 1.29
     eventAudio:
@@ -1897,7 +1901,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: dad52891dbba6c24d8b8c998d0b157ab, type: 3}
     usePitchVariation: 0
     sourceType: 0
-    volume: 0.38
+    volume: 0
     minPitch: 1
     maxPitch: 1
   enemyMouseover:
