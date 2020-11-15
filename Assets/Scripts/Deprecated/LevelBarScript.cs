@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LevelBarScript : MonoBehaviour {
 	public Image levelBar;
+	public GameObject heartIcon;
+	public GameObject powerIcon;
 	int currentPoints;
 	[HideInInspector]
 	public int maxPoints;
@@ -25,7 +27,7 @@ public class LevelBarScript : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.O) && Random.value >0.4f)
+		if(Input.GetKeyDown(KeyCode.J))
 		{
 			AddPoints(Var.activeBirds[0]);
 		}
@@ -41,14 +43,19 @@ public class LevelBarScript : MonoBehaviour {
 		if (maxPoints == currentPoints)
 		{
 			Helpers.ApplyLevel(type, bird);
-
 		}
 		SetText(bird);
 	}
-	public void SetText(Bird bird)
+	public void SetText(Bird bird, LevelDataScriptable data = null)
 	{
-		string color = Helpers.Instance.GetHexColor(Helpers.Instance.GetLevelEmotion(type));
-		tooltipScript.tooltipText =color +Helpers.Instance.GetLevelEmotion(type).ToString() + " level</color>\n" + currentPoints + 
+		if (data != null)
+		{
+			heartIcon.SetActive(data.givesHeart);
+			powerIcon.SetActive(data.givesPower);
+			heartIcon.GetComponent<ShowTooltip>().tooltipText = bird.charName + " will gain more health!";
+			powerIcon.GetComponent<ShowTooltip>().tooltipText = bird.charName + " will be stronger in confrontations with vultures";
+		}
+		tooltipScript.tooltipText = currentPoints + 
 			" / " + maxPoints + " seeds collected\nCollect all seeds to become stronger!";
 	}
 }

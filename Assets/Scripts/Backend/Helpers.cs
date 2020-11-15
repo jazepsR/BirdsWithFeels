@@ -39,6 +39,8 @@ public class Helpers : MonoBehaviour {
 	public GameObject seedFar;
 	[HideInInspector]
 	public List<LevelBits> levelBits;
+	//[HideInInspector]
+	public List<LevelDataScriptable> levels;
 	public GameObject selectionEffect;
 	public GameObject selectionEffectGround;
 	public GameObject highlightGroundEffect;
@@ -71,8 +73,11 @@ public class Helpers : MonoBehaviour {
 			levelBits.AddRange(Resources.LoadAll<LevelBits>("ScriptableOjbects/Confident"));
 			levelBits.AddRange(Resources.LoadAll<LevelBits>("ScriptableOjbects/Social"));
 			levelBits.AddRange(Resources.LoadAll<LevelBits>("ScriptableOjbects/Solitary"));
-
-
+		}
+		if(levels.Count == 0)
+		{
+			levels = new List<LevelDataScriptable>();
+			levels.AddRange(Resources.LoadAll<LevelDataScriptable>("ScriptableOjbects/Levels"));
 		}
 		Application.targetFrameRate = 60;
 	}

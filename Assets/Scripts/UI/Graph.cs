@@ -15,10 +15,7 @@ public class Graph : MonoBehaviour {
 	public List<GameObject> portraits;
 	public float factor =2f;
 	public bool isSmall;
-	public LevelBarScript socialBar;
-	public LevelBarScript solitaryBar;
-	public LevelBarScript confidenceBar;
-	public LevelBarScript cautiousBar;
+	public LevelBarScript levelBar;
 	public Image dangerZoneHighlight;
 	public Image lockImage;
 	// Use this for initialization
@@ -130,7 +127,49 @@ public class Graph : MonoBehaviour {
 			SetupLevelBar(Var.Em.Solitary, Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.data.levelList), bird);
 
 		}
-		foreach (LevelBits bit in Helpers.Instance.levelBits)
+		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
+			bird.data.level - 1)];
+
+		foreach (LevelBits bit in level.levelBits)
+		{			
+			if (!bird.data.recievedSeeds.Contains(bit.name))
+			{
+
+				GameObject toInstantiate = Helpers.Instance.seed;
+				//if (bird.emotion == bit.emotion)
+					//toInstantiate = Helpers.Instance.seed;
+				GameObject obj = Instantiate(toInstantiate, graphParent.transform);
+				obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-factor * bit.social, factor * bit.conf, 0);
+				obj.name = bit.name;
+				obj.transform.localScale = Vector3.one * factor / 16f;
+				obj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetStatInfo(bit.conf, bit.social);
+				if (Vector2.Distance(new Vector2(bird.data.friendliness, bird.data.confidence), new Vector2(bit.social, bit.conf)) <= 3
+					&& !isSmall && afterBattle)
+				{
+					Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
+					LeanTween.delayedCall(1.7f, () => levelBar.AddPoints(bird));
+					obj.GetComponent<Image>().color = Color.yellow;
+					bird.data.recievedSeeds.Add(bit.name);
+
+					LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, 0.7f).setEaseOutBack().setOnComplete(() =>
+					{
+						LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
+						setEaseOutBack().setOnComplete(() => Destroy(obj));
+						Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
+					}
+					));
+					GuiContoler.Instance.canChangeGraph = false;
+					LeanTween.delayedCall(2.1f, () => GuiContoler.Instance.canChangeGraph = true);
+				}
+				//obj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bit.emotion);
+
+			}
+			else if (!isSmall)
+			{
+				levelBar.AddPoints(bird);
+			}			
+		}
+		/*foreach (LevelBits bit in Helpers.Instance.levelBits)
 		{
 			if (bird.data.bannedLevels != bit.emotion && Helpers.Instance.ListContainsEmotion(bit.emotion, bird.data.levelList) == bit.isSecond)
 			{
@@ -171,39 +210,16 @@ public class Graph : MonoBehaviour {
 					GetLevelBar(bit.emotion).AddPoints(bird);
 				}
 			}
-		}
+		}*/
 	}
-
-	LevelBarScript GetLevelBar(Var.Em emotion)
-	{
-		switch(emotion)
-		{
-			case Var.Em.Cautious:
-				return cautiousBar;				
-			case Var.Em.Confident:
-				return confidenceBar;
-			case Var.Em.Social:
-				return socialBar;
-			case Var.Em.Solitary:
-				return solitaryBar;
-			default:
-				return null;
-
-
-		}
-	}
+		
 	void SetupLevelBar(Var.Em emotion, bool isSecond,Bird bird)
 	{
-		GetLevelBar(emotion).ClearPoints();
-		int count = 0;
-		GetLevelBar(emotion).isSecond = isSecond;
-		foreach (LevelBits levelBit in Helpers.Instance.levelBits)
-		{
-			if (levelBit.emotion == emotion && levelBit.isSecond == isSecond)
-				count++;
-		}
-		GetLevelBar(emotion).maxPoints = count;
-		GetLevelBar(emotion).SetText(bird);
+		levelBar.ClearPoints();
+		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
+			 bird.data.level - 1)];
+		levelBar.maxPoints = level.levelBits.Count;
+		levelBar.SetText(bird,level);
 	}
 
 }
