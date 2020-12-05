@@ -13,6 +13,7 @@ public class LevelBarScript : MonoBehaviour {
 	public Levels.type type;
 	public bool isSecond;
 	ShowTooltip tooltipScript;
+	public GameObject[] seedIndicators;
 	int id = -1;
 	// Use this for initialization
 	void Start () {
@@ -36,13 +37,13 @@ public class LevelBarScript : MonoBehaviour {
 	{
 		currentPoints++;
 		Vector3 temp= levelBar.rectTransform.localScale;
-		temp.y = currentPoints /(float) maxPoints;
 		levelBar.rectTransform.localScale = temp;
+		temp.y = currentPoints /(float) maxPoints;
 		id =LeanTween.value(gameObject, (float val) => levelBar.rectTransform.localScale = new Vector3(temp.x, val, temp.z), (currentPoints - 1) / ((float)maxPoints), temp.y, 0.5f).setEaseOutQuad().setOnComplete(()=>
 		AudioControler.Instance.PlaySound(AudioControler.Instance.levelUp)).id;
 		if (maxPoints == currentPoints)
 		{
-			Helpers.ApplyLevel(type, bird);
+			Helpers.ApplyLevel(bird);
 		}
 		SetText(bird);
 	}
@@ -57,5 +58,9 @@ public class LevelBarScript : MonoBehaviour {
 		}
 		tooltipScript.tooltipText = currentPoints + 
 			" / " + maxPoints + " seeds collected\nCollect all seeds to become stronger!";
+		for (int i = 0; i < seedIndicators.Length; i++)
+		{
+			seedIndicators[i].SetActive(i < maxPoints);
+		}
 	}
 }

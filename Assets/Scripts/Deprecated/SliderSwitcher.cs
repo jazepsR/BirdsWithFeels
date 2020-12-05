@@ -108,7 +108,7 @@ public class SliderSwitcher : MonoBehaviour
                 setState(EmotionBarScript.state.available);
                 bool hasPos1 = false;
                 bool hasNeg1 = false;
-                if (isConf)
+                /*if (isConf)
                 {
                     hasPos1 = Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.data.levelList);
                     hasNeg1 = Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.data.levelList);
@@ -118,7 +118,7 @@ public class SliderSwitcher : MonoBehaviour
                 {
                     hasPos1 = Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.data.levelList);
                     hasNeg1 = Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.data.levelList);
-                }
+                }*/
 
                 if (emotionStr >= 7)
                 {

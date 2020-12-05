@@ -206,10 +206,15 @@ public class Helpers : MonoBehaviour {
 		}
 	}
 
-	public static void ApplyLevel(Levels.type type, Bird bird)
+	public static void ApplyLevel(Bird bird)
 	{
+		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
+			 bird.data.level - 1)];
 
-		switch(type)
+		Levels.ApplyLevel(level, bird);
+
+		/*
+		switch (type)
 		{
 			case Levels.type.Brave1:
 				Levels.ApplyLevel(new LevelData(Levels.type.Brave1, Var.Em.Confident, Var.lvlSprites[1]), "Brave 1",bird);
@@ -237,7 +242,7 @@ public class Helpers : MonoBehaviour {
 				break;
 			default: break;
 
-		}
+		}*/
 
 
 	}
@@ -777,34 +782,34 @@ public class Helpers : MonoBehaviour {
 		}
 
 	}
-	public string GetDeathText(Levels.type type, string name)
+	public string GetDeathText( string name)
 	{
-		
+		int randInt = UnityEngine.Random.Range(0, 8);
 		string deathTxt = "";
-		switch (type)
+		switch (randInt)
 		{
-			case Levels.type.Brave1:
+			case 0:
 				deathTxt = "Despite their bravery, the enemies were too much for <name>. <name> hopes they will be strong enough to make it without him. ";
 				break;
-			case Levels.type.Brave2:
+			case 1:
 				deathTxt = "<name> was sure nothing could hurt them. Unfortunately, <name> realized this error too late... ";
 				break;
-			case Levels.type.Friend1:
+			case 2:
 				deathTxt = "<name> tired to help the team, but was not able to escape the danger. Who will take care of them now? ";
 				break;
-			case Levels.type.Friend2:
+			case 3:
 				deathTxt = "<name> was so close... If they had just made it back to base quicker, <name> would have made it all right.";
 				break;
-			case Levels.type.Lonely1:
+			case 4:
 				deathTxt = "<name> kept to themselves during the past few weeks. Maybe tht was the wrong strategy?";
 				break;
-			case Levels.type.Lonely2:
+			case 5:
 				deathTxt = "This is why <name> didn't want to rely on the other birds! Things like this often lead to injury";
 				break;
-			case Levels.type.Scared1:
+			case 6:
 				deathTxt = "<name> wasn't cut out for fighting. It turned out their clever tricks could'nt protect them.";
 				break;
-			case Levels.type.Scared2:
+			case 7:
 				deathTxt = "For all their attempts do avoid fighting, violence eventually found <name>. ";
 				break;
 			default:
@@ -893,7 +898,8 @@ public class Helpers : MonoBehaviour {
 
 	public bool ListContainsLevel(Levels.type level, List<LevelData> list)
 	{
-		if (list != null)
+		return false;
+		/*if (list != null)
 		{
 			foreach (LevelData data in list)
 			{
@@ -904,7 +910,7 @@ public class Helpers : MonoBehaviour {
 		}else
 		{
 			return false;
-		}
+		}*/
 	}
 	private void Update()
 	{

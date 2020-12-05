@@ -43,7 +43,7 @@ public class Levels : MonoBehaviour {
 		}
 	}
 
-	public void ApplyLevelOnDrop(Bird bird, List<LevelData> Levels)
+	public void ApplyLevelOnDrop(Bird bird)
 	{
 
 		if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
@@ -62,7 +62,7 @@ public class Levels : MonoBehaviour {
                 Destroy(myBird.cautiousParticleObj);
 		}
         return;
-		if (myBird.inMap || Var.isTutorial)
+		/*if (myBird.inMap || Var.isTutorial)
 			return;
 		//if (GameLogic.Instance.CheckIfResting(myBird) && myBird.x >= 0)
 		//Rest.SetActive(true);
@@ -156,7 +156,7 @@ public class Levels : MonoBehaviour {
 						 GameLogic.Instance.UpdateFeedback();
 
 					 }
-					 break;*/
+					 break;
 				case type.Kim:
 					if (myBird.x == -1)
 						break;
@@ -216,15 +216,16 @@ public class Levels : MonoBehaviour {
 					break;
 			}
 		}
+		*/
 	}
 
-	public void ApplyLevelOnPickup(Bird bird, List<LevelData> Levels)
+	public void ApplyLevelOnPickup(Bird bird, List<LevelDataScriptable> Levels)
 	{
 		if (myBird.inMap || Var.isTutorial)
 			return;
         return;
 		//Rest.SetActive(false);
-		foreach (LevelData data in Levels)
+		/*foreach (LevelData data in Levels)
 		{
 			type level = data.type;
 			switch (level)
@@ -318,7 +319,7 @@ public class Levels : MonoBehaviour {
 						
 						GameLogic.Instance.UpdateFeedback();                       
 					
-					break;*/
+					break;
 				case type.Sophie:
 					if (myBird.x == -1|| !TovaActivated)
 						break;
@@ -332,18 +333,18 @@ public class Levels : MonoBehaviour {
 				default:
 					break;
 			}
-		}
+		}*/
 
 
 
 	}
 
-	public void OnfightEndLevel(Bird bird, List<LevelData> Levels)
+	public void OnfightEndLevel(Bird bird, List<LevelDataScriptable> Levels)
 	{
 		lastSwapPos = new Vector2(-2, -2);
         return;
 		//Rest.SetActive(false);
-		foreach (LevelData data in Levels)
+		/*foreach (LevelDataScriptable data in Levels)
 		{
 			type level = data.type;
 			List<Bird> adjacent = null;
@@ -393,7 +394,7 @@ public class Levels : MonoBehaviour {
 				default:
 					break;
 			}
-		}
+		}*/
 	}
 
 	public List<LayoutButton> GetRow()
@@ -535,18 +536,12 @@ public class Levels : MonoBehaviour {
 
 
 	//Level triggers
-	public static void ApplyLevel(LevelData data, string levelName , Bird bird)
+	public static void ApplyLevel(LevelDataScriptable data , Bird bird)
 	{
-		if (data.emotion == bird.data.bannedLevels)
-			return;
-		if (!Helpers.Instance.ListContainsLevel(data.type, bird.data.levelList))
-		{
 			//GuiContoler.Instance.ShowMessage(Helpers.Instance.GetLevelUpText(myBird.charName,data.type));
 			bird.AddLevel(data);
 			levelPopupScript.Instance.Setup(bird, bird.data.lastLevel);
 			AudioControler.Instance.PlaySound(AudioControler.Instance.applause);
-			Debug.Log(bird.charName + " Reached level " + levelName);
-		}
 	}
 
 	/*public string CheckBrave1(bool tryingToApply = true)

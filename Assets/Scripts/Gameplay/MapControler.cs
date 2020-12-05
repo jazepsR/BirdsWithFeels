@@ -95,7 +95,7 @@ public class MapControler : MonoBehaviour {
 			}
 			CanLoadBattle();
 		}
-		foreach(Bird bird in Var.activeBirds)
+		/*foreach(Bird bird in Var.activeBirds)
 		{
 			if(Helpers.Instance.ListContainsLevel(Levels.type.Friend2, bird.data.levelList) &&!Var.fled)
 			{
@@ -103,7 +103,7 @@ public class MapControler : MonoBehaviour {
 				canHeal = true;
 				title.text = bird.charName + " can heal one of your birds!";
 			}
-		}
+		}*/
 		SaveLoad.Save();
 		if (Var.currentWeek<3)
 			Var.shouldDoMapEvent = false;

@@ -56,8 +56,8 @@ public class battleAnim :MonoBehaviour {
 		bool canReroll = false;
 		foreach (Bird bird in Var.activeBirds)
 		{
-			if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.data.levelList) && bird.data.CoolDownLeft == 0 && !bird.foughtInRound)
-				canReroll = true;
+			//if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.data.levelList) && bird.data.CoolDownLeft == 0 && !bird.foughtInRound)
+			//	canReroll = true;
 			
 		}
 		if (canReroll)

@@ -70,7 +70,7 @@ public class DebugMenu : MonoBehaviour {
 	{
 		try
 		{
-			Helpers.ApplyLevel((Levels.type)level, Var.selectedBird.GetComponent<Bird>());
+			Helpers.ApplyLevel(Var.selectedBird.GetComponent<Bird>());
 		}
 		catch
 		{ }

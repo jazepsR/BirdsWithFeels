@@ -85,22 +85,22 @@ public class LevelArea : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 	public void SetAnimator(Bird bird, bool isFinal)
 	{
 		int exitement = 1;
-		if (Helpers.Instance.ListContainsLevel(level, bird.data.levelList))
+		/*if (Helpers.Instance.ListContainsLevel(level, bird.data.levelList))
 		{
 			exitement = 0;
-		}
+		}*/
 
-		if (bird.data.bannedLevels == emotion)
-			exitement = 0;
+		//if (bird.data.bannedLevels == emotion)
+		//	exitement = 0;
 
 		float emotionRequirement = 7;
-		if (level.ToString().Contains("2"))
+		/*if (level.ToString().Contains("2"))
 		{
 			emotionRequirement = 10;
 			if (!Helpers.Instance.ListContainsEmotion(emotion, bird.data.levelList))
 				exitement = 0;
 
-		}
+		}*/
 		if (Var.isTutorial || isFinal || !Var.gameSettings.shownLevelTutorial)
 			exitement = 0;
 		if (bird.emotion == emotion && Helpers.Instance.GetEmotionValue(bird, emotion) >= emotionRequirement && exitement != 0)

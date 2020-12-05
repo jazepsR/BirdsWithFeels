@@ -74,7 +74,7 @@ public class ProgressGUI : MonoBehaviour {
         {
             if (bird.data.levelList.Count > index)
             {
-                element.FillLevel(bird.data.levelList[index]);
+                //element.FillLevel(bird.data.levelList[index]);
                 element.gameObject.SetActive(true);
             }
             else

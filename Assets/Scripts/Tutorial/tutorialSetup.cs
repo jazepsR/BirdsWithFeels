@@ -55,11 +55,11 @@ public class tutorialSetup : MonoBehaviour {
 		//AddLevel(alex, startingLVL3);
 		LeanTween.delayedCall(0.1f, terry.showText);
 	}
-	void AddLevel(Bird bird, Levels.type lvl)
+	/*void AddLevel(Bird bird, Levels.type lvl)
 	{
 		Sprite icon = Helpers.Instance.GetLVLSprite(lvl);
 		bird.AddLevel(new LevelData(lvl, Var.Em.Neutral, icon));
-	}
+	}*/
 	// Update is called once per frame
 	void Update () {
 		

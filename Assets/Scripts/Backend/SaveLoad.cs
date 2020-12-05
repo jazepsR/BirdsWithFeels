@@ -146,10 +146,9 @@ public class BirdData
 	public int maxHealth=3;
 	public bool injured= false;
 	public Var.Em preferredEmotion= Var.Em.Cautious;
-	public Var.Em bannedLevels= Var.Em.finish;
 	public List<string> recievedSeeds = new List<string>();
-	public List<LevelData> levelList = new List<LevelData>();
-	public LevelData lastLevel = null;
+	public List<LevelDataScriptable> levelList = new List<LevelDataScriptable>();
+	public LevelDataScriptable lastLevel = null;
 	public int level=1;
 	public string birdAbility;
 	public int consecutiveFightsWon =0;

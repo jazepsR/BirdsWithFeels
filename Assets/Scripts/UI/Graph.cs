@@ -63,9 +63,9 @@ public class Graph : MonoBehaviour {
 			catch { }
 		}
 		else
-			tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portrait, true, bird);
-		if (!isSmall)
-		{		
+		{
+			//Debug.LogError("PIECE OF SHIT");
+			tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portraitTiny, true, bird);
 			GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();
 			Vector3 secondPos = new Vector3(-bird.data.friendliness, bird.data.confidence, 0);
 			Var.Em emotion = bird.emotion;
@@ -99,7 +99,10 @@ public class Graph : MonoBehaviour {
 			else
 			{
 				//heartt.transform.Find("BirdName").GetComponent<Text>().text = bird.charName;
-				heartt.transform.Find("bg").Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
+				heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
+				ShowTooltip info = heartt.gameObject.AddComponent<ShowTooltip>();
+				info.tooltipText = "<b>" + Helpers.Instance.GetStatInfo(y, x) + "</b>";
+				//heartt.transform.Find("bg").Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.prevEmotion);
 			}
 			portraits.Add(heartt);
 			Canvas dummy = heartt.AddComponent<Canvas>();
@@ -111,23 +114,26 @@ public class Graph : MonoBehaviour {
 		if(isSmall)
 			heartt.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 		else
-			heartt.transform.localScale = new Vector3(0.45f, 0.45f, 0.45f);
+			heartt.transform.localScale = new Vector3(1f, 1f, 1f);
 		heartt.transform.localPosition = new Vector3(-x*factor, y*factor, 0);
 		return heartt;     
 	}
 	void CreateLevelSeeds(Bird bird,bool afterBattle)
 	{
-		float factor =8f;
-		if(!isSmall)
+		float factor = isSmall ? 8 : 16;
+		if (!isSmall)
 		{
-			factor = 16;
-			SetupLevelBar(Var.Em.Cautious, Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.data.levelList),bird);
-			SetupLevelBar(Var.Em.Confident, Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.data.levelList), bird);
-			SetupLevelBar(Var.Em.Social, Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.data.levelList), bird);
-			SetupLevelBar(Var.Em.Solitary, Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.data.levelList), bird);
-
+			SetupLevelBar(bird);
 		}
-		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
+			/*if(!isSmall)
+			{
+				factor = 16;
+				SetupLevelBar(Var.Em.Cautious, Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.data.levelList),bird);
+				SetupLevelBar(Var.Em.Confident, Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.data.levelList), bird);
+				SetupLevelBar(Var.Em.Social, Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.data.levelList), bird);
+				SetupLevelBar(Var.Em.Solitary, Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.data.levelList), bird);
+			}*/
+			LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
 			bird.data.level - 1)];
 
 		foreach (LevelBits bit in level.levelBits)
@@ -213,7 +219,7 @@ public class Graph : MonoBehaviour {
 		}*/
 	}
 		
-	void SetupLevelBar(Var.Em emotion, bool isSecond,Bird bird)
+	void SetupLevelBar(Bird bird)
 	{
 		levelBar.ClearPoints();
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,

@@ -215,7 +215,7 @@ public class Bird : MonoBehaviour
 	   
 			if (data.levelList.Count == 0 && !Var.isTutorial)
 			{
-				data.levelList = new List<LevelData>();
+				data.levelList = new List<LevelDataScriptable>();
 				/*Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);     
 				if(startingLVL != Levels.type.None)          
 					AddLevel(new LevelData(startingLVL, Var.Em.Neutral,icon));*/
@@ -381,7 +381,7 @@ public class Bird : MonoBehaviour
 
 	public void SetCoolDownRing(bool active)
 	{
-		if (CooldownRing != null)
+		/*if (CooldownRing != null)
 			if (Helpers.Instance.ListContainsLevel(Levels.type.Brave1, data.levelList))
 			{
 				CooldownRing.color = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
@@ -398,30 +398,16 @@ public class Bird : MonoBehaviour
 					CooldownRing.gameObject.SetActive(false);
 				}
 				
-			}
+			}*/
 	}
-	public void AddLevel(LevelData levelData)
-	{
-		if (levelData.emotion != Var.Em.Neutral)
-		{
-			hasNewLevel = true;            
-			Helpers.Instance.EmitEmotionParticles(transform, Var.Em.finish);
-			Helpers.Instance.EmitEmotionParticles(transform, levelData.emotion, false);
-		}
-		data.lastLevel = levelData;
-		List<Var.Em> currentEmotions = new List<Var.Em>();
-		foreach (LevelData lvlData in data.levelList)
-		{
-			if (!currentEmotions.Contains(lvlData.emotion))
-				currentEmotions.Add(lvlData.emotion);
+	public void AddLevel(LevelDataScriptable levelData)
+	{		
+		hasNewLevel = true;            
+		Helpers.Instance.EmitEmotionParticles(transform, Var.Em.finish);
+		Helpers.Instance.EmitEmotionParticles(transform, emotion, false);
 
-		}
-		if (levelData.emotion != Var.Em.Neutral)
-		{
-			if (!currentEmotions.Contains(levelData.emotion))
-			{				
-				GainedLVLHealth = true;
-			}
+
+		data.lastLevel = levelData;		
 			
 			data.levelRollBonus++;
 			//Reset Emotions
@@ -461,7 +447,6 @@ public class Bird : MonoBehaviour
 					break;
 			}*/
 			ResetBonuses();
-		}
 		data.levelList.Add(levelData);
 		data.level = data.levelList.Count+1;
 		levelUpText = null;
@@ -610,8 +595,8 @@ public class Bird : MonoBehaviour
 		try
 		{
 			levelControler.ApplyLevelOnPickup(this, data.levelList);
-			if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, data.levelList))
-				levelControler.Halo.SetActive(false);
+			/*if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, data.levelList))
+				levelControler.Halo.SetActive(false);*/
 			showText();
 		}
 		catch
@@ -779,14 +764,14 @@ public class Bird : MonoBehaviour
 		}
 		if (Input.GetMouseButtonUp(2))
 		{
-			if (!inMap && Helpers.Instance.ListContainsLevel(Levels.type.Scared2, data.levelList))
+			/*if (!inMap && Helpers.Instance.ListContainsLevel(Levels.type.Scared2, data.levelList))
 			{
 				bush.SetActive(!bush.activeSelf);
 				isHiding = bush.activeSelf;
 				GameLogic.Instance.CanWeFight();
 				GameLogic.Instance.UpdateFeedback();
 
-			}
+			}*/
 		}
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -877,7 +862,7 @@ public class Bird : MonoBehaviour
 							if (bird.charName != charName)
 							{
 								bird.levelControler.ApplyLevelOnPickup(bird, bird.data.levelList);
-								bird.levelControler.ApplyLevelOnDrop(bird, bird.data.levelList);
+								bird.levelControler.ApplyLevelOnDrop(bird);//, bird.data.levelList);
 							}
 						}
 					}
@@ -913,7 +898,7 @@ public class Bird : MonoBehaviour
 					if (bird.charName != charName)
 					{
 						bird.levelControler.ApplyLevelOnPickup(bird, bird.data.levelList);
-						bird.levelControler.ApplyLevelOnDrop(bird, bird.data.levelList);
+						bird.levelControler.ApplyLevelOnDrop(bird);//, bird.data.levelList);
 					}
 				}
 			}
@@ -977,7 +962,7 @@ public class Bird : MonoBehaviour
 	void UpdateFeedback()
 	{
 		fighting = false;
-		if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, data.levelList) )
+		/*if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, data.levelList) )
 		{
 			if (GameLogic.Instance.CheckIfResting(this)&&!dragged)
 			{
@@ -992,7 +977,7 @@ public class Bird : MonoBehaviour
 					Destroy(cautiousParticleObj);
 
 			}
-		}
+		}*/
 
         if (indicator)
         {
@@ -1043,38 +1028,6 @@ public class Bird : MonoBehaviour
 					Destroy(healObj, 1.5f);
 				}
 			}
-			else
-			{
-				if (Helpers.Instance.ListContainsLevel(Levels.type.Brave2, data.levelList) && (emotion == Var.Em.Confident || emotion == Var.Em.SuperConfident))
-				{
-					levelConfBoos -= 2;
-					GameObject shield = Resources.Load("shieldEffect") as GameObject;
-					Instantiate(shield, transform);
-
-				}
-				else
-				{
-					try
-					{
-						List<Bird> birds = Helpers.Instance.GetAdjacentBirds(this);
-						if (birds != null && birds.Count > 0)
-						{
-							foreach (Bird bird in birds)
-							{
-								if (Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.data.levelList) && bird.data.CoolDownLeft == 0)
-								{
-									bird.data.CoolDownLeft = bird.data.CoolDownLength;
-									change = 0;
-									GameObject shield = Resources.Load("shieldEffect") as GameObject;
-									Instantiate(shield, transform);
-								}
-							}
-						}
-					}
-					catch { }
-				}
-			}
-
 			roundHealthChange += change;
 			Debug.Log(charName + " health change " + change);
 			if (GuiContoler.Instance.selectedBird == this)
@@ -1357,7 +1310,7 @@ public class Bird : MonoBehaviour
 			Var.birdInfoFeeling.text = emotion.ToString();
 			Var.birdInfoFeeling.color = Helpers.Instance.GetEmotionColor(emotion);
 			if (data.lastLevel != null)
-				Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, data.lastLevel.title);
+				Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, data.lastLevel.birdTitle);
 			else
 				Var.birdInfoHeading.text = charName;          
 			GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
@@ -1552,13 +1505,13 @@ public class Bird : MonoBehaviour
             showText();
 			try
 			{
-				levelControler.ApplyLevelOnDrop(this, data.levelList);
+				levelControler.ApplyLevelOnDrop(this);
 				foreach (Bird bird in FillPlayer.Instance.playerBirds)
 				{
 					if (bird.charName != charName)
 					{
 						bird.levelControler.ApplyLevelOnPickup(bird, bird.data.levelList);
-						bird.levelControler.ApplyLevelOnDrop(bird, bird.data.levelList);
+						bird.levelControler.ApplyLevelOnDrop(bird);
 					}
 				}
 				foreach (Bird bird in FillPlayer.Instance.playerBirds)

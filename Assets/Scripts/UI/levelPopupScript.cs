@@ -23,7 +23,8 @@ public class levelPopupScript : MonoBehaviour {
 	Sprite heart;
 	Sprite sword;
 	Bird activeBird;
-	LevelData data;
+	LevelDataScriptable data;
+	bool healthGiven = false;
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -32,19 +33,20 @@ public class levelPopupScript : MonoBehaviour {
 		//Setup(FillPlayer.Instance.playerBirds[1], new LevelData(Levels.type.Brave1, Var.Em.Confident, Var.lvlSprites[2]));
 	}
 	
-	public void Setup(Bird bird, LevelData data)
+	public void Setup(Bird bird, LevelDataScriptable data)
 	{
+		healthGiven = false;
 		this.data = data;
 		activeBird = bird;
 		firstPart.SetActive(true);
 		secondPart.SetActive(false);
 		thirdPart.SetActive(false);
 		string name = activeBird.charName;
-		title.text = "Character developement!";
+		title.text = data.screenTitle;
 		LevelPopup.SetActive(true);
-		skillIcon.sprite = Helpers.Instance.GetLVLSprite(data.type);
+		skillIcon.sprite = data.levelUpImage;
 		//First part
-		//if (data.emotion == Var.Em.Scared || data.emotion == Var.Em.Lonely)
+		if (data.givesPower)
 		{
 			firstImage.sprite = sword;
 			firstText.text = name + " gained +10% combat strength!";
@@ -52,13 +54,20 @@ public class levelPopupScript : MonoBehaviour {
 
 		//second part
 		secondTextList = new List<string>();
-		secondTextList.AddRange(Helpers.Instance.GetLevelUpText(name, data.type).Split('&'));
+		secondTextList.AddRange(Helpers.Instance.ApplyTitle(activeBird, data.firstLevelUpText).Split('&'));
 		secondText.text = secondTextList[0];
-		secondTextList.RemoveAt(0);   
-		secondImage.sprite = Helpers.Instance.GetSkillPicture(data.type);
+		secondTextList.RemoveAt(0);
+		if (data.levelUpImage2 == null)
+		{
+			secondImage.sprite = data.levelUpImage;
+        }
+        else
+        {
+			secondImage.sprite = data.levelUpImage2;
+		}
 		// Third part
-		thirdText.text = Helpers.Instance.GetLVLInfoText(data.type);
-		thirdImage.sprite = Helpers.Instance.GetSkillPicture(data.type);
+		thirdText.text = data.secondLevelUpText;
+		//thirdImage.sprite = Helpers.Instance.GetSkillPicture(data.type);
 
 	}
 	public void FirstBtn()
@@ -78,14 +87,15 @@ public class levelPopupScript : MonoBehaviour {
 	}
 	public void SecondBtn()
 	{
-		if (activeBird.GainedLVLHealth)
+		if (data.givesHeart && !healthGiven)
 		{
 			activeBird.data.maxHealth++;
 			activeBird.data.health++;
 			ProgressGUI.Instance.PortraitClick(activeBird);
 			firstImage.sprite = heart;
-			firstText.text = "First level in a new emotion!\nGained +1 health!";
+			firstText.text = "Gained +1 health!";
 			activeBird.GainedLVLHealth = false;
+			healthGiven = true;
 		}
 		else
 		{
@@ -122,9 +132,9 @@ public class levelPopupScript : MonoBehaviour {
 			Var.gameSettings.shownFirstLevelUp = true;
 		}else
 		{
-			string[] texts = Helpers.Instance.GetLevelUpDialogs(data.type, Helpers.Instance.GetCharEnum(activeBird)).Split('&');
-			foreach (string text in texts)
-				GuiContoler.Instance.ShowSpeechBubble(Tutorial.Instance.portraitPoint, text,activeBird.birdSounds.GetTalkGroup(activeBird.emotion));
+			//string[] texts = Helpers.Instance.GetLevelUpDialogs(data.type, Helpers.Instance.GetCharEnum(activeBird)).Split('&');
+			//foreach (string text in texts)
+			//	GuiContoler.Instance.ShowSpeechBubble(Tutorial.Instance.portraitPoint, text,activeBird.birdSounds.GetTalkGroup(activeBird.emotion));
 		}
 	}
 	// Update is called once per frame

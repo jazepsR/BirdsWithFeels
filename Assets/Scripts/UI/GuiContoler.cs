@@ -609,11 +609,11 @@ public class GuiContoler : MonoBehaviour {
             bird.target = bird.home;
             bird.transform.position = bird.home;
             bird.data.health = bird.prevRoundHealth;
-            if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.data.levelList) && bird.data.CoolDownLeft == 0 && !bird.foughtInRound)
+          /*  if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.data.levelList) && bird.data.CoolDownLeft == 0 && !bird.foughtInRound)
             {
                 bird.data.CoolDownLeft = bird.data.CoolDownLength;
                 bird.CooldownRing.fillAmount = 0;
-            }
+            }*/
         }
         for (int i = 0; i < Var.activeBirds.Count; i++)
         {

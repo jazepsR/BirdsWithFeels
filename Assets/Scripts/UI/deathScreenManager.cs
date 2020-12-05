@@ -14,7 +14,7 @@ public class deathScreenManager : MonoBehaviour {
     {        
         DeathMenu.SetActive(true);
         heading.text = bird.charName + " is injured!";
-        description.text = Helpers.Instance.GetDeathText(bird.data.lastLevel.type, bird.charName);
+        description.text = Helpers.Instance.GetDeathText(bird.charName);
         print("showed death menu!");
         foreach (Transform child in Graph.Instance.graphArea.transform)
         {
