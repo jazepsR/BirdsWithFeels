@@ -875,7 +875,7 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 56528123bdc3c044f8913cf8d197c354, type: 3}
     usePitchVariation: 0
     sourceType: 3
-    volume: 1
+    volume: 0.8
     minPitch: 0.98
     maxPitch: 1.03
   buttonSoundMap:
@@ -883,12 +883,12 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 7958445757cf4b442ab59acb2040a855, type: 3}
     usePitchVariation: 1
     sourceType: 3
-    volume: 0.7
+    volume: 0.5
     minPitch: 1
     maxPitch: 1
   restSound:
     clips:
-    - {fileID: 8300000, guid: eeafa447320a2b54d8901cb68a45d5e4, type: 3}
+    - {fileID: 8300000, guid: 0092bb73bb86cc249b3382cc163cca0e, type: 3}
     usePitchVariation: 0
     sourceType: 3
     volume: 0.72
@@ -1089,7 +1089,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 4ebf07960e30db44e89c1ffd83e09dfc, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.85
+      volume: 0.72
       minPitch: 1
       maxPitch: 1
     mouseOverBird:
@@ -1097,12 +1097,11 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.3
+      volume: 0.35
       minPitch: 0.9
       maxPitch: 1
     considerSound:
-      clips:
-      - {fileID: 8300000, guid: b6a23db086feeb348b9a1edfb1cebb44, type: 3}
+      clips: []
       usePitchVariation: 0
       sourceType: 0
       volume: 1
@@ -1203,7 +1202,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: dbcb4931e9d67254ab2e6401ce0b33d7, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 1.25
+      volume: 1.3
       minPitch: 1
       maxPitch: 1
     mouseOverBird:
@@ -1211,7 +1210,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.3
+      volume: 0.35
       minPitch: 0.9
       maxPitch: 1
     considerSound:
@@ -1308,7 +1307,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.3
+      volume: 0.35
       minPitch: 0.9
       maxPitch: 1
     considerSound:
@@ -1410,10 +1409,11 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     mouseOverBird:
-      clips: []
+      clips:
+      - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.3
+      volume: 0.35
       minPitch: 0.9
       maxPitch: 1
     considerSound:
@@ -1515,7 +1515,7 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 3666ae52e04c9dc49b1820621514cb12, type: 3}
       usePitchVariation: 0
       sourceType: 0
-      volume: 0.3
+      volume: 0.35
       minPitch: 0.9
       maxPitch: 1
     considerSound:
@@ -1736,23 +1736,13 @@ MonoBehaviour:
     - {fileID: 8300000, guid: b6a23db086feeb348b9a1edfb1cebb44, type: 3}
   - character: 24
     sylables:
-    - {fileID: 8300000, guid: e83e22f08474b85408b8b9d7d7a059e8, type: 3}
-    - {fileID: 8300000, guid: 3e62db46bf40e9d4988c1408d4471314, type: 3}
-    - {fileID: 8300000, guid: 0eac34d67056a574ab0b81be173c273f, type: 3}
-    - {fileID: 8300000, guid: 568b4cde64970db469e33bf1fb19af66, type: 3}
-    - {fileID: 8300000, guid: 473432ae885ed5d479d634345b995ee5, type: 3}
-    - {fileID: 8300000, guid: 2ea99ad2a6454ad458cc5f64e0aa7bf4, type: 3}
-    - {fileID: 8300000, guid: d5556319a5b19fe41b8a56dd1641e11b, type: 3}
-    - {fileID: 8300000, guid: 347c155e2d62eb34aaf5720bde658d23, type: 3}
-    - {fileID: 8300000, guid: dd5373664bcd97442b9bddf5aedb6a82, type: 3}
-    - {fileID: 8300000, guid: e85b595a976048d488418644483b4f84, type: 3}
-    - {fileID: 8300000, guid: 063659b637fe6f748928b0e0d4898925, type: 3}
-    - {fileID: 8300000, guid: 255472058ec8dda45b21f4aabea4bee9, type: 3}
-    - {fileID: 8300000, guid: 5fd8f150576832643bc366637d91a57b, type: 3}
-    - {fileID: 8300000, guid: 1b7cee4642b6ac64b9f4d038a68c1ade, type: 3}
-    - {fileID: 8300000, guid: e81ce52bfe5c0d645a285980688c018e, type: 3}
-    - {fileID: 8300000, guid: f41a6407c315a0d4698e503e14eb8bbb, type: 3}
-    - {fileID: 8300000, guid: e08fb9e643d6e4b4cb196b5e87fc27bb, type: 3}
+    - {fileID: 8300000, guid: bb424373f07477e4dba53e4a9a8027c0, type: 3}
+    - {fileID: 8300000, guid: 7fe52649ff061e141af4f9e67c373de6, type: 3}
+    - {fileID: 8300000, guid: e2493e9ad20809644ab16b5ce01e964f, type: 3}
+    - {fileID: 8300000, guid: 2e3ec35b1dcaecb4d947acd9bcd8a21b, type: 3}
+    - {fileID: 8300000, guid: 7e9744ccf110d884d8916134cfb1dbf6, type: 3}
+    - {fileID: 8300000, guid: 7afb96a6213d65543a42a5e9b9f24466, type: 3}
+    - {fileID: 8300000, guid: 209c4814983aeed409c05d3afc775b5b, type: 3}
   - character: 35
     sylables:
     - {fileID: 8300000, guid: 3378cab93f57f9949af99669ec7db02a, type: 3}
