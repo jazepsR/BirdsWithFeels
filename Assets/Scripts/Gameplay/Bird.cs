@@ -289,10 +289,28 @@ public class Bird : MonoBehaviour
 			FileStream file = File.Open(path, FileMode.Open);
 			data = (BirdData)bf.Deserialize(file);
 			file.Close();
+			levelList = new List<LevelDataScriptable>();
+			levelList = new List<LevelDataScriptable>();
+			if (data.level>1)
+            {
+				if(Helpers.Instance.levels== null)
+                {
+					Helpers.Instance.LoadLevelData();
+				}
+				for(int i = 0;i<data.level;i++)
+                {
+					levelList.Add(Helpers.Instance.levels[i]);
+					if(i+1 == data.level)
+                    {
+						data.lastLevel = Helpers.Instance.levels[i];
+                    }
+                }
+            }
 		}
 		portraitOrder = Helpers.GetPortraitNumber(charName);
 		if (!isEnemy)
 			birdPrefabName = Helpers.GetBirdArtName(charName);
+
 	}
 	public void SaveBirdData()
 	{

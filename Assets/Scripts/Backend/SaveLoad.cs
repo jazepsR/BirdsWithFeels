@@ -23,8 +23,9 @@ public class SaveLoad : MonoBehaviour
 				foreach (Bird bird in FillPlayer.Instance.playerBirds)
 					bird.SaveBirdData();
 			}
-			catch
+			catch(Exception ex)
 			{
+				Debug.LogError("BIG ERROR:" + ex.Message);
 				foreach (Bird bird in Var.activeBirds)
 					bird.SaveBirdData();
 
@@ -148,6 +149,7 @@ public class BirdData
 	public bool injured= false;
 	public Var.Em preferredEmotion= Var.Em.Cautious;
 	public List<string> recievedSeeds = new List<string>();
+	[System.NonSerialized]
 	public LevelDataScriptable lastLevel = null;
 	public int level=1;
 	public string birdAbility;

@@ -64,9 +64,14 @@ public class Helpers : MonoBehaviour {
 		cautiousIcon = Resources.Load<Sprite>("Icons/emotional_icons_3");
 		randomIcon = Resources.Load<Sprite>("Icons/emotional_icons_4");*/
 
-
+		LoadLevelData();
 		Instance = this;
-		if (levelBits.Count ==0)
+		Application.targetFrameRate = 60;
+	}
+
+	public void LoadLevelData()
+    {
+		if (levelBits.Count == 0)
 		{
 			levelBits = new List<LevelBits>();
 			levelBits.AddRange(Resources.LoadAll<LevelBits>("ScriptableOjbects/Cautious"));
@@ -74,12 +79,11 @@ public class Helpers : MonoBehaviour {
 			levelBits.AddRange(Resources.LoadAll<LevelBits>("ScriptableOjbects/Social"));
 			levelBits.AddRange(Resources.LoadAll<LevelBits>("ScriptableOjbects/Solitary"));
 		}
-		if(levels.Count == 0)
+		if (levels.Count == 0)
 		{
 			levels = new List<LevelDataScriptable>();
 			levels.AddRange(Resources.LoadAll<LevelDataScriptable>("ScriptableOjbects/Levels"));
 		}
-		Application.targetFrameRate = 60;
 	}
 	public EventScript.Character GetCharEnum(Bird bird)
 	{

@@ -49,7 +49,8 @@ public class TimedEventControl : MonoBehaviour {
 
 	public void CheckStatus()
 	{
-		if (data.currentState == TimedEventData.state.active || data.currentState == TimedEventData.state.failed)
+		if (data.currentState == TimedEventData.state.active || data.currentState == TimedEventData.state.failed 
+			|| data.currentState == TimedEventData.state.completedFail)
 		{
 			EventNotification.transform.parent.gameObject.SetActive(true);
 			EventNotification.text = (Mathf.Max(0,data.completeBy - Var.currentWeek)).ToString();
@@ -94,7 +95,7 @@ public class TimedEventControl : MonoBehaviour {
 	{
 		if(!data.activationEventShown)
 		{
-			if (Var.currentWeek <= data.completeBy)
+			if (Var.currentWeek-1 <= data.completeBy)
 			{
 				EventController.Instance.CreateEvent(activationEvent);
 			}
