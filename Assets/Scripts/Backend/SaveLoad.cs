@@ -15,6 +15,7 @@ public class SaveLoad : MonoBehaviour
 		FileStream file = File.Create(Application.persistentDataPath +"/" +Var.currentSaveSlot + "/saveGame.dat");
 		SaveData saveData = new SaveData();
 		bf.Serialize(file, saveData);
+		file.Close();
 		if (saveBirds)
 		{
 			try
@@ -29,7 +30,6 @@ public class SaveLoad : MonoBehaviour
 
 			}
 		}
-		file.Close();
 	}
 	public static bool Load()
 	{
@@ -87,6 +87,7 @@ public class SaveLoad : MonoBehaviour
 		List<Bird> availableBirds = new List<Bird>();
 		foreach (BirdData birdData in data.availableBirds)
 		{
+			//birdData.levelList = new List<LevelDataScriptable>();
 			//availableBirds.Add(FillPlayer.LoadSavedBird(birdData));
 		}
 		Var.availableBirds = availableBirds;
@@ -147,7 +148,6 @@ public class BirdData
 	public bool injured= false;
 	public Var.Em preferredEmotion= Var.Em.Cautious;
 	public List<string> recievedSeeds = new List<string>();
-	public List<LevelDataScriptable> levelList = new List<LevelDataScriptable>();
 	public LevelDataScriptable lastLevel = null;
 	public int level=1;
 	public string birdAbility;

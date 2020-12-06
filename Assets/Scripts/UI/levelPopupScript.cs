@@ -44,7 +44,7 @@ public class levelPopupScript : MonoBehaviour {
 		string name = activeBird.charName;
 		title.text = data.screenTitle;
 		LevelPopup.SetActive(true);
-		skillIcon.sprite = data.levelUpImage;
+		skillIcon.sprite = data.levelUpIcon;
 		//First part
 		if (data.givesPower)
 		{
@@ -54,19 +54,18 @@ public class levelPopupScript : MonoBehaviour {
 
 		//second part
 		secondTextList = new List<string>();
-		secondTextList.AddRange(Helpers.Instance.ApplyTitle(activeBird, data.firstLevelUpText).Split('&'));
+		secondTextList.AddRange(Helpers.Instance.ApplyTitle(activeBird, data.LevelUpText).Split('&'));
 		secondText.text = secondTextList[0];
 		secondTextList.RemoveAt(0);
-		if (data.levelUpImage2 == null)
+		if (data.levelUpImage == null)
 		{
-			secondImage.sprite = data.levelUpImage;
+			secondImage.sprite = data.levelUpIcon;
         }
         else
         {
-			secondImage.sprite = data.levelUpImage2;
+			secondImage.sprite = data.levelUpImage;
 		}
 		// Third part
-		thirdText.text = data.secondLevelUpText;
 		//thirdImage.sprite = Helpers.Instance.GetSkillPicture(data.type);
 
 	}

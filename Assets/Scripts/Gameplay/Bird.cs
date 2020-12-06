@@ -155,6 +155,7 @@ public class Bird : MonoBehaviour
 	float clickTime = 0;
 	public BirdSound birdSounds;
     public EmoIndicator indicator;
+	public List<LevelDataScriptable> levelList = new List<LevelDataScriptable>();
 	void Awake()
 	{
 		if(!isEnemy && !Var.isTutorial)
@@ -213,9 +214,9 @@ public class Bird : MonoBehaviour
 			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
             birdArtObj.transform.SetAsFirstSibling();
 	   
-			if (data.levelList.Count == 0 && !Var.isTutorial)
+			if (levelList.Count == 0 && !Var.isTutorial)
 			{
-				data.levelList = new List<LevelDataScriptable>();
+				levelList = new List<LevelDataScriptable>();
 				/*Sprite icon = Helpers.Instance.GetLVLSprite(startingLVL);     
 				if(startingLVL != Levels.type.None)          
 					AddLevel(new LevelData(startingLVL, Var.Em.Neutral,icon));*/
@@ -298,7 +299,10 @@ public class Bird : MonoBehaviour
 		if (!isEnemy)
 		{
 			string path = Application.persistentDataPath + "/" + Var.currentSaveSlot + "/" + charName + ".dat";
-			File.Delete(path);
+			if (File.Exists(path))
+			{
+				File.Delete(path);
+			}
 			Debug.Log("savePath: " + path);
             if(charName.ToLower() == "Kim")
             {
@@ -447,8 +451,8 @@ public class Bird : MonoBehaviour
 					break;
 			}*/
 			ResetBonuses();
-		data.levelList.Add(levelData);
-		data.level = data.levelList.Count+1;
+		levelList.Add(levelData);
+		data.level = levelList.Count+1;
 		levelUpText = null;
 	}
 	public float getBonus()
@@ -594,7 +598,7 @@ public class Bird : MonoBehaviour
 		y = -1;
 		try
 		{
-			levelControler.ApplyLevelOnPickup(this, data.levelList);
+			levelControler.ApplyLevelOnPickup(this, levelList);
 			/*if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, data.levelList))
 				levelControler.Halo.SetActive(false);*/
 			showText();
@@ -861,16 +865,16 @@ public class Bird : MonoBehaviour
 						{
 							if (bird.charName != charName)
 							{
-								bird.levelControler.ApplyLevelOnPickup(bird, bird.data.levelList);
+								bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
 								bird.levelControler.ApplyLevelOnDrop(bird);//, bird.data.levelList);
 							}
 						}
 					}
 					catch
 					{
-						levelControler.ApplyLevelOnPickup(this, data.levelList);
+						levelControler.ApplyLevelOnPickup(this, levelList);
 					}
-					levelControler.ApplyLevelOnPickup(this, data.levelList);
+					levelControler.ApplyLevelOnPickup(this, levelList);
 					UpdateFeedback();
 				}
 			}
@@ -897,16 +901,16 @@ public class Bird : MonoBehaviour
 				{
 					if (bird.charName != charName)
 					{
-						bird.levelControler.ApplyLevelOnPickup(bird, bird.data.levelList);
+						bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
 						bird.levelControler.ApplyLevelOnDrop(bird);//, bird.data.levelList);
 					}
 				}
 			}
 			catch
 			{
-				levelControler.ApplyLevelOnPickup(this, data.levelList);
+				levelControler.ApplyLevelOnPickup(this, levelList);
 			}
-			levelControler.ApplyLevelOnPickup(this, data.levelList);
+			levelControler.ApplyLevelOnPickup(this,levelList);
 			UpdateFeedback();
 		}
 	}
@@ -1009,7 +1013,7 @@ public class Bird : MonoBehaviour
 
 	public void OnLevelPickup()
 	{
-	   levelControler.ApplyLevelOnPickup(this, data.levelList);
+	   levelControler.ApplyLevelOnPickup(this, levelList);
 	}
 
 	public void ChageHealth(int change)
@@ -1160,7 +1164,7 @@ public class Bird : MonoBehaviour
 				ChageHealth(1);
 			try
 			{
-				levelControler.OnfightEndLevel(this, data.levelList);
+				levelControler.OnfightEndLevel(this, levelList);
 			}
 			catch
 			{
@@ -1510,7 +1514,7 @@ public class Bird : MonoBehaviour
 				{
 					if (bird.charName != charName)
 					{
-						bird.levelControler.ApplyLevelOnPickup(bird, bird.data.levelList);
+						bird.levelControler.ApplyLevelOnPickup(bird, bird.levelList);
 						bird.levelControler.ApplyLevelOnDrop(bird);
 					}
 				}

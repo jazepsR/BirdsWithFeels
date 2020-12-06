@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "LevelData")]
+[System.Serializable]
 public class LevelDataScriptable : ScriptableObject
 {
     public List<LevelBits> levelBits;
@@ -10,10 +11,8 @@ public class LevelDataScriptable : ScriptableObject
     public bool givesPower = true;
     public string screenTitle;
     [TextArea(5, 10)]
-    public string firstLevelUpText;
-    [TextArea(5, 10)]
-    public string secondLevelUpText;
+    public string LevelUpText;
+    public Sprite levelUpIcon;
     public Sprite levelUpImage;
-    public Sprite levelUpImage2;
     public string birdTitle;
 }
