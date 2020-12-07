@@ -394,7 +394,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
         //Debug.LogError("setting battle vol: " + vol);
 		if (vol != 0.0f)
 			PlaySound(battleTracks);
-		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol*defaultMusicVol, 0.5f);
+		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol, 0.5f);
 	}
 	void AmbientControl()
 	{
