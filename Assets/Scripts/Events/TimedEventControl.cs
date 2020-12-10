@@ -21,7 +21,6 @@ public class TimedEventControl : MonoBehaviour {
 	public Text EventNotification;
 	[HideInInspector]
 	public TimedEventData data = null;
-	public TimedEventControl nextTimedEvent;
 	Vector3 offset = new Vector3(-95, 30f, 0);
 	bool shouldTriggerBattle = false;
 	// Use this for initialization
@@ -95,13 +94,13 @@ public class TimedEventControl : MonoBehaviour {
 	{
 		if(!data.activationEventShown)
 		{
-			if (Var.currentWeek-1 <= data.completeBy)
+			if (Var.currentWeek >= data.completeBy)
 			{
-				EventController.Instance.CreateEvent(activationEvent);
+				EventController.Instance.CreateEvent(activationEventFail);
 			}
 			else
 			{
-				EventController.Instance.CreateEvent(activationEventFail);
+				EventController.Instance.CreateEvent(activationEvent);
 			}
 			data.activationEventShown = true;
 		}
