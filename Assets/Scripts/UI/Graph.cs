@@ -224,7 +224,7 @@ public class Graph : MonoBehaviour {
 		levelBar.ClearPoints();
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
 			 bird.data.level - 1)];
-		levelBar.maxPoints = level.levelBits.Count;
+		levelBar.maxPoints = level.seedsNeeded;
 		levelBar.SetText(bird,level);
 	}
 

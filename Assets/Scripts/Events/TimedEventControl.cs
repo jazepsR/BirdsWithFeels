@@ -68,20 +68,59 @@ public class TimedEventControl : MonoBehaviour {
 				}
 				EventNotification.transform.parent.gameObject.SetActive(false);
 			}
-			if (Var.currentWeek >= data.completeBy)
+			if (Var.currentWeek == data.completeBy)
 			{
 				data.currentState = TimedEventData.state.completedFail;
 				EventController.Instance.CreateEvent(initialFailEvent);
+			}
+			if(Var.currentWeek >= data.completeBy)
+            {
 				EventNotification.transform.parent.gameObject.SetActive(false);
 			}
+
 			if(endArea)
 			{
 				endArea.timedEvent = this;
 			}
             foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
                 icon.SetState();
-        }	
+
+			
+				SetupTrialUI();
+		}	
 	}
+
+	void SetupTrialUI()
+	{
+		if (endArea.completed)
+			return;
+
+		MapControler.Instance.trialUiObject.SetActive(true);
+		MapControler.Instance.trialNameText.text = endArea.levelName;
+		MapControler.Instance.trialNameText.color = Helpers.Instance.GetEmotionColor(endArea.type);
+		MapControler.Instance.trialUiIcon.color = Helpers.Instance.GetEmotionColor(endArea.type);
+
+		if(data.currentState == TimedEventData.state.failed || data.currentState == TimedEventData.state.completedFail)
+        {
+			MapControler.Instance.trialTooLateText.gameObject.SetActive(true);
+			MapControler.Instance.trialWeeksLeftText.gameObject.SetActive(false);
+        }
+        else
+		{
+			MapControler.Instance.trialTooLateText.gameObject.SetActive(false);
+			MapControler.Instance.trialWeeksLeftText.gameObject.SetActive(true);
+			if (data.completeBy - Var.currentWeek == 1)
+			{
+				MapControler.Instance.trialWeeksLeftText.text = (Mathf.Max(0, data.completeBy - Var.currentWeek)).ToString() + " WEEK TO GO!";
+				MapControler.Instance.trialWeeksLeftText.color = Helpers.Instance.GetEmotionColor(Var.Em.Confident);
+			}
+            else
+			{
+				MapControler.Instance.trialWeeksLeftText.text = (Mathf.Max(0, data.completeBy - Var.currentWeek)).ToString() + " weeks to go";
+				MapControler.Instance.trialWeeksLeftText.color = Color.black;
+			}
+		}
+}
 	// Update is called once per frame
 	void Update () {
 		if (shouldTriggerBattle)

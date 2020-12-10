@@ -36,11 +36,18 @@ public class MapControler : MonoBehaviour {
 	[HideInInspector]
 	public int count = 0;
 	public AudioGroup ambientSounds;
+
+	[Header("Trial UI")]
+	public GameObject trialUiObject;
+	public Image trialUiIcon;
+	public Text trialWeeksLeftText;
+	public Text trialTooLateText;
+	public Text trialNameText;
 	void Awake()
 	{
 		Instance = this;
 		Var.snapshot = null;
-       
+		trialUiObject.SetActive(false);
 	}
 	// Use this for initialization
 	void Start () {

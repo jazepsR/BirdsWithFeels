@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class LevelDataScriptable : ScriptableObject
 {
+    [SerializeField] private int _levelBitsNeeded;
     public List<LevelBits> levelBits;
     public bool givesHeart = true;
     public bool givesPower = true;
@@ -15,4 +16,5 @@ public class LevelDataScriptable : ScriptableObject
     public Sprite levelUpIcon;
     public Sprite levelUpImage;
     public string birdTitle;
+    [HideInInspector] public int seedsNeeded => Mathf.Min(_levelBitsNeeded, levelBits.Count);
 }
