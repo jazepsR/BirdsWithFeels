@@ -248,7 +248,11 @@ public class ProgressGUI : MonoBehaviour {
                     if (i < prevMHP && prevMHP != -1)
                     {
                         anim.SetTrigger("lose");
-                        LeanTween.delayedCall(0.3f, () => anim.SetBool("active", false)).setUseEstimatedTime(true);
+                        LeanTween.delayedCall(0.3f, () =>
+                        {
+                            anim.SetBool("active", false);
+                            AudioControler.Instance.loseMHP.Play();
+                        }).setUseEstimatedTime(true);
                     }
 
                     if (i < maxMHP)

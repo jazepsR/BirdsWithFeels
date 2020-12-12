@@ -60,6 +60,7 @@ public class AudioControler : MonoBehaviour {
     public AudioGroup graphMove;
     public AudioGroup enterDangerZone;
     public AudioGroup exitDangerZone;
+    public AudioGroup loseMHP;
     public AudioGroup collectEmoSeed;
     public AudioGroup emoBarFill;
     public AudioGroup iconMove;

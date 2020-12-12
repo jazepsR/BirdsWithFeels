@@ -455,7 +455,7 @@ public class EventController : MonoBehaviour {
 			{
 				currentBird.AddRoundBonuses(false);
 				currentBird.showText();
-                StartBirdTalk(Helpers.Instance.GetCharEnum(currentBird));
+               // StartBirdTalk(Helpers.Instance.GetCharEnum(currentBird));
 
             }
 			catch { }

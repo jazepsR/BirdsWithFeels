@@ -229,12 +229,20 @@ public class GuiContoler : MonoBehaviour {
             pause.SetActive(false);
             Time.timeScale = 1.0f;
             AudioControler.Instance.SaveVolumeSettings();
+            if(inMap)
+            {
+                MapControler.Instance.canMove = true;
+            }
         }
         else
         {
             pause.SetActive(true);
             SetControlButtonText();
             Time.timeScale = 0.0f;
+            if (inMap)
+            {
+                MapControler.Instance.canMove = false;
+            }
         }
     }
 
@@ -718,20 +726,17 @@ public class GuiContoler : MonoBehaviour {
         else
             currentGraph = birdNum;
 
-        foreach (Bird bird in BirdsToGraph)
+
+        for (int i = 0; i < BirdsToGraph.Count; i++)
         {
-            if (!bird.data.injured)
+            if (!BirdsToGraph[i].data.injured)
             {
-                //Normalize bird stats
-                Helpers.Instance.NormalizeStats(bird);
-                GameObject portrait = bird.portrait;
-               // GameObject colorObj = portrait.gameObject.transform.Find("bird_color").gameObject;
-                //colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
-                Graph.Instance.PlotFull(bird, afterBattle);
-                //feedbackText.text = "";
+                Helpers.Instance.NormalizeStats(BirdsToGraph[i]);
+                GameObject portrait = BirdsToGraph[i].portrait;
+                Graph.Instance.PlotFull(BirdsToGraph[i], afterBattle,i==0);
             }
-            //winDetails.text = "";
         }
+
         if (!Var.isTutorial || currentGraph > 0)
             CheckGraphNavBtns();
 

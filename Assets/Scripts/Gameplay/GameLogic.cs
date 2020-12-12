@@ -336,7 +336,7 @@ public class GameLogic : MonoBehaviour {
 		//FightButton.gameObject.SetActive(canFight);  
 		FightButton.GetComponent<Animator>().SetBool("active", canFight);
 		FightButton.interactable = canFight;
-	   if(canFight)
+	   if(canFight && prevstate == false)
         {
             AudioControler.Instance.PlaySound(AudioControler.Instance.fightButtonAppear);
         }
