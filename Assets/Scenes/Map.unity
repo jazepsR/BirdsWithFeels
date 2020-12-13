@@ -561,53 +561,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8789566}
   m_CullTransparentMesh: 0
---- !u!1 &14153265
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 14153266}
-  - component: {fileID: 14153267}
-  m_Layer: 0
-  m_Name: part10
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &14153266
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14153265}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 670000751}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &14153267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14153265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerId: 2
-  text: ...
-  useCustomPic: 0
-  customPic: {fileID: 0}
 --- !u!4 &17241804
 Transform:
   m_ObjectHideFlags: 0
@@ -11709,11 +11662,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3467918933658214368, guid: 9ab489193ef088b4a89eaba2db11be74,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3581931690837705399, guid: 9ab489193ef088b4a89eaba2db11be74,
         type: 3}
       propertyPath: targets.Array.data[0]
       value: 
-      objectReference: {fileID: 1757799501}
+      objectReference: {fileID: 0}
     - target: {fileID: 3581931690837705399, guid: 9ab489193ef088b4a89eaba2db11be74,
         type: 3}
       propertyPath: ID
@@ -11723,6 +11681,16 @@ PrefabInstance:
         type: 3}
       propertyPath: background
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3581931690837705399, guid: 9ab489193ef088b4a89eaba2db11be74,
+        type: 3}
+      propertyPath: firstCompleteEvent
+      value: 
+      objectReference: {fileID: 670000752}
+    - target: {fileID: 3581931690837705399, guid: 9ab489193ef088b4a89eaba2db11be74,
+        type: 3}
+      propertyPath: trialID
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3581931691562659951, guid: 9ab489193ef088b4a89eaba2db11be74,
         type: 3}
@@ -11744,6 +11712,11 @@ PrefabInstance:
       propertyPath: ID
       value: 41
       objectReference: {fileID: 0}
+    - target: {fileID: 3582494354597389649, guid: 9ab489193ef088b4a89eaba2db11be74,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4731621053640263443, guid: 9ab489193ef088b4a89eaba2db11be74,
         type: 3}
       propertyPath: ID
@@ -11763,6 +11736,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ID
       value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8262918964195094881, guid: 9ab489193ef088b4a89eaba2db11be74,
+        type: 3}
+      propertyPath: trialID
+      value: 53
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ab489193ef088b4a89eaba2db11be74, type: 3}
@@ -17607,7 +17585,6 @@ Transform:
   - {fileID: 82842647}
   - {fileID: 1269188090}
   - {fileID: 1451694423}
-  - {fileID: 14153266}
   - {fileID: 1261013291}
   - {fileID: 1879980172}
   m_Father: {fileID: 1661642005}
@@ -26594,7 +26571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 1
-  text: Demo? Game? You're freaking me out, Terry!
+  text: Discord?? You're freaking me out, Terry!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1002234246
@@ -32976,7 +32953,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 670000751}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1261013292
 MonoBehaviour:
@@ -33228,8 +33205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: And don't forget to follow us on Twitter (@feelTheBirds) to see what we chirp
-    about!
+  text: 'There is also a PLAYTESTER questionare, there is a link to it in the main
+    menu. '
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1269270201
@@ -36814,7 +36791,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: Fly by BirdsWithFeelings.com to follow the development of the game!
+  text: Make sure to join our DISCORD channel to discuss your experience and follow
+    our progress!!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1001 &1437183693
@@ -37370,8 +37348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: ...
+  speakerId: 0
+  text: 'Please use it to give feedback, we''re listening closely to you! '
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1451802525
@@ -47464,7 +47442,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 670000751}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1879980173
 MonoBehaviour:
@@ -47489,10 +47467,11 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 0}
-  selectionText: Stop freaking out Rebecca and Alex!!
+  selectionText: 'Will do, cya birbs! '
   selectionTooltip: 
   conclusionHeading: 
-  conclusionText: 
+  conclusionText: This concludes the demo. Once you close this event, you will be
+    returned to the main menu. Thanks for playing!
 --- !u!1 &1881414947
 GameObject:
   m_ObjectHideFlags: 0
@@ -55454,6 +55433,11 @@ PrefabInstance:
       propertyPath: ID
       value: 26
       objectReference: {fileID: 0}
+    - target: {fileID: 8680449721511705882, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8782073427370752489, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: m_Name
@@ -55563,6 +55547,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782073428273643803, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1021d4f7acba6a943b1a6c6a3340be03, type: 3}
