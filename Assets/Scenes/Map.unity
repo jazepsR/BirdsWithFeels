@@ -11719,6 +11719,11 @@ PrefabInstance:
       propertyPath: ID
       value: 42
       objectReference: {fileID: 0}
+    - target: {fileID: 3581931690837705399, guid: 9ab489193ef088b4a89eaba2db11be74,
+        type: 3}
+      propertyPath: background
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3581931691562659951, guid: 9ab489193ef088b4a89eaba2db11be74,
         type: 3}
       propertyPath: ID
@@ -18368,6 +18373,11 @@ MonoBehaviour:
     volume: 1
     minPitch: 1
     maxPitch: 1
+  trialUiObject: {fileID: 1353052656}
+  trialUiIcon: {fileID: 1219613756}
+  trialWeeksLeftText: {fileID: 853590741}
+  trialTooLateText: {fileID: 875856201}
+  trialNameText: {fileID: 1745614368}
 --- !u!4 &685676507
 Transform:
   m_ObjectHideFlags: 0
@@ -21915,6 +21925,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 685676506}
         m_MethodName: HideSelectionMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1773653467}
+        m_MethodName: ClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -48429,7 +48450,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!1 &1922688376
 GameObject:

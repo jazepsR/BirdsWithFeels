@@ -41,7 +41,7 @@ public class Graph : MonoBehaviour {
 		}
 
 	}
-	public void PlotFull(Bird bird,bool afterBattle)
+	public void PlotFull(Bird bird,bool afterBattle, bool shouldHaveSound = false)
 	{
 		if (!GuiContoler.Instance.inMap && GuiContoler.Instance.winBanner.activeSelf)
 			return;
@@ -64,14 +64,13 @@ public class Graph : MonoBehaviour {
 		}
 		else
 		{
-			//Debug.LogError("PIECE OF SHIT");
 			tempHeart = PlotPoint(bird.prevFriend, bird.prevConf, bird.portraitTiny, true, bird);
 			GraphPortraitScript portraitScript = tempHeart.transform.gameObject.AddComponent<GraphPortraitScript>();
 			Vector3 secondPos = new Vector3(-bird.data.friendliness, bird.data.confidence, 0);
 			Var.Em emotion = bird.emotion;
 			if (bird.prevEmotion == bird.emotion)
 				emotion = Var.Em.finish;
-			portraitScript.StartGraph(secondPos, emotion, bird,this);
+			portraitScript.StartGraph(secondPos, emotion, bird,this, shouldHaveSound);
 		}
 		if ((GuiContoler.Instance.currentGraph == 3 && afterBattle) || !Var.gameSettings.shownLevelTutorial)
 		{
@@ -224,7 +223,7 @@ public class Graph : MonoBehaviour {
 		levelBar.ClearPoints();
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
 			 bird.data.level - 1)];
-		levelBar.maxPoints = level.levelBits.Count;
+		levelBar.maxPoints = level.seedsNeeded;
 		levelBar.SetText(bird,level);
 	}
 

@@ -455,7 +455,7 @@ public class EventController : MonoBehaviour {
 			{
 				currentBird.AddRoundBonuses(false);
 				currentBird.showText();
-                StartBirdTalk(Helpers.Instance.GetCharEnum(currentBird));
+               // StartBirdTalk(Helpers.Instance.GetCharEnum(currentBird));
 
             }
 			catch { }
@@ -576,8 +576,11 @@ public class EventController : MonoBehaviour {
 		choiceObj.GetComponent<Button>().onClick.AddListener(delegate { DisplayChoiceResult(ID); });
         try
         {
-            choiceObj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
-            choiceObj.transform.Find("Description").GetComponent<Text>().text = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionText);
+			if (choiceData.selectionTooltip.Trim() != "")
+			{
+				choiceObj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
+			}
+			choiceObj.transform.Find("Description").GetComponent<Text>().text = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionText);
         }
         catch
         {

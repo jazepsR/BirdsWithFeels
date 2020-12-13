@@ -16,6 +16,7 @@ public class GraphPortraitScript : MonoBehaviour {
 	Graph parent;
 	float delayBetweenTicks = 0.2f;
 	float lastTickTime = 0;
+	bool shouldHaveSound = true;
 	void Starter () {
 		try
 		{
@@ -53,8 +54,11 @@ public class GraphPortraitScript : MonoBehaviour {
 			parent.dangerZoneHighlight.transform.position = transform.position;
 		if ((Mathf.Abs(transform.localPosition.x / factor) >= 12 || Mathf.Abs(transform.localPosition.y / factor) >= 12) && !inDangerZone)
 		{
-
 			inDangerZone = true;
+			if (GuiContoler.Instance.dangerFollowHighlight.gameObject.activeSelf)
+			{
+				AudioControler.Instance.enterDangerZone.Play();
+			}
             if (GetComponent<Animator>() != null)
             {
                 GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
@@ -62,9 +66,12 @@ public class GraphPortraitScript : MonoBehaviour {
 		}
 		if ((Mathf.Abs(transform.localPosition.x / factor) < 12 && Mathf.Abs(transform.localPosition.y / factor) < 12) && inDangerZone)
 		{
-
 			inDangerZone = false;
-            if (GetComponent<Animator>() != null)
+			if (GuiContoler.Instance.dangerFollowHighlight.gameObject.activeSelf)
+			{
+				AudioControler.Instance.exitDangerZone.Play();
+			}
+			if (GetComponent<Animator>() != null)
             {
                 GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
             }
@@ -72,10 +79,11 @@ public class GraphPortraitScript : MonoBehaviour {
 
 	}
 
-	public void StartGraph(Vector3 target, Var.Em targetEmotion, Bird bird, Graph parent)
+	public void StartGraph(Vector3 target, Var.Em targetEmotion, Bird bird, Graph parent, bool shouldHaveSound = false)
 	{
 		this.parent = parent;
 		LeanTween.delayedCall(0.5f, Starter);
+		this.shouldHaveSound = shouldHaveSound;
 		GuiContoler.Instance.clearSmallGraph();
 		this.targetEmotion = targetEmotion;
 		ShowTooltip info =gameObject.AddComponent<ShowTooltip>();
@@ -132,7 +140,7 @@ public class GraphPortraitScript : MonoBehaviour {
 		{
 			transform.localPosition = new Vector3(pos.x, pos.y, 0);
 			lr.SetPosition(1, (new Vector3(transform.position.x, transform.position.y, 0)));
-			if(lastTickTime + delayBetweenTicks < Time.timeSinceLevelLoad)
+			if(lastTickTime + delayBetweenTicks < Time.timeSinceLevelLoad && shouldHaveSound)
 			{
 				lastTickTime = Time.timeSinceLevelLoad;
 				AudioControler.Instance.PlaySound(AudioControler.Instance.graphMove);

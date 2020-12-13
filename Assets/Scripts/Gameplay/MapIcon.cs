@@ -219,9 +219,14 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 						LeanTween.delayedCall(2.7f, () => icon.anim.SetInteger("state", 1));
 					}
 					Vector2 dist = Camera.main.transform.position - transform.position;
+					if (targets.Length>0)
+                    {
+						dist = Camera.main.transform.position - targets[0].transform.position;
+                    }
 					Vector3 temp = FindObjectOfType<mapPan>().transform.position;
 					temp+= new Vector3(dist.x,dist.y,0);
 					FindObjectOfType<mapPan>().transform.position = temp;
+					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
 				}
 				else
