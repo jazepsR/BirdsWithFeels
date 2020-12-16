@@ -57,7 +57,7 @@ public class bossBattleVultureVisuals : MonoBehaviour
     void Update()
     {
 
-        if (debugFinalBattleActive)
+        if (debugFinalBattleActive && Var.cheatsEnabled)
         { 
     if( Input.GetKeyDown(KeyCode.A))
         {

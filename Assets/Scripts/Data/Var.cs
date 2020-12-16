@@ -80,6 +80,7 @@ public static class Var {
     /// Tutorial IDs
     public static int battlePlanningTutorialID = 11;
     public static int levelTutorialID = 21;
+	public static bool cheatsEnabled = false;
 }
 
 [Serializable]
@@ -87,7 +88,7 @@ public class Settings
 {
    public bool shownFirstLevelUp = true;
    public bool shownBattlePlanningTutorial = true;
-   public bool shownLevelTutorial = true;
+   public bool shownLevelTutorial = false;
    public bool shownMapTutorial = true;
    public Settings(bool tutorialsCompleted)
    {

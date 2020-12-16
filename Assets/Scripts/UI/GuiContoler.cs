@@ -192,6 +192,11 @@ public class GuiContoler : MonoBehaviour {
     }
     public void UnlockAllMap()
     {
+        if(!Var.cheatsEnabled)
+        {
+            return;
+        }
+
         MapIcon[] icons = FindObjectsOfType<MapIcon>();
         foreach (MapIcon icon in icons)
         {
@@ -345,13 +350,10 @@ public class GuiContoler : MonoBehaviour {
         {
             setPause();
         }
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O) && Var.cheatsEnabled)
             ReturnToMap();
 
-
-#endif
-        if (DebugMenu.cameraControl)
+        if (DebugMenu.cameraControl && Var.cheatsEnabled)
         {
             if (Input.GetKeyDown(KeyCode.T))
                 canvasRect.gameObject.SetActive(!canvasRect.gameObject.activeSelf);

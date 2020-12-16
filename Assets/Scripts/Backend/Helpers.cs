@@ -918,7 +918,7 @@ public class Helpers : MonoBehaviour {
 	}
 	private void Update()
 	{
-		if (Input.GetKey(KeyCode.LeftShift))
+		if (Input.GetKey(KeyCode.LeftShift) && Var.cheatsEnabled)
 			Time.timeScale = 0.25f;
 		else if (Input.GetKey(KeyCode.RightShift) || Input.GetMouseButton(1))
 			Time.timeScale = 4f;

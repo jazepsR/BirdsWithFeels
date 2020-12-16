@@ -39,6 +39,10 @@ public class DebugMenu : MonoBehaviour {
     }
 	public void OpenDebug()
 	{
+		if (!Var.cheatsEnabled)
+		{
+			return;
+		}
 		try
 		{
 			currentBird.text = "Current bird: " + Var.selectedBird.GetComponent<Bird>().charName;
