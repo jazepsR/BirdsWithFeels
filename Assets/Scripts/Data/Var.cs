@@ -88,7 +88,7 @@ public class Settings
 {
    public bool shownFirstLevelUp = true;
    public bool shownBattlePlanningTutorial = true;
-   public bool shownLevelTutorial = false;
+   public bool shownLevelTutorial = true;
    public bool shownMapTutorial = true;
    public Settings(bool tutorialsCompleted)
    {

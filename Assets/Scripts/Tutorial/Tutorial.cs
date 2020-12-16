@@ -35,6 +35,7 @@ public class Tutorial : MonoBehaviour {
 	bool shouldShowOutlines = true;
 	bool showedSecondBirdReportText = false;
 	bool showedThirdBirdReportText = false;
+	bool shouldActivateBattleButton = false;
 	[HideInInspector]
 	public bool[] shownMapInfos = new bool[6];
 	private AudioGroup TerrySounds;
@@ -99,7 +100,11 @@ public class Tutorial : MonoBehaviour {
 			return;
 
 
-
+		if(shouldActivateBattleButton && !GuiContoler.Instance.speechBubbleObj.activeSelf)
+        {
+			AudioControler.Instance.PlaySound(AudioControler.Instance.fightButtonAppear);
+			shouldActivateBattleButton = false;
+        }
 
 		if (shouldShowOutlines && !GuiContoler.Instance.speechBubbleObj.activeSelf)
 		{
@@ -226,6 +231,7 @@ public class Tutorial : MonoBehaviour {
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Vultures will walk forward forever until they reach a confrontation! ",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Here goes nothing!!",TerrySounds); 
 				outlines.SetActive(false);
+				shouldActivateBattleButton = true;
 				break;
 			case 1:
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Hey you! Let's talk about life!!",RebeccaSounds);
