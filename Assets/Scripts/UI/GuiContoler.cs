@@ -237,16 +237,20 @@ public class GuiContoler : MonoBehaviour {
             if(inMap)
             {
                 MapControler.Instance.canMove = true;
+                MapControler.Instance.restBtnRaycaster.enabled = true;
             }
+            GraphBlocker.SetActive(false);
         }
         else
         {
             pause.SetActive(true);
             SetControlButtonText();
             Time.timeScale = 0.0f;
+            GraphBlocker.SetActive(true);
             if (inMap)
             {
                 MapControler.Instance.canMove = false;
+                MapControler.Instance.restBtnRaycaster.enabled = false;
             }
         }
     }

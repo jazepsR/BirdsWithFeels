@@ -491,7 +491,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			Var.gameSettings.shownMapTutorial = true;
 		}
 		SetupPieGraph();
-		if(timedEvent!= null)
+		if(timedEvent!= null && available)
 		{
 			timedEvent.TriggerActivationEvent();
 		}

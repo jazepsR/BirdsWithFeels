@@ -36,6 +36,7 @@ public class MapControler : MonoBehaviour {
 	[HideInInspector]
 	public int count = 0;
 	public AudioGroup ambientSounds;
+    public GraphicRaycaster restBtnRaycaster;
 
 	[Header("Trial UI")]
 	public GameObject trialUiObject;

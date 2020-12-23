@@ -61,11 +61,13 @@ public class TimedEventControl : MonoBehaviour {
 				{
 					data.currentState = TimedEventData.state.completedSuccess;
 					EventController.Instance.CreateEvent(completionEvent);
+                    data.currentState = TimedEventData.state.notStarted;
 				}else
 				{
 					data.currentState = TimedEventData.state.completedFail;
 					EventController.Instance.CreateEvent(completionAfterFailEvent);
-				}
+                    data.currentState = TimedEventData.state.notStarted;
+                }
 				EventNotification.transform.parent.gameObject.SetActive(false);
 			}
 			if (Var.currentWeek == data.completeBy)
