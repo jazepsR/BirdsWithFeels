@@ -15,10 +15,10 @@ public class powerTile : MonoBehaviour {
 		switch (type)
 		{
 			case Var.PowerUps.dmg:
-				offset = new Vector3(0.18f, 0.27f, 0);
+				offset = new Vector3(0.18f, 0.23f, 0);
 				break;
             case Var.PowerUps.shield:
-                offset = new Vector3(0.15f, 0.21f, 0);
+                offset = new Vector3(0.15f, 0.15f, 0);
                 break;
             case Var.PowerUps.heal:
 				offset = new Vector3(0.1f, 0.25f, 0);
