@@ -19,7 +19,7 @@ public static class Var {
 	public static List<string> shownDialogs = new List<string>();
 	public static List<string> shownEvents = new List<string>();
 	public enum Em { Neutral,Solitary,SuperLonely, Social, SuperFriendly,Confident,SuperConfident,Cautious, SuperScared,finish,Random};
-	public enum PowerUps { heal,dmg,emotion,obstacle};
+	public enum PowerUps { heal,dmg,emotion,obstacle,shield};
 	public static bool isTutorial = false;
     public static bool isEnding = false;
     public static bool tutorialCompleted = true;
@@ -80,7 +80,7 @@ public static class Var {
     /// Tutorial IDs
     public static int battlePlanningTutorialID = 11;
     public static int levelTutorialID = 21;
-	public static bool cheatsEnabled = false;
+	public static bool cheatsEnabled = true;
 }
 
 [Serializable]

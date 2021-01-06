@@ -15,9 +15,12 @@ public class powerTile : MonoBehaviour {
 		switch (type)
 		{
 			case Var.PowerUps.dmg:
-				offset = new Vector3(0.15f, 0.21f, 0);
+				offset = new Vector3(0.18f, 0.27f, 0);
 				break;
-			case Var.PowerUps.heal:
+            case Var.PowerUps.shield:
+                offset = new Vector3(0.15f, 0.21f, 0);
+                break;
+            case Var.PowerUps.heal:
 				offset = new Vector3(0.1f, 0.25f, 0);
 				break;
 			default:
@@ -76,7 +79,11 @@ public class powerTile : MonoBehaviour {
 				info = "Birds on this tile recieve +10% fighting bonus";
 				AudioControler.Instance.powerTileCombat.Play();
 				break;
-			case Var.PowerUps.emotion:
+            case Var.PowerUps.shield:
+                info = "Birds on this tile are shielded from damage";
+                AudioControler.Instance.powerTileCombat.Play();
+                break;
+            case Var.PowerUps.emotion:
 				info = "Gain one extra "+Helpers.Instance.GetHexColor(emotion) + emotion.ToString()+"</color>";
 				if(emotion == Var.Em.Solitary || emotion == Var.Em.Cautious)
 					AudioControler.Instance.powerTileNegative.Play();
@@ -134,5 +141,9 @@ public class powerTile : MonoBehaviour {
 		{
 			bird.GroundRollBonus = 1 * bird.groundMultiplier;
 		}
+        if(type == Var.PowerUps.shield)
+        {
+            bird.hasShieldBonus = true;
+        }
 	}
 }

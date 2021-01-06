@@ -109,7 +109,8 @@ public class Bird : MonoBehaviour
 	int roundHealthChange = 0;
 	//[HideInInspector]
 	public int GroundRollBonus = 0;
-	public bool inMap = false;
+    public bool hasShieldBonus = false;
+    public bool inMap = false;
 	[HideInInspector]
 	public Sprite hatSprite;
 	[HideInInspector]
@@ -589,6 +590,7 @@ public class Bird : MonoBehaviour
 		levelFriendBoos = 0;
 		levelConfBoos = 0;
 		healthBoost = 0;
+        hasShieldBonus = false;
 		isInfluenced = false;
 		Destroy(cautiousParticleObj);
 	}
@@ -1049,7 +1051,12 @@ public class Bird : MonoBehaviour
 					GameObject healObj = Instantiate(healParticle, transform);
 					Destroy(healObj, 1.5f);
 				}
-			}
+            }
+            else if(hasShieldBonus)
+            {
+                //Add Shield Effects Here
+                return;
+            }
 			roundHealthChange += change;
 			Debug.Log(charName + " health change " + change);
 			if (GuiContoler.Instance.selectedBird == this)

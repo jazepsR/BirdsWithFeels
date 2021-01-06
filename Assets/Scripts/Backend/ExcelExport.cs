@@ -89,6 +89,7 @@ public class ExcelExport : MonoBehaviour {
 		icon.hasWizards = Boolean.Parse(values[18]);
 		icon.hasDrills = Boolean.Parse(values[19]);
 		icon.isTrial = Boolean.Parse(values[23]);
+        icon.hasShields = Boolean.Parse(values[24]);
 #if UNITY_EDITOR
 		UnityEditor.EditorUtility.SetDirty(icon);
 		UnityEditor.Undo.RecordObject(icon, "test");
@@ -98,7 +99,7 @@ public class ExcelExport : MonoBehaviour {
 	public static void AddMapNode(MapIcon icon)
 	{
 
-		string[] row = new string[24];
+		string[] row = new string[25];
 		row[0] = icon.ID.ToString();
 		row[1] = icon.levelName;
 		row[2] = icon.levelDescription.Replace("\n"," ");
@@ -139,6 +140,7 @@ public class ExcelExport : MonoBehaviour {
 		else
 			row[22] = icon.firstCompleteDialogue.name;
 		row[23] = icon.isTrial.ToString();
+        row[24] = icon.hasShields.ToString();
 		rowData.Add(row);
 	}
 

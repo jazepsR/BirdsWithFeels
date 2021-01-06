@@ -133,15 +133,23 @@ public class battleAnim :MonoBehaviour {
 		//lose
 		if (battle.result != 1)
 		{
-			AudioControler.Instance.PlaySound(AudioControler.Instance.fightCloudSound);
-            Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
-			GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
-			battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
-			battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
+            if (!battle.player.hasShieldBonus)
+            {
+                AudioControler.Instance.PlaySound(AudioControler.Instance.fightCloudSound);
+                Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
+                GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
+                battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
+                battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
+                Destroy(fightCloudObj, waitTime - enemySpeed);
+                yield return new WaitForSeconds(waitTime - enemySpeed - 2.3f);
+            }
+            else
+            {
+                battle.player.GetComponentInChildren<Animator>().SetBool("rest", true);
+                LeanTween.delayedCall(1.5f,()=>battle.player.GetComponentInChildren<Animator>().SetBool("rest", false));
+            }
 			battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
-			Destroy(fightCloudObj, waitTime - enemySpeed);
 			LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
-			yield return new WaitForSeconds(waitTime - enemySpeed-2.3f);
 		}else
 		{
 			AudioControler.Instance.PlaySound(battle.player.birdSounds.birdWinSound);

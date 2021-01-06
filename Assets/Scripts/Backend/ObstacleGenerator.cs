@@ -13,7 +13,8 @@ public class ObstacleGenerator : MonoBehaviour {
 	public GameObject ScaredTile;
 	public GameObject healthTile;
 	public GameObject dmgTile;
-	public GameObject BattleArea;
+    public GameObject shieldTile;
+    public GameObject BattleArea;
 	public List<GameObject> obstacles = new List<GameObject>();
 	// Use this for initialization
 	void Awake()
@@ -99,9 +100,12 @@ public class ObstacleGenerator : MonoBehaviour {
 				powerObj.GetComponent<powerTile>().SetColor(emotion);
 				obstacles.Add(powerObj);
 			}
-			if(rand>0.7f && rand < 0.8f && Var.map[GuiContoler.mapPos].powers != null)
-			{
-				try
+            if(rand>0.7f && rand < 0.8f && Var.map[GuiContoler.mapPos].powers != null)
+            {
+               // Var.map[GuiContoler.mapPos].powers.Add(Var.PowerUps.shield);
+
+
+                try
 				{
 					List<Var.PowerUps> pow = Var.map[GuiContoler.mapPos].powers;
 					Var.PowerUps type = pow[Random.Range(0, pow.Count)];
@@ -115,7 +119,11 @@ public class ObstacleGenerator : MonoBehaviour {
 						case Var.PowerUps.heal:
 							powerUp = Instantiate(dmgTile, pos, Quaternion.identity);
 							break;
-					}
+                        case Var.PowerUps.shield:
+                            powerUp = Instantiate(shieldTile, pos, Quaternion.identity);
+                            break;
+
+                    }
 					powerUp.transform.parent = BattleArea.transform;
 					obstacles.Add(powerUp);
 					tile.power = powerUp.GetComponent<powerTile>();

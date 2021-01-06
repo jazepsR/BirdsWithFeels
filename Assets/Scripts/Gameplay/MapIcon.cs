@@ -40,6 +40,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	public bool hasLonelyPwerUps;
 	public bool hasHealthPowerUps;
 	public bool hasDMGPowerUps;
+    public bool hasShields;
 	[Header("References")]
    // [HideInInspector]
 	public MapIcon[] targets;    
@@ -645,6 +646,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			list.Add(Var.PowerUps.dmg);
 		if (hasHealthPowerUps)
 			list.Add(Var.PowerUps.heal);
+        if (hasShields)
+            list.Add(Var.PowerUps.shield);
 		return list;
 	}
 
