@@ -941,8 +941,6 @@ MonoBehaviour:
   panToPoint: {fileID: 266619621}
   parts:
   - {fileID: 15397288}
-  - {fileID: 1227343768}
-  - {fileID: 317242457}
   mainMenu: {fileID: 1938665147}
   textBox: {fileID: 894726823}
   cutsceneText: {fileID: 1043680443}
@@ -1514,7 +1512,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Start game!
+  m_Text: Let's go!
 --- !u!222 &730700955
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2225,39 +2223,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!1 &943459470
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1681113610232592, guid: 03e96fcea0a3871428868f68db9e2529,
-    type: 3}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 943459471}
-  - component: {fileID: 1227343768}
-  m_Layer: 0
-  m_Name: part1 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &943459471
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4615584911161026, guid: 03e96fcea0a3871428868f68db9e2529,
-    type: 3}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 943459470}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1881232098}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &983075595
 GameObject:
   m_ObjectHideFlags: 0
@@ -2616,7 +2581,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: f6a79424c1f9fe3459578a266e45cd50, type: 3}
-    m_FontSize: 57
+    m_FontSize: 48
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2641,6 +2606,7 @@ GameObject:
   - component: {fileID: 1070806426}
   - component: {fileID: 1070806425}
   - component: {fileID: 1070806429}
+  - component: {fileID: 1070806430}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -2747,7 +2713,7 @@ RectTransform:
   m_GameObject: {fileID: 1070806424}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.91876894, y: 0.91876894, z: 0.91876894}
+  m_LocalScale: {x: 0.73397696, y: 0.73397696, z: 0.73397696}
   m_Children:
   - {fileID: 730700953}
   m_Father: {fileID: 510236868}
@@ -2755,7 +2721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: -3457}
+  m_AnchoredPosition: {x: -3, y: -3442.1}
   m_SizeDelta: {x: 240, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1070806429
@@ -2777,6 +2743,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1070806430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070806424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f86f5a5175e9724b85d75bb65644a2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1070806429}
 --- !u!1 &1081205996
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,24 +3094,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1188977516}
   m_CullTransparentMesh: 0
---- !u!114 &1227343768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114582622082760922, guid: 03e96fcea0a3871428868f68db9e2529,
-    type: 3}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 943459470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7148d3ab0d3bfae4d85137124eccd2e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 21300036, guid: aa47b8b8fea42fb47a90d5064cc93020, type: 3}
-  cutsceneTexts:
-  - The queen has entrusted you, her advisor, to go on this diplomatic mission.
-  - You must travel deep into vulture territory to speak with their king.
-  - 'War must be avoided at all costs! '
 --- !u!1 &1233756793
 GameObject:
   m_ObjectHideFlags: 0
@@ -3999,7 +3960,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1881232098}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1574481329
 GameObject:
@@ -4715,7 +4676,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1123084083}
-  - {fileID: 943459471}
   - {fileID: 1469945275}
   m_Father: {fileID: 0}
   m_RootOrder: 5
