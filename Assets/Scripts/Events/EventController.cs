@@ -14,6 +14,8 @@ public class EventController : MonoBehaviour {
 	[Range(0.0f, 1.0f)]
 	public float eventFreq;
 	public static EventController Instance { get; private set; }
+	[SerializeField] private Image eventBg;
+	[SerializeField] private Image bgFog;
 	public EventScript testEvent;
 	public List<EventScript> events;
 	public bool inMap;
@@ -256,7 +258,12 @@ public class EventController : MonoBehaviour {
 	}
 	public void CreateEvent(EventScript eventData)
 	{
-		
+		if(eventData.eventBackground != null)
+        {
+			eventBg.sprite = eventData.eventBackground;
+        }
+		eventBg.gameObject.SetActive(eventData.eventBackground != null);
+		bgFog.gameObject.SetActive(eventData.useBgFog);
 		if (!eventData.canShowMultipleTimes)
 		{
 			Var.shownEvents.Add(eventData.heading);

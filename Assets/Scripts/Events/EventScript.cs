@@ -68,7 +68,9 @@ public class EventScript:MonoBehaviour{
 	public bool canShowMultipleTimes = false;
 	public Dialogue afterEventDialog;
     public bool quitAfterLevel = false;
-	public EventScript()
+    public Sprite eventBackground;
+    public bool useBgFog = true;
+    public EventScript()
 	{
 
 	}
