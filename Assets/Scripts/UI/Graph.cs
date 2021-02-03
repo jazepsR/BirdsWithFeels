@@ -18,6 +18,7 @@ public class Graph : MonoBehaviour {
 	public LevelBarScript levelBar;
 	public Image dangerZoneHighlight;
 	public Image lockImage;
+	bool afterBattle = false;
 	// Use this for initialization
 	void Start()
 	{
@@ -49,6 +50,7 @@ public class Graph : MonoBehaviour {
 			return;
 		if(isSmall && Var.freezeEmotions)
 			return;
+		this.afterBattle = afterBattle;
 		//GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
 		GameObject tempHeart;
 		if (isSmall)
@@ -79,7 +81,7 @@ public class Graph : MonoBehaviour {
 			CreateLevelSeeds(bird, afterBattle);
 		
 	}
-	
+
 	GameObject PlotPoint(int x,int y, GameObject obj, bool isPortrait, Bird bird=null )
 	{
 		Vector2 corner = graphArea.rectTransform.anchoredPosition;
@@ -119,7 +121,7 @@ public class Graph : MonoBehaviour {
 	}
 	void CreateLevelSeeds(Bird bird,bool afterBattle)
 	{
-		float factor = isSmall ? 8 : 16;
+		float factor = isSmall ? 8 : 18;
 		if (!isSmall)
 		{
 			SetupLevelBar(bird);
@@ -148,24 +150,7 @@ public class Graph : MonoBehaviour {
 				obj.name = bit.name;
 				obj.transform.localScale = Vector3.one * factor / 16f;
 				obj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetStatInfo(bit.conf, bit.social);
-				if (Vector2.Distance(new Vector2(bird.data.friendliness, bird.data.confidence), new Vector2(bit.social, bit.conf)) <= 3
-					&& !isSmall && afterBattle)
-				{
-					Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
-					LeanTween.delayedCall(1.7f, () => levelBar.AddPoints(bird));
-					obj.GetComponent<Image>().color = Color.yellow;
-					bird.data.recievedSeeds.Add(bit.name);
 
-					LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, 0.7f).setEaseOutBack().setOnComplete(() =>
-					{
-						LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
-						setEaseOutBack().setOnComplete(() => Destroy(obj));
-						Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
-					}
-					));
-					GuiContoler.Instance.canChangeGraph = false;
-					LeanTween.delayedCall(2.1f, () => GuiContoler.Instance.canChangeGraph = true);
-				}
 				//obj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bit.emotion);
 
 			}
@@ -174,48 +159,50 @@ public class Graph : MonoBehaviour {
 				levelBar.AddPoints(bird);
 			}			
 		}
-		/*foreach (LevelBits bit in Helpers.Instance.levelBits)
+	}
+	public void CheckIfCollectedSeed(Bird bird)
+	{
+		if (!afterBattle)
+			return;
+		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1, bird.data.level - 1)];
+		foreach (LevelBits bit in level.levelBits)
 		{
-			if (bird.data.bannedLevels != bit.emotion && Helpers.Instance.ListContainsEmotion(bit.emotion, bird.data.levelList) == bit.isSecond)
+			if (Vector2.Distance(new Vector2(bird.data.friendliness, bird.data.confidence), new Vector2(bit.social, bit.conf)) <= 3
+					&& !isSmall && !bird.data.recievedSeeds.Contains(bit.name))
 			{
-				if (!bird.data.recievedSeeds.Contains(bit.name))
-				{
-
-					GameObject toInstantiate = Helpers.Instance.seedFar;
-					if (bird.emotion == bit.emotion)
-						toInstantiate = Helpers.Instance.seed;
-					GameObject obj = Instantiate(toInstantiate, graphParent.transform);
-					obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-factor * bit.social, factor * bit.conf, 0);
-					obj.name = bit.name;
-					obj.transform.localScale = Vector3.one * factor / 16f;
-					obj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetStatInfo(bit.conf, bit.social);
-					if (Vector2.Distance(new Vector2(bird.data.friendliness, bird.data.confidence), new Vector2(bit.social, bit.conf)) <= 3
-						&& !isSmall && afterBattle)
-					{
-						Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
-						LeanTween.delayedCall(1.7f, () => GetLevelBar(bit.emotion).AddPoints(bird));
-						obj.GetComponent<Image>().color = Color.yellow;
-						bird.data.recievedSeeds.Add(bit.name);
-
-						LeanTween.delayedCall(1f, () => LeanTween.move(obj, GetLevelBar(bit.emotion).transform.position, 0.7f).setEaseOutBack().setOnComplete(() =>
-						{
-							LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
-							setEaseOutBack().setOnComplete(() => Destroy(obj));
-							Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
-						}
-						));						
-						GuiContoler.Instance.canChangeGraph = false;
-						LeanTween.delayedCall(2.1f, () => GuiContoler.Instance.canChangeGraph = true);
-					}
-					//obj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bit.emotion);
-
-				}
-				else if (!isSmall)
-				{
-					GetLevelBar(bit.emotion).AddPoints(bird);
-				}
+				CollectSeed(bird, bit);
 			}
-		}*/
+		}
+	}
+	public void CollectSeed(Bird bird, LevelBits bit)
+	{
+		foreach (Transform seed in graphParent.transform)
+		{
+			if(seed.name == bit.name)
+            {
+				Destroy(seed.gameObject);
+            }
+		}
+
+		GameObject toInstantiate = Helpers.Instance.seed;
+		GameObject obj = Instantiate(toInstantiate, graphParent.transform);
+		obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-factor * bit.social, factor * bit.conf, 0);
+		obj.name = bit.name;
+		obj.transform.localScale = Vector3.one * factor / 16f;
+		obj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetStatInfo(bit.conf, bit.social);
+		Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
+		LeanTween.delayedCall(1.7f, () => levelBar.AddPoints(bird));
+		obj.GetComponent<Image>().color = Color.yellow;
+		bird.data.recievedSeeds.Add(bit.name);
+		LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, 0.7f).setEaseOutBack().setOnComplete(() =>
+		{
+			LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
+			setEaseOutBack().setOnComplete(() => Destroy(obj));
+			Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
+		}
+		));
+		GuiContoler.Instance.canChangeGraph = false;
+		LeanTween.delayedCall(2.1f, () => GuiContoler.Instance.canChangeGraph = true);
 	}
 		
 	void SetupLevelBar(Bird bird)

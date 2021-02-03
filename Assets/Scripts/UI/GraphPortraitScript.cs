@@ -17,6 +17,7 @@ public class GraphPortraitScript : MonoBehaviour {
 	float delayBetweenTicks = 0.2f;
 	float lastTickTime = 0;
 	bool shouldHaveSound = true;
+	Bird bird;
 	void Starter () {
 		try
 		{
@@ -44,7 +45,8 @@ public class GraphPortraitScript : MonoBehaviour {
             {
                 GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
             }
-			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);
+			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f).setOnComplete(()=>
+			Graph.Instance.CheckIfCollectedSeed(bird));
 		}
 		catch
 		{
@@ -86,6 +88,7 @@ public class GraphPortraitScript : MonoBehaviour {
 	public void StartGraph(Vector3 target, Var.Em targetEmotion, Bird bird, Graph parent, bool shouldHaveSound = false)
 	{
 		this.parent = parent;
+		this.bird = bird;
 		LeanTween.delayedCall(0.5f, Starter);
 		this.shouldHaveSound = shouldHaveSound;
 		GuiContoler.Instance.clearSmallGraph();
@@ -117,7 +120,8 @@ public class GraphPortraitScript : MonoBehaviour {
 		try
 		{
 			targetEmotion = Var.Em.finish;
-			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f);
+			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f).setOnComplete(() =>
+			Graph.Instance.CheckIfCollectedSeed(bird)); ;
 		}
 		catch { }
 	}
