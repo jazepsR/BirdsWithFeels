@@ -307,7 +307,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 			source.time = eventSound.startPoints[number];
 
 		}*/
-        source.Play();
+        source.PlayOneShot(source.clip,eventAudio.volume);
         yield return new WaitForSeconds(source.clip.length + 0.15f);
         eventTalk = StartCoroutine(PlayNextBirdTalk(eventAudio));
     }
