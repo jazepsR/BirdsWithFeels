@@ -672,7 +672,10 @@ public class GuiContoler : MonoBehaviour {
         Var.activeBirds[0].showText();
         dangerFollowHighlight.gameObject.SetActive(false);
         foreach (Bird activeBird in Var.activeBirds)
+        {
             activeBird.SetEmotion();
+            activeBird.seedCollectedInRound = false;
+        }
     }
     public void CloseBirdStats()
     {
@@ -1375,6 +1378,7 @@ public class GuiContoler : MonoBehaviour {
 			Var.tutorialCompleted = true;
 			Var.isBoss = false;
 			winBanner.SetActive(true);
+            GraphBlocker.SetActive(true);
             AudioControler.Instance.PlayWinMusic();
 			clearSmallGraph();		
 		}

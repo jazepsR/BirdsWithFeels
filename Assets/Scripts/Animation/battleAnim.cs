@@ -79,6 +79,8 @@ public class battleAnim :MonoBehaviour {
 			}
 			AudioControler.Instance.setBattleVolume(0f);
 			yield return new WaitForSeconds(2.0f);
+			foreach (Bird bird in Var.activeBirds)
+				bird.GetComponentInChildren<Animator>().SetBool("lose", false);
 			if (Var.isBoss)
 			{
 				GuiContoler.Instance.Reset();
@@ -96,8 +98,6 @@ public class battleAnim :MonoBehaviour {
 				GuiContoler.Instance.CreateBattleReport();
                 
                 }
-				foreach (Bird bird in Var.activeBirds)
-					bird.GetComponentInChildren<Animator>().SetBool("lose", false);
 			}
             foreach(Bird enemy in Var.enemies)
             {

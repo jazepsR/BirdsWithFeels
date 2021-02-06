@@ -160,6 +160,7 @@ public class Bird : MonoBehaviour
 	public BirdSound birdSounds;
     public EmoIndicator indicator;
 	public List<LevelDataScriptable> levelList = new List<LevelDataScriptable>();
+	[HideInInspector] public bool seedCollectedInRound = false;
 	void Awake()
 	{
 		if(!isEnemy && !Var.isTutorial)

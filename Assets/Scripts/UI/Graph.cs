@@ -162,15 +162,20 @@ public class Graph : MonoBehaviour {
 	}
 	public void CheckIfCollectedSeed(Bird bird)
 	{
+		if (graphParent.transform.childCount == 0)
+			return;
 		if (!afterBattle)
+			return;
+		if (bird.seedCollectedInRound)
 			return;
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1, bird.data.level - 1)];
 		foreach (LevelBits bit in level.levelBits)
 		{
 			if (Vector2.Distance(new Vector2(bird.data.friendliness, bird.data.confidence), new Vector2(bit.social, bit.conf)) <= 3
-					&& !isSmall && !bird.data.recievedSeeds.Contains(bit.name))
+					&& !isSmall && !bird.data.recievedSeeds.Contains(bit.name) && !bird.seedCollectedInRound)
 			{
 				CollectSeed(bird, bit);
+				bird.seedCollectedInRound = true;
 			}
 		}
 	}

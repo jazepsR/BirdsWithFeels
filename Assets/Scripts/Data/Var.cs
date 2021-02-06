@@ -81,6 +81,7 @@ public static class Var {
     public static int battlePlanningTutorialID = 11;
     public static int levelTutorialID = 21;
 	public static bool cheatsEnabled = true;
+	public static float levelPopupDelay = 1f;
 }
 
 [Serializable]

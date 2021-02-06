@@ -36,15 +36,18 @@ public class LevelBarScript : MonoBehaviour {
 	public void AddPoints(Bird bird)
 	{
 		currentPoints++;
-		Vector3 temp= levelBar.rectTransform.localScale;
+		Vector3 temp = levelBar.rectTransform.localScale;
 		levelBar.rectTransform.localScale = temp;
-		temp.y = currentPoints /(float) maxPoints;
-		id =LeanTween.value(gameObject, (float val) => levelBar.rectTransform.localScale = new Vector3(temp.x, val, temp.z), (currentPoints - 1) / ((float)maxPoints), temp.y, 0.5f).setEaseOutQuad().setOnComplete(()=>
-		AudioControler.Instance.PlaySound(AudioControler.Instance.levelUp)).id;
+		temp.y = currentPoints / (float)maxPoints;
+		id = LeanTween.value(gameObject, (float val) => levelBar.rectTransform.localScale = new Vector3(temp.x, val, temp.z), (currentPoints - 1) / ((float)maxPoints), temp.y, 0.5f).setEaseOutQuad().setOnComplete(() =>
+		{ AudioControler.Instance.PlaySound(AudioControler.Instance.levelUp);
 		if (maxPoints == currentPoints)
 		{
-			Helpers.ApplyLevel(bird);
+			LeanTween.delayedCall(Var.levelPopupDelay,()=> Helpers.ApplyLevel(bird));
 		}
+	}		
+		).id;
+		
 		SetText(bird);
 	}
 	public void SetText(Bird bird, LevelDataScriptable data = null)
