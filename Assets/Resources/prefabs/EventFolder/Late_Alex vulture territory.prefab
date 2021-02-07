@@ -249,6 +249,8 @@ MonoBehaviour:
   canShowMultipleTimes: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
 --- !u!1 &4506307749276132245
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,7 +446,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4506307749697589591}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4506307749587901123
 MonoBehaviour:
@@ -459,9 +461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "No, listen. It\u2019s incredibly dangerous out here. We\u2019re deep in
-    vulture territory and we\u2019re surrounded by enemies. I won\u2019t let any
-    of you get harmed!"
+  text: "It\u2019s incredibly dangerous out here. We\u2019re deep in vulture territory
+    and we\u2019re surrounded by enemies. I won\u2019t let any of you get harmed!"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &4506307749697589588
@@ -498,58 +499,10 @@ Transform:
   - {fileID: 4506307748864786191}
   - {fileID: 4506307750056016897}
   - {fileID: 4506307748410829119}
-  - {fileID: 4506307749751786750}
   - {fileID: 4506307749587901120}
   m_Father: {fileID: 4506307749222598716}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4506307749751786751
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4506307749751786750}
-  - component: {fileID: 4506307749751786745}
-  m_Layer: 0
-  m_Name: Part 8
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4506307749751786750
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4506307749751786751}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4506307749697589591}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4506307749751786745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4506307749751786751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerId: 4
-  text: "Alexander\u2026 \r\n"
-  useCustomPic: 0
-  customPic: {fileID: 0}
 --- !u!1 &4506307750056016902
 GameObject:
   m_ObjectHideFlags: 0
