@@ -17,11 +17,11 @@ public class AudioGroup
 	public float maxPitch=1f;
 	public void Play()
 	{
-       // Debug.LogError("Playing sound: "+clips[0].name );
+      // Debug.LogError("Playing sound: "+clips[0].name );
 		AudioControler.Instance.PlaySound(this);
 	}
 }
-public enum audioSourceType { main,ambient,birdVoices,ui,particles, other};
+public enum audioSourceType { main,ambient,birdVoices,ui,particles, other, eventAudio };
 public class AudioControler : MonoBehaviour {
     public static AudioControler Instance { get; private set; }
     public bool inBattle = false;
@@ -50,6 +50,7 @@ public class AudioControler : MonoBehaviour {
     public AudioGroup rockMouseover;
     public AudioGroup effectTileMouseover;
     public AudioGroup tileHighlightBirdHover;
+    public AudioGroup tileHighlightBirdHoverSpecial;
     public AudioGroup confidentParticlePostBattle;
     public AudioGroup heartParticlePostBattle;
     [Header("Graph effects")]
@@ -92,6 +93,7 @@ public class AudioControler : MonoBehaviour {
     public AudioGroup powerTileNegative;
     public AudioGroup powerTileHeart;
     public AudioGroup powerTileCombat;
+    public AudioGroup powerTileShield;
 
     [Header("Ambient sounds")]
     public AudioGroup AmbientSounds;
@@ -111,6 +113,7 @@ public class AudioControler : MonoBehaviour {
     public AudioSource otherEffects;
     public AudioSource particleSounds;
     [Header("Individual bird sounds")]
+    public AudioGroup VultureDialogueSounds;
     public BirdSound TerrySounds;
     public BirdSound RebeccaSounds;
     public BirdSound AlexSound;
@@ -348,6 +351,8 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 				return otherEffects;
 			case audioSourceType.ambient:
 				return ambientAudioSource;
+            case audioSourceType.eventAudio:
+                return EventController.Instance.eventAudioSource;
 			default:
 				return mainAudioSource;
 		}

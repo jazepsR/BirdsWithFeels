@@ -474,7 +474,7 @@ public class GuiContoler : MonoBehaviour {
             speechPos.Add(pos);
             speechPivotIsFirst.Add(useFirst);
             speechAudioGroup.Add(birdTalk);
-            speechAudioGroup[0].Play();
+          //  speechAudioGroup[0].Play();
             AudioControler.Instance.speechBubbleContinue.Play();
         }
         else
@@ -492,6 +492,12 @@ public class GuiContoler : MonoBehaviour {
             speechBubbleObj.gameObject.SetActive(true);
             activeSpeechText.text = text;
             activeSpeechBubble.GetComponent<UIFollow>().target = pos;
+
+            if(speechAudioGroup.Count == 0)
+            {
+                speechAudioGroup.Add(birdTalk);
+            }
+
             try
             {
                 speechAudioGroup[0].Play();

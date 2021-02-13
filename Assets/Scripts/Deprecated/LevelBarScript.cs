@@ -35,6 +35,7 @@ public class LevelBarScript : MonoBehaviour {
 	}
 	public void AddPoints(Bird bird)
 	{
+		AudioControler.Instance.PlaySound(AudioControler.Instance.emoBarFill);
 		currentPoints++;
 		Vector3 temp = levelBar.rectTransform.localScale;
 		levelBar.rectTransform.localScale = temp;

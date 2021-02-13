@@ -160,14 +160,19 @@ public class ProgressGUI : MonoBehaviour {
             activeHearts = emoHeaderHearts;
 
 
+        portraitFillObj.sprite = bird.portrait.transform.Find("bg").Find("bird_color").GetComponent<Image>().sprite;
+        portrait.sprite = bird.portrait.transform.Find("bg").Find("bird").GetComponent<Image>().sprite;
 
         if (bird.data.injured && showDeath)
         {
             if(!bird.inMap)
                 deathScreen.ShowDeathMenu(bird);
             Helpers.Instance.setHearts(activeHearts, 0, bird.data.maxHealth, bird.prevRoundHealth);
-            portraitFillObj.color = new Color(0, 0, 0, 0);
+           // portraitFillObj.color = new Color(0, 0, 0, 0);
             nameText.text += "- Injured";
+            portraitFillObj.color = Helpers.Instance.GetEmotionColor(bird.emotion);
+
+            AudioControler.Instance.PlaySound(AudioControler.Instance.birdInjuredPopup);
         }
         else
         {
@@ -179,7 +184,6 @@ public class ProgressGUI : MonoBehaviour {
                 bird.hadMentalPain = false;
 
             }
-            portraitFillObj.sprite = bird.portrait.transform.Find("bg").Find("bird_color").GetComponent<Image>().sprite;
             if (bird.prevEmotion != bird.emotion && !bird.inMap)
             {
                 AudioControler.Instance.PlaySound(AudioControler.Instance.newEmotion);
@@ -209,7 +213,6 @@ public class ProgressGUI : MonoBehaviour {
                 portraitFillObj.color = Helpers.Instance.GetEmotionColor(bird.emotion);
             }
             bird.portrait.transform.Find("bg").Find("bird").GetComponent<Image>().color = Color.white;
-            portrait.sprite = bird.portrait.transform.Find("bg").Find("bird").GetComponent<Image>().sprite;
             updateLevels(bird);
             if (!bird.inMap)
             {

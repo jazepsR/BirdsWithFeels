@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115975d08fd14874783642e41418aa9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inBattle: 0
+  inBattle: 1
   defaultSnapshot: {fileID: 24500006, guid: ed6994bbaccc80e428f51f4073518c74, type: 2}
   playerWin:
     clips:
@@ -759,6 +759,14 @@ MonoBehaviour:
     usePitchVariation: 0
     sourceType: 0
     volume: 0.15
+    minPitch: 1
+    maxPitch: 1
+  tileHighlightBirdHoverSpecial:
+    clips:
+    - {fileID: 8300000, guid: 04647865b9d5c2d40a229bb5d7bed8cd, type: 3}
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 0.83
     minPitch: 1
     maxPitch: 1
   confidentParticlePostBattle:
@@ -1054,12 +1062,20 @@ MonoBehaviour:
     volume: 0.52
     minPitch: 1
     maxPitch: 1
+  powerTileShield:
+    clips:
+    - {fileID: 8300000, guid: 824813922ffaf214094a0ead01f90edd, type: 3}
+    usePitchVariation: 0
+    sourceType: 4
+    volume: 0.53
+    minPitch: 1
+    maxPitch: 1
   AmbientSounds:
     clips:
     - {fileID: 8300000, guid: cb7261a6b91aef2488ccab1aaa8d2c02, type: 3}
     usePitchVariation: 0
     sourceType: 1
-    volume: 0.33
+    volume: 0
     minPitch: 1
     maxPitch: 1
   battleTracks:
@@ -1084,6 +1100,19 @@ MonoBehaviour:
   birdVoices: {fileID: 82272072149844258}
   otherEffects: {fileID: 82959546991212600}
   particleSounds: {fileID: 82971078709043774}
+  VultureDialogueSounds:
+    clips:
+    - {fileID: 8300000, guid: 086c99db6e29aa349b1580e230e09865, type: 3}
+    - {fileID: 8300000, guid: 2a7974240cd3de44abbc22030cfae466, type: 3}
+    - {fileID: 8300000, guid: c804fce80e42df148a5c654269018aa1, type: 3}
+    - {fileID: 8300000, guid: 97aa4aa04e68a4a4dbe093cef56162bc, type: 3}
+    - {fileID: 8300000, guid: 2ba26a7f58e986c469175ae5aaf9d263, type: 3}
+    - {fileID: 8300000, guid: 3d91a86b696b80f4a8e26c5a881b734e, type: 3}
+    usePitchVariation: 1
+    sourceType: 0
+    volume: 0.51
+    minPitch: 0.47
+    maxPitch: 0.75
   TerrySounds:
     birdSelect:
       clips:
@@ -1174,6 +1203,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
+      volume: 1
       character: 0
       sylables:
       - {fileID: 8300000, guid: bd36af8a2a765444f8b5f2157a83b74b, type: 3}
@@ -1282,6 +1312,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
+      volume: 1
       character: 1
       sylables:
       - {fileID: 8300000, guid: 97d7e28fada2c30409d12e7670801496, type: 3}
@@ -1382,6 +1413,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
+      volume: 1
       character: 4
       sylables:
       - {fileID: 8300000, guid: de1553fda0377e045ab68bd8f743c439, type: 3}
@@ -1484,6 +1516,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
+      volume: 1
       character: 3
       sylables:
       - {fileID: 8300000, guid: 5fc316d6c21a7624691b08acd45e4c92, type: 3}
@@ -1583,6 +1616,7 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     eventAudio:
+      volume: 1
       character: 2
       sylables:
       - {fileID: 8300000, guid: ea7aa06d70d0c2c41b6962f56fb5cb2a, type: 3}
@@ -1676,6 +1710,7 @@ MonoBehaviour:
       minPitch: 1.1
       maxPitch: 1.29
     eventAudio:
+      volume: 1
       character: 3
       sylables:
       - {fileID: 8300000, guid: 9fd75e0688c36d745a11a4ea2f8a1350, type: 3}
@@ -1695,7 +1730,8 @@ MonoBehaviour:
       - {fileID: 8300000, guid: 1645484bd9e856141a045459bcb48022, type: 3}
       - {fileID: 8300000, guid: eb583fc1ea3184a4396b55965cd596c6, type: 3}
   eventCharacterAudio:
-  - character: 37
+  - volume: 1
+    character: 37
     sylables:
     - {fileID: 8300000, guid: ee4be4a8c94708649a44dc0442642927, type: 3}
     - {fileID: 8300000, guid: 5e83673df22e7a44dabadbec07a8b8b4, type: 3}
@@ -1707,7 +1743,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 94f669abdfacacd4d9cb282b1fa8bf4c, type: 3}
     - {fileID: 8300000, guid: 810d2567672dc844584ee7c4b04ee866, type: 3}
     - {fileID: 8300000, guid: fdeef21fa306f7f44b18d12976e3ef8f, type: 3}
-  - character: 7
+  - volume: 1
+    character: 7
     sylables:
     - {fileID: 8300000, guid: d6e581c03bfc2764dad30b9de9eb9514, type: 3}
     - {fileID: 8300000, guid: 2065b47272a434f43a2c0bca016da87c, type: 3}
@@ -1721,7 +1758,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: d4982f88ba1df68418c267b16b4996f9, type: 3}
     - {fileID: 8300000, guid: ab53283ef179e5743861bb7946f9062b, type: 3}
     - {fileID: 8300000, guid: 985b819a87335914fb99a47806695139, type: 3}
-  - character: 42
+  - volume: 1
+    character: 42
     sylables:
     - {fileID: 8300000, guid: fe3f274488faff74dadfd2c62a84c020, type: 3}
     - {fileID: 8300000, guid: 2a6032fbefe96754e83b9b9c40f28499, type: 3}
@@ -1731,7 +1769,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 58a7226d6e64f0141a4df2e8e7cc3f54, type: 3}
     - {fileID: 8300000, guid: 1f175ab36e41a624b8c432d1d3332d55, type: 3}
     - {fileID: 8300000, guid: 96d52af5baaa334429ce1491aa69a5fe, type: 3}
-  - character: 40
+  - volume: 1
+    character: 40
     sylables:
     - {fileID: 8300000, guid: 30687d49c0bd80f4f94f368e736a354a, type: 3}
     - {fileID: 8300000, guid: 48bce84ded98847438ae3d6325a279ad, type: 3}
@@ -1739,7 +1778,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 3eb17e5f311123445a2f415e9bff687c, type: 3}
     - {fileID: 8300000, guid: bb955f979ecf22945bab524db544d54e, type: 3}
     - {fileID: 8300000, guid: b6a23db086feeb348b9a1edfb1cebb44, type: 3}
-  - character: 24
+  - volume: 1
+    character: 24
     sylables:
     - {fileID: 8300000, guid: bb424373f07477e4dba53e4a9a8027c0, type: 3}
     - {fileID: 8300000, guid: 7fe52649ff061e141af4f9e67c373de6, type: 3}
@@ -1748,7 +1788,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 7e9744ccf110d884d8916134cfb1dbf6, type: 3}
     - {fileID: 8300000, guid: 7afb96a6213d65543a42a5e9b9f24466, type: 3}
     - {fileID: 8300000, guid: 209c4814983aeed409c05d3afc775b5b, type: 3}
-  - character: 35
+  - volume: 1
+    character: 35
     sylables:
     - {fileID: 8300000, guid: 3378cab93f57f9949af99669ec7db02a, type: 3}
     - {fileID: 8300000, guid: 7a71372a01cde4841ad35179ea295a0c, type: 3}
@@ -1759,7 +1800,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 554e7f6f61bc43a4e96edc8dee300223, type: 3}
     - {fileID: 8300000, guid: 8e2d6335e48826a4c82e143bedd127f3, type: 3}
     - {fileID: 8300000, guid: 035ad10c83b710b4aa109f3cae3c0258, type: 3}
-  - character: 36
+  - volume: 1
+    character: 36
     sylables:
     - {fileID: 8300000, guid: 344763f26f5fb874fb8e9cb60d208531, type: 3}
     - {fileID: 8300000, guid: ab1bc9d904deb904aad0c5c018fb4e4e, type: 3}
@@ -1767,7 +1809,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 8f6df7800772ee2498cca52259207230, type: 3}
     - {fileID: 8300000, guid: 6259a3c9bbc10f6429927fef8e5743e4, type: 3}
     - {fileID: 8300000, guid: ca8fd91db68b0714d8d587321d980c9e, type: 3}
-  - character: 47
+  - volume: 1
+    character: 47
     sylables:
     - {fileID: 8300000, guid: 47fc00b1884458b499e5de382b07ab17, type: 3}
     - {fileID: 8300000, guid: 1beaf85b9971e7b4186a89f4e4f87613, type: 3}
@@ -1776,7 +1819,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 5e3d622d961f3c64aa4fb34d4df1d095, type: 3}
     - {fileID: 8300000, guid: 4e44b9cff3236e44280f4022d3554afa, type: 3}
     - {fileID: 8300000, guid: af840baf40fdbc44e9969a44e2a3646a, type: 3}
-  - character: 41
+  - volume: 1
+    character: 41
     sylables:
     - {fileID: 8300000, guid: 850c51eb4edac854bbfca044a8e58171, type: 3}
     - {fileID: 8300000, guid: d8dc2a9542271f143975ff372650b927, type: 3}
@@ -1791,7 +1835,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 4a18d6a914b5fee4c9db107665060369, type: 3}
     - {fileID: 8300000, guid: a48e8f7cfcf672541b7fdaaf7cbea0c4, type: 3}
     - {fileID: 8300000, guid: 2ad6a24f80cfa8d489b6da5baad19190, type: 3}
-  - character: 30
+  - volume: 1
+    character: 30
     sylables:
     - {fileID: 8300000, guid: 6520f270e65f7fe40b41426ab3344d73, type: 3}
     - {fileID: 8300000, guid: c37548c3b4aeb6a42b16d88a0851810d, type: 3}
@@ -1800,7 +1845,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: c0cc7d5d04205774182df147f0de20f8, type: 3}
     - {fileID: 8300000, guid: 49375ee5840783747adc2da78a63c883, type: 3}
     - {fileID: 8300000, guid: fd1f54c35e48b694f977ccea57408b26, type: 3}
-  - character: 32
+  - volume: 1
+    character: 32
     sylables:
     - {fileID: 8300000, guid: 8745e34463aeab345ab61c36c719460b, type: 3}
     - {fileID: 8300000, guid: 6489076aa4cb8d641a3e60004a794362, type: 3}
@@ -1817,7 +1863,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 010c217f09a6caf4b8e6a981b7a62590, type: 3}
     - {fileID: 8300000, guid: a3ac2ea9cab6bb64d9a73e07a41f2d94, type: 3}
     - {fileID: 8300000, guid: 0927a92956817d74898bbfa7d9756b53, type: 3}
-  - character: 33
+  - volume: 1
+    character: 33
     sylables:
     - {fileID: 8300000, guid: 167ba3e772611814a8837eaccdab99aa, type: 3}
     - {fileID: 8300000, guid: 4aaf7b5492c43354d8bfba33646dfd69, type: 3}
@@ -1829,7 +1876,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 4e6f735dc896f7341a2b78b109fa689d, type: 3}
     - {fileID: 8300000, guid: 429f6760dc42ccd41a36dba35fc86fcd, type: 3}
     - {fileID: 8300000, guid: c80f67434a12ab54db2f92fa7171de78, type: 3}
-  - character: 31
+  - volume: 1
+    character: 31
     sylables:
     - {fileID: 8300000, guid: 086c99db6e29aa349b1580e230e09865, type: 3}
     - {fileID: 8300000, guid: 2a7974240cd3de44abbc22030cfae466, type: 3}
@@ -1837,7 +1885,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 97aa4aa04e68a4a4dbe093cef56162bc, type: 3}
     - {fileID: 8300000, guid: 2ba26a7f58e986c469175ae5aaf9d263, type: 3}
     - {fileID: 8300000, guid: 3d91a86b696b80f4a8e26c5a881b734e, type: 3}
-  - character: 22
+  - volume: 1
+    character: 22
     sylables:
     - {fileID: 8300000, guid: e9cc0298ddc4927489247318e067a0a4, type: 3}
     - {fileID: 8300000, guid: af0f8876ed8d1bd4cb2da126d4b43f62, type: 3}
@@ -1847,7 +1896,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: f09980b2fc3a756469636339433bdfd3, type: 3}
     - {fileID: 8300000, guid: a45644dd40617814ea9b5c9e808afb50, type: 3}
     - {fileID: 8300000, guid: cd0a4b8164a7a7d4c9ca903c1e2c5753, type: 3}
-  - character: 21
+  - volume: 1
+    character: 21
     sylables:
     - {fileID: 8300000, guid: 17dc3db44d18d204c8be30539dac7701, type: 3}
     - {fileID: 8300000, guid: f0d012a0b947d1240aa08e8a5ff0b265, type: 3}
@@ -1855,7 +1905,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 0597e4e395097fb418bbba8cb1aad43f, type: 3}
     - {fileID: 8300000, guid: 003761629efea6a4dae1180b5aac93a4, type: 3}
     - {fileID: 8300000, guid: 385dc032cb4775d44aaea39362f4edd5, type: 3}
-  - character: 28
+  - volume: 1
+    character: 28
     sylables:
     - {fileID: 8300000, guid: f4ccc800c75e59a44a100d1a1f709b52, type: 3}
     - {fileID: 8300000, guid: c65824646cd0f364e981bab14ccbe4d8, type: 3}
@@ -1867,7 +1918,8 @@ MonoBehaviour:
     - {fileID: 8300000, guid: f9ff208844af3064c90c8a564f09041c, type: 3}
     - {fileID: 8300000, guid: 7f1b64214df8ae04d8c21fbe0fd6984b, type: 3}
     - {fileID: 8300000, guid: a99a321cd94cc5244b8fa73d94c33c9c, type: 3}
-  - character: 9
+  - volume: 1
+    character: 9
     sylables:
     - {fileID: 8300000, guid: f185575fd137d8c41bfe57b16e6fa5b4, type: 3}
     - {fileID: 8300000, guid: a4e3565fe9c009c4e8042d67b830d5f8, type: 3}
@@ -1880,6 +1932,36 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 211189fcadd101a4b955af73b1bf3f4d, type: 3}
     - {fileID: 8300000, guid: cc7eb556e06c2494889a9172d537076d, type: 3}
     - {fileID: 8300000, guid: d601b0bf9a091a747b1558fd7dedaff5, type: 3}
+  - volume: 0
+    character: 44
+    sylables:
+    - {fileID: 8300000, guid: d6e581c03bfc2764dad30b9de9eb9514, type: 3}
+    - {fileID: 8300000, guid: 2065b47272a434f43a2c0bca016da87c, type: 3}
+    - {fileID: 8300000, guid: 580cfdf37d1559c4caed277d0a8ce791, type: 3}
+    - {fileID: 8300000, guid: 6e832e320f2ce0f4c91cb94309bd9f58, type: 3}
+    - {fileID: 8300000, guid: e7fd95315e1809e44b64942f98fdcb23, type: 3}
+    - {fileID: 8300000, guid: f56d7c2303bb71045873461d2054ebb6, type: 3}
+    - {fileID: 8300000, guid: 69853325b13f4394596ca9169e978450, type: 3}
+    - {fileID: 8300000, guid: ce90aa96b1c14684987704edcdd8b5f9, type: 3}
+    - {fileID: 8300000, guid: 2e699c9f248ece0468505265e60e9109, type: 3}
+    - {fileID: 8300000, guid: d4982f88ba1df68418c267b16b4996f9, type: 3}
+    - {fileID: 8300000, guid: ab53283ef179e5743861bb7946f9062b, type: 3}
+    - {fileID: 8300000, guid: 985b819a87335914fb99a47806695139, type: 3}
+  - volume: 0
+    character: 45
+    sylables:
+    - {fileID: 8300000, guid: d6e581c03bfc2764dad30b9de9eb9514, type: 3}
+    - {fileID: 8300000, guid: 2065b47272a434f43a2c0bca016da87c, type: 3}
+    - {fileID: 8300000, guid: 580cfdf37d1559c4caed277d0a8ce791, type: 3}
+    - {fileID: 8300000, guid: 6e832e320f2ce0f4c91cb94309bd9f58, type: 3}
+    - {fileID: 8300000, guid: e7fd95315e1809e44b64942f98fdcb23, type: 3}
+    - {fileID: 8300000, guid: f56d7c2303bb71045873461d2054ebb6, type: 3}
+    - {fileID: 8300000, guid: 69853325b13f4394596ca9169e978450, type: 3}
+    - {fileID: 8300000, guid: ce90aa96b1c14684987704edcdd8b5f9, type: 3}
+    - {fileID: 8300000, guid: 2e699c9f248ece0468505265e60e9109, type: 3}
+    - {fileID: 8300000, guid: d4982f88ba1df68418c267b16b4996f9, type: 3}
+    - {fileID: 8300000, guid: ab53283ef179e5743861bb7946f9062b, type: 3}
+    - {fileID: 8300000, guid: 985b819a87335914fb99a47806695139, type: 3}
   conflictWin:
     clips: []
     usePitchVariation: 0

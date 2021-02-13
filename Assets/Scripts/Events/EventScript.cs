@@ -70,11 +70,15 @@ public class EventScript:MonoBehaviour{
     public bool quitAfterLevel = false;
     public Sprite eventBackground;
     public bool useBgFog = true;
+    public bool useEventAudio;
+    public AudioGroup eventAudio;
     public EventScript()
 	{
 
 	}
-	public void Awake()
+   
+  
+    public void Awake()
 	{
 		if(Application.isEditor)
 		{

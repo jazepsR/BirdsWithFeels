@@ -47,6 +47,8 @@ public class EventController : MonoBehaviour {
 	int currentText = 0;
 	bool activeChoices = false;
 	bool printing = false;
+
+	public AudioSource eventAudioSource;
 	// Use this for initialization
 	void Awake () {
 		eventsToShow = new List<EventScript>();
@@ -54,28 +56,34 @@ public class EventController : MonoBehaviour {
 	}
 	void Start()
 	{
-		try
+		if (eventAudioSource == null)
 		{
-            if (!inMap)
-            {
-
-                foreach (EventSegment segment in eventSegments)
-                {
-                    int id = Var.currentStageID % 1000;
-                    if (id >= segment.minID && id <= segment.maxID)
-                    {
-                        events.AddRange(segment.eventParent.GetComponentsInChildren<EventScript>());
-                        break;
-                    }
-                }
-            }
-        }
-		catch
-		{
-
+			eventAudioSource = gameObject.AddComponent<AudioSource>();
 		}
-		if (testEvent != null)
+		if (testEvent == null)
+		{
+			if (!inMap)
+			{
+
+				foreach (EventSegment segment in eventSegments)
+				{
+					int id = Var.currentStageID % 1000;
+					if (id >= segment.minID && id <= segment.maxID)
+					{
+						events.AddRange(segment.eventParent.GetComponentsInChildren<EventScript>());
+						break;
+					}
+				}
+				LeanTween.delayedCall(0.25f, () => tryEvent());
+			}
+		}
+		else
+		{
 			CreateEvent(testEvent);
+		}
+
+
+
 		nextEvent = null;
 	}
 
@@ -128,7 +136,10 @@ public class EventController : MonoBehaviour {
                 return;
             }
             eventObject.SetActive(false);
-			if(nextEvent!= null)
+			LeanTween.value(gameObject, (float vol) => eventAudioSource.volume = vol, eventAudioSource.volume, 0, 0.5f);
+
+
+			if (nextEvent!= null)
             {
                 // currentEvent = null;
                 nextEvent.canShowMultipleTimes = true;
@@ -264,6 +275,14 @@ public class EventController : MonoBehaviour {
         }
 		eventBg.gameObject.SetActive(eventData.eventBackground != null);
 		bgFog.gameObject.SetActive(eventData.useBgFog);
+
+		if(eventData.useEventAudio && eventData.eventAudio.clips.Length >0)
+        {
+			eventAudioSource.volume = 1f;
+			eventData.eventAudio.Play();
+        }
+
+
 		if (!eventData.canShowMultipleTimes)
 		{
 			Var.shownEvents.Add(eventData.heading);

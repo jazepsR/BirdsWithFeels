@@ -168,6 +168,8 @@ public class Graph : MonoBehaviour {
 			return;
 		if (bird.seedCollectedInRound)
 			return;
+		if (bird.data.injured)
+			return;
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1, bird.data.level - 1)];
 		foreach (LevelBits bit in level.levelBits)
 		{
@@ -189,6 +191,7 @@ public class Graph : MonoBehaviour {
             }
 		}
 
+		AudioControler.Instance.PlaySound(AudioControler.Instance.collectEmoSeed);
 		GameObject toInstantiate = Helpers.Instance.seed;
 		GameObject obj = Instantiate(toInstantiate, graphParent.transform);
 		obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-factor * bit.social, factor * bit.conf, 0);

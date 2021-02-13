@@ -61,6 +61,15 @@ public class powerTile : MonoBehaviour {
 		}
 	}
 
+	void OnTriggerEnter2D(Collider2D other)
+	{
+		if (other.tag == "feet" && type != Var.PowerUps.obstacle)
+		{
+			AudioControler.Instance.PlaySound(AudioControler.Instance.tileHighlightBirdHoverSpecial);
+		}
+	}
+
+
 	void AllowKiss()
 	{
 		canKiss = true;
@@ -81,7 +90,7 @@ public class powerTile : MonoBehaviour {
 				break;
             case Var.PowerUps.shield:
                 info = "Birds on this tile are shielded from damage";
-                AudioControler.Instance.powerTileCombat.Play();
+                AudioControler.Instance.powerTileShield.Play();
                 break;
             case Var.PowerUps.emotion:
 				info = "Gain one extra "+Helpers.Instance.GetHexColor(emotion) + emotion.ToString()+"</color>";
