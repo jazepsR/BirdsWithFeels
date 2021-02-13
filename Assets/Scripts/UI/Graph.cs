@@ -170,6 +170,8 @@ public class Graph : MonoBehaviour {
 			return;
 		if (bird.data.injured)
 			return;
+		if (Var.isEnding || Var.isTutorial)
+			return;
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1, bird.data.level - 1)];
 		foreach (LevelBits bit in level.levelBits)
 		{
