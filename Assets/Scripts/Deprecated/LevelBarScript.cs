@@ -28,10 +28,7 @@ public class LevelBarScript : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.J) && Var.cheatsEnabled)
-		{
-			AddPoints(Var.activeBirds[0]);
-		}
+		
 	}
 	public void AddPoints(Bird bird)
 	{

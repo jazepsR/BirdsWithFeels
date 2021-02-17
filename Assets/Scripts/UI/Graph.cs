@@ -30,7 +30,26 @@ public class Graph : MonoBehaviour {
 		multiplier = graphSize / 15;
 		CheckEmotionLock();
 	}
-	public void CheckEmotionLock()
+
+    public void Update()
+    {
+		if (Input.GetKeyDown(KeyCode.J) && Var.cheatsEnabled && !isSmall)
+		{
+			var level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
+			   Var.activeBirds[0].data.level - 1)];
+
+			foreach (LevelBits bit in level.levelBits)
+			{
+				if (!Var.activeBirds[0].data.recievedSeeds.Contains(bit.name))
+				{
+					CollectSeed(Var.activeBirds[0],bit);
+					break;
+				}
+
+			}
+		}
+	}
+    public void CheckEmotionLock()
 	{
 		if(isSmall && lockImage!= null && Var.freezeEmotions)
 		{
