@@ -14,9 +14,17 @@ public class LevelBarScript : MonoBehaviour {
 	public bool isSecond;
 	ShowTooltip tooltipScript;
 	public GameObject[] seedIndicators;
+	public Animator levelUpAnimator;
+	public static LevelBarScript Instance;
 	int id = -1;
-	// Use this for initialization
-	void Start () {
+
+
+    private void Awake()
+    {
+		Instance = this;
+    }
+    // Use this for initialization
+    void Start () {
 		LeanTween.cancel(id);
 		tooltipScript = GetComponent<ShowTooltip>();
 		gameObject.SetActive(Var.gameSettings.shownLevelTutorial);
@@ -41,6 +49,10 @@ public class LevelBarScript : MonoBehaviour {
 		{ AudioControler.Instance.PlaySound(AudioControler.Instance.levelUp);
 		if (maxPoints == currentPoints)
 		{
+			if (levelUpAnimator)
+			{
+				levelUpAnimator.SetBool("isLevellingUp", true);
+			}
 			LeanTween.delayedCall(Var.levelPopupDelay,()=> Helpers.ApplyLevel(bird));
 		}
 	}		
