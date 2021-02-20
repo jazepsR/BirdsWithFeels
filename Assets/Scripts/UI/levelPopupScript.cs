@@ -49,7 +49,7 @@ public class levelPopupScript : MonoBehaviour {
 		if (data.givesPower)
 		{
 			firstImage.sprite = sword;
-			firstText.text = name + " gained +10% combat strength!";
+			firstText.text = name + " gained +10% diplomatic might!";
 		}
 
 		//second part
@@ -76,7 +76,7 @@ public class levelPopupScript : MonoBehaviour {
 			firstPart.SetActive(false);
 			secondPart.SetActive(true);
 			thirdPart.SetActive(false);
-			title.text = "Getting stronger!";
+			title.text = "Getting better!";
 		}
 		else
 		{
