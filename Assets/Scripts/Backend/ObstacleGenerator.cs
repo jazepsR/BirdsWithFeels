@@ -55,25 +55,31 @@ public class ObstacleGenerator : MonoBehaviour {
 			}*/
 			return;
 		}
-			
+		bool[] enemyPositions = new bool[8];
+		for(int i=0;i<fillEnemy.Instance.Enemies.Length;i++)
+        {
+			enemyPositions[i] = fillEnemy.Instance.Enemies[i].isActiveAndEnabled;
+			//Debug.Log("bird: " + (i+1) + " active: " + fillEnemy.Instance.Enemies[i].isActiveAndEnabled);
+
+        }
 		//TODO: set rock probability with float
 		//TODO: set max rock count
-		foreach (LayoutButton tile in tiles)
+		for(int i=0;i<tiles.Count;i++)
 		{
 			float rand = Random.Range(0.0f, 1.0f);
 			if (Var.map[GuiContoler.mapPos].hasRocks && rand > 0.9f)
 			{          
-				Vector3 pos = new Vector3(tile.transform.position.x+0.05f, tile.transform.position.y + 0.3f, 20);
-				tile.isActive = false;
+				Vector3 pos = new Vector3(tiles[i].transform.position.x+0.05f, tiles[i].transform.position.y + 0.3f, 20);
+				tiles[i].isActive = false;
 				GameObject rockObj = Instantiate(rock, pos, Quaternion.identity);
 				rockObj.transform.parent = BattleArea.transform;
-				tile.gameObject.SetActive(false);
+				tiles[i].gameObject.SetActive(false);
 				obstacles.Add(rockObj);              
 			}
 			if(rand>0.8f && rand < 0.9f && Var.map[GuiContoler.mapPos].powerUps.Count>0)
 			{
 				List<Var.Em> powerUps = Var.map[GuiContoler.mapPos].powerUps;
-				Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 20);
+				Vector3 pos = new Vector3(tiles[i].transform.position.x, tiles[i].transform.position.y, 20);
 				Var.Em emotion = powerUps[Random.Range(0, powerUps.Count)];
 				GameObject obj;
 				switch (emotion)
@@ -96,11 +102,11 @@ public class ObstacleGenerator : MonoBehaviour {
 				}
 				GameObject powerObj = Instantiate(obj, pos, Quaternion.identity);
 				powerObj.transform.parent = BattleArea.transform;
-				tile.power = powerObj.GetComponent<powerTile>();
+				tiles[i].power = powerObj.GetComponent<powerTile>();
 				powerObj.GetComponent<powerTile>().SetColor(emotion);
 				obstacles.Add(powerObj);
 			}
-            if(rand>0.7f && rand < 0.8f && Var.map[GuiContoler.mapPos].powers != null)
+            if(rand>0.65f && rand < 0.8f && Var.map[GuiContoler.mapPos].powers != null)
             {
                // Var.map[GuiContoler.mapPos].powers.Add(Var.PowerUps.shield);
 
@@ -110,23 +116,59 @@ public class ObstacleGenerator : MonoBehaviour {
 					List<Var.PowerUps> pow = Var.map[GuiContoler.mapPos].powers;
 					Var.PowerUps type = pow[Random.Range(0, pow.Count)];
 					GameObject powerUp = null;
-					Vector3 pos = new Vector3(tile.transform.position.x, tile.transform.position.y, 20);
+					Vector3 pos = new Vector3(tiles[i].transform.position.x, tiles[i].transform.position.y, 20);
+					bool enemyInRow = false;
+
+					for(int j =0;j<enemyPositions.Length;j++)
+                    {
+						if(j<4)
+                        {
+                            //column
+							if(i%4 == j && enemyPositions[j])
+                            {
+								enemyInRow = true;
+								//Debug.LogError("enemy: " + j + " tile: " + i);
+								break;
+							}
+
+                        }
+                        else
+                        {
+							//row
+							if(i<(j-3)*4 && i>= (j - 4) * 4 && enemyPositions[j])
+							{
+								enemyInRow = true;
+								//Debug.LogError("enemy: " + j + " tile: " + i);
+								break;
+							}
+
+						}
+
+                    }
+
+
 					switch (type)
 					{
 						case Var.PowerUps.dmg:
-							powerUp = Instantiate(healthTile, pos, Quaternion.identity);
+							if (enemyInRow)
+							{
+								powerUp = Instantiate(dmgTile, pos, Quaternion.identity);
+							}
 							break;
 						case Var.PowerUps.heal:
-							powerUp = Instantiate(dmgTile, pos, Quaternion.identity);
+							powerUp = Instantiate(healthTile, pos, Quaternion.identity);
 							break;
                         case Var.PowerUps.shield:
-                            powerUp = Instantiate(shieldTile, pos, Quaternion.identity);
+							if (enemyInRow)
+							{
+								powerUp = Instantiate(shieldTile, pos, Quaternion.identity);
+							}
                             break;
 
                     }
 					powerUp.transform.parent = BattleArea.transform;
 					obstacles.Add(powerUp);
-					tile.power = powerUp.GetComponent<powerTile>();
+					tiles[i].power = powerUp.GetComponent<powerTile>();
 				}
 				catch
 				{

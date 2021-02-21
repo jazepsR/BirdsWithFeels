@@ -1110,6 +1110,8 @@ public class Helpers : MonoBehaviour {
 				return level;
 			case Var.Em.Random:
 				return level;
+			case Var.Em.Shield:
+				return brave;
 			default:
 				return neutral;
 		}

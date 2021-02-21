@@ -231,40 +231,43 @@ public class EventController : MonoBehaviour {
 			birdsToCheck = Var.activeBirds;
 		}
 		bool canCreateEvent = false;
-		EventScript ev = events[Random.Range(0, events.Count)];
-
-		for (int i = 0; i < 100; i++)
+		if (events.Count > 0)
 		{
+			EventScript ev = events[Random.Range(0, events.Count)];
 
-
-			
-			if (testEvent != null)
-				ev = testEvent;
-			else
-				ev = events[Random.Range(0, events.Count)];
-			canCreateEvent = true;
-			if (ev == null)
-				canCreateEvent = false;
-			else
+			for (int i = 0; i < 100; i++)
 			{
-				if (Var.shownEvents.Contains(ev.heading))
-					canCreateEvent = false;
-				if (ev.speakers.Contains(EventScript.Character.Alexander) && Var.availableBirds.Count < 4)
-					canCreateEvent = false;
-				if (ev.speakers.Contains(EventScript.Character.Sophie) && Var.availableBirds.Count < 5)
-					canCreateEvent = false;
-				if (ev.speakers[0] != EventScript.Character.None)
-				{
-					if (!ConditionCheck.CheckCondition(ev.condition, Helpers.Instance.GetBirdFromEnum(ev.speakers[0]), ev.targetEmotion, ev.magnitude))
-						canCreateEvent = false;
-				}
-			}
-			if (canCreateEvent)
-				break;
-		}
 
-		if(canCreateEvent)
-			CreateEvent(ev);
+
+
+				if (testEvent != null)
+					ev = testEvent;
+				else
+					ev = events[Random.Range(0, events.Count)];
+				canCreateEvent = true;
+				if (ev == null)
+					canCreateEvent = false;
+				else
+				{
+					if (Var.shownEvents.Contains(ev.heading))
+						canCreateEvent = false;
+					if (ev.speakers.Contains(EventScript.Character.Alexander) && Var.availableBirds.Count < 4)
+						canCreateEvent = false;
+					if (ev.speakers.Contains(EventScript.Character.Sophie) && Var.availableBirds.Count < 5)
+						canCreateEvent = false;
+					if (ev.speakers[0] != EventScript.Character.None)
+					{
+						if (!ConditionCheck.CheckCondition(ev.condition, Helpers.Instance.GetBirdFromEnum(ev.speakers[0]), ev.targetEmotion, ev.magnitude))
+							canCreateEvent = false;
+					}
+				}
+				if (canCreateEvent)
+					break;
+			}
+
+			if (canCreateEvent)
+				CreateEvent(ev);
+		}
 		return true;
 	}
 	public void CreateEvent(EventScript eventData)

@@ -8,6 +8,7 @@ public class emoParticleController : MonoBehaviour {
 	public ParticleSystem particles_lonely;
 	public ParticleSystem particles_confident;
 	public ParticleSystem particles_cautious;
+	public ParticleSystem particles_shield;
 	public int small;
 	public int medium;
 	public int large;
@@ -52,7 +53,14 @@ public class emoParticleController : MonoBehaviour {
                     particles_cautious.Emit(getNumber(intensity));
                 else
                     Debug.LogError("Particle reference missing!");
-				break; 
+				break;
+
+			case Var.Em.Shield:
+				if (particles_shield)
+					particles_shield.Emit(getNumber(intensity));
+				else
+					Debug.LogError("Particle reference missing!");
+				break;
 		}
 	}
 	
