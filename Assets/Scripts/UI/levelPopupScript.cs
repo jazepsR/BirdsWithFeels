@@ -113,7 +113,11 @@ public class levelPopupScript : MonoBehaviour {
 		secondPart.SetActive(false);
 		thirdPart.SetActive(false);
 		activeBird.hasNewLevel = false;
-		LevelPopup.SetActive(false);
+		
+
+        Animator popupAnim = LevelPopup.GetComponent<Animator>();
+        popupAnim.SetTrigger("despawn");
+
 		if (LevelBarScript.Instance.levelUpAnimator)
 		{
 			LevelBarScript.Instance.levelUpAnimator.SetBool("isLevellingUp", false);
