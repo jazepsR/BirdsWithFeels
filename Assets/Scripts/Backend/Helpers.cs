@@ -1247,11 +1247,12 @@ public class Helpers : MonoBehaviour {
 		var particleSys = emParticleObject.GetComponentInChildren<ParticleSystem>().colorOverLifetime;
 		//Gradient grad = new Gradient();
 		Color col = GetEmotionColor(emotion);
-	  //  grad.SetKeys(new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
-	  //  particleSys.color = grad;
-		Text text = emParticleObject.transform.Find("Text").GetComponent<Text>();
-		text.enabled = useText;
-		text.text = emotion.ToString().Replace("Super","");
+        //  grad.SetKeys(new GradientColorKey[] { new GradientColorKey(col, 0.0f), new GradientColorKey(col, 1.0f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) });
+        //  particleSys.color = grad;
+        //Text text = emParticleObject.transform.Find("Text").GetComponentInChildren<Text>();
+        Text text = emoParticleCtrl.textObject;
+        text.enabled = useText;
+		text.text = emotion.ToString().Replace("Super",""); 
 		if (text.text == "finish")
 			text.text = "Level up!";
 		text.color = col;
