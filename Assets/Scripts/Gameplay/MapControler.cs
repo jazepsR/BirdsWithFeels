@@ -204,10 +204,12 @@ public class MapControler : MonoBehaviour {
 
 		canMove = true;
 
+        //this is seb taken off
+        /*
         	LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
         LeanTween.value(gameObject, (float alpha) => MapControler.Instance.SelectionMenu.GetComponent<CanvasGroup>().alpha = alpha, 1, 0, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-
-        // SelectionMenuAnimator.SetBool("active", false);
+       */
+         SelectionMenuAnimator.SetBool("active", false); //seb change 
         // SelectionMenuBlurAnimator.SetBool("active", false);
 
         MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
@@ -220,7 +222,7 @@ public class MapControler : MonoBehaviour {
 
     public void ShowSelectionMenuAnimation()
     {
-   //     SelectionMenuAnimator.SetBool("active", true);
+        SelectionMenuAnimator.SetBool("active", true);
   //      SelectionMenuBlurAnimator.SetBool("active", true);
     }
 

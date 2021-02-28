@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EmoIndicator : MonoBehaviour
 {
-    public GameObject parent;
+    public GameObject Background;
     public GameObject plusIcon;
 
     public GameObject socialIcon;
