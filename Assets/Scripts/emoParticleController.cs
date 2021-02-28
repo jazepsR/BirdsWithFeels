@@ -14,6 +14,7 @@ public class emoParticleController : MonoBehaviour {
 	public int medium;
 	public int large;
     public Text textObject;
+    public Sprite shieldSprite;
   
     public Image emotionImage;
 
@@ -29,39 +30,43 @@ public class emoParticleController : MonoBehaviour {
 	public void emitParticles(Var.Em emotion, int intensity)
 	{
         emotionImage.sprite = Helpers.Instance.GetEmotionIcon(emotion);
-		switch(emotion)
-		{
-			case Var.Em.Social:
-                if(particles_social)
-				    particles_social.Emit(getNumber(intensity));
+
+        switch (emotion)
+        {
+            case Var.Em.Social:
+                if (particles_social)
+                    particles_social.Emit(getNumber(intensity));
                 else
                     Debug.LogError("Particle reference missing!");
                 break;
 
-			case Var.Em.Confident:
-                if(particles_confident)                
-				    particles_confident.Emit(getNumber(intensity));
+            case Var.Em.Confident:
+                if (particles_confident)
+                    particles_confident.Emit(getNumber(intensity));
                 else
                     Debug.LogError("Particle reference missing!");
                 break;
 
-			case Var.Em.Solitary:
-                if(particles_lonely)
-				    particles_lonely.Emit(getNumber(intensity));
+            case Var.Em.Solitary:
+                if (particles_lonely)
+                    particles_lonely.Emit(getNumber(intensity));
                 else
                     Debug.LogError("Particle reference missing!");
                 break;
 
-			case Var.Em.Cautious:
+            case Var.Em.Cautious:
                 if (particles_cautious)
                     particles_cautious.Emit(getNumber(intensity));
                 else
                     Debug.LogError("Particle reference missing!");
-				break;
+                break;
 
-			case Var.Em.Shield:
-				if (particles_shield)
-					particles_shield.Emit(getNumber(intensity));
+            case Var.Em.Shield:
+                if (particles_shield)
+                {
+                    particles_shield.Emit(getNumber(intensity));
+                    emotionImage.sprite = shieldSprite;
+                }
 				else
 					Debug.LogError("Particle reference missing!");
 				break;
