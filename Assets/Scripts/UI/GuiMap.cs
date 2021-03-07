@@ -73,36 +73,38 @@ public class GuiMap : MonoBehaviour {
 				}
 				Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
 			}
-			if (inMap)
+			if (inMap || Var.mapSaveData.Count==0)
 				return;
-				foreach (MapSaveData data in Var.mapSaveData)
+
+
+			MapSaveData currentNode = Var.mapSaveData[0];
+			foreach (MapSaveData data in Var.mapSaveData)
+			{
+				if (data.ID == Var.currentStageID)                    
 				{
-                if (data.ID == Var.currentStageID)
-                {
-                    if (data.trialID == data.ID && trialObj != null)
-                    {
-                        trialObj.SetActive(false);
-                    }
-                }
-                else
-                {
-
-                    foreach (MapSaveData targ in Var.mapSaveData)
-                    {
-                        if (targ.ID == data.trialID)
-                        {
-                            nextAdventureIcon.color = Helpers.Instance.GetEmotionColor(targ.emotion);
-                            nextAreaInfo.text = targ.areaName;
-                            nextAdventureIcon.GetComponent<ShowTooltip>().tooltipText = targ.areaName + " is the next big challenge. Main emotion: " + targ.emotion.ToString();
-                            break;
-                        }
-                    }
-
-                }
-					
+					currentNode = data;
+					break;
 				}
-					
-			
+
+			}
+			if (currentNode.trialID == currentNode.ID && trialObj != null)
+			{
+				trialObj.SetActive(false);
+			}
+			else
+			{
+
+				foreach (MapSaveData targ in Var.mapSaveData)
+				{
+					if (targ.ID == currentNode.trialID )
+					{
+						nextAdventureIcon.color = Helpers.Instance.GetEmotionColor(targ.emotion);
+						nextAreaInfo.text = targ.areaName;
+						nextAdventureIcon.GetComponent<ShowTooltip>().tooltipText = targ.areaName + " is the next big challenge. Main emotion: " + targ.emotion.ToString();
+						break;
+					}
+				}
+			}	
 		}
 	}
 
