@@ -78,6 +78,7 @@ public class battleAnim :MonoBehaviour {
 				}
 			}
 			AudioControler.Instance.setBattleVolume(0f);
+			AudioControler.Instance.battleOver.Play();
 			yield return new WaitForSeconds(2.0f);
 			foreach (Bird bird in Var.activeBirds)
 				bird.GetComponentInChildren<Animator>().SetBool("lose", false);

@@ -29,6 +29,7 @@ public class AudioControler : MonoBehaviour {
     public AudioMixerSnapshot defaultSnapshot;
     public AudioGroup playerWin;
     public AudioGroup combatLose;
+    public AudioGroup battleOver;
     public AudioGroup newEmotion;
     public AudioGroup levelUp;
     public AudioGroup enemyRun;
