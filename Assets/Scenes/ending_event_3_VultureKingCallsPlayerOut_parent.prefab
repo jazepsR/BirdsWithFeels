@@ -75,58 +75,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7417989369041053848}
-  - {fileID: 7417989368865831316}
   - {fileID: 7417989368642827106}
   m_Father: {fileID: 7417989368278871791}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7417989367397023642
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7417989367397023641}
-  - component: {fileID: 7417989367397023640}
-  m_Layer: 0
-  m_Name: Part 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7417989367397023641
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417989367397023642}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7417989367673384840}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7417989367397023640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417989367397023642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerId: 0
-  text: I know all of you have it in you to be confident in the face of danger!
-  useCustomPic: 0
-  customPic: {fileID: 0}
 --- !u!1 &7417989367478207340
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +134,16 @@ MonoBehaviour:
   canShowMultipleTimes: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &7417989367521868866
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +172,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7417989367714075182}
-  - {fileID: 7417989368559173787}
   - {fileID: 7417989369359263426}
   m_Father: {fileID: 7417989367478207339}
   m_RootOrder: 0
@@ -338,7 +299,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7417989369189705824}
-  - {fileID: 7417989367397023641}
   - {fileID: 7417989369015342752}
   m_Father: {fileID: 7417989368445237138}
   m_RootOrder: 0
@@ -453,6 +413,16 @@ MonoBehaviour:
   canShowMultipleTimes: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &7417989367714075183
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,7 +682,7 @@ MonoBehaviour:
   selectionText: OK
   selectionTooltip: 
   conclusionHeading: 
-  conclusionText: 
+  conclusionText: It was the only way we could achieve our goals
 --- !u!1 &7417989368084267191
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,6 +843,16 @@ MonoBehaviour:
   canShowMultipleTimes: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &7417989368422118098
 GameObject:
   m_ObjectHideFlags: 0
@@ -970,54 +950,16 @@ MonoBehaviour:
   canShowMultipleTimes: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
---- !u!1 &7417989368559173788
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7417989368559173787}
-  - component: {fileID: 7417989368559173786}
-  m_Layer: 0
-  m_Name: Part 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7417989368559173787
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417989368559173788}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7417989367521868865}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7417989368559173786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417989368559173788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerId: 0
-  text: "We\x19've gone through some rough times together but we can\x19t let the
-    king ruin our friendship!"
-  useCustomPic: 0
-  customPic: {fileID: 0}
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &7417989368595502356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,7 +1095,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7417989367366388968}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7417989368642827105
 MonoBehaviour:
@@ -1180,7 +1122,7 @@ MonoBehaviour:
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: OK
   selectionTooltip: 
-  conclusionHeading: 
+  conclusionHeading: Without me, you would all be hurt, or worse
   conclusionText: 
 --- !u!1 &7417989368761562629
 GameObject:
@@ -1334,53 +1276,6 @@ MonoBehaviour:
   text: Beg pardon?
   useCustomPic: 0
   customPic: {fileID: 0}
---- !u!1 &7417989368865831317
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7417989368865831316}
-  - component: {fileID: 7417989368865831315}
-  m_Layer: 0
-  m_Name: Part 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7417989368865831316
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417989368865831317}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7417989367366388968}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7417989368865831315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7417989368865831317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerId: 0
-  text: Without me, you would all be hurt, or worse
-  useCustomPic: 0
-  customPic: {fileID: 0}
 --- !u!1 &7417989368958118124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1492,7 +1387,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7417989367673384840}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7417989369015342767
 MonoBehaviour:
@@ -1519,7 +1414,8 @@ MonoBehaviour:
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: OK
   selectionTooltip: 
-  conclusionHeading: 
+  conclusionHeading: I know all of you have it in you to be confident in the face
+    of danger!
   conclusionText: 
 --- !u!1 &7417989369041053849
 GameObject:
@@ -1704,6 +1600,16 @@ MonoBehaviour:
   canShowMultipleTimes: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &7417989369302592580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1782,7 +1688,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7417989367521868865}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7417989369359263427
 MonoBehaviour:
@@ -1810,7 +1716,8 @@ MonoBehaviour:
   selectionText: OK
   selectionTooltip: 
   conclusionHeading: 
-  conclusionText: 
+  conclusionText: "We\x19've gone through some rough times together but we can\x19t
+    let the king ruin our friendship!"
 --- !u!1 &7417989369419643724
 GameObject:
   m_ObjectHideFlags: 0

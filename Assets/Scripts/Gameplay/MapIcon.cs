@@ -63,19 +63,27 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	public MeshRenderer[] splineRoads;
 	bool useline;
 	public int trialID;
-	[HideInInspector]
 	public Animator anim;
 	[HideInInspector]
 	public TimedEventControl timedEventTrigger;
 	bool birdAdded = false;
 	public EventScript firstCompleteEvent;
 	public Dialogue firstCompleteDialogue;
-	bool stateSet = false;
+	[HideInInspector] public bool stateSet = false;
 	bool eventShown = false;
 	bool dialogueShown = false;
 	[HideInInspector] public TimedEventControl timedEvent;
-	// Use this for initialization
-	void Start()
+    // Use this for initialization
+
+    private void Awake()
+    {
+        if(!anim)
+        {
+			anim = GetComponent<Animator>();
+        }
+    }
+
+    void Start()
 	{
 		if(MapControler.Instance.allIDs.Contains(ID))
 		{
@@ -219,14 +227,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 					{
 						LeanTween.delayedCall(2.7f, () => icon.anim.SetInteger("state", 1));
 					}
-					Vector2 dist = Camera.main.transform.position - transform.position;
-					if (targets.Length>0)
-                    {
-						dist = Camera.main.transform.position - targets[0].transform.position;
-                    }
-					Vector3 temp = FindObjectOfType<mapPan>().transform.position;
-					temp+= new Vector3(dist.x,dist.y,0);
-					FindObjectOfType<mapPan>().transform.position = temp;
+					CenterMapNode();
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
 				}
@@ -244,7 +245,17 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		}
 
 	}
-
+	public void CenterMapNode()
+	{
+		Vector2 dist = Camera.main.transform.position - transform.position;
+		if (targets.Length > 0)
+		{
+			dist = Camera.main.transform.position - targets[0].transform.position;
+		}
+		Vector3 temp = FindObjectOfType<mapPan>().transform.position;
+		temp += new Vector3(dist.x, dist.y, 0);
+		FindObjectOfType<mapPan>().transform.position = temp;
+	}
 	void ValidateAll()
 	{
 		int i = 1;
@@ -430,20 +441,27 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	{
 	   // LockedIcon.SetActive(false);
 	}
-	void LoadSaveData()
+	public void LoadSaveData(bool createNewSave = false)
 	{
 		bool SaveDataCreated = false;
 		foreach (MapSaveData data in Var.mapSaveData)
 		{
 			if (data.ID == ID)
 			{
-				SaveDataCreated = true;
+				if(createNewSave)
+                {
+					Var.mapSaveData.Remove(data);
+                }
+                else
+				{
+					SaveDataCreated = true;
+				}
 				break;
 			}
 		}
 
 
-		if (!SaveDataCreated)
+		if (!SaveDataCreated )
 		{
 			List<int> targIDs = new List<int>();
 			foreach (MapIcon targ in targets)

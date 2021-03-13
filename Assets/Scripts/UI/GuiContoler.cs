@@ -150,9 +150,12 @@ public class GuiContoler : MonoBehaviour {
         messages = new List<string>();
         if (!inMap)
         {
-            foreach (GuiMap map in FindObjectsOfType<GuiMap>())
-                map.CreateMap(Var.map);
-            minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
+            if (!Var.isEnding)
+            {
+                foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+                    map.CreateMap(Var.map);
+                minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
+            }
             setMapLocation(0);
             LeanTween.delayedCall(0.05f, tryDialog);
             boss.SetActive(Var.isBoss);

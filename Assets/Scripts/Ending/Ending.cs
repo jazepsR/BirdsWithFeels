@@ -32,6 +32,7 @@ public class Ending : MonoBehaviour
     public bossBattleVultureVisuals visuals;
 
     public List<List<TutorialEnemy>> TutorialMap = new List<List<TutorialEnemy>>();
+    public List<BattleData> map = new List<BattleData>();
     [HideInInspector]
     public int CurrentPos = 0;
     public Transform[] birdSpeechPos;
@@ -62,10 +63,10 @@ public class Ending : MonoBehaviour
         AddEnemiesToList(forthStageEnemies);
         AddEnemiesToList(fifthStageEnemies);
         AddEnemiesToList(sixthStageEnemies);
-        AddEnemiesToList(seventhStageEnemies);
-        AddEnemiesToList(eightStageEnemies);
-        AddEnemiesToList(ninethStageEnemies);
-        AddEnemiesToList(tenthStageEnemies);
+        AddEnemiesToList(seventhStageEnemies, false);
+      //  AddEnemiesToList(eightStageEnemies);
+       // AddEnemiesToList(ninethStageEnemies);
+       // AddEnemiesToList(tenthStageEnemies);
         visuals.gameObject.SetActive(true);
         visuals.debugFinalBattleActive = true;
         visuals.setupLastBattle();
@@ -79,6 +80,8 @@ public class Ending : MonoBehaviour
         kingAnimator.SetInteger("emotion", 0);
         tutorialSetup.TutorialSetup.SetupBirds();
         LeanTween.delayedCall(0.2f, () => ShowEndingStartingText(0));
+        foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+            map.CreateMap(this.map);
     }
 
     private void Update()
@@ -123,7 +126,7 @@ public class Ending : MonoBehaviour
             if(showedForthKingColor && !showedFinalEvent&& !GuiContoler.Instance.speechBubbleObj.activeSelf)
             {
                // EventController.Instance.CreateEvent(EndingEvent4);
-                showedFinalEvent = true;
+              //  showedFinalEvent = true;
             }
             if(showedFinalEvent && !EventController.Instance.eventObject.activeSelf)
             {
@@ -154,17 +157,25 @@ public class Ending : MonoBehaviour
             ShowEndingThirdGridText(CurrentPos);
     }
 
-    void AddEnemiesToList(Var.Em[] array)
+    void AddEnemiesToList(Var.Em[] array, bool addToMap = true)
     {
         List<TutorialEnemy> list = new List<TutorialEnemy>();
+        Var.Em lastEmotion = Var.Em.Neutral;
         for (int i = 0; i < array.Length; i++)
         {
             if (array[i] == Var.Em.finish)
                 list.Add(null);
             else
+            {
                 list.Add(new TutorialEnemy(array[i]));
+                lastEmotion = array[i];
+            }
         }
         TutorialMap.Add(list);
+        if (addToMap)
+        {
+            map.Add(new BattleData(lastEmotion, false, new List<Var.Em>(), new MapBattleData()));
+        }
     }
     public void ShowEndingStartingText(int stage)
     {
@@ -198,17 +209,17 @@ public class Ending : MonoBehaviour
                 
                 break;
             case 5:
-                EventController.Instance.CreateEvent(EndingEvent4_FinalTalk);
                 visuals.addVulturesToLeftSide();
                 break;
             case 6:
-
-                if (!showedFirstKingColor)
+                showedFinalEvent = true;
+                EventController.Instance.CreateEvent(EndingEvent4_FinalTalk);
+                /*if (!showedFirstKingColor)
                 {
                   //  DialogueControl.Instance.CreateParticularDialog(EndingDialogue4a);
                     showedFirstKingColor = true;
                     kingAnimator.SetInteger("emotion", 1);
-                }
+                }*/
 
                 break;
         }

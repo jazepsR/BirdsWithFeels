@@ -44,12 +44,49 @@ public class MapControler : MonoBehaviour {
 	public Text trialWeeksLeftText;
 	public Text trialTooLateText;
 	public Text trialNameText;
+	public int[] chapterIDs;
 	void Awake()
 	{
 		Instance = this;
 		Var.snapshot = null;
 		trialUiObject.SetActive(false);
 	}
+
+	public void UnlockToChapter(int targetLevel)
+	{
+		if (Var.loadChapterID < 0)
+			return;
+		MapIcon[] icons = FindObjectsOfType<MapIcon>();
+		int lastID = -1;
+		foreach (MapIcon icon in icons)
+		{
+			if (icon.ID <= targetLevel)
+			{
+				icon.available = true;
+				icon.completed = true;
+				if (icon.fogObject)
+				{
+					icon.fogObject.SetActive(false);
+				}
+				if(icon.ID > lastID)
+                {
+					lastID = icon.ID;
+					SelectedIcon = icon;
+				}
+				//icon.stateSet = false;
+				icon.SetState();
+				icon.LoadSaveData(true);
+			}			
+		}
+		SelectedIcon.completed = false;
+		SelectedIcon.SetState();
+		SelectedIcon.CenterMapNode();
+		mapPan.Instance.activeFog = null;
+		mapPan.Instance.scrollingEnabled = true;
+		Var.loadChapterID = -1;
+		SaveLoad.Save();
+	}
+
 	// Use this for initialization
 	void Start () {
 		timedEvents = FindObjectsOfType<TimedEventControl>();
@@ -113,6 +150,11 @@ public class MapControler : MonoBehaviour {
 			}
 		}*/
 		SaveLoad.Save();
+		if (Var.loadChapterID >= 0)
+		{
+			LeanTween.delayedCall(0.05f, () =>
+			 UnlockToChapter(chapterIDs[Var.loadChapterID]));
+		}
 		if (Var.currentWeek<3)
 			Var.shouldDoMapEvent = false;
 		//Var.shouldDoMapEvent = true;

@@ -21,9 +21,10 @@ public static class Var {
 	public enum Em { Neutral,Solitary,SuperLonely, Social, SuperFriendly,Confident,SuperConfident,Cautious, SuperScared,finish,Random, Shield};
 	public enum PowerUps { heal,dmg,emotion,obstacle,shield};
 	public static bool isTutorial = false;
-    public static bool isEnding = false;
+    public static bool isEnding = true;
     public static bool tutorialCompleted = true;
 	public static bool isBoss = false;
+	public static int loadChapterID = -1;
 	public static GameObject dustCloud = null;
 	public static int MoveGraphBy = 1315;
 	public static int maxMentalHealth = 3;

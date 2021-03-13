@@ -16,6 +16,8 @@ public class mainMenuScript : MonoBehaviour {
     public GameObject saveSlotPanel;
     public GameObject deleteSaveDialog;
     public GameObject quitGameButton;
+    public GameObject selectChapterButton;
+    public GameObject chapterPanel;
     public Text deleteSaveText;
     string toDelete = "debug";
     public static mainMenuScript Instance;
@@ -35,7 +37,9 @@ public class mainMenuScript : MonoBehaviour {
         buttonPanel.SetActive(true);
         saveSlotPanel.SetActive(false);
         quitGameButton.SetActive(false);
+        chapterPanel.SetActive(false);
         AudioControler.Instance.musicSource.Play();
+        selectChapterButton.SetActive(Var.cheatsEnabled);
     }
     public void OpenSaveSlots(bool isNewGame)
     {
@@ -59,6 +63,19 @@ public class mainMenuScript : MonoBehaviour {
         }
     }
 
+    public void SelectChapter(int chapterID)
+    {
+        Var.loadChapterID = (chapterID-1);
+        SceneManager.LoadScene("Map");
+    }
+
+    public void SelectEnding()
+    {
+        Var.isEnding = true;
+        SceneManager.LoadScene("NewMain");
+
+    }
+
     public void QuitGame()
     {
         Application.Quit();
@@ -67,8 +84,9 @@ public class mainMenuScript : MonoBehaviour {
     public void CloseSaveSlots()
     {
         buttonPanel.SetActive(true);
-        quitGameButton.SetActive(true);
+        //quitGameButton.SetActive(true);
         saveSlotPanel.SetActive(false);
+        chapterPanel.SetActive(false);
     }
     void TweenForward()
     {
@@ -78,6 +96,14 @@ public class mainMenuScript : MonoBehaviour {
     public void OpenCredits()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    public void OpenChapterScreen()
+    {
+        buttonPanel.SetActive(false);
+        saveSlotPanel.SetActive(false);
+        chapterPanel.SetActive(true);
+
     }
 
     void TweenBack()
