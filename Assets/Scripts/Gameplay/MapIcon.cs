@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Audio;
-public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandler
+
+public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 	public AudioMixerSnapshot nodeSnapshot;
 	public AudioGroup ambientSounds;
@@ -100,7 +101,18 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		LoadSaveData();
 		//if (!Var.StartedNormally)
 			//available = true;
+
+
 		sr = GetComponent<Image>();
+        sr = this.transform.Find("mapIcon_art").GetComponent<Image>();
+
+        //Seb. Kind of dirty way to get the "lock" gameobject even if it has not been set. In case the prefab connection breaks
+        if (LockedIcon == null)
+        {
+            LockedIcon = this.transform.Find("lock").gameObject;
+            
+        }
+
 		if (isTrial)
 		{
 			sr.sprite = MapControler.Instance.trialSprite;
@@ -140,7 +152,8 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 			//LeanTween.delayedCall(0.1f, mapBtnClick);
 		ValidateAll();
 		CalculateTotals();
-		if(splineRoads.Length>0)
+
+		if(splineRoads!=null && splineRoads.Length>0)
 		{
 			if (available)
 			{
@@ -167,7 +180,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 		}
 		if (unlockedRoad == null && splineRoads.Length ==0)
 		{
-			useline = true;
+			useline = false;
 		}
 		else
 		{
@@ -180,6 +193,19 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 				SetState();
 		});
 	}
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        anim.SetBool("hover", true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        anim.SetBool("hover", false);
+    }
+
+
+
 	int GetTargetID(MapIcon data)
 	{
 		if (data.targets.Length == 0)
@@ -490,7 +516,7 @@ public class MapIcon : MonoBehaviour//, IPointerEnterHandler, IPointerExitHandle
 	public void mapBtnClick()
 	{
 
-
+        anim.SetTrigger("click");
 
         if (MapControler.Instance.SelectedIcon == this)
         {
