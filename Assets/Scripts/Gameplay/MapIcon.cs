@@ -224,24 +224,29 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			ExcelExport.AddMapNode(this);
 			if (completed)
 			{
-				if(ID == Var.currentStageID && firstCompletion)
+				if(ID == Var.currentStageID && firstCompletion) //Stuff that happens the FIRST time user completes level
 				{
-					if (firstCompleteEvent != null && !eventShown)
+					if (firstCompleteEvent != null && !eventShown) //Show event that only appears once when node is completed
 					{
 						eventShown = true;
 						EventController.Instance.CreateEvent(firstCompleteEvent);
 						return;
 					}
-					if (firstCompleteDialogue != null && !dialogueShown)
+					if (firstCompleteDialogue != null && !dialogueShown) //Show dialogue that plays if node is completed first time 
 					{
 						dialogueShown = true;
 						DialogueControl.Instance.CreateParticularDialog(firstCompleteDialogue);
 						return;
 					}
+
 					stateSet = true;
 					firstCompletion = false;
-					anim.SetInteger("state", 1);
-					LeanTween.delayedCall(0.2f, () => anim.SetInteger("state", 2));
+
+                    anim.SetInteger("state", 1);
+
+                    float time = 0.8f;
+                    LeanTween.delayedCall(time, () => anim.SetTrigger("playCompleteAnim")); //Delay b4 playing unlock anim
+                    LeanTween.delayedCall(time, () => anim.SetInteger("state", 2));
                     AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
 					if (unlockedRoad != null)
 					{
@@ -259,16 +264,30 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				}
 				else
 				{
-					anim.SetInteger("state", 2);
-				}
-			}else
-			{
-				anim.SetInteger("state", 1);
+
+                    
+                    anim.SetInteger("state", 2); //set map icon to "completed" state instantly
+                    
+                }
 			}
-		}else
-		{
-			anim.SetInteger("state", 0);
+            else
+			{
+
+                float time = 2f;
+                anim.SetInteger("state", 0);
+                LeanTween.delayedCall(time, () => anim.SetTrigger("playUnlockAnim"));  //Set map icon to "available" state after a delay
+                LeanTween.delayedCall(time, () => anim.SetInteger("state",1));
+               
+
+            }
 		}
+        else
+		{
+
+            
+            anim.SetInteger("state", 0); //Set map icon to "locked" state
+          
+        }
 
 	}
 	public void CenterMapNode()
