@@ -32,6 +32,7 @@ public class Helpers : MonoBehaviour {
 	Sprite emptyHeart;
 	Sprite emptyMentalHeart;
 	Sprite[] emotionIcons;
+    private Sprite[] myEmotionIconsVultures;
 	public bool inMap;
 	List<Image> heartsToFill = new List<Image>();
 	public Transform relationshipDialogs;
@@ -58,6 +59,7 @@ public class Helpers : MonoBehaviour {
 		mentalHeart = Resources.Load<Sprite>("sprites/mentalHeart");
 		emptyMentalHeart = Resources.Load<Sprite>("sprites/mentalHeart_empty");
 		emotionIcons = Resources.LoadAll<Sprite>("Icons/emotional_icons");
+        myEmotionIconsVultures = Resources.LoadAll<Sprite>("Icons/emotional_icons_vultures");
 		/*socialIcon = Resources.Load<Sprite>("Icons/emotional_icons_0");
 		solitaryIcon = Resources.Load<Sprite>("Icons/emotional_icons_2");
 		confidentIcon = Resources.Load<Sprite>("Icons/emotional_icons_1");
@@ -97,24 +99,49 @@ public class Helpers : MonoBehaviour {
 		}
 	}
 
-	public Sprite GetEmotionIcon(Var.Em emotion)
+	public Sprite GetEmotionIcon(Var.Em emotion,bool aShowVultureEmo)
 	{
-		switch (emotion)
-		{
-			case Var.Em.Cautious:
-				return emotionIcons[3];
-			case Var.Em.Confident:
-				return emotionIcons[1];
-			case Var.Em.Social:
-				return emotionIcons[0];
-			case Var.Em.Solitary:
-				return emotionIcons[2];
-			case Var.Em.Random:
-				return emotionIcons[4];
-			default:
-				return emotionIcons[4]; 
+        if (!aShowVultureEmo)
+        {
+            switch (emotion)
+            {
+                case Var.Em.Cautious:
+                    return emotionIcons[3];
+                case Var.Em.Confident:
+                    return emotionIcons[1];
+                case Var.Em.Social:
+                    return emotionIcons[0];
+                case Var.Em.Solitary:
+                    return emotionIcons[2];
+                case Var.Em.Random:
+                    return emotionIcons[5];
+                default:
+                    return emotionIcons[4];
 
-		}
+            }
+        }
+        else
+        {
+            switch (emotion)
+            {
+                case Var.Em.Cautious:
+                    return myEmotionIconsVultures[3];
+                case Var.Em.Confident:
+                    return myEmotionIconsVultures[1];
+                case Var.Em.Social:
+                    return myEmotionIconsVultures[0];
+                case Var.Em.Solitary:
+                    return myEmotionIconsVultures[2];
+                case Var.Em.Random:
+                    return myEmotionIconsVultures[4];
+                case Var.Em.Neutral:
+                    return myEmotionIconsVultures[5];
+                default:
+                    return myEmotionIconsVultures[4];
+
+            }
+        }
+		
 	}
 
 	public bool VarContainsTimedEvent(string evName)

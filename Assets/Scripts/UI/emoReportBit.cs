@@ -17,7 +17,7 @@ public class emoReportBit : MonoBehaviour
     {
         changeNumber.text = number;
         changeNumber.color = Helpers.Instance.GetEmotionColor(emo);
-        emoIcon.sprite = Helpers.Instance.GetEmotionIcon(emo);
+        emoIcon.sprite = Helpers.Instance.GetEmotionIcon(emo,false);
         this.changeText.text = changeText;
     }
     // Update is called once per frame

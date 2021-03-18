@@ -164,7 +164,7 @@ public class GuiMap : MonoBehaviour {
 	void DrawCircles(Var.Em emotion, float scale = 30)
 	{
 		GameObject point = Instantiate(mapIcon, new Vector3(start.position.x + dist * count, start.position.y, start.position.z), Quaternion.identity,nodes);
-		point.GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetEmotionIcon(emotion);
+		point.GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetEmotionIcon(emotion,true);
 		if (!inMap)
 			point.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetHexColor(emotion) + emotion.ToString() + "</color>";
 		nodeList.Add(point.GetComponent<SpriteRenderer>());

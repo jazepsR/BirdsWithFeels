@@ -138,7 +138,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
 		else
 		{
-			sr.sprite = Helpers.Instance.GetEmotionIcon(type);
+			sr.sprite = Helpers.Instance.GetEmotionIcon(type,true);
 		}
 		//GetComponent<Button>().interactable = available;
 		CompleteIcon.SetActive(completed);

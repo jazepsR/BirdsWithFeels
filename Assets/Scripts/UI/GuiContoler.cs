@@ -807,7 +807,7 @@ public class GuiContoler : MonoBehaviour {
        
         
         sprite.gameObject.SetActive(true);
-        sprite.sprite = Helpers.Instance.GetEmotionIcon(emo);
+        sprite.sprite = Helpers.Instance.GetEmotionIcon(emo,false);
         
         amountText.text ="+"+ Mathf.Abs((float)amount).ToString();//.ToString("+#;-#;0");
         amountText.color = Helpers.Instance.GetEmotionColor(emo);

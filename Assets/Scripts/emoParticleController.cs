@@ -29,7 +29,7 @@ public class emoParticleController : MonoBehaviour {
 
 	public void emitParticles(Var.Em emotion, int intensity)
 	{
-        emotionImage.sprite = Helpers.Instance.GetEmotionIcon(emotion);
+        emotionImage.sprite = Helpers.Instance.GetEmotionIcon(emotion,false);
 
         switch (emotion)
         {
