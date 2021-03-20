@@ -601,24 +601,29 @@ public class EventController : MonoBehaviour {
 	}
 	void SetupChoice(GameObject choiceObj,int ID)
 	{
-		EventConsequence choiceData = currentEvent.options[ID];
+        Transform myTransformToGetComponentsFrom = choiceObj.transform.Find("BG");
+
+        EventConsequence choiceData = currentEvent.options[ID];
 		choiceObj.GetComponent<Button>().onClick.AddListener(delegate { DisplayChoiceResult(ID); });
         try
         {
 			if (choiceData.selectionTooltip.Trim() != "")
 			{
-				choiceObj.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
+				choiceObj.GetComponentInChildren<ShowTooltip>().tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
 			}
-			choiceObj.transform.Find("Description").GetComponent<Text>().text = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionText);
+            Text myChoiceTest = myTransformToGetComponentsFrom.transform.Find("Description").GetComponent<Text>();
+
+            myChoiceTest.text = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionText);
+
         }
         catch
         {
 
         }
 		if (choiceData.icon != null)
-			choiceObj.transform.Find("Icon").GetComponent<Image>().sprite = choiceData.icon;
+            myTransformToGetComponentsFrom.transform.Find("Icon").GetComponent<Image>().sprite = choiceData.icon;
 		else
-			choiceObj.transform.Find("Icon").gameObject.SetActive(false);
+            myTransformToGetComponentsFrom.transform.Find("Icon").gameObject.SetActive(false);
 
 	}
 }
