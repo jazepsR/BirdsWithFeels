@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8957541201529027272}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -62,6 +62,16 @@ MonoBehaviour:
   canShowMultipleTimes: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &8957541201961520150
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,11 +155,10 @@ MonoBehaviour:
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
-  AfterImage: {fileID: 0}
+  AfterImage: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   icon: {fileID: 21300002, guid: c3a1ac45abf2a0242b5aeb174e5c07bf, type: 3}
-  selectionText: "Stay strong, everybirdy! We\u2019ve convinced hundreds of vultures
-    to change their ways and if we push forward we can convince the king as well!"
-  selectionTooltip: 
+  selectionText: 'Stay strong, everybirdy! '
+  selectionTooltip: '[+++ Confidence]'
   conclusionHeading: 
   conclusionText: That's right! We can handle this as well!
 --- !u!1 &8957541202411505936
@@ -198,7 +207,7 @@ MonoBehaviour:
   onComplete: {fileID: 0}
   applyToAll: 1
   consequenceType1: 1
-  magnitude1: -3
+  magnitude1: -15
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
@@ -206,9 +215,8 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300006, guid: 577d0146acfda9f4a87d8c2be5dcbad6, type: 3}
-  selectionText: "That is a lot of them indeed! Remember, we\u2019re all alone in
-    vulture territory now and there\u2019s nobirdy here to help us!"
-  selectionTooltip: 
+  selectionText: ' Don''t rely too heavily on each other!'
+  selectionTooltip: '[+++ Solitude] '
   conclusionHeading: 
   conclusionText: Everybirdy feels just how far they are from home
 --- !u!1 &8957541202523696653
@@ -304,17 +312,16 @@ MonoBehaviour:
   onComplete: {fileID: 0}
   applyToAll: 1
   consequenceType1: 1
-  magnitude1: 3
+  magnitude1: 15
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
-  icon: {fileID: 21300000, guid: 577d0146acfda9f4a87d8c2be5dcbad6, type: 3}
-  selectionText: "We\u2019ve gotten this far together! As long as we stick together,
-    nothing can stop us!"
-  selectionTooltip: 
+  icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
+  selectionText: "We\u2019ve gotten this far TOGETHER! "
+  selectionTooltip: '[+++ Social]'
   conclusionHeading: 
   conclusionText: Hearing you say that makes me feel so much better!
 --- !u!1 &8957541203391233850
@@ -363,7 +370,7 @@ MonoBehaviour:
   onComplete: {fileID: 0}
   applyToAll: 1
   consequenceType1: 2
-  magnitude1: -3
+  magnitude1: -15
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
@@ -371,8 +378,7 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300004, guid: 577d0146acfda9f4a87d8c2be5dcbad6, type: 3}
-  selectionText: Be careful everybirdy! The king and his vulture are strong and outnumber
-    us! There is only a slim chance of success!
-  selectionTooltip: 
+  selectionText: Be careful! There is only a slim chance of success!
+  selectionTooltip: '[+++ Caution]'
   conclusionHeading: 
   conclusionText: The vast numbers of vultures makes the team hesitant
