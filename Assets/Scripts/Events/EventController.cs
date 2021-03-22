@@ -49,6 +49,7 @@ public class EventController : MonoBehaviour
     int currentText = 0;
     bool activeChoices = false;
     bool printing = false;
+    
 
     public AudioSource eventAudioSource;
     // Use this for initialization
@@ -469,6 +470,10 @@ public class EventController : MonoBehaviour
         {
             int i = 0;
             choiceList.gameObject.SetActive(true);
+            myEventGUIAnimator.SetBool("showingEmoGraph", true);
+
+            //Seb. Please add functionality to make the emo graph show the affected bird's emo graph! 
+
             foreach (EventConsequence choiceData in currentEvent.options)
             {
                 GameObject choiceObj = Instantiate(choice, choiceList);
@@ -487,6 +492,8 @@ public class EventController : MonoBehaviour
     }
     void DisplayChoiceResult(int ID)
     {
+
+        myEventGUIAnimator.SetBool("showingEmoGraph", false);
         activeChoices = false;
         AudioControler.Instance.PlayPaperSound();
         choiceList.gameObject.SetActive(false);
