@@ -74,6 +74,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	bool eventShown = false;
 	bool dialogueShown = false;
 	[HideInInspector] public TimedEventControl timedEvent;
+  
+
     // Use this for initialization
 
     private void Awake()
@@ -196,14 +198,15 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        anim.SetBool("hover", true);
+        if (MapControler.Instance.isViewingNode == false)
+            anim.SetBool("hover", true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        anim.SetBool("hover", false);
+        if (MapControler.Instance.isViewingNode == false)
+            anim.SetBool("hover", false);
     }
-
 
 
 	int GetTargetID(MapIcon data)
@@ -534,53 +537,57 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	public void mapBtnClick()
 	{
-
         anim.SetTrigger("click");
 
-        if (MapControler.Instance.SelectedIcon == this)
+        if (MapControler.Instance.SelectedIcon == this || MapControler.Instance.isViewingNode)
         {
             return;
         }
-		try
-		{
-			AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
-		}
-		catch { }
-		//map tutorial
-		if (!Var.gameSettings.shownMapTutorial)
-		{
-			MapTutorial tut = FindObjectOfType<MapTutorial>();
-			tut.tutorialHighlight.SetTrigger("off");
-			DialogueControl.Instance.CreateParticularDialog(tut.mapTutorialDialog2);
-			Var.gameSettings.shownMapTutorial = true;
-		}
-		SetupPieGraph();
-		if(timedEvent!= null && available)
-		{
-			timedEvent.TriggerActivationEvent();
-		}
-		active = true;
-		foreach (GuiMap map in FindObjectsOfType<GuiMap>())
-			map.Clear();
-		MapControler.Instance.SelectedIcon = null;
-		MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
-		//MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero; //seb
-		MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
-		ShowAreaDetails();
-        
-        //LeanTween.value(gameObject, (float alpha) => MapControler.Instance.SelectionMenu.GetComponent<CanvasGroup>().alpha =alpha, 0,1, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-        //LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-        
-        
-        //LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position+(transform.parent.transform.position-transform.position), 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
+        try
+        {
+            AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
+        }
+        catch { }
+        //map tutorial
+        if (!Var.gameSettings.shownMapTutorial)
+        {
+            MapTutorial tut = FindObjectOfType<MapTutorial>();
+            tut.tutorialHighlight.SetTrigger("off");
+            DialogueControl.Instance.CreateParticularDialog(tut.mapTutorialDialog2);
+            Var.gameSettings.shownMapTutorial = true;
+        }
 
+            SetupPieGraph();
+
+            if (timedEvent != null && available)
+            {
+                timedEvent.TriggerActivationEvent();
+            }
+
+            active = true;
+
+            foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+                map.Clear();
+            MapControler.Instance.SelectedIcon = null;
+            MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
+            //MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero; //seb
+            MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
+
+
+            ShowAreaDetails();
+
+            //LeanTween.value(gameObject, (float alpha) => MapControler.Instance.SelectionMenu.GetComponent<CanvasGroup>().alpha =alpha, 0,1, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
+            //LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
+
+
+            //LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position+(transform.parent.transform.position-transform.position), 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
+        
     }
 
 	public void ShowAreaDetails()
 	{
 		MapControler.Instance.canMove = false;
-		active = false;      
-		
+		active = false;
 		MapControler.Instance.SelectionMenu.SetActive(true);
 		MapControler.Instance.SelectionTitle.text = levelName;
 		MapControler.Instance.SelectionText.text = ToString();

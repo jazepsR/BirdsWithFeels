@@ -24,7 +24,9 @@ public class MapControler : MonoBehaviour {
     Animator SelectionMenuAnimator;
   //  public Animator SelectionMenuBlurAnimator;
 	[HideInInspector]
-	public MapIcon SelectedIcon;
+    public bool isViewingNode = false;
+    [HideInInspector]
+    public MapIcon SelectedIcon;
 	public Text timerText;
 	public List<Bird> selectedBirds;
 	public Sprite trialSprite;
@@ -244,6 +246,25 @@ public class MapControler : MonoBehaviour {
             return;
         }
 
+        if (isViewingNode)
+        {
+            isViewingNode = false;
+        }
+
+        /*if (MapIcon.Instance.isViewingLevelNode == true)
+        {
+            MapIcon.Instance.isViewingLevelNode = false;
+            foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+            {
+
+                if (icon != MapControler.Instance.SelectedIcon)
+                {
+                    icon.GetComponent<Button>().interactable = false;
+
+                }
+            }
+        }*/
+
 		canMove = true;
 
         //this is seb taken off
@@ -265,7 +286,10 @@ public class MapControler : MonoBehaviour {
     public void ShowSelectionMenuAnimation()
     {
         SelectionMenuAnimator.SetBool("active", true);
-  //      SelectionMenuBlurAnimator.SetBool("active", true);
+        //      SelectionMenuBlurAnimator.SetBool("active", true);
+       
+        isViewingNode = true;
+        
     }
 
 	
