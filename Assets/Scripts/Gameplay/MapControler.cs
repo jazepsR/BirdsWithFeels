@@ -207,7 +207,10 @@ public class MapControler : MonoBehaviour {
 		{
 			SelectedIcon.LoadBattleScene();
 			AudioControler.Instance.buttonSoundMap.Play();
-		}
+            //Debug.LogError(isViewingNode);
+
+
+        }
 	}
 
 	public void Rest()
@@ -249,6 +252,7 @@ public class MapControler : MonoBehaviour {
         if (isViewingNode)
         {
             isViewingNode = false;
+            SelectedIcon.anim.SetBool("hover", false);
         }
 
         /*if (MapIcon.Instance.isViewingLevelNode == true)

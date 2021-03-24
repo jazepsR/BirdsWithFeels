@@ -537,6 +537,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	public void mapBtnClick()
 	{
+        if(!MapControler.Instance.isViewingNode)
         anim.SetTrigger("click");
 
         if (MapControler.Instance.SelectedIcon == this || MapControler.Instance.isViewingNode)
