@@ -46,8 +46,9 @@ public class GuiContoler : MonoBehaviour {
     public GameObject[] portraits;
     public Transform[] battleTrag;
     public GameObject rerollBox;
-    Var.Em currentMapArea;
-    public Var.Em nextMapArea;
+    Var.Em currentMapArea; //this is previous map spot
+    public Var.Em nextMapArea; //this is current map spot
+    public Var.Em nextNextMapArea; //next spot on map
     public static int mapPos = 0;
     private int finalResult = 0;
     public GameObject graph;
@@ -102,6 +103,8 @@ public class GuiContoler : MonoBehaviour {
     public Graph smallGraph;
     int maxGraph = 3;
     public GameObject boss;
+    public GameObject bossTransition; 
+    public bool canplayBossTransition = false; // make sure you are in a trial for this to work
     Transform lastSpeechPos = null;
     public Animator graphAnime;
     public GameObject minimap;
@@ -157,6 +160,7 @@ public class GuiContoler : MonoBehaviour {
                 minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
             }
             setMapLocation(0);
+            canplayBossTransition = true;
             LeanTween.delayedCall(0.05f, tryDialog);
             boss.SetActive(Var.isBoss);
             GraphBlocker.SetActive(false);
@@ -1224,8 +1228,8 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public bool Reset()
 	{
-		
-		Var.enemies = new Bird[8];
+        
+        Var.enemies = new Bird[8];
 		Var.Infight = false;		
 		ProgressGUI.Instance.SetOnePortrait();       
 		foreach (Bird bird in players)
@@ -1360,6 +1364,14 @@ public class GuiContoler : MonoBehaviour {
 			currentMapArea = Var.map[index].type;
 		}
 		catch { }
+        try
+        {
+            nextNextMapArea = Var.map[index + 2].type;
+        }
+
+        catch {
+
+        }
 		try
 		{
 			nextMapArea = Var.map[index + 1].type;
@@ -1372,27 +1384,30 @@ public class GuiContoler : MonoBehaviour {
 	}
 
 	void moveInMap()
-	{				
-
-		setMapLocation(mapPos);
-		if (nextMapArea == Var.Em.finish)
-		{
-			mapPos = 0;
-            if(Var.isTutorial)
+	{
+        
+        setMapLocation(mapPos);
+        if (nextMapArea == Var.Em.finish)
+        {
+            
+            mapPos = 0;
+            if (Var.isTutorial)
             {
                 Var.KimUnlocked = false;
                 Var.SophieUnlocked = false;
             }
-			Var.isTutorial = false;
-			Var.tutorialCompleted = true;
-			Var.isBoss = false;
-			winBanner.SetActive(true);
+            Var.isTutorial = false;
+            Var.tutorialCompleted = true;
+            Var.isBoss = false;
+            canplayBossTransition = false;
+            winBanner.SetActive(true);
             GraphBlocker.SetActive(true);
             AudioControler.Instance.PlayWinMusic();
-			clearSmallGraph();		
-		}
+            clearSmallGraph();
+        }
+        //Debug.Log("current mapped area " + currentMapArea + " next map area: " + nextMapArea + "next next mapped area " + nextNextMapArea);
 
-	}
+    }
 	
 	public void ShowMessage(string message)
 	{

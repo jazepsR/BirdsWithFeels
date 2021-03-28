@@ -1245,9 +1245,14 @@ public class Helpers : MonoBehaviour {
 
 	public void ShowTooltip(String text)
 	{
-		if (!GuiContoler.Instance.pause.activeSelf)
-		{
-			GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(true);
+        if (MapControler.Instance && !MapControler.Instance.isViewingNode == false)
+        {
+            return;
+        }
+        if (!GuiContoler.Instance.pause.activeSelf)
+        {
+            //Debug.Log(MapControler.Instance.isViewingNode);
+            GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(true);
 			GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<Image>().enabled = false;
 			GuiContoler.Instance.tooltipText.text = text;
 			AudioControler.Instance.PlaySound(AudioControler.Instance.showTooltip);

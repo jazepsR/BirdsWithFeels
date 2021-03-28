@@ -90,8 +90,16 @@ public class battleAnim :MonoBehaviour {
 			{
 				if(Var.freezeEmotions)
 				{
-//SHOW TARNSITION AND CREATE NEXT BATTLE
-					GuiContoler.Instance.CloseGraph();
+                    //SHOW TARNSITION AND CREATE NEXT BATTLE
+
+                    //Debug.Log("canplayBossTransition: " + GuiContoler.Instance.canplayBossTransition);
+                    if (GuiContoler.Instance.canplayBossTransition && (GuiContoler.Instance.nextNextMapArea != Var.Em.finish))
+                    {
+                        GuiContoler.Instance.bossTransition.GetComponent<Animator>().SetTrigger("TriggerTransition");
+                        //GuiContoler.Instance.canplayBossTransition = false;
+                        yield return new WaitForSeconds(.5f);
+                    }
+                    GuiContoler.Instance.CloseGraph();
 				}
 				else
 				{
