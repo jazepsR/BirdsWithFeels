@@ -49,7 +49,7 @@ public class EventController : MonoBehaviour
     int currentText = 0;
     bool activeChoices = false;
     bool printing = false;
-    
+
 
     public AudioSource eventAudioSource;
     // Use this for initialization
@@ -143,9 +143,9 @@ public class EventController : MonoBehaviour
                 UnityEngine.SceneManagement.SceneManager.LoadScene("mainMenu");
                 return;
             }
-            
-            
-             //Turns off event object
+
+
+            //Turns off event object
             LeanTween.value(gameObject, (float vol) => eventAudioSource.volume = vol, eventAudioSource.volume, 0, 0.5f);
 
 
@@ -173,7 +173,7 @@ public class EventController : MonoBehaviour
             {
                 myEventGUIAnimator.SetTrigger("close"); //Hide GUI once it has finished animating closed
                 LeanTween.delayedCall(0.7f, () =>
-                 eventObject.SetActive(false)); 
+                 eventObject.SetActive(false));
 
                 if (inMap) //Update map icons once event has finished playing. 
                 {
@@ -470,16 +470,29 @@ public class EventController : MonoBehaviour
         {
             int i = 0;
             choiceList.gameObject.SetActive(true);
-            myEventGUIAnimator.SetBool("showingEmoGraph", true);
+
+
+
 
             //Seb. Please add functionality to make the emo graph show the affected bird's emo graph! 
+
+            bool ChoicesInfluenceEmotions = false;
 
             foreach (EventConsequence choiceData in currentEvent.options)
             {
                 GameObject choiceObj = Instantiate(choice, choiceList);
                 SetupChoice(choiceObj, i);
+                
+                ChoicesInfluenceEmotions = DoesOptionIfluenceEmotions(currentEvent.options[i]);
+
                 i++;
             }
+
+            if (ChoicesInfluenceEmotions) //Seb, only show the emo graph if the choices influences the relevant bird 
+            {
+                myEventGUIAnimator.SetBool("showingEmoGraph", true);
+            }
+
             activeChoices = true;
         }
         else
@@ -490,6 +503,17 @@ public class EventController : MonoBehaviour
         currentText++;
 
     }
+
+    private bool DoesOptionIfluenceEmotions(EventConsequence A_Option)
+    {
+        if (A_Option.magnitude1 == 0 && A_Option.magnitude2 == 0 && A_Option.magnitude3 == 0)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     void DisplayChoiceResult(int ID)
     {
 
