@@ -1251,7 +1251,7 @@ public class Helpers : MonoBehaviour {
         }
         if (!GuiContoler.Instance.pause.activeSelf)
         {
-            Debug.Log(MapControler.Instance.isViewingNode);
+            //Debug.Log(MapControler.Instance.isViewingNode);
             GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(true);
 			GuiContoler.Instance.tooltipText.transform.parent.gameObject.GetComponent<Image>().enabled = false;
 			GuiContoler.Instance.tooltipText.text = text;
