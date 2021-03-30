@@ -24,6 +24,17 @@ public class LevelVisualSetup : MonoBehaviour {
             }   */      
               
             backgrounds[i].SetActive(i == Var.currentBG);
+
+            if (i == Var.currentBG && backgrounds[i].transform.Find("ProgressAnimator"))
+            {
+                try
+                {
+                    backgrounds[i].transform.Find("ProgressAnimator").GetComponent<Animator>().SetInteger("ProgressInt", Var.currentBackgroundProgressAnim);
+                }
+                catch {
+                    backgrounds[i].transform.Find("ProgressAnimator").GetComponent<Animator>().SetInteger("ProgressInt", 0);
+                }
+            }
         }       
 	}
 	

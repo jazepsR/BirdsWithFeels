@@ -392,6 +392,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
     { 
         LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume, 1, 1f);
         battleSource.clip = levelCompleteMusic;
+        battleSource.loop = true; //loops victory music
         battleSource.Play();
     }
 

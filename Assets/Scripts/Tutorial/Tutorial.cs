@@ -187,13 +187,13 @@ public class Tutorial : MonoBehaviour {
                 shouldShowFriendlyPopup = true;
 				break;
 			case 2:
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), " These birds are not just neutral, they're solitary and cautious! Will they listen to us?",RebeccaSounds);
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "These birds are not just neutral, they're solitary and cautious! Will they listen to us?",RebeccaSounds);
                 shouldShowEmotionPopup = true;
 
                 break;
 			case 3:
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "These encounters are taking a toll on me..",RebeccaSounds);
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hey no worries - I'll fight so that you can <b>rest</b> and regain some <b>health</b>",TerrySounds);
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Hey no worries - I'll fight so that you can <b>rest</b> and regain some <b>health</b>.",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "You'll also gain some <b>caution!</b>",TerrySounds);
 				break;
 			case 4:
@@ -211,7 +211,7 @@ public class Tutorial : MonoBehaviour {
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "You guys can you let me fight <b>two at once?</b> I feel SUPER PUMPED UP!! ",TerrySounds);
                 
                 GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[1].GetMouthTransform(), "Just don’t let it get to your head", RebeccaSounds);
-                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "  Pffft, what’s the worst that could happen? ", TerrySounds);
+                GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Pffft, what’s the worst that could happen?", TerrySounds);
                 break;
             case 6:
             
@@ -228,7 +228,7 @@ public class Tutorial : MonoBehaviour {
 		switch (stage)
 		{
 			case 0:
-				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Vultures will walk forward forever until they reach a confrontation! ",TerrySounds);
+				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Vultures will walk forward forever until they reach a confrontation!",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Here goes nothing!!",TerrySounds); 
 				outlines.SetActive(false);
 				shouldActivateBattleButton = true;
@@ -268,7 +268,7 @@ public class Tutorial : MonoBehaviour {
 		switch (stage)
 		{
 			case 0:
-				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "We birds are <b>affected emotionally</b> by what happens to us! Unlike you, you monster",TerrySounds);
+				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "We birds are <b>affected emotionally</b> by what happens to us!",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I befriended them, my <b>confidence</b> is surging! ",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "But there’s also no other birds to hang out with - making me more <b>solitary</b>.",TerrySounds);
 				break;
@@ -280,9 +280,9 @@ public class Tutorial : MonoBehaviour {
 					if (Var.activeBirds[0].FriendGainedInRound < 0)
 					{
 						GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Being alone this battle made me more lonely..",TerrySounds);
-						GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I mean independent! ",TerrySounds);
-						GuiContoler.Instance.ShowSpeechBubble(portraitPoint, " and strong",TerrySounds); 
-						GuiContoler.Instance.ShowSpeechBubble(portraitPoint, " Strong and independent.",TerrySounds);
+						GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I mean independent!",TerrySounds);
+						GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "And strong.",TerrySounds); 
+						GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Strong and independent.",TerrySounds);
 					}
 					else
 					{
@@ -317,7 +317,7 @@ public class Tutorial : MonoBehaviour {
 			case 0:
 				 break;
 			case 1:
-				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I became more <b>cautious</b> - anyone would after getting beat up like that ",RebeccaSounds);
+				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "I became more <b>cautious</b> - anyone would after getting beat up like that.",RebeccaSounds);
 				GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "But that strong emotion is making me <b>stronger</b>! Losing is <b>not always bad</b>.",RebeccaSounds);
 				break;
 			case 2:               

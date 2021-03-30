@@ -93,7 +93,7 @@ public class battleAnim :MonoBehaviour {
                     //SHOW TARNSITION AND CREATE NEXT BATTLE
 
                     //Debug.Log("canplayBossTransition: " + GuiContoler.Instance.canplayBossTransition);
-                    if (GuiContoler.Instance.canplayBossTransition && (GuiContoler.Instance.nextNextMapArea != Var.Em.finish))
+                    if (GuiContoler.Instance.canplayBossTransition && (GuiContoler.Instance.nextNextMapArea != Var.Em.finish) && !Var.isEnding)
                     {
                         GuiContoler.Instance.bossTransition.GetComponent<Animator>().SetTrigger("TriggerTransition");
                         //GuiContoler.Instance.canplayBossTransition = false;

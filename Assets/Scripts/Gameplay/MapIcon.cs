@@ -15,7 +15,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public GameObject[] hiddenThingsWhenTrialActive;
 	public GameObject CompleteIcon;
 	public GameObject LockedIcon;
-	public int ID;    
+    public int ID;
 	public bool completed = false;
 	public string levelName;
 	[TextArea(3, 20)]
@@ -23,8 +23,9 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	public bool available;
 	[Header("Level configuration")]
 	public Var.Em type;
-	public int background = 0;   
-	public int birdLVL = 1;
+	public int background = 0;
+    public int bgProgressAnim = 0;
+    public int birdLVL = 1;
 	int length = 0;
 	public int minEnemies = 3;
 	public int maxEnemies = 4;
@@ -633,7 +634,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			Var.fled = false;
 			Var.isTutorial = false;                       
 			Var.currentBG = background;
-			Var.map.Clear();
+            Var.currentBackgroundProgressAnim = bgProgressAnim;
+            Var.map.Clear();
 			Var.map = CreateMap();
 			Var.currentStageID = ID;
 			Var.activeBirds = new List<Bird>();

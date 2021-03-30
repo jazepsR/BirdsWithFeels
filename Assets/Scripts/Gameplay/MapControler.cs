@@ -19,6 +19,10 @@ public class MapControler : MonoBehaviour {
 	public Text SelectionDescription;
 	public Text SelectionTitle;
 	public Button startLvlBtn;
+    public GameObject restButton;
+    public GameObject restButtonBeam; //the iron beam visual that is connected to the rest button
+    [HideInInspector]
+    public int birdsAtMaxHealth = 0;
 	public float scaleTime = 0.35f;
 	public Image[] pieChart;
     Animator SelectionMenuAnimator;
@@ -104,8 +108,12 @@ public class MapControler : MonoBehaviour {
 		}
 		foreach(Bird bird in FillPlayer.Instance.playerBirds)
 		{
-			if (bird.data.unlocked)
-				count++;
+            if (bird.data.unlocked)
+            {
+               
+                count++;
+                
+            }
 			bool wasActive = false;
 			foreach(Bird activeBird in Var.activeBirds)
 			{
@@ -126,6 +134,9 @@ public class MapControler : MonoBehaviour {
 				bird.data.mentalHealth = Mathf.Min(bird.data.mentalHealth + 1, Var.maxMentalHealth);
 			}
 		}
+
+        canRest();
+
 		if (count == 3)
 		{
 			foreach (Bird bird in FillPlayer.Instance.playerBirds)
@@ -137,8 +148,7 @@ public class MapControler : MonoBehaviour {
 						bird.mapHighlight.SetActive(true);
 						selectedBirds.Add(bird);
 					}
-					
-				}
+                }
 			}
 			CanLoadBattle();
 		}
@@ -213,6 +223,40 @@ public class MapControler : MonoBehaviour {
         }
 	}
 
+    public void canRest()
+    {
+
+        foreach(Bird bird in FillPlayer.Instance.playerBirds)
+        {
+            if (bird.data.unlocked)
+            {
+                if (bird.data.health < bird.data.maxHealth || bird.data.injured)
+                {
+                    restButton.SetActive(true);
+                    restButtonBeam.SetActive(true);
+                }
+
+                else
+                {
+                    birdsAtMaxHealth++;
+                }
+
+                if (birdsAtMaxHealth == count)
+                {
+                    birdsAtMaxHealth = 0;
+                    restButton.SetActive(false);
+                    restButtonBeam.SetActive(false);
+                }
+            }
+                 
+        }
+
+        //Debug.Log("birds at max health: " + birdsAtMaxHealth++ + " count: " + count);
+
+        birdsAtMaxHealth = 0;
+     
+    }
+
 	public void Rest()
 	{
 		Var.currentWeek++;
@@ -225,20 +269,22 @@ public class MapControler : MonoBehaviour {
 			control.CheckStatus();
 		foreach(Bird bird in FillPlayer.Instance.playerBirds)
 		{
-			if (bird.data.injured)
-			{
-				bird.DecreaseTurnsInjured();
-				GameObject healObj = Instantiate(bird.healParticle, bird.transform);
-				Destroy(healObj, 1.5f);
-			}
-			else if (bird.data.health < bird.data.maxHealth)
-				{
-					bird.data.health++;
-					GameObject healObj = Instantiate(bird.healParticle, bird.transform);
-					Destroy(healObj, 1.5f);
-				}
-			
+            if (bird.data.injured)
+            {
+                bird.DecreaseTurnsInjured();
+                GameObject healObj = Instantiate(bird.healParticle, bird.transform);
+                Destroy(healObj, 1.5f);
+            }
+            else if (bird.data.health < bird.data.maxHealth)
+            {
+                bird.data.health++;
+                GameObject healObj = Instantiate(bird.healParticle, bird.transform);
+                Destroy(healObj, 1.5f);
+
+            }
 		}
+
+        canRest();
 		//foreach (TimedEventControl timedEvent in FindObjectsOfType<TimedEventControl>())
 		//	timedEvent.CheckStatus();
 	}
