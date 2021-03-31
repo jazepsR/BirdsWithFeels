@@ -8,6 +8,7 @@ public class LevelVisualSetup : MonoBehaviour {
     public static LevelVisualSetup Instance { get; private set; }
     public bool isDebug = false;
     public int debugSelection = 0;
+    Transform  progressAnim;
     // Use this for initialization
     void Awake()
     {
@@ -25,14 +26,19 @@ public class LevelVisualSetup : MonoBehaviour {
               
             backgrounds[i].SetActive(i == Var.currentBG);
 
-            if (i == Var.currentBG && backgrounds[i].transform.Find("ProgressAnimator"))
+            progressAnim = backgrounds[i].transform.Find("ProgressAnimator");
+
+
+
+            if (i == Var.currentBG && progressAnim)
             {
+                //Debug.Log("Hi i am here");
                 try
                 {
-                    backgrounds[i].transform.Find("ProgressAnimator").GetComponent<Animator>().SetInteger("ProgressInt", Var.currentBackgroundProgressAnim);
+                    progressAnim.GetComponent<Animator>().SetInteger("ProgressInt", Var.currentBackgroundProgressAnim);
                 }
                 catch {
-                    backgrounds[i].transform.Find("ProgressAnimator").GetComponent<Animator>().SetInteger("ProgressInt", 0);
+                    progressAnim.GetComponent<Animator>().SetInteger("ProgressInt", 0);
                 }
             }
         }       

@@ -22,7 +22,6 @@ public class MapControler : MonoBehaviour {
     public GameObject restButton;
     public GameObject restButtonBeam; //the iron beam visual that is connected to the rest button
     [HideInInspector]
-    public int birdsAtMaxHealth = 0;
 	public float scaleTime = 0.35f;
 	public Image[] pieChart;
     Animator SelectionMenuAnimator;
@@ -225,7 +224,7 @@ public class MapControler : MonoBehaviour {
 
     public void canRest()
     {
-
+        int birdsAtMaxHealth = 0;
         foreach(Bird bird in FillPlayer.Instance.playerBirds)
         {
             if (bird.data.unlocked)

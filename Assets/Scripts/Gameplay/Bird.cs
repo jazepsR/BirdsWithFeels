@@ -17,6 +17,7 @@ public class BirdSound
 	public AudioGroup pickupBird;
 	public AudioGroup dropBird;
 	public AudioGroup birdDialogueTalk;
+    public AudioGroup birdBattleConversations;
     public AudioGroup birdSelectSound;
 	public AudioGroup birdWinSound;
 	public EventAudio eventAudio;
