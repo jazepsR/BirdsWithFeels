@@ -168,8 +168,8 @@ public class Bird : MonoBehaviour
 	}
 	void Start()
 	{
-	
-		wonLastBattle = -1;
+        birdSounds = new BirdSound();
+        wonLastBattle = -1;
 		if (!isEnemy && portrait == null)
 		{
 			portrait = Resources.Load<GameObject>("prefabs/portraits/portrait_" + charName);
@@ -179,7 +179,7 @@ public class Bird : MonoBehaviour
         }
 		if(isEnemy)
         {
-			birdSounds = new BirdSound();
+			
 			birdSounds.birdDialogueTalk = AudioControler.Instance.VultureDialogueSounds;
 
 		}
@@ -201,7 +201,7 @@ public class Bird : MonoBehaviour
 		if (!isEnemy)
 		{
 
-			/*if (relationships == null)
+            /*if (relationships == null)
 			{
 				relationships = new Dictionary<EventScript.Character, int>();
 				relationships.Add(EventScript.Character.Kim, 0);
@@ -221,7 +221,8 @@ public class Bird : MonoBehaviour
 		   
 			RelationshipScript.applyRelationship(this, false);
 			SetRealtionshipParticles();*/
-			var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
+
+            var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
 			birdArtObj = Instantiate(BirdArt, transform) as GameObject;
 			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
             birdArtObj.transform.SetAsFirstSibling();

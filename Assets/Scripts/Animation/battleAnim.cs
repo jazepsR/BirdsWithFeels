@@ -136,6 +136,8 @@ public class battleAnim :MonoBehaviour {
 			battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_right");
 		battle.enemy.GetComponentInChildren<Animator>().SetTrigger("startListening");
 		battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking");
+        AudioControler.Instance.PlaySound(battle.player.birdSounds.birdDialogueTalk);
+
         yield return new WaitForSeconds(0.8f);
 		AudioControler.Instance.PlaySound(AudioControler.Instance.considerSound);
         	yield return new WaitForSeconds(1.0f);
