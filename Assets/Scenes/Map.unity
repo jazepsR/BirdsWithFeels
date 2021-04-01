@@ -4697,6 +4697,13 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
+    birdBattleConversations:
+      clips: []
+      usePitchVariation: 0
+      sourceType: 0
+      volume: 1
+      minPitch: 1
+      maxPitch: 1
     birdSelectSound:
       clips: []
       usePitchVariation: 0
@@ -8865,8 +8872,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4469545945995120445, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
+      propertyPath: levelName
+      value: Trial of Socializing
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469545945995120445, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
       propertyPath: background
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4469545945995120445, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: levelDescription
+      value: Your beak-changing first trial awaits. Many talkative vultures, many
+        social feels.
       objectReference: {fileID: 0}
     - target: {fileID: 4469545945995120445, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
@@ -8878,6 +8896,16 @@ PrefabInstance:
       propertyPath: type
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6213867986796790788, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: levelName
+      value: Make Love not Talons
+      objectReference: {fileID: 0}
+    - target: {fileID: 6213867986796790788, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: levelDescription
+      value: 'Vultures weren''t always meanies, can fate change? '
+      objectReference: {fileID: 0}
     - target: {fileID: 8679887015462586534, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
       propertyPath: type
@@ -8887,6 +8915,17 @@ PrefabInstance:
         type: 3}
       propertyPath: available
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679887015462586534, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: levelName
+      value: Fly To It
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679887015462586534, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: levelDescription
+      value: Your very first vulture confrontation on your own, don't expect guidance
+        from us!
       objectReference: {fileID: 0}
     - target: {fileID: 8782073427370752489, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
@@ -9002,6 +9041,16 @@ PrefabInstance:
         type: 3}
       propertyPath: type
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948960720905090174, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: levelName
+      value: Chirps Have Feeling Too
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948960720905090174, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: levelDescription
+      value: 'Your emotions have changed, show us how you really feel. '
       objectReference: {fileID: 0}
     - target: {fileID: 9139133433049552324, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
@@ -9917,6 +9966,13 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     birdDialogueTalk:
+      clips: []
+      usePitchVariation: 0
+      sourceType: 0
+      volume: 1
+      minPitch: 1
+      maxPitch: 1
+    birdBattleConversations:
       clips: []
       usePitchVariation: 0
       sourceType: 0
@@ -18401,7 +18457,6 @@ MonoBehaviour:
   startLvlBtn: {fileID: 976363283}
   restButton: {fileID: 2064811454}
   restButtonBeam: {fileID: 644497508}
-  birdsAtMaxHealth: 0
   scaleTime: 0.35
   pieChart:
   - {fileID: 2099006801}
@@ -21422,6 +21477,23 @@ PrefabInstance:
       propertyPath: hiddenThingsWhenTrialActive.Array.data[2]
       value: 
       objectReference: {fileID: 1263721721}
+    - target: {fileID: 6626675787348534938, guid: e8c06d92a7356bd4a9cd4fb4f7a841c9,
+        type: 3}
+      propertyPath: levelName
+      value: Checkpoint In The Cliffs
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626675787348534938, guid: e8c06d92a7356bd4a9cd4fb4f7a841c9,
+        type: 3}
+      propertyPath: levelDescription
+      value: 'You''re closer to the top than you are to the bottom! Well not really,
+        but keep thinking that and you''ll get there eventually. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6626675787866069136, guid: e8c06d92a7356bd4a9cd4fb4f7a841c9,
+        type: 3}
+      propertyPath: levelDescription
+      value: There is no "i" in "dangerous ledges". But there is an "i" in "i am
+        going to use my team to break my fall".
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8c06d92a7356bd4a9cd4fb4f7a841c9, type: 3}
 --- !u!1 &799482955
@@ -26199,6 +26271,13 @@ MonoBehaviour:
       volume: 1
       minPitch: 1
       maxPitch: 1
+    birdBattleConversations:
+      clips: []
+      usePitchVariation: 0
+      sourceType: 0
+      volume: 1
+      minPitch: 1
+      maxPitch: 1
     birdSelectSound:
       clips: []
       usePitchVariation: 0
@@ -26475,6 +26554,13 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     birdDialogueTalk:
+      clips: []
+      usePitchVariation: 0
+      sourceType: 0
+      volume: 1
+      minPitch: 1
+      maxPitch: 1
+    birdBattleConversations:
       clips: []
       usePitchVariation: 0
       sourceType: 0
@@ -35037,6 +35123,13 @@ MonoBehaviour:
       minPitch: 1
       maxPitch: 1
     birdDialogueTalk:
+      clips: []
+      usePitchVariation: 0
+      sourceType: 0
+      volume: 1
+      minPitch: 1
+      maxPitch: 1
+    birdBattleConversations:
       clips: []
       usePitchVariation: 0
       sourceType: 0
@@ -49290,6 +49383,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1513960782}
     m_Modifications:
+    - target: {fileID: 3378706546154589579, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: levelName
+      value: Tip Of The Beak
+      objectReference: {fileID: 0}
     - target: {fileID: 4189619365460848367, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
       propertyPath: bgProgressAnim
@@ -49327,8 +49425,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4189619367133161132, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
+      propertyPath: levelName
+      value: South Is The New North
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189619367133161132, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
       propertyPath: bgProgressAnim
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189619367261943727, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: levelName
+      value: Trial Of Confidence
       objectReference: {fileID: 0}
     - target: {fileID: 4301380324899223149, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
@@ -55580,6 +55688,17 @@ PrefabInstance:
         type: 3}
       propertyPath: ID
       value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 3961438258276554745, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: levelName
+      value: Rolling In The Seeds
+      objectReference: {fileID: 0}
+    - target: {fileID: 3961438258276554745, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: levelDescription
+      value: 'How many more vultures are there? We don''t have enough feathers to
+        count them all. '
       objectReference: {fileID: 0}
     - target: {fileID: 3961438258276554745, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
