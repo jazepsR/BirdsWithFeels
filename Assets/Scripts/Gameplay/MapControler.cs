@@ -245,6 +245,7 @@ public class MapControler : MonoBehaviour {
                     birdsAtMaxHealth = 0;
                     restButton.SetActive(false);
                     restButtonBeam.SetActive(false);
+                    Helpers.Instance.HideTooltip();
                 }
             }
                  
@@ -297,6 +298,14 @@ public class MapControler : MonoBehaviour {
         if (isViewingNode)
         {
             isViewingNode = false;
+
+            foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+            {
+
+                icon.GetComponent<ShowTooltip>().enabled = true;
+
+            }
+
             SelectedIcon.anim.SetBool("hover", false);
         }
 
@@ -336,7 +345,15 @@ public class MapControler : MonoBehaviour {
     {
         SelectionMenuAnimator.SetBool("active", true);
         //      SelectionMenuBlurAnimator.SetBool("active", true);
-       
+    
+        foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+        {
+
+            icon.GetComponent<ShowTooltip>().enabled = false;
+            Helpers.Instance.HideTooltip();
+            
+        }
+
         isViewingNode = true;
         
     }

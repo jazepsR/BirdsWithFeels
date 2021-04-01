@@ -1245,10 +1245,10 @@ public class Helpers : MonoBehaviour {
 
 	public void ShowTooltip(String text)
 	{
-        if (MapControler.Instance && !MapControler.Instance.isViewingNode == false)
+        /*if (MapControler.Instance && !MapControler.Instance.isViewingNode == false)
         {
-            return;
-        }
+                return;
+        }*/
         if (!GuiContoler.Instance.pause.activeSelf)
         {
             //Debug.Log(MapControler.Instance.isViewingNode);
