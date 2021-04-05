@@ -26,19 +26,22 @@ public class LevelVisualSetup : MonoBehaviour {
               
             backgrounds[i].SetActive(i == Var.currentBG);
 
-            progressAnim = backgrounds[i].transform.Find("ProgressAnimator");
-
-
-
-            if (i == Var.currentBG && progressAnim)
+            if (i == Var.currentBG && Var.currentBackgroundProgressAnim != -1)
             {
-                //Debug.Log("Hi i am here");
+                progressAnim = backgrounds[i].transform.Find("ProgressAnimator");
+                if (progressAnim == null)
+                {
+                    Debug.LogError("error: unable to find a progress animator");
+                    return;
+                }
                 try
                 {
                     progressAnim.GetComponent<Animator>().SetInteger("ProgressInt", Var.currentBackgroundProgressAnim);
                 }
                 catch {
+                    Debug.LogError("error: setting background default to 0");
                     progressAnim.GetComponent<Animator>().SetInteger("ProgressInt", 0);
+                    
                 }
             }
         }       

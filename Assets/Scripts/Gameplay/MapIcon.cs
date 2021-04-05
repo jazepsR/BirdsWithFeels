@@ -24,7 +24,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	[Header("Level configuration")]
 	public Var.Em type;
 	public int background = 0;
-    public int bgProgressAnim = 0;
+    public int bgProgressAnim = -1;
     public int birdLVL = 1;
 	int length = 0;
 	public int minEnemies = 3;
