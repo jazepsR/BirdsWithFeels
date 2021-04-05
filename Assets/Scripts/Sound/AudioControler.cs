@@ -102,7 +102,7 @@ public class AudioControler : MonoBehaviour {
     [Header("Music")]
     public AudioClip defaultThinkingMusic;
     public AudioClip TrialThinkingMusic;
-    public AudioClip bossThinkinkingMusic;
+    public AudioClip bossThinkingMusic;
     public AudioClip levelCompleteMusic;
     [Header("Audio sources")]
     public AudioSource mainAudioSource;
@@ -157,15 +157,18 @@ public class AudioControler : MonoBehaviour {
         }
         if (mainMenuScript.Instance == null)
         {
+          
             if (inBattle)
             {
+                Debug.Log("hi");
                 if (Var.isBoss)
                 {
-                    musicSource.clip = bossThinkinkingMusic;
+                    musicSource.clip = bossThinkingMusic;
                 }
                 else if (Var.freezeEmotions)
 				{
                     musicSource.clip = TrialThinkingMusic;
+                    
 				}
                 else
                 {
@@ -392,6 +395,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
     { 
         LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume, 1, 1f);
         battleSource.clip = levelCompleteMusic;
+        battleSource.loop = true; //loops victory music
         battleSource.Play();
     }
 

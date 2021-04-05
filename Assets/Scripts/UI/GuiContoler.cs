@@ -46,8 +46,8 @@ public class GuiContoler : MonoBehaviour {
     public GameObject[] portraits;
     public Transform[] battleTrag;
     public GameObject rerollBox;
-    Var.Em currentMapArea; //this is previous map spot
-    public Var.Em nextMapArea; //this is current map spot
+    Var.Em currentMapArea; 
+    public Var.Em nextMapArea; 
     public Var.Em nextNextMapArea; //next spot on map
     public static int mapPos = 0;
     private int finalResult = 0;
@@ -165,6 +165,7 @@ public class GuiContoler : MonoBehaviour {
             boss.SetActive(Var.isBoss);
             GraphBlocker.SetActive(false);
         }
+
     }
 
     void tryDialog()
@@ -1383,6 +1384,7 @@ public class GuiContoler : MonoBehaviour {
 		
 	}
 
+    
 	void moveInMap()
 	{
         
@@ -1400,13 +1402,40 @@ public class GuiContoler : MonoBehaviour {
             Var.tutorialCompleted = true;
             Var.isBoss = false;
             canplayBossTransition = false;
-            winBanner.SetActive(true);
+            showVictoryScreen();
             GraphBlocker.SetActive(true);
             AudioControler.Instance.PlayWinMusic();
             clearSmallGraph();
         }
-        //Debug.Log("current mapped area " + currentMapArea + " next map area: " + nextMapArea + "next next mapped area " + nextNextMapArea);
+  
 
+    }
+    
+    public void showVictoryScreen()
+    {
+        foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
+        {
+            child.transform.GetChild(0).gameObject.SetActive(false);
+        }
+
+        foreach (Bird bird in FillPlayer.Instance.playerBirds)
+        {
+            
+            foreach(Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
+            {
+
+                if (bird.data.unlocked)
+                {
+                    if (bird.charName.ToLower() == child.transform.GetChild(0).name)
+                    {
+                        child.transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                }
+                
+            }
+        }
+
+        winBanner.SetActive(true);
     }
 	
 	public void ShowMessage(string message)

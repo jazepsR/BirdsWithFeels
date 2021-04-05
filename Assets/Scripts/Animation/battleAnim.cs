@@ -93,7 +93,7 @@ public class battleAnim :MonoBehaviour {
                     //SHOW TARNSITION AND CREATE NEXT BATTLE
 
                     //Debug.Log("canplayBossTransition: " + GuiContoler.Instance.canplayBossTransition);
-                    if (GuiContoler.Instance.canplayBossTransition && (GuiContoler.Instance.nextNextMapArea != Var.Em.finish))
+                    if (GuiContoler.Instance.canplayBossTransition && (GuiContoler.Instance.nextNextMapArea != Var.Em.finish) && !Var.isEnding)
                     {
                         GuiContoler.Instance.bossTransition.GetComponent<Animator>().SetTrigger("TriggerTransition");
                         //GuiContoler.Instance.canplayBossTransition = false;
@@ -136,6 +136,12 @@ public class battleAnim :MonoBehaviour {
 			battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_right");
 		battle.enemy.GetComponentInChildren<Animator>().SetTrigger("startListening");
 		battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking");
+
+        if (battle.player.birdSounds.birdBattleConversations.clips.Length == 0)
+            battle.player.birdSounds.birdBattleConversations = battle.player.birdSounds.birdDialogueTalk;
+
+        AudioControler.Instance.PlaySound(battle.player.birdSounds.birdBattleConversations);
+
         yield return new WaitForSeconds(0.8f);
 		AudioControler.Instance.PlaySound(AudioControler.Instance.considerSound);
         	yield return new WaitForSeconds(1.0f);

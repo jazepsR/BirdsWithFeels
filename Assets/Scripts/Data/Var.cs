@@ -55,6 +55,7 @@ public static class Var {
 	public static List<Bird> activeBirds = new List<Bird>();
 	public static List<Bird> availableBirds = new List<Bird>();
 	public static int currentStageID = -1;
+    public static int currentBackgroundProgressAnim = -1;
 	public static Sprite[] lvlSprites = null;
 	public static Sprite[] skillIcons = null;
 	public static Sprite[] startingLvlSprites = null;
