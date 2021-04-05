@@ -46,8 +46,8 @@ public class GuiContoler : MonoBehaviour {
     public GameObject[] portraits;
     public Transform[] battleTrag;
     public GameObject rerollBox;
-    Var.Em currentMapArea; //this is previous map spot
-    public Var.Em nextMapArea; //this is current map spot
+    Var.Em currentMapArea; 
+    public Var.Em nextMapArea; 
     public Var.Em nextNextMapArea; //next spot on map
     public static int mapPos = 0;
     private int finalResult = 0;
