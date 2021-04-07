@@ -554,7 +554,10 @@ public class EventController : MonoBehaviour
 
     void DisplayChoiceResult(int ID)
     {
-
+        if (hideEventButton)
+        {
+            hideEventButton.SetActive(false);
+        }
         myEventGUIAnimator.SetBool("showingEmoGraph", false);
         activeChoices = false;
         AudioControler.Instance.PlayPaperSound();
