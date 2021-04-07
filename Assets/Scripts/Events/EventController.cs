@@ -610,11 +610,13 @@ public class EventController : MonoBehaviour
         {
             if (bird != null)
                 bird.SetEmotion();
+
+            int clamp = Var.isEnding? 12 :15;
             switch (type)
             {
                 case ConsequenceType.Courage:
-                    bird.data.confidence += magnitude;
-                    bird.prevConf += magnitude;
+                    bird.data.confidence = Mathf.Clamp(bird.data.confidence + magnitude,-clamp,clamp);
+                    bird.prevConf = Mathf.Clamp(bird.prevConf + magnitude, -clamp, clamp);
                     if (magnitude > 0)
                     {
                         infoString += bird.charName + " gained " + magnitude + " confidence\n";
@@ -625,8 +627,8 @@ public class EventController : MonoBehaviour
                     }
                     break;
                 case ConsequenceType.Friendliness:
-                    bird.data.friendliness += magnitude;
-                    bird.prevFriend += magnitude;
+                    bird.data.friendliness = Mathf.Clamp(bird.data.friendliness + magnitude, -clamp, clamp);
+                    bird.prevFriend = Mathf.Clamp(bird.prevFriend + magnitude, -clamp, clamp);
                     if (magnitude > 0)
                     {
                         infoString += bird.charName + " gained " + magnitude + " social\n";
