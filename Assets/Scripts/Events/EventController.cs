@@ -103,18 +103,24 @@ public class EventController : MonoBehaviour
             {
                 CreateChoices();
                 AudioControler.Instance.FadeOutBirdTalk();
+                
             }
+            
             return;
         }
         if (activeChoices) //Continue button does not work if there's choices active 
             return;
 
         currentText++;
+       // Debug.Log("currentText: " + currentText + "currentEvent.parts.Count" + (currentEvent.parts.Count - 1));
         AudioControler.Instance.ClickSound();
         myEventGUIAnimator.SetTrigger("click");
 
-        if (currentText < currentEvent.parts.Count - 1) //If there's more to show, show it
+        
+        
+        if (currentEvent != null && (currentText < currentEvent.parts.Count - 1)) //If there's more to show, show it
         {
+            print("if there is more to show, show it");
             string text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
             if (coroutine != null)
                 StopCoroutine(coroutine);
@@ -123,9 +129,12 @@ public class EventController : MonoBehaviour
             StartCoroutine(coroutine);
             SetPortrait(currentText); //Seb. Maybe only play new portrait anims if bird has changed? Easy to set up
 
+
         }
-        if (currentText == currentEvent.parts.Count - 1)
+        
+        if (currentEvent != null && (currentText == currentEvent.parts.Count - 1))
         {
+            print("i am last in event");
             string text = Helpers.Instance.ApplyTitle(currentBird, currentEvent.parts[currentText].text);
             if (coroutine != null)
                 StopCoroutine(coroutine);
@@ -136,7 +145,7 @@ public class EventController : MonoBehaviour
             return;
         }
 
-        if (currentText > currentEvent.parts.Count - 1) //Has finished playing all parts in current event? 
+        if (currentEvent != null && (currentText > currentEvent.parts.Count - 1)) //Has finished playing all parts in current event? 
         {
             if (currentEvent.quitAfterLevel) //Go to main menu after current event? 
             {
@@ -171,6 +180,7 @@ public class EventController : MonoBehaviour
             }
             else
             {
+                Debug.Log("i am closing now");
                 myEventGUIAnimator.SetTrigger("close"); //Hide GUI once it has finished animating closed
                 LeanTween.delayedCall(0.7f, () =>
                  eventObject.SetActive(false));
@@ -228,7 +238,7 @@ public class EventController : MonoBehaviour
             return false;
         if (eventObject.activeSelf)
             return false;
-        if (Var.isTutorial || Var.isEnding)
+        if (Var.isTutorial || Var.isEnding || Var.freezeEmotions)
             return false;
         currentBird = null;
         currentPortrait = null;
