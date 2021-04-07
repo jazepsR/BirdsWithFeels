@@ -25,6 +25,8 @@ public class EventController : MonoBehaviour
     public List<EventSegment> eventSegments;
     [Header("References")]
     public GameObject eventObject;
+    public GameObject hideEventButton;
+    public Text hideEventButtonText;
     public Text heading;
     public Text text;
     public GameObject choice;
@@ -300,6 +302,10 @@ public class EventController : MonoBehaviour
         {
             eventBg.sprite = eventData.eventBackground;
         }
+        if (hideEventButton)
+        {
+            hideEventButton.SetActive(false);
+        }
         eventBg.gameObject.SetActive(eventData.eventBackground != null);
         bgFog.gameObject.SetActive(eventData.useBgFog);
 
@@ -472,7 +478,22 @@ public class EventController : MonoBehaviour
             Debug.LogError("audio not found!");
         }
     }
-
+    public void HideEventGUI()
+    {
+        if(hideEventButtonText)
+        {
+            hideEventButtonText.text = "Show";
+        }
+        myEventGUIAnimator.SetBool("showBattlefield", true);
+    }
+    public void ShowEventGUI()
+    {
+        if (hideEventButtonText)
+        {
+            hideEventButtonText.text = "Hide";
+        }
+        myEventGUIAnimator.SetBool("showBattlefield", false);
+    }
     void CreateChoices()
     {
 
@@ -481,7 +502,14 @@ public class EventController : MonoBehaviour
             int i = 0;
             choiceList.gameObject.SetActive(true);
 
-
+            LeanTween.delayedCall(2f, () =>
+            {
+                if (!inMap && hideEventButton)
+                {
+                    hideEventButton.SetActive(true);
+                }
+            }
+            );
 
 
             //Seb. Please add functionality to make the emo graph show the affected bird's emo graph! 
