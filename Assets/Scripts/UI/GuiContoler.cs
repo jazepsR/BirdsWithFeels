@@ -678,6 +678,13 @@ public class GuiContoler : MonoBehaviour {
 
     public void CloseGraph()
     {
+        if (AudioControler.Instance.emoGraphSource.isPlaying)
+        {
+            AudioControler.Instance.musicSource.UnPause();
+            AudioControler.Instance.emoGraphSource.Stop();
+            
+        }
+
         LeanTween.delayedCall(0.7f, () => GraphActive = false);
         speechTexts = new List<string>();
         speechPos = new List<Transform>();

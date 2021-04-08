@@ -75,15 +75,18 @@ public class battleAnim :MonoBehaviour {
 					bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
 					bird.TryLevelUp();					
 					bird.AddRoundBonuses();
-					bird.SetEmotion();
+					bird.SetEmotion(); 
 				}
 			}
 
             AudioControler.Instance.battleSource.Stop();
+            AudioControler.Instance.musicSource.Pause();
             AudioControler.Instance.setBattleVolume(0f);
-			AudioControler.Instance.battleOver.Play();
+            AudioControler.Instance.battleOver.Play();
 			yield return new WaitForSeconds(2.0f);
-			foreach (Bird bird in Var.activeBirds)
+            AudioControler.Instance.emoGraphSource.Play();
+
+            foreach (Bird bird in Var.activeBirds)
 				bird.GetComponentInChildren<Animator>().SetBool("lose", false);
 			if (Var.isBoss)
 			{
