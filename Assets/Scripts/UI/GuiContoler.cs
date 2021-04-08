@@ -82,6 +82,7 @@ public class GuiContoler : MonoBehaviour {
     public Image[] BirdMentalHearts;
     public Text levelNumberText;
     public GameObject pause;
+    public GameObject pauseBtn;
     public GameObject deathMenu;
     public Text deathTitle;
     public Toggle[] deadBirdToggles;
@@ -178,16 +179,20 @@ public class GuiContoler : MonoBehaviour {
 
     public void StatToggle()
     {
+        
+
         if (relationshipPanel.activeSelf)
         {
             relationshipPanel.SetActive(false);
             statPanel.SetActive(true);
             ToggleRelationPanelText.text = "Relationships";
+            Debug.Log("i am a relationship");
         } else
         {
             relationshipPanel.SetActive(true);
             statPanel.SetActive(false);
             ToggleRelationPanelText.text = "Stats";
+            Debug.Log("i am a stat");
         }
 
 
@@ -261,6 +266,14 @@ public class GuiContoler : MonoBehaviour {
                 MapControler.Instance.restBtnRaycaster.enabled = false;
             }
         }
+    }
+
+    public void canPause(bool canPause)
+    {
+        if (canPause)
+            pauseBtn.SetActive(true);
+        else
+            pauseBtn.SetActive(false);
     }
 
     public void QuitGame()
@@ -665,6 +678,13 @@ public class GuiContoler : MonoBehaviour {
 
     public void CloseGraph()
     {
+        if (AudioControler.Instance.emoGraphSource.isPlaying)
+        {
+            AudioControler.Instance.musicSource.UnPause();
+            AudioControler.Instance.emoGraphSource.Stop();
+            
+        }
+
         LeanTween.delayedCall(0.7f, () => GraphActive = false);
         speechTexts = new List<string>();
         speechPos = new List<Transform>();
@@ -690,6 +710,7 @@ public class GuiContoler : MonoBehaviour {
             activeBird.SetEmotion();
             activeBird.seedCollectedInRound = false;
         }
+        
     }
     public void CloseBirdStats()
     {
@@ -969,7 +990,10 @@ public class GuiContoler : MonoBehaviour {
 
 	public void GraphButton()
 	{
-		clearSmallGraph();
+        if (GraphActive)
+            return;
+
+        clearSmallGraph();
 		if (LevelTutorial.shouldShowFirstBattleDialog)
 		{
 			LevelTutorial.shouldShowFirstBattleDialog = false;
@@ -977,7 +1001,8 @@ public class GuiContoler : MonoBehaviour {
 		}               
 		InitiateGraph(selectedBird,false);
 		AudioControler.Instance.PlaySound(AudioControler.Instance.notebookOpen);
-	}
+        
+    }
 	void CloseTutorialText()
 	{
 		speechBubbleObj.SetActive(false);       
@@ -1387,8 +1412,8 @@ public class GuiContoler : MonoBehaviour {
     
 	void moveInMap()
 	{
-        
         setMapLocation(mapPos);
+        GuiContoler.Instance.canPause(true);
         if (nextMapArea == Var.Em.finish)
         {
             

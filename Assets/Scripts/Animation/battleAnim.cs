@@ -39,6 +39,7 @@ public class battleAnim :MonoBehaviour {
 
 	IEnumerator DoBattles(float waitTime, float loseWaitTime)
 	{
+        GuiContoler.Instance.canPause(false);
 		yield return new WaitForSeconds(waitTime/3f);
 		
 		//float extraWait = 0.8f;
@@ -74,13 +75,18 @@ public class battleAnim :MonoBehaviour {
 					bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
 					bird.TryLevelUp();					
 					bird.AddRoundBonuses();
-					bird.SetEmotion();
+					bird.SetEmotion(); 
 				}
 			}
-			AudioControler.Instance.setBattleVolume(0f);
-			AudioControler.Instance.battleOver.Play();
+
+            AudioControler.Instance.battleSource.Stop();
+            AudioControler.Instance.musicSource.Pause();
+            AudioControler.Instance.setBattleVolume(0f);
+            AudioControler.Instance.battleOver.Play();
 			yield return new WaitForSeconds(2.0f);
-			foreach (Bird bird in Var.activeBirds)
+            AudioControler.Instance.emoGraphSource.Play();
+
+            foreach (Bird bird in Var.activeBirds)
 				bird.GetComponentInChildren<Animator>().SetBool("lose", false);
 			if (Var.isBoss)
 			{
@@ -110,7 +116,8 @@ public class battleAnim :MonoBehaviour {
 			}
             foreach(Bird enemy in Var.enemies)
             {
-                LeanTween.cancel(enemy.gameObject);
+                if(enemy != null)
+                    LeanTween.cancel(enemy.gameObject);
             }
 			if(Var.isTutorial)
 			{
@@ -127,103 +134,124 @@ public class battleAnim :MonoBehaviour {
 
 	IEnumerator ShowResult(battleData battle,float waitTime)
 	{
-		AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
-		battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
-		yield return new WaitForSeconds(enemySpeed);
-		if (battle.enemy.position == Bird.dir.top)
-			battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_up");
-		else
-			battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_right");
-		battle.enemy.GetComponentInChildren<Animator>().SetTrigger("startListening");
-		battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking");
-
-        if (battle.player.birdSounds.birdBattleConversations.clips.Length == 0)
-            battle.player.birdSounds.birdBattleConversations = battle.player.birdSounds.birdDialogueTalk;
-
-        AudioControler.Instance.PlaySound(battle.player.birdSounds.birdBattleConversations);
-
-        yield return new WaitForSeconds(0.8f);
-		AudioControler.Instance.PlaySound(AudioControler.Instance.considerSound);
-        	yield return new WaitForSeconds(1.0f);
-		//lose
-		if (battle.result != 1)
-		{
-			AudioControler.Instance.PlaySound(AudioControler.Instance.fightCloudSound);
-			Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
-			GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
-			if (!battle.player.hasShieldBonus)
-			{
-				battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
-            }
+        if (battle.player.data.injured)
+        {
+            battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
+            AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
+            LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
+            Debug.Log("I moved");
+        }
+        else
+        {
+            AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
+            battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
+            yield return new WaitForSeconds(enemySpeed);
+            if (battle.enemy.position == Bird.dir.top)
+                battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_up");
             else
-			{
-				Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Shield);
-				battle.player.GetComponentInChildren<Animator>().SetTrigger("stopTalking");
-			}
-			battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
-			Destroy(fightCloudObj, waitTime - enemySpeed);
-			yield return new WaitForSeconds(waitTime - enemySpeed - 2.3f);
+                battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_right");
+            battle.enemy.GetComponentInChildren<Animator>().SetTrigger("startListening");
+            battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking");
 
+            if (battle.player.birdSounds.birdBattleConversations.clips.Length == 0)
+                battle.player.birdSounds.birdBattleConversations = battle.player.birdSounds.birdDialogueTalk;
 
+            AudioControler.Instance.PlaySound(battle.player.birdSounds.birdBattleConversations);
 
-
-			/*/if (!battle.player.hasShieldBonus)
+            yield return new WaitForSeconds(0.8f);
+            AudioControler.Instance.PlaySound(AudioControler.Instance.considerSound);
+            yield return new WaitForSeconds(1.0f);
+            //lose
+            if (battle.result != 1)
             {
                 AudioControler.Instance.PlaySound(AudioControler.Instance.fightCloudSound);
                 Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
                 GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
-                battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
+                if (!battle.player.hasShieldBonus)
+                {
+                    battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
+                }
+                else
+                {
+                    Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Shield);
+                    battle.player.GetComponentInChildren<Animator>().SetTrigger("stopTalking");
+                }
                 battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
                 Destroy(fightCloudObj, waitTime - enemySpeed);
                 yield return new WaitForSeconds(waitTime - enemySpeed - 2.3f);
+
+
+
+
+                /*/if (!battle.player.hasShieldBonus)
+                {
+                    AudioControler.Instance.PlaySound(AudioControler.Instance.fightCloudSound);
+                    Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
+                    GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
+                    battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
+                    battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
+                    Destroy(fightCloudObj, waitTime - enemySpeed);
+                    yield return new WaitForSeconds(waitTime - enemySpeed - 2.3f);
+                }
+                else
+                {
+                    battle.player.GetComponentInChildren<Animator>().SetBool("rest", true);
+                    LeanTween.delayedCall(1.5f,()=>battle.player.GetComponentInChildren<Animator>().SetBool("rest", false));
+                }*/
+                battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
+                LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
             }
             else
             {
-                battle.player.GetComponentInChildren<Animator>().SetBool("rest", true);
-                LeanTween.delayedCall(1.5f,()=>battle.player.GetComponentInChildren<Animator>().SetBool("rest", false));
-            }*/
-			battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
-			LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
-		}
-		else
-		{
-			AudioControler.Instance.PlaySound(battle.player.birdSounds.birdWinSound);
-			battle.enemy.GetComponentInChildren<Animator>().SetBool("win", false);
-		}
+                AudioControler.Instance.PlaySound(battle.player.birdSounds.birdWinSound);
+                battle.enemy.GetComponentInChildren<Animator>().SetBool("win", false);
+            }
+        }
 		ShowBattleResult(battle);
 	}
 
 	void ShowBattleResult(battleData battle)
 	{
 
-		//Player won
-		if (battle.result == 1)
-		{
-			AudioControler.Instance.PlaySound(AudioControler.Instance.conflictWin);            
-			battle.player.GetComponentInChildren<Animator>().SetTrigger("victory 0");   
-			battle.player.battleConfBoos += Var.confWinFight;
-			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Confident);
-            AudioControler.Instance.PlaySound(AudioControler.Instance.confidentParticlePostBattle);
-            //battle.enemy.GetComponentInChildren<Animator>().SetBool("lose", true);
-            if (battle.player == GuiContoler.Instance.selectedBird)
-				battle.player.showText();
-			print(battle.player.charName + " won fight");
-		}
-		else
-		{
-			battle.player.battleConfBoos += Var.confLoseFight;
-			if ( !(battle.enemy.enemyType == fillEnemy.enemyType.drill && !battle.enemy.foughtInRound))
-				LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.transform.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
-				 , 2.75f).setEaseOutQuad());
-            AudioControler.Instance.PlaySound(AudioControler.Instance.combatLose);
-            battle.player.ChageHealth(-1);
-			Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Cautious);
-			//battle.enemy.GetComponentInChildren<Animator>().SetBool("victory", true);
-			if (battle.player == GuiContoler.Instance.selectedBird)
-				battle.player.showText();
-			print(battle.player.charName + " lost fight");
-		}
-		battle.enemy.foughtInRound = true;
+        if (battle.player.data.injured)
+        {
+            battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
+            LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.transform.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
+                     , 2.75f).setEaseOutQuad());
+            
+        }
+        else
+        {
+            //Player won
+            if (battle.result == 1)
+            {
+                AudioControler.Instance.PlaySound(AudioControler.Instance.conflictWin);
+                battle.player.GetComponentInChildren<Animator>().SetTrigger("victory 0");
+                battle.player.battleConfBoos += Var.confWinFight;
+                Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Confident);
+                AudioControler.Instance.PlaySound(AudioControler.Instance.confidentParticlePostBattle);
+                //battle.enemy.GetComponentInChildren<Animator>().SetBool("lose", true);
+                if (battle.player == GuiContoler.Instance.selectedBird)
+                    battle.player.showText();
+                print(battle.player.charName + " won fight");
+            }
+            else
+            {
+                battle.player.battleConfBoos += Var.confLoseFight;
+                if (!(battle.enemy.enemyType == fillEnemy.enemyType.drill && !battle.enemy.foughtInRound))
+                    LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.transform.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
+                     , 2.75f).setEaseOutQuad());
+                AudioControler.Instance.PlaySound(AudioControler.Instance.combatLose);
+                battle.player.ChageHealth(-1);
+                Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Cautious);
+                //battle.enemy.GetComponentInChildren<Animator>().SetBool("victory", true);
+                if (battle.player == GuiContoler.Instance.selectedBird)
+                    battle.player.showText();
+                print(battle.player.charName + " lost fight");
+            }
+        }
+            battle.enemy.foughtInRound = true;
+        
 	}
 }
 

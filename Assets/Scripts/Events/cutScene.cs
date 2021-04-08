@@ -25,6 +25,7 @@ public class cutScene : MonoBehaviour {
 
 	public void StartCutscene()
     {
+        AudioControler.Instance.PlayIntroCutSceneMusic();
         cutsceneText.text = parts[0].cutsceneTexts[0];
 		if (isEnd)
 		{

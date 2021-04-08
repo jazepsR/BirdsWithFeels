@@ -104,6 +104,9 @@ public class AudioControler : MonoBehaviour {
     public AudioClip TrialThinkingMusic;
     public AudioClip bossThinkingMusic;
     public AudioClip levelCompleteMusic;
+    public AudioClip introCutSceneMusic;
+    //public AudioClip emoChartMusic;
+
     [Header("Audio sources")]
     public AudioSource mainAudioSource;
     public AudioSource ambientAudioSource;
@@ -113,6 +116,7 @@ public class AudioControler : MonoBehaviour {
     public AudioSource birdVoices;
     public AudioSource otherEffects;
     public AudioSource particleSounds;
+    public AudioSource emoGraphSource;
     [Header("Individual bird sounds")]
     public AudioGroup VultureDialogueSounds;
     public BirdSound TerrySounds;
@@ -191,6 +195,13 @@ public class AudioControler : MonoBehaviour {
     public void PlayTutorialBtnClick()
     {
         PlaySound(tutorialButtonClick);
+    }
+    public void PlayIntroCutSceneMusic()
+    {
+        //LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume, 1, 1f);
+        musicSource.clip = introCutSceneMusic;
+        musicSource.loop = true;
+        musicSource.Play();
     }
     public BirdSound GetBirdSoundGroup(string charName)
     {
@@ -407,7 +418,8 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 			PlaySound(battleTracks);
 		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol, 0.5f);
 	}
-	void AmbientControl()
+
+    void AmbientControl()
 	{
 		if (!inBattle || ambientAudioSource== null)
 			return;        
