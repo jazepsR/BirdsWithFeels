@@ -224,37 +224,45 @@ public class MapControler : MonoBehaviour {
 
     public void canRest()
     {
-        int birdsAtMaxHealth = 0;
-        foreach(Bird bird in FillPlayer.Instance.playerBirds)
+        if (!Var.gameSettings.shownMapTutorial)
         {
-            if (bird.data.unlocked)
-            {
-                if (bird.data.health < bird.data.maxHealth || bird.data.injured)
-                {
-                    restButton.SetActive(true);
-                    restButtonBeam.SetActive(true);
-                }
-
-                else
-                {
-                    birdsAtMaxHealth++;
-                }
-
-                if (birdsAtMaxHealth == count)
-                {
-                    birdsAtMaxHealth = 0;
-                    restButton.SetActive(false);
-                    restButtonBeam.SetActive(false);
-                    Helpers.Instance.HideTooltip();
-                }
-            }
-                 
+            restButton.SetActive(false);
+            restButtonBeam.SetActive(false);
         }
+        else
+        {
+            int birdsAtMaxHealth = 0;
+            foreach (Bird bird in FillPlayer.Instance.playerBirds)
+            {
+                if (bird.data.unlocked)
+                {
+                    if (bird.data.health < bird.data.maxHealth || bird.data.injured)
+                    {
+                        restButton.SetActive(true);
+                        restButtonBeam.SetActive(true);
+                    }
 
-        //Debug.Log("birds at max health: " + birdsAtMaxHealth++ + " count: " + count);
+                    else
+                    {
+                        birdsAtMaxHealth++;
+                    }
 
-        birdsAtMaxHealth = 0;
-     
+                    if (birdsAtMaxHealth == count)
+                    {
+                        birdsAtMaxHealth = 0;
+                        restButton.SetActive(false);
+                        restButtonBeam.SetActive(false);
+                        Helpers.Instance.HideTooltip();
+                    }
+                }
+
+            }
+
+
+            //Debug.Log("birds at max health: " + birdsAtMaxHealth++ + " count: " + count);
+
+            birdsAtMaxHealth = 0;
+        }
     }
 
 	public void Rest()
@@ -309,20 +317,6 @@ public class MapControler : MonoBehaviour {
             SelectedIcon.anim.SetBool("hover", false);
         }
 
-        /*if (MapIcon.Instance.isViewingLevelNode == true)
-        {
-            MapIcon.Instance.isViewingLevelNode = false;
-            foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
-            {
-
-                if (icon != MapControler.Instance.SelectedIcon)
-                {
-                    icon.GetComponent<Button>().interactable = false;
-
-                }
-            }
-        }*/
-
 		canMove = true;
 
         //this is seb taken off
@@ -348,6 +342,7 @@ public class MapControler : MonoBehaviour {
     
         foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
         {
+
 
             icon.GetComponent<ShowTooltip>().enabled = false;
             Helpers.Instance.HideTooltip();
