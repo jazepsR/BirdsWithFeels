@@ -130,8 +130,6 @@ public class EventController : MonoBehaviour
             //nameText.text = currentBird.charName;
             StartCoroutine(coroutine);
             SetPortrait(currentText); //Seb. Maybe only play new portrait anims if bird has changed? Easy to set up
-
-
         }
         
         if (currentEvent != null && (currentText == currentEvent.parts.Count - 1))

@@ -680,9 +680,7 @@ public class GuiContoler : MonoBehaviour {
     {
         if (AudioControler.Instance.emoGraphSource.isPlaying)
         {
-            AudioControler.Instance.musicSource.UnPause();
-            AudioControler.Instance.emoGraphSource.Stop();
-            
+            AudioControler.Instance.ActivateMusicSource(audioSourceType.musicSource);
         }
 
         LeanTween.delayedCall(0.7f, () => GraphActive = false);
@@ -1066,8 +1064,7 @@ public class GuiContoler : MonoBehaviour {
 	{
 		GameLogic.Instance.FightButton.interactable = false;
 		AudioControler.Instance.ClickSound();
-		AudioControler.Instance.setBattleVolume(1f);
-        AudioControler.Instance.battleSource.Play();
+        AudioControler.Instance.ActivateMusicSource(audioSourceType.battleSource);
 		AudioControler.Instance.PlaySound(AudioControler.Instance.clicks);
 		feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
 		foreach (feedBack fb in feedBackObj)

@@ -41,9 +41,9 @@ public class battleAnim :MonoBehaviour {
 	{
         GuiContoler.Instance.canPause(false);
 		yield return new WaitForSeconds(waitTime/3f);
-		
-		//float extraWait = 0.8f;
-		foreach (battleData battle in battles)
+
+        //float extraWait = 0.8f;
+        foreach (battleData battle in battles)
 		{
 
 			StartBattle(battle.player,battle.enemy);
@@ -79,12 +79,10 @@ public class battleAnim :MonoBehaviour {
 				}
 			}
 
-            AudioControler.Instance.battleSource.Stop();
-            AudioControler.Instance.musicSource.Pause();
-            AudioControler.Instance.setBattleVolume(0f);
             AudioControler.Instance.battleOver.Play();
-			yield return new WaitForSeconds(2.0f);
-            AudioControler.Instance.emoGraphSource.Play();
+			yield return new WaitForSeconds(1.0f);
+            AudioControler.Instance.ActivateMusicSource(audioSourceType.graphMusic);
+            yield return new WaitForSeconds(1.0f);
 
             foreach (Bird bird in Var.activeBirds)
 				bird.GetComponentInChildren<Animator>().SetBool("lose", false);
@@ -217,8 +215,7 @@ public class battleAnim :MonoBehaviour {
         {
             battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
             LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.transform.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
-                     , 2.75f).setEaseOutQuad());
-            
+                     , 2.75f).setEaseOutQuad());            
         }
         else
         {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 [System.Serializable]
+
 public class AudioGroup
 {
 	public AudioClip[] clips;
@@ -21,7 +22,7 @@ public class AudioGroup
 		AudioControler.Instance.PlaySound(this);
 	}
 }
-public enum audioSourceType { main,ambient,birdVoices,ui,particles, other, eventAudio };
+public enum audioSourceType { main,ambient,birdVoices,ui,particles, other, eventAudio,graphMusic, battleSource, musicSource };
 public class AudioControler : MonoBehaviour {
     public static AudioControler Instance { get; private set; }
     public bool inBattle = false;
@@ -164,6 +165,8 @@ public class AudioControler : MonoBehaviour {
           
             if (inBattle)
             {
+
+                AudioControler.Instance.ActivateMusicSource(audioSourceType.musicSource);
                 Debug.Log("hi");
                 if (Var.isBoss)
                 {
@@ -368,6 +371,12 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 				return ambientAudioSource;
             case audioSourceType.eventAudio:
                 return EventController.Instance.eventAudioSource;
+            case audioSourceType.graphMusic:
+                return emoGraphSource;
+            case audioSourceType.battleSource:
+                return battleSource;
+            case audioSourceType.musicSource:
+                return musicSource;
 			default:
 				return mainAudioSource;
 		}
@@ -410,14 +419,41 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
         battleSource.Play();
     }
 
-    public void setBattleVolume(float vol)
+    public void ActivateMusicSource(audioSourceType sourceToActivate)
 	{
         
-        //Debug.LogError("setting battle vol: " + vol);
-		if (vol != 0.0f)
+       // Debug.LogError("activate source: " + sourceToActivate);
+		if (sourceToActivate == audioSourceType.battleSource)
 			PlaySound(battleTracks);
-		LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume,vol, 0.5f);
+        StartCoroutine(ToggleMusicSource(sourceToActivate, 0.5f));
 	}
+
+    private IEnumerator ToggleMusicSource(audioSourceType sourceToActivate, float lerpTime)
+    {
+        List<AudioSource> audioSources = new List<AudioSource>();
+        audioSources.Add(GetAudioSource(audioSourceType.battleSource));
+        audioSources.Add(GetAudioSource(audioSourceType.graphMusic));
+        audioSources.Add(GetAudioSource(audioSourceType.musicSource));
+
+        AudioSource activeSource = GetAudioSource(sourceToActivate);
+        audioSources.Remove(activeSource);
+        activeSource.Play();
+        float t = 0;
+        while(t<1)
+        {
+            t += Time.deltaTime / lerpTime;
+            activeSource.volume = Mathf.Max(activeSource.volume, t);
+            foreach(AudioSource source in audioSources)
+            {
+                source.volume = Mathf.Min(source.volume, 1 - t);
+            }
+            yield return null;
+        }
+        foreach (AudioSource source in audioSources)
+        {
+            source.Stop();
+        }
+    }
 
     void AmbientControl()
 	{
