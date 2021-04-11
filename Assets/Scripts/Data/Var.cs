@@ -98,7 +98,7 @@ public class Settings
         shownFirstLevelUp = tutorialsCompleted;
         shownBattlePlanningTutorial = tutorialsCompleted;
         shownLevelTutorial = tutorialsCompleted;
-        shownMapTutorial = tutorialsCompleted;
+		shownMapTutorial =  tutorialsCompleted;
 }
 }
 

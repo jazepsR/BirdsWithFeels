@@ -504,7 +504,7 @@ public class EventController : MonoBehaviour
 
             LeanTween.delayedCall(2f, () =>
             {
-                if (!inMap && hideEventButton)
+                if (!inMap && hideEventButton && !Var.isTutorial)
                 {
                     hideEventButton.SetActive(true);
                 }

@@ -22,7 +22,7 @@ public class buttonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(GetComponent<Button>().interactable)
+        if(GetComponent<Button>() == null || GetComponent<Button>().interactable)
             anim.SetBool("onhover", true);
     }
     public void OnPointerExit(PointerEventData eventData)
