@@ -96,10 +96,11 @@ public class GuiMap : MonoBehaviour {
 
 				foreach (MapSaveData targ in Var.mapSaveData)
 				{
-					if (targ.ID == currentNode.trialID )
+					if (targ.ID == currentNode.trialID)
 					{
 						nextAdventureIcon.color = Helpers.Instance.GetEmotionColor(targ.emotion);
 						nextAreaInfo.text = targ.areaName;
+						Debug.Log("areaName:" + targ.areaName);
 						nextAdventureIcon.GetComponent<ShowTooltip>().tooltipText = targ.areaName + " is the next big challenge. Main emotion: " + targ.emotion.ToString();
 						break;
 					}
