@@ -213,7 +213,17 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	int GetTargetID(MapIcon data)
 	{
 		if (data.targets.Length == 0)
+		{
+			foreach (Transform child in data.transform.parent)
+			{
+				if (child.GetComponent<MapIcon>() != null && child.GetComponent<MapIcon>().isTrial)
+				{
+					return child.GetComponent<MapIcon>().ID;
+				}
+			}
+
 			return -1;
+		}
 		if (data.targets[0].isTrial)
 			return data.targets[0].ID;
 		else
