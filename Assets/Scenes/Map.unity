@@ -7772,7 +7772,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 500, y: -180}
+  m_AnchoredPosition: {x: 500, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &276294329
@@ -8945,6 +8945,11 @@ PrefabInstance:
         type: 3}
       propertyPath: levelDescription
       value: 'Vultures weren''t always meanies, can fate change? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679887015462586534, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: ID
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 8679887015462586534, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
@@ -17913,18 +17918,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 544202916664921831}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &670000752 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 544202917148895383, guid: 4855bbe6eeb052a488dd8f8eefe15dde,
-    type: 3}
-  m_PrefabInstance: {fileID: 544202916664921831}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &671669042
 GameObject:
   m_ObjectHideFlags: 0
@@ -37113,12 +37106,17 @@ PrefabInstance:
     - target: {fileID: 224202514117283940, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 420.265
+      value: 420.5
       objectReference: {fileID: 0}
     - target: {fileID: 224202514117283940, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 224208539137523760, guid: 9640144b0402f6e49ae177bef4b08adc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 405.5
       objectReference: {fileID: 0}
     - target: {fileID: 224284803251300662, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
@@ -37233,7 +37231,7 @@ PrefabInstance:
     - target: {fileID: 224663541810946892, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 420.265
+      value: 420.5
       objectReference: {fileID: 0}
     - target: {fileID: 224663541810946892, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
@@ -37279,6 +37277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087334621926111195, guid: 9640144b0402f6e49ae177bef4b08adc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 240.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9640144b0402f6e49ae177bef4b08adc, type: 3}
@@ -48774,7 +48777,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 11
   m_TargetDisplay: 0
 --- !u!1 &1922688376
 GameObject:
@@ -49576,6 +49579,21 @@ PrefabInstance:
       propertyPath: bgProgressAnim
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 308583492263987872, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212615913711285569, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2647187095724943039, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3378706546154589579, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
       propertyPath: levelName
@@ -49605,6 +49623,11 @@ PrefabInstance:
         type: 3}
       propertyPath: bgProgressAnim
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078207399232111623, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: levelName
+      value: A Cautionary Tale
       objectReference: {fileID: 0}
     - target: {fileID: 4078207399232111623, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
@@ -49791,6 +49814,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5024767331116911524, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5784305093625557826, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
       propertyPath: bgProgressAnim
@@ -49811,10 +49839,20 @@ PrefabInstance:
       propertyPath: bgProgressAnim
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 8075802554310382600, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8499279315996849401, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
       propertyPath: bgProgressAnim
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9053895775186965568, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd877a5ad3252324883b3e1ec6efa003, type: 3}
@@ -50359,7 +50397,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Welcome to the map. Here you can decide where to go next!
+  m_Text: Here in the map, you can decide where to go next!
 --- !u!222 &1968576170
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -54641,7 +54679,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onComplete
       value: 
-      objectReference: {fileID: 670000752}
+      objectReference: {fileID: 0}
     - target: {fileID: 1401116558678545226, guid: aec78b885c3af494884f2acadd6fc836,
         type: 3}
       propertyPath: useBgFog
@@ -54736,7 +54774,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onComplete
       value: 
-      objectReference: {fileID: 670000752}
+      objectReference: {fileID: 0}
     - target: {fileID: 3393595197053433226, guid: aec78b885c3af494884f2acadd6fc836,
         type: 3}
       propertyPath: useBgFog
@@ -54751,7 +54789,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onComplete
       value: 
-      objectReference: {fileID: 670000752}
+      objectReference: {fileID: 0}
     - target: {fileID: 4299379943994937972, guid: aec78b885c3af494884f2acadd6fc836,
         type: 3}
       propertyPath: useBgFog

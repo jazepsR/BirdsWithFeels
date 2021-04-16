@@ -232,6 +232,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	public void SetState()
 	{
+		MapControler.Instance.canOpenNode();
 		if (available && !stateSet)
 		{
 			ExcelExport.CreateExportTable();
@@ -275,14 +276,16 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					CenterMapNode();
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
+					LeanTween.delayedCall(3f, () => MapControler.Instance.canOpenNode()); 
 				}
 				else
 				{
 
                     
                     anim.SetInteger("state", 2); //set map icon to "completed" state instantly
-                    
-                }
+					LeanTween.delayedCall(.03f, () => MapControler.Instance.canOpenNode());
+
+				}
 			}
             else
 			{
@@ -291,18 +294,20 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 anim.SetInteger("state", 0);
                 LeanTween.delayedCall(time, () => anim.SetTrigger("playUnlockAnim"));  //Set map icon to "available" state after a delay
                 LeanTween.delayedCall(time, () => anim.SetInteger("state",1));
-               
+				LeanTween.delayedCall(time + 2, () => MapControler.Instance.canOpenNode());
 
-            }
+
+			}
 		}
         else
 		{
 
             
             anim.SetInteger("state", 0); //Set map icon to "locked" state
-          
-        }
+			LeanTween.delayedCall(.03f, () => MapControler.Instance.canOpenNode());
 
+		}
+		
 	}
 	public void CenterMapNode()
 	{
@@ -450,14 +455,16 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	}
 
+
 	void Update()
 	{
 		/*if(active)
 		{
 			transform.parent.position = transform.position - offset;           
 		}*/
+
 		
-		if(useline)
+		if (useline)
 		{
 			renderLine();
 		}
@@ -552,7 +559,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         anim.SetTrigger("click");
 
         if (MapControler.Instance.SelectedIcon == this || MapControler.Instance.isViewingNode)
-        {
+		{
             return;
         }
         try

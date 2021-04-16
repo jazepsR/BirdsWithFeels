@@ -296,6 +296,19 @@ public class MapControler : MonoBehaviour {
 		//foreach (TimedEventControl timedEvent in FindObjectsOfType<TimedEventControl>())
 		//	timedEvent.CheckStatus();
 	}
+
+	public void canOpenNode()
+	{
+
+		if (isViewingNode)
+		{
+			isViewingNode = false;
+		}
+		else
+		{
+			isViewingNode = true;
+		}
+	}
 	public void HideSelectionMenu()
 	{
         if(MapTutorial.instance && MapTutorial.instance.mapTutPopup.activeSelf)
@@ -303,7 +316,7 @@ public class MapControler : MonoBehaviour {
             return;
         }
 
-        if (isViewingNode)
+        if (isViewingNode && SelectedIcon != null)
         {
             isViewingNode = false;
 
