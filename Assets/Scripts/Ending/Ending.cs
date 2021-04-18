@@ -24,6 +24,7 @@ public class Ending : MonoBehaviour
     public EventScript EndingEvent_VultureKingCallsPlayerOut;
     public EventScript EndingEvent_PercySaysNo;
     public EventScript EndingEvent4_FinalTalk;
+    public EventScript EndingEvent5_BirdsConfrontPlayer;
     [Header("ENDING DIALOGUES")]
     public Dialogue EndingDialogue1;
     public Dialogue EndingDialogue2;

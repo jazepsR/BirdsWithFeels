@@ -43,65 +43,6 @@ Transform:
   m_Father: {fileID: 1732886605078230872}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1732886604692361232
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1732886604692361235}
-  - component: {fileID: 1732886604692361234}
-  m_Layer: 0
-  m_Name: Option 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1732886604692361235
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732886604692361232}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1732886605078230872}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1732886604692361234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732886604692361232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onComplete: {fileID: 0}
-  applyToAll: 0
-  consequenceType1: 3
-  magnitude1: 3
-  consequenceType2: 3
-  magnitude2: 0
-  consequenceType3: 3
-  magnitude3: 0
-  useAutoExplanation: 1
-  AfterImage: {fileID: 0}
-  icon: {fileID: 21300002, guid: c3a1ac45abf2a0242b5aeb174e5c07bf, type: 3}
-  selectionText: Your team and the vultures stand aside as the king runs out of the
-    throne room, never to be seen again.
-  selectionTooltip: 
-  conclusionHeading: 
-  conclusionText: "He\x19 is no longer a threat to the kingdoms."
 --- !u!1 &1732886604706675162
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,13 +161,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732886605078230873}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1732886604664480500}
   - {fileID: 1732886606074941326}
-  - {fileID: 1732886604692361235}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -250,10 +190,19 @@ MonoBehaviour:
   parts: []
   options:
   - {fileID: 1732886606074941321}
-  - {fileID: 1732886604692361234}
   canShowMultipleTimes: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &1732886605205120637
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,12 +492,11 @@ MonoBehaviour:
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
-  icon: {fileID: 21300000, guid: 577d0146acfda9f4a87d8c2be5dcbad6, type: 3}
-  selectionText: 'Your team and the vultures manage to capture the king without any
-    resistance from him. '
+  icon: {fileID: 21300000, guid: 6e4e71e2fb138408e84865d6ed3a0e0b, type: 3}
+  selectionText: Your team and the vultures manage to capture the king
   selectionTooltip: 
   conclusionHeading: 
-  conclusionText: "Cautious now, he ha\x19s realized that it i\x19s over."
+  conclusionText: 
 --- !u!1 &1732886606108679892
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +635,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: So, what are we going to do with him?
+  text: " I think you\u2019re going to have to come with us. I\u2019m sure you and
+    the Queen will have a good, long talk about the future of the vulture kingdom
+    and your subjects. "
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1732886606451007342

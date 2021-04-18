@@ -105,21 +105,21 @@ public class EventController : MonoBehaviour
             {
                 CreateChoices();
                 AudioControler.Instance.FadeOutBirdTalk();
-                
+
             }
-            
+
             return;
         }
         if (activeChoices) //Continue button does not work if there's choices active 
             return;
 
         currentText++;
-       // Debug.Log("currentText: " + currentText + "currentEvent.parts.Count" + (currentEvent.parts.Count - 1));
+        // Debug.Log("currentText: " + currentText + "currentEvent.parts.Count" + (currentEvent.parts.Count - 1));
         AudioControler.Instance.ClickSound();
         myEventGUIAnimator.SetTrigger("click");
 
-        
-        
+
+
         if (currentEvent != null && (currentText < currentEvent.parts.Count - 1)) //If there's more to show, show it
         {
             print("if there is more to show, show it");
@@ -131,7 +131,7 @@ public class EventController : MonoBehaviour
             StartCoroutine(coroutine);
             SetPortrait(currentText); //Seb. Maybe only play new portrait anims if bird has changed? Easy to set up
         }
-        
+
         if (currentEvent != null && (currentText == currentEvent.parts.Count - 1))
         {
             print("i am last in event");
@@ -478,9 +478,9 @@ public class EventController : MonoBehaviour
     }
     public void HideEventGUI()
     {
-        if(hideEventButtonText)
+        if (hideEventButtonText)
         {
-            hideEventButtonText.text = "Show";
+            hideEventButtonText.text = "Hover to show battlefield";
         }
         myEventGUIAnimator.SetBool("showBattlefield", true);
     }
@@ -488,7 +488,7 @@ public class EventController : MonoBehaviour
     {
         if (hideEventButtonText)
         {
-            hideEventButtonText.text = "Hide";
+            hideEventButtonText.text = "";
         }
         myEventGUIAnimator.SetBool("showBattlefield", false);
     }
@@ -513,18 +513,20 @@ public class EventController : MonoBehaviour
             //Seb. Please add functionality to make the emo graph show the affected bird's emo graph! 
 
             bool ChoicesInfluenceEmotions = false;
+            int myAmountOfChoices = 0;
 
             foreach (EventConsequence choiceData in currentEvent.options)
             {
+                myAmountOfChoices += 1;
                 GameObject choiceObj = Instantiate(choice, choiceList);
                 SetupChoice(choiceObj, i);
-                
+
                 ChoicesInfluenceEmotions = DoesOptionIfluenceEmotions(currentEvent.options[i]);
 
                 i++;
             }
 
-            if (ChoicesInfluenceEmotions) //Seb, only show the emo graph if the choices influences the relevant bird 
+            if (ChoicesInfluenceEmotions && myAmountOfChoices > 1) //Seb, only show the emo graph if the choices influences the relevant bird, and there's more then one choice. 
             {
                 myEventGUIAnimator.SetBool("showingEmoGraph", true);
             }
@@ -640,11 +642,11 @@ public class EventController : MonoBehaviour
             if (bird != null)
                 bird.SetEmotion();
 
-            int clamp = Var.isEnding? 12 :15;
+            int clamp = Var.isEnding ? 12 : 15;
             switch (type)
             {
                 case ConsequenceType.Courage:
-                    bird.data.confidence = Mathf.Clamp(bird.data.confidence + magnitude,-clamp,clamp);
+                    bird.data.confidence = Mathf.Clamp(bird.data.confidence + magnitude, -clamp, clamp);
                     bird.prevConf = Mathf.Clamp(bird.prevConf + magnitude, -clamp, clamp);
                     if (magnitude > 0)
                     {
