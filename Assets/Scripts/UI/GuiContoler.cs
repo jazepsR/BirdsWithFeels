@@ -404,6 +404,19 @@ public class GuiContoler : MonoBehaviour {
 
 
         }
+
+
+        Debug.Log(AudioControler.Instance.musicSource.time);
+       
+        if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic)
+            AudioControler.Instance.musicSource.loop = false;
+
+        if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic && !AudioControler.Instance.musicSource.isPlaying)
+        {
+            AudioControler.Instance.musicSource.time = 41.44f;
+            AudioControler.Instance.musicSource.Play();
+        }
+        
     }
     public void SpeechBubbleClicked()
     {
