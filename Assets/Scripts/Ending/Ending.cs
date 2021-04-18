@@ -13,18 +13,17 @@ public class Ending : MonoBehaviour
     public Var.Em[] forthStageEnemies;
     public Var.Em[] fifthStageEnemies;
     public Var.Em[] sixthStageEnemies;
-    public Var.Em[] seventhStageEnemies;
-    public Var.Em[] eightStageEnemies;
-    public Var.Em[] ninethStageEnemies;
-    public Var.Em[] tenthStageEnemies;
+    //public Var.Em[] seventhStageEnemies;
+    //public Var.Em[] eightStageEnemies;
+    //public Var.Em[] ninethStageEnemies;
+    //public Var.Em[] tenthStageEnemies;
     [Header("ENDING EVENTS")]
     public EventScript EndingEvent0_Introduction;
     public EventScript EndingEvent_PlayerManipulateEmotions1;
     public EventScript EndingEvent_PlayerManipulateEmotions2;
     public EventScript EndingEvent_VultureKingCallsPlayerOut;
     public EventScript EndingEvent_PercySaysNo;
-    public EventScript EndingEvent4_FinalTalk;
-    public EventScript EndingEvent5_BirdsConfrontPlayer;
+    public EventScript EndingEvent4_FinalTalk; //Leads into "confront player" event as well
     [Header("ENDING DIALOGUES")]
     public Dialogue EndingDialogue1;
     public Dialogue EndingDialogue2;
@@ -63,8 +62,8 @@ public class Ending : MonoBehaviour
         AddEnemiesToList(thirdStageEnemies);
         AddEnemiesToList(forthStageEnemies);
         AddEnemiesToList(fifthStageEnemies);
-        AddEnemiesToList(sixthStageEnemies);
-        AddEnemiesToList(seventhStageEnemies, false);
+        AddEnemiesToList(sixthStageEnemies, false);
+        //AddEnemiesToList(seventhStageEnemies, false);
       //  AddEnemiesToList(eightStageEnemies);
        // AddEnemiesToList(ninethStageEnemies);
        // AddEnemiesToList(tenthStageEnemies);
@@ -189,7 +188,7 @@ public class Ending : MonoBehaviour
 
             case 1:
                 LeanTween.delayedCall(0.2f,()=> DialogueControl.Instance.CreateParticularDialog(EndingDialogue1));
-                
+                visuals.addVulturesToLeftSide();
 
                 break;
 
@@ -206,15 +205,17 @@ public class Ending : MonoBehaviour
                 break;
             case 4:
                 visuals.addVulturesToLeftSide();
-              //  LeanTween.delayedCall(0.2f, () => DialogueControl.Instance.CreateParticularDialog(EndingDialogue3));
-                
+                //Nothing mayor happens here? 
+
+                //  LeanTween.delayedCall(0.2f, () => DialogueControl.Instance.CreateParticularDialog(EndingDialogue3));
+
                 break;
             case 5:
-                visuals.addVulturesToLeftSide();
-                break;
-            case 6:
                 showedFinalEvent = true;
                 EventController.Instance.CreateEvent(EndingEvent4_FinalTalk);
+                break;
+            case 6:
+                
                 /*if (!showedFirstKingColor)
                 {
                   //  DialogueControl.Instance.CreateParticularDialog(EndingDialogue4a);
@@ -253,10 +254,7 @@ public class Ending : MonoBehaviour
             case 3:
 
                 LeanTween.delayedCall(0.2f, () => EventController.Instance.CreateEvent(EndingEvent_PercySaysNo));
-
-              
                 
-
                 break;
             case 4:
                 

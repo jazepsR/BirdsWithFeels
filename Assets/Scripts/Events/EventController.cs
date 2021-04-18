@@ -302,7 +302,7 @@ public class EventController : MonoBehaviour
         }
         if (hideEventButton)
         {
-            hideEventButton.SetActive(false);
+            //hideEventButton.SetActive(false);
         }
         eventBg.gameObject.SetActive(eventData.eventBackground != null);
         bgFog.gameObject.SetActive(eventData.useBgFog);
@@ -504,7 +504,7 @@ public class EventController : MonoBehaviour
             {
                 if (!inMap && hideEventButton && !Var.isTutorial)
                 {
-                    hideEventButton.SetActive(true);
+                   // hideEventButton.SetActive(true);
                 }
             }
             );
@@ -556,7 +556,7 @@ public class EventController : MonoBehaviour
     {
         if (hideEventButton)
         {
-            hideEventButton.SetActive(false);
+            //hideEventButton.SetActive(false);
         }
         myEventGUIAnimator.SetBool("showingEmoGraph", false);
         activeChoices = false;
