@@ -271,7 +271,11 @@ public class MapControler : MonoBehaviour {
 
 		AudioControler.Instance.buttonSoundMap.Play();
 		LeanTween.delayedCall(0.3f, () => AudioControler.Instance.restSound.Play());
-		timerText.text = "Week: " + Var.currentWeek;
+		if(Var.currentWeek >= 999)
+			timerText.text = "Week: " + "999";
+        else
+			timerText.text = "Week: " + Var.currentWeek;
+
 		timerText.GetComponent<Animator>().SetTrigger("Increment");
 		foreach (TimedEventControl control in timedEvents)
 			control.CheckStatus();
