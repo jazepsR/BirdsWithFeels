@@ -89,6 +89,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void Start()
 	{
+		
 		if(MapControler.Instance.allIDs.Contains(ID))
 		{
 			Debug.LogError("Duplicate ID found! ID: " + ID + " node name: " + name);
@@ -195,6 +196,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			if (EventController.Instance.eventsToShow.Count == 0 && !GuiContoler.Instance.activeSpeechBubble.activeInHierarchy)
 				SetState();
 		});
+
+		
 	}
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -578,12 +581,16 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             SetupPieGraph();
 
-            if (timedEvent != null && available)
-            {
-                timedEvent.TriggerActivationEvent();
-            }
+		/*if (timedEvent != null && available)
+		{
+		    timedEvent.TriggerActivationEvent();
+		}*/
+		if (timedEvent != null)
+		{
 
-            active = true;
+			Var.selectedTimeEvent = timedEvent.data;
+		}
+			active = true;
 
             foreach (GuiMap map in FindObjectsOfType<GuiMap>())
                 map.Clear();
@@ -638,11 +645,12 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	public void LoadBattleScene()
 	{
-		if (timedEventTrigger != null && !timedEventTrigger.data.activationEventShown)
+		/*if (timedEventTrigger != null && !timedEventTrigger.data.activationEventShown)
 		{
 			timedEventTrigger.TriggerActivationEvent();
 			return;
 		}
+		*/
 		//Debug.LogError("loading battle scene");
 		if (available && MapControler.Instance.canFight)
 		{

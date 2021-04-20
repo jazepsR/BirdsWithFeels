@@ -122,6 +122,8 @@ public class GuiContoler : MonoBehaviour {
     private Text activeSpeechText;
     [HideInInspector]
     public GameObject activeSpeechBubble;
+    [HideInInspector]
+    public TimedEventControl control;
 
     void Awake()
     {
@@ -165,6 +167,21 @@ public class GuiContoler : MonoBehaviour {
             LeanTween.delayedCall(0.05f, tryDialog);
             boss.SetActive(Var.isBoss);
             GraphBlocker.SetActive(false);
+
+            if (Var.freezeEmotions && !Var.selectedTimeEvent.activationEventShown && Var.selectedTimeEvent != null && !Var.isEnding && !inMap)
+            {
+                foreach (TimedEventControl anEvent in FindObjectsOfType<TimedEventControl>())
+                {
+                    if (anEvent.eventName == Var.selectedTimeEvent.eventName)
+                    {
+                        control = anEvent;
+                        control.data = Var.selectedTimeEvent;
+                    }
+                }
+                Debug.Log("control is" + control.eventName);
+                control.TriggerActivationEvent();
+
+            }
         }
 
     }
@@ -404,9 +421,6 @@ public class GuiContoler : MonoBehaviour {
 
 
         }
-
-
-        Debug.Log(AudioControler.Instance.musicSource.time);
        
         if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic)
             AudioControler.Instance.musicSource.loop = false;
