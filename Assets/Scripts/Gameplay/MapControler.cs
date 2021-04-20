@@ -301,18 +301,6 @@ public class MapControler : MonoBehaviour {
 		//	timedEvent.CheckStatus();
 	}
 
-	public void canOpenNode()
-	{
-
-		if (isViewingNode)
-		{
-			isViewingNode = false;
-		}
-		else
-		{
-			isViewingNode = true;
-		}
-	}
 	public void HideSelectionMenu()
 	{
         if(MapTutorial.instance && MapTutorial.instance.mapTutPopup.activeSelf)

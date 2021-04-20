@@ -82,6 +82,8 @@ public class GuiContoler : MonoBehaviour {
     public Image[] BirdMentalHearts;
     public Text levelNumberText;
     public GameObject pause;
+    public GameObject toMapBtn;
+    public GameObject mainMenuBtn;
     public GameObject pauseBtn;
     public GameObject deathMenu;
     public Text deathTitle;
@@ -124,6 +126,7 @@ public class GuiContoler : MonoBehaviour {
     public GameObject activeSpeechBubble;
     [HideInInspector]
     public TimedEventControl control;
+    
 
     void Awake()
     {
@@ -147,9 +150,11 @@ public class GuiContoler : MonoBehaviour {
             Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
         if (Var.isTutorial)
         {
+            
             try
             {
                 Tutorial.Instance.enabled = true;
+                canPause(false);
             }
             catch { }
         }
@@ -277,6 +282,11 @@ public class GuiContoler : MonoBehaviour {
             SetControlButtonText();
             Time.timeScale = 0.0f;
             GraphBlocker.SetActive(true);
+            if (Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID && !Var.cheatsEnabled)
+            {
+                mainMenuBtn.GetComponent<Button>().interactable = false;
+                toMapBtn.GetComponent<Button>().interactable = false;    
+            }
             if (inMap)
             {
                 MapControler.Instance.canMove = false;
