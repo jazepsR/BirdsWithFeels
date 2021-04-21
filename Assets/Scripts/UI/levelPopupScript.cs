@@ -111,6 +111,7 @@ public class levelPopupScript : MonoBehaviour {
 	}
 	public void ThirdBtn()
 	{
+		GuiContoler.Instance.GraphBlocker.SetActive(false);
 		firstPart.SetActive(false);
 		secondPart.SetActive(false);
 		thirdPart.SetActive(false);
@@ -119,7 +120,6 @@ public class levelPopupScript : MonoBehaviour {
 
         Animator popupAnim = LevelPopup.GetComponent<Animator>();
         popupAnim.SetTrigger("despawn");
-		GuiContoler.Instance.GraphBlocker.SetActive(false);
 		if (LevelBarScript.Instance.levelUpAnimator)
 		{
 			LevelBarScript.Instance.levelUpAnimator.SetBool("isLevellingUp", false);

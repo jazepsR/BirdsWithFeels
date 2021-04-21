@@ -65,8 +65,8 @@ public class powerTile : MonoBehaviour {
 	{
 		if (other.tag == "feet" && type != Var.PowerUps.obstacle)
 		{
-
-			switch (type)
+			AudioControler.Instance.PlaySound(AudioControler.Instance.tileHighlightBirdHoverSpecial);
+			/*switch (type)
 			{
 				case Var.PowerUps.dmg:
 					AudioControler.Instance.powerTileCombat.Play();
@@ -86,7 +86,7 @@ public class powerTile : MonoBehaviour {
 				default:
 					AudioControler.Instance.PlaySound(AudioControler.Instance.tileHighlightBirdHoverSpecial);
 					break;
-			}
+			}*/
 			
 		}
 	}

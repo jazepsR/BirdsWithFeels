@@ -587,7 +587,6 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		}*/
 		if (timedEvent != null)
 		{
-
 			Var.selectedTimeEvent = timedEvent.data;
 		}
 			active = true;

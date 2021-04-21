@@ -126,7 +126,7 @@ public class GuiContoler : MonoBehaviour {
     public GameObject activeSpeechBubble;
     [HideInInspector]
     public TimedEventControl control;
-    
+    [SerializeField] public TimedEventControl[] timedEventControllers;
 
     void Awake()
     {
@@ -175,7 +175,7 @@ public class GuiContoler : MonoBehaviour {
 
             if (Var.freezeEmotions && !Var.selectedTimeEvent.activationEventShown && Var.selectedTimeEvent != null && !Var.isEnding && !inMap)
             {
-                foreach (TimedEventControl anEvent in FindObjectsOfType<TimedEventControl>())
+                foreach (TimedEventControl anEvent in timedEventControllers)
                 {
                     if (anEvent.eventName == Var.selectedTimeEvent.eventName)
                     {
