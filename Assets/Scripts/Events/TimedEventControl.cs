@@ -25,23 +25,25 @@ public class TimedEventControl : MonoBehaviour {
 	bool shouldTriggerBattle = false;
 	// Use this for initialization
 	
-	void Start () {	
-		if (Helpers.Instance.VarContainsTimedEvent(eventName))
-		{
-			data = Helpers.Instance.GetTimedEvent(eventName);
-		}
-		else
-		{
-			if (startArea && startArea.completed)
+	void Start () {
+			if (Helpers.Instance.VarContainsTimedEvent(eventName))
 			{
-				data = new TimedEventData(eventName, Var.currentWeek + timeToComplete);
-				data.currentState = TimedEventData.state.active;
-				Var.timedEvents.Add(data);
-				EventController.Instance.CreateEvent(startEvent);
-				endArea.timedEventTrigger = this;				
+				data = Helpers.Instance.GetTimedEvent(eventName);
 			}
-		}
-		CheckStatus();
+			else
+			{
+				if (startArea && startArea.completed)
+				{
+					data = new TimedEventData(eventName, Var.currentWeek + timeToComplete);
+					data.currentState = TimedEventData.state.active;
+					Var.timedEvents.Add(data);
+					EventController.Instance.CreateEvent(startEvent);
+					endArea.timedEventTrigger = this;
+				}
+			}
+		
+		if(MapControler.Instance)
+			CheckStatus();
 		
 	}
 	
@@ -51,11 +53,14 @@ public class TimedEventControl : MonoBehaviour {
 		if (data.currentState == TimedEventData.state.active || data.currentState == TimedEventData.state.failed 
 			|| data.currentState == TimedEventData.state.completedFail)
 		{
-			EventNotification.transform.parent.gameObject.SetActive(true);
-			EventNotification.text = (Mathf.Max(0,data.completeBy - Var.currentWeek)).ToString();
-			EventNotification.transform.parent.parent = endArea.transform;
-			EventNotification.transform.parent.localPosition = offset;
-			if (endArea.completed)
+			if (EventNotification != null)
+			{
+				EventNotification.transform.parent.gameObject.SetActive(true);
+				EventNotification.text = (Mathf.Max(0, data.completeBy - Var.currentWeek)).ToString();
+				EventNotification.transform.parent.parent = endArea.transform;
+				EventNotification.transform.parent.localPosition = offset;
+			}
+			if (endArea != null && endArea.completed)
 			{
 				if (Var.currentWeek<= data.completeBy)
 				{
@@ -68,6 +73,8 @@ public class TimedEventControl : MonoBehaviour {
 					EventController.Instance.CreateEvent(completionAfterFailEvent);
                     data.currentState = TimedEventData.state.notStarted;
                 }
+				
+			if(EventNotification != null)
 				EventNotification.transform.parent.gameObject.SetActive(false);
 			}
 			if (Var.currentWeek == data.completeBy)
@@ -77,10 +84,11 @@ public class TimedEventControl : MonoBehaviour {
 			}
 			if(Var.currentWeek >= data.completeBy)
             {
-				EventNotification.transform.parent.gameObject.SetActive(false);
+				if (EventNotification != null)
+					EventNotification.transform.parent.gameObject.SetActive(false);
 			}
 
-			if(endArea)
+			if(endArea && endArea != null)
 			{
 				endArea.timedEvent = this;
 			}

@@ -30,11 +30,13 @@ public class levelPopupScript : MonoBehaviour {
 		Instance = this;
 		heart = Resources.Load<Sprite>("Sprites/heart");
 		sword = Resources.Load<Sprite>("Sprites/swords");
+		
 		//Setup(FillPlayer.Instance.playerBirds[1], new LevelData(Levels.type.Brave1, Var.Em.Confident, Var.lvlSprites[2]));
 	}
 	
 	public void Setup(Bird bird, LevelDataScriptable data)
 	{
+		GuiContoler.Instance.GraphBlocker.SetActive(true);
 		healthGiven = false;
 		this.data = data;
 		activeBird = bird;
@@ -109,6 +111,7 @@ public class levelPopupScript : MonoBehaviour {
 	}
 	public void ThirdBtn()
 	{
+		GuiContoler.Instance.GraphBlocker.SetActive(false);
 		firstPart.SetActive(false);
 		secondPart.SetActive(false);
 		thirdPart.SetActive(false);
@@ -117,7 +120,6 @@ public class levelPopupScript : MonoBehaviour {
 
         Animator popupAnim = LevelPopup.GetComponent<Animator>();
         popupAnim.SetTrigger("despawn");
-
 		if (LevelBarScript.Instance.levelUpAnimator)
 		{
 			LevelBarScript.Instance.levelUpAnimator.SetBool("isLevellingUp", false);
@@ -143,6 +145,8 @@ public class levelPopupScript : MonoBehaviour {
 			//foreach (string text in texts)
 			//	GuiContoler.Instance.ShowSpeechBubble(Tutorial.Instance.portraitPoint, text,activeBird.birdSounds.GetTalkGroup(activeBird.emotion));
 		}
+
+		
 	}
 	// Update is called once per frame
 	void Update () {

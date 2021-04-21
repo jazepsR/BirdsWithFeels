@@ -271,7 +271,11 @@ public class MapControler : MonoBehaviour {
 
 		AudioControler.Instance.buttonSoundMap.Play();
 		LeanTween.delayedCall(0.3f, () => AudioControler.Instance.restSound.Play());
-		timerText.text = "Week: " + Var.currentWeek;
+		if(Var.currentWeek >= 999)
+			timerText.text = "Week: " + "999";
+        else
+			timerText.text = "Week: " + Var.currentWeek;
+
 		timerText.GetComponent<Animator>().SetTrigger("Increment");
 		foreach (TimedEventControl control in timedEvents)
 			control.CheckStatus();
@@ -296,6 +300,7 @@ public class MapControler : MonoBehaviour {
 		//foreach (TimedEventControl timedEvent in FindObjectsOfType<TimedEventControl>())
 		//	timedEvent.CheckStatus();
 	}
+
 	public void HideSelectionMenu()
 	{
         if(MapTutorial.instance && MapTutorial.instance.mapTutPopup.activeSelf)
@@ -303,7 +308,7 @@ public class MapControler : MonoBehaviour {
             return;
         }
 
-        if (isViewingNode)
+        if (isViewingNode && SelectedIcon != null)
         {
             isViewingNode = false;
 

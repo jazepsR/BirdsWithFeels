@@ -82,6 +82,8 @@ public class GuiContoler : MonoBehaviour {
     public Image[] BirdMentalHearts;
     public Text levelNumberText;
     public GameObject pause;
+    public GameObject toMapBtn;
+    public GameObject mainMenuBtn;
     public GameObject pauseBtn;
     public GameObject deathMenu;
     public Text deathTitle;
@@ -122,6 +124,9 @@ public class GuiContoler : MonoBehaviour {
     private Text activeSpeechText;
     [HideInInspector]
     public GameObject activeSpeechBubble;
+    [HideInInspector]
+    public TimedEventControl control;
+    [SerializeField] public TimedEventControl[] timedEventControllers;
 
     void Awake()
     {
@@ -145,9 +150,11 @@ public class GuiContoler : MonoBehaviour {
             Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
         if (Var.isTutorial)
         {
+            
             try
             {
                 Tutorial.Instance.enabled = true;
+                canPause(false);
             }
             catch { }
         }
@@ -165,6 +172,21 @@ public class GuiContoler : MonoBehaviour {
             LeanTween.delayedCall(0.05f, tryDialog);
             boss.SetActive(Var.isBoss);
             GraphBlocker.SetActive(false);
+
+            if (Var.freezeEmotions && !Var.selectedTimeEvent.activationEventShown && Var.selectedTimeEvent != null && !Var.isEnding && !inMap)
+            {
+                foreach (TimedEventControl anEvent in timedEventControllers)
+                {
+                    if (anEvent.eventName == Var.selectedTimeEvent.eventName)
+                    {
+                        control = anEvent;
+                        control.data = Var.selectedTimeEvent;
+                    }
+                }
+                Debug.Log("control is" + control.eventName);
+                control.TriggerActivationEvent();
+
+            }
         }
 
     }
@@ -260,6 +282,11 @@ public class GuiContoler : MonoBehaviour {
             SetControlButtonText();
             Time.timeScale = 0.0f;
             GraphBlocker.SetActive(true);
+            if (Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID && !Var.cheatsEnabled)
+            {
+                mainMenuBtn.GetComponent<Button>().interactable = false;
+                toMapBtn.GetComponent<Button>().interactable = false;    
+            }
             if (inMap)
             {
                 MapControler.Instance.canMove = false;
@@ -404,6 +431,16 @@ public class GuiContoler : MonoBehaviour {
 
 
         }
+       
+        if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic)
+            AudioControler.Instance.musicSource.loop = false;
+
+        if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic && !AudioControler.Instance.musicSource.isPlaying)
+        {
+            AudioControler.Instance.musicSource.time = 41.44f;
+            AudioControler.Instance.musicSource.Play();
+        }
+        
     }
     public void SpeechBubbleClicked()
     {

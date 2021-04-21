@@ -89,6 +89,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     void Start()
 	{
+		
 		if(MapControler.Instance.allIDs.Contains(ID))
 		{
 			Debug.LogError("Duplicate ID found! ID: " + ID + " node name: " + name);
@@ -195,6 +196,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			if (EventController.Instance.eventsToShow.Count == 0 && !GuiContoler.Instance.activeSpeechBubble.activeInHierarchy)
 				SetState();
 		});
+
+		
 	}
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -213,7 +216,17 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	int GetTargetID(MapIcon data)
 	{
 		if (data.targets.Length == 0)
+		{
+			foreach (Transform child in data.transform.parent)
+			{
+				if (child.GetComponent<MapIcon>() != null && child.GetComponent<MapIcon>().isTrial)
+				{
+					return child.GetComponent<MapIcon>().ID;
+				}
+			}
+
 			return -1;
+		}
 		if (data.targets[0].isTrial)
 			return data.targets[0].ID;
 		else
@@ -222,6 +235,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	public void SetState()
 	{
+		
 		if (available && !stateSet)
 		{
 			ExcelExport.CreateExportTable();
@@ -265,14 +279,16 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					CenterMapNode();
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
+					
 				}
 				else
 				{
 
                     
                     anim.SetInteger("state", 2); //set map icon to "completed" state instantly
-                    
-                }
+					
+
+				}
 			}
             else
 			{
@@ -281,18 +297,20 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 anim.SetInteger("state", 0);
                 LeanTween.delayedCall(time, () => anim.SetTrigger("playUnlockAnim"));  //Set map icon to "available" state after a delay
                 LeanTween.delayedCall(time, () => anim.SetInteger("state",1));
-               
+				
 
-            }
+
+			}
 		}
         else
 		{
 
             
             anim.SetInteger("state", 0); //Set map icon to "locked" state
-          
-        }
+			
 
+		}
+		
 	}
 	public void CenterMapNode()
 	{
@@ -440,14 +458,16 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	}
 
+
 	void Update()
 	{
 		/*if(active)
 		{
 			transform.parent.position = transform.position - offset;           
 		}*/
+
 		
-		if(useline)
+		if (useline)
 		{
 			renderLine();
 		}
@@ -542,7 +562,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         anim.SetTrigger("click");
 
         if (MapControler.Instance.SelectedIcon == this || MapControler.Instance.isViewingNode)
-        {
+		{
             return;
         }
         try
@@ -561,12 +581,15 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             SetupPieGraph();
 
-            if (timedEvent != null && available)
-            {
-                timedEvent.TriggerActivationEvent();
-            }
-
-            active = true;
+		/*if (timedEvent != null && available)
+		{
+		    timedEvent.TriggerActivationEvent();
+		}*/
+		if (timedEvent != null)
+		{
+			Var.selectedTimeEvent = timedEvent.data;
+		}
+			active = true;
 
             foreach (GuiMap map in FindObjectsOfType<GuiMap>())
                 map.Clear();
@@ -621,11 +644,12 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	public void LoadBattleScene()
 	{
-		if (timedEventTrigger != null && !timedEventTrigger.data.activationEventShown)
+		/*if (timedEventTrigger != null && !timedEventTrigger.data.activationEventShown)
 		{
 			timedEventTrigger.TriggerActivationEvent();
 			return;
 		}
+		*/
 		//Debug.LogError("loading battle scene");
 		if (available && MapControler.Instance.canFight)
 		{

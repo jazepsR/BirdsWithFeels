@@ -66,6 +66,28 @@ public class powerTile : MonoBehaviour {
 		if (other.tag == "feet" && type != Var.PowerUps.obstacle)
 		{
 			AudioControler.Instance.PlaySound(AudioControler.Instance.tileHighlightBirdHoverSpecial);
+			/*switch (type)
+			{
+				case Var.PowerUps.dmg:
+					AudioControler.Instance.powerTileCombat.Play();
+					break;
+				case Var.PowerUps.shield:
+					AudioControler.Instance.powerTileShield.Play();
+					break;
+				case Var.PowerUps.emotion:
+					if (emotion == Var.Em.Solitary || emotion == Var.Em.Cautious)
+						AudioControler.Instance.powerTileNegative.Play();
+					else
+						AudioControler.Instance.powerTilePositive.Play();
+					break;
+				case Var.PowerUps.heal:
+					AudioControler.Instance.powerTileHeart.Play();
+					break;
+				default:
+					AudioControler.Instance.PlaySound(AudioControler.Instance.tileHighlightBirdHoverSpecial);
+					break;
+			}*/
+			
 		}
 	}
 
@@ -86,22 +108,22 @@ public class powerTile : MonoBehaviour {
 		{
 			case Var.PowerUps.dmg:
 				info = "Birds on this tile recieve +10% fighting bonus";
-				AudioControler.Instance.powerTileCombat.Play();
+				//AudioControler.Instance.powerTileCombat.Play();
 				break;
             case Var.PowerUps.shield:
                 info = "Birds on this tile are shielded from damage";
-                AudioControler.Instance.powerTileShield.Play();
+               // AudioControler.Instance.powerTileShield.Play();
                 break;
             case Var.PowerUps.emotion:
 				info = "Gain one extra "+Helpers.Instance.GetHexColor(emotion) + emotion.ToString()+"</color>";
-				if(emotion == Var.Em.Solitary || emotion == Var.Em.Cautious)
-					AudioControler.Instance.powerTileNegative.Play();
+				/*if(emotion == Var.Em.Solitary || emotion == Var.Em.Cautious)
+					//AudioControler.Instance.powerTileNegative.Play();
 				else
-					AudioControler.Instance.powerTilePositive.Play();
+					//AudioControler.Instance.powerTilePositive.Play();*/
 				break;
 			case Var.PowerUps.heal:
 				info = "Birds on this tile will heal 1 heart after the battle";
-				AudioControler.Instance.powerTileHeart.Play();
+				//AudioControler.Instance.powerTileHeart.Play();
 				break;
 			case Var.PowerUps.obstacle:
 				info = "You can't place birds here - enemies will walk through";

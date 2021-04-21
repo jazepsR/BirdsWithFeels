@@ -66,6 +66,8 @@ public static class Var {
 	public static List<GameObject> sueprEnemySprites = null;
 	public static GameObject emotionParticles = null;
 	public static bool Infight = false;
+	[HideInInspector]
+	public static TimedEventData selectedTimeEvent;
 	public static bool shouldDoMapEvent = false;
 	public static Settings gameSettings = new Settings(true);
 	public static List<TimedEventData> timedEvents = new List<TimedEventData>();
@@ -98,7 +100,7 @@ public class Settings
         shownFirstLevelUp = tutorialsCompleted;
         shownBattlePlanningTutorial = tutorialsCompleted;
         shownLevelTutorial = tutorialsCompleted;
-		shownMapTutorial =  tutorialsCompleted;
+		shownMapTutorial = tutorialsCompleted;
 }
 }
 

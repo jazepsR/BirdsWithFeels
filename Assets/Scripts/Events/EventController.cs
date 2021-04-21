@@ -368,7 +368,7 @@ public class EventController : MonoBehaviour
         //nameText.text = currentBird.charName;
         if (coroutine != null)
             StopCoroutine(coroutine);
-        coroutine = WaitAndPrint(text, false);
+        coroutine = WaitAndPrint(text, true);
         StartCoroutine(coroutine);
         SetPortrait(0);
 

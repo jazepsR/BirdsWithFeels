@@ -413,10 +413,11 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
     public void PlayWinMusic()
     { 
-        LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume, 1, 1f);
-        battleSource.clip = levelCompleteMusic;
-        battleSource.loop = true; //loops victory music
-        battleSource.Play();
+        //LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume, 1, 1f);
+        musicSource.clip = levelCompleteMusic;
+        //musicSource.loop = true; //loops victory music
+        AudioControler.Instance.ActivateMusicSource(audioSourceType.musicSource);
+        musicSource.Play();
     }
 
     public void ActivateMusicSource(audioSourceType sourceToActivate)

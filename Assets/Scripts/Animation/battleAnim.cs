@@ -80,10 +80,10 @@ public class battleAnim :MonoBehaviour {
 			}
 
             AudioControler.Instance.battleOver.Play();
-			yield return new WaitForSeconds(1.0f);
-            AudioControler.Instance.ActivateMusicSource(audioSourceType.graphMusic);
+			if(!Var.freezeEmotions)
+                yield return new WaitForSeconds(1.0f);
+                AudioControler.Instance.ActivateMusicSource(audioSourceType.graphMusic);
             yield return new WaitForSeconds(1.0f);
-
             foreach (Bird bird in Var.activeBirds)
 				bird.GetComponentInChildren<Animator>().SetBool("lose", false);
 			if (Var.isBoss)
