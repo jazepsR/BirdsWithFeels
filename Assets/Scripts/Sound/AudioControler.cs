@@ -118,6 +118,7 @@ public class AudioControler : MonoBehaviour {
     public AudioSource otherEffects;
     public AudioSource particleSounds;
     public AudioSource emoGraphSource;
+    public List<AudioSource> spatialMusicSources;
     [Header("Individual bird sounds")]
     public AudioGroup VultureDialogueSounds;
     public BirdSound TerrySounds;
@@ -152,6 +153,7 @@ public class AudioControler : MonoBehaviour {
         defaultSoundVol = PlayerPrefs.GetFloat("soundVol", 1);
         defaultMusicVol = PlayerPrefs.GetFloat("musicVol", 1);
 
+
     }
 
     private void Start()
@@ -166,14 +168,21 @@ public class AudioControler : MonoBehaviour {
             if (inBattle)
             {
 
-                AudioControler.Instance.ActivateMusicSource(audioSourceType.musicSource);
-                Debug.Log("hi");
+               
+                // AudioControler.Instance.ActivateMusicSource(audioSourceType.musicSource);
+
+                Debug.Log("DEFAULT SOUND: " + defaultSoundVol);
+            
+
+
+
                 if (Var.isBoss)
                 {
                     musicSource.clip = bossThinkingMusic;
                 }
                 else if (Var.freezeEmotions)
 				{
+                  
                     musicSource.clip = TrialThinkingMusic;
                     
 				}
@@ -181,10 +190,13 @@ public class AudioControler : MonoBehaviour {
                 {
                     musicSource.clip = defaultThinkingMusic;
                 }
+
+                
             }
         }
         musicSource.Play();
         SetSoundVol();
+        
 
     }
     public void PlayStartGameHover()
@@ -279,8 +291,11 @@ public class AudioControler : MonoBehaviour {
 			ambientAudioSource.volume = defaultSoundVol;
 		if(battleSource)
 			battleSource.volume = defaultMusicVol;
-		if(musicSource)
-			musicSource.volume = defaultMusicVol;
+        if (musicSource)
+        {
+           // Debug.Log("hello i am music source at music volume: " + defaultMusicVol);
+            musicSource.volume = defaultMusicVol;
+        }
         if(UiEffects)
             UiEffects.volume = defaultSoundVol;
         if(birdVoices)
@@ -289,6 +304,17 @@ public class AudioControler : MonoBehaviour {
             otherEffects.volume = defaultSoundVol;
         if(particleSounds)
             particleSounds.volume = defaultSoundVol;
+        if (emoGraphSource)
+            emoGraphSource.volume = defaultMusicVol;
+        if (EventController.Instance.eventAudioSource)
+            EventController.Instance.eventAudioSource.volume = defaultSoundVol;
+        if (spatialMusicSources.Count > 0)
+        {
+            foreach (AudioSource spatialsound in spatialMusicSources)
+            {
+                spatialsound.volume = ambientAudioSource.volume;
+            }
+        }
 
     }
 public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int pitchRange=0)
@@ -300,9 +326,10 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
 	public void PlaySound(AudioClip clip, audioSourceType sourceType)
 	{
-        Debug.LogError("Playing sound: " + clip.name);
+        Debug.Log("Playing sound: " + clip.name);
 		GetAudioSource(sourceType).pitch = 1f;
 		GetAudioSource(sourceType).PlayOneShot(clip);
+
 	}
 	public void PlaySound(EventAudio eventSound)
 	{
@@ -390,13 +417,15 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	{
 		defaultSoundVol = vol;
 		SetSoundVol();
+        Debug.Log("Sound has been set");
 	}
 
 	public void SetMusicVolume(float vol)
 	{
 		defaultMusicVol = vol;
 		SetSoundVol();
-	}
+        Debug.Log("Music has been set");
+    }
 	public void SaveVolumeSettings()
 	{
 		PlayerPrefs.SetFloat("soundVol", defaultSoundVol);
@@ -407,7 +436,8 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
 	void battleVolumeToggle(float vol)
 	{
-		battleSource.volume = vol*defaultSoundVol;
+        Debug.Log("battle volume toggle");
+        battleSource.volume = vol*defaultSoundVol;
 		musicSource.volume = (1 - vol)*defaultMusicVol;
 	}
 
@@ -440,9 +470,10 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
         audioSources.Remove(activeSource);
         activeSource.Play();
         float t = 0;
-        while(t<1)
+        while(t < defaultMusicVol)
         {
             t += Time.deltaTime / lerpTime;
+            
             activeSource.volume = Mathf.Max(activeSource.volume, t);
             foreach(AudioSource source in audioSources)
             {
@@ -469,7 +500,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
 	void StartSound()
 	{
-		mainAudioSource.volume = 1.0f;
+		mainAudioSource.volume = defaultSoundVol;
 	}
 	// Update is called once per frame
 	void Update () {

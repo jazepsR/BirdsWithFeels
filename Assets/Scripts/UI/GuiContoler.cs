@@ -263,7 +263,6 @@ public class GuiContoler : MonoBehaviour {
             soundSlider.value = AudioControler.Instance.defaultSoundVol;
         if (musicSlider)
             musicSlider.value = AudioControler.Instance.defaultMusicVol;
-
         if (pause.activeSelf)
         {
             pause.SetActive(false);
@@ -1274,6 +1273,7 @@ public class GuiContoler : MonoBehaviour {
 		Var.shouldDoMapEvent = true;
 		Var.CanShowHover = true;
 		LeanTween.cancelAll();
+        AudioControler.Instance.SaveVolumeSettings();
 		SaveLoad.Save();
 		SceneManager.LoadScene("Map");
 	}
@@ -1281,6 +1281,7 @@ public class GuiContoler : MonoBehaviour {
 	public void LoadMainMenu()
 	{
 		Time.timeScale = 1.0f;
+        AudioControler.Instance.SaveVolumeSettings();
 		SaveLoad.Save();
 		AudioControler.Instance.ClickSound();
 		SceneManager.LoadScene("MainMenu");
