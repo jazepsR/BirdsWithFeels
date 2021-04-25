@@ -190,8 +190,15 @@ public class GuiContoler : MonoBehaviour {
             }
         }
 
-        if(!Var.isTutorial || !(Var.currentStageID == Var.battlePlanningTutorialID) || !Var.freezeEmotions || !inMap || !Var.isEnding)
-            showEmoGraphArrow.SetActive(true);
+        if (showEmoGraphArrow != null)
+        {
+            if ((Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID) || Var.freezeEmotions || inMap || Var.isEnding)
+                showEmoGraphArrow.SetActive(false);
+            else
+            {
+                showEmoGraphArrow.SetActive(true);
+            }
+        }
             
     }
 

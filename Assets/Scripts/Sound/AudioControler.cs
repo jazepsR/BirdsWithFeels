@@ -312,7 +312,10 @@ public class AudioControler : MonoBehaviour {
         {
             foreach (AudioSource spatialsound in spatialMusicSources)
             {
-                spatialsound.volume = ambientAudioSource.volume;
+                if (spatialsound != null)
+                {
+                    spatialsound.volume = ambientAudioSource.volume;
+                }
             }
         }
 
@@ -470,14 +473,14 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
         audioSources.Remove(activeSource);
         activeSource.Play();
         float t = 0;
-        while(t < defaultMusicVol)
+        while(t < 1)
         {
             t += Time.deltaTime / lerpTime;
             
-            activeSource.volume = Mathf.Max(activeSource.volume, t);
+            activeSource.volume = Mathf.Max(activeSource.volume, t * defaultMusicVol);
             foreach(AudioSource source in audioSources)
             {
-                source.volume = Mathf.Min(source.volume, 1 - t);
+                source.volume = Mathf.Min(source.volume, (1 - t) * defaultMusicVol);
             }
             yield return null;
         }
