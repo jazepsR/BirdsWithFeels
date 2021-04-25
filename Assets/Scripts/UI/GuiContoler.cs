@@ -281,7 +281,7 @@ public class GuiContoler : MonoBehaviour {
             SetControlButtonText();
             Time.timeScale = 0.0f;
             GraphBlocker.SetActive(true);
-            if (Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID && !Var.cheatsEnabled)
+            if ((Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID) && !Var.cheatsEnabled)
             {
                 mainMenuBtn.GetComponent<Button>().interactable = false;
                 toMapBtn.GetComponent<Button>().interactable = false;    

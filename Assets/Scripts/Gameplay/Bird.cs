@@ -401,14 +401,15 @@ public class Bird : MonoBehaviour
 		{
 			birdArtObj.transform.Find("neutral").SetAsLastSibling();
 		
-		for (int i = 0; i < birdArtObj.transform.childCount; i++)
-		{
-			if (birdArtObj.transform.GetChild(i).gameObject.activeSelf)
+			for (int i = 0; i < birdArtObj.transform.childCount; i++)
 			{
-				mouth = birdArtObj.transform.GetChild(i).Find("mouth");
-				break;
+					if (birdArtObj.transform.GetChild(i).gameObject.activeSelf && birdArtObj.transform.GetChild(i).name == emotion.ToString().ToLower())
+					{
+						mouth = birdArtObj.transform.GetChild(i).Find("mouth");
+
+						break;
+					}
 			}
-		}
 		}
 		catch {
 			mouth = transform;
@@ -1507,8 +1508,6 @@ public class Bird : MonoBehaviour
 		{
 			LeanTween.move(gameObject, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0), 0.02f);
 		}
-		
-
 	}
 	void drawLines()
 	{

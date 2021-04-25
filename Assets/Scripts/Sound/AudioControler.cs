@@ -417,14 +417,14 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	{
 		defaultSoundVol = vol;
 		SetSoundVol();
-        Debug.Log("Sound has been set");
+        //Debug.Log("Sound has been set");
 	}
 
 	public void SetMusicVolume(float vol)
 	{
 		defaultMusicVol = vol;
 		SetSoundVol();
-        Debug.Log("Music has been set");
+        //Debug.Log("Music has been set");
     }
 	public void SaveVolumeSettings()
 	{
