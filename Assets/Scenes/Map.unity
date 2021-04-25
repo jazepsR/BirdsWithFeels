@@ -10596,6 +10596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Audio
       objectReference: {fileID: 0}
+    - target: {fileID: 1945365071565964, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4168642407719740, guid: d2e1b6db1ca414e418db27bcd0f93516, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -10650,6 +10654,36 @@ PrefabInstance:
       propertyPath: inBattle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: spatialMusicSources.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: spatialMusicSources.Array.data[0]
+      value: 
+      objectReference: {fileID: 1542201145}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: spatialMusicSources.Array.data[1]
+      value: 
+      objectReference: {fileID: 1965713242}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: spatialMusicSources.Array.data[2]
+      value: 
+      objectReference: {fileID: 1294744866}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: spatialMusicSources.Array.data[3]
+      value: 
+      objectReference: {fileID: 1435890563}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: spatialMusicSources.Array.data[4]
+      value: 
+      objectReference: {fileID: 416258140}
     - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
         type: 3}
       propertyPath: powerTileShield.clips.Array.data[0]
@@ -11048,6 +11082,12 @@ MonoBehaviour:
   text: Alright, stay safe out there, and good luck!
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!82 &416258140 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6419968587716489156, guid: 0a18cd4bb9546464e87c4a77f31ab40c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6419968588567399186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &420149762
 GameObject:
   m_ObjectHideFlags: 0
@@ -11825,6 +11865,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ID
       value: 43
+      objectReference: {fileID: 0}
+    - target: {fileID: 3581931690837705399, guid: 9ab489193ef088b4a89eaba2db11be74,
+        type: 3}
+      propertyPath: isBoss
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3581931690837705399, guid: 9ab489193ef088b4a89eaba2db11be74,
         type: 3}
@@ -18772,6 +18817,8 @@ MonoBehaviour:
   - {fileID: 547202812}
   levelNumberText: {fileID: 1114999023}
   pause: {fileID: 912135980}
+  toMapBtn: {fileID: 0}
+  mainMenuBtn: {fileID: 0}
   pauseBtn: {fileID: 0}
   deathMenu: {fileID: 0}
   deathTitle: {fileID: 0}
@@ -18800,6 +18847,8 @@ MonoBehaviour:
   GraphBlocker: {fileID: 1329101914}
   controlButtonText: {fileID: 0}
   activeSpeechBubble: {fileID: 0}
+  control: {fileID: 0}
+  timedEventControllers: []
 --- !u!114 &685676510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33888,6 +33937,12 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &1294744866 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6419968587750662646, guid: 0a18cd4bb9546464e87c4a77f31ab40c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6419968588567399186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1295939447
 GameObject:
   m_ObjectHideFlags: 0
@@ -37062,6 +37117,12 @@ MonoBehaviour:
     and start your own! I know you can do anything you set your mind to, sweetfeathers."
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!82 &1435890563 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6419968588582711688, guid: 0a18cd4bb9546464e87c4a77f31ab40c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6419968588567399186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1437183693
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40159,6 +40220,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541407774}
   m_CullTransparentMesh: 0
+--- !u!82 &1542201145 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6419968589506701936, guid: 0a18cd4bb9546464e87c4a77f31ab40c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6419968588567399186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1543239315
 GameObject:
   m_ObjectHideFlags: 0
@@ -50290,6 +50357,12 @@ Transform:
   m_Father: {fileID: 133129185}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1965713242 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6419968588819748577, guid: 0a18cd4bb9546464e87c4a77f31ab40c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6419968588567399186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1968512699
 GameObject:
   m_ObjectHideFlags: 0
