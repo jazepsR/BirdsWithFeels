@@ -127,7 +127,6 @@ public class GuiContoler : MonoBehaviour {
     [HideInInspector]
     public TimedEventControl control;
     [SerializeField] public TimedEventControl[] timedEventControllers;
-    public GameObject showEmoGraphArrow;
 
     void Awake()
     {
@@ -190,7 +189,7 @@ public class GuiContoler : MonoBehaviour {
             }
         }
 
-        if (showEmoGraphArrow != null)
+      /*  if (showEmoGraphArrow != null)
         {
             if ((Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID) || Var.freezeEmotions || inMap || Var.isEnding)
                 showEmoGraphArrow.SetActive(false);
@@ -198,7 +197,7 @@ public class GuiContoler : MonoBehaviour {
             {
                 showEmoGraphArrow.SetActive(true);
             }
-        }
+        }*/
             
     }
 
@@ -1059,7 +1058,6 @@ public class GuiContoler : MonoBehaviour {
 		canChangeGraph = false;
 		if(inMap)
 			minimap.SetActive(false);
-        showEmoGraphArrow.SetActive(false);
         int index = -1;
 		for(int i= 0; i < Var.activeBirds.Count; i++)
 		{
