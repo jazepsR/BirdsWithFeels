@@ -1020,9 +1020,10 @@ public class Bird : MonoBehaviour
 
         if (indicator)
         {
-            if (dragged)
+			if (dragged || (target != home && !isEnemy))
             {
-                indicator.Hide();
+				Debug.Log("hello memem");
+				indicator.Hide();
             }
             else
             {
@@ -1030,8 +1031,13 @@ public class Bird : MonoBehaviour
                 GetConfBoost();
                 Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(this).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
                 Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
-                indicator.Show(emo1,emo2);
-            }
+
+				if (target != home && !isEnemy)
+				{
+					indicator.Show(emo1, emo2);
+			    }
+				
+			}
         }
         GameLogic.Instance.UpdateFeedback();
 		
@@ -1499,7 +1505,9 @@ public class Bird : MonoBehaviour
 			needsReset = false;
 			Var.selectedBird = null;
 			dragged = false;
+			indicator.Hide();
 			LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
+			
 		}
 		if (Input.GetMouseButtonUp(0) &&dragged)
 			needsReset = true;        

@@ -11,6 +11,10 @@ public class EmoIndicator : MonoBehaviour
     public GameObject solitaryIcon;
     public GameObject confidentIcon;
     public GameObject cautiousIcon;
+    public Sprite confidenceSprite;
+    public Sprite cautiousSprite;
+    public Sprite solitarySprite;
+    public Sprite socialSprite;
     public Animator anim;
     //public SpriteRenderer firstIcon;
     //public SpriteRenderer secondIcon;
@@ -58,7 +62,7 @@ public class EmoIndicator : MonoBehaviour
         confidentIcon.SetActive(emo2 == Var.Em.Confident);
         cautiousIcon.SetActive(emo2 == Var.Em.Cautious);
        //Debug.LogError(bird.charName + " emo1: " + emo1 + " emo2: " + emo2);
-         if(emo1 == Var.Em.Neutral && emo2 == Var.Em.Neutral)
+         if((emo1 == Var.Em.Neutral && emo2 == Var.Em.Neutral) || bird.target == bird.home)
          {
            //  Debug.Log("hiding");
              Hide();
@@ -66,7 +70,34 @@ public class EmoIndicator : MonoBehaviour
         else
          {
             // Debug.Log("showing");
-             Show(emo1, emo2,false);
+
+            if (emo1 == Var.Em.Neutral && emo2 != Var.Em.Neutral)
+            {
+                if (emo2 == Var.Em.Confident)
+                {
+                    emo2 = Var.Em.Neutral;
+                    confidentIcon.SetActive(false);
+                    solitaryIcon.GetComponent<SpriteRenderer>().sprite = confidenceSprite;
+                    solitaryIcon.SetActive(true);
+                }
+
+                if (emo2 == Var.Em.Cautious)
+                {
+                    emo2 = Var.Em.Neutral;
+                    cautiousIcon.SetActive(false);
+                    socialIcon.GetComponent<SpriteRenderer>().sprite = cautiousSprite;
+                    socialIcon.SetActive(true);
+                }
+
+            }
+            else
+            {
+                solitaryIcon.GetComponent<SpriteRenderer>().sprite = solitarySprite;
+                socialIcon.GetComponent<SpriteRenderer>().sprite = socialSprite;
+            }
+
+                Debug.Log("emo2 is: " + emo2);
+                Show(emo1, emo2,false);
          }
     }
 
