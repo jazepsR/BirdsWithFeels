@@ -403,7 +403,7 @@ public class Bird : MonoBehaviour
 		
 			for (int i = 0; i < birdArtObj.transform.childCount; i++)
 			{
-					if (birdArtObj.transform.GetChild(i).gameObject.activeSelf && birdArtObj.transform.GetChild(i).name == emotion.ToString().ToLower())
+					if (birdArtObj.transform.GetChild(i).name == emotion.ToString().ToLower())
 					{
 						mouth = birdArtObj.transform.GetChild(i).Find("mouth");
 
