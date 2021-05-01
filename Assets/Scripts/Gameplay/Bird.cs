@@ -1000,6 +1000,7 @@ public class Bird : MonoBehaviour
 
 	void UpdateFeedback()
 	{
+		
 		fighting = false;
 		/*if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, data.levelList) )
 		{
@@ -1018,25 +1019,18 @@ public class Bird : MonoBehaviour
 			}
 		}*/
 
-        if (indicator)
+		if (indicator)
         {
-			if (dragged || (target != home && !isEnemy))
+			
+			if (dragged || (target == home && !isEnemy))
             {
-				Debug.Log("hello memem");
 				indicator.Hide();
             }
             else
             {
                 GetFriendlinessBonus();
                 GetConfBoost();
-                Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(this).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
-                Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
 
-				if (target != home && !isEnemy)
-				{
-					indicator.Show(emo1, emo2);
-			    }
-				
 			}
         }
         GameLogic.Instance.UpdateFeedback();
@@ -1520,7 +1514,8 @@ public class Bird : MonoBehaviour
 	void drawLines()
 	{
 		lines.DrawLines();
-        if(indicator)
+		
+		if (indicator)
         {
             Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(this).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
             Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
@@ -1528,7 +1523,8 @@ public class Bird : MonoBehaviour
             {
                 emo1 = lines.activeLines.Count == 0 ? Var.Em.Neutral : Var.Em.Social;
             }
-            indicator.SetEmotions(emo1, emo2);
+			Debug.Log("draw lines setting emotion: emo1: " + emo1 + "emo2: " + emo2);
+			indicator.SetEmotions(emo1, emo2);
         }
     }
 	public void ReleaseBird(int x, int y)

@@ -85,16 +85,22 @@ public class firendLine : MonoBehaviour {
 
 
                 }
-                if (Var.playerPos[y, x].indicator)
+               if (Var.playerPos[y, x].indicator && !Var.Infight)
                 {
                     List<Bird> birds = Helpers.Instance.GetAdjacentBirds(Var.playerPos[y, x]);
-                    Var.Em emo1 = (birds.Count == 0 ? Var.Em.Solitary : Var.Em.Social);
-                    if (emo1 == Var.Em.Social)
+
+					Var.Em emo1 = (birds.Count == 0 ? Var.Em.Solitary : Var.Em.Social);
+
+
+					if (emo1 == Var.Em.Social)
                     {
-                        emo1 = activeLines.Count == 0 ? Var.Em.Neutral : Var.Em.Social;
+                        emo1 = (Helpers.Instance.getFriendState(Var.playerPos[y, x]) == Helpers.friendState.diagonal ? Var.Em.Neutral : Var.Em.Social);
                     }
-                    Var.Em emo2 = Var.playerPos[y, x].fighting ? Var.Em.Neutral : Var.Em.Cautious;
-                    Var.playerPos[y, x].indicator.SetEmotions(emo1, emo2);
+                    
+					
+					Var.Em emo2 = Var.playerPos[y, x].fighting ? Var.Em.Neutral : Var.Em.Cautious;
+					//Debug.Log("active lines count " + activeLines.Count + "friendline play pos for" + Var.playerPos[y, x].charName + " emo1 " + emo1 + "emo2: " + emo2);
+					Var.playerPos[y, x].indicator.SetEmotions(emo1, emo2);
                 }
                 Destroy(Var.playerPos[y, x].gameObject.GetComponent<firendLine>().lonelyParticleObj);
                 //Deprecated code
@@ -156,15 +162,17 @@ public class firendLine : MonoBehaviour {
             AudioControler.Instance.PlaySound(AudioControler.Instance.SolitaryAppear);
 			//lonelyParticleObj.transform.localPosition = new Vector3(0.3f, 0, 0);
 		}
-        if (birdScript.indicator)
+        if (birdScript.indicator && !Var.Infight)
         {
             Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(birdScript).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
             Var.Em emo2 = birdScript.fighting ? Var.Em.Neutral : Var.Em.Cautious;
-            if (emo1 == Var.Em.Social)
-            {
-                emo1 = activeLines.Count == 0 ? Var.Em.Neutral : Var.Em.Social;
-            }
-            birdScript.indicator.SetEmotions(emo1, emo2);
+
+			if (emo1 == Var.Em.Social)
+			{
+				emo1 = Helpers.Instance.getFriendState(birdScript) == Helpers.friendState.diagonal ? Var.Em.Neutral : Var.Em.Social; 
+			}
+			//Debug.Log("active lines count " + activeLines.Count + "particle play pos for" + birdScript.charName + " emo1 " + emo1 + "emo2: " + emo2);
+			birdScript.indicator.SetEmotions(emo1, emo2);
         }
 
 
@@ -186,7 +194,8 @@ public class firendLine : MonoBehaviour {
 			{
                 if (bird != birdScript)
                 {
-                    bird.lines.CheckParticles();
+					
+					bird.lines.CheckParticles();
                 }
 			}
 		}

@@ -700,6 +700,7 @@ public class GuiContoler : MonoBehaviour {
             if (bird.indicator)
             {
                 bird.indicator.Hide();
+                Debug.Log("i have rolled for you: " + bird.charName);
             }
             /*  if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.data.levelList) && bird.data.CoolDownLeft == 0 && !bird.foughtInRound)
               {
@@ -1238,10 +1239,9 @@ public class GuiContoler : MonoBehaviour {
 
 			bird.friendBoost += friendGain;			
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();
-            if (bird.indicator)
-            {
-                bird.indicator.Hide();
-            }
+
+            bird.indicator.SetEmotions(Var.Em.Neutral, Var.Em.Neutral);
+            bird.indicator.Hide();
         }
 
 

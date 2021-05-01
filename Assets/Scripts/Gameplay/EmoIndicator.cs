@@ -24,11 +24,15 @@ public class EmoIndicator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+      confidenceSprite = confidentIcon.GetComponent<SpriteRenderer>().sprite;
+      cautiousSprite= cautiousIcon.GetComponent<SpriteRenderer>().sprite;
+        solitarySprite = solitaryIcon.GetComponent<SpriteRenderer>().sprite; 
+      socialSprite = socialIcon.GetComponent<SpriteRenderer>().sprite; 
     }
 
     public void Hide()
     {
+        
         anim.ResetTrigger("show");
         anim.SetTrigger("hide");
         hidden = true;
@@ -69,7 +73,7 @@ public class EmoIndicator : MonoBehaviour
          }
         else
          {
-            // Debug.Log("showing");
+            //Debug.Log("showing");
 
             if (emo1 == Var.Em.Neutral && emo2 != Var.Em.Neutral)
             {
@@ -96,7 +100,7 @@ public class EmoIndicator : MonoBehaviour
                 socialIcon.GetComponent<SpriteRenderer>().sprite = socialSprite;
             }
 
-                Debug.Log("emo2 is: " + emo2);
+                
                 Show(emo1, emo2,false);
          }
     }
@@ -108,6 +112,6 @@ public class EmoIndicator : MonoBehaviour
     // Update is called once per frame
     public void RefreshEmotions()
     {
-       // Helpers.Instance.GetEmotionIcon();
+       
     }
 }
