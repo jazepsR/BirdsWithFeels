@@ -238,7 +238,7 @@ public class EventController : MonoBehaviour
             return false;
         if (eventObject.activeSelf)
             return false;
-        if (Var.isTutorial || Var.isEnding || Var.freezeEmotions)
+        if (Var.isTutorial || Var.isEnding || Var.freezeEmotions || (Var.currentStageID == Var.battlePlanningTutorialID && !Var.gameSettings.shownBattlePlanningTutorial) || (Var.currentStageID == Var.levelTutorialID && !Var.gameSettings.shownLevelTutorial))
             return false;
         currentBird = null;
         currentPortrait = null;
