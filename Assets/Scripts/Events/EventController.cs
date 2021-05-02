@@ -238,7 +238,7 @@ public class EventController : MonoBehaviour
             return false;
         if (eventObject.activeSelf)
             return false;
-        if (Var.isTutorial || Var.isEnding || Var.freezeEmotions)
+        if (Var.isTutorial || Var.isEnding || Var.freezeEmotions || (Var.currentStageID == Var.battlePlanningTutorialID && !Var.gameSettings.shownBattlePlanningTutorial) || (Var.currentStageID == Var.levelTutorialID && !Var.gameSettings.shownLevelTutorial))
             return false;
         currentBird = null;
         currentPortrait = null;
@@ -296,6 +296,38 @@ public class EventController : MonoBehaviour
     }
     public void CreateEvent(EventScript eventData)
     {
+
+        if (eventData.isCampFireScene && inMap)
+        {
+            Transform campFire = eventObject.transform.Find("Campfire");
+
+            if (campFire != null)
+            {
+
+                foreach (Bird bird in FillPlayer.Instance.playerBirds)
+                {
+
+                    foreach (Transform child in campFire.GetChild(1))
+                    {
+
+                        if (bird.charName == child.transform.name && bird.data.unlocked)
+                        {
+                            Debug.Log("WORK BIATCH : " + bird.charName);
+                            child.transform.GetChild(0).GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+                        }
+                        else if (bird.charName == child.transform.name && !bird.data.unlocked)
+                        {
+                            child.transform.gameObject.SetActive(false);
+                        }
+
+                    }
+                }
+
+                campFire.gameObject.SetActive(true);
+            }
+            
+            
+        }
         if (eventData.eventBackground != null)
         {
             eventBg.sprite = eventData.eventBackground;

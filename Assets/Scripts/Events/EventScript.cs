@@ -68,10 +68,12 @@ public class EventScript:MonoBehaviour{
 	public bool canShowMultipleTimes = false;
 	public Dialogue afterEventDialog;
     public bool quitAfterLevel = false;
+    public bool isCampFireScene;
     public Sprite eventBackground;
     public bool useBgFog = true;
     public bool useEventAudio;
     public AudioGroup eventAudio;
+    
     public EventScript()
 	{
 

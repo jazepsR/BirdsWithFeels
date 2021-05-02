@@ -403,7 +403,7 @@ public class Bird : MonoBehaviour
 		
 			for (int i = 0; i < birdArtObj.transform.childCount; i++)
 			{
-					if (birdArtObj.transform.GetChild(i).gameObject.activeSelf && birdArtObj.transform.GetChild(i).name == emotion.ToString().ToLower())
+					if (birdArtObj.transform.GetChild(i).name == emotion.ToString().ToLower())
 					{
 						mouth = birdArtObj.transform.GetChild(i).Find("mouth");
 
@@ -1000,6 +1000,7 @@ public class Bird : MonoBehaviour
 
 	void UpdateFeedback()
 	{
+		
 		fighting = false;
 		/*if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, data.levelList) )
 		{
@@ -1018,20 +1019,19 @@ public class Bird : MonoBehaviour
 			}
 		}*/
 
-        if (indicator)
+		if (indicator)
         {
-            if (dragged)
+			
+			if (dragged || (target == home && !isEnemy))
             {
-                indicator.Hide();
+				indicator.Hide();
             }
             else
             {
                 GetFriendlinessBonus();
                 GetConfBoost();
-                Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(this).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
-                Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
-                indicator.Show(emo1,emo2);
-            }
+
+			}
         }
         GameLogic.Instance.UpdateFeedback();
 		
@@ -1499,7 +1499,9 @@ public class Bird : MonoBehaviour
 			needsReset = false;
 			Var.selectedBird = null;
 			dragged = false;
+			indicator.Hide();
 			LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
+			
 		}
 		if (Input.GetMouseButtonUp(0) &&dragged)
 			needsReset = true;        
@@ -1512,7 +1514,8 @@ public class Bird : MonoBehaviour
 	void drawLines()
 	{
 		lines.DrawLines();
-        if(indicator)
+		
+		if (indicator)
         {
             Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(this).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
             Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
@@ -1520,7 +1523,8 @@ public class Bird : MonoBehaviour
             {
                 emo1 = lines.activeLines.Count == 0 ? Var.Em.Neutral : Var.Em.Social;
             }
-            indicator.SetEmotions(emo1, emo2);
+			Debug.Log("draw lines setting emotion: emo1: " + emo1 + "emo2: " + emo2);
+			indicator.SetEmotions(emo1, emo2);
         }
     }
 	public void ReleaseBird(int x, int y)

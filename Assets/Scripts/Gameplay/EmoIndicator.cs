@@ -7,10 +7,18 @@ public class EmoIndicator : MonoBehaviour
     public GameObject Background;
     public GameObject plusIcon;
 
-    public GameObject socialIcon;
+    public SpriteRenderer icon1;
+    public SpriteRenderer icon2;
+
+
+   /* public GameObject socialIcon;
     public GameObject solitaryIcon;
     public GameObject confidentIcon;
     public GameObject cautiousIcon;
+    public Sprite confidenceSprite;
+    public Sprite cautiousSprite;
+    public Sprite solitarySprite;
+    public Sprite socialSprite;*/
     public Animator anim;
     //public SpriteRenderer firstIcon;
     //public SpriteRenderer secondIcon;
@@ -20,11 +28,15 @@ public class EmoIndicator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+    /*  confidenceSprite = confidentIcon.GetComponent<SpriteRenderer>().sprite;
+      cautiousSprite= cautiousIcon.GetComponent<SpriteRenderer>().sprite;
+        solitarySprite = solitaryIcon.GetComponent<SpriteRenderer>().sprite; 
+      socialSprite = socialIcon.GetComponent<SpriteRenderer>().sprite; */
     }
 
     public void Hide()
     {
+        
         anim.ResetTrigger("show");
         anim.SetTrigger("hide");
         hidden = true;
@@ -53,21 +65,71 @@ public class EmoIndicator : MonoBehaviour
 
     public void SetEmotions(Var.Em emo1, Var.Em emo2)
     {
-        socialIcon.SetActive(emo1 == Var.Em.Social);
+        /*socialIcon.SetActive(emo1 == Var.Em.Social);
         solitaryIcon.SetActive(emo1 == Var.Em.Solitary);
         confidentIcon.SetActive(emo2 == Var.Em.Confident);
-        cautiousIcon.SetActive(emo2 == Var.Em.Cautious);
+        cautiousIcon.SetActive(emo2 == Var.Em.Cautious);*/
        //Debug.LogError(bird.charName + " emo1: " + emo1 + " emo2: " + emo2);
-         if(emo1 == Var.Em.Neutral && emo2 == Var.Em.Neutral)
+         if((emo1 == Var.Em.Neutral && emo2 == Var.Em.Neutral) || bird.target == bird.home)
          {
            //  Debug.Log("hiding");
              Hide();
          }
         else
          {
-            // Debug.Log("showing");
-             Show(emo1, emo2,false);
+            //Debug.Log("showing");
+            if (emo1 == Var.Em.Neutral && emo2 != Var.Em.Neutral)
+            {
+                SetIconEmotion(emo2, icon1);
+                SetIconEmotion(Var.Em.Neutral, icon2);
+            }
+            else
+            {
+                SetIconEmotion(emo1, icon1);
+                SetIconEmotion(emo2, icon2);
+
+            }
+                /*  if (emo1 == Var.Em.Neutral && emo2 != Var.Em.Neutral)
+                  {
+                      if (emo2 == Var.Em.Confident)
+                      {
+                          emo2 = Var.Em.Neutral;
+                          confidentIcon.SetActive(false);
+                          solitaryIcon.GetComponent<SpriteRenderer>().sprite = confidenceSprite;
+                          solitaryIcon.SetActive(true);
+                      }
+
+                      if (emo2 == Var.Em.Cautious)
+                      {
+                          emo2 = Var.Em.Neutral;
+                          cautiousIcon.SetActive(false);
+                          socialIcon.GetComponent<SpriteRenderer>().sprite = cautiousSprite;
+                          socialIcon.SetActive(true);
+                      }
+
+                  }
+                  else
+                  {
+                      solitaryIcon.GetComponent<SpriteRenderer>().sprite = solitarySprite;
+                      socialIcon.GetComponent<SpriteRenderer>().sprite = socialSprite;
+                  }*/
+
+
+                Show(emo1, emo2,false);
          }
+    }
+
+    private void SetIconEmotion(Var.Em emotion, SpriteRenderer sr)
+    {
+       // sr.gameObject.SetActive(false);
+       sr.gameObject.SetActive(emotion != Var.Em.Neutral);
+       // Debug.Log("name: " + sr.name + " emo: " + emotion);
+        if (emotion == Var.Em.Neutral)
+        {
+            return;
+        }
+
+        sr.sprite = Helpers.Instance.GetEmotionIcon(emotion, false);
     }
 
     public void Update()
@@ -77,6 +139,6 @@ public class EmoIndicator : MonoBehaviour
     // Update is called once per frame
     public void RefreshEmotions()
     {
-       // Helpers.Instance.GetEmotionIcon();
+       
     }
 }

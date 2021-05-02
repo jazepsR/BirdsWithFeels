@@ -48,7 +48,7 @@ public class Helpers : MonoBehaviour {
 	[Header("Battle timing")]
 	public float winWaitTime = 4f;
 	public float loseWaitTime = 2f;
-	enum friendState { alone, diagonal, oneFriend, twoFriends };
+	public enum friendState { alone, diagonal, oneFriend, twoFriends };
 	public void Awake()
 	{
 		pickupExplosion = Resources.Load<GameObject>("prefabs/pickupExplosion");
@@ -947,7 +947,7 @@ public class Helpers : MonoBehaviour {
 	{
 		if (Input.GetKey(KeyCode.LeftShift) && Var.cheatsEnabled)
 			Time.timeScale = 0.25f;
-		else if (Input.GetKey(KeyCode.RightShift) || Input.GetMouseButton(1))
+		else if (Input.GetKey(KeyCode.RightShift) || Input.GetMouseButton(1) && Var.Infight && !GuiContoler.Instance.GraphActive)
 			Time.timeScale = 4f;
 		else
 			Time.timeScale = 1;
@@ -1389,6 +1389,75 @@ public class Helpers : MonoBehaviour {
 				return 0;
 		}  
 
+	}
+
+	public friendState getFriendState(Bird bird)
+	{
+		int x = 0;
+		int y = 0;
+		for (int i = 0; i < Var.playerPos.GetLength(0); i++)
+		{
+			for (int j = 0; j < Var.playerPos.GetLength(1); j++)
+			{
+
+				if (Var.playerPos[i, j] == bird)
+				{
+					x = i;
+					y = j;
+					break;
+				}
+			}
+		}
+		//TODO: Make these values global
+		int sizeY = Var.playerPos.GetLength(1) - 1;
+		int sizeX = Var.playerPos.GetLength(0) - 1;
+		friendState state = friendState.alone;
+		if (y + 1 <= sizeY && x + 1 <= sizeX && Var.playerPos[x + 1, y + 1] != null)
+		{
+			state = friendState.diagonal;
+		}
+		if (y + 1 <= sizeY && x - 1 >= 0 && Var.playerPos[x - 1, y + 1] != null)
+		{
+			state = friendState.diagonal;
+		}
+		if (y - 1 >= 0 && x + 1 <= sizeX && Var.playerPos[x + 1, y - 1] != null)
+		{
+			state = friendState.diagonal;
+		}
+		if (y - 1 >= 0 && x - 1 >= 0 && Var.playerPos[x - 1, y - 1] != null)
+		{
+			state = friendState.diagonal;
+		}
+		if (y + 1 <= sizeY && Var.playerPos[x, y + 1] != null)
+		{
+			if (state == friendState.oneFriend)
+				state = friendState.twoFriends;
+			else
+				state = friendState.oneFriend;
+		}
+		if (y - 1 >= 0 && Var.playerPos[x, y - 1] != null)
+		{
+			if (state == friendState.oneFriend)
+				state = friendState.twoFriends;
+			else
+				state = friendState.oneFriend;
+		}
+		if (x + 1 <= sizeX && Var.playerPos[x + 1, y] != null)
+		{
+			if (state == friendState.oneFriend)
+				state = friendState.twoFriends;
+			else
+				state = friendState.oneFriend;
+		}
+		if (x - 1 >= 0 && Var.playerPos[x - 1, y] != null)
+		{
+			if (state == friendState.oneFriend)
+				state = friendState.twoFriends;
+			else
+				state = friendState.oneFriend;
+		}
+
+		return state;
 	}
 
 	//Used to apply stat changes based on the emotion. first number is friendliness, second number is confidence

@@ -127,7 +127,6 @@ public class GuiContoler : MonoBehaviour {
     [HideInInspector]
     public TimedEventControl control;
     [SerializeField] public TimedEventControl[] timedEventControllers;
-    public GameObject showEmoGraphArrow;
 
     void Awake()
     {
@@ -143,6 +142,7 @@ public class GuiContoler : MonoBehaviour {
         Var.powerText = powerTextTemp;
         activeSpeechText = SpeechBubbleText;
         activeSpeechBubble = speechBubble;
+               
     }
     void Start()
     {
@@ -190,7 +190,7 @@ public class GuiContoler : MonoBehaviour {
             }
         }
 
-        if (showEmoGraphArrow != null)
+      /*  if (showEmoGraphArrow != null)
         {
             if ((Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID) || Var.freezeEmotions || inMap || Var.isEnding)
                 showEmoGraphArrow.SetActive(false);
@@ -198,7 +198,7 @@ public class GuiContoler : MonoBehaviour {
             {
                 showEmoGraphArrow.SetActive(true);
             }
-        }
+        }*/
             
     }
 
@@ -697,11 +697,16 @@ public class GuiContoler : MonoBehaviour {
             bird.target = bird.home;
             bird.transform.position = bird.home;
             bird.data.health = bird.prevRoundHealth;
-          /*  if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.data.levelList) && bird.data.CoolDownLeft == 0 && !bird.foughtInRound)
+            if (bird.indicator)
             {
-                bird.data.CoolDownLeft = bird.data.CoolDownLength;
-                bird.CooldownRing.fillAmount = 0;
-            }*/
+                bird.indicator.Hide();
+                Debug.Log("i have rolled for you: " + bird.charName);
+            }
+            /*  if (Helpers.Instance.ListContainsLevel(Levels.type.Lonely2, bird.data.levelList) && bird.data.CoolDownLeft == 0 && !bird.foughtInRound)
+              {
+                  bird.data.CoolDownLeft = bird.data.CoolDownLength;
+                  bird.CooldownRing.fillAmount = 0;
+              }*/
         }
         for (int i = 0; i < Var.activeBirds.Count; i++)
         {
@@ -1035,7 +1040,7 @@ public class GuiContoler : MonoBehaviour {
 
 	public void GraphButton()
 	{
-        if (GraphActive)
+        if (GraphActive || selectedBird.dragged)
             return;
 
         clearSmallGraph();
@@ -1059,7 +1064,6 @@ public class GuiContoler : MonoBehaviour {
 		canChangeGraph = false;
 		if(inMap)
 			minimap.SetActive(false);
-        showEmoGraphArrow.SetActive(false);
         int index = -1;
 		for(int i= 0; i < Var.activeBirds.Count; i++)
 		{
@@ -1235,10 +1239,9 @@ public class GuiContoler : MonoBehaviour {
 
 			bird.friendBoost += friendGain;			
 			bird.gameObject.GetComponent<firendLine>().RemoveLines();
-            if (bird.indicator)
-            {
-                bird.indicator.Hide();
-            }
+
+            bird.indicator.SetEmotions(Var.Em.Neutral, Var.Em.Neutral);
+            bird.indicator.Hide();
         }
 
 
