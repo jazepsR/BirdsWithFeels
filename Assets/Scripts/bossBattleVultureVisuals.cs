@@ -4,25 +4,19 @@ using UnityEngine;
 
 public class bossBattleVultureVisuals : MonoBehaviour
 {
-    public GameObject[] rightVultures;
-    public GameObject[] leftVultures;
+    public Animator myAnimator;
 
     public GameObject vultureKing;
-    Animator vultureKingAnimator;
+    public Animator vultureKingAnimator;
 
     public bool debugFinalBattleActive;
+
+    public Animator[] Vultures;
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < leftVultures.Length; i++)
-        {
-            leftVultures[i].gameObject.SetActive(false);
-        }
-        for (int i = 0; i < rightVultures.Length; i++)
-        {
-            rightVultures[i].gameObject.SetActive(false);
-        }
+       
         vultureKingAnimator = vultureKing.GetComponent<Animator>();
         vultureKing.SetActive(false);
 
@@ -36,16 +30,7 @@ public class bossBattleVultureVisuals : MonoBehaviour
     {
 
         vultureKing.SetActive(true);
-        for (int i = 0; i < leftVultures.Length; i++)
-        {
-            leftVultures[i].gameObject.SetActive(false);
-        }
-
-        for (int i = 0; i < rightVultures.Length; i++)
-        {
-            rightVultures[i].gameObject.SetActive(true);
-        }
-        vultureKing.SetActive(true);
+    
     }
 
     public void vultureKingFistPumps()
@@ -57,7 +42,7 @@ public class bossBattleVultureVisuals : MonoBehaviour
     void Update()
     {
 
-        if (debugFinalBattleActive && Var.cheatsEnabled)
+        if (debugFinalBattleActive)
         { 
     if( Input.GetKeyDown(KeyCode.A))
         {
@@ -70,32 +55,18 @@ public class bossBattleVultureVisuals : MonoBehaviour
         }
     }
 
-    
     public void addVulturesToLeftSide()
     {
-
-
-        for (int i = 0; i < leftVultures.Length; i++)
+        if (myAnimator != null)
         {
-            if(leftVultures[i].gameObject.activeInHierarchy==false)
-            {
-                leftVultures[i].gameObject.SetActive(true);
-                break;
-            }
-            
-        }
-
-        for (int i = 0; i < rightVultures.Length; i++)
-        {
-            if (rightVultures[i].gameObject.activeInHierarchy == true)
-            {
-                rightVultures[i].gameObject.SetActive(false);
-                break;
-            }
-
+            myAnimator.SetTrigger("progress");
         }
 
 
     }
-
 }
+
+
+
+
+
