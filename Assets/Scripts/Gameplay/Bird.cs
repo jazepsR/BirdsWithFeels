@@ -1521,7 +1521,7 @@ public class Bird : MonoBehaviour
             Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
             if (emo1 == Var.Em.Social)
             {
-                emo1 = lines.activeLines.Count == 0 ? Var.Em.Neutral : Var.Em.Social;
+                emo1 = Helpers.Instance.getFriendState(this) == Helpers.friendState.diagonal ? Var.Em.Neutral : Var.Em.Social;
             }
 			Debug.Log("draw lines setting emotion: emo1: " + emo1 + "emo2: " + emo2);
 			indicator.SetEmotions(emo1, emo2);
