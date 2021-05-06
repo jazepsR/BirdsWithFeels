@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class LayoutButton : MonoBehaviour
 {
 	public Vector2 index = new Vector2(0, 0);
-	Bird currentBird = null;
-	Bird swapBird = null;
+	public Bird currentBird = null;
+	public Bird swapBird = null;
 	public bool hasBird;
 	[HideInInspector]
 	public bool isActive = true;
@@ -269,6 +269,10 @@ public class LayoutButton : MonoBehaviour
 				currentBird.GroundRollBonus = 0;
 				currentBird = swapBird;
 				currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
+				foreach(Bird bird in Var.activeBirds)
+                {
+					bird.ResetCanGrab();
+                }
 				// currentBird.res
 				ApplyPower(currentBird);
 				currentBird.ReleaseBird((int)index.x, (int)index.y);

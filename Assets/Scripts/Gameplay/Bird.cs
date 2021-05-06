@@ -51,6 +51,7 @@ public class Bird : MonoBehaviour
 	public string charName;
 	public bool loadDataFromInspector = false;
 	public string birdPrefabName;
+	bool canGrab = true;
 	public int portraitOrder = 1;
 	public BirdData data;
 	public string birdBio;
@@ -169,6 +170,7 @@ public class Bird : MonoBehaviour
 	}
 	void Start()
 	{
+		canGrab = true;
         birdSounds = new BirdSound();
         wonLastBattle = -1;
 		if (!isEnemy && portrait == null)
@@ -844,20 +846,7 @@ public class Bird : MonoBehaviour
                     MapControler.Instance.selectedBirds.Add(this);
 				}
 				MapControler.Instance.CanLoadBattle();
-				return;
-			}
-			if (Var.isDragControls)
-			{
-				birdSounds.pickupBird.Play();
-                GetComponentInChildren<Animator>().SetBool("lift", true);
-                foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-                {
-                    child.sortingLayerName = "Front";
-                }
-                indicator.ResetLayer();
-            }
-			if (inMap)
-			{
+				return;			
 				if (MapControler.Instance.canHeal)
 				{
 					ChageHealth(data.maxHealth);
@@ -867,8 +856,16 @@ public class Bird : MonoBehaviour
 					return;
 				}
 			}
-			if (Var.isDragControls)
+			if (Var.isDragControls && canGrab)
 			{
+				birdSounds.pickupBird.Play();
+				GetComponentInChildren<Animator>().SetBool("lift", true);
+				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+				{
+					child.sortingLayerName = "Front";
+				}
+				indicator.ResetLayer();
+
 				for (int i = 0; i < Var.playerPos.GetLength(0); i++)
 				{
 					for (int j = 0; j < Var.playerPos.GetLength(1); j++)
@@ -919,6 +916,8 @@ public class Bird : MonoBehaviour
 			}
 		}
 	}
+
+
 	void ResetOnSelection()
 	{
 		if (!inMap)
@@ -1248,7 +1247,17 @@ public class Bird : MonoBehaviour
 		if (this == GuiContoler.Instance.selectedBird)
 			showText();    
 	}
+	public void ResetCanGrab()
+    {
+		StartCoroutine(ResetGrabDelay());
+    }
 
+	private IEnumerator ResetGrabDelay()
+    {
+		canGrab = false;
+		yield return new WaitForSeconds(0.2f);
+		canGrab = true;
+    }
 	public void SetEmotion()
 	{
 		float factor = 0.13f;
