@@ -156,7 +156,7 @@ public class feedBack : MonoBehaviour {
 		lr.startColor = Helpers.Instance.GetEmotionColor(enemy.emotion);
 		lr.endColor = Helpers.Instance.GetEmotionColor(enemy.emotion);
 		lr.gameObject.SetActive(true);
-		player.lines.activeLines.Add(lineObj);
+		player.lines.activeLines.Add(new FriendLineObject(lineObj, player,enemy));
 
 	}
 	public void HighlightTutorialTiles()
