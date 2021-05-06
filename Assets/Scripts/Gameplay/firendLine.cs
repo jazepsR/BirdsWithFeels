@@ -84,7 +84,7 @@ public class firendLine : MonoBehaviour {
 					activeLines.Add(LineObj);
 					Var.playerPos[y, x].lines.activeLines.Add(LineObj);
                     AudioControler.Instance.PlaySound(AudioControler.Instance.createLines);
-					Debug.Log("drawing line from: " + birdScript.charName + " to: " + Var.playerPos[y, x].charName);
+					//Debug.Log("drawing line from: " + birdScript.charName + " to: " + Var.playerPos[y, x].charName);
                 }
                if (Var.playerPos[y, x].indicator && !Var.Infight)
                 {
