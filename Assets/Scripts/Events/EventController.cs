@@ -299,33 +299,52 @@ public class EventController : MonoBehaviour
 
         if (eventData.isCampFireScene && inMap)
         {
-            Transform campFire = eventObject.transform.Find("Campfire");
 
-            if (campFire != null)
+            try
             {
-
-                foreach (Bird bird in FillPlayer.Instance.playerBirds)
+                Transform campFire = eventObject.transform.Find("Campfire");
+                if (campFire != null)
                 {
 
-                    foreach (Transform child in campFire.GetChild(1))
+                    foreach (Bird bird in FillPlayer.Instance.playerBirds)
                     {
 
-                        if (bird.charName == child.transform.name && bird.data.unlocked)
+                        foreach (Transform child in campFire.GetChild(1))
                         {
-                            Debug.Log("WORK BIATCH : " + bird.charName);
-                            child.transform.GetChild(0).GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
-                        }
-                        else if (bird.charName == child.transform.name && !bird.data.unlocked)
-                        {
-                            child.transform.gameObject.SetActive(false);
-                        }
 
+                            if (bird.charName == child.transform.name && bird.data.unlocked)
+                            {
+                                try
+                                {
+
+                                    if (child.transform.GetChild(0).GetComponent<Image>() != null)
+                                    {
+                                        child.transform.GetChild(0).GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+                                    }
+                                }
+                                catch
+                                {
+                                    Debug.Log("campfire bird image component not found");
+                                }
+
+                            }
+                            else if (bird.charName == child.transform.name && !bird.data.unlocked)
+                            {
+                                child.transform.gameObject.SetActive(false);
+                            }
+
+                        }
                     }
+
+                    campFire.gameObject.SetActive(true);
                 }
 
-                campFire.gameObject.SetActive(true);
             }
-            
+            catch
+            {
+
+                Debug.Log("campfire can not be shown");
+            } 
             
         }
         if (eventData.eventBackground != null)

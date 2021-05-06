@@ -4,7 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class firendLine : MonoBehaviour {
 	//public GameObject LineObj;
-	public List<GameObject> activeLines = new List<GameObject>();
+	[SerializeField]
+	public List<FriendLineObject> activeLines = new List<FriendLineObject>();
 	public GameObject lonelyParticleObj = null;
 	public Color thick;
 	public Color thin;
@@ -45,6 +46,7 @@ public class firendLine : MonoBehaviour {
         int y = birdScript.y;
 		if (x < 0 || y < 0)
 			return;
+		RemoveLines();
 		DrawLine(y, x + 1,horizontalLine);
 		DrawLine(y, x - 1,horizontalLine);
 		DrawLine(y + 1, x,verticalLine);
@@ -78,12 +80,11 @@ public class firendLine : MonoBehaviour {
 				{
 					Vector3 pos = (birdScript.target + Var.playerPos[y, x].target) / 2f;
 					Quaternion rot = line.transform.rotation;
-					GameObject LineObj = Instantiate(line, pos, rot);
+					FriendLineObject LineObj = new FriendLineObject(Instantiate(line, pos, rot), birdScript, Var.playerPos[y, x]);
 					activeLines.Add(LineObj);
 					Var.playerPos[y, x].lines.activeLines.Add(LineObj);
                     AudioControler.Instance.PlaySound(AudioControler.Instance.createLines);
-
-
+					//Debug.Log("drawing line from: " + birdScript.charName + " to: " + Var.playerPos[y, x].charName);
                 }
                if (Var.playerPos[y, x].indicator && !Var.Infight)
                 {
@@ -181,9 +182,17 @@ public class firendLine : MonoBehaviour {
 
 	public void RemoveLines()
 	{
-		foreach(GameObject line in activeLines)
-		{		   
-			Destroy(line);
+		foreach (Bird bird in Var.activeBirds)
+		{
+
+			for(int i = bird.lines.activeLines.Count - 1; i >= 0; i--)
+			{
+				if(bird.lines.activeLines[i].isConnectedToBird(birdScript))
+				{
+					Destroy(bird.lines.activeLines[i].line);
+					bird.lines.activeLines.Remove(bird.lines.activeLines[i]);
+                }
+			}
 		}
 		activeLines.Clear();
 		if (lonelyParticleObj != null)
@@ -204,5 +213,31 @@ public class firendLine : MonoBehaviour {
 
 		}
 	}
+
+}
+[System.Serializable]
+public class FriendLineObject
+{
+	public GameObject line;
+	public Bird firstBird;
+	public Bird secondBird;
+
+	public FriendLineObject(GameObject obj, Bird bird1, Bird bird2)
+    {
+		line = obj;
+		firstBird = bird1;
+		secondBird = bird2;
+    }
+	public bool isConnectedToBird(Bird bird)
+    {
+		if(bird.charName == firstBird.charName || bird.charName == secondBird.charName)
+        {
+			return true;
+        }
+        else
+        {
+			return false;
+        }
+    }
 
 }

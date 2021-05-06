@@ -156,7 +156,7 @@ public class feedBack : MonoBehaviour {
 		lr.startColor = Helpers.Instance.GetEmotionColor(enemy.emotion);
 		lr.endColor = Helpers.Instance.GetEmotionColor(enemy.emotion);
 		lr.gameObject.SetActive(true);
-		player.lines.activeLines.Add(lineObj);
+		player.lines.activeLines.Add(new FriendLineObject(lineObj, player,enemy));
 
 	}
 	public void HighlightTutorialTiles()
@@ -206,8 +206,8 @@ public class feedBack : MonoBehaviour {
 						{
 							if (isMain)
 							{
-								PlayerEnemyBird = Var.playerPos[myIndex, i];
 								ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
+								PlayerEnemyBird = Var.playerPos[myIndex, i];
 								hasFeedback = true;
 								TryWizardLine(Var.playerPos[myIndex, i], birdScript);
 								break;                              
@@ -216,8 +216,8 @@ public class feedBack : MonoBehaviour {
 							{
 								if (skippedFirst && birdScript.enemyType == fillEnemy.enemyType.drill)
 								{
-									PlayerEnemyBird = Var.playerPos[myIndex, i];
 									ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
+									PlayerEnemyBird = Var.playerPos[myIndex, i];
 									hasFeedback = true;
 									break;
 								}
@@ -245,8 +245,8 @@ public class feedBack : MonoBehaviour {
 						{
 							if (isMain)
 							{ 
-								PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
 								ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
+								PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
 								hasFeedback = true;
 								TryWizardLine(Var.playerPos[3 - i, myIndex], birdScript);
 								break;                              
@@ -255,8 +255,8 @@ public class feedBack : MonoBehaviour {
 							{
 								if (skippedFirst && birdScript.enemyType == fillEnemy.enemyType.drill)
 								{
-									PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
 									ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
+									PlayerEnemyBird = Var.playerPos[3 - i, myIndex]; 
 									hasFeedback = true;
 									break;
 								}
@@ -388,6 +388,11 @@ public class feedBack : MonoBehaviour {
 			BelowBirdIndicator.color = new Color(1f, 0, 0, 1f);
 			LeanTween.scale(BelowBirdIndicator.gameObject, scale * 1.2f, 0.15f).setEase(LeanTweenType.easeOutCubic).setOnComplete(ScaleDownIndicator);
 		}
+		if (PlayerEnemyBird != null && PlayerEnemyBird != bird)
+		{
+			PlayerEnemyBird.fighting = !GameLogic.Instance.CheckIfResting(PlayerEnemyBird);
+		}
+
 		bird.fighting = true;
 		feedBackText.gameObject.SetActive(true);
 		value = Mathf.Clamp01(value+hideBonus);
