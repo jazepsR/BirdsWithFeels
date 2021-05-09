@@ -261,9 +261,10 @@ public class LayoutButton : MonoBehaviour
 						bird.target = bird.home;
 						currentBird.target = currentBird.home;
 						bird.ReleaseBird((int)index.x, (int)index.y);
-						bird.lines.RemoveLines();
 						currentBird.ReleaseBird((int)index.x, (int)index.y);
+						Var.playerPos[(int)index.x, (int)index.y] = null;
 						currentBird.lines.RemoveLines();
+						bird.lines.RemoveLines();
 						currentBird = null;
 						swapBird = null;
 					}
