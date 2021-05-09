@@ -52,7 +52,7 @@ public class LayoutButton : MonoBehaviour
 	}
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		//Debug.Log("entered!");
+	    Debug.Log("entered!");
 		if (isActive && other.transform.parent.GetComponent<Bird>().dragged)
 		{
 			if (selectionEffect == null && index.x >= 0)
@@ -65,6 +65,8 @@ public class LayoutButton : MonoBehaviour
             AudioControler.Instance.PlaySound(AudioControler.Instance.tileHighlightBirdHover);
 		}
 	}
+
+	
 
 	void OnMouseOver()
 	{
@@ -219,6 +221,9 @@ public class LayoutButton : MonoBehaviour
 
 	void Update()
 	{
+		//detect feet/resting collison in tile if current bird == null to prevent fake social lines
+		// check to see location of birds are the same in a tile to address overlapping?
+		  //if matches position/tile check to see what the current bird is on the tile and then remove the glitched bird that isnt in current
 
 		hasBird = (currentBird != null);
 		if (Input.GetMouseButtonUp(0))
@@ -245,6 +250,32 @@ public class LayoutButton : MonoBehaviour
 				currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
 				ApplyPower(currentBird);
 				currentBird.ReleaseBird((int)index.x, (int)index.y);
+
+				Debug.Log("tile x: " + (int)index.x + " bird X" + currentBird.x + " tile y: " + (int)index.y + "bird Y: " + currentBird.y);
+
+				foreach (Bird bird in FillPlayer.Instance.playerBirds)
+                {
+					//Debug.Log(bird.target);
+					if (bird != currentBird && bird.target == currentBird.target)
+					{
+						bird.target = bird.home;
+						currentBird.target = currentBird.home;
+						bird.ReleaseBird((int)index.x, (int)index.y);
+						bird.lines.RemoveLines();
+						currentBird.ReleaseBird((int)index.x, (int)index.y);
+						currentBird.lines.RemoveLines();
+						currentBird = null;
+						swapBird = null;
+					}
+
+					//if (((int)index.x == bird.x && (int)index.y == bird.y) && currentBird != null)
+					//{
+						//Debug.Log("I glitched out - CURRENT BIRD NULL BUG - LAYOUT BUTTON CLASS");
+						//currentBird = bird;
+					//	currentBird.ReleaseBird((int)index.x, (int)index.y);
+
+					//}
+				}
 
 
 			}
@@ -291,6 +322,11 @@ public class LayoutButton : MonoBehaviour
 				currentBird = null;
 				swapBird = null;
 			}
+
+			if(currentBird == null)
+			{
+				Debug.Log("hello");
+			}
 			if (!inMap)
 			{
 				GameLogic.Instance.CanWeFight();
@@ -299,8 +335,9 @@ public class LayoutButton : MonoBehaviour
 			{
 				MapControler.Instance.CanLoadBattle();
 			}
-		}
 
+		}
+		
 	}
 }
 

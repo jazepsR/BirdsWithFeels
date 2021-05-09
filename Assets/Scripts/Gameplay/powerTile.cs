@@ -133,7 +133,8 @@ public class powerTile : MonoBehaviour {
 				break;
 
 		}
-		Helpers.Instance.ShowTooltip(info);
+		if(info != "")
+			Helpers.Instance.ShowTooltip(info);
 
 	}
 
