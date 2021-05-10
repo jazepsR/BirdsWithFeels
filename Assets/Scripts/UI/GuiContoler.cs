@@ -316,7 +316,10 @@ public class GuiContoler : MonoBehaviour {
     public void QuitGame()
     {
         AudioControler.Instance.ClickSound();
-        SaveLoad.Save();
+        if(Var.tutorialCompleted)
+        {
+           SaveLoad.Save();
+        }
         Application.Quit();
     }
 
@@ -325,7 +328,7 @@ public class GuiContoler : MonoBehaviour {
         if (!Var.tutorialCompleted)
         {
             Time.timeScale = 1.0f;
-            SaveLoad.Save();
+            //SaveLoad.Save();
             SceneManager.LoadScene("MainMenu");
             return;
         }
@@ -1297,7 +1300,10 @@ public class GuiContoler : MonoBehaviour {
 	{
 		Time.timeScale = 1.0f;
         AudioControler.Instance.SaveVolumeSettings();
-		SaveLoad.Save();
+        if (Var.tutorialCompleted)
+        {
+           SaveLoad.Save();
+        }
 		AudioControler.Instance.ClickSound();
 		SceneManager.LoadScene("MainMenu");
 
