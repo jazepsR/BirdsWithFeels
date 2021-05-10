@@ -164,12 +164,14 @@ public class EventController : MonoBehaviour
                 nextEvent.canShowMultipleTimes = true;
                 currentEvent = null;
                 CreateEvent(nextEvent);
+                Debug.Log("playing next event");
                 return;
             }
 
             if (eventsToShow.Count > 0) //Play queued up events to show 
             {
                 EventScript nextEvent = eventsToShow[0];
+                Debug.Log("play queue up events to show");
                 eventsToShow.RemoveAt(0);
                 CreateEvent(nextEvent);
 
@@ -177,6 +179,10 @@ public class EventController : MonoBehaviour
             else if (currentEvent.afterEventDialog != null) //Play specific dialogue after event finishes 
             {
                 DialogueControl.Instance.CreateParticularDialog(currentEvent.afterEventDialog);
+                myEventGUIAnimator.SetTrigger("close"); //Hide GUI once it has finished animating closed
+                LeanTween.delayedCall(0.7f, () =>
+                 eventObject.SetActive(false));
+                Debug.Log("play specific dialogue");
             }
             else
             {
