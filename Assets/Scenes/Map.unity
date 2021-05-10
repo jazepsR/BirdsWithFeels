@@ -6124,7 +6124,7 @@ PrefabInstance:
     - target: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -215
+      value: -214.99997
       objectReference: {fileID: 0}
     - target: {fileID: 224264056252348976, guid: ad8acf0bd215db74884b964d95b969f3,
         type: 3}
@@ -8963,6 +8963,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8679887015462586534, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
+      propertyPath: birdToAdd
+      value: 
+      objectReference: {fileID: 1364067972}
+    - target: {fileID: 8679887015462586534, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
       propertyPath: levelName
       value: Fly To It
       objectReference: {fileID: 0}
@@ -8973,9 +8978,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8679887015462586534, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
+      propertyPath: birdToAddScript
+      value: 
+      objectReference: {fileID: 1553602832}
+    - target: {fileID: 8679887015462586534, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
       propertyPath: levelDescription
       value: Your very first vulture confrontation on your own, don't expect guidance
         from us!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679887015462586534, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
+        type: 3}
+      propertyPath: firstCompleteEvent
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8782073427370752489, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
@@ -21999,7 +22014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -220, y: -135}
+  m_AnchoredPosition: {x: -219.99997, y: -134.99997}
   m_SizeDelta: {x: 460, y: 411.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &803136198
@@ -37424,6 +37439,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5007150716809781643, guid: 9640144b0402f6e49ae177bef4b08adc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -179.99997
+      objectReference: {fileID: 0}
     - target: {fileID: 5308731823026350425, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -39296,6 +39316,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: {x: -1, y: -1}
+  currentBird: {fileID: 0}
+  swapBird: {fileID: 0}
   hasBird: 0
   isActive: 1
   power: {fileID: 0}
@@ -40644,6 +40666,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e777ba048bee5404e97fc46ed5edbe6f, type: 3}
+--- !u!114 &1553602832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114667945286850408, guid: e777ba048bee5404e97fc46ed5edbe6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1553602831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1553901306 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2021498800314962222, guid: cd877a5ad3252324883b3e1ec6efa003,
