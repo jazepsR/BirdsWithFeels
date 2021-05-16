@@ -9,11 +9,11 @@ public class Graph : MonoBehaviour {
 	public GameObject prevHeart;
 	public GameObject graphParent;
 	public int graphSize = 275;
-	int multiplier;   
+	int multiplier;
 	public static Graph Instance { get; private set; }
 	[HideInInspector]
 	public List<GameObject> portraits;
-	public float factor =2f;
+	public float factor = 2f;
 	public bool isSmall;
 	public LevelBarScript levelBar;
 	public Image dangerZoneHighlight;
@@ -22,7 +22,7 @@ public class Graph : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		if(!isSmall)
+		if (!isSmall)
 			Instance = this;
 		if (isSmall && !Var.tutorialCompleted)
 			graphArea.transform.parent.gameObject.SetActive(false);
@@ -31,8 +31,8 @@ public class Graph : MonoBehaviour {
 		CheckEmotionLock();
 	}
 
-    public void Update()
-    {
+	public void Update()
+	{
 		if (Input.GetKeyDown(KeyCode.J) && Var.cheatsEnabled && !isSmall)
 		{
 			var level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
@@ -42,32 +42,32 @@ public class Graph : MonoBehaviour {
 			{
 				if (!Var.activeBirds[0].data.recievedSeeds.Contains(bit.name))
 				{
-					CollectSeed(Var.activeBirds[0],bit);
+					CollectSeed(Var.activeBirds[0], bit);
 					break;
 				}
 
 			}
 		}
 	}
-    public void CheckEmotionLock()
+	public void CheckEmotionLock()
 	{
-		if(isSmall && lockImage!= null && Var.freezeEmotions)
+		if (isSmall && lockImage != null && Var.freezeEmotions)
 		{
 			lockImage.gameObject.SetActive(true);
 		}
-		else if(lockImage!= null)
+		else if (lockImage != null)
 		{
-			lockImage.gameObject.SetActive(false);			
+			lockImage.gameObject.SetActive(false);
 		}
 
 	}
-	public void PlotFull(Bird bird,bool afterBattle, bool shouldHaveSound = false)
+	public void PlotFull(Bird bird, bool afterBattle, bool shouldHaveSound = false)
 	{
 		if (!GuiContoler.Instance.inMap && GuiContoler.Instance.winBanner.activeSelf)
 			return;
 		if (bird.data.health <= 0)
 			return;
-		if(isSmall && Var.freezeEmotions)
+		if (isSmall && Var.freezeEmotions)
 			return;
 		this.afterBattle = afterBattle;
 		//GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
@@ -91,30 +91,31 @@ public class Graph : MonoBehaviour {
 			Var.Em emotion = bird.emotion;
 			if (bird.prevEmotion == bird.emotion)
 				emotion = Var.Em.finish;
-			portraitScript.StartGraph(secondPos, emotion, bird,this, shouldHaveSound);
+			portraitScript.StartGraph(secondPos, emotion, bird, this, shouldHaveSound);
 		}
 		if ((GuiContoler.Instance.currentGraph == 3 && afterBattle) || !Var.gameSettings.shownLevelTutorial)
 		{
+			Debug.Log("not going to create seeds");
 		}
 		else
 			CreateLevelSeeds(bird, afterBattle);
-		
+
 	}
 
-	GameObject PlotPoint(int x,int y, GameObject obj, bool isPortrait, Bird bird=null )
+	GameObject PlotPoint(int x, int y, GameObject obj, bool isPortrait, Bird bird = null)
 	{
 		Vector2 corner = graphArea.rectTransform.anchoredPosition;
 		Rect size = graphArea.rectTransform.rect;
 		Vector2 max = graphArea.rectTransform.anchorMax;
 		Vector2 offset = graphArea.rectTransform.offsetMax;
-		GameObject heartt =Instantiate(obj,graphParent.transform);
+		GameObject heartt = Instantiate(obj, graphParent.transform);
 		if (isPortrait)
 		{
 			if (isSmall)
 			{
 				heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
 				ShowTooltip info = heartt.gameObject.AddComponent<ShowTooltip>();
-				info.tooltipText = "<b>" +Helpers.Instance.GetStatInfo(y,x) + "</b>";
+				info.tooltipText = "<b>" + Helpers.Instance.GetStatInfo(y, x) + "</b>";
 			}
 			else
 			{
@@ -131,39 +132,40 @@ public class Graph : MonoBehaviour {
 			dummy.sortingOrder = 10;
 			heartt.AddComponent<GraphicRaycaster>();
 		}
-		if(isSmall)
+		if (isSmall)
 			heartt.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 		else
 			heartt.transform.localScale = new Vector3(1f, 1f, 1f);
-		heartt.transform.localPosition = new Vector3(-x*factor, y*factor, 0);
-		return heartt;     
+		heartt.transform.localPosition = new Vector3(-x * factor, y * factor, 0);
+		return heartt;
 	}
-	void CreateLevelSeeds(Bird bird,bool afterBattle)
+	void CreateLevelSeeds(Bird bird, bool afterBattle)
 	{
+		Debug.Log("SEEDS ARE BEING CREATED");
 		float factor = isSmall ? 8 : 18;
 		if (!isSmall)
 		{
 			SetupLevelBar(bird);
 		}
-			/*if(!isSmall)
-			{
-				factor = 16;
-				SetupLevelBar(Var.Em.Cautious, Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.data.levelList),bird);
-				SetupLevelBar(Var.Em.Confident, Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.data.levelList), bird);
-				SetupLevelBar(Var.Em.Social, Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.data.levelList), bird);
-				SetupLevelBar(Var.Em.Solitary, Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.data.levelList), bird);
-			}*/
-			LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
-			bird.data.level - 1)];
+		/*if(!isSmall)
+		{
+			factor = 16;
+			SetupLevelBar(Var.Em.Cautious, Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.data.levelList),bird);
+			SetupLevelBar(Var.Em.Confident, Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.data.levelList), bird);
+			SetupLevelBar(Var.Em.Social, Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.data.levelList), bird);
+			SetupLevelBar(Var.Em.Solitary, Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.data.levelList), bird);
+		}*/
+		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
+		bird.data.level - 1)];
 
 		foreach (LevelBits bit in level.levelBits)
-		{			
+		{
 			if (!bird.data.recievedSeeds.Contains(bit.name))
 			{
 
 				GameObject toInstantiate = Helpers.Instance.seed;
 				//if (bird.emotion == bit.emotion)
-					//toInstantiate = Helpers.Instance.seed;
+				//toInstantiate = Helpers.Instance.seed;
 				GameObject obj = Instantiate(toInstantiate, graphParent.transform);
 				obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(-factor * bit.social, factor * bit.conf, 0);
 				obj.name = bit.name;
@@ -176,11 +178,13 @@ public class Graph : MonoBehaviour {
 			else if (!isSmall)
 			{
 				levelBar.AddPoints(bird);
-			}			
+			}
 		}
 	}
 	public void CheckIfCollectedSeed(Bird bird)
 	{
+		Debug.Log("SEEDS ARE BEING CHECKED IF COLLECTED");
+
 		if (graphParent.transform.childCount == 0)
 			return;
 		if (!afterBattle)
@@ -189,7 +193,7 @@ public class Graph : MonoBehaviour {
 			return;
 		if (bird.data.injured)
 			return;
-		if (Var.isEnding || Var.isTutorial)
+		if (Var.isEnding || Var.isTutorial || Var.gameSettings.shownLevelTutorial == false)
 			return;
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1, bird.data.level - 1)];
 		foreach (LevelBits bit in level.levelBits)
@@ -204,6 +208,7 @@ public class Graph : MonoBehaviour {
 	}
 	public void CollectSeed(Bird bird, LevelBits bit)
 	{
+		Debug.Log("SEEDS ARE BEING COLLECTED");
 		foreach (Transform seed in graphParent.transform)
 		{
 			if(seed.name == bit.name)

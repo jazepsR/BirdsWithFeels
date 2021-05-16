@@ -99,7 +99,7 @@ public class powerTile : MonoBehaviour {
 
 	void OnMouseEnter()
 	{
-        if (!Var.CanShowHover || GuiContoler.Instance.speechBubbleObj.activeSelf || Var.Infight || EventController.Instance.eventObject.activeSelf)
+        if (!Var.CanShowHover || GuiContoler.Instance.speechBubbleObj.activeSelf || Var.Infight || EventController.Instance.eventObject.activeSelf || Time.timeSinceLevelLoad < .3f)
             return;
         //if (Var.selectedBird != null)       
         //	return;        

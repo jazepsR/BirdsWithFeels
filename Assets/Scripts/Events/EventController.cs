@@ -611,14 +611,14 @@ public class EventController : MonoBehaviour
 
     void DisplayChoiceResult(int ID)
     {
-        if (hideEventButton)
+        if (hideEventButton && currentEvent.isCharacterJoinEvent)
         {
-            //hideEventButton.SetActive(false);
+            hideEventButton.SetActive(false);
         }
         myEventGUIAnimator.SetBool("showingEmoGraph", false);
         activeChoices = false;
         AudioControler.Instance.PlayPaperSound();
-        choiceList.gameObject.SetActive(false);
+        choiceList.gameObject.SetActive(false); 
         Helpers.Instance.HideTooltip();
         string consequences = ApplyConsequences(ID);
         if (currentBird != null)
