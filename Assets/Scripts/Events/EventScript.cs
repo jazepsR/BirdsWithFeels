@@ -66,6 +66,7 @@ public class EventScript:MonoBehaviour{
 	public List<EventPart> parts;
 	public EventConsequence[] options;
 	public bool canShowMultipleTimes = false;
+    public bool isCharacterJoinEvent = false;
 	public Dialogue afterEventDialog;
     public bool quitAfterLevel = false;
     public bool isCampFireScene;

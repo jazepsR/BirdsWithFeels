@@ -305,18 +305,27 @@ public class GuiContoler : MonoBehaviour {
         }
     }
 
-    public void canPause(bool canPause)
+    public bool canPause(bool canPause)
     {
         if (canPause)
+        {
             pauseBtn.SetActive(true);
+            return true;
+        }
         else
+        {
             pauseBtn.SetActive(false);
+            return false;
+        }
     }
 
     public void QuitGame()
     {
         AudioControler.Instance.ClickSound();
-        SaveLoad.Save();
+        if(Var.tutorialCompleted)
+        {
+           SaveLoad.Save();
+        }
         Application.Quit();
     }
 
@@ -325,7 +334,7 @@ public class GuiContoler : MonoBehaviour {
         if (!Var.tutorialCompleted)
         {
             Time.timeScale = 1.0f;
-            SaveLoad.Save();
+            //SaveLoad.Save();
             SceneManager.LoadScene("MainMenu");
             return;
         }
@@ -408,9 +417,17 @@ public class GuiContoler : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && pauseBtn.activeSelf)
         {
-            setPause();
+            if(EventController.Instance.eventObject.gameObject.activeSelf || GraphBlocker.gameObject.activeSelf)
+            {     
+                
+            }
+            else
+            {
+                setPause();
+            }
+           
         }
         if (Input.GetKeyDown(KeyCode.O) && Var.cheatsEnabled)
             ReturnToMap();
@@ -1040,7 +1057,7 @@ public class GuiContoler : MonoBehaviour {
 
 	public void GraphButton()
 	{
-        if (GraphActive || selectedBird.dragged)
+        if (GraphActive || selectedBird.dragged || EventController.Instance.eventObject.activeSelf)
             return;
 
         clearSmallGraph();
@@ -1297,7 +1314,10 @@ public class GuiContoler : MonoBehaviour {
 	{
 		Time.timeScale = 1.0f;
         AudioControler.Instance.SaveVolumeSettings();
-		SaveLoad.Save();
+        if (Var.tutorialCompleted)
+        {
+           SaveLoad.Save();
+        }
 		AudioControler.Instance.ClickSound();
 		SceneManager.LoadScene("MainMenu");
 

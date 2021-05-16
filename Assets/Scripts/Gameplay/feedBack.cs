@@ -394,6 +394,11 @@ public class feedBack : MonoBehaviour {
 		}
 
 		bird.fighting = true;
+		if(bird.GetComponentInChildren<Animator>().GetBool("rest"))
+		{
+			bird.GetComponentInChildren<Animator>().SetBool("rest", false);
+		}
+		//Debug.Log(bird.charName + " is called and fighting status is: " + bird.fighting);
 		feedBackText.gameObject.SetActive(true);
 		value = Mathf.Clamp01(value+hideBonus);
 		float colorIndex = value;

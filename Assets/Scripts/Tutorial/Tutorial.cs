@@ -297,9 +297,10 @@ public class Tutorial : MonoBehaviour {
 				graphAnim.SetBool("shake", false);
 				break;
 			case 3:
-				GuiContoler.Instance.nextGraph.interactable = true;
+				
 				if (Var.activeBirds[0].prevRoundHealth<Var.activeBirds[0].data.health)
 					GuiContoler.Instance.ShowSpeechBubble(portraitPoint, "Ahh, I needed that rest - back to full health!",TerrySounds);
+				LeanTween.delayedCall(.5f, () => GuiContoler.Instance.nextGraph.interactable = true);
 				break;
 			case 4:
 				GuiContoler.Instance.nextGraph.interactable = true;
