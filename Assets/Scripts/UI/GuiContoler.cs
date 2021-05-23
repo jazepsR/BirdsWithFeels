@@ -419,7 +419,7 @@ public class GuiContoler : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape) && pauseBtn.activeSelf)
         {
-            if(EventController.Instance.eventObject.gameObject.activeSelf || GraphBlocker.gameObject.activeSelf)
+            if (EventController.Instance.eventObject.gameObject.activeSelf || GraphBlocker.gameObject.activeSelf || winBanner.activeSelf)
             {     
                 
             }
@@ -561,6 +561,7 @@ public class GuiContoler : MonoBehaviour {
             speechAudioGroup.Add(birdTalk);
           //  speechAudioGroup[0].Play();
             AudioControler.Instance.speechBubbleContinue.Play();
+
         }
         else
         {
@@ -620,7 +621,10 @@ public class GuiContoler : MonoBehaviour {
         print("currentGraph : " + currentGraph);
         if (Var.isTutorial)
         {
-            Tutorial.Instance.ShowGraphSpeech(currentGraph);
+
+
+            //GuiContoler.Instance.nextGraph.interactable = false;
+           Tutorial.Instance.ShowGraphSpeech(currentGraph);
         }
         foreach (Transform child in graph.transform.Find("GraphParts").transform)
         {
@@ -1057,7 +1061,7 @@ public class GuiContoler : MonoBehaviour {
 
 	public void GraphButton()
 	{
-        if (GraphActive || selectedBird.dragged || EventController.Instance.eventObject.activeSelf)
+        if (GraphActive || selectedBird.dragged || EventController.Instance.eventObject.activeSelf || Var.Infight)
             return;
 
         clearSmallGraph();

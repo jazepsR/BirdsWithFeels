@@ -61,23 +61,23 @@ public class battleAnim :MonoBehaviour {
 			//	canReroll = true;
 			
 		}
-		if (canReroll)
-		{
-			GuiContoler.Instance.rerollBox.SetActive(true);
-		}
-		else
-		{
-			yield return new WaitForSeconds((battles.Count+1)*0.2f);
-			foreach (Bird bird in FillPlayer.Instance.playerBirds)
-			{
-				if (bird.gameObject.activeSelf)
-				{
-					bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
-					bird.TryLevelUp();					
-					bird.AddRoundBonuses();
-					bird.SetEmotion(); 
-				}
-			}
+        if (canReroll)
+        {
+            GuiContoler.Instance.rerollBox.SetActive(true);
+        }
+        else
+        {
+            yield return new WaitForSeconds((battles.Count + 1) * 0.2f);
+            foreach (Bird bird in FillPlayer.Instance.playerBirds)
+            {
+                if (bird.gameObject.activeSelf)
+                {
+                    bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
+                    bird.TryLevelUp();
+                    bird.AddRoundBonuses();
+                    bird.SetEmotion();
+                }
+            }
 
             AudioControler.Instance.battleOver.Play();
             if (!Var.freezeEmotions)
@@ -91,15 +91,15 @@ public class battleAnim :MonoBehaviour {
             }
             yield return new WaitForSeconds(1.0f);
             foreach (Bird bird in Var.activeBirds)
-				bird.GetComponentInChildren<Animator>().SetBool("lose", false);
-			if (Var.isBoss)
-			{
-				GuiContoler.Instance.Reset();
-			}
-			else
-			{
-				if(Var.freezeEmotions)
-				{
+                bird.GetComponentInChildren<Animator>().SetBool("lose", false);
+            if (Var.isBoss)
+            {
+                GuiContoler.Instance.Reset();
+            }
+            else
+            {
+                if (Var.freezeEmotions)
+                {
                     //SHOW TARNSITION AND CREATE NEXT BATTLE
 
                     //Debug.Log("canplayBossTransition: " + GuiContoler.Instance.canplayBossTransition);
@@ -110,26 +110,41 @@ public class battleAnim :MonoBehaviour {
                         yield return new WaitForSeconds(.5f);
                     }
                     GuiContoler.Instance.CloseGraph();
-				}
-				else
-				{
-				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);				
-				GuiContoler.Instance.CreateBattleReport();
-                
                 }
-			}
-            foreach(Bird enemy in Var.enemies)
+                else
+                {
+                    GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
+                    GuiContoler.Instance.CreateBattleReport();
+
+                }
+            }
+            foreach (Bird enemy in Var.enemies)
             {
-                if(enemy != null)
+                if (enemy != null)
                     LeanTween.cancel(enemy.gameObject);
             }
-			if(Var.isTutorial)
-			{
-				yield return new WaitForSeconds(1.0f);
-				Tutorial.Instance.ShowTutorialFirstGridText(Tutorial.Instance.CurrentPos);
-			}
+            if (Var.isTutorial)
+            {
+                //Debug.Log("hello its me: " + Tutorial.Instance.showedSecondBirdReportText);
+                if (GuiContoler.Instance.GraphActive)
+                 {
+
+                     //GuiContoler.Instance.nextGraph.interactable = false;
+                 }
+
+                yield return new WaitForSeconds(1.0f);
+
+     
+                Tutorial.Instance.ShowTutorialFirstGridText(Tutorial.Instance.CurrentPos);
+            }
             if (Var.isEnding)
             {
+
+                //if (GuiContoler.Instance.GraphActive)
+                //{
+                  //  GuiContoler.Instance.nextGraph.interactable = false; //not sure if ending needs this but im going to put it here 
+                //}
+
                 yield return new WaitForSeconds(1.0f);
                 Ending.Instance.ShowEndingFirstGridText(Tutorial.Instance.CurrentPos);
             }
