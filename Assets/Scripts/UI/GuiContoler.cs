@@ -46,6 +46,7 @@ public class GuiContoler : MonoBehaviour {
     public GameObject[] portraits;
     public Transform[] battleTrag;
     public GameObject rerollBox;
+    public FastForwardScript FastForwardScript;
     Var.Em currentMapArea; 
     public Var.Em nextMapArea; 
     public Var.Em nextNextMapArea; //next spot on map
@@ -364,6 +365,7 @@ public class GuiContoler : MonoBehaviour {
         }
 
     }
+
 
     public void ShowDeathMenu(Bird deadBird)
     {
@@ -1055,6 +1057,11 @@ public class GuiContoler : MonoBehaviour {
 
 	}
 
+
+
+
+    
+
 	public void GraphButton()
 	{
         if (GraphActive || selectedBird.dragged || EventController.Instance.eventObject.activeSelf)
@@ -1100,8 +1107,12 @@ public class GuiContoler : MonoBehaviour {
 		//LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
 		graphAnime.SetBool("open", true);
 	}
-	public void CreateBattleReport() {
-		clearSmallGraph();
+	public void CreateBattleReport() //triggers upon finishing battles in bossless adventures
+    {
+        FastForwardScript.SetIsInFight(false);
+        
+
+        clearSmallGraph();
 		closeReportBtn.SetActive(true);
 		HideSmallGraph.gameObject.SetActive(false);
 		if (finalResult < 0)
@@ -1132,10 +1143,13 @@ public class GuiContoler : MonoBehaviour {
 	public void Fight()
 	{
 		GameLogic.Instance.FightButton.interactable = false;
-		AudioControler.Instance.ClickSound();
+        GameLogic.Instance.FightButton.GetComponent<Animator>().SetBool("fight", true);
+        AudioControler.Instance.ClickSound();
         AudioControler.Instance.ActivateMusicSource(audioSourceType.battleSource);
 		AudioControler.Instance.PlaySound(AudioControler.Instance.clicks);
 		feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
+        FastForwardScript.SetIsInFight(true);
+
 		foreach (feedBack fb in feedBackObj)
 		{
 			fb.HideFeedBack(true);

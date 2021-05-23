@@ -115,7 +115,6 @@ public class battleAnim :MonoBehaviour {
 				{
 				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);				
 				GuiContoler.Instance.CreateBattleReport();
-                
                 }
 			}
             foreach(Bird enemy in Var.enemies)

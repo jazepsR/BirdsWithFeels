@@ -943,15 +943,8 @@ public class Helpers : MonoBehaviour {
 			return false;
 		}*/
 	}
-	private void Update()
-	{
-		if (Input.GetKey(KeyCode.LeftShift) && Var.cheatsEnabled)
-			Time.timeScale = 0.25f;
-		else if (Input.GetKey(KeyCode.RightShift) || Input.GetMouseButton(1) && Var.Infight && !GuiContoler.Instance.GraphActive)
-			Time.timeScale = 4f;
-		else
-			Time.timeScale = 1;
-	}
+
+
 
 	public string GetLevelUpDialogs(Levels.type type, EventScript.Character character)
 	{
