@@ -110,12 +110,11 @@ public class battleAnim :MonoBehaviour {
                         yield return new WaitForSeconds(.5f);
                     }
                     GuiContoler.Instance.CloseGraph();
-                }
-                else
-                {
-                    GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);
-                    GuiContoler.Instance.CreateBattleReport();
-
+				}
+				else
+				{
+				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);				
+				GuiContoler.Instance.CreateBattleReport();
                 }
             }
             foreach (Bird enemy in Var.enemies)
