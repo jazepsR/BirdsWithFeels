@@ -144,8 +144,20 @@ public class EventController : MonoBehaviour
             SetPortrait(currentText);
             return;
         }
+        if (currentEvent == null)
+        {
+            myEventGUIAnimator.SetTrigger("close"); //Hide GUI once it has finished animating closed
+            LeanTween.delayedCall(0.7f, () =>
+             eventObject.SetActive(false));
 
-        if (currentEvent != null && (currentText > currentEvent.parts.Count - 1)) //Has finished playing all parts in current event? 
+            if (inMap) //Update map icons once event has finished playing. 
+            {
+                DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
+                foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+                    icon.SetState();
+            }
+        }
+            else if (currentEvent != null && (currentText > currentEvent.parts.Count - 1)) //Has finished playing all parts in current event? 
         {
             if (currentEvent.quitAfterLevel) //Go to main menu after current event? 
             {
@@ -206,10 +218,11 @@ public class EventController : MonoBehaviour
                     }
                 }
             }
+
             currentEvent = null;
             nextEvent = null;
         }
-
+       
 
     }
 
