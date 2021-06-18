@@ -1526,12 +1526,20 @@ public class GuiContoler : MonoBehaviour {
     
     public void showVictoryScreen()
     {
-        foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
+        if (Var.unlockedBirds == null)
         {
-            child.transform.GetChild(0).gameObject.SetActive(false);
+            foreach (Bird bird in FillPlayer.Instance.playerBirds)
+            {
+                Var.unlockedBirds.Add(bird);
+            }
         }
 
-        foreach (Bird bird in FillPlayer.Instance.playerBirds)
+        foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
+        {
+            child.transform.gameObject.SetActive(false);
+        }
+
+        foreach (Bird bird in Var.unlockedBirds)
         {
             
             foreach(Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
@@ -1539,9 +1547,20 @@ public class GuiContoler : MonoBehaviour {
 
                 if (bird.data.unlocked)
                 {
-                    if (bird.charName.ToLower() == child.transform.GetChild(0).name)
+                    if (bird.charName.ToLower() == child.transform.GetChild(1).name)
                     {
-                        child.transform.GetChild(0).gameObject.SetActive(true);
+                        foreach (Bird aBird in FillPlayer.Instance.playerBirds)
+                        {
+                            if (aBird.charName.ToLower() == bird.charName.ToLower())
+                            {
+                                child.transform.GetChild(0).GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(aBird.emotion);
+                            }
+                            else 
+                            {
+                                child.transform.GetChild(0).GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+                            }
+                        }
+                        child.transform.gameObject.SetActive(true);
                     }
                 }
                 
