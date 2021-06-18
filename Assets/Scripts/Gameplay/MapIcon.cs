@@ -654,6 +654,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		if (available && MapControler.Instance.canFight)
 		{
 			AudioControler.Instance.ClickSound();
+			Var.isEnding = isBoss;
 			Var.isBoss = isBoss;
 			Var.fled = false;
 			Var.isTutorial = false;                       

@@ -175,7 +175,7 @@ public class GuiContoler : MonoBehaviour {
             boss.SetActive(Var.isBoss);
             GraphBlocker.SetActive(false);
 
-            if (Var.freezeEmotions && !Var.selectedTimeEvent.activationEventShown && Var.selectedTimeEvent != null && !Var.isEnding && !inMap)
+            if (Var.freezeEmotions && Var.selectedTimeEvent != null && !Var.selectedTimeEvent.activationEventShown  && !Var.isEnding && !inMap)
             {
                 foreach (TimedEventControl anEvent in timedEventControllers)
                 {
@@ -1431,7 +1431,7 @@ public class GuiContoler : MonoBehaviour {
                 {
                     GetComponent<fillEnemy>().CreateEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
                 }
-				if (!EventController.Instance.tryEvent())
+				//if (!EventController.Instance.tryEvent())
 					DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
 			}
 			ObstacleGenerator.Instance.clearObstacles();
