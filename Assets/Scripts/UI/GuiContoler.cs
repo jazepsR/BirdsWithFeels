@@ -113,6 +113,7 @@ public class GuiContoler : MonoBehaviour {
     public Animator graphAnime;
     public GameObject minimap;
     public GameObject dangerZoneBorder;
+    public GameObject levelUpScreen;
     [HideInInspector]
     public bool canChangeGraph = true;
     [HideInInspector]
@@ -451,7 +452,7 @@ public class GuiContoler : MonoBehaviour {
                 moveBy.x += moveSpeed * Time.deltaTime;
             Camera.main.transform.position += (Vector3)moveBy;
         }
-        if (GraphActive && Input.GetMouseButtonDown(1) && canChangeGraph)
+        if (GraphActive && Input.GetMouseButtonDown(1) && canChangeGraph && levelUpScreen.activeSelf == false)
         {
             if (nextGraph.gameObject.activeInHierarchy)
                 nextGraph.onClick.Invoke();
