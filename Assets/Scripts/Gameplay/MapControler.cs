@@ -144,6 +144,8 @@ public class MapControler : MonoBehaviour {
 				bird.data.health = Mathf.Min(bird.data.health + 1, bird.data.maxHealth);                
 				bird.data.mentalHealth = Mathf.Min(bird.data.mentalHealth + 1, Var.maxMentalHealth);
 			}
+
+			Var.unlockedBirds.Add(bird);
 		}
 
         canRest();
