@@ -75,11 +75,19 @@ public class EventController : MonoBehaviour
 
                 foreach (EventSegment segment in eventSegments)
                 {
-                    int id = Var.currentStageID % 1000;
-                    if (id >= segment.minID && id <= segment.maxID)
+                    if (Var.currentStageID == -1)
                     {
                         events.AddRange(segment.eventParent.GetComponentsInChildren<EventScript>());
-                        break;
+                    }
+                    else
+                    {
+
+                        int id = Var.currentStageID % 1000;
+                        if (id >= segment.minID && id <= segment.maxID)
+                        {
+                            events.AddRange(segment.eventParent.GetComponentsInChildren<EventScript>());
+                            break;
+                        }
                     }
                 }
                 LeanTween.delayedCall(0.25f, () => tryEvent()); //Event plays as soon as player enters scene
@@ -144,8 +152,20 @@ public class EventController : MonoBehaviour
             SetPortrait(currentText);
             return;
         }
+        if (currentEvent == null)
+        {
+            myEventGUIAnimator.SetTrigger("close"); //Hide GUI once it has finished animating closed
+            LeanTween.delayedCall(0.7f, () =>
+             eventObject.SetActive(false));
 
-        if (currentEvent != null && (currentText > currentEvent.parts.Count - 1)) //Has finished playing all parts in current event? 
+            if (inMap) //Update map icons once event has finished playing. 
+            {
+                DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
+                foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+                    icon.SetState();
+            }
+        }
+            else if (currentEvent != null && (currentText > currentEvent.parts.Count - 1)) //Has finished playing all parts in current event? 
         {
             if (currentEvent.quitAfterLevel) //Go to main menu after current event? 
             {
@@ -206,10 +226,11 @@ public class EventController : MonoBehaviour
                     }
                 }
             }
+
             currentEvent = null;
             nextEvent = null;
         }
-
+       
 
     }
 
@@ -279,7 +300,7 @@ public class EventController : MonoBehaviour
                     canCreateEvent = false;
                 else
                 {
-                    if (Var.shownEvents.Contains(ev.heading))
+                    if (ev.heading != "" && Var.shownEvents.Contains(ev.heading))
                         canCreateEvent = false;
                     if (ev.speakers.Contains(EventScript.Character.Alexander) && Var.availableBirds.Count < 4)
                         canCreateEvent = false;
@@ -302,7 +323,7 @@ public class EventController : MonoBehaviour
     }
     public void CreateEvent(EventScript eventData)
     {
-
+        Debug.Log("creating Event!");
         if (eventData.isCampFireScene && inMap)
         {
 
@@ -428,7 +449,6 @@ public class EventController : MonoBehaviour
         coroutine = WaitAndPrint(text, true);
         StartCoroutine(coroutine);
         SetPortrait(0);
-
         if (eventData.options.Length > 0 && eventData.parts.Count <= 1)
         {
             CreateChoices();

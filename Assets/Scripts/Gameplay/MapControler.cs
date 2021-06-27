@@ -56,7 +56,19 @@ public class MapControler : MonoBehaviour {
 		Var.snapshot = null;
 		trialUiObject.SetActive(false);
 	}
+	public void FocusOnNodeAfterLoss()
+	{
 
+		MapIcon[] icons = FindObjectsOfType<MapIcon>();
+		foreach (MapIcon icon in icons)
+		{
+			if (icon.ID == Var.currentStageID)
+			{
+				icon.CenterMapNode();
+				return;
+			}
+		}
+	}
 	public void UnlockToChapter(int targetLevel)
 	{
 		if (Var.loadChapterID < 0)
@@ -168,6 +180,12 @@ public class MapControler : MonoBehaviour {
 			LeanTween.delayedCall(0.05f, () =>
 			 UnlockToChapter(chapterIDs[Var.loadChapterID]));
 		}
+		if(Var.fled)
+		{
+			FocusOnNodeAfterLoss();
+		}
+
+
 		if (Var.currentWeek<3)
 			Var.shouldDoMapEvent = false;
 		//Var.shouldDoMapEvent = true;
