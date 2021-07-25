@@ -128,7 +128,7 @@ public class GuiContoler : MonoBehaviour {
     [HideInInspector]
     public TimedEventControl control;
     [SerializeField] public TimedEventControl[] timedEventControllers;
-
+    [HideInInspector] public int graphInteractTweenID = -1;
     void Awake()
     {
         //if (!Var.StartedNormally)
@@ -832,7 +832,7 @@ public class GuiContoler : MonoBehaviour {
     public void CreateGraph(object o, bool afterBattle = true)
     {
         GraphActive = true;
-        canChangeGraph = true;
+        //canChangeGraph = true;
         GraphBlocker.SetActive(true);
         Helpers.Instance.HideTooltip();
         minimap.SetActive(false);
@@ -846,6 +846,11 @@ public class GuiContoler : MonoBehaviour {
 
         Graph.Instance.portraits = new List<GameObject>();
         List<Bird> BirdsToGraph;
+        if(graphInteractTweenID!= -1)
+        {
+            LeanTween.cancel(graphInteractTweenID);
+        }
+        //graphInteractTweenID= LeanTween.delayedCall(2f, () => canChangeGraph = true).id;
         if (birdNum == -1)
         {
             BirdsToGraph = Var.activeBirds;
@@ -1547,29 +1552,32 @@ public class GuiContoler : MonoBehaviour {
     
     public void showVictoryScreen()
     {
-        foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
-        {
-            child.transform.GetChild(0).gameObject.SetActive(false);
-        }
-
-        foreach (Bird bird in FillPlayer.Instance.playerBirds)
-        {
-            
-            foreach(Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
-            {
-
-                if (bird.data.unlocked)
-                {
-                    if (bird.charName.ToLower() == child.transform.GetChild(0).name)
-                    {
-                        child.transform.GetChild(0).gameObject.SetActive(true);
-                    }
-                }
-                
-            }
-        }
-
         winBanner.SetActive(true);
+        WinScreen.Instance.SetupWinScreen(Var.availableBirds);//  new List<Bird>(FillPlayer.Instance.playerBirds));
+        /* foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
+         {
+             child.transform.gameObject.SetActive(false);
+         }
+
+         foreach (Bird bird in Var.activeBirds)
+         {
+
+             foreach(Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
+             {
+
+                 child.transform.gameObject.SetActive(true);
+                 if (bird.data.unlocked)
+                 {
+                     if (bird.charName.ToLower() == child.transform.GetChild(0).name)
+                     {
+                         child.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+                     }
+                 }
+
+             }
+         }
+
+         winBanner.SetActive(true);*/
     }
 	
 	public void ShowMessage(string message)
@@ -1596,3 +1604,4 @@ public class GuiContoler : MonoBehaviour {
 
 	}
 }
+

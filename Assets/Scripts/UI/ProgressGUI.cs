@@ -42,6 +42,8 @@ public class ProgressGUI : MonoBehaviour {
     public string injuryEndStringSingular = " was injured and cannot continue";
     public string injuryEndStringPlural = " were injured and cannot continue";
     internal bool CanLevel;
+    public Button nextGraphButton;
+    public Button prevGraphButton;
     // Use this for initialization
     void Start () {
         Instance = this;
@@ -55,7 +57,8 @@ public class ProgressGUI : MonoBehaviour {
     
     // Update is called once per frame
     void Update () {
-        
+        nextGraphButton.interactable = GuiContoler.Instance.canChangeGraph;
+        prevGraphButton.interactable = GuiContoler.Instance.canChangeGraph;
     }
    
     void UpdateLevelAreas(Bird bird, bool isFinal =false)

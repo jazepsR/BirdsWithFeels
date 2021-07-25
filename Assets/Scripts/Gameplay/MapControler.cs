@@ -302,8 +302,8 @@ public class MapControler : MonoBehaviour {
             if (bird.data.injured)
             {
                 bird.DecreaseTurnsInjured();
-                GameObject healObj = Instantiate(bird.healParticle, bird.transform);
-                Destroy(healObj, 1.5f);
+              //  GameObject healObj = Instantiate(bird.healParticle, bird.transform);
+              //  Destroy(healObj, 1.5f);
             }
             else if (bird.data.health < bird.data.maxHealth)
             {

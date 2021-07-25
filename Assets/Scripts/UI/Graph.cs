@@ -186,7 +186,7 @@ public class Graph : MonoBehaviour {
 	public void CheckIfCollectedSeed(Bird bird)
 	{
 		Debug.Log("SEEDS ARE BEING CHECKED IF COLLECTED");
-
+		GuiContoler.Instance.canChangeGraph = true;
 		if (graphParent.transform.childCount == 0)
 			return;
 		if (!afterBattle)
@@ -238,6 +238,10 @@ public class Graph : MonoBehaviour {
 		}
 		));
 		GuiContoler.Instance.canChangeGraph = false;
+		if (GuiContoler.Instance.graphInteractTweenID != -1)
+		{
+			LeanTween.cancel(GuiContoler.Instance.graphInteractTweenID);
+		}
 		LeanTween.delayedCall(2.1f, () => GuiContoler.Instance.canChangeGraph = true);
 	}
 		

@@ -1061,7 +1061,7 @@ public class Bird : MonoBehaviour
 				return;
 			if (change > 0)
 			{
-				if (data.health != data.maxHealth)
+				if (data.health != data.maxHealth && !data.injured )
 				{
 					GameObject healObj = Instantiate(healParticle, transform);
 					Destroy(healObj, 1.5f);
