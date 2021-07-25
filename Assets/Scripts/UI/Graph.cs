@@ -66,7 +66,9 @@ public class Graph : MonoBehaviour {
 		if (!GuiContoler.Instance.inMap && GuiContoler.Instance.winBanner.activeSelf)
 			return;
 		if (bird.data.health <= 0)
+		{
 			return;
+		}
 		if (isSmall && Var.freezeEmotions)
 			return;
 		this.afterBattle = afterBattle;

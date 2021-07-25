@@ -111,7 +111,8 @@ public class Bird : MonoBehaviour
 	public bool isInfluenced = false;
 	//[HideInInspector]
 	public int healthBoost = 0;
-	int roundHealthChange = 0;
+	[HideInInspector]
+	public int roundHealthChange = 0;
 	//[HideInInspector]
 	public int GroundRollBonus = 0;
     public bool hasShieldBonus = false;
@@ -1417,7 +1418,14 @@ public class Bird : MonoBehaviour
 			//SetRelationshipText(GuiContoler.Instance.relationshipPortrait, GuiContoler.Instance.relationshipText);			
 			try
 			{
-				Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, data.health +roundHealthChange, data.maxHealth);
+				if (data.injured)
+				{
+					Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, 0, data.maxHealth);
+                }
+                else
+				{
+					Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, data.health + roundHealthChange, data.maxHealth);
+				}
 				Helpers.Instance.setHearts(GuiContoler.Instance.BirdMentalHearts, data.mentalHealth, Var.maxMentalHealth,-1,true);
 
 			}

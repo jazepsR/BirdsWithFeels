@@ -37,6 +37,10 @@ public class ProgressGUI : MonoBehaviour {
     public Text emotionValuesText;
     public Image ConditionsBG;
     public GameObject mentalPainPopup;
+    public GameObject injuryEndScreen;
+    public Text injuryEndText;
+    public string injuryEndStringSingular = " was injured and cannot continue";
+    public string injuryEndStringPlural = " were injured and cannot continue";
     internal bool CanLevel;
     // Use this for initialization
     void Start () {
@@ -100,6 +104,54 @@ public class ProgressGUI : MonoBehaviour {
         LeanTween.textAlpha(newEmotionHeader.rectTransform, 0.0f, 2.5f);
         LeanTween.scale(newEmotionHeader.rectTransform, Vector3.one * 2.3f, 2.5f).setEase(LeanTweenType.easeInOutQuad);
     }
+
+    public void ActivateDeathSummaryScreen()
+    {
+        injuryEndScreen.SetActive(true);
+        LeanTween.delayedCall(0.5f, () => GuiContoler.Instance.canChangeGraph = true);
+        emoHeader.SetActive(false);
+        emotionValuesText.text = "";
+        List<string> injuredBirdNames = GetInjuredBirdNameList();
+        string injuryNames = string.Join(" and ", injuredBirdNames);
+        string injuryString = injuryNames + (injuredBirdNames.Count>1?injuryEndStringPlural: injuryEndStringSingular);
+        injuryEndText.text = injuryString;
+    }
+
+    private List<string> GetInjuredBirdNameList()
+    {
+        List<string> nameList = new List<string>();
+        List<Bird> injuredBirds = GetInjuredBirdList();
+        foreach (Bird bird in Var.activeBirds)
+        {
+            if (bird.data.injured)
+            {
+                nameList.Add(bird.charName);
+            }
+        }
+        return nameList;
+    }
+    private List<string> GetInjuredBirdNameList(List<Bird> injuredBirds)
+    {
+        List<string> nameList = new List<string>();
+        foreach (Bird bird in Var.activeBirds)
+        {
+            nameList.Add(bird.charName);
+        }
+        return nameList;
+    }
+    private List<Bird> GetInjuredBirdList()
+    {
+        List<Bird> injuredBirds = new List<Bird>();
+        foreach(Bird bird in Var.activeBirds)
+        {
+            if(bird.data.injured)
+            {
+                injuredBirds.Add(bird);
+            }
+        }
+        return injuredBirds;
+    }
+
     public void AllPortraitClick()
     {
         for(int i = 0; i < 3; i++)
@@ -136,6 +188,7 @@ public class ProgressGUI : MonoBehaviour {
             portrait = portraits[portraitNum];
             portraitFillObj = portraitFill[portraitNum];
         }
+        injuryEndScreen.SetActive(false);
         emoHeader.SetActive(useEmoHeader);
         portraits[portraitNum].transform.parent.gameObject.SetActive(!useEmoHeader);
         nameText.text = bird.charName;
