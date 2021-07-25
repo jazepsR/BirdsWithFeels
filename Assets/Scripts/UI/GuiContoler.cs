@@ -1546,29 +1546,32 @@ public class GuiContoler : MonoBehaviour {
     
     public void showVictoryScreen()
     {
-        foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
-        {
-            child.transform.GetChild(0).gameObject.SetActive(false);
-        }
-
-        foreach (Bird bird in FillPlayer.Instance.playerBirds)
-        {
-            
-            foreach(Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
-            {
-
-                if (bird.data.unlocked)
-                {
-                    if (bird.charName.ToLower() == child.transform.GetChild(0).name)
-                    {
-                        child.transform.GetChild(0).gameObject.SetActive(true);
-                    }
-                }
-                
-            }
-        }
-
         winBanner.SetActive(true);
+        WinScreen.Instance.SetupWinScreen(Var.availableBirds);//  new List<Bird>(FillPlayer.Instance.playerBirds));
+        /* foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
+         {
+             child.transform.gameObject.SetActive(false);
+         }
+
+         foreach (Bird bird in Var.activeBirds)
+         {
+
+             foreach(Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
+             {
+
+                 child.transform.gameObject.SetActive(true);
+                 if (bird.data.unlocked)
+                 {
+                     if (bird.charName.ToLower() == child.transform.GetChild(0).name)
+                     {
+                         child.transform.GetChild(0).GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+                     }
+                 }
+
+             }
+         }
+
+         winBanner.SetActive(true);*/
     }
 	
 	public void ShowMessage(string message)
@@ -1595,3 +1598,4 @@ public class GuiContoler : MonoBehaviour {
 
 	}
 }
+
