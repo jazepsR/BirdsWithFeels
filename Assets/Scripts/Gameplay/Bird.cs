@@ -1418,7 +1418,14 @@ public class Bird : MonoBehaviour
 			//SetRelationshipText(GuiContoler.Instance.relationshipPortrait, GuiContoler.Instance.relationshipText);			
 			try
 			{
-				Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, data.health +roundHealthChange, data.maxHealth);
+				if (data.injured)
+				{
+					Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, 0, data.maxHealth);
+                }
+                else
+				{
+					Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, data.health + roundHealthChange, data.maxHealth);
+				}
 				Helpers.Instance.setHearts(GuiContoler.Instance.BirdMentalHearts, data.mentalHealth, Var.maxMentalHealth,-1,true);
 
 			}
