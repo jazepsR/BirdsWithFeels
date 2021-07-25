@@ -80,6 +80,27 @@ public class DebugMenu : MonoBehaviour {
 		{ }
 	}
 
+	public void AddHP()
+	{
+		if (Var.selectedBird)
+		{
+			//Var.selectedBird.GetComponent<Bird>().data.injured = false;
+			//Var.selectedBird.GetComponent<Bird>().data.TurnsInjured = 0;
+			Var.selectedBird.GetComponent<Bird>().ChageHealth(1);
+			UpdateBirdStats();
+		}
+	}
+
+	public void LoseHP()
+	{
+		if (Var.selectedBird)
+		{
+			Var.selectedBird.GetComponent<Bird>().ChageHealth(-1);
+			UpdateBirdStats();
+		}
+	}
+
+
 	public void IncreaseConfidence()
 	{
 		if(Var.selectedBird)

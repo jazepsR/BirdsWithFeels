@@ -634,10 +634,17 @@ public class GuiContoler : MonoBehaviour {
         }
         if (currentGraph == 3)
         {
-            LeanTween.delayedCall(0.2f, () => CreateGraph(-1));
+            if (isActiveBirdInjured())
+            {
 
-            dangerZoneBorder.SetActive(false);
-            ProgressGUI.Instance.AllPortraitClick();
+                ProgressGUI.Instance.ActivateDeathSummaryScreen();
+            }
+            else
+            {
+                LeanTween.delayedCall(0.2f, () => CreateGraph(-1));
+                dangerZoneBorder.SetActive(false);
+                ProgressGUI.Instance.AllPortraitClick();
+            }
         }
         else
         {
@@ -651,6 +658,19 @@ public class GuiContoler : MonoBehaviour {
 
 
 
+    }
+
+
+    public bool isActiveBirdInjured()
+    {
+        foreach(Bird bird in Var.activeBirds)
+        {
+            if(bird.data.injured)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     public void ShowPrevGraph()
     {

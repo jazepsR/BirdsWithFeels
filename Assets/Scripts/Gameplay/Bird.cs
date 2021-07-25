@@ -111,7 +111,8 @@ public class Bird : MonoBehaviour
 	public bool isInfluenced = false;
 	//[HideInInspector]
 	public int healthBoost = 0;
-	int roundHealthChange = 0;
+	[HideInInspector]
+	public int roundHealthChange = 0;
 	//[HideInInspector]
 	public int GroundRollBonus = 0;
     public bool hasShieldBonus = false;
