@@ -53,7 +53,7 @@ public class GuiContoler : MonoBehaviour {
     public static int mapPos = 0;
     private int finalResult = 0;
     public GameObject graph;
-    public Animator graphAnimator;
+    public SetEmoGraphColor emoGraphColor;
     public Animator graphPageAnimator;
     public GameObject battlePanel;
     public GameObject closeReportBtn;
@@ -614,7 +614,8 @@ public class GuiContoler : MonoBehaviour {
             return;
         }
 
-        graphAnimator.SetTrigger("turn");
+
+        emoGraphColor.ToggleImageColor();
         graphPageAnimator.SetTrigger("turnright");
         AudioControler.Instance.PlaySound(AudioControler.Instance.notebookRight);
         AudioControler.Instance.ClickSound();
@@ -683,7 +684,7 @@ public class GuiContoler : MonoBehaviour {
         ProgressGUI.Instance.PortraitClick(Var.activeBirds[currentGraph]);
         AudioControler.Instance.PlaySound(AudioControler.Instance.notebookLeft);
         AudioControler.Instance.ClickSound();
-        graphAnimator.SetTrigger("turn");
+        emoGraphColor.ToggleImageColor();
         graphPageAnimator.SetTrigger("turnleft");
     }
 
