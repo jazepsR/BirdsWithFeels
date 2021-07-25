@@ -128,7 +128,7 @@ public class GuiContoler : MonoBehaviour {
     [HideInInspector]
     public TimedEventControl control;
     [SerializeField] public TimedEventControl[] timedEventControllers;
-
+    [HideInInspector] public int graphInteractTweenID = -1;
     void Awake()
     {
         //if (!Var.StartedNormally)
@@ -831,7 +831,7 @@ public class GuiContoler : MonoBehaviour {
     public void CreateGraph(object o, bool afterBattle = true)
     {
         GraphActive = true;
-        canChangeGraph = true;
+        //canChangeGraph = true;
         GraphBlocker.SetActive(true);
         Helpers.Instance.HideTooltip();
         minimap.SetActive(false);
@@ -845,6 +845,11 @@ public class GuiContoler : MonoBehaviour {
 
         Graph.Instance.portraits = new List<GameObject>();
         List<Bird> BirdsToGraph;
+        if(graphInteractTweenID!= -1)
+        {
+            LeanTween.cancel(graphInteractTweenID);
+        }
+        //graphInteractTweenID= LeanTween.delayedCall(2f, () => canChangeGraph = true).id;
         if (birdNum == -1)
         {
             BirdsToGraph = Var.activeBirds;
