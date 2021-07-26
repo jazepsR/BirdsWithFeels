@@ -130,7 +130,7 @@ public class Ending : MonoBehaviour
             }
             if(showedFinalEvent && !EventController.Instance.eventObject.activeSelf)
             {
-                SceneManager.LoadScene("endCutscene");
+                SceneManager.LoadScene("Credits");
             }
         }
     }

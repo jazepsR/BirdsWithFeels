@@ -97,9 +97,6 @@ public class EventController : MonoBehaviour
         {
             CreateEvent(testEvent);
         }
-
-
-
         nextEvent = null;
     }
 
@@ -184,6 +181,7 @@ public class EventController : MonoBehaviour
                 nextEvent.canShowMultipleTimes = true;
                 currentEvent = null;
                 CreateEvent(nextEvent);
+                nextEvent = null;
                 Debug.Log("playing next event");
                 return;
             }
@@ -599,7 +597,6 @@ public class EventController : MonoBehaviour
                 SetupChoice(choiceObj, i);
 
                 ChoicesInfluenceEmotions = DoesOptionIfluenceEmotions(currentEvent.options[i]);
-
                 i++;
             }
 
@@ -607,8 +604,11 @@ public class EventController : MonoBehaviour
             {
                 myEventGUIAnimator.SetBool("showingEmoGraph", true);
             }
-
             activeChoices = true;
+            if (currentBird)
+            {
+                currentBird.showText();
+            }
         }
         else
         {
