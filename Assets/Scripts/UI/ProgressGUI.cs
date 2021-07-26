@@ -63,7 +63,7 @@ public class ProgressGUI : MonoBehaviour {
         }
         if (prevGraphButton)
         {
-            prevGraphButton.interactable = GuiContoler.Instance.canChangeGraph;
+            prevGraphButton.interactable = GuiContoler.Instance.canChangeGraph && !Var.freezeEmotions;
         }
     }
    
