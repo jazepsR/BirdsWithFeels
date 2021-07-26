@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 //using System.Linq;
 using UnityEngine.SceneManagement;
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+using UnityEngine.Analytics;
+#endif
 
 public class GuiContoler : MonoBehaviour {
     public static GuiContoler Instance { get; private set; }
@@ -1539,6 +1542,9 @@ public class GuiContoler : MonoBehaviour {
             {
                 Var.KimUnlocked = false;
                 Var.SophieUnlocked = false;
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+                Analytics.CustomEvent("tutorialCompleted");
+#endif
             }
             Var.isTutorial = false;
             Var.tutorialCompleted = true;
