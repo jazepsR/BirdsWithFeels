@@ -201,7 +201,7 @@ public class ProgressGUI : MonoBehaviour {
         emoHeader.SetActive(useEmoHeader);
         portraits[portraitNum].transform.parent.gameObject.SetActive(!useEmoHeader);
         nameText.text = bird.charName;
-        emotionValuesText.text = Helpers.Instance.GetStatInfo(bird.data.confidence, bird.data.friendliness).Replace('\n', ' ');
+        emotionValuesText.text = "";// Helpers.Instance.GetStatInfo(bird.data.confidence, bird.data.friendliness).Replace('\n', ' ');
         Image[] activeHearts;
         switch (portraitNum)
         {
