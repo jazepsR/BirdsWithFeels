@@ -575,7 +575,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             MapTutorial tut = FindObjectOfType<MapTutorial>();
             tut.tutorialHighlight.SetTrigger("off");
-            DialogueControl.Instance.CreateParticularDialog(tut.mapTutorialDialog2);
+            //DialogueControl.Instance.CreateParticularDialog(tut.mapTutorialDialog2);
             Var.gameSettings.shownMapTutorial = true;
         }
 

@@ -43,7 +43,7 @@ public class MapTutorial : MonoBehaviour {
     }
     public void ShowDialog2()
 	{
-		DialogueControl.Instance.CreateParticularDialog(mapTutorialDialog2);
+		//DialogueControl.Instance.CreateParticularDialog(mapTutorialDialog2);
 		Var.gameSettings.shownMapTutorial = true;
 	}
 }
