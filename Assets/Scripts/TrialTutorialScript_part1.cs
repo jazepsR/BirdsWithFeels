@@ -9,6 +9,8 @@ public class TrialTutorialScript_part1 : MonoBehaviour
     public Button[] levelsToDisable;
     public Button LevelToOpenInTutorial;
     Animator anime;
+    public MapControler mapctrl; //used for hiding the selection menu 
+    public Animator HighlightAnimator;
 
     public Button continueButton;
 
@@ -28,6 +30,10 @@ public class TrialTutorialScript_part1 : MonoBehaviour
         setLevelsEnabled(false);
         LevelToOpenInTutorial.interactable = true;
         continueButton.gameObject.SetActive(false);
+        if (HighlightAnimator)
+        {
+            HighlightAnimator.gameObject.SetActive(true);
+        }
 
     }
 
@@ -56,6 +62,10 @@ public class TrialTutorialScript_part1 : MonoBehaviour
             anime.SetTrigger("menuOpen");
         }
         continueButton.gameObject.SetActive(true);
+        if (HighlightAnimator)
+        {
+            HighlightAnimator.gameObject.SetActive(false);
+        }
     }
 
     public void hideTutorialPopup()
@@ -63,4 +73,14 @@ public class TrialTutorialScript_part1 : MonoBehaviour
         enableLevels();
         this.gameObject.SetActive(false);
     }
+
+    public void CloseMapSelectionMenu()
+    {
+        if (mapctrl)
+        {
+            mapctrl.HideSelectionMenu();
+        }
+    }
+
+
 }
