@@ -254,10 +254,11 @@ public class MapControler : MonoBehaviour {
             {
                 if (bird.data.unlocked)
                 {
-                    if (bird.data.health < bird.data.maxHealth || bird.data.injured)
+                    if (bird.data.health < bird.data.maxHealth || bird.data.injured || bird.data.mentalHealth < Var.maxMentalHealth)
                     {
-                        restButton.SetActive(true);
-                        restButtonBeam.SetActive(true);
+						restButton.GetComponent<Button>().interactable = true;
+						restButton.GetComponent<ShowTooltip>().tooltipText = "A week will pass. All your birds will heal one health, and your injured birds will be closer to recovery";
+
                     }
 
                     else
@@ -268,9 +269,9 @@ public class MapControler : MonoBehaviour {
                     if (birdsAtMaxHealth == count)
                     {
                         birdsAtMaxHealth = 0;
-                        restButton.SetActive(false);
-                        restButtonBeam.SetActive(false);
-                        Helpers.Instance.HideTooltip();
+						restButton.GetComponent<Button>().interactable = false;
+						restButton.GetComponent<ShowTooltip>().tooltipText = "All birds at full mental and physical health! You can continue the adventure, no need to rest";
+						 Helpers.Instance.HideTooltip();
                     }
                 }
 
@@ -302,16 +303,18 @@ public class MapControler : MonoBehaviour {
             if (bird.data.injured)
             {
                 bird.DecreaseTurnsInjured();
-              //  GameObject healObj = Instantiate(bird.healParticle, bird.transform);
-              //  Destroy(healObj, 1.5f);
             }
             else if (bird.data.health < bird.data.maxHealth)
             {
                 bird.data.health++;
                 GameObject healObj = Instantiate(bird.healParticle, bird.transform);
                 Destroy(healObj, 1.5f);
-
             }
+
+			if(bird.data.mentalHealth < Var.maxMentalHealth)
+            {
+				bird.data.mentalHealth = Mathf.Min(Var.maxMentalHealth, bird.data.mentalHealth + 1);
+			}
 		}
 
         canRest();

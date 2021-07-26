@@ -57,8 +57,14 @@ public class ProgressGUI : MonoBehaviour {
     
     // Update is called once per frame
     void Update () {
-        nextGraphButton.interactable = GuiContoler.Instance.canChangeGraph;
-        prevGraphButton.interactable = GuiContoler.Instance.canChangeGraph;
+        if (nextGraphButton)
+        {
+            nextGraphButton.interactable = GuiContoler.Instance.canChangeGraph;
+        }
+        if (prevGraphButton)
+        {
+            prevGraphButton.interactable = GuiContoler.Instance.canChangeGraph;
+        }
     }
    
     void UpdateLevelAreas(Bird bird, bool isFinal =false)
