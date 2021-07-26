@@ -14,8 +14,14 @@ public class battleAnim :MonoBehaviour {
 		Instance = this;
 		fightCloud = Resources.Load<GameObject>("prefabs/fightcloud");
 	}
-
-	public void AddData(Bird player, Bird enemy, int result)
+    private void Update()
+    {
+        if(Var.cheatsEnabled && Input.GetKeyDown(KeyCode.P))
+        {
+            DoQuickTransition();
+        }
+    }
+    public void AddData(Bird player, Bird enemy, int result)
 	{
 		battles.Add(new battleData(player, enemy, result));    
 	}
@@ -105,12 +111,11 @@ public class battleAnim :MonoBehaviour {
                     //Debug.Log("canplayBossTransition: " + GuiContoler.Instance.canplayBossTransition);
                     if (GuiContoler.Instance.canplayBossTransition && (GuiContoler.Instance.nextNextMapArea != Var.Em.finish) && !Var.isEnding)
                     {
-                        GuiContoler.Instance.bossTransition.GetComponent<Animator>().SetTrigger("TriggerTransition");
-                        //GuiContoler.Instance.canplayBossTransition = false;
-                        yield return new WaitForSeconds(.5f);
+                        DoQuickTransition();
                     }
-                    GuiContoler.Instance.CloseGraph();
-				}
+                    yield return new WaitForSeconds(0.5f);
+
+                }
 				else
 				{
 				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);				
@@ -149,6 +154,14 @@ public class battleAnim :MonoBehaviour {
             }
         }
 	}
+
+    private void DoQuickTransition()
+    {      
+        GuiContoler.Instance.bossTransition.GetComponent<Animator>().SetTrigger("TriggerTransition");
+        //GuiContoler.Instance.canplayBossTransition = false;
+        LeanTween.delayedCall(0.5f,()=>
+        GuiContoler.Instance.CloseGraph());        
+    }
 
 	IEnumerator ShowResult(battleData battle,float waitTime)
 	{
