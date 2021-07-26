@@ -28,6 +28,7 @@ public static class Var {
 	public static GameObject dustCloud = null;
 	public static int MoveGraphBy = 1315;
 	public static int maxMentalHealth = 3;
+	public static int DangerZoneStart = 14;
 	public static int lvl1 = 5;
 	public static bool fled = false;
 	public  static int lvl2 = 10;

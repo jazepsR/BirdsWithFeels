@@ -36,7 +36,7 @@ public class GraphPortraitScript : MonoBehaviour {
 			firstPos = new Vector3(transform.position.x, transform.position.y, 0);
 			lr.SetPosition(0, firstPos);
 			lr.SetPosition(1, firstPos);
-			if (Mathf.Abs(transform.localPosition.x / factor) > 12 || Mathf.Abs(transform.localPosition.y / factor) > 12)
+			if (Mathf.Abs(transform.localPosition.x / factor) > Var.DangerZoneStart || Mathf.Abs(transform.localPosition.y / factor) > Var.DangerZoneStart)
 				inDangerZone = true;
 			else
 				inDangerZone = false;
@@ -58,7 +58,7 @@ public class GraphPortraitScript : MonoBehaviour {
 	void Update () {
 		if (parent != null && parent.dangerZoneHighlight != null)
 			parent.dangerZoneHighlight.transform.position = transform.position;
-		if ((Mathf.Abs(transform.localPosition.x / factor) >= 12 || Mathf.Abs(transform.localPosition.y / factor) >= 12) && !inDangerZone)
+		if ((Mathf.Abs(transform.localPosition.x / factor) >= Var.DangerZoneStart || Mathf.Abs(transform.localPosition.y / factor) >= Var.DangerZoneStart) && !inDangerZone)
 		{
 			inDangerZone = true;
 			if (GuiContoler.Instance.dangerFollowHighlight.gameObject.activeSelf)
@@ -70,7 +70,7 @@ public class GraphPortraitScript : MonoBehaviour {
                 GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
             }
 		}
-		if ((Mathf.Abs(transform.localPosition.x / factor) < 12 && Mathf.Abs(transform.localPosition.y / factor) < 12) && inDangerZone)
+		if ((Mathf.Abs(transform.localPosition.x / factor) < Var.DangerZoneStart && Mathf.Abs(transform.localPosition.y / factor) < Var.DangerZoneStart) && inDangerZone)
 		{
 			inDangerZone = false;
 			if (GuiContoler.Instance.dangerFollowHighlight.gameObject.activeSelf)
@@ -95,7 +95,7 @@ public class GraphPortraitScript : MonoBehaviour {
 		this.targetEmotion = targetEmotion;
 		ShowTooltip info =gameObject.AddComponent<ShowTooltip>();
 		finish = target * factor;
-		if (Mathf.Abs(transform.localPosition.x / factor) > 12 || Mathf.Abs(transform.localPosition.y / factor) > 12)
+		if (Mathf.Abs(transform.localPosition.x / factor) > Var.DangerZoneStart || Mathf.Abs(transform.localPosition.y / factor) > Var.DangerZoneStart)
 		{
 			info.tooltipText = "This bird is outside their <b>comfort zone</b>! Get them back in before they lose all mental HP and <b>take damage</b>!";
 		}

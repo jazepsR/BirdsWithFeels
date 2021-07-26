@@ -1220,7 +1220,7 @@ public class Bird : MonoBehaviour
 		}
 		data.health = Mathf.Min(data.health + healthBoost + roundHealthChange, data.maxHealth);
 		//Mental health
-		if ((Mathf.Abs(data.confidence) >= 12 || Mathf.Abs(data.friendliness) >= 12) && (Mathf.Abs(prevConf) >= 12 || Mathf.Abs(prevFriend) >= 12) && !Var.freezeEmotions)
+		if ((Mathf.Abs(data.confidence) >= Var.DangerZoneStart || Mathf.Abs(data.friendliness) >= Var.DangerZoneStart) && (Mathf.Abs(prevConf) >= Var.DangerZoneStart || Mathf.Abs(prevFriend) >= Var.DangerZoneStart) && !Var.freezeEmotions)
 		{//In danger zone
 			data.mentalHealth = Math.Max(data.mentalHealth - 1, 0);
 			if (data.mentalHealth == 0)
@@ -1237,7 +1237,7 @@ public class Bird : MonoBehaviour
 			}
 
 		}
-		else if(Mathf.Abs(data.confidence)< 12 && Mathf.Abs(data.friendliness) < 12 && (Mathf.Abs(prevConf) < 12 && Mathf.Abs(prevFriend) <12))
+		else if(Mathf.Abs(data.confidence)< Var.DangerZoneStart && Mathf.Abs(data.friendliness) < Var.DangerZoneStart && (Mathf.Abs(prevConf) < Var.DangerZoneStart && Mathf.Abs(prevFriend) < Var.DangerZoneStart))
 		{//In comfort zone
 			data.mentalHealth = Mathf.Min(Var.maxMentalHealth, data.mentalHealth + 1);
 		}	 

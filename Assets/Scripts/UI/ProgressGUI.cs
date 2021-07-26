@@ -325,7 +325,7 @@ public class ProgressGUI : MonoBehaviour {
                         anim.SetBool("active", false);
                     }
                 }
-                if (i == MHP - 1 && (Mathf.Abs(bird.data.confidence) >= 12 || Mathf.Abs(bird.data.friendliness) >= 12))
+                if (i == MHP - 1 && (Mathf.Abs(bird.data.confidence) >= Var.DangerZoneStart || Mathf.Abs(bird.data.friendliness) >= Var.DangerZoneStart))
                     anim.SetBool("indanger", true);
 
             }
