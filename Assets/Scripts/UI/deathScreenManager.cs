@@ -13,6 +13,7 @@ public class deathScreenManager : MonoBehaviour {
     public void ShowDeathMenu(Bird bird)
     {        
         DeathMenu.SetActive(true);
+        GuiContoler.Instance.canChangeGraph = true;
         heading.text = bird.charName + " is injured!";
         description.text = Helpers.Instance.GetDeathText(bird.charName);
         print("showed death menu!");

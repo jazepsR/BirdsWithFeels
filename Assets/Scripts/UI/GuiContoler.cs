@@ -637,7 +637,6 @@ public class GuiContoler : MonoBehaviour {
         {
             if (isActiveBirdInjured())
             {
-
                 ProgressGUI.Instance.ActivateDeathSummaryScreen();
             }
             else
@@ -1086,11 +1085,7 @@ public class GuiContoler : MonoBehaviour {
 		}
 
 	}
-
-
-
-
-    
+        
 
 	public void GraphButton()
 	{
@@ -1111,27 +1106,36 @@ public class GuiContoler : MonoBehaviour {
 	{
 		speechBubbleObj.SetActive(false);       
 	}
-	public void InitiateGraph(Bird bird,bool afterBattle = true)
+	public void InitiateGraph(Bird bird= null,bool afterBattle = true)
 	{
 		if (!canChangeGraph)
 			return;
 		canChangeGraph = false;
 		if(inMap)
 			minimap.SetActive(false);
-        int index = -1;
-		for(int i= 0; i < Var.activeBirds.Count; i++)
-		{
-			if(bird.charName == Var.activeBirds[i].charName)
-			{
-				index = i;
-				break;
-			}
-		}
-		//LeanTween.delayedCall(0.7f, () =>
-		// {
-		Debug.Log("doing graph! " + bird.charName + " index: " + index);
-		CreateGraph(index,afterBattle);
-		ProgressGUI.Instance.PortraitClick(bird);
+
+        if (bird)
+        {
+            int index = -1;
+            for (int i = 0; i < Var.activeBirds.Count; i++)
+            {
+                if (bird.charName == Var.activeBirds[i].charName)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            //LeanTween.delayedCall(0.7f, () =>
+            // {
+            //Debug.Log("doing graph! " + bird.charName + " index: " + index);
+            CreateGraph(index, afterBattle);
+            ProgressGUI.Instance.PortraitClick(bird);
+        }
+        else
+        {
+            currentGraph = 3;
+            CreateBattleReport();
+        }
 	   // });
 		ProgressGUI.Instance.skillArea.SetActive(false);
 		//LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
@@ -1271,8 +1275,7 @@ public class GuiContoler : MonoBehaviour {
 		{
 
 			if (!bird.isEnemy && !bird.data.injured)
-			{
-				
+			{				
 				players.Add(bird);
 			}
 		}
