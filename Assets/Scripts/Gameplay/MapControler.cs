@@ -314,6 +314,11 @@ public class MapControler : MonoBehaviour {
 			if(bird.data.mentalHealth < Var.maxMentalHealth)
             {
 				bird.data.mentalHealth = Mathf.Min(Var.maxMentalHealth, bird.data.mentalHealth + 1);
+				if (bird.MHPParticle)
+				{
+					GameObject healObj = Instantiate(bird.MHPParticle, bird.transform);
+					Destroy(healObj, 1.5f);
+				}
 			}
 		}
 
