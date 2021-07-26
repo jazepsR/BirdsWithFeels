@@ -96,12 +96,14 @@ public class Settings
    public bool shownBattlePlanningTutorial = true;
    public bool shownLevelTutorial = true;
    public bool shownMapTutorial = true;
-   public Settings(bool tutorialsCompleted)
+	public bool shownMapTutorial2 = true;
+	public Settings(bool tutorialsCompleted)
    {
         shownFirstLevelUp = tutorialsCompleted;
         shownBattlePlanningTutorial = tutorialsCompleted;
         shownLevelTutorial = tutorialsCompleted;
 		shownMapTutorial = tutorialsCompleted;
+		shownMapTutorial2 = tutorialsCompleted;
 }
 }
 

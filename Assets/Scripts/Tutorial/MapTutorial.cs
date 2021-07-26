@@ -11,7 +11,9 @@ public class MapTutorial : MonoBehaviour {
 
     private bool shouldShowMapTutPopup = false;
     public GameObject mapTutPopup;
+    public GameObject mapTutPopup2;
     public static MapTutorial instance;
+    private int secondMapTutID = 11;
     // Use this for initialization
 
     private void Awake()
@@ -31,6 +33,13 @@ public class MapTutorial : MonoBehaviour {
 			tutorialHighlight.gameObject.SetActive(false);
 
 		}
+        Debug.LogError(Var.currentStageID);
+        if (!Var.gameSettings.shownMapTutorial2 && Var.currentStageID == secondMapTutID)
+        {
+            mapTutPopup2.SetActive(true);
+            Var.gameSettings.shownMapTutorial2 = true;
+            SaveLoad.Save(false);
+        }
 	}
 
     public void Update()
@@ -40,6 +49,8 @@ public class MapTutorial : MonoBehaviour {
             shouldShowMapTutPopup = false;
             mapTutPopup.SetActive(true);
         }
+
+        
     }
     public void ShowDialog2()
 	{
