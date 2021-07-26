@@ -123,6 +123,7 @@ public class Bird : MonoBehaviour
 	public int confLoseOnRest = 2;
 	public int groundMultiplier = 1;
 	public GameObject healParticle;
+	public GameObject MHPParticle;
 	[HideInInspector, NonSerialized]
 	public Levels levelControler;
 	[HideInInspector]
