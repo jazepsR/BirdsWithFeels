@@ -312,10 +312,10 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		}
 		
 	}
-	public void CenterMapNode()
+	public void CenterMapNode(bool focusOnNext = true)
 	{
 		Vector2 dist = Camera.main.transform.position - transform.position;
-		if (targets.Length > 0)
+		if (targets.Length> 0 && focusOnNext)
 		{
 			dist = Camera.main.transform.position - targets[0].transform.position;
 		}
