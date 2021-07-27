@@ -64,7 +64,7 @@ public class MapControler : MonoBehaviour {
 		{
 			if (icon.ID == Var.currentStageID)
 			{
-				icon.CenterMapNode();
+				icon.CenterMapNode(false);
 				return;
 			}
 		}

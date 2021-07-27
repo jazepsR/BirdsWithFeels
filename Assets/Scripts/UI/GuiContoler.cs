@@ -644,9 +644,12 @@ public class GuiContoler : MonoBehaviour {
             }
             else
             {
-                LeanTween.delayedCall(0.2f, () => CreateGraph(-1));
-                dangerZoneBorder.SetActive(false);
-                ProgressGUI.Instance.AllPortraitClick();
+
+                CloseGraph();
+                return;
+                /* LeanTween.delayedCall(0.2f, () => CreateGraph(-1));
+                 dangerZoneBorder.SetActive(false);
+                 ProgressGUI.Instance.AllPortraitClick();*/
             }
         }
         else

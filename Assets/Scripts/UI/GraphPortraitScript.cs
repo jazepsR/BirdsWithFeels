@@ -18,6 +18,8 @@ public class GraphPortraitScript : MonoBehaviour {
 	float lastTickTime = 0;
 	bool shouldHaveSound = true;
 	Bird bird;
+	private float movePointTime = 0.55f;
+	private float waitPointTime = 0.3f;
 	void Starter () {
 		try
 		{
@@ -45,7 +47,7 @@ public class GraphPortraitScript : MonoBehaviour {
             {
                 GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
             }
-			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f).setOnComplete(()=>
+			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, movePointTime).setOnComplete(()=>
 			Graph.Instance.CheckIfCollectedSeed(bird));
 		}
 		catch
@@ -120,7 +122,7 @@ public class GraphPortraitScript : MonoBehaviour {
 		try
 		{
 			targetEmotion = Var.Em.finish;
-			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f).setOnComplete(() =>
+			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, movePointTime).setOnComplete(() =>
 			Graph.Instance.CheckIfCollectedSeed(bird)); ;
 		}
 		catch { }
@@ -142,8 +144,8 @@ public class GraphPortraitScript : MonoBehaviour {
 			activeText.rectTransform.localScale = Vector3.one;
 			//heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
 			//LeanTween.scale(activeText.gameObject.GetComponent<RectTransform>(), Vector3.one * 1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownText);
-			LeanTween.color(transform.Find("bird_color").GetComponent<Image>().rectTransform, Helpers.Instance.GetEmotionColor(targetEmotion), 0.7f).setEaseInBack();                                
-			LeanTween.delayedCall(0.7f,ResumeMovement);
+			LeanTween.color(transform.Find("bird_color").GetComponent<Image>().rectTransform, Helpers.Instance.GetEmotionColor(targetEmotion), waitPointTime).setEaseInBack();                                
+			LeanTween.delayedCall(waitPointTime, ResumeMovement);
 		}else
 		{
 			transform.localPosition = new Vector3(pos.x, pos.y, 0);
