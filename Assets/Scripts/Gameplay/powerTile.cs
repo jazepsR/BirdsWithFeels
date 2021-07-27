@@ -115,7 +115,7 @@ public class powerTile : MonoBehaviour {
                // AudioControler.Instance.powerTileShield.Play();
                 break;
             case Var.PowerUps.emotion:
-				info = "Gain one extra "+Helpers.Instance.GetHexColor(emotion) + emotion.ToString()+"</color>";
+				info = "Gain three extra "+Helpers.Instance.GetHexColor(emotion) + emotion.ToString()+"</color>";
 				/*if(emotion == Var.Em.Solitary || emotion == Var.Em.Cautious)
 					//AudioControler.Instance.powerTileNegative.Play();
 				else
@@ -150,16 +150,16 @@ public class powerTile : MonoBehaviour {
 			switch (emotion)
 			{
 				case Var.Em.Confident:
-					bird.groundConfBoos = 1 * bird.groundMultiplier;
+					bird.groundConfBoos = Var.emPowerTileStrength * bird.groundMultiplier;
 					break;
 				case Var.Em.Social:
-					bird.groundFriendBoos= 1 * bird.groundMultiplier;
+					bird.groundFriendBoos= Var.emPowerTileStrength * bird.groundMultiplier;
 					break;
 				case Var.Em.Solitary:
-					bird.groundFriendBoos = -1 * bird.groundMultiplier;
+					bird.groundFriendBoos = -Var.emPowerTileStrength * bird.groundMultiplier;
 					break;
 				case Var.Em.Cautious:
-					bird.groundConfBoos = -1 * bird.groundMultiplier;
+					bird.groundConfBoos = -Var.emPowerTileStrength * bird.groundMultiplier;
 					break;
 			}
 
