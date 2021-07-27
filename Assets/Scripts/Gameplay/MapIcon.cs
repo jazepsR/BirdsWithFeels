@@ -119,7 +119,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 		if (isTrial)
 		{
-			sr.sprite = MapControler.Instance.trialSprite;
+			//sr.sprite = MapControler.Instance.trialSprite;
+			sr.sprite = Helpers.Instance.GetEmotionIcon(type, true);
 			sr.color = Helpers.Instance.GetEmotionColor(type);
 			if(fogObject)
 			{
@@ -574,9 +575,9 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (!Var.gameSettings.shownMapTutorial)
         {
             MapTutorial tut = FindObjectOfType<MapTutorial>();
-            tut.tutorialHighlight.SetTrigger("off");
+            tut.tutorialHighlight.SetTrigger("off"); 
             //DialogueControl.Instance.CreateParticularDialog(tut.mapTutorialDialog2);
-            Var.gameSettings.shownMapTutorial = true;
+            Var.gameSettings.shownMapTutorial = true; 
         }
 
             SetupPieGraph();
