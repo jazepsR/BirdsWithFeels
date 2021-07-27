@@ -8,9 +8,10 @@ public class battleAnim :MonoBehaviour {
     public AnimationCurve vultureEnterCloudCurve;
     List<battleData> battles = new List<battleData>();
 	float enemySpeed = 5f;
-    float enemySwitchToTalkOffset = -0.3f;
+    float enemySwitchToTalkOffset = 0.1f;
     float enemyTalkBeforeSound = 1f;
     float enemyTalkAfterSound = 1f;
+    float windUpDelay = 0.34f;
     GameObject fightCloud;
 
 
@@ -37,12 +38,14 @@ public class battleAnim :MonoBehaviour {
 	}
 
 
-	void StartBattle(Bird player,Bird enemy)
+	IEnumerator StartBattle(Bird player,Bird enemy)
 	{
-		enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
-		enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
+        enemy.GetComponentInChildren<Animator>().SetTrigger("walkprepare");
+        enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
 		enemy.GetComponentInChildren<Animator>().SetBool("win", false);
-		AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
+        yield return new WaitForSeconds(windUpDelay);
+        enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
+        AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
         float enemyMoveTime = Vector2.Distance(enemy.transform.position, player.transform.position + Helpers.Instance.dirToVector(enemy.position) * 2) / enemySpeed;
         LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position)*2, enemyMoveTime).setEase(vultureRunCurve).setOnComplete(()=>
 			enemy.GetComponentInChildren<Animator>().SetBool("walk", false)
@@ -58,7 +61,7 @@ public class battleAnim :MonoBehaviour {
         foreach (battleData battle in battles)
 		{
 
-			StartBattle(battle.player,battle.enemy);
+			StartCoroutine(StartBattle(battle.player,battle.enemy));
 			yield return StartCoroutine(ShowResult(battle, waitTime+1f));
             
             /*
@@ -186,6 +189,8 @@ public class battleAnim :MonoBehaviour {
         float enemyMoveTime = Vector2.Distance(battle.enemy.transform.position, battle.player.transform.position) / enemySpeed;
         if (battle.player.data.injured)
         {
+            battle.enemy.GetComponentInChildren<Animator>().SetTrigger("walkprepare");
+            yield return new WaitForSeconds(windUpDelay);
             battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
             AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
             LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemyMoveTime).setEase(vultureRunCurve);
@@ -231,6 +236,8 @@ public class battleAnim :MonoBehaviour {
                 battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
                 Destroy(fightCloudObj, waitTime - enemyMoveTime);
                 yield return new WaitForSeconds(waitTime - enemyMoveTime - 2.3f);
+                battle.enemy.GetComponentInChildren<Animator>().SetTrigger("walkprepare");
+                yield return new WaitForSeconds(windUpDelay);
                 battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
                 LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemyMoveTime).setEase(LeanTweenType.easeOutQuad);
             }

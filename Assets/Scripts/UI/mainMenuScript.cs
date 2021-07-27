@@ -123,7 +123,6 @@ public class mainMenuScript : MonoBehaviour {
         Var.isTutorial = true;
         AudioControler.Instance.PlaySound(AudioControler.Instance.mainMenuFreeSaveBtnClick);
         cutsceneScript.StartCutscene();
-
         Steamworks.SteamUserStats.SetStat("start_game", 1);
         bool tutorialCompleted;
         Steamworks.SteamUserStats.GetAchievement("Start_game", out tutorialCompleted);
