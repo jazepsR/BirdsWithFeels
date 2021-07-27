@@ -152,6 +152,10 @@ public class GuiMap : MonoBehaviour {
 			//LeanTween.delayedCall(0.3f, CreateColor);
 			cupObj.transform.localPosition = new Vector3(dist * count * 150, 0, 0);
 			cupObj.transform.localScale = Vector3.one * 25;
+        }
+        else
+        {
+			cupObj.GetComponent<SpriteRenderer>().sortingOrder = -1;
 		}
 	}
 	public void Clear()
@@ -167,7 +171,10 @@ public class GuiMap : MonoBehaviour {
 		GameObject point = Instantiate(mapIcon, new Vector3(start.position.x + dist * count, start.position.y, start.position.z), Quaternion.identity,nodes);
 		point.GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetEmotionIcon(emotion,true);
 		if (!inMap)
+		{
 			point.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetHexColor(emotion) + emotion.ToString() + "</color>";
+			point.GetComponent<SpriteRenderer>().sortingOrder = -1;
+		}
 		nodeList.Add(point.GetComponent<SpriteRenderer>());
 		//point.transform.parent = nodes;
 		//point.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class battleAnim :MonoBehaviour {
 	public static battleAnim Instance { get; private set; }
 	List<battleData> battles = new List<battleData>();
-	float enemySpeed = 0.85f;
+	float enemySpeed = 5f;
 	GameObject fightCloud;
 
 
@@ -38,7 +38,8 @@ public class battleAnim :MonoBehaviour {
 		enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
 		enemy.GetComponentInChildren<Animator>().SetBool("win", false);
 		AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
-        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position)*2, enemySpeed).setEase(LeanTweenType.easeInBack).setOnComplete(()=>
+        float enemyMoveTime = Vector2.Distance(enemy.transform.position, player.transform.position + Helpers.Instance.dirToVector(enemy.position) * 2) / enemySpeed;
+        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position)*2, enemyMoveTime).setEase(LeanTweenType.easeInBack).setOnComplete(()=>
 			enemy.GetComponentInChildren<Animator>().SetBool("walk", false)
 		); 
 	}
@@ -53,11 +54,13 @@ public class battleAnim :MonoBehaviour {
 		{
 
 			StartBattle(battle.player,battle.enemy);
-			StartCoroutine(ShowResult(battle, waitTime+1f));
+			yield return StartCoroutine(ShowResult(battle, waitTime+1f));
+            
+            /*
 			if (battle.result != 1)
 				yield return new WaitForSeconds(loseWaitTime + 1);
 			else
-				yield return new WaitForSeconds(waitTime + 1f);
+				yield return new WaitForSeconds(waitTime + 1f);*/
 		}
 		battles = new List<battleData>();
 		bool canReroll = false;
@@ -171,19 +174,20 @@ public class battleAnim :MonoBehaviour {
     }
 
 	IEnumerator ShowResult(battleData battle,float waitTime)
-	{
+    {
+        float enemyMoveTime = Vector2.Distance(battle.enemy.transform.position, battle.player.transform.position) / enemySpeed;
         if (battle.player.data.injured)
         {
             battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
             AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
-            LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
+            LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemyMoveTime).setEase(LeanTweenType.easeOutQuad);
             Debug.Log("I moved");
         }
         else
         {
             AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
             battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
-            yield return new WaitForSeconds(enemySpeed);
+            yield return new WaitForSeconds(enemyMoveTime);
             if (battle.enemy.position == Bird.dir.top)
                 battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_up");
             else
@@ -215,8 +219,8 @@ public class battleAnim :MonoBehaviour {
                     battle.player.GetComponentInChildren<Animator>().SetTrigger("stopTalking");
                 }
                 battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
-                Destroy(fightCloudObj, waitTime - enemySpeed);
-                yield return new WaitForSeconds(waitTime - enemySpeed - 2.3f);
+                Destroy(fightCloudObj, waitTime - enemyMoveTime);
+                yield return new WaitForSeconds(waitTime - enemyMoveTime - 2.3f);
 
 
 
@@ -237,7 +241,7 @@ public class battleAnim :MonoBehaviour {
                     LeanTween.delayedCall(1.5f,()=>battle.player.GetComponentInChildren<Animator>().SetBool("rest", false));
                 }*/
                 battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
-                LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
+                LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemyMoveTime).setEase(LeanTweenType.easeOutQuad);
             }
             else
             {
