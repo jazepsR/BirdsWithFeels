@@ -19,6 +19,7 @@ public class Graph : MonoBehaviour {
 	public Image dangerZoneHighlight;
 	public Image lockImage;
 	bool afterBattle = false;
+	private float seedMoveTime = 0.4f;
 	// Use this for initialization
 	void Start()
 	{
@@ -230,7 +231,7 @@ public class Graph : MonoBehaviour {
 		LeanTween.delayedCall(1.7f, () => levelBar.AddPoints(bird));
 		obj.GetComponent<Image>().color = Color.yellow;
 		bird.data.recievedSeeds.Add(bit.name);
-		LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, 0.7f).setEaseOutBack().setOnComplete(() =>
+		LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, seedMoveTime).setEaseOutBack().setOnComplete(() =>
 		{
 			LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
 			setEaseOutBack().setOnComplete(() => Destroy(obj));

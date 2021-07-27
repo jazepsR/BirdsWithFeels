@@ -117,9 +117,9 @@ public class battleAnim :MonoBehaviour {
                     //SHOW TARNSITION AND CREATE NEXT BATTLE
 
                     //Debug.Log("canplayBossTransition: " + GuiContoler.Instance.canplayBossTransition);
-                    if (GuiContoler.Instance.canplayBossTransition && (GuiContoler.Instance.nextNextMapArea != Var.Em.finish) && !Var.isEnding)
+                    if (GuiContoler.Instance.canplayBossTransition && !Var.isEnding)
                     {
-                        if (GuiContoler.Instance.isActiveBirdInjured())
+                        if (GuiContoler.Instance.isActiveBirdInjured() && (GuiContoler.Instance.nextNextMapArea != Var.Em.finish))
                         {
                             GuiContoler.Instance.InitiateGraph();
                             ProgressGUI.Instance.ActivateDeathSummaryScreen();
@@ -172,8 +172,11 @@ public class battleAnim :MonoBehaviour {
 	}
 
     private void DoQuickTransition()
-    {      
-        GuiContoler.Instance.bossTransition.GetComponent<Animator>().SetTrigger("TriggerTransition");
+    {
+        if (GuiContoler.Instance.nextNextMapArea != Var.Em.finish)
+        {
+            GuiContoler.Instance.bossTransition.GetComponent<Animator>().SetTrigger("TriggerTransition");
+        }
         LeanTween.delayedCall(0.5f,()=>
         GuiContoler.Instance.CloseGraph());        
     }

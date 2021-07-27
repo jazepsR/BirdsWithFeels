@@ -808,8 +808,7 @@ public class GuiContoler : MonoBehaviour {
         {
             activeBird.SetEmotion();
             activeBird.seedCollectedInRound = false;
-        }
-        
+        }        
     }
     public void CloseBirdStats()
     {
@@ -1377,7 +1376,7 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public bool Reset()
 	{
-        
+        //Debug.LogError("Resetting!");
         Var.enemies = new Bird[8];
 		Var.Infight = false;		
 		ProgressGUI.Instance.SetOnePortrait();       
