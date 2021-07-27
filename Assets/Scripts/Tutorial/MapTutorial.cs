@@ -33,7 +33,7 @@ public class MapTutorial : MonoBehaviour {
 			tutorialHighlight.gameObject.SetActive(false);
 
 		}
-        Debug.LogError(Var.currentStageID);
+       // Debug.LogError(Var.currentStageID);
         if (!Var.gameSettings.shownMapTutorial2 && Var.currentStageID == secondMapTutID)
         {
             mapTutPopup2.SetActive(true);
