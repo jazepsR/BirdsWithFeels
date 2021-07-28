@@ -446,7 +446,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					break;
 				}
 			}
-			if (canAdd && birdToAdd != null && birdToAddScript != null)
+			if (canAdd && birdToAdd != null && birdToAddScript != null && !Var.shownEvents.Contains(birdToAddScript.heading))
 			{
 				birdToAdd.gameObject.SetActive(true);
 				Var.availableBirds.Add(birdToAdd);
