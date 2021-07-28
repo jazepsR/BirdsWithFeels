@@ -212,8 +212,8 @@ public class EventController : MonoBehaviour
                 if (inMap) //Update map icons once event has finished playing. 
                 {
                     DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
-                    foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
-                        icon.SetState();
+                    //foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+                       // icon.SetState();
                 }
                 else
                 {

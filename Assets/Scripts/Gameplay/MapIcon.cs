@@ -58,7 +58,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	public bool firstCompletion = true;
 	public Bird birdToAdd;
 	public EventScript birdToAddScript;
-	ShowTooltip tooltipInfo;
+	internal ShowTooltip tooltipInfo;
 	List<Var.Em> totalEmotions;
 	List<float> totalPercentages;
 	public Image unlockedRoad;
@@ -79,7 +79,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     // Use this for initialization
 
-    private void Awake()
+    internal void Awake()
     {
         if(!anim)
         {
@@ -87,7 +87,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
-    void Start()
+    internal virtual void Start()
 	{
 		
 		if(MapControler.Instance.allIDs.Contains(ID))
@@ -196,9 +196,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		{
 			if (EventController.Instance.eventsToShow.Count == 0 && !GuiContoler.Instance.activeSpeechBubble.activeInHierarchy)
 				SetState();
-		});
-
-		
+		});		
 	}
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -234,7 +232,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			return GetTargetID(data.targets[0]);
 	}
 
-	public void SetState()
+	public virtual void SetState()
 	{
 		
 		if (available && !stateSet)
@@ -335,7 +333,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	}
 		
-	void Validate(int id, MapBattleData data)
+	internal virtual void Validate(int id, MapBattleData data)
 	{
 		//Debug.LogError(levelName + " battle " + id + " starting validation");
 		if(data.emotionPercentage.Count==0 && data.emotionType.Count==0)
@@ -376,7 +374,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			}
 		}
 	}
-	string GetTooltip()
+	private string GetTooltip()
 	{
 
 		string tooltip = "";
@@ -411,7 +409,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			print("Could not assign pie chart tooltip");
 		}
 	}
-	string GetTooltipText()
+	internal virtual string GetTooltipText()
 	{
 		string tooltipText ="";
 		if (isTrial)
@@ -460,7 +458,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	}
 
 
-	void Update()
+	internal virtual void Update()
 	{
 		/*if(active)
 		{
@@ -557,7 +555,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	}
 
 
-	public void mapBtnClick()
+	public virtual void mapBtnClick()
 	{
         if(!MapControler.Instance.isViewingNode)
         anim.SetTrigger("click");
