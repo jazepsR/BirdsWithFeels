@@ -50,6 +50,16 @@ public class MapControler : MonoBehaviour {
 	public Text trialTooLateText;
 	public Text trialNameText;
 	public int[] chapterIDs;
+
+	[Header("Map info panel")]
+	public GameObject selectionPanelHealthIcon;
+	public GameObject selectionPanelEmoTiles;
+	public GameObject selectionPanelWizards;
+	public GameObject selectionPanelShields;
+	public GameObject selectionPanelSwords;
+	public Text enemyLevelText;
+
+
 	void Awake()
 	{
 		Instance = this;
@@ -365,8 +375,41 @@ public class MapControler : MonoBehaviour {
         MapControler.Instance.SelectedIcon = null;
 
     }
+	public void SetSelectionMenuIcons(MapIcon mapIcon)
+    {
+		selectionPanelHealthIcon.SetActive(mapIcon.hasHealthPowerUps);
+		SetEmotionTile(mapIcon);
+		selectionPanelWizards.SetActive(mapIcon.hasWizards);
+		selectionPanelShields.SetActive(mapIcon.hasShields);
+		selectionPanelSwords.SetActive(mapIcon.hasDMGPowerUps);
+	}
 
-    public void ShowSelectionMenuAnimation()
+	private void SetEmotionTile(MapIcon mapIcon)
+    {
+		bool hasEmos = (mapIcon.hasLonelyPwerUps
+			|| mapIcon.hasFirendlyPowerUps || mapIcon.hasScaredPowerUps || mapIcon.hasConfidentPowerUps);
+		selectionPanelEmoTiles.SetActive(hasEmos);
+		if (hasEmos)
+		{
+			selectionPanelEmoTiles.SetActive(hasEmos);
+			string tooltipString = "";
+			List<string> emotionsPresent = new List<string>();
+			if (mapIcon.hasLonelyPwerUps)
+				emotionsPresent.Add("solitary");
+			if (mapIcon.hasScaredPowerUps)
+				emotionsPresent.Add("cautious");
+			if (mapIcon.hasConfidentPowerUps)
+				emotionsPresent.Add("confident");
+			if (mapIcon.hasFirendlyPowerUps)
+				emotionsPresent.Add("friendly");
+			tooltipString += string.Join(", " ,emotionsPresent);
+			tooltipString = char.ToUpper(tooltipString[0]) + tooltipString.Substring(1);
+			tooltipString += " emotional tiles will spawn";
+			selectionPanelEmoTiles.GetComponentInChildren<ShowTooltip>().tooltipText = tooltipString;
+		}
+	}
+
+	public void ShowSelectionMenuAnimation()
     {
         SelectionMenuAnimator.SetBool("active", true);
         //      SelectionMenuBlurAnimator.SetBool("active", true);

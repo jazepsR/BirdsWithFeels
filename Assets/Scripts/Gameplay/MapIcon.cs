@@ -615,12 +615,14 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		MapControler.Instance.SelectionMenu.SetActive(true);
 		MapControler.Instance.SelectionTitle.text = levelName;
 		MapControler.Instance.SelectionText.text = ToString();
+		MapControler.Instance.enemyLevelText.text = "Average enemy level: " + birdLVL;
 		MapControler.Instance.SelectionDescription.text = levelDescription;
 		AudioControler.Instance.ClickSound();
 		FindObjectOfType<GuiMap>().CreateMap(CreateMap());
        // LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack); //seb
         
         MapControler.Instance.ShowSelectionMenuAnimation();
+		MapControler.Instance.SetSelectionMenuIcons(this);
 		MapControler.Instance.SelectedIcon = this;
 		if (available)
 		{
@@ -773,13 +775,13 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			stageState = "completed";
 		if (available)
 			stageState = "available";
-		stageInfo += "Stage " + (ID + 1) + ": " + stageState;
+		//stageInfo += "Stage " + (ID + 1) + ": " + stageState;
 		/*string weakness = "All";
 		if (type == Var.Em.Random)
 			weakness = "Unpredictable";
 		else if (type != Var.Em.Neutral)
 			weakness = Helpers.Instance.GetWeakness(type).ToString();*/
-		stageInfo += ". Main ENEMY emotion: " + Helpers.Instance.GetHexColor(type) + type + "</color>.";
+		stageInfo += "Main ENEMY emotion: " + Helpers.Instance.GetHexColor(type) + type + "</color>";
 		   // " Weak to: " +	Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(type)) + weakness + "</color>.";
 		/*stageInfo += "\nEnemies attack from the: ";
 		if (hasFrontEnemyRow)

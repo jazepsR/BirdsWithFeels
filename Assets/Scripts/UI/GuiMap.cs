@@ -172,9 +172,9 @@ public class GuiMap : MonoBehaviour {
 		point.GetComponent<SpriteRenderer>().sprite = Helpers.Instance.GetEmotionIcon(emotion,true);
 		if (!inMap)
 		{
-			point.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetHexColor(emotion) + emotion.ToString() + "</color>";
 			point.GetComponent<SpriteRenderer>().sortingOrder = -1;
 		}
+		point.GetComponent<ShowTooltip>().tooltipText = Helpers.Instance.GetHexColor(emotion) + emotion.ToString() + "</color>";
 		nodeList.Add(point.GetComponent<SpriteRenderer>());
 		//point.transform.parent = nodes;
 		//point.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
