@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 95581348159751706}
   - component: {fileID: 114969971583463362}
   - component: {fileID: 733038901725333112}
+  - component: {fileID: 2198197382840857658}
   m_Layer: 0
   m_Name: BirdArt1
   m_TagString: Untagged
@@ -441,6 +442,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conversationTopicSprite: {fileID: 212325238489751944}
+--- !u!114 &2198197382840857658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1040652847368460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff7987d7028bca146bf0339823fdf388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bandageSprites:
+  - healthySprite: {fileID: 21300010, guid: c577905edc20e3241abd888b8dcb553c, type: 3}
+    bandagedSprite: {fileID: 21300010, guid: 2cf4cf64dcdf92a46b4a56e64877e568, type: 3}
+    bandagedRenderer: {fileID: 212578696822471984}
+  - healthySprite: {fileID: 21300016, guid: c577905edc20e3241abd888b8dcb553c, type: 3}
+    bandagedSprite: {fileID: 21300016, guid: 2cf4cf64dcdf92a46b4a56e64877e568, type: 3}
+    bandagedRenderer: {fileID: 212834215668081784}
+  - healthySprite: {fileID: 21300018, guid: 689eec95cdbcea648816a95fb0358ed8, type: 3}
+    bandagedSprite: {fileID: 21300018, guid: 43d2c948ad1fe104eb7c1b1e01b7caa0, type: 3}
+    bandagedRenderer: {fileID: 212531591352349726}
+  - healthySprite: {fileID: 21300018, guid: 689eec95cdbcea648816a95fb0358ed8, type: 3}
+    bandagedSprite: {fileID: 21300018, guid: 43d2c948ad1fe104eb7c1b1e01b7caa0, type: 3}
+    bandagedRenderer: {fileID: 212176849668854080}
+  - healthySprite: {fileID: 21300022, guid: 689eec95cdbcea648816a95fb0358ed8, type: 3}
+    bandagedSprite: {fileID: 21300022, guid: 43d2c948ad1fe104eb7c1b1e01b7caa0, type: 3}
+    bandagedRenderer: {fileID: 212557783311152988}
+  - healthySprite: {fileID: 21300022, guid: 638afe51d756fd4498f8340db9eb7c66, type: 3}
+    bandagedSprite: {fileID: 21300022, guid: 1ce47add74dfe5143971ed2cc18e2a4e, type: 3}
+    bandagedRenderer: {fileID: 212597019867433134}
+  - healthySprite: {fileID: 21300002, guid: 638afe51d756fd4498f8340db9eb7c66, type: 3}
+    bandagedSprite: {fileID: 21300002, guid: 1ce47add74dfe5143971ed2cc18e2a4e, type: 3}
+    bandagedRenderer: {fileID: 212270988104094586}
+  - healthySprite: {fileID: 21300012, guid: 638afe51d756fd4498f8340db9eb7c66, type: 3}
+    bandagedSprite: {fileID: 21300012, guid: 1ce47add74dfe5143971ed2cc18e2a4e, type: 3}
+    bandagedRenderer: {fileID: 212212468792337846}
+  - healthySprite: {fileID: 21300000, guid: 593f79fb1c28b6e41b21cbdcfd3d2dcb, type: 3}
+    bandagedSprite: {fileID: 21300000, guid: f6abd1166e99f444da66743223fd0bde, type: 3}
+    bandagedRenderer: {fileID: 212151373847950158}
+  - healthySprite: {fileID: 21300002, guid: 593f79fb1c28b6e41b21cbdcfd3d2dcb, type: 3}
+    bandagedSprite: {fileID: 21300002, guid: f6abd1166e99f444da66743223fd0bde, type: 3}
+    bandagedRenderer: {fileID: 212507391708620182}
+  - healthySprite: {fileID: 21300002, guid: bbe83dc1318a5b24dafd25d007da57fe, type: 3}
+    bandagedSprite: {fileID: 21300002, guid: 3eb64ba4ad2dffa45bbd4ea06b49a53f, type: 3}
+    bandagedRenderer: {fileID: 212612289373890710}
+  - healthySprite: {fileID: 21300012, guid: 39945158be965b9478c4508f795116d6, type: 3}
+    bandagedSprite: {fileID: 21300012, guid: 3eb64ba4ad2dffa45bbd4ea06b49a53f, type: 3}
+    bandagedRenderer: {fileID: 212732031447069560}
+  - healthySprite: {fileID: 21300012, guid: bbe83dc1318a5b24dafd25d007da57fe, type: 3}
+    bandagedSprite: {fileID: 21300012, guid: 3eb64ba4ad2dffa45bbd4ea06b49a53f, type: 3}
+    bandagedRenderer: {fileID: 212981172713408394}
+  - healthySprite: {fileID: 21300000, guid: bbe83dc1318a5b24dafd25d007da57fe, type: 3}
+    bandagedSprite: {fileID: 21300000, guid: 3eb64ba4ad2dffa45bbd4ea06b49a53f, type: 3}
+    bandagedRenderer: {fileID: 212188045362112842}
 --- !u!1 &1040828724467734
 GameObject:
   m_ObjectHideFlags: 0
@@ -3470,7 +3526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4492590416089742
 Transform:
   m_ObjectHideFlags: 0
