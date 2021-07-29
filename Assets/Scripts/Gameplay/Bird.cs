@@ -266,6 +266,7 @@ public class Bird : MonoBehaviour
 		{
 			home = transform.position;
 			LoadStats();
+			SetBandages();
 		}
 		target = transform.position;
 		if (!isEnemy && (data.injured || data.health <=0))
@@ -420,7 +421,15 @@ public class Bird : MonoBehaviour
 		}
 		return mouth;
 	}
-
+	public void SetBandages()
+    {
+		//bird
+		var bandageSwitchers = birdArtObj.GetComponentsInChildren<BandageSwitcher>();
+		foreach(BandageSwitcher switcher in bandageSwitchers)
+        {
+			switcher.SetBandages(data.health <= 1);
+        }
+    }
 	public void SetCoolDownRing(bool active)
 	{
 		/*if (CooldownRing != null)

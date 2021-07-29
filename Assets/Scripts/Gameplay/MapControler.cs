@@ -135,10 +135,8 @@ public class MapControler : MonoBehaviour {
 		foreach(Bird bird in FillPlayer.Instance.playerBirds)
 		{
             if (bird.data.unlocked)
-            {
-               
-                count++;
-                
+            {               
+                count++;                
             }
 			bool wasActive = false;
 			foreach(Bird activeBird in Var.activeBirds)
@@ -335,6 +333,7 @@ public class MapControler : MonoBehaviour {
 					Destroy(healObj, 1.5f);
 				}
 			}
+			bird.SetBandages();
 		}
 
         canRest();

@@ -1407,6 +1407,7 @@ public class GuiContoler : MonoBehaviour {
             bird.ResetAfterLevel();
         }
     }
+
 	public bool Reset()
 	{
         //Debug.LogError("Resetting!");
@@ -1437,6 +1438,7 @@ public class GuiContoler : MonoBehaviour {
 			bird.totalFriendliness += bird.totalFriendliness;
 			bird.ResetBonuses();
 			bird.GroundBonus.SetActive(false);
+            bird.SetBandages();
 		}
 		//After applying levels;
 		/*GuiContoler.Instance.relationshipPanel.SetActive(false);
