@@ -29,7 +29,7 @@ MonoBehaviour:
   completed: 0
   levelName: Test event
   levelDescription: A strange event may take place here
-  available: 0
+  available: 1
   type: 10
   background: 0
   bgProgressAnim: -1
@@ -67,6 +67,9 @@ MonoBehaviour:
   timedEvent: {fileID: 0}
   possibleEvents:
   - {fileID: 0}
+  NarrativeIcon: {fileID: 2376212580146602565, guid: 091f3f0d6cbf8d7449d1ca317290e999,
+    type: 3}
+  iconToChange: {fileID: 3736559435882433689}
 --- !u!1001 &5491302208325236482
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -76,7 +79,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1266214687233880, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
       propertyPath: m_Name
-      value: MapEventNode
+      value: MapEventNode Variant
       objectReference: {fileID: 0}
     - target: {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
@@ -251,12 +254,33 @@ PrefabInstance:
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -152
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 224337126825383080, guid: d0515ffbf52d5804da8193f0f1634be4,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -35
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9218845627333688219, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 2376212580146602565, guid: 091f3f0d6cbf8d7449d1ca317290e999,
+        type: 3}
+    - target: {fileID: 9218845627333688219, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.7783019
+      objectReference: {fileID: 0}
+    - target: {fileID: 9218845627333688219, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9692291
+      objectReference: {fileID: 0}
+    - target: {fileID: 9218845627333688219, guid: d0515ffbf52d5804da8193f0f1634be4,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114021556308198814, guid: d0515ffbf52d5804da8193f0f1634be4, type: 3}
@@ -273,6 +297,18 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 5491302208325236482}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3736559435882433689 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9218845627333688219, guid: d0515ffbf52d5804da8193f0f1634be4,
+    type: 3}
+  m_PrefabInstance: {fileID: 5491302208325236482}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5490150082327594192 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1662645278929874, guid: d0515ffbf52d5804da8193f0f1634be4,

@@ -1,20 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapIconEvent : MapIcon
 {
     public EventScript[] possibleEvents;
     private bool eventActive = false;
+    public Sprite NarrativeIcon;
+    public Image iconToChange;
 
     internal override void Start()
     {
         base.Start();
+
+        if (iconToChange != null && NarrativeIcon != null)
+        {
+            iconToChange.sprite = NarrativeIcon;
+        }
     }
 
     internal override void Update()
     {
-        if(eventActive && !EventController.Instance.eventObject.activeSelf)
+        if (eventActive && !EventController.Instance.eventObject.activeSelf)
         {
             completed = true;
             firstCompletion = true;
@@ -32,7 +40,7 @@ public class MapIconEvent : MapIcon
             if (completed)
             {
                 if (firstCompletion) //Stuff that happens the FIRST time user completes level
-                {        
+                {
                     stateSet = true;
                     firstCompletion = false;
                     anim.SetInteger("state", 1);
@@ -48,11 +56,12 @@ public class MapIconEvent : MapIcon
                     }
                     foreach (MapIcon icon in targets)
                     {
-                        LeanTween.delayedCall(1.3f, () => {
+                        LeanTween.delayedCall(1.3f, () =>
+                        {
                             icon.stateSet = false;
                             icon.available = true;
                             icon.SetState();
-                            });
+                        });
                     }
                     LeanTween.delayedCall(3f, () => SaveLoad.Save());
                 }
@@ -76,12 +85,12 @@ public class MapIconEvent : MapIcon
     }
     internal override string GetTooltipText()
     {
-        string tooltipText = "<b>"+levelName+ "</b>";
-        if(!available)
+        string tooltipText = "<b>" + levelName + "</b>";
+        if (!available)
         {
             tooltipText += " -locked";
         }
-        if(completed)
+        if (completed)
         {
             tooltipText += "<color=#E7CA21ff> -completed</color>";
         }
@@ -109,4 +118,4 @@ public class MapIconEvent : MapIcon
 
     }
 
-    }
+}
