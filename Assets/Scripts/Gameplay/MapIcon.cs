@@ -114,7 +114,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		//Seb. Kind of dirty way to get the "lock" gameobject even if it has not been set. In case the prefab connection breaks
 		if (LockedIcon == null)
         {
-            LockedIcon = this.transform.Find("mapIcon_parent").Find("lock").gameObject;
+            LockedIcon = this.transform.Find("mapIcon_parent").Find("Lock_parent").Find("lock").gameObject;
             
         }
 
@@ -148,7 +148,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		}
 		//GetComponent<Button>().interactable = available;
 		CompleteIcon.SetActive(completed);
-		LockedIcon.SetActive(!available);        
+   
 		lr = GetComponent<LineRenderer>();
 		AddNewBird();
 		tooltipInfo = gameObject.AddComponent<ShowTooltip>();
