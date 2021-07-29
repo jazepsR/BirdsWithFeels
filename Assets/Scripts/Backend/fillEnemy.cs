@@ -13,6 +13,7 @@ public class fillEnemy : MonoBehaviour {
 	public bool hasWizardsDebug = false;
 	List<Bird> newBirds;
 	public static fillEnemy Instance;
+	public List<string> activeEnemyNames = new List<string>();
 	void Awake()
 	{
 		Instance = this;
@@ -273,6 +274,7 @@ public class fillEnemy : MonoBehaviour {
 
 	public void Reset()
 	{
+		activeEnemyNames = new List<string>();
 		 foreach(Bird enemy in Enemies)
 		{
 			enemy.transform.localPosition = enemy.home;

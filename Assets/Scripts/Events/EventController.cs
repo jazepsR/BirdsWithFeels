@@ -38,7 +38,7 @@ public class EventController : MonoBehaviour
     public Text nameText;
     EventScript currentEvent;
     GameObject currentPortrait;
-    Bird currentBird;
+    public Bird currentBird;
     List<GameObject> portraits;
     List<Color> colors;
     EventScript nextEvent = null;
@@ -160,6 +160,7 @@ public class EventController : MonoBehaviour
                 DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
                 foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
                     icon.SetState();
+                
             }
         }
             else if (currentEvent != null && (currentText > currentEvent.parts.Count - 1)) //Has finished playing all parts in current event? 
@@ -211,9 +212,13 @@ public class EventController : MonoBehaviour
 
                 if (inMap) //Update map icons once event has finished playing. 
                 {
-                    DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
+                    DialogueControl.Instance.TryDialogue(Dialogue.Location.map); 
+                    if (currentBird)
+                    {
+                        LeanTween.delayedCall(0.7f, () =>GuiContoler.Instance.OpenMapBigGraph(currentBird));
+                    }
                     //foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
-                       // icon.SetState();
+                    // icon.SetState();
                 }
                 else
                 {
@@ -231,6 +236,8 @@ public class EventController : MonoBehaviour
        
 
     }
+
+   
 
     private IEnumerator WaitAndPrint(string printText, bool shouldShowContinue)
     {
@@ -555,7 +562,7 @@ public class EventController : MonoBehaviour
     {
         if (hideEventButtonText)
         {
-            hideEventButtonText.text = "Hover to show battlefield";
+            hideEventButtonText.text = "Show Field";
         }
         myEventGUIAnimator.SetBool("showBattlefield", true);
     }
@@ -563,7 +570,7 @@ public class EventController : MonoBehaviour
     {
         if (hideEventButtonText)
         {
-            hideEventButtonText.text = "";
+            hideEventButtonText.text = "Show Field";
         }
         myEventGUIAnimator.SetBool("showBattlefield", false);
     }
@@ -608,6 +615,11 @@ public class EventController : MonoBehaviour
             if (currentBird)
             {
                 currentBird.showText();
+                if(inMap)
+                {
+                    MapControler.Instance.charInfoAnim.SetBool("show", true);
+                    MapControler.Instance.charInfoAnim.SetBool("hide", false);
+                }
             }
         }
         else
@@ -719,12 +731,12 @@ public class EventController : MonoBehaviour
             if (bird != null)
                 bird.SetEmotion();
 
-            int clamp = Var.isEnding ? 12 : 15;
+            int clamp = Var.isEnding ? 13 : 15;
             switch (type)
             {
                 case ConsequenceType.Courage:
                     bird.data.confidence = Mathf.Clamp(bird.data.confidence + magnitude, -clamp, clamp);
-                    bird.prevConf = Mathf.Clamp(bird.prevConf + magnitude, -clamp, clamp);
+                   // bird.prevConf = Mathf.Clamp(bird.prevConf + magnitude, -clamp, clamp);
                     if (magnitude > 0)
                     {
                         infoString += bird.charName + " gained " + magnitude + " confidence\n";
@@ -736,7 +748,7 @@ public class EventController : MonoBehaviour
                     break;
                 case ConsequenceType.Friendliness:
                     bird.data.friendliness = Mathf.Clamp(bird.data.friendliness + magnitude, -clamp, clamp);
-                    bird.prevFriend = Mathf.Clamp(bird.prevFriend + magnitude, -clamp, clamp);
+                   // bird.prevFriend = Mathf.Clamp(bird.prevFriend + magnitude, -clamp, clamp);
                     if (magnitude > 0)
                     {
                         infoString += bird.charName + " gained " + magnitude + " social\n";
