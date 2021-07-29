@@ -51,13 +51,18 @@ public class MapControler : MonoBehaviour {
 	public Text trialNameText;
 	public int[] chapterIDs;
 
-	[Header("Map info panel")]
+	[Header("Map selection panel")]
 	public GameObject selectionPanelHealthIcon;
 	public GameObject selectionPanelEmoTiles;
 	public GameObject selectionPanelWizards;
 	public GameObject selectionPanelShields;
 	public GameObject selectionPanelSwords;
 	public Text enemyLevelText;
+	public GameObject selectionPanelBG;
+	public GameObject selectionPanelTitleBG;
+	public GameObject selectionPanelTrialBG;
+	public GameObject selectionPanelTrialTitleBG;
+
 
 
 	void Awake()
@@ -407,6 +412,14 @@ public class MapControler : MonoBehaviour {
 			tooltipString += " emotional tiles will spawn";
 			selectionPanelEmoTiles.GetComponentInChildren<ShowTooltip>().tooltipText = tooltipString;
 		}
+	}
+
+	public void SetSelectionMenuBG(bool isTrial)
+    {
+		selectionPanelTrialBG.SetActive(isTrial);
+		selectionPanelTrialTitleBG.SetActive(isTrial);
+		selectionPanelBG.SetActive(!isTrial);
+		selectionPanelTitleBG.SetActive(!isTrial);
 	}
 
 	public void ShowSelectionMenuAnimation()
