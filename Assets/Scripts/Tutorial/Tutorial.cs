@@ -82,7 +82,7 @@ public class Tutorial : MonoBehaviour {
 			}
 		}
 		tutorialSetup.TutorialSetup.SetupBirds();
-		LeanTween.delayedCall(0.5f,()=> ShowtutorialStartingText(0));
+		ShowtutorialStartingText(0);
 		LeanTween.delayedCall(0.5f, () => GuiContoler.Instance.canPause(true));
 
 	}

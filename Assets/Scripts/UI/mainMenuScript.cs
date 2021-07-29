@@ -26,6 +26,13 @@ public class mainMenuScript : MonoBehaviour {
     void Awake()
     {
         Instance = this;
+        PreloadMap();
+    }
+
+    void PreloadMap()
+    {
+        SceneManager.LoadSceneAsync("Map", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("NewMain", LoadSceneMode.Additive);
     }
     void Start()
     {
