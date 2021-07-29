@@ -55,9 +55,9 @@ public class Bird : MonoBehaviour
 	public int portraitOrder = 1;
 	public BirdData data;
 	public string birdBio;
-	[HideInInspector]
+	//[HideInInspector]
 	public int prevConf = 0;
-	[HideInInspector]
+	//[HideInInspector]
 	public int prevFriend = 0;
 	[HideInInspector]
 	public int totalFriendliness = 0;
@@ -959,7 +959,7 @@ public class Bird : MonoBehaviour
 
 			//AudioControler.Instance.smallGraphDisappear.Play();
 		}
-		if (inMap)
+		if (inMap && !EventController.Instance.eventObject.activeSelf)
 		{
 			MapControler.Instance.charInfoAnim.SetBool("hide", true);
 			MapControler.Instance.charInfoAnim.SetBool("show", false);

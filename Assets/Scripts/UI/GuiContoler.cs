@@ -436,6 +436,8 @@ public class GuiContoler : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.O) && Var.cheatsEnabled)
             ReturnToMap();
+        if (Input.GetKeyDown(KeyCode.B) && Var.cheatsEnabled)
+            GraphButton();
 
         if (DebugMenu.cameraControl && Var.cheatsEnabled)
         {
@@ -812,7 +814,8 @@ public class GuiContoler : MonoBehaviour {
     }
     public void CloseBirdStats()
     {
-        minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
+        if(minimap)
+            minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
         graphAnime.SetBool("open", false);
         GraphBlocker.SetActive(false);
         foreach (Transform child in graph.transform.Find("GraphParts").transform)
@@ -839,7 +842,8 @@ public class GuiContoler : MonoBehaviour {
         //canChangeGraph = true;
         GraphBlocker.SetActive(true);
         Helpers.Instance.HideTooltip();
-        minimap.SetActive(false);
+        if(minimap)
+            minimap.SetActive(false);
         //nextGraph.interactable = !Var.isTutorial;
         //prevGraph.interactable = !Var.isTutorial;
         foreach (Transform child in graph.transform.Find("GraphParts").transform)
@@ -1107,7 +1111,17 @@ public class GuiContoler : MonoBehaviour {
 		AudioControler.Instance.PlaySound(AudioControler.Instance.notebookOpen);
         
     }
-	void CloseTutorialText()
+
+    public void OpenMapBigGraph(Bird bird)
+    {
+        MapControler.Instance.charInfoAnim.SetBool("hide", true);
+        MapControler.Instance.charInfoAnim.SetBool("show", false); 
+        InitiateGraph(bird);
+        CreateBattleReport();
+        CheckGraphNavBtns();
+    }
+
+    void CloseTutorialText()
 	{
 		speechBubbleObj.SetActive(false);       
 	}
@@ -1116,7 +1130,7 @@ public class GuiContoler : MonoBehaviour {
 		if (!canChangeGraph)
 			return;
 		canChangeGraph = false;
-		if(inMap)
+		if(inMap && minimap)
 			minimap.SetActive(false);
 
         if (bird)
@@ -1148,12 +1162,19 @@ public class GuiContoler : MonoBehaviour {
 	}
 	public void CreateBattleReport() //triggers upon finishing battles in bossless adventures
     {
-        FastForwardScript.SetIsInFight(false);
+        if (FastForwardScript)
+        {
+            FastForwardScript.SetIsInFight(false);
+        }
         
 
         clearSmallGraph();
-		closeReportBtn.SetActive(true);
-		HideSmallGraph.gameObject.SetActive(false);
+        if(!inMap)
+		    closeReportBtn.SetActive(true);
+        if (HideSmallGraph)
+        {
+            HideSmallGraph.gameObject.SetActive(false);
+        }
 		if (finalResult < 0)
 		{
 			UpdateHearts(--Var.health);
@@ -1374,6 +1395,18 @@ public class GuiContoler : MonoBehaviour {
 		SceneManager.LoadScene("MainMenu");
 
 	}
+    public void ResetAfterMapEvent()
+    {
+        foreach (Bird bird in Var.activeBirds)
+        {
+           // Var.availableBirds[0].ToString();
+          //  Var.activeBirds[0].ToString();
+           // EventController.Instance.currentBird.ToString();
+            bird.prevConf = bird.data.confidence;
+            bird.prevFriend = bird.data.friendliness;
+            bird.ResetAfterLevel();
+        }
+    }
 	public bool Reset()
 	{
         //Debug.LogError("Resetting!");
@@ -1474,7 +1507,6 @@ public class GuiContoler : MonoBehaviour {
 			
 		}
 		return true;
-
 	}
 
 	public void UpdateBirdSave(Bird bird)

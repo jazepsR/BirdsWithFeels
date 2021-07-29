@@ -91,7 +91,7 @@ public class MapIconEvent : MapIcon
 
     public override void mapBtnClick()
     {
-        if (available && !completed)
+        if (available)// && !completed)
         {
             Var.currentStageID = ID;
             EventController.Instance.CreateEvent(possibleEvents[Random.Range(0, possibleEvents.Length)]);
