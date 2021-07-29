@@ -116,6 +116,7 @@ public class GuiContoler : MonoBehaviour {
     public Animator graphAnime;
     public GameObject minimap;
     public GameObject dangerZoneBorder;
+    public GameObject levelUpScreen;
     [HideInInspector]
     public bool canChangeGraph = true;
     [HideInInspector]
@@ -454,7 +455,7 @@ public class GuiContoler : MonoBehaviour {
                 moveBy.x += moveSpeed * Time.deltaTime;
             Camera.main.transform.position += (Vector3)moveBy;
         }
-        if (GraphActive && Input.GetMouseButtonDown(1) && canChangeGraph)
+        if (GraphActive && Input.GetMouseButtonDown(1) && canChangeGraph && levelUpScreen.activeSelf == false)
         {
             if (nextGraph.gameObject.activeInHierarchy)
                 nextGraph.onClick.Invoke();
@@ -1563,6 +1564,50 @@ public class GuiContoler : MonoBehaviour {
     
     public void showVictoryScreen()
     {
+<<<<<<< HEAD
+=======
+        if (Var.unlockedBirds == null)
+        {
+            foreach (Bird bird in FillPlayer.Instance.playerBirds)
+            {
+                Var.unlockedBirds.Add(bird);
+            }
+        }
+
+        foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
+        {
+            child.transform.gameObject.SetActive(false);
+        }
+
+        foreach (Bird bird in Var.unlockedBirds)
+        {
+            
+            foreach(Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
+            {
+
+                if (bird.data.unlocked)
+                {
+                    if (bird.charName.ToLower() == child.transform.GetChild(1).name)
+                    {
+                        foreach (Bird aBird in FillPlayer.Instance.playerBirds)
+                        {
+                            if (aBird.charName.ToLower() == bird.charName.ToLower())
+                            {
+                                child.transform.GetChild(0).GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(aBird.emotion);
+                            }
+                            else 
+                            {
+                                child.transform.GetChild(0).GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+                            }
+                        }
+                        child.transform.gameObject.SetActive(true);
+                    }
+                }
+                
+            }
+        }
+
+>>>>>>> a9f5d26559bffcbae9670e182ce719129bffce77
         winBanner.SetActive(true);
         WinScreen.Instance.SetupWinScreen(Var.availableBirds.Count > 0 ?Var.availableBirds: Var.activeBirds);//  new List<Bird>(FillPlayer.Instance.playerBirds));
         /* foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))

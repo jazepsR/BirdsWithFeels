@@ -11,7 +11,7 @@ public class FastForwardScript : MonoBehaviour
     public Button mySpeedUpButton;
     private bool myIsInFight;
     public float TimeScaleWhenSpeedingUp = 4f;
-    private bool SpeedButtonIsHeld;
+    private bool SpeedButtonIsHeld = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,20 +22,24 @@ public class FastForwardScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKey(KeyCode.LeftShift) && Var.cheatsEnabled) //Slow down time using cheats
         {
             Time.timeScale = 0.25f;
 
         }
-        else if (Input.GetKey(KeyCode.RightShift) || Input.GetMouseButton(1) || SpeedButtonIsHeld && Var.Infight && !GuiContoler.Instance.GraphActive )
+        else if ((Input.GetKey(KeyCode.RightShift) || Input.GetMouseButton(1)) && ((Var.Infight || GuiContoler.Instance.winBanner.activeSelf) && !GuiContoler.Instance.GraphActive))
         {
             SetGameSpeedUp(true);
+            SpeedButtonIsHeld = true;
+            MouseButtonDown();
+        
 
         }
-        else
+        else if(((!Input.GetKey(KeyCode.RightShift) || !Input.GetMouseButton(1)) && SpeedButtonIsHeld && (Var.Infight || GuiContoler.Instance.winBanner.activeSelf) || GuiContoler.Instance.GraphActive))
         {
             SetGameSpeedUp(false);
+            MouseButtonUp();
+            SpeedButtonIsHeld = false;
         }
 
         if (myIsInFight&&!Var.Infight) //Checks every frame if the fight is over - there's probably a better way to do this 
@@ -56,6 +60,7 @@ public class FastForwardScript : MonoBehaviour
             Time.timeScale = 1f;
             myAnimator.SetBool("active", false);
         }
+        
     }
 
     public void SetIsInFight(bool aIsFighting)
@@ -81,15 +86,14 @@ public class FastForwardScript : MonoBehaviour
 
     public void MouseButtonDown() //is picked up in "update" function
     {
-        
-        SpeedButtonIsHeld = true;
         //do speed up things here :)
+        
     }
 
     public void MouseButtonUp()
     {
-        SpeedButtonIsHeld = false;
+       
     }
 
-
+    
 }
