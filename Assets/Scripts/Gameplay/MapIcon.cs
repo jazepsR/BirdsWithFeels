@@ -108,19 +108,20 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 
 		sr = GetComponent<Image>();
-        sr = this.transform.Find("mapIcon_art").GetComponent<Image>();
+        sr = this.transform.Find("mapIcon_parent").Find("mapIcon_art").GetComponent<Image>();
+		
 
-        //Seb. Kind of dirty way to get the "lock" gameobject even if it has not been set. In case the prefab connection breaks
-        if (LockedIcon == null)
+		//Seb. Kind of dirty way to get the "lock" gameobject even if it has not been set. In case the prefab connection breaks
+		if (LockedIcon == null)
         {
-            LockedIcon = this.transform.Find("lock").gameObject;
+            LockedIcon = this.transform.Find("mapIcon_parent").Find("lock").gameObject;
             
         }
 
 		if (isTrial)
 		{
-			//sr.sprite = MapControler.Instance.trialSprite;
-			sr.sprite = Helpers.Instance.GetEmotionIcon(type, true);
+			sr.sprite = MapControler.Instance.trialSprite;
+			//sr.sprite = Helpers.Instance.GetEmotionIcon(type, true);
 			sr.color = Helpers.Instance.GetEmotionColor(type);
 			if(fogObject)
 			{
