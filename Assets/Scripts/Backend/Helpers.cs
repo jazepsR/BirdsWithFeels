@@ -486,10 +486,16 @@ public class Helpers : MonoBehaviour {
 	}
 	public string GetName(bool isMale)
 	{
-		if (isMale)
-			return Var.maleNames[UnityEngine.Random.Range(0, Var.maleNames.Length)];
-		else
-			return Var.femaleNames[UnityEngine.Random.Range(0, Var.femaleNames.Length)];
+		string name = "";
+        do
+		{
+			if (isMale)
+				name = Var.maleNames[UnityEngine.Random.Range(0, Var.maleNames.Length)];
+			else
+				name = Var.femaleNames[UnityEngine.Random.Range(0, Var.femaleNames.Length)];
+
+		} while (fillEnemy.Instance.activeEnemyNames.Contains(name));
+		return name;
 	}
 	void FillHearts(Sprite HeartSprite)
 	{
