@@ -623,6 +623,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         
         MapControler.Instance.ShowSelectionMenuAnimation();
 		MapControler.Instance.SetSelectionMenuIcons(this);
+		MapControler.Instance.SetSelectionMenuBG(isTrial);
 		MapControler.Instance.SelectedIcon = this;
 		if (available)
 		{
