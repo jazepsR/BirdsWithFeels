@@ -84,12 +84,12 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				}				
 				transform.Translate(delta.x * mouseSensitivity, delta.y * mouseSensitivity, 0);
 				Vector3 temp = transform.position;//+ new Vector3(delta.x * mouseSensitivity, delta.y * mouseSensitivity, 0);
-				if(temp.y > maxY*transform.localScale.y/startingScale.y ||temp.y < minY * transform.localScale.y / startingScale.y)
+				if(temp.y > minY*transform.localScale.y/startingScale.y ||temp.y < maxY * transform.localScale.y / startingScale.y)
 				{
 					
 					transform.Translate(-delta.x * mouseSensitivity, -delta.y * mouseSensitivity, 0);
 					temp = transform.position;
-					if(temp.y-1f > maxY*transform.localScale.y/startingScale.y ||temp.y+1f < minY * transform.localScale.y / startingScale.y)
+					if(temp.y-1f > minY*transform.localScale.y/startingScale.y ||temp.y+1f < maxY * transform.localScale.y / startingScale.y)
 					{
 						if(boundaryPos.x<-5)
 						{
@@ -133,8 +133,8 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		{
 			if(height.transform.position.x<0f && height.transform.position.x >currentPointDist)
 			{
-				minY = height.minY;
-				maxY = height.maxY;
+				minY = -height.minY;
+				maxY = -height.maxY;
 				currentPointDist = height.transform.position.x;
 				boundaryPos = height.transform.position;
 				//Debug.LogError("current height: "+ height.name);
