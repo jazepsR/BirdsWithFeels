@@ -4152,7 +4152,7 @@ MonoBehaviour:
     friendliness: -6
     confidence: -3
     health: 3
-    mentalHealth: 3
+    mentalHealth: 2
     maxHealth: 3
     injured: 0
     preferredEmotion: 7
@@ -9529,7 +9529,7 @@ MonoBehaviour:
     friendliness: 0
     confidence: 0
     health: 3
-    mentalHealth: 3
+    mentalHealth: 2
     maxHealth: 3
     injured: 0
     preferredEmotion: 7
@@ -10526,6 +10526,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 404866765}
   m_CullTransparentMesh: 0
+--- !u!21 &404932977
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.002645075, y: 0.0026781422}
+        m_Offset: {x: 0.49529323, y: 3.6954978}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &405052952
 GameObject:
   m_ObjectHideFlags: 0
@@ -10571,6 +10611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 010000000a00000000000000
   condition: 2
   magnitude: 0
@@ -10639,6 +10680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0a00000002000000
   condition: 2
   magnitude: 0
@@ -12588,6 +12630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0000000001000000040000000a000000
   condition: 2
   magnitude: 0
@@ -14240,6 +14283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0a00000004000000
   condition: 2
   magnitude: 0
@@ -18753,6 +18797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 04000000000000000a0000000100000002000000
   condition: 2
   magnitude: 0
@@ -21124,6 +21169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0a00000002000000
   condition: 2
   magnitude: 0
@@ -25531,6 +25577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0900000001000000020000000400000000000000
   condition: 2
   magnitude: 0
@@ -26117,7 +26164,7 @@ MonoBehaviour:
     friendliness: 0
     confidence: 0
     health: 3
-    mentalHealth: 3
+    mentalHealth: 2
     maxHealth: 3
     injured: 0
     preferredEmotion: 7
@@ -26312,46 +26359,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5272907933274264430}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &989314576
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.002645075, y: 0.0026781433}
-        m_Offset: {x: 0.49529317, y: 3.6954992}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &992112251
 GameObject:
   m_ObjectHideFlags: 0
@@ -26455,7 +26462,7 @@ MonoBehaviour:
     friendliness: 0
     confidence: 0
     health: 3
-    mentalHealth: 3
+    mentalHealth: 2
     maxHealth: 3
     injured: 0
     preferredEmotion: 7
@@ -30465,6 +30472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 020000000400000003000000010000000900000000000000
   condition: 2
   magnitude: 0
@@ -33113,6 +33121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c00000015000000160000001700000018000000190000001a0000001b0000001c0000001d0000001e0000001f000000200000002100000022000000230000002400000025000000260000002700000028000000290000002a0000002b0000002c0000002d0000002e0000002f00000030000000
   condition: 2
   magnitude: 0
@@ -37117,7 +37126,7 @@ MonoBehaviour:
     friendliness: 7
     confidence: 2
     health: 1
-    mentalHealth: 1
+    mentalHealth: 2
     maxHealth: 3
     injured: 0
     preferredEmotion: 7
@@ -37425,6 +37434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 040000000a0000000900000009000000
   condition: 2
   magnitude: 0
@@ -39554,6 +39564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0200000000000000010000000300000004000000
   condition: 2
   magnitude: 0
@@ -48289,6 +48300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 01000000040000000000000003000000
   condition: 2
   magnitude: 0
@@ -50960,6 +50972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 040000000a0000000100000000000000
   condition: 2
   magnitude: 0
@@ -57363,6 +57376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 00000000040000000a00000001000000
   condition: 2
   magnitude: 0
@@ -59453,6 +59467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 000000000400000001000000
   condition: 2
   magnitude: 0
@@ -62195,6 +62210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 00000000070000000b000000
   condition: 0
   magnitude: 0
