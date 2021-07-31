@@ -55,7 +55,8 @@ public class EventScript:MonoBehaviour{
         Cousin_Adelaide,
         A_vulture0_3,
     };
-	public List<Character> speakers;
+    public Character affectedBird = Character.None;
+    public List<Character> speakers;
 	public ConditionCheck.Condition condition;
 	public int magnitude = 0;
 	public Var.Em targetEmotion;

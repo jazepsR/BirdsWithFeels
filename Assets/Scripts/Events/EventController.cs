@@ -423,11 +423,22 @@ public class EventController : MonoBehaviour
         currentEvent.parts.AddRange(eventData.transform.GetComponentsInChildren<EventPart>());
         if (eventData.speakers[0] != EventScript.Character.None)
         {
-            try
+            if (currentEvent.affectedBird != EventScript.Character.None)
             {
-                currentBird = Helpers.Instance.GetBirdFromEnum(eventData.speakers[0]);
+                try
+                {
+                    currentBird = Helpers.Instance.GetBirdFromEnum(currentEvent.affectedBird);
+                }
+                catch { }
             }
-            catch { }
+            else
+            {
+                try
+                {
+                    currentBird = Helpers.Instance.GetBirdFromEnum(eventData.speakers[0]);
+                }
+                catch { }
+            }
             //currentPortrait = currentBird.portrait;
         }
         portraits = new List<GameObject>();
