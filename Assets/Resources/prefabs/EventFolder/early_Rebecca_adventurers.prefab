@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &112280453666070697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6935296609281794833}
+  - component: {fileID: 1080273866463131397}
+  m_Layer: 0
+  m_Name: Part 8 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6935296609281794833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112280453666070697}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4381041335918826402}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1080273866463131397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112280453666070697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 0
+  text: '...law enforcement huh? '
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &4381041335510347343
 GameObject:
   m_ObjectHideFlags: 0
@@ -56,8 +103,20 @@ MonoBehaviour:
   - {fileID: 4381041336940715982}
   - {fileID: 4381041336299758804}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &4381041335559606161
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,6 +201,7 @@ Transform:
   - {fileID: 1165188211930808944}
   - {fileID: 4381041337510482906}
   - {fileID: 4381041337015071201}
+  - {fileID: 6935296609281794833}
   - {fileID: 4381041336247982198}
   - {fileID: 4381041336536238086}
   m_Father: {fileID: 4381041335510347340}
@@ -223,7 +283,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4381041335918826402}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4381041336247982199
 MonoBehaviour:
@@ -238,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 3
-  text: Rebecca, are you alright? You look kinda sad.
+  text: Rebecca, are you alright?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &4381041336299758806
@@ -296,10 +356,10 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: You might feel that way now, but if you change emotions you might
-    feel different. Only time can tell.
-  selectionTooltip: Some dreams don't come true.  (+3 Caution)
+    feel different. It's okay to change
+  selectionTooltip: 
   conclusionHeading: 
-  conclusionText: "Yeah. I guess we\u2019ll see. \r"
+  conclusionText: "Yeah. I guess we\u2019ll see, yikes"
 --- !u!1 &4381041336419032321
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,7 +436,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4381041335918826402}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4381041336536238087
 MonoBehaviour:
@@ -451,7 +511,7 @@ MonoBehaviour:
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Hey, if you wanna be a merchant, you can be a merchant! You're one
     of the friendliest birds I've ever met!
-  selectionTooltip: Sell those goods! (+3 Friendliness)
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: 'Thank you! I do like meeting and helping new people!
 
