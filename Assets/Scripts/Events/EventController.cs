@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
@@ -423,11 +424,22 @@ public class EventController : MonoBehaviour
         currentEvent.parts.AddRange(eventData.transform.GetComponentsInChildren<EventPart>());
         if (eventData.speakers[0] != EventScript.Character.None)
         {
-            try
+            if (currentEvent.affectedBird != EventScript.Character.None)
             {
-                currentBird = Helpers.Instance.GetBirdFromEnum(eventData.speakers[0]);
+                try
+                {
+                    currentBird = Helpers.Instance.GetBirdFromEnum(currentEvent.affectedBird);
+                }
+                catch { }
             }
-            catch { }
+            else
+            {
+                try
+                {
+                    currentBird = Helpers.Instance.GetBirdFromEnum(eventData.speakers[0]);
+                }
+                catch { }
+            }
             //currentPortrait = currentBird.portrait;
         }
         portraits = new List<GameObject>();
@@ -595,9 +607,6 @@ public class EventController : MonoBehaviour
             }
             );
 
-
-            //Seb. Please add functionality to make the emo graph show the affected bird's emo graph! 
-
             bool ChoicesInfluenceEmotions = false;
             int myAmountOfChoices = 0;
 
@@ -656,7 +665,8 @@ public class EventController : MonoBehaviour
         AudioControler.Instance.PlayPaperSound();
         choiceList.gameObject.SetActive(false); 
         Helpers.Instance.HideTooltip();
-        string consequences = ApplyConsequences(ID);
+        ApplyConsequences(ID);
+        string consequences = GetEventConsequenceText(ID);
         if (currentBird != null)
         {
             try
@@ -694,11 +704,11 @@ public class EventController : MonoBehaviour
 
     }
 
-    string ApplyConsequences(int ID)
+    void ApplyConsequences(int ID)
     {
-        string ConsequenceText = ApplyConsequence(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1, currentEvent.options[ID].applyToAll);
-        ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2, currentEvent.options[ID].applyToAll);
-        ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3, currentEvent.options[ID].applyToAll);
+        ApplyConsequence(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1, currentEvent.options[ID].applyToAll);
+        ApplyConsequence(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2, currentEvent.options[ID].applyToAll);
+        ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3, currentEvent.options[ID].applyToAll);
         if (currentBird != null)
             currentBird.SetEmotion();
         if (GameLogic.Instance)
@@ -709,13 +719,80 @@ public class EventController : MonoBehaviour
         {
             GuiContoler.Instance.GraphBlocker.SetActive(false);
         }
-        return ConsequenceText;
 
     }
-    string ApplyConsequence(ConsequenceType type, int magnitude, bool applyToAll)
+    public string GetEventConsequenceText(int ID)
+    {
+        string[] consequences = new string[] {
+        GetConsequenceText(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1, currentEvent.options[ID].applyToAll),
+            GetConsequenceText(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2, currentEvent.options[ID].applyToAll),
+            GetConsequenceText(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3, currentEvent.options[ID].applyToAll) };
+        return string.Join("\n",consequences.Where(s => !System.String.IsNullOrEmpty(s)));
+    }
+
+    public string GetConsequenceText(ConsequenceType type, int magnitude, bool applyToAll)
     {
         if (currentBird == null)
             return "";
+        List<Bird> birdsToApply = new List<Bird>();
+        if (applyToAll)
+        {
+            foreach (Bird bird in Var.activeBirds)
+            {
+                birdsToApply.Add(bird);
+            }
+        }
+        else
+        {
+            birdsToApply.Add(currentBird);
+        }
+
+        string infoString = "";
+        foreach (Bird bird in birdsToApply)
+        {
+            switch (type)
+            {
+                case ConsequenceType.Courage:
+                    if (magnitude > 0)
+                    {
+                        infoString += bird.charName + " gains " + magnitude + " confidence\n";
+                    }
+                    else
+                    {
+                        infoString += bird.charName + "'s caution increases by " + Mathf.Abs(magnitude) + "\n";
+                    }
+                    break;
+                case ConsequenceType.Friendliness:
+                    if (magnitude > 0)
+                    {
+                        infoString += bird.charName + " gains " + magnitude + " social\n";
+                    }
+                    else
+                    {
+                        infoString += bird.charName + " gains " + Mathf.Abs(magnitude) + " solitude\n";
+                    }
+
+                    break;
+                case ConsequenceType.Health:
+                    if (magnitude > 0)
+                    {
+                        infoString += bird.charName + " gained " + magnitude + " health\n";
+                    }
+                    else
+                    {
+                        infoString += bird.charName + " lost " + Mathf.Abs(magnitude) + " health\n";
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        return infoString;
+    }
+    void ApplyConsequence(ConsequenceType type, int magnitude, bool applyToAll)
+    {
+        if (currentBird == null)
+            return;
         List<Bird> birdsToApply = new List<Bird>();
         if (applyToAll)
         {
@@ -741,47 +818,19 @@ public class EventController : MonoBehaviour
                 case ConsequenceType.Courage:
                     bird.prevConf = bird.data.confidence;
                     bird.data.confidence = Mathf.Clamp(bird.data.confidence + magnitude, -clamp, clamp);
-                   // bird.prevConf = Mathf.Clamp(bird.prevConf + magnitude, -clamp, clamp);
-                    if (magnitude > 0)
-                    {
-                        infoString += bird.charName + " gained " + magnitude + " confidence\n";
-                    }
-                    else
-                    {
-                        infoString += bird.charName + "'s caution increased by " + Mathf.Abs(magnitude) + "\n";
-                    }
                     break;
                 case ConsequenceType.Friendliness:
                     bird.prevFriend = bird.data.friendliness;
                     bird.data.friendliness = Mathf.Clamp(bird.data.friendliness + magnitude, -clamp, clamp);
-                   // bird.prevFriend = Mathf.Clamp(bird.prevFriend + magnitude, -clamp, clamp);
-                    if (magnitude > 0)
-                    {
-                        infoString += bird.charName + " gained " + magnitude + " social\n";
-                    }
-                    else
-                    {
-                        infoString += bird.charName + " gained " + Mathf.Abs(magnitude) + " solitude\n";
-                    }
 
-                    Debug.LogError(bird.charName + " prevFriend: " + bird.prevFriend + " friend: " + bird.data.friendliness);
                     break;
                 case ConsequenceType.Health:
                     currentBird.ChageHealth(magnitude);
-                    if (magnitude > 0)
-                    {
-                        infoString += bird.charName + " gained " + magnitude + " health\n";
-                    }
-                    else
-                    {
-                        infoString += bird.charName + " lost " + Mathf.Abs(magnitude) + " health\n";
-                    }
                     break;
                 default:
                     break;
             }
         }
-        return infoString;
 
     }
     void SetupChoice(GameObject choiceObj, int ID)
@@ -792,10 +841,20 @@ public class EventController : MonoBehaviour
         choiceObj.GetComponent<Button>().onClick.AddListener(delegate { DisplayChoiceResult(ID); });
         try
         {
+            var tooltip = choiceObj.GetComponentInChildren<ShowTooltip>();
             if (choiceData.selectionTooltip.Trim() != "")
             {
-                choiceObj.GetComponentInChildren<ShowTooltip>().tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
+                tooltip.tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
+                if (choiceData.useAutoExplanation)
+                {
+                    tooltip.tooltipText += "\n" + GetEventConsequenceText(ID);
+                }
             }
+            else
+            {
+                tooltip.tooltipText = GetEventConsequenceText(ID);
+            }
+            
             Text myChoiceTest = myTransformToGetComponentsFrom.transform.Find("Description").GetComponent<Text>();
 
             myChoiceTest.text = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionText);
