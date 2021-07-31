@@ -1230,7 +1230,7 @@ public class Bird : MonoBehaviour
 		}
 		data.health = Mathf.Min(data.health + healthBoost + roundHealthChange, data.maxHealth);
 		//Mental health
-		if ((Mathf.Abs(data.confidence) >= Var.DangerZoneStart || Mathf.Abs(data.friendliness) >= Var.DangerZoneStart) && (Mathf.Abs(prevConf) >= Var.DangerZoneStart || Mathf.Abs(prevFriend) >= Var.DangerZoneStart) && !Var.freezeEmotions)
+		if ((Mathf.Abs(data.confidence) >= Var.DangerZoneStart || Mathf.Abs(data.friendliness) >= Var.DangerZoneStart) && (Mathf.Abs(prevConf) >= Var.DangerZoneStart || Mathf.Abs(prevFriend) >= Var.DangerZoneStart) && !Var.freezeEmotions && !inMap)
 		{//In danger zone
 			data.mentalHealth = Math.Max(data.mentalHealth - 1, 0);
 			if (data.mentalHealth == 0)
