@@ -14,6 +14,7 @@ public class EventController : MonoBehaviour
 {
     [Range(0.0f, 1.0f)]
     public float eventFreq;
+    public EventScript defaultMapEvent;
     public static EventController Instance { get; private set; }
     [SerializeField] private Image eventBg;
     [SerializeField] private Image bgFog;
@@ -305,7 +306,7 @@ public class EventController : MonoBehaviour
                     canCreateEvent = false;
                 else
                 {
-                    if (ev.heading != "" && Var.shownEvents.Contains(ev.heading))
+                    if (ev.gameObject.name != "" && Var.shownEvents.Contains(ev.gameObject.name))
                         canCreateEvent = false;
                     if (ev.speakers.Contains(EventScript.Character.Alexander) && Var.availableBirds.Count < 4)
                         canCreateEvent = false;
@@ -399,7 +400,10 @@ public class EventController : MonoBehaviour
 
         if (!eventData.canShowMultipleTimes)
         {
-            Var.shownEvents.Add(eventData.heading);
+            Var.shownEvents.Add(eventData.gameObject.name);
+           // Debug.LogError("ADDED " + eventData.gameObject.name + " to completed events!");
+            
+
         }
         if (currentEvent != null)
         {

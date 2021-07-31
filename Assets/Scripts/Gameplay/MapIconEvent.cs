@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MapIconEvent : MapIcon
 {
-    public EventScript[] possibleEvents;
+    public List<EventScript> possibleEvents;
     private bool eventActive = false;
     public Sprite NarrativeIcon;
     public Image iconToChange;
@@ -108,14 +108,38 @@ public class MapIconEvent : MapIcon
         if (available && !completed)
         {
             Var.currentStageID = ID;
-            EventScript ev = possibleEvents[Random.Range(0, possibleEvents.Length)];
-            EventController.Instance.CreateEvent(ev);
+            EventController.Instance.CreateEvent(GetEventToDisplay());
             MapControler.Instance.showGraphAfterEvent = showGraph;
             eventActive = true;
             if(timedEvent)
             {
                 timedEvent.CheckIfTimedEvent();
             }
+        }
+    }
+
+    private EventScript GetEventToDisplay()
+    {
+        bool eventFound = false;
+        EventScript ev= null;
+        while (possibleEvents.Count>0 && !eventFound)
+        {
+            int foundEvent = Random.Range(0, possibleEvents.Count);
+            ev = possibleEvents[foundEvent];
+            if (ev.gameObject.name != "" && !Var.shownEvents.Contains(ev.gameObject.name))
+            {
+                eventFound = true;
+            }
+            possibleEvents.RemoveAt(foundEvent);
+        }
+        if(eventFound)
+        {
+            return ev;
+        }
+        else
+        {
+            Debug.LogError("Had to use event node fallback event!");
+            return EventController.Instance.defaultMapEvent;
         }
     }
 
