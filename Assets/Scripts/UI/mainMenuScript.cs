@@ -45,7 +45,7 @@ public class mainMenuScript : MonoBehaviour {
         saveSlotPanel.SetActive(false);
         quitGameButton.SetActive(false);
         chapterPanel.SetActive(false);
-        AudioControler.Instance.musicSource.Play();
+      //  AudioControler.Instance.musicSource.Play();
         selectChapterButton.SetActive(Var.cheatsEnabled);
     }
     public void OpenSaveSlots(bool isNewGame)

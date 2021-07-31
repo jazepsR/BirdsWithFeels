@@ -293,7 +293,6 @@ public class AudioControler : MonoBehaviour {
 			battleSource.volume = defaultMusicVol;
         if (musicSource)
         {
-           // Debug.Log("hello i am music source at music volume: " + defaultMusicVol);
             musicSource.volume = defaultMusicVol;
         }
         if(UiEffects)
@@ -468,6 +467,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
         audioSources.Add(GetAudioSource(audioSourceType.battleSource));
         audioSources.Add(GetAudioSource(audioSourceType.graphMusic));
         audioSources.Add(GetAudioSource(audioSourceType.musicSource));
+        audioSources.Add(GetAudioSource(audioSourceType.ambient));
 
         AudioSource activeSource = GetAudioSource(sourceToActivate);
         audioSources.Remove(activeSource);
