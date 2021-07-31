@@ -836,7 +836,7 @@ public class GuiContoler : MonoBehaviour {
             Destroy(child.gameObject);
         }
     }
-    public void CreateGraph(object o, bool afterBattle = true)
+    public void CreateGraph(object o, bool afterBattle = true, Bird bird = null)
     {
         GraphActive = true;
         //canChangeGraph = true;
@@ -859,7 +859,12 @@ public class GuiContoler : MonoBehaviour {
             LeanTween.cancel(graphInteractTweenID);
         }
         //graphInteractTweenID= LeanTween.delayedCall(2f, () => canChangeGraph = true).id;
-        if (birdNum == -1)
+        if(bird != null)
+        {
+
+            BirdsToGraph = new List<Bird>() { bird };
+        }
+        else if (birdNum == -1)
         {
             BirdsToGraph = Var.activeBirds;
             ProgressGUI.Instance.ConditionsBG.transform.parent.gameObject.SetActive(false);
@@ -902,9 +907,9 @@ public class GuiContoler : MonoBehaviour {
         if (currentGraph != 3)
         {
             //Normal case
-            DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(Var.activeBirds[birdNum]));
+            DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(BirdsToGraph[0]));
            // EmotionChangeFeedback.gameObject.SetActive(true);
-            CreateEmotionChangeText(Var.activeBirds[birdNum], emoReportBitParent);
+            CreateEmotionChangeText(BirdsToGraph[0], emoReportBitParent);
             //EmotionChangeFeedback.text = changeText;
             //EmotionChangeHeading.gameObject.SetActive(changeText != "");
             feelReport.SetActive(true);
@@ -1115,7 +1120,7 @@ public class GuiContoler : MonoBehaviour {
     public void OpenMapBigGraph(Bird bird)
     {
         MapControler.Instance.charInfoAnim.SetBool("hide", true);
-        MapControler.Instance.charInfoAnim.SetBool("show", false); 
+        MapControler.Instance.charInfoAnim.SetBool("show", false);
         InitiateGraph(bird);
         CreateBattleReport();
         CheckGraphNavBtns();
@@ -1147,7 +1152,7 @@ public class GuiContoler : MonoBehaviour {
             //LeanTween.delayedCall(0.7f, () =>
             // {
             //Debug.Log("doing graph! " + bird.charName + " index: " + index);
-            CreateGraph(index, afterBattle);
+            CreateGraph(index, afterBattle, bird);
             ProgressGUI.Instance.PortraitClick(bird);
         }
         else
@@ -1397,7 +1402,7 @@ public class GuiContoler : MonoBehaviour {
 	}
     public void ResetAfterMapEvent()
     {
-        foreach (Bird bird in Var.activeBirds)
+        foreach (Bird bird in FillPlayer.Instance.playerBirds)
         {
            // Var.availableBirds[0].ToString();
           //  Var.activeBirds[0].ToString();
