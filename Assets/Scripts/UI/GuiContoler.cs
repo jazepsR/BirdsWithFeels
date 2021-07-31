@@ -178,7 +178,8 @@ public class GuiContoler : MonoBehaviour {
             boss.SetActive(Var.isBoss);
             GraphBlocker.SetActive(false);
 
-            if (Var.freezeEmotions && Var.selectedTimeEvent != null && !Var.selectedTimeEvent.activationEventShown  && !Var.isEnding && !inMap)
+            if (Var.selectedTimeEvent != null && Var.selectedTimeEvent.activationEventID == Var.currentStageID
+                && !Var.selectedTimeEvent.activationEventShown  && !Var.isEnding && !inMap)
             {
                 foreach (TimedEventControl anEvent in timedEventControllers)
                 {
