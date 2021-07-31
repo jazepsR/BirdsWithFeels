@@ -510,33 +510,15 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	}
 	public void LoadSaveData(bool createNewSave = false)
 	{
-		bool SaveDataCreated = false;
-		foreach (MapSaveData data in Var.mapSaveData)
-		{
-			if (data.ID == ID)
-			{
-				if(createNewSave)
-                {
-					Var.mapSaveData.Remove(data);
-                }
-                else
-				{
-					SaveDataCreated = true;
-				}
-				break;
-			}
-		}
+		bool saveDataCreated = CheckIfSaveDataExists();
+		if(createNewSave)
+        {
+			RemoveSave();
+        }
 
-
-		if (!SaveDataCreated )
+		if (!saveDataCreated )
 		{
-			List<int> targIDs = new List<int>();
-			foreach (MapIcon targ in targets)
-			{
-				targIDs.Add(targ.ID);
-			}
-			mySaveData = new MapSaveData(completed, available,firstCompletion, ID, targIDs,type, trialID,levelName);
-			Var.mapSaveData.Add(mySaveData);
+			CreateSaveData();
 		}
 		else
 		{
@@ -552,7 +534,48 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			}
 		}
 	}
-
+	public void RemoveSave()
+    {
+		foreach (MapSaveData data in Var.mapSaveData)
+		{
+			if (data.ID == ID)
+			{
+				Var.mapSaveData.Remove(data);
+				break;
+			}
+		}
+	}
+	public void TryCreateNewSave()
+    {
+		RemoveSave();
+		if(!CheckIfSaveDataExists())
+        {
+			CreateSaveData();
+        }
+    }
+	public bool CheckIfSaveDataExists()
+    {
+		bool saveDataCreated =false;
+		foreach (MapSaveData data in Var.mapSaveData)
+		{
+			if (data.ID == ID)
+			{				
+				saveDataCreated = true;
+				break;
+			}
+		}
+		return saveDataCreated;
+	}
+	private void CreateSaveData()
+    {
+		List<int> targIDs = new List<int>();
+		foreach (MapIcon targ in targets)
+		{
+			targIDs.Add(targ.ID);
+		}
+		mySaveData = new MapSaveData(completed, available, firstCompletion, ID, targIDs, type, trialID, levelName);
+		Var.mapSaveData.Add(mySaveData);
+	}
 
 	public virtual void mapBtnClick()
 	{

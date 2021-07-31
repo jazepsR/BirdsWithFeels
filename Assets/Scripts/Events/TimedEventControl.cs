@@ -30,7 +30,10 @@ public class TimedEventControl : MonoBehaviour {
 		{
 			data = Helpers.Instance.GetTimedEvent(eventName);
 		}
-		startArea.timedEvent = this;
+		if (startArea)
+		{
+			startArea.timedEvent = this;
+		}
 		if (MapControler.Instance)
 		{
 			CheckStatus();

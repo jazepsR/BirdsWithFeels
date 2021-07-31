@@ -56,16 +56,19 @@ public class MapIconEvent : MapIcon
                         LeanTween.delayedCall(1.7f, () => unlockedRoad.gameObject.GetComponent<Animator>().SetBool("new", true));
                         LeanTween.delayedCall(1.7f, () => unlockedRoad.gameObject.SetActive(true));
                     }
+                    LeanTween.delayedCall(1.3f, () =>
+                    {
                     foreach (MapIcon icon in targets)
                     {
-                        LeanTween.delayedCall(1.3f, () =>
-                        {
+                        
                             icon.stateSet = false;
                             icon.available = true;
                             icon.SetState();
-                        });
+                            icon.TryCreateNewSave();
                     }
-                    LeanTween.delayedCall(3f, () => SaveLoad.Save());
+                    TryCreateNewSave();
+                    SaveLoad.Save();
+                    });
                 }
                 else
                 {
