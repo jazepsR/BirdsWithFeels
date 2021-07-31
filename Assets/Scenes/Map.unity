@@ -8663,46 +8663,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &323823302
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.0026450756, y: 0.0026781438}
-        m_Offset: {x: 0.49529317, y: 3.6954994}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &323943746
 GameObject:
   m_ObjectHideFlags: 0
@@ -9824,6 +9784,46 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50421a0210bff8242b57c5780aed91a3, type: 3}
+--- !u!21 &370171261
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.0026450756, y: 0.0026781424}
+        m_Offset: {x: 0.49529317, y: 3.6954975}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &372313899 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114150951801007776, guid: bcba0062914f46c4895397ffa376facf,
@@ -11441,6 +11441,11 @@ PrefabInstance:
       propertyPath: possibleEvents.Array.data[1]
       value: 
       objectReference: {fileID: 318212503}
+    - target: {fileID: 515480570476029295, guid: 9ab489193ef088b4a89eaba2db11be74,
+        type: 3}
+      propertyPath: showGraph
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 515480570476029295, guid: 9ab489193ef088b4a89eaba2db11be74,
         type: 3}
       propertyPath: possibleEvents.Array.data[0]
@@ -21676,6 +21681,11 @@ PrefabInstance:
         type: 3}
       propertyPath: bgProgressAnim
       value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4524174351294144952, guid: e8c06d92a7356bd4a9cd4fb4f7a841c9,
+        type: 3}
+      propertyPath: showGraph
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4524174351294144952, guid: e8c06d92a7356bd4a9cd4fb4f7a841c9,
         type: 3}
@@ -52720,6 +52730,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5387123061175390775, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
+      propertyPath: showGraph
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387123061175390775, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
       propertyPath: levelDescription
       value: 
       objectReference: {fileID: 0}
@@ -52728,6 +52743,11 @@ PrefabInstance:
       propertyPath: possibleEvents.Array.data[0]
       value: 
       objectReference: {fileID: 461947792}
+    - target: {fileID: 5477224168762143384, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: showGraph
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5477224168762143384, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
       propertyPath: possibleEvents.Array.data[0]
@@ -63174,6 +63194,16 @@ PrefabInstance:
       propertyPath: possibleEvents.Array.data[2]
       value: 
       objectReference: {fileID: 1886759404474689276}
+    - target: {fileID: 5060519416400859085, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: ID
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5060519416400859085, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: showGraph
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5060519416400859085, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: possibleEvents.Array.data[0]
