@@ -323,7 +323,7 @@ MonoBehaviour:
   onComplete: {fileID: 0}
   applyToAll: 0
   consequenceType1: 2
-  magnitude1: 1
+  magnitude1: 4
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
@@ -333,7 +333,7 @@ MonoBehaviour:
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: I don't think you should give up those seeds, they're an investment
     in your future. These birds can find some other food!
-  selectionTooltip: Helping myself before other birds. (+1 Confidence)
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: Yeah!
 --- !u!1 &8381512231847680873
@@ -583,8 +583,20 @@ MonoBehaviour:
   - {fileID: 8381512232830167780}
   - {fileID: 8381512231769786750}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &8381512232830167782
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,7 +643,7 @@ MonoBehaviour:
   onComplete: {fileID: 0}
   applyToAll: 0
   consequenceType1: 1
-  magnitude1: 1
+  magnitude1: 4
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
@@ -639,8 +651,8 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: "Rebecca, these birds don\u2019t have anything else to eat. You
-    can't save them for the future when these birds need them now."
-  selectionTooltip: Spare some seeds (+1 Friendliness)
+  selectionText: "Rebecca, these birds don\u2019t have anything else to eat. We can
+    have the queen get you some new seedlings once this is over"
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: You're right, of course. Here you go.

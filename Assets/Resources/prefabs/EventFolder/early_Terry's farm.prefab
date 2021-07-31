@@ -103,8 +103,20 @@ MonoBehaviour:
   - {fileID: 2740127119318167834}
   - {fileID: 2740127119124870205}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &2740127118130390052
 GameObject:
   m_ObjectHideFlags: 0
@@ -378,7 +390,7 @@ MonoBehaviour:
   onComplete: {fileID: 0}
   applyToAll: 0
   consequenceType1: 1
-  magnitude1: -3
+  magnitude1: -4
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
@@ -388,7 +400,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Oh don't be so dramatic! I bet this mission is way more interesting
     than anything that could happen on a farm!
-  selectionTooltip: Brush it off (+3 Solitude)
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: 'I knew you wouldn''t get it... '
 --- !u!1 &2740127119305811249
@@ -484,7 +496,7 @@ MonoBehaviour:
   onComplete: {fileID: 0}
   applyToAll: 0
   consequenceType1: 1
-  magnitude1: 1
+  magnitude1: 4
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
@@ -493,11 +505,10 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "I get it, Terry. You\u2019re used to a neutral life at a small
-    farm, and adventuring like this must be very different. It\u2019s alright if
-    you miss it. \r\n"
-  selectionTooltip: Farm sick (+1 Friendliness)
+    farm, and adventuring like this must be very different!"
+  selectionTooltip: 
   conclusionHeading: 
-  conclusionText: Yeah. Thanks.
+  conclusionText: Thanks leader, you always know what to say
 --- !u!1 &2740127119561881206
 GameObject:
   m_ObjectHideFlags: 0

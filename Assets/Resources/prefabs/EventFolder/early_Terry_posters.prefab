@@ -46,7 +46,7 @@ MonoBehaviour:
   onComplete: {fileID: 0}
   applyToAll: 0
   consequenceType1: 2
-  magnitude1: -3
+  magnitude1: -4
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
@@ -55,9 +55,8 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Sorry, Terry, but even if we do make it to the king there's no way
-    of knowing if we'll be able to change things. The vultures might not want to
-    listen.
-  selectionTooltip: It's too late... (+3 Caution)
+    of knowing if we'll be able to change things. The king might not want to listen
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: Right... of course.
 --- !u!1 &2927743873912507969
@@ -161,9 +160,8 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: No, I don't think all vultures are bad. I know that we can talk
-    to them and reason with them!
-  selectionTooltip: Change their minds! (+3 Confidence)
+  selectionText: 'Of course not, we are constantly befriending them! '
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: Hearing you say that makes me feel so much better!
 --- !u!1 &2927743874021090976
@@ -269,8 +267,20 @@ MonoBehaviour:
   - {fileID: 2927743873962538568}
   - {fileID: 2927743873910825992}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &2927743874187869392
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 1
-  text: They're anti-bird posters put up by the vultures! I can't believe this!
+  text: They're anti-bird posters put up by the vulture king's troops! I can't believe
+    this!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &2927743874513697477
