@@ -9,6 +9,8 @@ public class MapControler : MonoBehaviour {
 	[HideInInspector]
 	public bool canFight= false;
 	[HideInInspector]
+	public bool showGraphAfterEvent = true;
+	[HideInInspector]
 	public bool canHeal = false;
 	GameObject healTrail;
 	public Text title;

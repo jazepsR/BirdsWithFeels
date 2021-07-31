@@ -9,6 +9,7 @@ public class MapIconEvent : MapIcon
     private bool eventActive = false;
     public Sprite NarrativeIcon;
     public Image iconToChange;
+    public bool showGraph = true;
 
     internal override void Start()
     {
@@ -26,6 +27,7 @@ public class MapIconEvent : MapIcon
         {
             completed = true;
             firstCompletion = true;
+            eventActive = false;
             tooltipInfo.tooltipText = GetTooltipText();
             SetState();
         }
@@ -100,11 +102,17 @@ public class MapIconEvent : MapIcon
 
     public override void mapBtnClick()
     {
-        if (available)// && !completed)
+        if (available && !completed)
         {
             Var.currentStageID = ID;
-            EventController.Instance.CreateEvent(possibleEvents[Random.Range(0, possibleEvents.Length)]);
+            EventScript ev = possibleEvents[Random.Range(0, possibleEvents.Length)];
+            EventController.Instance.CreateEvent(ev);
+            MapControler.Instance.showGraphAfterEvent = showGraph;
             eventActive = true;
+            if(timedEvent)
+            {
+                timedEvent.CheckIfTimedEvent();
+            }
         }
     }
 

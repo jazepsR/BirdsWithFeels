@@ -8,7 +8,7 @@ public class TimedEventControl : MonoBehaviour {
 	[Header("Start")]
 	public string eventName;
 	public MapIcon startArea;
-	public EventScript startEvent;
+	//public EventScript startEvent;
 	public int timeToComplete;
 	[Header("Resolution")]
 	public MapIcon endArea;
@@ -23,30 +23,33 @@ public class TimedEventControl : MonoBehaviour {
 	public TimedEventData data = null;
 	Vector3 offset = new Vector3(-95, 30f, 0);
 	bool shouldTriggerBattle = false;
-	// Use this for initialization
-	
-	void Start () {
-			if (Helpers.Instance.VarContainsTimedEvent(eventName))
-			{
-				data = Helpers.Instance.GetTimedEvent(eventName);
-			}
-			else
-			{
-				if (startArea && startArea.completed)
-				{
-					data = new TimedEventData(eventName, Var.currentWeek + timeToComplete);
-					data.currentState = TimedEventData.state.active;
-					Var.timedEvents.Add(data);
-					EventController.Instance.CreateEvent(startEvent);
-					endArea.timedEventTrigger = this;
-				}
-			}
-		
-		if(MapControler.Instance)
+    // Use this for initialization
+    
+    void Start () {
+		if (Helpers.Instance.VarContainsTimedEvent(eventName))
+		{
+			data = Helpers.Instance.GetTimedEvent(eventName);
+		}
+		startArea.timedEvent = this;
+		if (MapControler.Instance)
+		{
 			CheckStatus();
+		}
 		
 	}
 	
+	public void CheckIfTimedEvent()
+    {
+		if (startArea)
+		{
+			data = new TimedEventData(eventName, Var.currentWeek + timeToComplete);
+			data.currentState = TimedEventData.state.active;
+			Var.timedEvents.Add(data);
+			CheckStatus();
+			//EventController.Instance.CreateEvent(startEvent);
+		}
+	}
+
 
 	public void CheckStatus()
 	{

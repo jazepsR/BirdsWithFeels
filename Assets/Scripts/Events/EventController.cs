@@ -210,10 +210,10 @@ public class EventController : MonoBehaviour
                 LeanTween.delayedCall(0.7f, () =>
                  eventObject.SetActive(false));
 
-                if (inMap) //Update map icons once event has finished playing. 
+                if (inMap) 
                 {
                     DialogueControl.Instance.TryDialogue(Dialogue.Location.map); 
-                    if (currentBird)
+                    if (currentBird && MapControler.Instance.showGraphAfterEvent)
                     {
                         LeanTween.delayedCall(0.7f, () =>GuiContoler.Instance.OpenMapBigGraph(currentBird));
                     }
