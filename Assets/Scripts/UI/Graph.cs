@@ -94,6 +94,10 @@ public class Graph : MonoBehaviour {
 			Var.Em emotion = bird.emotion;
 			if (bird.prevEmotion == bird.emotion)
 				emotion = Var.Em.finish;
+
+			//Debug.LogError(bird.charName + " prevconf: " + bird.prevConf + " conf: " + bird.data.confidence);
+			//Debug.LogError(bird.charName + " prevfriend: " + bird.prevFriend + " friend: " + bird.data.friendliness);
+
 			portraitScript.StartGraph(secondPos, emotion, bird, this, shouldHaveSound);
 		}
 		if ((GuiContoler.Instance.currentGraph == 3 && afterBattle) || !Var.gameSettings.shownLevelTutorial)

@@ -739,6 +739,7 @@ public class EventController : MonoBehaviour
             switch (type)
             {
                 case ConsequenceType.Courage:
+                    bird.prevConf = bird.data.confidence;
                     bird.data.confidence = Mathf.Clamp(bird.data.confidence + magnitude, -clamp, clamp);
                    // bird.prevConf = Mathf.Clamp(bird.prevConf + magnitude, -clamp, clamp);
                     if (magnitude > 0)
@@ -751,6 +752,7 @@ public class EventController : MonoBehaviour
                     }
                     break;
                 case ConsequenceType.Friendliness:
+                    bird.prevFriend = bird.data.friendliness;
                     bird.data.friendliness = Mathf.Clamp(bird.data.friendliness + magnitude, -clamp, clamp);
                    // bird.prevFriend = Mathf.Clamp(bird.prevFriend + magnitude, -clamp, clamp);
                     if (magnitude > 0)
@@ -761,6 +763,8 @@ public class EventController : MonoBehaviour
                     {
                         infoString += bird.charName + " gained " + Mathf.Abs(magnitude) + " solitude\n";
                     }
+
+                    Debug.LogError(bird.charName + " prevFriend: " + bird.prevFriend + " friend: " + bird.data.friendliness);
                     break;
                 case ConsequenceType.Health:
                     currentBird.ChageHealth(magnitude);

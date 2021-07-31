@@ -45,7 +45,7 @@ public class TimedEventControl : MonoBehaviour {
     {
 		if (startArea)
 		{
-			data = new TimedEventData(eventName, Var.currentWeek + timeToComplete);
+			data = new TimedEventData(eventName, Var.currentWeek + timeToComplete, endArea.ID);
 			data.currentState = TimedEventData.state.active;
 			Var.timedEvents.Add(data);
 			CheckStatus();
@@ -172,9 +172,11 @@ public class TimedEventData
 	public enum state { notStarted,active,failed,completedSuccess,completedFail};
 	public state currentState = state.notStarted;
 	public bool activationEventShown = false;
-	public TimedEventData(string eventName, int completeBy)
+	public int activationEventID = 0;
+	public TimedEventData(string eventName, int completeBy, int activationEventID)
 	{
 		this.eventName = eventName;
 		this.completeBy = completeBy;
+		this.activationEventID = activationEventID;
 	}
 }
