@@ -144,7 +144,7 @@ public class BirdData
 	public int friendliness =0;
 	public int confidence =0;
 	public int health=3;
-	public int mentalHealth=3;
+	public int mentalHealth=Var.maxMentalHealth;
 	public int maxHealth=3;
 	public bool injured= false;
 	public Var.Em preferredEmotion= Var.Em.Cautious;

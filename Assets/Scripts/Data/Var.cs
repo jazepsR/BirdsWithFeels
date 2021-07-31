@@ -27,7 +27,7 @@ public static class Var {
 	public static int loadChapterID = -1;
 	public static GameObject dustCloud = null;
 	public static int MoveGraphBy = 1315;
-	public static int maxMentalHealth = 3;
+	public static int maxMentalHealth = 2;
 	public static int emPowerTileStrength = 3;
 	public static int DangerZoneStart = 14;
 	public static int lvl1 = 5;
