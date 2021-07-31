@@ -66,8 +66,6 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	bool useline;
 	public int trialID;
 	public Animator anim;
-	[HideInInspector]
-	public TimedEventControl timedEventTrigger;
 	bool birdAdded = false;
 	public EventScript firstCompleteEvent;
 	public Dialogue firstCompleteDialogue;
