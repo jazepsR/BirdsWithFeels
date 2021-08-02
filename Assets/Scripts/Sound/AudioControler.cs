@@ -305,7 +305,7 @@ public class AudioControler : MonoBehaviour {
             particleSounds.volume = defaultSoundVol;
         if (emoGraphSource)
             emoGraphSource.volume = defaultMusicVol;
-        if (EventController.Instance.eventAudioSource)
+        if (EventController.Instance && EventController.Instance.eventAudioSource)
             EventController.Instance.eventAudioSource.volume = defaultSoundVol;
         if (spatialMusicSources.Count > 0)
         {

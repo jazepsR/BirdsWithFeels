@@ -952,9 +952,8 @@ public class GuiContoler : MonoBehaviour {
 
 	 public void CreateEmotionChangeText(Bird bird, Transform topParent)
 	{
-		Debug.Log("CHANGE TEXT " + bird.charName + " gorund conf: " + bird.groundConfBoos + " ground friend: " + bird.groundFriendBoos);
-
-		string fbText = "";
+		//Debug.Log("CHANGE TEXT " + bird.charName + " gorund conf: " + bird.groundConfBoos + " ground friend: " + bird.groundFriendBoos);
+        string fbText = "";
 		int ConfGainedInRound = bird.battleConfBoos + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
 		int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
         SetupTotal(confTotalReportParent, Var.Em.Confident, Var.Em.Cautious, ConfGainedInRound, confTotalReportIcon, confTotalReportCount);

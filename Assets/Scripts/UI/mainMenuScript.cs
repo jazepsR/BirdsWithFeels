@@ -26,7 +26,7 @@ public class mainMenuScript : MonoBehaviour {
     void Awake()
     {
         Instance = this;
-        PreloadMap();
+      //  PreloadMap();
     }
 
     void PreloadMap()
