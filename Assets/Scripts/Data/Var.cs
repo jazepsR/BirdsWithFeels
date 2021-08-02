@@ -84,7 +84,7 @@ public static class Var {
 	public static bool freezeEmotions = false;
 	public static int eventTextCharLimit = 200;
     /// Tutorial IDs
-    public static int battlePlanningTutorialID = 11;
+    public static int battlePlanningTutorialID = 13;
     public static int levelTutorialID = 21;
 	public static bool cheatsEnabled = true;
 	public static float levelPopupDelay = 0.3f;
