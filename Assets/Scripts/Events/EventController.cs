@@ -402,9 +402,6 @@ public class EventController : MonoBehaviour
         if (!eventData.canShowMultipleTimes)
         {
             Var.shownEvents.Add(eventData.gameObject.name);
-           // Debug.LogError("ADDED " + eventData.gameObject.name + " to completed events!");
-            
-
         }
         if (currentEvent != null)
         {
@@ -464,7 +461,6 @@ public class EventController : MonoBehaviour
         eventObject.SetActive(true);
         heading.text = Helpers.Instance.ApplyTitle(currentBird, eventData.heading);
         string text = Helpers.Instance.ApplyTitle(currentBird, eventData.parts[0].text);
-        //nameText.text = currentBird.charName;
         if (coroutine != null)
             StopCoroutine(coroutine);
         coroutine = WaitAndPrint(text, true);

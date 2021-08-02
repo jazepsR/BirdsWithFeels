@@ -151,6 +151,11 @@ public class MapControler : MonoBehaviour {
 			}
 			if (!wasActive && bird.gameObject.activeSelf)
 			{
+				if(bird.data.injured)
+                {
+					bird.DecreaseTurnsInjured();
+                }
+
 				if(bird.data.health<bird.data.maxHealth && !bird.data.injured)
 				{
 					GameObject healObj = Instantiate(bird.healParticle, bird.transform);
@@ -169,7 +174,7 @@ public class MapControler : MonoBehaviour {
 			{
 				if (bird.data.unlocked)
 				{
-					if (!bird.data.injured)
+					if (!bird.data.injured && bird.mapHighlight)
 					{
 						bird.mapHighlight.SetActive(true);
 						selectedBirds.Add(bird);
@@ -366,20 +371,22 @@ public class MapControler : MonoBehaviour {
 
 		canMove = true;
 
-        //this is seb taken off
-        /*
+		//this is seb taken off
+		/*
         	LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
         LeanTween.value(gameObject, (float alpha) => MapControler.Instance.SelectionMenu.GetComponent<CanvasGroup>().alpha = alpha, 1, 0, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
        */
-         SelectionMenuAnimator.SetBool("active", false); //seb change 
+		if (SelectionMenuAnimator)
+		{
+			SelectionMenuAnimator.SetBool("active", false); //seb change 
+		}
         // SelectionMenuBlurAnimator.SetBool("active", false);
 
-        MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
-        
+        ScaleSelectedBirds(scaleTime, Vector3.zero);        
         foreach (GuiMap map in FindObjectsOfType<GuiMap>())
 			map.Clear();
-        MapControler.Instance.SelectedIcon = null;
-
+        SelectedIcon = null;
+		mapPan.Instance.scrollingEnabled = true;
     }
 	public void SetSelectionMenuIcons(MapIcon mapIcon)
     {

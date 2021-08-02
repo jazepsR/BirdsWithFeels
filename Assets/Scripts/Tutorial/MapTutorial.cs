@@ -27,6 +27,7 @@ public class MapTutorial : MonoBehaviour {
 		{
 			tutorialHighlight.gameObject.SetActive(true);
 			DialogueControl.Instance.CreateParticularDialog(mapTutorialDialog);
+            mapPan.Instance.scrollingEnabled = false;
             shouldShowMapTutPopup = true;
 		}else
 		{
@@ -38,6 +39,7 @@ public class MapTutorial : MonoBehaviour {
         {
             mapTutPopup2.SetActive(true);
             Var.gameSettings.shownMapTutorial2 = true;
+            mapPan.Instance.scrollingEnabled = false;
             SaveLoad.Save(false);
         }
 	}

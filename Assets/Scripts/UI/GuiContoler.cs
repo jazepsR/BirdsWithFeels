@@ -862,7 +862,6 @@ public class GuiContoler : MonoBehaviour {
         //graphInteractTweenID= LeanTween.delayedCall(2f, () => canChangeGraph = true).id;
         if(bird != null)
         {
-
             BirdsToGraph = new List<Bird>() { bird };
         }
         else if (birdNum == -1)
@@ -886,10 +885,9 @@ public class GuiContoler : MonoBehaviour {
 
         for (int i = 0; i < BirdsToGraph.Count; i++)
         {
-            if (!BirdsToGraph[i].data.injured)
+            if (!BirdsToGraph[i].data.injured || inMap)
             {
                 Helpers.Instance.NormalizeStats(BirdsToGraph[i]);
-                GameObject portrait = BirdsToGraph[i].portrait;
                 Graph.Instance.PlotFull(BirdsToGraph[i], afterBattle,i==0);
             }
         }
@@ -980,7 +978,7 @@ public class GuiContoler : MonoBehaviour {
                 CreateEmoBit(topParent, bird.battleConfBoos, Var.Em.Cautious, "Getting hurt by vultures");
         }
         //fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs(bird.battleConfBoos).ToString("+#;-#;0") + " caution</color>";
-        if (bird.data.injured)
+        if (bird.data.injured && !inMap)
             CreateEmoBit(topParent, 5, Var.Em.Cautious, "Suffered injury");
        // fbText += Helpers.Instance.ScaredHexColor + "\n\t(5 caution from injury)</color>";
 		if (bird.groundConfBoos > 0)
