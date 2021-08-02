@@ -140,7 +140,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		{
 			temp.y = maxY - 0.5f;
 		}
-		Debug.LogError("ychange: " + temp.y + " minY: " + minY + " maxY: " + maxY);
+		//Debug.LogError("ychange: " + temp.y + " minY: " + minY + " maxY: " + maxY);
 		transform.position = temp;
 	}
 	private void AdjustToBoundary()
