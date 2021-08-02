@@ -72,15 +72,15 @@ public class Bird : MonoBehaviour
 	public int x = -1;
 	public int y = -1;
 	public Var.Em emotion;
-	public bool inUse = true;	
+	public bool inUse = true;
 	[NonSerialized]
-	public SpriteRenderer colorRenderer;    
-	[HideInInspector,NonSerialized]
+	public SpriteRenderer colorRenderer;
+	[HideInInspector, NonSerialized]
 	public List<SpriteRenderer> colorSprites;
 	[NonSerialized]
-	public GameObject bush;    
-	public GameObject portrait, portraitTiny;	
-	[HideInInspector] 
+	public GameObject bush;
+	public GameObject portrait, portraitTiny;
+	[HideInInspector]
 	public Vector3 target;
 	public Vector3 home;
 	[HideInInspector]
@@ -88,10 +88,10 @@ public class Bird : MonoBehaviour
 	//[HideInInspector]
 	[NonSerialized]
 	public firendLine lines;
-	bool needsReset = false; 
-	public enum dir { top,front,bottom};
+	bool needsReset = false;
+	public enum dir { top, front, bottom };
 	public dir position;
-	public fillEnemy.enemyType enemyType = fillEnemy.enemyType.normal;	
+	public fillEnemy.enemyType enemyType = fillEnemy.enemyType.normal;
 	public bool isEnemy = true;
 	[HideInInspector]
 	public int friendBoost = 0;
@@ -115,8 +115,8 @@ public class Bird : MonoBehaviour
 	public int roundHealthChange = 0;
 	//[HideInInspector]
 	public int GroundRollBonus = 0;
-    public bool hasShieldBonus = false;
-    public bool inMap = false;
+	public bool hasShieldBonus = false;
+	public bool inMap = false;
 	[HideInInspector]
 	public Sprite hatSprite;
 	[HideInInspector]
@@ -147,7 +147,7 @@ public class Bird : MonoBehaviour
 	Color HighlightCol;
 	public int birdIndex = 0;
 	public bool hasNewLevel = false;
-	public Var.Em prevEmotion=  Var.Em.finish;
+	public Var.Em prevEmotion = Var.Em.finish;
 	bool started = false;
 	public GameObject EnemyArt = null;
 	public GameObject GroundBonus;
@@ -162,51 +162,51 @@ public class Bird : MonoBehaviour
 	bool mouseHeld = false;
 	float clickTime = 0;
 	public BirdSound birdSounds;
-    public EmoIndicator indicator;
+	public EmoIndicator indicator;
 	public List<LevelDataScriptable> levelList = new List<LevelDataScriptable>();
 	[HideInInspector] public bool seedCollectedInRound = false;
 	void Awake()
 	{
-		if(!isEnemy && !Var.isTutorial)
+		if (!isEnemy && !Var.isTutorial)
 			LoadBirdData();
 	}
 	void Start()
 	{
 		canGrab = true;
-        birdSounds = new BirdSound();
-        wonLastBattle = -1;
+		birdSounds = new BirdSound();
+		wonLastBattle = -1;
 		if (!isEnemy && portrait == null)
 		{
 			portrait = Resources.Load<GameObject>("prefabs/portraits/portrait_" + charName);
 			portraitTiny = Resources.Load<GameObject>("prefabs/portraits/tiny_portrait_" + charName);
 			birdSounds = AudioControler.Instance.GetBirdSoundGroup(charName);
 
-        }
-		if(isEnemy)
-        {
-			
+		}
+		if (isEnemy)
+		{
+
 			birdSounds.birdDialogueTalk = AudioControler.Instance.VultureDialogueSounds;
 
 		}
-	   /* if (!isEnemy && !inMap)
-		{
-			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi!");
-			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi2!");
-			GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi3!");
-		}*/
-		
+		/* if (!isEnemy && !inMap)
+		 {
+			 GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi!");
+			 GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi2!");
+			 GuiContoler.Instance.ShowSpeechBubble(transform.Find("mouth").transform, "hi3!");
+		 }*/
+
 		prevRoundHealth = data.health;
 		prevRoundMentalHealth = data.mentalHealth;
 		x = -1;
 		y = -1;
 		prevConf = data.confidence;
 		prevFriend = data.friendliness;
-	  
- 
+
+
 		if (!isEnemy)
 		{
 
-            /*if (relationships == null)
+			/*if (relationships == null)
 			{
 				relationships = new Dictionary<EventScript.Character, int>();
 				relationships.Add(EventScript.Character.Kim, 0);
@@ -227,11 +227,11 @@ public class Bird : MonoBehaviour
 			RelationshipScript.applyRelationship(this, false);
 			SetRealtionshipParticles();*/
 
-            var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
+			var BirdArt = Resources.Load("prefabs/" + birdPrefabName);
 			birdArtObj = Instantiate(BirdArt, transform) as GameObject;
 			birdArtObj.transform.localPosition = new Vector3(0.23f, -0.3f, 0);
-            birdArtObj.transform.SetAsFirstSibling();
-	   
+			birdArtObj.transform.SetAsFirstSibling();
+
 			if (levelList.Count == 0 && !Var.isTutorial)
 			{
 				levelList = new List<LevelDataScriptable>();
@@ -241,7 +241,7 @@ public class Bird : MonoBehaviour
 			}
 			levelControler = GetComponent<Levels>();
 			/*if (startingLVL != Levels.type.None)
-				levelControler.ApplyStartLevel(this, levelList);      */ 
+				levelControler.ApplyStartLevel(this, levelList);      */
 		}
 		colorSprites = new List<SpriteRenderer>();
 		foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
@@ -251,16 +251,16 @@ public class Bird : MonoBehaviour
 		}
 		SetEmotion();
 		foreach (SpriteRenderer sp in colorSprites)
-		   sp.color = Helpers.Instance.GetEmotionColor(emotion);
+			sp.color = Helpers.Instance.GetEmotionColor(emotion);
 		//SetCoolDownRing(false);
 		if (CooldownRing != null)
 		{
 			CooldownRing.fillAmount = (float)(data.CoolDownLength - data.CoolDownLeft) / (float)data.CoolDownLength;
 		}
-		lines = GetComponent<firendLine>();        
+		lines = GetComponent<firendLine>();
 		if (isEnemy)
 		{
-			home = transform.localPosition;           
+			home = transform.localPosition;
 		}
 		else
 		{
@@ -269,7 +269,7 @@ public class Bird : MonoBehaviour
 			SetBandages();
 		}
 		target = transform.position;
-		if (!isEnemy && (data.injured || data.health <=0))
+		if (!isEnemy && (data.injured || data.health <= 0))
 		{
 			data.injured = true;
 			Animator anim = GetComponentInChildren<Animator>();
@@ -282,10 +282,10 @@ public class Bird : MonoBehaviour
 			}
 		}
 
-        if (inMap && MapControler.Instance.count != 3)
-        {
-            GetComponentInChildren<Animator>().SetBool("rest", true);
-        }
+		if (inMap && MapControler.Instance.count != 3)
+		{
+			GetComponentInChildren<Animator>().SetBool("rest", true);
+		}
 
 		if (data.recievedSeeds == null)
 			data.recievedSeeds = new List<string>();
@@ -299,7 +299,7 @@ public class Bird : MonoBehaviour
 	void LoadBirdData()
 	{
 		string path = Application.persistentDataPath + "/" + Var.currentSaveSlot + "/" + charName + ".dat";
-#if !UNITY_EDITOR		
+#if !UNITY_EDITOR
 		loadDataFromInspector = false;
 #endif
 		if (File.Exists(path) && !loadDataFromInspector)
@@ -310,21 +310,21 @@ public class Bird : MonoBehaviour
 			file.Close();
 			levelList = new List<LevelDataScriptable>();
 			levelList = new List<LevelDataScriptable>();
-			if (data.level>1)
-            {
-				if(Helpers.Instance.levels== null)
-                {
+			if (data.level > 1)
+			{
+				if (Helpers.Instance.levels == null)
+				{
 					Helpers.Instance.LoadLevelData();
 				}
-				for(int i = 0;i<data.level;i++)
-                {
+				for (int i = 0; i < data.level; i++)
+				{
 					levelList.Add(Helpers.Instance.levels[i]);
-					if(i+1 == data.level)
-                    {
+					if (i + 1 == data.level)
+					{
 						data.lastLevel = Helpers.Instance.levels[i];
-                    }
-                }
-            }
+					}
+				}
+			}
 		}
 		portraitOrder = Helpers.GetPortraitNumber(charName);
 		if (!isEnemy)
@@ -341,14 +341,14 @@ public class Bird : MonoBehaviour
 				File.Delete(path);
 			}
 			Debug.Log("savePath: " + path);
-            if(charName.ToLower() == "Kim")
-            {
-                data.unlocked = Var.KimUnlocked;
-            }
-            if(charName.ToLower() == "Sophie")
-            {
-                data.unlocked = Var.SophieUnlocked;
-            }
+			if (charName.ToLower() == "Kim")
+			{
+				data.unlocked = Var.KimUnlocked;
+			}
+			if (charName.ToLower() == "Sophie")
+			{
+				data.unlocked = Var.SophieUnlocked;
+			}
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Create(path);
 			bf.Serialize(file, data);
@@ -359,16 +359,16 @@ public class Bird : MonoBehaviour
 	{
 		Start();
 	}
-	public void DecreaseTurnsInjured()
+	public void DecreaseTurnsInjured(int reduceBy = 1)
 	{
 		if (data.injured)
 		{
-			data.TurnsInjured--;
-			if (data.TurnsInjured <=0)
+			data.TurnsInjured-=reduceBy;
+			if (data.TurnsInjured <= 0)
 			{
 				data.injured = false;
 				GetComponentInChildren<Animator>().SetBool("injured", false);
-				data.health = 3;
+				data.health = data.maxHealth;
 			}
 		}
 	}
@@ -380,7 +380,7 @@ public class Bird : MonoBehaviour
 		CrushParticles.SetActive(relationshipBonus < 0);
 
 	}*/
-	
+
 	public void Speak(string text)
 	{
 		string str = charName;
@@ -390,10 +390,10 @@ public class Bird : MonoBehaviour
 	public Transform GetMouthTransform()
 	{
 		Transform mouth = transform;
-		if(isEnemy)
-		{			
-			mouth =EnemyArt.transform.Find("mouth");
-			if(mouth != null)
+		if (isEnemy)
+		{
+			mouth = EnemyArt.transform.Find("mouth");
+			if (mouth != null)
 			{
 				return mouth;
 			}
@@ -405,31 +405,32 @@ public class Bird : MonoBehaviour
 		try
 		{
 			birdArtObj.transform.Find("neutral").SetAsLastSibling();
-		
+
 			for (int i = 0; i < birdArtObj.transform.childCount; i++)
 			{
-					if (birdArtObj.transform.GetChild(i).name == emotion.ToString().ToLower())
-					{
-						mouth = birdArtObj.transform.GetChild(i).Find("mouth");
+				if (birdArtObj.transform.GetChild(i).name == emotion.ToString().ToLower())
+				{
+					mouth = birdArtObj.transform.GetChild(i).Find("mouth");
 
-						break;
-					}
+					break;
+				}
 			}
 		}
-		catch {
+		catch
+		{
 			mouth = transform;
 		}
 		return mouth;
 	}
 	public void SetBandages()
-    {
+	{
 		//bird
 		var bandageSwitchers = birdArtObj.GetComponentsInChildren<BandageSwitcher>();
-		foreach(BandageSwitcher switcher in bandageSwitchers)
-        {
+		foreach (BandageSwitcher switcher in bandageSwitchers)
+		{
 			switcher.SetBandages(data.health <= 1);
-        }
-    }
+		}
+	}
 	public void SetCoolDownRing(bool active)
 	{
 		/*if (CooldownRing != null)
@@ -452,54 +453,54 @@ public class Bird : MonoBehaviour
 			}*/
 	}
 	public void AddLevel(LevelDataScriptable levelData)
-	{		
-		hasNewLevel = true;            
+	{
+		hasNewLevel = true;
 		Helpers.Instance.EmitEmotionParticles(transform, Var.Em.finish);
 		Helpers.Instance.EmitEmotionParticles(transform, emotion, false);
 
 
-		data.lastLevel = levelData;		
-			
-			data.levelRollBonus++;
-			//Reset Emotions
-			/*prevConf = confidence;
-			prevFriend = friendliness;
-			switch (data.emotion)
-			{
-				case Var.Em.Confident:
-					confidence = 4;
-					if (friendliness > 0)
-						friendliness = (int)Mathf.Min(4, friendliness);
-					else
-						friendliness = (int)Mathf.Max(-4, friendliness);
-					break;
-				case Var.Em.Cautious:
-					confidence = -4;
-					if (friendliness > 0)
-						friendliness = (int)Mathf.Min(4, friendliness);
-					else
-						friendliness = (int)Mathf.Max(-4, friendliness);
-					break;
-				case Var.Em.Social:
-					friendliness = 4;
-					if (confidence > 0)
-						confidence = (int)Mathf.Min(4, confidence);
-					else
-						confidence = (int)Mathf.Max(-4, confidence);
-					break;
-				case Var.Em.Solitary:
-					friendliness = -4;
-					if (confidence > 0)
-						confidence = (int)Mathf.Min(4, confidence);
-					else
-						confidence = (int)Mathf.Max(-4, confidence);
-					break;
-				default:
-					break;
-			}*/
-			ResetBonuses();
+		data.lastLevel = levelData;
+
+		data.levelRollBonus++;
+		//Reset Emotions
+		/*prevConf = confidence;
+		prevFriend = friendliness;
+		switch (data.emotion)
+		{
+			case Var.Em.Confident:
+				confidence = 4;
+				if (friendliness > 0)
+					friendliness = (int)Mathf.Min(4, friendliness);
+				else
+					friendliness = (int)Mathf.Max(-4, friendliness);
+				break;
+			case Var.Em.Cautious:
+				confidence = -4;
+				if (friendliness > 0)
+					friendliness = (int)Mathf.Min(4, friendliness);
+				else
+					friendliness = (int)Mathf.Max(-4, friendliness);
+				break;
+			case Var.Em.Social:
+				friendliness = 4;
+				if (confidence > 0)
+					confidence = (int)Mathf.Min(4, confidence);
+				else
+					confidence = (int)Mathf.Max(-4, confidence);
+				break;
+			case Var.Em.Solitary:
+				friendliness = -4;
+				if (confidence > 0)
+					confidence = (int)Mathf.Min(4, confidence);
+				else
+					confidence = (int)Mathf.Max(-4, confidence);
+				break;
+			default:
+				break;
+		}*/
+		ResetBonuses();
 		levelList.Add(levelData);
-		data.level = levelList.Count+1;
+		data.level = levelList.Count + 1;
 		levelUpText = null;
 	}
 	public float getBonus()
@@ -519,7 +520,7 @@ public class Bird : MonoBehaviour
 		string bonusText = "";
 		if (data.levelRollBonus != 0)
 			bonusText += "\nFrom levels: " + (data.levelRollBonus * 10).ToString("+#;-#;0");
-		if(PlayerRollBonus !=0)
+		if (PlayerRollBonus != 0)
 			bonusText += "\nFrom other birds: " + (PlayerRollBonus * 10).ToString("+#;-#;0");
 		if (GroundRollBonus != 0)
 			bonusText += "\nFrom the current tile: " + (GroundRollBonus * 10).ToString("+#;-#;0");
@@ -590,10 +591,10 @@ public class Bird : MonoBehaviour
 		}
 
 
-		if (!SaveDataCreated && (Var.activeBirds.Count<=3 || inMap))
+		if (!SaveDataCreated && (Var.activeBirds.Count <= 3 || inMap))
 		{
 			//Var.activeBirds.Add(this);
-		   // print("created something!");       
+			// print("created something!");       
 		}
 		else
 		{
@@ -603,12 +604,12 @@ public class Bird : MonoBehaviour
 			friendliness = savedData.friendliness;*/
 		}
 	}
-	
+
 	public void ResetBonuses()
 	{
-		Debug.Log("Reset: " +charName +" ground bonus friend: " + groundFriendBoos + " conf: " + groundConfBoos);
+		Debug.Log("Reset: " + charName + " ground bonus friend: " + groundFriendBoos + " conf: " + groundConfBoos);
 		battleConfBoos = 0;
-		friendBoost = 0;       
+		friendBoost = 0;
 		groundConfBoos = 0;
 		groundFriendBoos = 0;
 		wizardConfBoos = 0;
@@ -618,20 +619,20 @@ public class Bird : MonoBehaviour
 		levelFriendBoos = 0;
 		levelConfBoos = 0;
 		healthBoost = 0;
-        hasShieldBonus = false;
+		hasShieldBonus = false;
 		isInfluenced = false;
 		Destroy(cautiousParticleObj);
 	}
 
-    public int GetFriendlinessBonus()
-    {
-        return friendBoost + groundFriendBoos + wizardFrienBoos + levelFriendBoos;
-    }
-    public int GetConfBoost()
-    {
-        return battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
-    }
-    public void TryLevelUp()
+	public int GetFriendlinessBonus()
+	{
+		return friendBoost + groundFriendBoos + wizardFrienBoos + levelFriendBoos;
+	}
+	public int GetConfBoost()
+	{
+		return battleConfBoos + groundConfBoos + wizardConfBoos + levelConfBoos;
+	}
+	public void TryLevelUp()
 	{
 		if (data.injured)
 			return;
@@ -655,7 +656,7 @@ public class Bird : MonoBehaviour
 		{
 			Debug.LogError("failed to reset!");
 		}
-		
+
 	}
 	/*public string CheckLevels(bool toApply = true)
 	{
@@ -693,9 +694,9 @@ public class Bird : MonoBehaviour
 	void OnMouseEnter()
 	{
 
-       // Debug.LogError("friendly: " + prevFriend + " gain friendly " + GetFriendlinessBonus() + " conf: " + prevConf + " prev conf: " + GetFriendlinessBonus());
-        //if(!Var.Infight)
-        if (!Var.CanShowHover || GuiContoler.Instance.speechBubbleObj.activeSelf || Var.Infight || EventController.Instance.eventObject.activeSelf)
+		// Debug.LogError("friendly: " + prevFriend + " gain friendly " + GetFriendlinessBonus() + " conf: " + prevConf + " prev conf: " + GetFriendlinessBonus());
+		//if(!Var.Infight)
+		if (!Var.CanShowHover || GuiContoler.Instance.speechBubbleObj.activeSelf || Var.Infight || EventController.Instance.eventObject.activeSelf)
 			return;
 		if (Var.CanShowHover)
 			showText();
@@ -707,23 +708,23 @@ public class Bird : MonoBehaviour
 		else
 		{
 
-			if(Time.timeSinceLevelLoad > 1)
+			if (Time.timeSinceLevelLoad > 1)
 			{
-               
+
 				if (inMap)
 				{
 					MapControler.Instance.charInfoAnim.SetBool("show", true);
 					MapControler.Instance.charInfoAnim.SetBool("hide", false);
-                }
-                if (!dragged  && birdSounds.mouseOverBird.clips.Length >0)
-                   birdSounds.mouseOverBird.Play();
-            }
+				}
+				if (!dragged && birdSounds.mouseOverBird.clips.Length > 0)
+					birdSounds.mouseOverBird.Play();
+			}
 			foreach (SpriteRenderer sp in colorSprites)
-				sp.color = HighlightCol;			
-			
+				sp.color = HighlightCol;
+
 		}
 		//if(inMap)
-			//ProgressGUI.Instance.PortraitClick(this);
+		//ProgressGUI.Instance.PortraitClick(this);
 		if (!inMap && !isEnemy && levelUpText != null && levelUpText != "" && !dragged && !Var.Infight && Var.CanShowHover)
 			GuiContoler.Instance.ShowLvlText(levelUpText);
 	}
@@ -748,12 +749,12 @@ public class Bird : MonoBehaviour
 			if (Time.timeSinceLevelLoad - clickTime > 0.25f && !isEnemy && !inMap && !Var.isDragControls)
 			{
 				birdSounds.pickupBird.Play();
-                GetComponentInChildren<Animator>().SetBool("lift", true);
+				GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-				{                   
-                    child.sortingLayerName = "Front";
+				{
+					child.sortingLayerName = "Front";
 				}
-                indicator.ResetLayer();
+				indicator.ResetLayer();
 
 				for (int i = 0; i < Var.playerPos.GetLength(0); i++)
 				{
@@ -772,7 +773,7 @@ public class Bird : MonoBehaviour
 				if (selectionEffect != null)
 					DestroySelection();
 				ResetOnSelection();
-			}			
+			}
 			else
 			{
 				if (!dragged && !Var.isDragControls)
@@ -782,9 +783,9 @@ public class Bird : MonoBehaviour
 					foreach (LayoutButton btn in ObstacleGenerator.Instance.tiles)
 					{
 						LeanTween.delayedCall((btn.index.x + btn.index.y) * 0.05f + 0.05f, () => btn.ShowHighlight());
-						btn.gameObject.layer = LayerMask.NameToLayer(charName.Substring(0,1).ToUpper() + charName.Substring(1));
+						btn.gameObject.layer = LayerMask.NameToLayer(charName.Substring(0, 1).ToUpper() + charName.Substring(1));
 					}
-				
+
 					ResetOnSelection();
 					Var.clickedBird = this;
 					foreach (Bird bird in Var.activeBirds)
@@ -794,23 +795,23 @@ public class Bird : MonoBehaviour
 				{
 
 
-                    foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-                    {
-                        child.sortingLayerName = charName.Substring(0, 1).ToUpper() + charName.Substring(1);
-                    }
-                    if (indicator)
-                    {
-                        indicator.ResetLayer();
-                    }
-                    GetComponentInChildren<Animator>().SetBool("lift", false);
-			if (Var.isTutorial && !GuiContoler.Instance.inMap)
-			{
-				foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
-				{
-					tile.baseColor = tile.defaultColor;
-					LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
-				}
-			}
+					foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+					{
+						child.sortingLayerName = charName.Substring(0, 1).ToUpper() + charName.Substring(1);
+					}
+					if (indicator)
+					{
+						indicator.ResetLayer();
+					}
+					GetComponentInChildren<Animator>().SetBool("lift", false);
+					if (Var.isTutorial && !GuiContoler.Instance.inMap)
+					{
+						foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
+						{
+							tile.baseColor = tile.defaultColor;
+							LeanTween.color(tile.gameObject, tile.defaultColor, 0.3f);
+						}
+					}
 				}
 			}
 		}
@@ -829,35 +830,35 @@ public class Bird : MonoBehaviour
 		{
 			if (Var.Infight || data.injured || GuiContoler.Instance.speechBubbleObj.activeSelf)
 				return;
-            if (!inMap)
-            {
-                if (birdSounds.pickupBird.clips.Length > 0)
-                {
-                    birdSounds.pickupBird.Play();
-                }
-                else
-                {
-                    AudioControler.Instance.DefaultBirdSound.birdSelect.Play();
-                }
-            }
-            if (inMap)
+			if (!inMap)
+			{
+				if (birdSounds.pickupBird.clips.Length > 0)
+				{
+					birdSounds.pickupBird.Play();
+				}
+				else
+				{
+					AudioControler.Instance.DefaultBirdSound.birdSelect.Play();
+				}
+			}
+			if (inMap)
 			{
 				if (MapControler.Instance.selectedBirds.Contains(this))
 				{
 					mapHighlight.SetActive(false);
 					GetComponentInChildren<Animator>().SetBool("rest", true);
-                    AudioControler.Instance.PlaySound(AudioControler.Instance.BirdSitDown);
+					AudioControler.Instance.PlaySound(AudioControler.Instance.BirdSitDown);
 					MapControler.Instance.selectedBirds.Remove(this);
 				}
 				else
 				{
 					mapHighlight.SetActive(true);
 					GetComponentInChildren<Animator>().SetBool("rest", false);
-                    birdSounds.birdSelect.Play();
-                    MapControler.Instance.selectedBirds.Add(this);
+					birdSounds.birdSelect.Play();
+					MapControler.Instance.selectedBirds.Add(this);
 				}
 				MapControler.Instance.CanLoadBattle();
-				return;			
+				return;
 				if (MapControler.Instance.canHeal)
 				{
 					ChageHealth(data.maxHealth);
@@ -921,7 +922,7 @@ public class Bird : MonoBehaviour
 					UpdateFeedback();
 				}
 			}
-				else
+			else
 			{
 				clickTime = Time.timeSinceLevelLoad;
 			}
@@ -955,7 +956,7 @@ public class Bird : MonoBehaviour
 			{
 				levelControler.ApplyLevelOnPickup(this, levelList);
 			}
-			levelControler.ApplyLevelOnPickup(this,levelList);
+			levelControler.ApplyLevelOnPickup(this, levelList);
 			UpdateFeedback();
 		}
 	}
@@ -978,7 +979,7 @@ public class Bird : MonoBehaviour
 			SetCoolDownRing(false);
 			if (isEnemy)
 			{
-				
+
 			}
 			else
 			{
@@ -986,7 +987,7 @@ public class Bird : MonoBehaviour
 				foreach (SpriteRenderer sp in colorSprites)
 					sp.color = DefaultCol;
 			}
-			
+
 		}
 		if (isEnemy)
 		{
@@ -1010,7 +1011,7 @@ public class Bird : MonoBehaviour
 
 	void UpdateFeedback()
 	{
-		
+
 		fighting = false;
 		/*if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, data.levelList) )
 		{
@@ -1030,25 +1031,25 @@ public class Bird : MonoBehaviour
 		}*/
 
 		if (indicator)
-        {
-			
+		{
+
 			if (dragged || (target == home && !isEnemy))
-            {
+			{
 				indicator.Hide();
-            }
-            else
-            {
-                GetFriendlinessBonus();
-                GetConfBoost();
+			}
+			else
+			{
+				GetFriendlinessBonus();
+				GetConfBoost();
 
 			}
-        }
-        GameLogic.Instance.UpdateFeedback();
-		
+		}
+		GameLogic.Instance.UpdateFeedback();
+
 	}
-	public Bird(string name,int confidence =0,int friendliness = 0)
+	public Bird(string name, int confidence = 0, int friendliness = 0)
 	{
-        this.data = new BirdData();
+		this.data = new BirdData();
 		this.data.confidence = confidence;
 		this.data.friendliness = friendliness;
 		this.charName = name;
@@ -1058,9 +1059,19 @@ public class Bird : MonoBehaviour
 
 	public void OnLevelPickup()
 	{
-	   levelControler.ApplyLevelOnPickup(this, levelList);
+		levelControler.ApplyLevelOnPickup(this, levelList);
 	}
+	public void HealFully(bool reviveFromInjury)
+	{
+		if (reviveFromInjury)
+		{
+			DecreaseTurnsInjured(5);
+		}
+		ChageHealth(data.maxHealth);
+		data.mentalHealth = Var.maxMentalHealth;
+		prevRoundMentalHealth = Var.maxMentalHealth;
 
+	}
 	public void ChageHealth(int change)
 	{
 		try
@@ -1071,17 +1082,17 @@ public class Bird : MonoBehaviour
 				return;
 			if (change > 0)
 			{
-				if (data.health != data.maxHealth && !data.injured )
+				if (data.health != data.maxHealth && !data.injured)
 				{
 					GameObject healObj = Instantiate(healParticle, transform);
 					Destroy(healObj, 1.5f);
 				}
-            }
-            else if(hasShieldBonus)
-            {
-                //Add Shield Effects Here
-                return;
-            }
+			}
+			else if (hasShieldBonus)
+			{
+				//Add Shield Effects Here
+				return;
+			}
 			roundHealthChange += change;
 			Debug.Log(charName + " health change " + change);
 			if (GuiContoler.Instance.selectedBird == this)
@@ -1096,20 +1107,21 @@ public class Bird : MonoBehaviour
 				data.TurnsInjured = 4;
 			}
 		}
-		catch(Exception ex)
+		catch (Exception ex)
 		{
 			print("Error in add health: " + ex.Message);
 		}
-		
+
 	}
 
 	public override string ToString()
 	{
 		if (enabled && !isEnemy)
 		{
-			return '\u2022'+"friendly: " + data.friendliness +" "+ '\u2022' + "brave: " + data.confidence + 
-				"\n"+ '\u2022' + "level: " + data.level + " "+'\u2022' + "health: " + data.health +"\n" + data.birdAbility;
-		}else
+			return '\u2022' + "friendly: " + data.friendliness + " " + '\u2022' + "brave: " + data.confidence +
+				"\n" + '\u2022' + "level: " + data.level + " " + '\u2022' + "health: " + data.health + "\n" + data.birdAbility;
+		}
+		else
 		{
 			return null;
 		}
@@ -1120,7 +1132,7 @@ public class Bird : MonoBehaviour
 	{
 		if (enabled)
 		{
-			return charName + "\n" +emotion.ToString();
+			return charName + "\n" + emotion.ToString();
 		}
 		else
 		{
@@ -1136,7 +1148,7 @@ public class Bird : MonoBehaviour
 		{
 			if (friendBoost + wizardFrienBoos + groundFriendBoos + levelFriendBoos > 0)
 			{
-				if(shouldApply)
+				if (shouldApply)
 					levelFriendBoos += 1;
 				toReturn.y = 1;
 				print(charName + " got influenced to friendly");
@@ -1171,7 +1183,7 @@ public class Bird : MonoBehaviour
 		}
 		return toReturn;
 	}
-	public void AddRoundBonuses(bool doFightStuff= true)
+	public void AddRoundBonuses(bool doFightStuff = true)
 	{
 		print(charName + " doing round bonus. HealthGain " + roundHealthChange);
 		if (data.injured)
@@ -1180,12 +1192,12 @@ public class Bird : MonoBehaviour
 
 		prevRoundHealth = data.health;
 		prevRoundMentalHealth = data.mentalHealth;
-		
+
 
 
 		if (doFightStuff)
 		{
-			
+
 			/*RelationshipScript.applyRelationship(this);
 			relationshipBonus = GetRelationshipBonus();
 			SetRealtionshipParticles();
@@ -1193,7 +1205,7 @@ public class Bird : MonoBehaviour
 			if (!foughtInRound)
 			{
 				data.consecutiveFightsWon = 0;
-				data.roundsRested++;				
+				data.roundsRested++;
 				battleConfBoos -= 2;
 			}
 			else
@@ -1238,7 +1250,7 @@ public class Bird : MonoBehaviour
 				//dont kill the player
 				if (data.health > 1)
 				{//Effects from having no mental health left
-					//mentalHealth = Var.maxMentalHealth;					
+				 //mentalHealth = Var.maxMentalHealth;					
 					hadMentalPain = true;
 					data.health--;
 				}
@@ -1247,38 +1259,38 @@ public class Bird : MonoBehaviour
 			}
 
 		}
-		else if(Mathf.Abs(data.confidence)< Var.DangerZoneStart && Mathf.Abs(data.friendliness) < Var.DangerZoneStart && (Mathf.Abs(prevConf) < Var.DangerZoneStart && Mathf.Abs(prevFriend) < Var.DangerZoneStart))
+		else if (Mathf.Abs(data.confidence) < Var.DangerZoneStart && Mathf.Abs(data.friendliness) < Var.DangerZoneStart && (Mathf.Abs(prevConf) < Var.DangerZoneStart && Mathf.Abs(prevFriend) < Var.DangerZoneStart))
 		{//In comfort zone
 			data.mentalHealth = Mathf.Min(Var.maxMentalHealth, data.mentalHealth + 1);
-		}	 
+		}
 		roundHealthChange = 0;
-		foughtInRound = false;        
-		
-		Helpers.Instance.NormalizeStats(this);        
+		foughtInRound = false;
+
+		Helpers.Instance.NormalizeStats(this);
 		if (this == GuiContoler.Instance.selectedBird)
-			showText();    
+			showText();
 	}
 	public void ResetCanGrab()
-    {
+	{
 		StartCoroutine(ResetGrabDelay());
-    }
+	}
 
 	private IEnumerator ResetGrabDelay()
-    {
+	{
 		canGrab = false;
 		yield return new WaitForSeconds(0.28f);
 		canGrab = true;
-    }
+	}
 	public void SetEmotion()
 	{
 		float factor = 0.13f;
 		float transitionTime = 1.9f;
-		if (prevEmotion.Equals( Var.Em.finish)|| isEnemy)
+		if (prevEmotion.Equals(Var.Em.finish) || isEnemy)
 		{
 			transitionTime = 0.0f;
 		}
 		prevEmotion = emotion;
-		if (Mathf.Abs((float)data.confidence)<Var.lvl1 && Mathf.Abs((float)data.friendliness) < Var.lvl1)
+		if (Mathf.Abs((float)data.confidence) < Var.lvl1 && Mathf.Abs((float)data.friendliness) < Var.lvl1)
 		{
 			//No type
 			emotion = Var.Em.Neutral;
@@ -1287,24 +1299,25 @@ public class Bird : MonoBehaviour
 				foreach (SpriteRenderer sp in colorSprites)
 					LeanTween.color(sp.gameObject, Helpers.Instance.GetEmotionColor(emotion), transitionTime);
 			}
-			catch { }        
-			DefaultCol = Helpers.Instance.GetEmotionColor(emotion);            
+			catch { }
+			DefaultCol = Helpers.Instance.GetEmotionColor(emotion);
 			HighlightCol = new Color(DefaultCol.r + factor, DefaultCol.g + factor, DefaultCol.b + factor);
-		}else if (Mathf.Abs((float)data.confidence) > Mathf.Abs((float)data.friendliness))
+		}
+		else if (Mathf.Abs((float)data.confidence) > Mathf.Abs((float)data.friendliness))
 		{
 			if (data.confidence > 0)
 			{
-				
+
 				//Confident
 				if (data.confidence >= Var.lvl1)
 					emotion = Var.Em.Confident;
-			
+
 			}
 			else
 			{
 				//Scared
-			   if (data.confidence <= -Var.lvl1)
-					emotion = Var.Em.Cautious;				
+				if (data.confidence <= -Var.lvl1)
+					emotion = Var.Em.Cautious;
 			}
 
 		}
@@ -1316,13 +1329,13 @@ public class Bird : MonoBehaviour
 
 				//friendly				
 				if (data.friendliness >= Var.lvl1)
-					emotion = Var.Em.Social;				
+					emotion = Var.Em.Social;
 			}
 			else
 			{
 				//Lonely				
 				if (data.friendliness <= -Var.lvl1)
-					emotion = Var.Em.Solitary;				
+					emotion = Var.Em.Solitary;
 			}
 
 		}
@@ -1340,13 +1353,13 @@ public class Bird : MonoBehaviour
 			if (Var.Infight)
 				delay = 6f;
 			LeanTween.delayedCall(delay, () => SetAnimation(emotion));
-		}		
+		}
 		if (prevEmotion.Equals(Var.Em.finish))
 			prevEmotion = emotion;
 
 
 	}
-	
+
 	public void SetAnimation(Var.Em emotionNum)
 	{
 		try
@@ -1365,10 +1378,10 @@ public class Bird : MonoBehaviour
 		if (ToString() != null)
 		{
 			//Var.birdInfo.text = ToString();         
-			
+
 			GuiContoler.Instance.clearSmallGraph();
-			GuiContoler.Instance.smallGraph.PlotFull(this,false);
-			
+			GuiContoler.Instance.smallGraph.PlotFull(this, false);
+
 			GuiContoler.Instance.selectedBird = this;
 			//SetRelationshipSliders(GuiContoler.Instance.relationshipSliders);
 			Var.birdInfoFeeling.text = emotion.ToString();
@@ -1376,9 +1389,9 @@ public class Bird : MonoBehaviour
 			if (data.lastLevel != null)
 				Var.birdInfoHeading.text = Helpers.Instance.ApplyTitle(this, data.lastLevel.birdTitle);
 			else
-				Var.birdInfoHeading.text = charName;          
+				Var.birdInfoHeading.text = charName;
 			GuiContoler.Instance.PortraitControl(portraitOrder, emotion);
-			GuiContoler.Instance.BirdCombatStr.text = "Combat strength: " + (getBonus()* 10f).ToString("+#;-#;0") + "%";
+			GuiContoler.Instance.BirdCombatStr.text = "Combat strength: " + (getBonus() * 10f).ToString("+#;-#;0") + "%";
 			GuiContoler.Instance.BirdCombatStr.gameObject.GetComponent<ShowTooltip>().tooltipText = GetBonusText();
 			//levelUpText = CheckLevels(false);
 			//set progress to level bar
@@ -1400,7 +1413,7 @@ public class Bird : MonoBehaviour
 			int index = 0;
 			GuiContoler.Instance.levelNumberText.text = data.level.ToString();
 			//Set Relationship bars
-				
+
 
 			///Set level icons
 			///Currently removed
@@ -1431,17 +1444,18 @@ public class Bird : MonoBehaviour
 				if (data.injured)
 				{
 					Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, 0, data.maxHealth);
-                }
-                else
+				}
+				else
 				{
 					Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, data.health + roundHealthChange, data.maxHealth);
 				}
-				Helpers.Instance.setHearts(GuiContoler.Instance.BirdMentalHearts, data.mentalHealth, Var.maxMentalHealth,-1,true);
+				Helpers.Instance.setHearts(GuiContoler.Instance.BirdMentalHearts, data.mentalHealth, Var.maxMentalHealth, -1, true);
 
 			}
-			catch {
+			catch
+			{
 				Debug.Log("failed to set hearts");
-			}			
+			}
 		}
 	}
 
@@ -1495,8 +1509,8 @@ public class Bird : MonoBehaviour
 		}
 		RelationshipText.text = relationshipText;
 	}*/
-	
-	
+
+
 	public void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.P) && Var.cheatsEnabled)
@@ -1528,11 +1542,11 @@ public class Bird : MonoBehaviour
 			dragged = false;
 			indicator.Hide();
 			LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
-			
+
 		}
-		if (Input.GetMouseButtonUp(0) &&dragged)
-			needsReset = true;        
-			
+		if (Input.GetMouseButtonUp(0) && dragged)
+			needsReset = true;
+
 		if (dragged)
 		{
 			LeanTween.move(gameObject, new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0), 0.02f);
@@ -1541,32 +1555,32 @@ public class Bird : MonoBehaviour
 	void drawLines()
 	{
 		lines.DrawLines();
-		
+
 		if (indicator)
-        {
-            Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(this).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
-            Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
-            if (emo1 == Var.Em.Social)
-            {
-                emo1 = Helpers.Instance.getFriendState(this) == Helpers.friendState.diagonal ? Var.Em.Neutral : Var.Em.Social;
-            }
+		{
+			Var.Em emo1 = (Helpers.Instance.GetAdjacentBirds(this).Count == 0 ? Var.Em.Solitary : Var.Em.Social);
+			Var.Em emo2 = fighting ? Var.Em.Neutral : Var.Em.Cautious;
+			if (emo1 == Var.Em.Social)
+			{
+				emo1 = Helpers.Instance.getFriendState(this) == Helpers.friendState.diagonal ? Var.Em.Neutral : Var.Em.Social;
+			}
 			Debug.Log("draw lines setting emotion: emo1: " + emo1 + "emo2: " + emo2);
 			indicator.SetEmotions(emo1, emo2);
-        }
-    }
+		}
+	}
 	public void ReleaseBird(int x, int y)
 	{
-		
+
 		Var.selectedBird = null;
 		dragged = false;
 		this.x = x;
 		this.y = y;
 		GetComponentInChildren<Animator>().SetBool("lift", false);
-        foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
-        {
-            child.sortingLayerName = charName.Substring(0, 1).ToUpper() + charName.Substring(1);
-        }
-        indicator.ResetLayer();
+		foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
+		{
+			child.sortingLayerName = charName.Substring(0, 1).ToUpper() + charName.Substring(1);
+		}
+		indicator.ResetLayer();
 		GameObject dustObj = Instantiate(Var.dustCloud, transform.Find("feet"));
 		dustObj.transform.localPosition = Vector3.zero;
 		Destroy(dustObj, 1.0f);
@@ -1574,8 +1588,8 @@ public class Bird : MonoBehaviour
 		{
 			LeanTween.delayedCall(0.15f, drawLines);
 			birdSounds.dropBird.Play();
-            //lines.DrawLines();
-            showText();
+			//lines.DrawLines();
+			showText();
 			try
 			{
 				levelControler.ApplyLevelOnDrop(this);
@@ -1595,7 +1609,8 @@ public class Bird : MonoBehaviour
 				}
 				UpdateFeedback();
 			}
-			catch {
+			catch
+			{
 				UpdateFeedback();
 			}
 		}
@@ -1609,14 +1624,11 @@ public class Bird : MonoBehaviour
 		}
 		LeanTween.move(gameObject, new Vector3(target.x, target.y, 0), 0.5f).setEase(LeanTweenType.easeOutBack);
 		SetCoolDownRing(false);
-		if(inMap)
+		if (inMap)
 		{
 			MapControler.Instance.CanLoadBattle();
 		}
 
 
 	}
-	
-
-
 }
