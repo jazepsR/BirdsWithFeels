@@ -333,13 +333,11 @@ public class EventController : MonoBehaviour
         Debug.Log("creating Event!");
         if (eventData.isCampFireScene && inMap)
         {
-
             try
             {
                 Transform campFire = eventObject.transform.Find("Campfire");
                 if (campFire != null)
                 {
-
                     foreach (Bird bird in FillPlayer.Instance.playerBirds)
                     {
 
@@ -378,8 +376,16 @@ public class EventController : MonoBehaviour
             {
 
                 Debug.Log("campfire can not be shown");
-            } 
-            
+            }
+
+        }
+        else
+        {
+            Transform campFire = eventObject.transform.Find("Campfire");
+            if (campFire != null)
+            {
+                campFire.gameObject.SetActive(false);
+            }
         }
         if (eventData.eventBackground != null)
         {
