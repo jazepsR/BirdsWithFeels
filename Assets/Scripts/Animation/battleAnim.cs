@@ -13,12 +13,20 @@ public class battleAnim :MonoBehaviour {
     float enemyTalkAfterSound = 1f;
     float windUpDelay = 0.34f;
     GameObject fightCloud;
-
-
+    
+    [Header("Camera animation")]
+    public AnimationCurve cameraZoomInCurve;
+    public AnimationCurve cameraYMovementCurve;
+    private float cameraZoomInTime = 0.3f;
+    private float cameraZoomOutTime = 0.8f;
+    private float cameraStartingSize;
+    private float cameraStartingY;
 	void Awake()
 	{
 		Instance = this;
 		fightCloud = Resources.Load<GameObject>("prefabs/fightcloud");
+        cameraStartingSize = Camera.main.orthographicSize;
+        cameraStartingY = Camera.main.transform.position.y;
 	}
     private void Update()
     {
@@ -37,7 +45,6 @@ public class battleAnim :MonoBehaviour {
 		StartCoroutine(DoBattles(Helpers.Instance.winWaitTime, Helpers.Instance.loseWaitTime));
 	}
 
-
 	IEnumerator StartBattle(Bird player,Bird enemy)
 	{
         enemy.GetComponentInChildren<Animator>().SetTrigger("walkprepare");
@@ -49,14 +56,31 @@ public class battleAnim :MonoBehaviour {
         float enemyMoveTime = Vector2.Distance(enemy.transform.position, player.transform.position + Helpers.Instance.dirToVector(enemy.position) * 2) / enemySpeed;
         LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position)*2, enemyMoveTime).setEase(vultureRunCurve).setOnComplete(()=>
 			enemy.GetComponentInChildren<Animator>().SetBool("walk", false)
-		); 
-	}
+		);
+    }
+    private IEnumerator CameraZoomInAnimation(float time)
+    {
+        float t = 0;
+        while(t<=1)
+        {
+            Camera.main.orthographicSize = cameraZoomInCurve.Evaluate(t) * cameraStartingSize;
+            Camera.main.transform.Translate(new Vector3(0, cameraZoomInCurve.Evaluate(t)*Time.deltaTime, 0));
+            t += Time.deltaTime / time;
+            yield return null;
+        }
+    }
 
-	IEnumerator DoBattles(float waitTime, float loseWaitTime)
+    public void CameraZoomOutAnimation(float time)
+    {
+        LeanTween.value(gameObject, (float val) => Camera.main.orthographicSize = val, Camera.main.orthographicSize, cameraStartingSize, time).setEaseInOutCubic(); 
+        LeanTween.moveY(Camera.main.gameObject, cameraStartingY, time).setEaseInOutCubic();
+
+    }
+    IEnumerator DoBattles(float waitTime, float loseWaitTime)
 	{
         GuiContoler.Instance.canPause(false);
-		yield return new WaitForSeconds(waitTime/3f);
-
+        StartCoroutine(CameraZoomInAnimation(cameraZoomInTime));
+        yield return new WaitForSeconds(waitTime/3f);
         //float extraWait = 0.8f;
         foreach (battleData battle in battles)
 		{
@@ -141,6 +165,7 @@ public class battleAnim :MonoBehaviour {
 				GuiContoler.Instance.CreateBattleReport();
                 }
             }
+            CameraZoomOutAnimation(cameraZoomOutTime);
             foreach (Bird enemy in Var.enemies)
             {
                 if (enemy != null)
