@@ -397,7 +397,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		try
 		{
 		  
-			MapControler.Instance.pieChart[0].gameObject.GetComponent<ShowTooltip>().tooltipText = GetTooltip();
+			MapControler.Instance.pieChart[0].gameObject.GetComponent<ShowTooltip>().tooltipText =
+				"<b>Enemies in level:</b> \n"+ GetTooltip();
 		}
 		catch
 		{
