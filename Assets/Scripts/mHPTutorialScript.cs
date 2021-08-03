@@ -8,6 +8,10 @@ public class mHPTutorialScript : MonoBehaviour
     public Animator mHeart2;
     public Animator mHeart3; 
 
+    public void OnClose()
+    {
+        FillPlayer.Instance.playerBirds[0].showText();
+    }
 
     public void blinkHeart()
     {

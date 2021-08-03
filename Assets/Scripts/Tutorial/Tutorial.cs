@@ -133,6 +133,7 @@ public class Tutorial : MonoBehaviour {
             mHPTutorialPopup.SetActive(true);
             GuiContoler.Instance.GraphBlocker.SetActive(true);
             shouldShowMHPTutorial = false;
+			GuiContoler.Instance.clearSmallGraph();
         }
 
     }
