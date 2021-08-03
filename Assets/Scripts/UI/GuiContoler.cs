@@ -1592,9 +1592,12 @@ public class GuiContoler : MonoBehaviour {
             Var.tutorialCompleted = true;
             Var.isBoss = false;
             canplayBossTransition = false;
-            showVictoryScreen();
+            LeanTween.delayedCall(0.2f, () =>
+            {
+                showVictoryScreen();
+                AudioControler.Instance.PlayWinMusic();
+            });
             GraphBlocker.SetActive(true);
-            AudioControler.Instance.PlayWinMusic();
             clearSmallGraph();
         }
   
