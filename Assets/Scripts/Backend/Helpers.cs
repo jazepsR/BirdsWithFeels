@@ -32,7 +32,8 @@ public class Helpers : MonoBehaviour {
 	Sprite emptyHeart;
 	Sprite emptyMentalHeart;
 	Sprite[] emotionIcons;
-    private Sprite[] myEmotionIconsVultures;
+	Sprite[] emotionIconsTrial;
+	private Sprite[] myEmotionIconsVultures;
 	public bool inMap;
 	List<Image> heartsToFill = new List<Image>();
 	public Transform relationshipDialogs;
@@ -59,7 +60,8 @@ public class Helpers : MonoBehaviour {
 		mentalHeart = Resources.Load<Sprite>("sprites/mentalHeart");
 		emptyMentalHeart = Resources.Load<Sprite>("sprites/mentalHeart_empty");
 		emotionIcons = Resources.LoadAll<Sprite>("Icons/emotional_icons");
-        myEmotionIconsVultures = Resources.LoadAll<Sprite>("Icons/emotional_icons_vultures");
+		emotionIconsTrial = Resources.LoadAll<Sprite>("Icons/emotional_icons_trial");
+		myEmotionIconsVultures = Resources.LoadAll<Sprite>("Icons/emotional_icons_vultures");
 		/*socialIcon = Resources.Load<Sprite>("Icons/emotional_icons_0");
 		solitaryIcon = Resources.Load<Sprite>("Icons/emotional_icons_2");
 		confidentIcon = Resources.Load<Sprite>("Icons/emotional_icons_1");
@@ -98,7 +100,24 @@ public class Helpers : MonoBehaviour {
 			return EventScript.Character.None;
 		}
 	}
-
+	public Sprite GetEmotionIconTrial(Var.Em emotion)
+	{
+		switch (emotion)
+		{
+			case Var.Em.Cautious:
+				return emotionIconsTrial[3];
+			case Var.Em.Confident:
+				return emotionIconsTrial[1];
+			case Var.Em.Social:
+				return emotionIconsTrial[0];
+			case Var.Em.Solitary:
+				return emotionIconsTrial[2];
+			case Var.Em.Random:
+				return emotionIconsTrial[5];
+			default:
+				return emotionIconsTrial[4];
+		}
+	}
 	public Sprite GetEmotionIcon(Var.Em emotion,bool aShowVultureEmo)
 	{
         if (!aShowVultureEmo)
@@ -140,8 +159,7 @@ public class Helpers : MonoBehaviour {
                     return myEmotionIconsVultures[4];
 
             }
-        }
-		
+        }		
 	}
 
 	public bool VarContainsTimedEvent(string evName)
