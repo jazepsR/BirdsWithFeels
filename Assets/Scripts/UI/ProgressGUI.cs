@@ -239,8 +239,17 @@ public class ProgressGUI : MonoBehaviour {
         else
         {
             Helpers.Instance.setHearts(activeHearts, bird.data.health, bird.data.maxHealth, bird.prevRoundHealth);
-            LeanTween.delayedCall(1f, () => SetMentalHearts(bird.data.mentalHealth, Var.maxMentalHealth, bird.prevRoundMentalHealth, bird));
-            if(bird.hadMentalPain && !bird.inMap)
+            if (Var.gameSettings.useMHP)
+            {
+                mentalHearts[0].transform.parent.gameObject.SetActive(true);
+                LeanTween.delayedCall(1f, () => SetMentalHearts(bird.data.mentalHealth, Var.maxMentalHealth, bird.prevRoundMentalHealth, bird));
+            }
+            else
+            {
+                mentalHearts[0].transform.parent.gameObject.SetActive(false);
+            }
+
+            if (bird.hadMentalPain && !bird.inMap)
             {
                 mentalPainPopup.SetActive(true);
                 bird.hadMentalPain = false;

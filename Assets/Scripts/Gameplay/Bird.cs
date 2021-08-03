@@ -1242,7 +1242,7 @@ public class Bird : MonoBehaviour
 		}
 		data.health = Mathf.Min(data.health + healthBoost + roundHealthChange, data.maxHealth);
 		//Mental health
-		if ((Mathf.Abs(data.confidence) >= Var.DangerZoneStart || Mathf.Abs(data.friendliness) >= Var.DangerZoneStart) && (Mathf.Abs(prevConf) >= Var.DangerZoneStart || Mathf.Abs(prevFriend) >= Var.DangerZoneStart) && !Var.freezeEmotions && !inMap)
+		if ((Mathf.Abs(data.confidence) >= Var.DangerZoneStart || Mathf.Abs(data.friendliness) >= Var.DangerZoneStart) && (Mathf.Abs(prevConf) >= Var.DangerZoneStart || Mathf.Abs(prevFriend) >= Var.DangerZoneStart) && !Var.freezeEmotions && !inMap && Var.gameSettings.useMHP)
 		{//In danger zone
 			data.mentalHealth = Math.Max(data.mentalHealth - 1, 0);
 			if (data.mentalHealth == 0)
@@ -1449,8 +1449,11 @@ public class Bird : MonoBehaviour
 				{
 					Helpers.Instance.setHearts(GuiContoler.Instance.BirdInfoHearts, data.health + roundHealthChange, data.maxHealth);
 				}
-				Helpers.Instance.setHearts(GuiContoler.Instance.BirdMentalHearts, data.mentalHealth, Var.maxMentalHealth, -1, true);
-
+				if (Var.gameSettings.useMHP)
+				{
+					Helpers.Instance.setHearts(GuiContoler.Instance.BirdMentalHearts, data.mentalHealth, Var.maxMentalHealth, -1, true);
+				}
+				GuiContoler.Instance.BirdMentalHearts[0].transform.parent.gameObject.SetActive(Var.gameSettings.useMHP);
 			}
 			catch
 			{

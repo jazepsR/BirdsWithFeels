@@ -852,7 +852,7 @@ public class GuiContoler : MonoBehaviour {
             Destroy(child.gameObject);
         }
         int birdNum = (int)o;
-
+        dangerZoneBorder.SetActive(Var.gameSettings.useMHP);
         Graph.Instance.portraits = new List<GameObject>();
         List<Bird> BirdsToGraph;
         if(graphInteractTweenID!= -1)
@@ -873,7 +873,6 @@ public class GuiContoler : MonoBehaviour {
         else
         {
             BirdsToGraph = new List<Bird>() { Var.activeBirds[birdNum] };
-            dangerZoneBorder.SetActive(true);
             dangerFollowHighlight.gameObject.SetActive(true);
         }
 

@@ -43,9 +43,16 @@ public class GraphPortraitScript : MonoBehaviour {
 			else
 				inDangerZone = false;
 			print("pos:" + transform.localPosition);
-            if (GetComponent<Animator>() != null)
+            if (GetComponent<Animator>() != null )
             {
-                GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+				if (Var.gameSettings.useMHP)
+				{
+					GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+                }
+                else
+				{
+					GetComponent<Animator>().SetBool("dangerzone", false);
+				}
             }
 			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, movePointTime).setOnComplete(()=>
 			Graph.Instance.CheckIfCollectedSeed(bird));
@@ -60,10 +67,10 @@ public class GraphPortraitScript : MonoBehaviour {
 	void Update () {
 		if (parent != null && parent.dangerZoneHighlight != null)
 			parent.dangerZoneHighlight.transform.position = transform.position;
-		if ((Mathf.Abs(transform.localPosition.x / factor) >= Var.DangerZoneStart || Mathf.Abs(transform.localPosition.y / factor) >= Var.DangerZoneStart) && !inDangerZone)
+		if ((Mathf.Abs(transform.localPosition.x / factor) >= Var.DangerZoneStart || Mathf.Abs(transform.localPosition.y / factor) >= Var.DangerZoneStart) && !inDangerZone && Var.gameSettings.useMHP)
 		{
 			inDangerZone = true;
-			if (GuiContoler.Instance.dangerFollowHighlight.gameObject.activeSelf)
+			if (GuiContoler.Instance.dangerFollowHighlight.gameObject.activeSelf )
 			{
 				AudioControler.Instance.enterDangerZone.Play();
 			}
@@ -72,7 +79,7 @@ public class GraphPortraitScript : MonoBehaviour {
                 GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
             }
 		}
-		if ((Mathf.Abs(transform.localPosition.x / factor) < Var.DangerZoneStart && Mathf.Abs(transform.localPosition.y / factor) < Var.DangerZoneStart) && inDangerZone)
+		if ((Mathf.Abs(transform.localPosition.x / factor) < Var.DangerZoneStart && Mathf.Abs(transform.localPosition.y / factor) < Var.DangerZoneStart) && inDangerZone && Var.gameSettings.useMHP)
 		{
 			inDangerZone = false;
 			if (GuiContoler.Instance.dangerFollowHighlight.gameObject.activeSelf)
