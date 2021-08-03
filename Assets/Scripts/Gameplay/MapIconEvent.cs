@@ -69,10 +69,12 @@ public class MapIconEvent : MapIcon
                     TryCreateNewSave();
                     SaveLoad.Save();
                     });
+                    tooltipInfo.tooltipText = GetTooltipText();
                 }
                 else
                 {
                     anim.SetInteger("state", 2); //set map icon to "completed" state instantly
+                    tooltipInfo.tooltipText = GetTooltipText();
                 }
             }
             else
@@ -81,6 +83,7 @@ public class MapIconEvent : MapIcon
                 anim.SetInteger("state", 0);
                 LeanTween.delayedCall(time, () => anim.SetTrigger("playUnlockAnim"));  //Set map icon to "available" state after a delay
                 LeanTween.delayedCall(time, () => anim.SetInteger("state", 1));
+                tooltipInfo.tooltipText = GetTooltipText();
             }
         }
         else

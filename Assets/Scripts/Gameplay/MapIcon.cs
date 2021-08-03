@@ -121,7 +121,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			//sr.sprite = MapControler.Instance.trialSprite;
 			sr.sprite = Helpers.Instance.GetEmotionIconTrial(type);
 			//sr.color = Helpers.Instance.GetEmotionColor(type);
-			Debug.LogError("trial: " + levelName + " color: " + sr.color);
+			//Debug.LogError("trial: " + levelName + " color: " + sr.color);
 			if(fogObject)
 			{
 				fogObject.SetActive(!completed);
@@ -278,27 +278,21 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					CenterMapNode();
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
-					
+					tooltipInfo.tooltipText = GetTooltipText();
 				}
 				else
-				{
-
-                    
+				{                    
                     anim.SetInteger("state", 2); //set map icon to "completed" state instantly
-					
-
+					tooltipInfo.tooltipText = GetTooltipText();
 				}
 			}
             else
 			{
-
                 float time = 2f;
                 anim.SetInteger("state", 0);
                 LeanTween.delayedCall(time, () => anim.SetTrigger("playUnlockAnim"));  //Set map icon to "available" state after a delay
                 LeanTween.delayedCall(time, () => anim.SetInteger("state",1));
-				
-
-
+				tooltipInfo.tooltipText = GetTooltipText();
 			}
 		}
         else
@@ -309,6 +303,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			
 
 		}
+
 		
 	}
 	public void CenterMapNode(bool focusOnNext = true)
