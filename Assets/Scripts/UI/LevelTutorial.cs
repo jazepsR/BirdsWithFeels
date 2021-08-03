@@ -16,8 +16,21 @@ public class LevelTutorial : MonoBehaviour {
 	bool shouldShowGraphDiag2 = false;
 	bool shouldShowSecondBattleDialog = false;
 	float timeSinceStart = 1f;
+
+	[Header("map feature tutorials")]
+	public Dialogue swordTutorialDialogue;
+	public Dialogue shieldTutorialDialogue;
+	public Dialogue emoSquareTutorialDialogue;
+	public Dialogue wizardTutorialDialogue;
+	public Dialogue oneHealthDialogue;
+	public Dialogue heartDialogue;
 	// Use this for initialization
-	void Start ()
+	public static LevelTutorial Instance;
+    private void Awake()
+    {
+		Instance = this;
+    }
+    void Start ()
 	{
 		//Var.currentStageID = 1;
 		if((Var.currentStageID == Var.battlePlanningTutorialID) && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
@@ -42,7 +55,65 @@ public class LevelTutorial : MonoBehaviour {
 			catch { }
 		}
 	}
-   
+   public void ShowSwordTutorial()
+    {
+		if (!Var.gameSettings.shownSwordTutorial)
+		{
+			DialogueControl.Instance.CreateParticularDialog(swordTutorialDialogue);
+			Var.gameSettings.shownSwordTutorial = true;
+			SaveLoad.Save(false);
+		}
+    }
+
+	public void ShowShieldTutorial()
+    {
+		if (!Var.gameSettings.shownShieldTutorial)
+		{
+			DialogueControl.Instance.CreateParticularDialog(shieldTutorialDialogue);
+			Var.gameSettings.shownShieldTutorial = true;
+			SaveLoad.Save(false);
+		}
+	}
+
+	public void ShowEmoTileTutorial()
+    {
+		if (!Var.gameSettings.shownEmoSquareTutorial)
+		{
+			DialogueControl.Instance.CreateParticularDialog(emoSquareTutorialDialogue);
+			Var.gameSettings.shownEmoSquareTutorial = true;
+			SaveLoad.Save(false);
+		}
+	}
+
+	public void ShowWizardTutorial()
+    {
+		if (!Var.gameSettings.shownWizardTutorial)
+		{
+			DialogueControl.Instance.CreateParticularDialog(wizardTutorialDialogue);
+			Var.gameSettings.shownWizardTutorial = true;
+			SaveLoad.Save(false);
+		}
+	}
+
+	public void ShowOneHealthTutorial()
+	{
+		if (!Var.gameSettings.shownOneHealthTutorial)
+		{
+			DialogueControl.Instance.CreateParticularDialog(oneHealthDialogue);
+			Var.gameSettings.shownOneHealthTutorial = true;
+			SaveLoad.Save(false);
+		}
+	}
+
+	public void ShowHeartTutorial()
+	{
+		if (!Var.gameSettings.shownHeartTutorial)
+		{
+			DialogueControl.Instance.CreateParticularDialog(heartDialogue);
+			Var.gameSettings.shownHeartTutorial = true;
+			SaveLoad.Save(false);
+		}
+	}
 	// Update is called once per frame
 	void Update()
 	{		

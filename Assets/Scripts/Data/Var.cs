@@ -84,7 +84,7 @@ public static class Var {
 	public static bool freezeEmotions = false;
 	public static int eventTextCharLimit = 200;
     /// Tutorial IDs
-    public static int battlePlanningTutorialID = 11;
+    public static int battlePlanningTutorialID = 13;
     public static int levelTutorialID = 21;
 	public static bool cheatsEnabled = true;
 	public static float levelPopupDelay = 0.3f;
@@ -93,11 +93,18 @@ public static class Var {
 [Serializable]
 public class Settings
 {
-   public bool shownFirstLevelUp = true;
-   public bool shownBattlePlanningTutorial = true;
-   public bool shownLevelTutorial = true;
-   public bool shownMapTutorial = true;
+	public bool shownFirstLevelUp = true;
+	public bool shownBattlePlanningTutorial = true;
+	public bool shownLevelTutorial = true;
+	public bool shownMapTutorial = true;
 	public bool shownMapTutorial2 = true;
+	// map feature tutorials
+	public bool shownSwordTutorial = true;
+	public bool shownShieldTutorial = true;
+	public bool shownEmoSquareTutorial = true;
+	public bool shownWizardTutorial = true;
+	public bool shownHeartTutorial = true;
+	public bool shownOneHealthTutorial = true;
 	public Settings(bool tutorialsCompleted)
    {
         shownFirstLevelUp = tutorialsCompleted;
@@ -105,7 +112,15 @@ public class Settings
         shownLevelTutorial = tutorialsCompleted;
 		shownMapTutorial = tutorialsCompleted;
 		shownMapTutorial2 = tutorialsCompleted;
-}
+		// map feature tutorials
+		shownSwordTutorial =  tutorialsCompleted;
+		shownShieldTutorial = tutorialsCompleted;
+		shownEmoSquareTutorial = tutorialsCompleted;
+		shownWizardTutorial = tutorialsCompleted;		
+		shownHeartTutorial = tutorialsCompleted;
+		shownOneHealthTutorial = tutorialsCompleted;
+
+	}
 }
 
 

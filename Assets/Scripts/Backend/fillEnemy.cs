@@ -14,9 +14,11 @@ public class fillEnemy : MonoBehaviour {
 	List<Bird> newBirds;
 	public static fillEnemy Instance;
 	public List<string> activeEnemyNames = new List<string>();
+	private LevelTutorial lvlTut;
 	void Awake()
 	{
 		Instance = this;
+		lvlTut = GetComponent<LevelTutorial>();
 	}
 	// Use this for initialization
 	void Start ()
@@ -170,7 +172,10 @@ public class fillEnemy : MonoBehaviour {
 				CreateEnemy(enemy, enemyType.super);
 			}
 			else if (rand < wizardChance && hasWizards)
+			{
 				CreateEnemy(enemy, enemyType.wizard);
+				lvlTut.ShowWizardTutorial();
+			}
 			else
 				CreateEnemy(enemy);            
 			Enemies[enemyPos].gameObject.SetActive(true);

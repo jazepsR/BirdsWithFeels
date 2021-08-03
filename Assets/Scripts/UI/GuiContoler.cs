@@ -1430,7 +1430,6 @@ public class GuiContoler : MonoBehaviour {
 				}
 			}
 			//bird.gameObject.GetComponentInChildren<Animator>().SetBool("iswalking", false);
-
 			//bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
 			//bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
 			bird.target = bird.home;
@@ -1442,6 +1441,10 @@ public class GuiContoler : MonoBehaviour {
 			bird.ResetBonuses();
 			bird.GroundBonus.SetActive(false);
             bird.SetBandages();
+            if(bird.data.health==1 && LevelTutorial.Instance)
+            {
+                LevelTutorial.Instance.ShowOneHealthTutorial();
+            }
 		}
 		//After applying levels;
 		/*GuiContoler.Instance.relationshipPanel.SetActive(false);
@@ -1504,7 +1507,7 @@ public class GuiContoler : MonoBehaviour {
                     GetComponent<fillEnemy>().CreateEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
                 }
 				//if (!EventController.Instance.tryEvent())
-					DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+				DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
 			}
 			ObstacleGenerator.Instance.clearObstacles();
 			ObstacleGenerator.Instance.GenerateObstacles();
