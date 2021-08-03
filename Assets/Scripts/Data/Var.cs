@@ -76,9 +76,9 @@ public static class Var {
 	public static string[] maleNames = {"Noah", "Liam", "Mason", "Jacob", "William","Ethan", "James","Alexander","Michael","Benjamin","Elijah",
 		"Daniel", "Aiden", "Logan", "Matthew","Lucas","Jackson","David","Oliver","Jayden","Joseph","Gabriel","Samuel","Carter","Anthony","John",
 		"Dylan", "Luke", "Henry","Andrew","Isaac","Christopher","Joshua","Wyatt","Sebastian","Owen","Caleb","Nathan","Ryan","Jack","Hunter","Levi",
-		"Christian","Jaxon","Julian","Landon","Grayson","Jonathan","Isaiah","Charles","Rory"};
+		"Christian","Jaxon","Julian","Landon","Grayson","Jonathan","Isaiah","Charles","Rory", "Eric"};
 	public static string[] femaleNames = {"Emma","Olivia","Sophia","Ava","Isabella","Mia","Abigail","Emily", "Charlotte", "Harper","Madison", "Amelia",
-		"Elizabeth","Sofia","Evelyn","Chloe","Ella","Grace","Victoria","Aubrey","Scarlett","Zoey","Addison","Lily","Lillian","Natalie","Hannah","Aria","Layla"};
+		"Elizabeth","Sofia","Evelyn","Chloe","Ella","Grace","Victoria","Aubrey","Scarlett","Zoey","Addison","Lily","Lillian","Natalie","Hannah","Aria","Layla","Lulu"};
 	public static string[] deathSignoffs = { "Get well soon, <name>!", "Tis but a scratch!", "I'm sure <name> won't be down for long!" };
 	public static bool isDragControls = true;
 	public static bool freezeEmotions = false;
@@ -105,6 +105,7 @@ public class Settings
 	public bool shownWizardTutorial = true;
 	public bool shownHeartTutorial = true;
 	public bool shownOneHealthTutorial = true;
+	public bool useMHP = true;
 	public Settings(bool tutorialsCompleted)
    {
         shownFirstLevelUp = tutorialsCompleted;
@@ -119,7 +120,7 @@ public class Settings
 		shownWizardTutorial = tutorialsCompleted;		
 		shownHeartTutorial = tutorialsCompleted;
 		shownOneHealthTutorial = tutorialsCompleted;
-
+		useMHP = tutorialsCompleted;
 	}
 }
 
