@@ -118,9 +118,10 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 		if (isTrial)
 		{
-			sr.sprite = MapControler.Instance.trialSprite;
-			//sr.sprite = Helpers.Instance.GetEmotionIcon(type, true);
-			sr.color = Helpers.Instance.GetEmotionColor(type);
+			//sr.sprite = MapControler.Instance.trialSprite;
+			sr.sprite = Helpers.Instance.GetEmotionIconTrial(type);
+			//sr.color = Helpers.Instance.GetEmotionColor(type);
+			Debug.LogError("trial: " + levelName + " color: " + sr.color);
 			if(fogObject)
 			{
 				fogObject.SetActive(!completed);
