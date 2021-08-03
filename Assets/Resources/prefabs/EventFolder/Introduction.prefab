@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -53,11 +54,12 @@ MonoBehaviour:
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
-  icon: {fileID: 21300010, guid: b7029f9ef86eeec458bb956efa9df87b, type: 3}
+  icon: {fileID: 21300012, guid: c3a1ac45abf2a0242b5aeb174e5c07bf, type: 3}
   selectionText: Who, me?
-  selectionTooltip: 
+  selectionTooltip: Yes, you!
   conclusionHeading: 
-  conclusionText: 
+  conclusionText: 'You must travel to the vulture king to negotiate terms of peace
+    with him. '
 --- !u!1 &953045059291355917
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,8 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 3
-  text: "Yes your highness, just three days ago the vultures broke through the barricades
-    at Talonport and shortly after they raided our neighbour\u2019s farm!\r"
+  text: "Yes! Three days ago, the vultures broke through the barricades at Talonport
+    and shortly after they raided our neighbour\u2019s farm!\r"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &953045059635263685
@@ -244,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "Uh\u2026 Terry, is here to speak with you. \r"
+  text: "Uh\u2026 Mister Terry, is here to speak with you. \r"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &953045059854442023
@@ -291,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: ' Your sky highness, Rebecca Sparkbeak and..'
+  text: ' Your sky highness, Miss Rebecca Sparkbeak and Mister..'
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &953045060312839130
@@ -337,7 +339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
+  speakerId: 5
   text: My faithful advisor, I entrust this mission to you.
   useCustomPic: 0
   customPic: {fileID: 0}
@@ -384,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
+  speakerId: 5
   text: "Despite our brave birds at the borders, we don\u2019t have an army to fight
     back. Diplomacy is our only option."
   useCustomPic: 0
@@ -433,6 +435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -442,11 +445,12 @@ MonoBehaviour:
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
-  icon: {fileID: 21300010, guid: b7029f9ef86eeec458bb956efa9df87b, type: 3}
+  icon: {fileID: 21300000, guid: c3a1ac45abf2a0242b5aeb174e5c07bf, type: 3}
   selectionText: Yes, my queen!
-  selectionTooltip: 
+  selectionTooltip: Accept the task!
   conclusionHeading: 
-  conclusionText: 
+  conclusionText: 'You must travel to the vulture king to negotiate terms of peace
+    with him. '
 --- !u!1 &953045060561147726
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
+  speakerId: 5
   text: 'The vulture king has gone too far! We cannot sit by and let the vultures
     bully us into submission. '
   useCustomPic: 0
@@ -567,7 +571,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953045060689658220}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -589,7 +593,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 0a000000070000000100000000000000
+  affectedBird: 6
+  speakers: 2a0000000700000001000000000000002c0000002d000000
   condition: 0
   magnitude: 0
   targetEmotion: 0
@@ -599,8 +604,20 @@ MonoBehaviour:
   - {fileID: 953045059177477583}
   - {fileID: 953045060535444037}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 21300000, guid: a7f68d0010046bf4383007e4b71dae0f, type: 3}
+  useBgFog: 0
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &953045060809137385
 GameObject:
   m_ObjectHideFlags: 0
