@@ -102,7 +102,7 @@ public class MapIconEvent : MapIcon
         {
             tooltipText += "<color=#E7CA21ff> -completed</color>";
         }
-        tooltipText += "\n" + levelDescription;
+        tooltipText += "\n" + levelDescription +"\nThis node will not take a week";
         return tooltipText;
     }
 

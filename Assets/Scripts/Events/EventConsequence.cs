@@ -7,7 +7,8 @@ public enum ConsequenceType { Health, Friendliness, Courage, Nothing };
 [System.Serializable]
 public class EventConsequence :MonoBehaviour{
 	public EventScript onComplete = null;
-    public bool applyToAll = false;
+	public bool useNarration = false;
+	public bool applyToAll = false;
 	public ConsequenceType consequenceType1 = ConsequenceType.Nothing;
 	public int magnitude1;
 	public ConsequenceType consequenceType2 = ConsequenceType.Nothing;

@@ -33,6 +33,8 @@ public class EventController : MonoBehaviour
     public Text text;
     public GameObject choice;
     public RectTransform choiceList;
+    public GameObject portraitParent;
+    public GameObject nameFieldParent;
     public Image portrait;
     public Image portraitFill;
     public Image customImage;
@@ -486,6 +488,8 @@ public class EventController : MonoBehaviour
 
     void SetPortrait(int id)
     {
+        portraitParent.SetActive(true);
+        nameFieldParent.SetActive(true);
         if (mouseOver)
         {
             mouseOver.tooltipText = "";
@@ -503,11 +507,7 @@ public class EventController : MonoBehaviour
             customImage.gameObject.SetActive(false);
             try
             {
-                //if (currentBird != null)
-                //	mouseOver.tooltipText = Helpers.Instance.GetStatInfo(currentBird.data.confidence, currentBird.data.friendliness);
                 portrait.transform.parent.gameObject.SetActive(true);
-
-
                 if (portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird_color").GetComponent<Image>().sprite == null)
                 {
                     portraitFill.gameObject.SetActive(false);
@@ -550,7 +550,8 @@ public class EventController : MonoBehaviour
             catch
             {
                 print("failed to show portrait");
-                portrait.transform.parent.gameObject.SetActive(false);
+                portraitParent.SetActive(false);
+                nameFieldParent.SetActive(false);
             }
         }
 
@@ -702,6 +703,12 @@ public class EventController : MonoBehaviour
             portraitFill.gameObject.SetActive(false);
             portrait.gameObject.SetActive(false);
             customImage.sprite = currentEvent.options[ID].AfterImage;
+        }
+        
+        if(currentEvent.options[ID].useNarration)
+        {
+            portraitParent.SetActive(false);
+            nameFieldParent.SetActive(false);
         }
 
     }
