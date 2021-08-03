@@ -35,7 +35,7 @@ public class WinScreen : MonoBehaviour
                 if (data.character == character)
                 {
                     data.birdObject.SetActive(true);
-                    Debug.LogError(bird.charName + " conf: " + bird.data.confidence + " friend: " + bird.data.friendliness + " emotion: " + bird.emotion);
+                  //  Debug.LogError(bird.charName + " conf: " + bird.data.confidence + " friend: " + bird.data.friendliness + " emotion: " + bird.emotion);
                     data.birdFill.color = Helpers.Instance.GetSoftEmotionColor(bird.emotion);
                 }
             }
