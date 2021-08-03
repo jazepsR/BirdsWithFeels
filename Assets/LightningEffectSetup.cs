@@ -10,7 +10,10 @@ public class LightningEffectSetup : MonoBehaviour
     public SpriteRenderer sr_glowEffect;
     public GameObject glowEffect_wizard;
     private ShowTooltip tooltipScript;
-
+    [SerializeField]
+    private GameObject forcefield;
+    [SerializeField]
+    private ParticleSystem ps;
 
     private void SetupReferences()
     {
@@ -33,8 +36,9 @@ public class LightningEffectSetup : MonoBehaviour
             tooltipScript.tooltipText = affectedBird.charName + " will become more " + emotion.ToString() + " from facing the wizard vulture";
             glowEffect_wizard.transform.position = enemy.target;
             glowEffect_wizard.GetComponent<SpriteRenderer>().color = Helpers.Instance.GetEmotionColor(emotion);
-
-
+            forcefield.transform.position = affectedBird.transform.position;
+            var PsMain = ps.main;
+            PsMain.startColor= Helpers.Instance.GetEmotionColor(emotion);
 
         }
     }
