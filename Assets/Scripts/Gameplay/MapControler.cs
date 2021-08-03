@@ -12,6 +12,9 @@ public class MapControler : MonoBehaviour {
 	public bool showGraphAfterEvent = true;
 	[HideInInspector]
 	public bool canHeal = false;
+	[TextArea(3,10)]
+	public string trialDescription = "This is a <b>trial level!</b> In this level your <b>emotions are frozen</b>" +
+		"and won't change. In this level, mHP will not affect your birds";
 	GameObject healTrail;
 	public Text title;
 	public Transform centerPos;
@@ -238,7 +241,7 @@ public class MapControler : MonoBehaviour {
 		{
 			canFight = true;
 			startLvlBtn.interactable = true;            
-			startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "";
+			startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "Start the adventure\nA week will pass";
 		}
 		else
 		{

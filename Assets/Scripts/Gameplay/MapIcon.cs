@@ -635,7 +635,14 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		MapControler.Instance.SelectionTitle.text = levelName;
 		MapControler.Instance.SelectionText.text = ToString();
 		MapControler.Instance.enemyLevelText.text = "Average enemy level: " + birdLVL;
-		MapControler.Instance.SelectionDescription.text = levelDescription;
+		if (isTrial)
+		{
+			MapControler.Instance.SelectionDescription.text = MapControler.Instance.trialDescription + levelDescription;
+		}
+        else
+		{
+			MapControler.Instance.SelectionDescription.text =levelDescription;
+		}
 		AudioControler.Instance.ClickSound();
 		FindObjectOfType<GuiMap>().CreateMap(CreateMap());
        // LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack); //seb
