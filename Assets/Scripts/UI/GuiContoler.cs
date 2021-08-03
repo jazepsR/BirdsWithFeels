@@ -284,7 +284,7 @@ public class GuiContoler : MonoBehaviour {
             pause.SetActive(false);
             Time.timeScale = 1.0f;
             AudioControler.Instance.SaveVolumeSettings();
-            if(inMap)
+            if(inMap && MapControler.Instance)
             {
                 MapControler.Instance.canMove = true;
                 MapControler.Instance.restBtnRaycaster.enabled = true;
@@ -302,7 +302,7 @@ public class GuiContoler : MonoBehaviour {
                 mainMenuBtn.GetComponent<Button>().interactable = false;
                 toMapBtn.GetComponent<Button>().interactable = false;    
             }
-            if (inMap)
+            if (inMap && MapControler.Instance)
             {
                 MapControler.Instance.canMove = false;
                 MapControler.Instance.restBtnRaycaster.enabled = false;
