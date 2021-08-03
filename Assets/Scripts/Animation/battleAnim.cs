@@ -64,7 +64,7 @@ public class battleAnim :MonoBehaviour {
         while(t<=1)
         {
             Camera.main.orthographicSize = cameraZoomInCurve.Evaluate(t) * cameraStartingSize;
-            Camera.main.transform.Translate(new Vector3(0, cameraZoomInCurve.Evaluate(t)*Time.deltaTime, 0));
+            Camera.main.transform.Translate(new Vector3(0, cameraYMovementCurve.Evaluate(t)*Time.deltaTime, 0));
             t += Time.deltaTime / time;
             yield return null;
         }
