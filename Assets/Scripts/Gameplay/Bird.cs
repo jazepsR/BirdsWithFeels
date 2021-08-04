@@ -969,11 +969,11 @@ public class Bird : MonoBehaviour
 
 			//AudioControler.Instance.smallGraphDisappear.Play();
 		}
-		if (inMap && !EventController.Instance.eventObject.activeSelf)
+		/*if (inMap && !EventController.Instance.eventObject.activeSelf)
 		{
 			MapControler.Instance.charInfoAnim.SetBool("hide", true);
 			MapControler.Instance.charInfoAnim.SetBool("show", false);
-		}
+		}*/
 		if (!dragged)
 		{
 			SetCoolDownRing(false);
