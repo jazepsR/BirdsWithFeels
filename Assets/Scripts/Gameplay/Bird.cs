@@ -1244,7 +1244,7 @@ public class Bird : MonoBehaviour
 		//Mental health
 		if ((Mathf.Abs(data.confidence) >= Var.DangerZoneStart || Mathf.Abs(data.friendliness) >= Var.DangerZoneStart) && (Mathf.Abs(prevConf) >= Var.DangerZoneStart || Mathf.Abs(prevFriend) >= Var.DangerZoneStart) && !Var.freezeEmotions && !inMap && Var.gameSettings.useMHP)
 		{//In danger zone
-			data.mentalHealth = Math.Max(data.mentalHealth - 1, 0);
+
 			if (data.mentalHealth == 0)
 			{
 				//dont kill the player
@@ -1254,15 +1254,16 @@ public class Bird : MonoBehaviour
 					hadMentalPain = true;
 					data.health--;
 				}
-
-				data.mentalHealth = 1;
+				//data.mentalHealth = 1;
 			}
+			data.mentalHealth = Math.Max(data.mentalHealth - 1, 0);
 
 		}
-		else if (Mathf.Abs(data.confidence) < Var.DangerZoneStart && Mathf.Abs(data.friendliness) < Var.DangerZoneStart && (Mathf.Abs(prevConf) < Var.DangerZoneStart && Mathf.Abs(prevFriend) < Var.DangerZoneStart))
+		else// if (Mathf.Abs(data.confidence) < Var.DangerZoneStart && Mathf.Abs(data.friendliness) < Var.DangerZoneStart && (Mathf.Abs(prevConf) < Var.DangerZoneStart && Mathf.Abs(prevFriend) < Var.DangerZoneStart))
 		{//In comfort zone
 			data.mentalHealth = Mathf.Min(Var.maxMentalHealth, data.mentalHealth + 1);
 		}
+		//Debug.LogError("Updating MPH for" + charName + " mental health: " + data.mentalHealth);
 		roundHealthChange = 0;
 		foughtInRound = false;
 
