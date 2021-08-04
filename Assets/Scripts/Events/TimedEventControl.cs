@@ -19,6 +19,10 @@ public class TimedEventControl : MonoBehaviour {
 	public EventScript initialFailEvent;
 	public EventScript completionAfterFailEvent;
 	public Text EventNotification;
+	[Header("Visuals")]
+	public List<GameObject> startingVisuals;
+	public List<GameObject> completedVisuals;
+	public List<GameObject> failedVisuals;
 	[HideInInspector]
 	public TimedEventData data = null;
 	Vector3 offset = new Vector3(-95, 30f, 0);
@@ -37,7 +41,7 @@ public class TimedEventControl : MonoBehaviour {
 		if (MapControler.Instance)
 		{
 			CheckStatus();
-		}		
+		}
 	}
 	
 	public void CheckIfTimedEvent()
@@ -72,12 +76,12 @@ public class TimedEventControl : MonoBehaviour {
 					data.currentState = TimedEventData.state.completedSuccess;
 					EventController.Instance.CreateEvent(completionEvent);
 					HealAllBirds();
-                    data.currentState = TimedEventData.state.notStarted;
+                   // data.currentState = TimedEventData.state.notStarted;
 				}else
 				{
 					data.currentState = TimedEventData.state.completedFail;
 					EventController.Instance.CreateEvent(completionAfterFailEvent);
-                    data.currentState = TimedEventData.state.notStarted;
+                   // data.currentState = TimedEventData.state.notStarted;
 					//HealAllBirds();
 				}
 				
@@ -104,8 +108,46 @@ public class TimedEventControl : MonoBehaviour {
 
 			
 				SetupTrialUI();
-		}	
+		}
+		SetMapVisuals();
 	}
+
+	private void SetMapVisuals()
+    {
+		//Debug.LogError("SETTING MAP VISUALS!");
+		ToggleObjects(startingVisuals, false);
+		ToggleObjects(failedVisuals, false);
+		ToggleObjects(completedVisuals, false);
+		if (data != null)
+		{
+			//Debug.LogError("GOT DATA! State: "+ data.currentState);
+			switch (data.currentState)
+			{
+				case TimedEventData.state.active:
+					ToggleObjects(startingVisuals, true);
+					break;
+				case TimedEventData.state.failed:
+					ToggleObjects(failedVisuals, true);
+					break;
+				case TimedEventData.state.completedFail:
+					ToggleObjects(failedVisuals, true);
+					break;
+				case TimedEventData.state.completedSuccess:
+					ToggleObjects(completedVisuals, true);
+					break;
+				default:
+					break;
+			}
+		}
+    }
+
+	private void ToggleObjects(List<GameObject> objects, bool isActive)
+    {
+		foreach(GameObject gameObj in objects)
+        {
+			gameObj.SetActive(isActive);
+        }
+    }
 	private void HealAllBirds()
     {
 		foreach(Bird bird in FillPlayer.Instance.playerBirds)
