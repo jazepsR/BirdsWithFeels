@@ -463,8 +463,6 @@ public class GuiContoler : MonoBehaviour {
                 nextGraph.onClick.Invoke();
             else if (CloseBattleReport.gameObject.activeSelf)
                 CloseBattleReport.onClick.Invoke();
-
-
         }
        
         if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic)

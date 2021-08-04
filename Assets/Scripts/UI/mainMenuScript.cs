@@ -22,6 +22,12 @@ public class mainMenuScript : MonoBehaviour {
     string toDelete = "debug";
     public static mainMenuScript Instance;
 	bool isDelete = false;
+    bool tempFullscreen;
+    int tempXResloution;
+    int tempYResoultion;
+    public Toggle fullscreenToggle;
+    public Dropdown resolutionDropdown;
+    private List<Dropdown.OptionData> resolutionDropdownOptions;
     // Use this for initialization
     void Awake()
     {
@@ -39,14 +45,48 @@ public class mainMenuScript : MonoBehaviour {
         Var.StartedNormally = true;
         titleColor = title.color;
         TweenForward();
+        SaveLoad.LoadResolution(true);
         deleteSaveDialog.SetActive(false);
         ContinueBtn.interactable = SaveLoad.CheckIfContinueAvailable();
         buttonPanel.SetActive(true);
         saveSlotPanel.SetActive(false);
         quitGameButton.SetActive(false);
         chapterPanel.SetActive(false);
-      //  AudioControler.Instance.musicSource.Play();
         selectChapterButton.SetActive(Var.cheatsEnabled);
+        fullscreenToggle.isOn = SaveLoad.fullscreen;
+        tempFullscreen = SaveLoad.fullscreen;
+        tempXResloution = SaveLoad.resolutionX;
+        tempYResoultion = SaveLoad.resolutionY;
+        resolutionDropdownOptions = resolutionDropdown.options;
+        SetResolutionSelection();
+    }
+    public void SetFullScreen(bool isFullScreen)
+    {
+        tempFullscreen = isFullScreen;
+    }
+
+    private void SetResolutionSelection()
+    {
+        for(int i = 0;i<resolutionDropdownOptions.Count;i++)
+        {
+           int x= int.Parse(resolutionDropdownOptions[i].text.Split(' ')[0]);
+            if(x == SaveLoad.resolutionX)
+            {
+                resolutionDropdown.value = i;
+                break;
+            }
+        }
+    }
+
+    public void SetResoultion(int selectedOption)
+    {
+        var selection = resolutionDropdownOptions[selectedOption];
+        tempXResloution = int.Parse(selection.text.Split(' ')[0]);
+        tempYResoultion = int.Parse(selection.text.Split(' ')[2]);
+    }
+    public void ApplyResoultion()
+    {
+        SaveLoad.SaveResoultion(tempXResloution, tempYResoultion, tempFullscreen, true);
     }
     public void OpenSaveSlots(bool isNewGame)
     {
