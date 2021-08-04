@@ -130,14 +130,14 @@ public class mainMenuScript : MonoBehaviour {
         Var.isTutorial = true;
         AudioControler.Instance.PlaySound(AudioControler.Instance.mainMenuFreeSaveBtnClick);
         cutsceneScript.StartCutscene();
-        Steamworks.SteamUserStats.SetStat("start_game", 1);
+       /* Steamworks.SteamUserStats.SetStat("start_game", 1);
         bool tutorialCompleted;
         Steamworks.SteamUserStats.GetAchievement("Start_game", out tutorialCompleted);
         if (tutorialCompleted == false)
         {
             Steamworks.SteamUserStats.SetAchievement("Start_game");
         }
-        Steamworks.SteamUserStats.StoreStats();
+        Steamworks.SteamUserStats.StoreStats(); */
         //SceneManager.LoadScene("NewMain");
     }
     public void SecretStartClick()
