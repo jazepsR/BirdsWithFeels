@@ -10,10 +10,15 @@ public class MapIconEvent : MapIcon
     public Sprite NarrativeIcon;
     public Image iconToChange;
     public bool showGraph = true;
+    public string headingName = "Narrative Event";
+    public string description = "";
 
     internal override void Start()
     {
         base.Start();
+
+        levelName = headingName;
+        levelDescription = description;
 
         if (iconToChange != null && NarrativeIcon != null)
         {

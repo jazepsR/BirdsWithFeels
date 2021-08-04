@@ -126,7 +126,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759541389152688918}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4817687425128643024
 MonoBehaviour:
@@ -141,11 +141,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 6619753708532281625}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
-  magnitude1: 5
+  magnitude1: 0
   consequenceType2: 3
-  magnitude2: 3
+  magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
@@ -710,7 +711,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759541390533154733}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3958825202585755642
 MonoBehaviour:
@@ -725,20 +726,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 6314597668191840256}
+  useNarration: 0
   applyToAll: 0
-  consequenceType1: 1
-  magnitude1: 5
-  consequenceType2: 2
-  magnitude2: 3
+  consequenceType1: 3
+  magnitude1: 0
+  consequenceType2: 3
+  magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Urge the others to go talk to him.
-  selectionTooltip: Chirp at Terry (+5 Confidence +5 Friendliness)
+  selectionTooltip: 
   conclusionHeading: 
-  conclusionText: You and the others slowly approach him.
+  conclusionText: You approach him.
 --- !u!1 &3373992001576240510
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,6 +832,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 5
@@ -936,6 +939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 5
@@ -1050,6 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0000000015000000090000000100000004000000
   condition: 2
   magnitude: 0
@@ -1223,7 +1228,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName: Terry's farm is in trouble
   startArea: {fileID: 0}
-  startEvent: {fileID: 4759541390608175567}
   timeToComplete: 5
   endArea: {fileID: 0}
   activationEvent: {fileID: 4759541388599828963}
@@ -1237,6 +1241,7 @@ MonoBehaviour:
     completeBy: 0
     currentState: 0
     activationEventShown: 0
+    activationEventID: 0
 --- !u!1 &4759541389042519174
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,8 +1554,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4759541390614111701}
-  - {fileID: 4759541389878309268}
   - {fileID: 5500451646845444542}
+  - {fileID: 4759541389878309268}
   m_Father: {fileID: 4759541389018058440}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1566,6 +1571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 00000000
   condition: 2
   magnitude: 0
@@ -1729,6 +1735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -1930,6 +1937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -2211,7 +2219,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759541389152688918}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4759541389878309269
 MonoBehaviour:
@@ -2226,11 +2234,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
-  magnitude1: -3
+  magnitude1: 0
   consequenceType2: 3
-  magnitude2: -5
+  magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
@@ -2333,6 +2342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: -5
@@ -2495,6 +2505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 010000000400000000000000
   condition: 2
   magnitude: 0
@@ -2705,6 +2716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -2938,8 +2950,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4759541390580662605}
-  - {fileID: 4759541390624882392}
   - {fileID: 6122233958240159874}
+  - {fileID: 4759541390624882392}
   m_Father: {fileID: 4759541389018058440}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2955,6 +2967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 00000000
   condition: 2
   magnitude: 0
@@ -3088,6 +3101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 000000002f000000
   condition: 2
   magnitude: 0
@@ -3187,7 +3201,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759541390533154733}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4759541390624882399
 MonoBehaviour:
@@ -3202,18 +3216,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
-  magnitude1: 5
+  magnitude1: 0
   consequenceType2: 3
-  magnitude2: 3
+  magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Tell the others to let Terry be alone for a while.
-  selectionTooltip: Give personal bird space. (this will skip a narrative event)
+  selectionTooltip: ' (this will skip a narrative event)'
   conclusionHeading: 
   conclusionText: "You rest for a while, satisfied that Terry\u2019s family and farm
     are safe and sound, and that the first part of your journey is complete."
@@ -3498,6 +3513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -3945,6 +3961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0100000000000000
   condition: 2
   magnitude: 0
@@ -4115,6 +4132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 00000000010000000400000009000000
   condition: 2
   magnitude: 0
@@ -4190,6 +4208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0100000000000000
   condition: 2
   magnitude: 0
