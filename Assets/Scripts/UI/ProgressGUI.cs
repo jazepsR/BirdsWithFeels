@@ -293,6 +293,7 @@ public class ProgressGUI : MonoBehaviour {
     }
     void SetMentalHearts(int MHP, int maxMHP, int prevMHP, Bird bird)
     {
+       // Debug.LogError("setting hearts " +bird.charName + " mhp: " + MHP);
         for (int i = 0; i < mentalHearts.Length; i++)
         {
 
@@ -337,6 +338,10 @@ public class ProgressGUI : MonoBehaviour {
                     anim.SetBool("indanger", true);
 
             }
+           /* if(MHP== 0)
+            {
+                anim.SetBool("indanger", true);
+            }*/
         }
     }
 }
