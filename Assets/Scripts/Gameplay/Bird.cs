@@ -455,8 +455,8 @@ public class Bird : MonoBehaviour
 	public void AddLevel(LevelDataScriptable levelData)
 	{
 		hasNewLevel = true;
-		Helpers.Instance.EmitEmotionParticles(transform, Var.Em.finish);
-		Helpers.Instance.EmitEmotionParticles(transform, emotion, false);
+		//Helpers.Instance.EmitEmotionParticles(transform, Var.Em.finish);
+		//Helpers.Instance.EmitEmotionParticles(transform, emotion, false);
 
 
 		data.lastLevel = levelData;
