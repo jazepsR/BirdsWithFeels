@@ -73,7 +73,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	bool eventShown = false;
 	bool dialogueShown = false;
 	[HideInInspector] public TimedEventControl timedEvent;
-  
+	public bool logTargetSearch = false;
 
     // Use this for initialization
 
@@ -98,8 +98,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		offset = transform.position- transform.parent.position;
 		if (isTrial)
 			trialID = ID;
-		else
-			trialID = GetTargetID(this);
+		else if(trialID == 0)
+			trialID = GetTargetID(this, logTargetSearch);
 		LoadSaveData();
 		//if (!Var.StartedNormally)
 			//available = true;
@@ -212,8 +212,12 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
 
-	int GetTargetID(MapIcon data)
+	int GetTargetID(MapIcon data, bool logtargetSearch)
 	{
+		if (logtargetSearch)
+		{
+			Debug.LogError("starting search! ID: " + ID);
+		}
 		if (data.targets.Length == 0)
 		{
 			foreach (Transform child in data.transform.parent)
@@ -227,9 +231,21 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			return -1;
 		}
 		if (data.targets[0].isTrial)
+		{
+			if (logtargetSearch)
+			{
+				Debug.LogError("found trial! ID: " + data.targets[0].ID);
+			}
 			return data.targets[0].ID;
+		}
 		else
-			return GetTargetID(data.targets[0]);
+		{
+			if (logtargetSearch)
+			{
+				Debug.LogError("Brancing to ID: " + data.targets[0].ID);
+			}
+			return GetTargetID(data.targets[0], logtargetSearch);
+		}
 	}
 
 	public virtual void SetState()
