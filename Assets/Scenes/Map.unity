@@ -3710,18 +3710,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8782073427488628664}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &152065588 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1401116558549398409, guid: aec78b885c3af494884f2acadd6fc836,
-    type: 3}
-  m_PrefabInstance: {fileID: 1401116558399464893}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &152342636
 GameObject:
   m_ObjectHideFlags: 0
@@ -8459,7 +8447,7 @@ PrefabInstance:
     - target: {fileID: 566595943094489508, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1604548117387671099, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
@@ -8619,7 +8607,7 @@ PrefabInstance:
     - target: {fileID: 7188698617191472023, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7315897382575486490, guid: 6038d5b60e6bf0f4cbe40cbc070b7589,
         type: 3}
@@ -25032,6 +25020,18 @@ MonoBehaviour:
   text: And these are your companions?
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!114 &896805268 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2428832010756705153, guid: 9ab489193ef088b4a89eaba2db11be74,
+    type: 3}
+  m_PrefabInstance: {fileID: 434924973}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a613d3738b784f882023685cb836d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &897923807
 GameObject:
   m_ObjectHideFlags: 0
@@ -44662,18 +44662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1593771709 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6302336448948161556, guid: 9ab489193ef088b4a89eaba2db11be74,
-    type: 3}
-  m_PrefabInstance: {fileID: 434924973}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759a613d3738b784f882023685cb836d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1594805184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49517,6 +49505,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115975d08fd14874783642e41418aa9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!21 &1775077451
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.002645075, y: 0.0026781429}
+        m_Offset: {x: 0.49529317, y: 3.6954985}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1775785933
 GameObject:
   m_ObjectHideFlags: 0
@@ -52381,7 +52409,7 @@ MonoBehaviour:
   parts: []
   options:
   - {fileID: 1716049623}
-  - {fileID: 152065588}
+  - {fileID: 0}
   canShowMultipleTimes: 0
   isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
@@ -60189,81 +60217,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1282160142}
     m_Modifications:
-    - target: {fileID: 104661380028921115, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: m_Name
-      value: Rebecca_post trial - In Time
-      objectReference: {fileID: 0}
-    - target: {fileID: 261085081040064008, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: m_Name
-      value: Rebecca_post trial - TOO LATE (after chat)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116557869381132, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: m_Name
-      value: Rebecca_reachingTrialInTime
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116557869381134, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useBgFog
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116558252488258, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: onComplete
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116558678545224, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: m_Name
-      value: Rebecca_post trial - TOO LATE
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116558678545226, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useBgFog
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116558678545226, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useEventAudio
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116558678545226, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: eventBackground
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116558678545226, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: isCampFireScene
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116559147683169, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useBgFog
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116559147683175, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: m_Name
-      value: 'Rebecca_timer runs out '
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116559233478804, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useBgFog
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1401116559233478810, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: m_Name
-      value: Rebecca_incitingEvent
-      objectReference: {fileID: 0}
     - target: {fileID: 1401116559564680901, guid: aec78b885c3af494884f2acadd6fc836,
         type: 3}
       propertyPath: endArea
       value: 
-      objectReference: {fileID: 1593771709}
+      objectReference: {fileID: 896805268}
     - target: {fileID: 1401116559564680901, guid: aec78b885c3af494884f2acadd6fc836,
         type: 3}
       propertyPath: startArea
@@ -60333,96 +60291,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: World 2-RebeccaEvent
-      objectReference: {fileID: 0}
-    - target: {fileID: 1987762325798082375, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: onComplete
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3393595197053433226, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useBgFog
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3393595197053433226, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useEventAudio
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3393595197053433226, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: eventBackground
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3393595197053433226, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: isCampFireScene
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3689590340884107083, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: onComplete
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3784301437074939323, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: onComplete
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3844363578309681100, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: m_Name
-      value: Rebecca_post trial - In Time (after chat)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299379943994937972, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useBgFog
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299379943994937972, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useEventAudio
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299379943994937972, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: eventBackground
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4299379943994937972, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: isCampFireScene
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4904852981690447245, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: m_Name
-      value: Rebecca_reaching trial - TOO LATE
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635620737427431491, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useBgFog
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635620737427431491, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useEventAudio
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635620737427431491, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: eventBackground
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635620737427431491, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: isCampFireScene
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7126875847335866078, guid: aec78b885c3af494884f2acadd6fc836,
-        type: 3}
-      propertyPath: useBgFog
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aec78b885c3af494884f2acadd6fc836, type: 3}
@@ -62516,7 +62384,7 @@ PrefabInstance:
     - target: {fileID: 5272907934645062219, guid: f0eff861912a40c44bc8fbe02469eeef,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 47.407406
+      value: 46.80958
       objectReference: {fileID: 0}
     - target: {fileID: 5272907934678496962, guid: f0eff861912a40c44bc8fbe02469eeef,
         type: 3}
@@ -62591,7 +62459,7 @@ PrefabInstance:
     - target: {fileID: 6882346265839103896, guid: f0eff861912a40c44bc8fbe02469eeef,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 24.150942
+      value: 24.211853
       objectReference: {fileID: 0}
     - target: {fileID: 7285018487621880814, guid: f0eff861912a40c44bc8fbe02469eeef,
         type: 3}
