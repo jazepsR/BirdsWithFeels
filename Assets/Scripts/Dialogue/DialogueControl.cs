@@ -77,7 +77,7 @@ public class DialogueControl : MonoBehaviour {
 
         if (Var.isTutorial || Var.isEnding || (GuiContoler.Instance.winBanner != null
         && GuiContoler.Instance.winBanner.activeSelf) || Var.currentStageID == 100 || Var.gameSettings.shownBattlePlanningTutorial == false 
-		|| (Var.gameSettings.shownLevelTutorial == false) || Var.freezeEmotions)
+		|| (Var.gameSettings.shownLevelTutorial == false) || Var.freezeEmotions || Var.gameSettings.shownLevelTutorial)
         {
             return;
         }
