@@ -32,6 +32,5 @@ public class buttonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerClick(PointerEventData eventData)
     {
         anim.SetTrigger("click");
-        anim.SetBool("onhover", false);
     }
     }

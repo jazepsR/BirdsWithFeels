@@ -10,7 +10,8 @@ public class levelPopupScript : MonoBehaviour {
 	public Text firstText;
 	public Image firstImage;
 	public Text secondText;
-	public Image secondImage;
+	public Image secondImage_lineart;
+	public Image secondImage_fill;
 	public Text thirdText;
 	public Image thirdImage;
 	public GameObject firstPart;
@@ -59,14 +60,9 @@ public class levelPopupScript : MonoBehaviour {
 		secondTextList.AddRange(Helpers.Instance.ApplyTitle(activeBird, data.LevelUpText).Split('&'));
 		secondText.text = secondTextList[0];
 		secondTextList.RemoveAt(0);
-		if (data.levelUpImage == null)
-		{
-			secondImage.sprite = data.levelUpIcon;
-        }
-        else
-        {
-			secondImage.sprite = data.levelUpImage;
-		}
+		secondImage_fill.sprite = Helpers.Instance.GetPortrait(Helpers.Instance.GetCharEnum(bird)).transform.Find("bg/bird_color").GetComponent<Image>().sprite;
+		secondImage_fill.color = Helpers.Instance.GetEmotionColor(bird.emotion);
+		secondImage_lineart.sprite = Helpers.Instance.GetPortrait(Helpers.Instance.GetCharEnum(bird)).transform.Find("bg/bird").GetComponent<Image>().sprite;
 		// Third part
 		//thirdImage.sprite = Helpers.Instance.GetSkillPicture(data.type);
 

@@ -33,6 +33,8 @@ public class EventController : MonoBehaviour
     public Text text;
     public GameObject choice;
     public RectTransform choiceList;
+    public GameObject portraitParent;
+    public GameObject nameFieldParent;
     public Image portrait;
     public Image portraitFill;
     public Image customImage;
@@ -333,13 +335,11 @@ public class EventController : MonoBehaviour
         Debug.Log("creating Event!");
         if (eventData.isCampFireScene && inMap)
         {
-
             try
             {
                 Transform campFire = eventObject.transform.Find("Campfire");
                 if (campFire != null)
                 {
-
                     foreach (Bird bird in FillPlayer.Instance.playerBirds)
                     {
 
@@ -378,8 +378,16 @@ public class EventController : MonoBehaviour
             {
 
                 Debug.Log("campfire can not be shown");
-            } 
-            
+            }
+
+        }
+        else
+        {
+            Transform campFire = eventObject.transform.Find("Campfire");
+            if (campFire != null)
+            {
+                campFire.gameObject.SetActive(false);
+            }
         }
         if (eventData.eventBackground != null)
         {
@@ -402,9 +410,6 @@ public class EventController : MonoBehaviour
         if (!eventData.canShowMultipleTimes)
         {
             Var.shownEvents.Add(eventData.gameObject.name);
-           // Debug.LogError("ADDED " + eventData.gameObject.name + " to completed events!");
-            
-
         }
         if (currentEvent != null)
         {
@@ -464,7 +469,6 @@ public class EventController : MonoBehaviour
         eventObject.SetActive(true);
         heading.text = Helpers.Instance.ApplyTitle(currentBird, eventData.heading);
         string text = Helpers.Instance.ApplyTitle(currentBird, eventData.parts[0].text);
-        //nameText.text = currentBird.charName;
         if (coroutine != null)
             StopCoroutine(coroutine);
         coroutine = WaitAndPrint(text, true);
@@ -484,6 +488,8 @@ public class EventController : MonoBehaviour
 
     void SetPortrait(int id)
     {
+        portraitParent.SetActive(true);
+        nameFieldParent.SetActive(true);
         if (mouseOver)
         {
             mouseOver.tooltipText = "";
@@ -501,11 +507,7 @@ public class EventController : MonoBehaviour
             customImage.gameObject.SetActive(false);
             try
             {
-                //if (currentBird != null)
-                //	mouseOver.tooltipText = Helpers.Instance.GetStatInfo(currentBird.data.confidence, currentBird.data.friendliness);
                 portrait.transform.parent.gameObject.SetActive(true);
-
-
                 if (portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird_color").GetComponent<Image>().sprite == null)
                 {
                     portraitFill.gameObject.SetActive(false);
@@ -548,7 +550,8 @@ public class EventController : MonoBehaviour
             catch
             {
                 print("failed to show portrait");
-                portrait.transform.parent.gameObject.SetActive(false);
+                portraitParent.SetActive(false);
+                nameFieldParent.SetActive(false);
             }
         }
 
@@ -700,6 +703,12 @@ public class EventController : MonoBehaviour
             portraitFill.gameObject.SetActive(false);
             portrait.gameObject.SetActive(false);
             customImage.sprite = currentEvent.options[ID].AfterImage;
+        }
+        
+        if(currentEvent.options[ID].useNarration)
+        {
+            portraitParent.SetActive(false);
+            nameFieldParent.SetActive(false);
         }
 
     }

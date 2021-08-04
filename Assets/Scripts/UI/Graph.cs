@@ -17,6 +17,7 @@ public class Graph : MonoBehaviour {
 	public bool isSmall;
 	public LevelBarScript levelBar;
 	public Image dangerZoneHighlight;
+	public GameObject dangerZoneParent;
 	public Image lockImage;
 	bool afterBattle = false;
 	private float seedMoveTime = 0.4f;
@@ -72,6 +73,10 @@ public class Graph : MonoBehaviour {
 		}
 		if (isSmall && Var.freezeEmotions)
 			return;
+		if (dangerZoneParent)
+		{
+			dangerZoneParent.SetActive(Var.gameSettings.useMHP);
+		}
 		this.afterBattle = afterBattle;
 		//GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
 		GameObject tempHeart;

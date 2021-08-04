@@ -10,10 +10,15 @@ public class MapIconEvent : MapIcon
     public Sprite NarrativeIcon;
     public Image iconToChange;
     public bool showGraph = true;
+    public string headingName = "Narrative Event";
+    public string description = "";
 
     internal override void Start()
     {
         base.Start();
+
+        levelName = headingName;
+        levelDescription = description;
 
         if (iconToChange != null && NarrativeIcon != null)
         {
@@ -69,10 +74,12 @@ public class MapIconEvent : MapIcon
                     TryCreateNewSave();
                     SaveLoad.Save();
                     });
+                    tooltipInfo.tooltipText = GetTooltipText();
                 }
                 else
                 {
                     anim.SetInteger("state", 2); //set map icon to "completed" state instantly
+                    tooltipInfo.tooltipText = GetTooltipText();
                 }
             }
             else
@@ -81,6 +88,7 @@ public class MapIconEvent : MapIcon
                 anim.SetInteger("state", 0);
                 LeanTween.delayedCall(time, () => anim.SetTrigger("playUnlockAnim"));  //Set map icon to "available" state after a delay
                 LeanTween.delayedCall(time, () => anim.SetInteger("state", 1));
+                tooltipInfo.tooltipText = GetTooltipText();
             }
         }
         else
@@ -99,7 +107,7 @@ public class MapIconEvent : MapIcon
         {
             tooltipText += "<color=#E7CA21ff> -completed</color>";
         }
-        tooltipText += "\n" + levelDescription;
+        tooltipText += "\n" + levelDescription +"\nThis node will not take a week";
         return tooltipText;
     }
 

@@ -93,17 +93,27 @@ public class GuiMap : MonoBehaviour {
 			}
 			else
 			{
-
+				bool found = false;
 				foreach (MapSaveData targ in Var.mapSaveData)
 				{
 					if (targ.ID == currentNode.trialID)
 					{
+						found = true;
+						if(targ.completed)
+                        {
+							trialObj.SetActive(false);
+							break;
+						}
 						nextAdventureIcon.color = Helpers.Instance.GetEmotionColor(targ.emotion);
 						nextAreaInfo.text = targ.areaName;
 						Debug.Log("areaName:" + targ.areaName);
 						nextAdventureIcon.GetComponent<ShowTooltip>().tooltipText = targ.areaName + " is the next big challenge. Main emotion: " + targ.emotion.ToString();
 						break;
 					}
+				}
+				if(!found)
+				{
+					trialObj.SetActive(false);
 				}
 			}	
 		}

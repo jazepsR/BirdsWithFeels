@@ -37,8 +37,7 @@ public class TimedEventControl : MonoBehaviour {
 		if (MapControler.Instance)
 		{
 			CheckStatus();
-		}
-		
+		}		
 	}
 	
 	public void CheckIfTimedEvent()
@@ -76,13 +75,15 @@ public class TimedEventControl : MonoBehaviour {
 
 
 					EventController.Instance.CreateEvent(completionEvent);
+					HealAllBirds();
                     data.currentState = TimedEventData.state.notStarted;
 				}else
 				{
 					data.currentState = TimedEventData.state.completedFail;
 					EventController.Instance.CreateEvent(completionAfterFailEvent);
                     data.currentState = TimedEventData.state.notStarted;
-                }
+					//HealAllBirds();
+				}
 				
 			if(EventNotification != null)
 				EventNotification.transform.parent.gameObject.SetActive(false);
@@ -109,7 +110,14 @@ public class TimedEventControl : MonoBehaviour {
 				SetupTrialUI();
 		}	
 	}
+	private void HealAllBirds()
+    {
+		foreach(Bird bird in FillPlayer.Instance.playerBirds)
+        {
+			bird.HealFully(true);
+        }
 
+    }
 	void SetupTrialUI()
 	{
 		if (endArea.completed)

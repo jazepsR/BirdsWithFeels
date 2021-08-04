@@ -12,6 +12,9 @@ public class MapControler : MonoBehaviour {
 	public bool showGraphAfterEvent = true;
 	[HideInInspector]
 	public bool canHeal = false;
+	[TextArea(3,10)]
+	public string trialDescription = "This is a <b>trial level!</b> In this level your <b>emotions are frozen</b>" +
+		"and won't change. In this level, mHP will not affect your birds";
 	GameObject healTrail;
 	public Text title;
 	public Transform centerPos;
@@ -151,6 +154,11 @@ public class MapControler : MonoBehaviour {
 			}
 			if (!wasActive && bird.gameObject.activeSelf)
 			{
+				if(bird.data.injured)
+                {
+					bird.DecreaseTurnsInjured();
+                }
+
 				if(bird.data.health<bird.data.maxHealth && !bird.data.injured)
 				{
 					GameObject healObj = Instantiate(bird.healParticle, bird.transform);
@@ -169,7 +177,7 @@ public class MapControler : MonoBehaviour {
 			{
 				if (bird.data.unlocked)
 				{
-					if (!bird.data.injured)
+					if (!bird.data.injured && bird.mapHighlight)
 					{
 						bird.mapHighlight.SetActive(true);
 						selectedBirds.Add(bird);
@@ -233,7 +241,7 @@ public class MapControler : MonoBehaviour {
 		{
 			canFight = true;
 			startLvlBtn.interactable = true;            
-			startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "";
+			startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "Start the adventure\nA week will pass";
 		}
 		else
 		{
@@ -366,20 +374,22 @@ public class MapControler : MonoBehaviour {
 
 		canMove = true;
 
-        //this is seb taken off
-        /*
+		//this is seb taken off
+		/*
         	LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
         LeanTween.value(gameObject, (float alpha) => MapControler.Instance.SelectionMenu.GetComponent<CanvasGroup>().alpha = alpha, 1, 0, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
        */
-         SelectionMenuAnimator.SetBool("active", false); //seb change 
+		if (SelectionMenuAnimator)
+		{
+			SelectionMenuAnimator.SetBool("active", false); //seb change 
+		}
         // SelectionMenuBlurAnimator.SetBool("active", false);
 
-        MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
-        
+        ScaleSelectedBirds(scaleTime, Vector3.zero);        
         foreach (GuiMap map in FindObjectsOfType<GuiMap>())
 			map.Clear();
-        MapControler.Instance.SelectedIcon = null;
-
+        SelectedIcon = null;
+		mapPan.Instance.scrollingEnabled = true;
     }
 	public void SetSelectionMenuIcons(MapIcon mapIcon)
     {

@@ -34,7 +34,7 @@ public class Tutorial : MonoBehaviour {
 	public Transform portraitPoint;
 	bool shouldShowFriendlyPopup = false;
 	bool shouldShowEmotionPopup = false;
-    bool shouldShowMHPTutorial = false;
+	bool shouldShowMHPTutorial = false;
 	bool shouldShowOutlines = true;
 	bool showedSecondBirdReportText = false;
 	bool showedThirdBirdReportText = false;
@@ -133,6 +133,9 @@ public class Tutorial : MonoBehaviour {
             mHPTutorialPopup.SetActive(true);
             GuiContoler.Instance.GraphBlocker.SetActive(true);
             shouldShowMHPTutorial = false;
+			GuiContoler.Instance.clearSmallGraph();
+			Var.gameSettings.useMHP = true;
+			//SaveLoad.Save(false);
         }
 
     }

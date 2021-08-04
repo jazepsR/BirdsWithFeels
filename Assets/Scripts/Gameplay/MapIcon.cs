@@ -73,7 +73,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	bool eventShown = false;
 	bool dialogueShown = false;
 	[HideInInspector] public TimedEventControl timedEvent;
-  
+	public bool logTargetSearch = false;
 
     // Use this for initialization
 
@@ -98,8 +98,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		offset = transform.position- transform.parent.position;
 		if (isTrial)
 			trialID = ID;
-		else
-			trialID = GetTargetID(this);
+		else if(trialID == 0)
+			trialID = GetTargetID(this, logTargetSearch);
 		LoadSaveData();
 		//if (!Var.StartedNormally)
 			//available = true;
@@ -118,9 +118,10 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 		if (isTrial)
 		{
-			sr.sprite = MapControler.Instance.trialSprite;
-			//sr.sprite = Helpers.Instance.GetEmotionIcon(type, true);
-			sr.color = Helpers.Instance.GetEmotionColor(type);
+			//sr.sprite = MapControler.Instance.trialSprite;
+			sr.sprite = Helpers.Instance.GetEmotionIconTrial(type);
+			//sr.color = Helpers.Instance.GetEmotionColor(type);
+			//Debug.LogError("trial: " + levelName + " color: " + sr.color);
 			if(fogObject)
 			{
 				fogObject.SetActive(!completed);
@@ -211,8 +212,12 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
 
-	int GetTargetID(MapIcon data)
+	int GetTargetID(MapIcon data, bool logtargetSearch)
 	{
+		if (logtargetSearch)
+		{
+			Debug.LogError("starting search! ID: " + ID);
+		}
 		if (data.targets.Length == 0)
 		{
 			foreach (Transform child in data.transform.parent)
@@ -226,9 +231,21 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			return -1;
 		}
 		if (data.targets[0].isTrial)
+		{
+			if (logtargetSearch)
+			{
+				Debug.LogError("found trial! ID: " + data.targets[0].ID);
+			}
 			return data.targets[0].ID;
+		}
 		else
-			return GetTargetID(data.targets[0]);
+		{
+			if (logtargetSearch)
+			{
+				Debug.LogError("Brancing to ID: " + data.targets[0].ID);
+			}
+			return GetTargetID(data.targets[0], logtargetSearch);
+		}
 	}
 
 	public virtual void SetState()
@@ -277,27 +294,21 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					CenterMapNode();
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
-					
+					tooltipInfo.tooltipText = GetTooltipText();
 				}
 				else
-				{
-
-                    
+				{                    
                     anim.SetInteger("state", 2); //set map icon to "completed" state instantly
-					
-
+					tooltipInfo.tooltipText = GetTooltipText();
 				}
 			}
             else
 			{
-
                 float time = 2f;
                 anim.SetInteger("state", 0);
                 LeanTween.delayedCall(time, () => anim.SetTrigger("playUnlockAnim"));  //Set map icon to "available" state after a delay
                 LeanTween.delayedCall(time, () => anim.SetInteger("state",1));
-				
-
-
+				tooltipInfo.tooltipText = GetTooltipText();
 			}
 		}
         else
@@ -308,6 +319,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			
 
 		}
+
 		
 	}
 	public void CenterMapNode(bool focusOnNext = true)
@@ -401,7 +413,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		try
 		{
 		  
-			MapControler.Instance.pieChart[0].gameObject.GetComponent<ShowTooltip>().tooltipText = GetTooltip();
+			MapControler.Instance.pieChart[0].gameObject.GetComponent<ShowTooltip>().tooltipText =
+				"<b>Enemies in level:</b> \n"+ GetTooltip();
 		}
 		catch
 		{
@@ -597,7 +610,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             MapTutorial tut = FindObjectOfType<MapTutorial>();
             tut.tutorialHighlight.SetTrigger("off"); 
             //DialogueControl.Instance.CreateParticularDialog(tut.mapTutorialDialog2);
-            Var.gameSettings.shownMapTutorial = true; 
+            Var.gameSettings.shownMapTutorial = true;
+			mapPan.Instance.scrollingEnabled = true;
         }
 
             SetupPieGraph();
@@ -638,7 +652,14 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		MapControler.Instance.SelectionTitle.text = levelName;
 		MapControler.Instance.SelectionText.text = ToString();
 		MapControler.Instance.enemyLevelText.text = "Average enemy level: " + birdLVL;
-		MapControler.Instance.SelectionDescription.text = levelDescription;
+		if (isTrial)
+		{
+			MapControler.Instance.SelectionDescription.text = MapControler.Instance.trialDescription + levelDescription;
+		}
+        else
+		{
+			MapControler.Instance.SelectionDescription.text =levelDescription;
+		}
 		AudioControler.Instance.ClickSound();
 		FindObjectOfType<GuiMap>().CreateMap(CreateMap());
        // LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack); //seb

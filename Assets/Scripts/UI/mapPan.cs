@@ -24,6 +24,8 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	public mapScrolHeight[] mapScrollPoints;
     public bool scrollingEnabled = false;
 	Rect maxPos;
+	float adjustboundariesSpeed = 25f;
+	bool snapped = false;
 	void Awake()
 	{
 		startingScale = transform.localScale;
@@ -33,7 +35,17 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	{
 		maxPos = map.rect;
         AudioControler.Instance.musicSource.Stop();
+		FindMapBoundaries();
 	}
+	void LateUpdate()
+    {
+		AdjustToBoundary();
+		if(!snapped)
+        {
+			SnapToBorder();
+			snapped = true;
+        }
+    }
 	void Update()
 	{
 		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
@@ -88,23 +100,15 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				{
 					
 					transform.Translate(-delta.x * mouseSensitivity, -delta.y * mouseSensitivity, 0);
-					temp = transform.position;
-					if(temp.y-1f > minY*transform.localScale.y/startingScale.y ||temp.y+1f < maxY * transform.localScale.y / startingScale.y)
+					/*temp = transform.position;
+					if(temp.y+1f > minY*transform.localScale.y/startingScale.y) 
 					{
-						if(boundaryPos.x<-5)
-						{
-							//Debug.LogError("Subtracting! Cant move too high! Boundary: "+ boundaryPos.x+" extendo: "+  Camera.main.transform.position.x);
-							temp.x -=0.1f;
-						}
-							else
-						{
-							//Debug.LogError("Adding! Cant move too high! Boundary: "+ boundaryPos.x+" extendo: " +Camera.main.transform.position.x);							
-							temp.x +=0.1f;
-							//boundaryPos.x > temp.x
-							
-						}
+						temp.y -= 1.5f;
 					}
-					//Debug.LogError("Cant move too high!");
+					else if(temp.y - 1f < maxY * transform.localScale.y / startingScale.y)
+					{
+						temp.y +=1.5f;						
+					}*/
 				}
 				else
 				{
@@ -125,6 +129,40 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			}
 		}
 	}
+	private void SnapToBorder()
+    {
+		Vector3 temp = transform.position;
+		if (temp.y - 0.5f > minY * transform.localScale.y / startingScale.y)
+		{
+			temp.y = minY+ 0.5f;
+		}
+		else if (temp.y + 0.5f < maxY * transform.localScale.y / startingScale.y)
+		{
+			temp.y = maxY - 0.5f;
+		}
+		//Debug.LogError("ychange: " + temp.y + " minY: " + minY + " maxY: " + maxY);
+		transform.position = temp;
+	}
+	private void AdjustToBoundary()
+    {
+		if (!Input.GetMouseButton(0))
+		{
+			Vector3 temp = transform.position;
+			float yChange = 0;
+			if (temp.y + 0.5f > minY * transform.localScale.y / startingScale.y)
+			{
+				yChange = -adjustboundariesSpeed * Time.deltaTime;
+			}
+			else if (temp.y - 0.5f < maxY * transform.localScale.y / startingScale.y)
+			{
+				yChange = +adjustboundariesSpeed * Time.deltaTime;
+			}
+			//Debug.LogError("temp.y: " + temp.y + " minY: " + minY + " maxY: " + maxY);
+			temp.x = Mathf.Min(temp.x, minX * transform.localScale.x / startingScale.x);
+			transform.Translate(0, yChange, 0);
+		}
+	}
+
 	private Vector3 FindMapBoundaries()
 	{
 		float currentPointDist = -Mathf.Infinity;

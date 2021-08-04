@@ -305,7 +305,7 @@ public class AudioControler : MonoBehaviour {
             particleSounds.volume = defaultSoundVol;
         if (emoGraphSource)
             emoGraphSource.volume = defaultMusicVol;
-        if (EventController.Instance.eventAudioSource)
+        if (EventController.Instance && EventController.Instance.eventAudioSource)
             EventController.Instance.eventAudioSource.volume = defaultSoundVol;
         if (spatialMusicSources.Count > 0)
         {
@@ -471,7 +471,8 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
         AudioSource activeSource = GetAudioSource(sourceToActivate);
         audioSources.Remove(activeSource);
-        activeSource.Play();
+        if(!activeSource.isPlaying)
+            activeSource.Play();
         float t = 0;
         while(t < 1)
         {
@@ -480,13 +481,14 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
             activeSource.volume = Mathf.Max(activeSource.volume, t * defaultMusicVol);
             foreach(AudioSource source in audioSources)
             {
-                source.volume = Mathf.Min(source.volume, (1 - t) * defaultMusicVol);
+                source.volume = Mathf.Min(source.volume, (1.0f - t) * defaultMusicVol);
             }
             yield return null;
         }
         foreach (AudioSource source in audioSources)
         {
-            source.Stop();
+            if(source != musicSource)
+                source.Stop();
         }
     }
 
@@ -507,7 +509,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	}
 	// Update is called once per frame
 	void Update () {
-		
+       // Debug.LogError("music distance: " + musicSource.time);
 	}
 	public void ClickSound()
 	{
