@@ -35,8 +35,8 @@ public class LevelTutorial : MonoBehaviour {
 		//Var.currentStageID = 1;
 		if((Var.currentStageID == Var.battlePlanningTutorialID) && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
 		{
-            LeanTween.delayedCall(0.75f, () =>
-             Var.gameSettings.shownBattlePlanningTutorial = true);
+            LeanTween.delayedCall(0.14f, () =>
+				Var.gameSettings.shownBattlePlanningTutorial = true);
             GuiContoler.Instance.minimap.SetActive(true);
             DialogueControl.Instance.CreateParticularDialog(planningDialogue);
 		}
@@ -119,7 +119,7 @@ public class LevelTutorial : MonoBehaviour {
 	{		
 		//if (Var.currentStageID != 5)
 		//	return;
-		if (shouldShowFirstBattleDialog && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad >0.1f)
+		if (shouldShowFirstBattleDialog && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad >0.5f)
 		{
 			GraphHighlight.SetActive(true);
 			Var.activeBirds[0].Speak("Leader, open up the emotional grid and I'll explain!");

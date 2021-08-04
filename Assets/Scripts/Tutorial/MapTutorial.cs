@@ -46,7 +46,7 @@ public class MapTutorial : MonoBehaviour {
 
     public void Update()
     {
-        if(shouldShowMapTutPopup && !GuiContoler.Instance.speechBubbleObj.activeSelf)
+        if (shouldShowMapTutPopup && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad > 0.5f)
         {
             shouldShowMapTutPopup = false;
             mapTutPopup.SetActive(true);
