@@ -35,7 +35,7 @@ public class LevelTutorial : MonoBehaviour {
 		//Var.currentStageID = 1;
 		if((Var.currentStageID == Var.battlePlanningTutorialID) && !Var.gameSettings.shownBattlePlanningTutorial) //In the map previous to to lvl 3 (ID =2) players learn abt the trials
 		{
-            LeanTween.delayedCall(0.1f, () =>
+            LeanTween.delayedCall(0.75f, () =>
              Var.gameSettings.shownBattlePlanningTutorial = true);
             GuiContoler.Instance.minimap.SetActive(true);
             DialogueControl.Instance.CreateParticularDialog(planningDialogue);
@@ -48,16 +48,16 @@ public class LevelTutorial : MonoBehaviour {
 			shouldShowFirstBattleDialog = true;
 			shouldShowGraphDialog = true;
 			Var.CanShowHover = false;
-			try
+			/*try
 			{               
 				Helpers.Instance.GetBirdFromEnum(EventScript.Character.Rebecca).showText();
 			}
-			catch { }
+			catch { }*/
 		}
 	}
    public void ShowSwordTutorial()
     {
-		if (!Var.gameSettings.shownSwordTutorial)
+		if (!Var.gameSettings.shownSwordTutorial && Var.gameSettings.shownLevelTutorial)
 		{
 			DialogueControl.Instance.CreateParticularDialog(swordTutorialDialogue);
 			Var.gameSettings.shownSwordTutorial = true;
@@ -67,7 +67,7 @@ public class LevelTutorial : MonoBehaviour {
 
 	public void ShowShieldTutorial()
     {
-		if (!Var.gameSettings.shownShieldTutorial)
+		if (!Var.gameSettings.shownShieldTutorial && Var.gameSettings.shownLevelTutorial)
 		{
 			DialogueControl.Instance.CreateParticularDialog(shieldTutorialDialogue);
 			Var.gameSettings.shownShieldTutorial = true;
@@ -77,7 +77,7 @@ public class LevelTutorial : MonoBehaviour {
 
 	public void ShowEmoTileTutorial()
     {
-		if (!Var.gameSettings.shownEmoSquareTutorial)
+		if (!Var.gameSettings.shownEmoSquareTutorial && Var.gameSettings.shownLevelTutorial)
 		{
 			DialogueControl.Instance.CreateParticularDialog(emoSquareTutorialDialogue);
 			Var.gameSettings.shownEmoSquareTutorial = true;
@@ -87,7 +87,7 @@ public class LevelTutorial : MonoBehaviour {
 
 	public void ShowWizardTutorial()
     {
-		if (!Var.gameSettings.shownWizardTutorial)
+		if (!Var.gameSettings.shownWizardTutorial && Var.gameSettings.shownLevelTutorial)
 		{
 			DialogueControl.Instance.CreateParticularDialog(wizardTutorialDialogue);
 			Var.gameSettings.shownWizardTutorial = true;
@@ -97,7 +97,7 @@ public class LevelTutorial : MonoBehaviour {
 
 	public void ShowOneHealthTutorial()
 	{
-		if (!Var.gameSettings.shownOneHealthTutorial)
+		if (!Var.gameSettings.shownOneHealthTutorial && Var.gameSettings.shownLevelTutorial)
 		{
 			DialogueControl.Instance.CreateParticularDialog(oneHealthDialogue);
 			Var.gameSettings.shownOneHealthTutorial = true;
@@ -107,7 +107,7 @@ public class LevelTutorial : MonoBehaviour {
 
 	public void ShowHeartTutorial()
 	{
-		if (!Var.gameSettings.shownHeartTutorial)
+		if (!Var.gameSettings.shownHeartTutorial && Var.gameSettings.shownLevelTutorial)
 		{
 			DialogueControl.Instance.CreateParticularDialog(heartDialogue);
 			Var.gameSettings.shownHeartTutorial = true;
@@ -121,13 +121,12 @@ public class LevelTutorial : MonoBehaviour {
 		//	return;
 		if (shouldShowFirstBattleDialog && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad >0.1f)
 		{
-			Var.gameSettings.shownLevelTutorial = true;
 			GraphHighlight.SetActive(true);
-			Helpers.Instance.GetBirdFromEnum(EventScript.Character.Rebecca).Speak("Leader, open up the emotional grid and I'll explain!");
+			Var.activeBirds[0].Speak("Leader, open up the emotional grid and I'll explain!");
 			try
 			{
+				Var.activeBirds[0].showText();
 				GuiContoler.Instance.speechBubbleObj.transform.Find("BG").gameObject.SetActive(false);
-				Helpers.Instance.GetBirdFromEnum(EventScript.Character.Rebecca).showText();
 			}
 			catch
 			{

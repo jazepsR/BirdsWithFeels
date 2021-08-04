@@ -9,10 +9,7 @@ public class BirdHoverAreaMap : MonoBehaviour
     {
         
     }
-    private void OnMouseEnter()
-    {
-        Debug.LogError("MOUSE IN DA HOUSE!");
-    }
+   
 
     private void OnMouseExit()
     {
