@@ -14,11 +14,17 @@ public class MapDetailScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = this.gameObject.GetComponent<Animator>();
+        
     }
 
     private void OnEnable()
     {
+        anim = this.gameObject.GetComponent<Animator>();
+
+        if (UseThisAnim == AnimationEnum.floating)
+        {
+            print("animation integer for float: " + (int)UseThisAnim);
+        }
         if (anim != null)
         {
             anim.SetInteger("animation", (int)UseThisAnim);
