@@ -24,6 +24,7 @@ public class LevelTutorial : MonoBehaviour {
 	public Dialogue wizardTutorialDialogue;
 	public Dialogue oneHealthDialogue;
 	public Dialogue heartDialogue;
+	public Dialogue firstTrialDialogue;
 	// Use this for initialization
 	public static LevelTutorial Instance;
     private void Awake()
@@ -48,11 +49,11 @@ public class LevelTutorial : MonoBehaviour {
 			shouldShowFirstBattleDialog = true;
 			shouldShowGraphDialog = true;
 			Var.CanShowHover = false;
-			/*try
-			{               
-				Helpers.Instance.GetBirdFromEnum(EventScript.Character.Rebecca).showText();
-			}
-			catch { }*/
+		}
+
+		if (Var.freezeEmotions)
+		{
+			ShowFirstTrialTutorial();
 		}
 	}
    public void ShowSwordTutorial()
@@ -64,6 +65,15 @@ public class LevelTutorial : MonoBehaviour {
 			SaveLoad.Save(false);
 		}
     }
+	public void ShowFirstTrialTutorial()
+	{
+		if (!Var.gameSettings.shownTrialTutorial)
+		{
+			DialogueControl.Instance.CreateParticularDialog(firstTrialDialogue);
+			Var.gameSettings.shownTrialTutorial = true;
+			SaveLoad.Save(false);
+		}
+	}
 
 	public void ShowShieldTutorial()
     {
