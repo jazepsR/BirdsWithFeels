@@ -627,10 +627,7 @@ public class GuiContoler : MonoBehaviour {
         currentGraph = Mathf.Min(3, currentGraph);
         print("currentGraph : " + currentGraph);
         if (Var.isTutorial)
-        {
-
-
-            //GuiContoler.Instance.nextGraph.interactable = false;
+        {            //GuiContoler.Instance.nextGraph.interactable = false;
            Tutorial.Instance.ShowGraphSpeech(currentGraph);
         }
         foreach (Transform child in graph.transform.Find("GraphParts").transform)
@@ -662,9 +659,6 @@ public class GuiContoler : MonoBehaviour {
             });
             ProgressGUI.Instance.SetOnePortrait();
         }
-
-
-
     }
 
 
@@ -904,10 +898,7 @@ public class GuiContoler : MonoBehaviour {
         {
             //Normal case
             DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(BirdsToGraph[0]));
-           // EmotionChangeFeedback.gameObject.SetActive(true);
             CreateEmotionChangeText(BirdsToGraph[0], emoReportBitParent);
-            //EmotionChangeFeedback.text = changeText;
-            //EmotionChangeHeading.gameObject.SetActive(changeText != "");
             feelReport.SetActive(true);
         }
         else
