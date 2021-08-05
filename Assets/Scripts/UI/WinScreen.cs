@@ -14,15 +14,25 @@ public class WinScreen : MonoBehaviour
 {
     public WinScreenData[] birdsOnWinScreenData;
     public static WinScreen Instance;
+
+    public string TextWhenNormalTrial;
+    public string TextWhenFirstTrial;
+    public Sprite adventureComplete_normal;
+    public Sprite adventureComplete_trial;
+    public Image AdventureCompleteImage;
+    public Text trialInfoText;
+    public GameObject TrialInfoParent;
+
     public void Awake()
     {
         Instance = this;
     }
 
-    public void SetupWinScreen(List<Bird> birdList)
+    public void SetupWinScreen(List<Bird> birdList, bool isTrial, bool isFirstTrial)
     {
         ResetWinScreen();
         PopulateWinScreen(birdList);
+        SetupTrialWinscreen(isTrial, isFirstTrial);
     }
 
     private void PopulateWinScreen(List<Bird> birdList)
@@ -41,6 +51,31 @@ public class WinScreen : MonoBehaviour
             }
         }
     }
+
+    void SetupTrialWinscreen(bool isTrial, bool isFirstTrial)
+    {
+        TrialInfoParent.SetActive(isTrial);
+
+        if (isTrial)
+        {
+            AdventureCompleteImage.sprite = adventureComplete_trial;
+        }
+        else
+        {
+            AdventureCompleteImage.sprite = adventureComplete_normal;
+            
+        }
+
+        if (isFirstTrial)
+        {
+            trialInfoText.text = TextWhenFirstTrial;
+        }
+        else
+        {
+            trialInfoText.text = TextWhenNormalTrial;
+        }
+    }
+
     private void ResetWinScreen()
     {
          foreach (WinScreenData data in birdsOnWinScreenData)
