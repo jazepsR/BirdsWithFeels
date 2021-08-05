@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 114021556308198814}
   - component: {fileID: 120854450012961444}
   - component: {fileID: 790651287728218884}
+  - component: {fileID: 2838234451632346750}
   m_Layer: 5
   m_Name: mapIcon
   m_TagString: Untagged
@@ -199,11 +200,11 @@ MonoBehaviour:
   - {fileID: 0}
   trialID: 0
   anim: {fileID: 0}
-  timedEventTrigger: {fileID: 0}
   firstCompleteEvent: {fileID: 0}
   firstCompleteDialogue: {fileID: 0}
   stateSet: 0
   timedEvent: {fileID: 0}
+  logTargetSearch: 0
 --- !u!120 &120854450012961444
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -318,6 +319,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2838234451632346750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266214687233880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d7b974dbed77c47bbc70b219ca9f3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundToPlay:
+    clips:
+    - {fileID: 8300000, guid: feef7f379caf97947bb4792c631aa252, type: 3}
+    - {fileID: 8300000, guid: d9a48aeb2f94cb24aa1e8fb5e5a5e79e, type: 3}
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &1662645278929874
 GameObject:
   m_ObjectHideFlags: 0
