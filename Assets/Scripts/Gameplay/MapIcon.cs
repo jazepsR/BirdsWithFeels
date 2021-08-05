@@ -291,7 +291,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					{
 						LeanTween.delayedCall(2.7f, () => icon.anim.SetInteger("state", 1));
 					}
-					CenterMapNode();
+					CenterMapNode(false);
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
 					tooltipInfo.tooltipText = GetTooltipText();
