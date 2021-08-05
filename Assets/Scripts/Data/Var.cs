@@ -107,7 +107,7 @@ public class Settings
 	public bool shownHeartTutorial = true;
 	public bool shownOneHealthTutorial = true;
 	public bool shownTrialTutorial = true;
-	public bool shownLevelCapTutorial = false;
+	public bool shownLevelCapTutorial = true;
 	public bool useMHP = true;
 	public Settings(bool tutorialsCompleted)
    {
@@ -124,7 +124,7 @@ public class Settings
 		shownHeartTutorial = tutorialsCompleted;
 		shownOneHealthTutorial = tutorialsCompleted;
 		shownTrialTutorial = tutorialsCompleted;
-		//shownLevelCapTutorial = tutorialsCompleted;
+		shownLevelCapTutorial = tutorialsCompleted;
 		useMHP = tutorialsCompleted;
 	}
 }

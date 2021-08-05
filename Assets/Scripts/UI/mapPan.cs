@@ -75,7 +75,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				AudioControler.Instance.mapPanGrab.Play();
 				MapControler.Instance.HideSelectionMenu();
 				MapControler.Instance.SelectedIcon = null;
-				MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
+				MapControler.Instance.startLvlBtn.interactable = false;
 				lastSoundPosition = lastPosition;
 			}
 

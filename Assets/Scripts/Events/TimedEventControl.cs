@@ -69,7 +69,8 @@ public class TimedEventControl : MonoBehaviour {
 				EventNotification.transform.parent.parent = endArea.transform;
 				EventNotification.transform.parent.localPosition = offset;
 			}
-			if (endArea != null && endArea.completed)
+			if (endArea != null && endArea.completed && data.currentState != TimedEventData.state.completedSuccess &&
+				data.currentState != TimedEventData.state.completedFail)
 			{
 				if (Var.currentWeek<= data.completeBy)
 				{
@@ -84,9 +85,9 @@ public class TimedEventControl : MonoBehaviour {
                    // data.currentState = TimedEventData.state.notStarted;
 					//HealAllBirds();
 				}
-				
-			if(EventNotification != null)
-				EventNotification.transform.parent.gameObject.SetActive(false);
+				Var.maxLevel++;
+				if(EventNotification != null)
+					EventNotification.transform.parent.gameObject.SetActive(false);
 			}
 			if (Var.currentWeek == data.completeBy)
 			{
