@@ -10523,9 +10523,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
         type: 3}
+      propertyPath: optionHoverSounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
       propertyPath: spatialMusicSources.Array.size
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: optionHoverSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 309f994f3059b8646aaa69a1a0627481, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: optionHoverSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0f7e8a70e8a9ba849adcebfe254b2cc3, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: optionHoverSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b9077b3a519ceb4e8ebb3250c60e751, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: optionHoverSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ef8f42b2d4194049a6b79b504e78c70, type: 3}
     - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
         type: 3}
       propertyPath: spatialMusicSources.Array.data[0]
@@ -14897,6 +14922,46 @@ MonoBehaviour:
     volume: 1
     minPitch: 1
     maxPitch: 1
+--- !u!21 &522853672
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.0026450756, y: 0.0026781433}
+        m_Offset: {x: 0.49529317, y: 3.6954985}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &526933394
 GameObject:
   m_ObjectHideFlags: 0
@@ -15233,46 +15298,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!21 &530894425
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.002645075, y: 0.0026781429}
-        m_Offset: {x: 0.49529317, y: 3.6954985}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &533704075 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7358071862249090268, guid: a10ac7ebcf420c943b4da5c7bbd83bd8,

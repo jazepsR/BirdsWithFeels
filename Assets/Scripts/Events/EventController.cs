@@ -851,6 +851,7 @@ public class EventController : MonoBehaviour
         try
         {
             var tooltip = choiceObj.GetComponentInChildren<ShowTooltip>();
+            choiceObj.GetComponentInChildren<EventOptionAudio>().Setup(ID);
             if (choiceData.selectionTooltip.Trim() != "")
             {
                 tooltip.tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);

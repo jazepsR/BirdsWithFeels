@@ -55,6 +55,10 @@ public class AudioControler : MonoBehaviour {
     public AudioGroup tileHighlightBirdHoverSpecial;
     public AudioGroup confidentParticlePostBattle;
     public AudioGroup heartParticlePostBattle;
+
+    [Header("Event option hover sound")]
+    public AudioClip[] optionHoverSounds;
+
     [Header("Graph effects")]
     public AudioGroup smallGraphAppear;
     public AudioGroup smallGraphDisappear;
@@ -199,6 +203,13 @@ public class AudioControler : MonoBehaviour {
         
 
     }
+    public void PlayOptionHoverSound(int ID)
+    {
+        if(optionHoverSounds != null && optionHoverSounds.Length >= ID)
+        {
+            PlaySound(optionHoverSounds[ID], audioSourceType.main);
+        }
+    }
     public void PlayStartGameHover()
     {
         PlaySound(mainMenuNewGameHighlight);
@@ -328,7 +339,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
 	public void PlaySound(AudioClip clip, audioSourceType sourceType)
 	{
-        Debug.Log("Playing sound: " + clip.name);
+        Debug.LogError("Playing sound: " + clip.name);
 		GetAudioSource(sourceType).pitch = 1f;
 		GetAudioSource(sourceType).PlayOneShot(clip);
 
@@ -380,6 +391,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 		{
 			return;
 		}
+        Debug.LogError("playing " + group.clips[0].name + " on source " + source.name);
 		source.PlayOneShot(group.clips[UnityEngine.Random.Range(0, group.clips.Length)],group.volume);
 	}
 	public AudioSource GetAudioSource(audioSourceType sourceType)
