@@ -129,7 +129,7 @@ public class ProgressGUI : MonoBehaviour {
     private List<string> GetInjuredBirdNameList()
     {
         List<string> nameList = new List<string>();
-        List<Bird> injuredBirds = GetInjuredBirdList();
+       // List<Bird> injuredBirds = GetInjuredBirdList();
         foreach (Bird bird in Var.activeBirds)
         {
             if (bird.data.injured)
@@ -252,6 +252,7 @@ public class ProgressGUI : MonoBehaviour {
             if (bird.hadMentalPain && !bird.inMap)
             {
                 mentalPainPopup.SetActive(true);
+                AudioControler.Instance.tooMuchTimeInDangerzoneSound.Play();
                 bird.hadMentalPain = false;
             }
             if (bird.prevEmotion != bird.emotion && !bird.inMap)
