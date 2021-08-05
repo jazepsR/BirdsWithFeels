@@ -55,6 +55,13 @@ public class AudioControler : MonoBehaviour {
     public AudioGroup tileHighlightBirdHoverSpecial;
     public AudioGroup confidentParticlePostBattle;
     public AudioGroup heartParticlePostBattle;
+    public AudioGroup nodeHoverSound;
+    public AudioGroup nodeCompleteSound;
+    public AudioGroup nodeUnlockSound;
+    public AudioGroup injuredBirdGraphSound;
+    public AudioGroup levelUpHeartSound;
+    public AudioGroup levelUpSwordSound;
+    public AudioGroup tooMuchTimeInDangerzoneSound;
 
     [Header("Event option hover sound")]
     public AudioClip[] optionHoverSounds;

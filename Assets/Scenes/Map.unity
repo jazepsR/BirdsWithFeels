@@ -3931,46 +3931,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153427852}
   m_CullTransparentMesh: 0
---- !u!21 &156240642
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.002645075, y: 0.0026781429}
-        m_Offset: {x: 0.49529323, y: 3.6954985}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!224 &158922853 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224066781370344964, guid: fbabd2b114f0b284da81290312b968f3,
@@ -10498,6 +10458,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
         type: 3}
+      propertyPath: nodeHoverSound.clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
       propertyPath: optionHoverSounds.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 309f994f3059b8646aaa69a1a0627481, type: 3}
@@ -10516,6 +10481,11 @@ PrefabInstance:
       propertyPath: optionHoverSounds.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 8ef8f42b2d4194049a6b79b504e78c70, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: nodeUnlockSound.clips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
         type: 3}
       propertyPath: spatialMusicSources.Array.data[0]
@@ -10543,6 +10513,46 @@ PrefabInstance:
       objectReference: {fileID: 416258140}
     - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
         type: 3}
+      propertyPath: levelUpHeartSound.clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: levelUpSwordSound.clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: nodeCompleteSound.clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: nodeHoverSound.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 86049e14190909342953feaf3ff3a7d5, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: nodeUnlockCupSound.clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: nodeUnlockSound.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 80e40e7686cbc8c43942256f8db48716, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: nodeUnlockSound.clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0f7ef72454dce2846a408072fd29595e, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: nodeUnlockSound.clips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: a47ee09ef1f97b745a951165b9cf8164, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
       propertyPath: powerTileShield.clips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 624116cd9ecdfec48929d1b44d10cbd4, type: 3}
@@ -10551,6 +10561,46 @@ PrefabInstance:
       propertyPath: tileHighlightBirdHoverSpecial.volume
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: levelUpHeartSound.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0c65997ac8fb93f4f9d7b7df37f8e418, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: levelUpSwordSound.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7a008fd097d2e6f4e9c8803e01d416b7, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: nodeCompleteSound.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 40ce93393bff2f843abef35743b55fa9, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: injuredBirdGraphSound.clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: nodeUnlockCupSound.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 40ce93393bff2f843abef35743b55fa9, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: injuredBirdGraphSound.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 536027007eb96254d93f1a5bff595c53, type: 3}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: tooMuchTimeInDangerzoneSound.clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
+        type: 3}
+      propertyPath: tooMuchTimeInDangerzoneSound.clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fd211259b7f53d04e9e80c61a2ba77b7, type: 3}
     - target: {fileID: 114935367075027242, guid: d2e1b6db1ca414e418db27bcd0f93516,
         type: 3}
       propertyPath: tileHighlightBirdHoverSpecial.clips.Array.data[0]
@@ -14806,46 +14856,6 @@ MonoBehaviour:
     volume: 1
     minPitch: 1
     maxPitch: 1
---- !u!21 &522853672
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.0026450756, y: 0.0026781433}
-        m_Offset: {x: 0.49529317, y: 3.6954985}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &526933394
 GameObject:
   m_ObjectHideFlags: 0
@@ -26397,6 +26407,46 @@ RectTransform:
   m_AnchoredPosition: {x: -86.000015, y: 124}
   m_SizeDelta: {x: 86, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!21 &952064889
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.002645075, y: 0.0026781429}
+        m_Offset: {x: 0.49529317, y: 3.6954985}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &952394806
 GameObject:
   m_ObjectHideFlags: 0
