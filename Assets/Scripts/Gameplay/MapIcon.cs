@@ -624,24 +624,14 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		{
 			Var.selectedTimeEvent = timedEvent.data;
 		}
-			active = true;
+		active = true;
 
-            foreach (GuiMap map in FindObjectsOfType<GuiMap>())
-                map.Clear();
-            MapControler.Instance.SelectedIcon = null;
-            MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
-            //MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero; //seb
-            MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
-
-
-            ShowAreaDetails();
-
-            //LeanTween.value(gameObject, (float alpha) => MapControler.Instance.SelectionMenu.GetComponent<CanvasGroup>().alpha =alpha, 0,1, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-            //LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-
-
-            //LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position+(transform.parent.transform.position-transform.position), 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
-        
+        foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+            map.Clear();
+        MapControler.Instance.SelectedIcon = null;
+        //MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero; //seb
+        MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
+        ShowAreaDetails();
     }
 
 	public void ShowAreaDetails()
@@ -670,9 +660,14 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		MapControler.Instance.SelectedIcon = this;
 		if (available)
 		{
-			MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);            
-			MapControler.Instance.startLvlBtn.gameObject.SetActive(true);
-			
+			MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);
+			MapControler.Instance.startLvlBtn.interactable = true;
+			MapControler.Instance.startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "Start the adventure\nA week will pass";
+		}
+        else
+        {
+			MapControler.Instance.startLvlBtn.interactable = false;
+			MapControler.Instance.startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "Area locked!\nComplete previous adventures!";
 		}
 	}
 	bool CheckTargetsAvailable()
