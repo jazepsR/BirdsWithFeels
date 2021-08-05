@@ -8,7 +8,7 @@ public class animatorOffsetScript : MonoBehaviour {
          float offset;
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
         anime = GetComponent<Animator>();
        
             offset = Random.Range(0.0f, 1.0f);
