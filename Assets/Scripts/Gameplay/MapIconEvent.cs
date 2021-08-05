@@ -105,7 +105,7 @@ public class MapIconEvent : MapIcon
         }
         if (completed)
         {
-            tooltipText += "<color=#E7CA21ff> -completed</color>";
+            tooltipText += "<color=#2bd617ff> -completed</color>";
         }
         tooltipText += "\n" + levelDescription +"\nThis node will not take a week";
         return tooltipText;

@@ -425,7 +425,7 @@ public class GuiContoler : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape) && pauseBtn.activeSelf)
         {
-            if (EventController.Instance.eventObject.gameObject.activeSelf || GraphBlocker.gameObject.activeSelf || winBanner.activeSelf)
+            if ((EventController.Instance && EventController.Instance.eventObject.gameObject.activeSelf) || GraphBlocker.gameObject.activeSelf ||( winBanner && winBanner.activeSelf))
             {     
                 
             }

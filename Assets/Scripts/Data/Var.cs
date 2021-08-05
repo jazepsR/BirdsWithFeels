@@ -105,6 +105,7 @@ public class Settings
 	public bool shownWizardTutorial = true;
 	public bool shownHeartTutorial = true;
 	public bool shownOneHealthTutorial = true;
+	public bool shownTrialTutorial = true;
 	public bool useMHP = true;
 	public Settings(bool tutorialsCompleted)
    {
@@ -120,6 +121,7 @@ public class Settings
 		shownWizardTutorial = tutorialsCompleted;		
 		shownHeartTutorial = tutorialsCompleted;
 		shownOneHealthTutorial = tutorialsCompleted;
+		shownTrialTutorial = tutorialsCompleted;
 		useMHP = tutorialsCompleted;
 	}
 }

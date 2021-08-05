@@ -6,6 +6,8 @@ public class EmoIndicator : MonoBehaviour
 {
     public GameObject Background;
     public GameObject plusIcon;
+    public GameObject heartIcon;
+    public Transform heartDefaultPosition;
 
     public SpriteRenderer icon1;
     public SpriteRenderer icon2;
@@ -36,7 +38,7 @@ public class EmoIndicator : MonoBehaviour
 
     public void Hide()
     {
-        
+        //Debug.LogError("HIDING! bird: "+ bird.charName);
         anim.ResetTrigger("show");
         anim.SetTrigger("hide");
         hidden = true;
@@ -50,6 +52,7 @@ public class EmoIndicator : MonoBehaviour
         {
             SetEmotions(emo1, emo2);
         }
+        
         hidden = false;
         hideCount++;
     }
@@ -65,62 +68,46 @@ public class EmoIndicator : MonoBehaviour
 
     public void SetEmotions(Var.Em emo1, Var.Em emo2)
     {
-        /*socialIcon.SetActive(emo1 == Var.Em.Social);
-        solitaryIcon.SetActive(emo1 == Var.Em.Solitary);
-        confidentIcon.SetActive(emo2 == Var.Em.Confident);
-        cautiousIcon.SetActive(emo2 == Var.Em.Cautious);*/
-       //Debug.LogError(bird.charName + " emo1: " + emo1 + " emo2: " + emo2);
-         if((emo1 == Var.Em.Neutral && emo2 == Var.Em.Neutral) || bird.target == bird.home)
-         {
-           //  Debug.Log("hiding");
-             Hide();
-         }
+        if (Var.freezeEmotions)
+        {
+            emo1 = Var.Em.Neutral;
+            emo2 = Var.Em.Neutral;
+        }
+        bool isResting = bird.GetComponentInChildren<Animator>().GetBool("rest");
+        heartIcon.SetActive(isResting);
+        //Debug.LogError("setting emotions! bird: "+ bird.charName);
+        if ((emo1 == Var.Em.Neutral && emo2 == Var.Em.Neutral) || bird.target == bird.home)
+        {
+            SetIconEmotion(Var.Em.Neutral, icon1);
+            SetIconEmotion(Var.Em.Neutral, icon2);
+            heartIcon.transform.localPosition = icon1.transform.localPosition;
+            if (isResting)
+            {
+                Show(emo1, emo2, false);
+            }
+            // Hide();
+        }
         else
          {
-            //Debug.Log("showing");
             if (emo1 == Var.Em.Neutral && emo2 != Var.Em.Neutral)
             {
                 SetIconEmotion(emo2, icon1);
                 SetIconEmotion(Var.Em.Neutral, icon2);
+                heartIcon.transform.localPosition = icon2.transform.localPosition;
             }
             else
             {
                 SetIconEmotion(emo1, icon1);
                 SetIconEmotion(emo2, icon2);
-
+                heartIcon.transform.localPosition = heartDefaultPosition.localPosition;
             }
-                /*  if (emo1 == Var.Em.Neutral && emo2 != Var.Em.Neutral)
-                  {
-                      if (emo2 == Var.Em.Confident)
-                      {
-                          emo2 = Var.Em.Neutral;
-                          confidentIcon.SetActive(false);
-                          solitaryIcon.GetComponent<SpriteRenderer>().sprite = confidenceSprite;
-                          solitaryIcon.SetActive(true);
-                      }
-
-                      if (emo2 == Var.Em.Cautious)
-                      {
-                          emo2 = Var.Em.Neutral;
-                          cautiousIcon.SetActive(false);
-                          socialIcon.GetComponent<SpriteRenderer>().sprite = cautiousSprite;
-                          socialIcon.SetActive(true);
-                      }
-
-                  }
-                  else
-                  {
-                      solitaryIcon.GetComponent<SpriteRenderer>().sprite = solitarySprite;
-                      socialIcon.GetComponent<SpriteRenderer>().sprite = socialSprite;
-                  }*/
-
-
-                Show(emo1, emo2,false);
+            Show(emo1, emo2,false);
          }
     }
 
     private void SetIconEmotion(Var.Em emotion, SpriteRenderer sr)
     {
+        
        // sr.gameObject.SetActive(false);
        sr.gameObject.SetActive(emotion != Var.Em.Neutral);
        // Debug.Log("name: " + sr.name + " emo: " + emotion);
