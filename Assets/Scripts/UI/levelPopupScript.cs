@@ -76,12 +76,13 @@ public class levelPopupScript : MonoBehaviour {
 			secondPart.SetActive(true);
 			thirdPart.SetActive(false);
 			title.text = "Getting better!";
+			AudioControler.Instance.levelUpSwordSound.Play();
 		}
 		else
 		{
 			secondText.text = secondTextList[0];
 			secondTextList.RemoveAt(0);
-		}	
+		}
 	}
 	public void SecondBtn()
 	{
@@ -94,6 +95,7 @@ public class levelPopupScript : MonoBehaviour {
 			firstText.text = "Gained +1 health!";
 			activeBird.GainedLVLHealth = false;
 			healthGiven = true;
+			AudioControler.Instance.levelUpHeartSound.Play();
 		}
 		else
 		{
