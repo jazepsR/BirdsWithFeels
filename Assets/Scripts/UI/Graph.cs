@@ -153,20 +153,16 @@ public class Graph : MonoBehaviour {
 	}
 	void CreateLevelSeeds(Bird bird, bool afterBattle)
 	{
+		if(bird.data.level >= Var.maxLevel)
+        {
+			return;
+        }
 		Debug.Log("SEEDS ARE BEING CREATED");
 		float factor = isSmall ? 8 : 18;
 		if (!isSmall)
 		{
 			SetupLevelBar(bird);
 		}
-		/*if(!isSmall)
-		{
-			factor = 16;
-			SetupLevelBar(Var.Em.Cautious, Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.data.levelList),bird);
-			SetupLevelBar(Var.Em.Confident, Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.data.levelList), bird);
-			SetupLevelBar(Var.Em.Social, Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.data.levelList), bird);
-			SetupLevelBar(Var.Em.Solitary, Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.data.levelList), bird);
-		}*/
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
 		bird.data.level - 1)];
 

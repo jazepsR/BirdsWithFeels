@@ -26,6 +26,7 @@ public class levelPopupScript : MonoBehaviour {
 	Bird activeBird;
 	LevelDataScriptable data;
 	bool healthGiven = false;
+	public Dialogue levelCapDialogue;
 	// Use this for initialization
 	void Start () {
 		Instance = this;
@@ -120,6 +121,10 @@ public class levelPopupScript : MonoBehaviour {
 		{
 			LevelBarScript.Instance.levelUpAnimator.SetBool("isLevellingUp", false);
 		}
+		if (activeBird.data.level == Var.maxLevel)
+		{
+			ShowLevelCapTutorial();
+		}
 		if (DebugMenu.Instance.debugMenu.activeSelf)
 			return;
 		try
@@ -141,8 +146,18 @@ public class levelPopupScript : MonoBehaviour {
 			//foreach (string text in texts)
 			//	GuiContoler.Instance.ShowSpeechBubble(Tutorial.Instance.portraitPoint, text,activeBird.birdSounds.GetTalkGroup(activeBird.emotion));
 		}
-
 		
+		
+	}
+
+	public void ShowLevelCapTutorial()
+	{
+		if (!Var.gameSettings.shownLevelCapTutorial && Var.gameSettings.shownLevelTutorial)
+		{
+			DialogueControl.Instance.CreateParticularDialog(levelCapDialogue);
+			Var.gameSettings.shownLevelCapTutorial = true;
+			SaveLoad.Save(false);
+		}
 	}
 	// Update is called once per frame
 	void Update () {

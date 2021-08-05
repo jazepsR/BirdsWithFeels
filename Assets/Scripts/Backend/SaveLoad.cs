@@ -117,6 +117,7 @@ public class SaveLoad : MonoBehaviour
 		Var.SophieUnlocked = data.SophieUnlocked;
 		Var.KimUnlocked = data.KimUnlocked;
 		Var.isDragControls = data.isDragControls;
+		Var.maxLevel = data.maxLevel;
 		//List<Bird> activeBirds = new List<Bird>();
 		List<Bird> availableBirds = new List<Bird>();
 		foreach (BirdData birdData in data.availableBirds)
@@ -142,6 +143,7 @@ public class SaveData
 	public bool SophieUnlocked = false;
 	public bool KimUnlocked = false;
 	public bool isDragControls = true;
+	public int maxLevel = 2;
 	public SaveData()
 	{
 		SophieUnlocked = Var.SophieUnlocked;
@@ -153,6 +155,7 @@ public class SaveData
 		gameSettings = Var.gameSettings;
 		currentStageID = Var.currentStageID;
 		isDragControls = Var.isDragControls;
+		maxLevel = Var.maxLevel;
 		activeBirds = new List<BirdData>();
 		foreach(Bird bird in Var.activeBirds)
 		{

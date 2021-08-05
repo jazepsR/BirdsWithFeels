@@ -1517,7 +1517,7 @@ public class Bird : MonoBehaviour
 
 	public void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.P) && Var.cheatsEnabled)
+		if (Input.GetKeyDown(KeyCode.S) && Var.cheatsEnabled)
 		{
 			if (Var.selectedBird == gameObject)
 			{

@@ -83,8 +83,9 @@ public static class Var {
 	public static bool isDragControls = true;
 	public static bool freezeEmotions = false;
 	public static int eventTextCharLimit = 200;
-    /// Tutorial IDs
-    public static int battlePlanningTutorialID = 13;
+	public static int maxLevel = 2;
+	/// Tutorial IDs
+	public static int battlePlanningTutorialID = 13;
     public static int levelTutorialID = 21;
 	public static bool cheatsEnabled = true;
 	public static float levelPopupDelay = 0.3f;
@@ -106,6 +107,7 @@ public class Settings
 	public bool shownHeartTutorial = true;
 	public bool shownOneHealthTutorial = true;
 	public bool shownTrialTutorial = true;
+	public bool shownLevelCapTutorial = false;
 	public bool useMHP = true;
 	public Settings(bool tutorialsCompleted)
    {
@@ -122,6 +124,7 @@ public class Settings
 		shownHeartTutorial = tutorialsCompleted;
 		shownOneHealthTutorial = tutorialsCompleted;
 		shownTrialTutorial = tutorialsCompleted;
+		//shownLevelCapTutorial = tutorialsCompleted;
 		useMHP = tutorialsCompleted;
 	}
 }

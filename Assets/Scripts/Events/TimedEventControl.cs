@@ -123,6 +123,9 @@ public class TimedEventControl : MonoBehaviour {
 			//Debug.LogError("GOT DATA! State: "+ data.currentState);
 			switch (data.currentState)
 			{
+				case TimedEventData.state.notStarted:
+					ToggleObjects(startingVisuals, true);
+					break;
 				case TimedEventData.state.active:
 					ToggleObjects(startingVisuals, true);
 					break;
