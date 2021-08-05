@@ -84,7 +84,7 @@ public class fillEnemy : MonoBehaviour {
 			wizardChance = 0.5f;
 			drillChance = 0.5f;
 			hasDrills = hasDrillsDebug;
-			hasSuper = true;
+			//hasSuper = true;
 			superChance = 1f;
 		}
 		List<int> frontPos = new List<int>();

@@ -128,11 +128,21 @@ public class feedBack : MonoBehaviour
     public void TryWizardLine(Bird player, Bird enemy)
     {
         if (lineObj != null)
+        {
+            SetupWizardLine(player, enemy, lineObj);
+            //Debug.LogError("LINE NOT NULL from " + enemy.charName + " to " + player.charName);
             return;
+        }
         if (enemy.enemyType != fillEnemy.enemyType.wizard)
             return;
         if (enemy.emotion == Var.Em.Neutral)
-            return;
+            return;              
+        lineObj = Instantiate(WizardBirdsFeedbackline);
+        SetupWizardLine(player, enemy, lineObj);
+    }
+
+    private void SetupWizardLine(Bird player, Bird enemy, GameObject lineObj)
+    {
         switch (enemy.emotion)
         {
             case Var.Em.Solitary:
@@ -150,9 +160,7 @@ public class feedBack : MonoBehaviour
             default:
                 break;
         }
-        lineObj = Instantiate(WizardBirdsFeedbackline);
         LightningEffectSetup lightSetup = lineObj.GetComponentInChildren<LightningEffectSetup>();
-
         LineRenderer lr = lineObj.GetComponent<LineRenderer>();
         lr.sortingOrder = 0;
         lr.SetPosition(0, player.target);
@@ -166,9 +174,6 @@ public class feedBack : MonoBehaviour
         {
             lightSetup.SetupGlowEffect(enemy.emotion, player, enemy);
         }
-
-
-
     }
     public void HighlightTutorialTiles()
     {
@@ -221,7 +226,7 @@ public class feedBack : MonoBehaviour
                                 ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[myIndex, i], birdScript), Var.playerPos[myIndex, i]);
                                 PlayerEnemyBird = Var.playerPos[myIndex, i];
                                 hasFeedback = true;
-                                TryWizardLine(Var.playerPos[myIndex, i], birdScript);
+                                LeanTween.delayedCall(0.15f, () => TryWizardLine(Var.playerPos[myIndex, i], birdScript));
                                 break;
                             }
                             else
@@ -260,7 +265,7 @@ public class feedBack : MonoBehaviour
                                 ShowFeedback(GameLogic.Instance.GetBonus(Var.playerPos[3 - i, myIndex], birdScript), Var.playerPos[3 - i, myIndex]);
                                 PlayerEnemyBird = Var.playerPos[3 - i, myIndex];
                                 hasFeedback = true;
-                                TryWizardLine(Var.playerPos[3 - i, myIndex], birdScript);
+                                LeanTween.delayedCall(0.15f, () => TryWizardLine(Var.playerPos[3 - i, myIndex], birdScript));
                                 break;
                             }
                             else
