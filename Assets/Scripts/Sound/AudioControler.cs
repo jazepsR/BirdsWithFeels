@@ -55,6 +55,17 @@ public class AudioControler : MonoBehaviour {
     public AudioGroup tileHighlightBirdHoverSpecial;
     public AudioGroup confidentParticlePostBattle;
     public AudioGroup heartParticlePostBattle;
+    public AudioGroup nodeHoverSound;
+    public AudioGroup nodeCompleteSound;
+    public AudioGroup nodeUnlockSound;
+    public AudioGroup injuredBirdGraphSound;
+    public AudioGroup levelUpHeartSound;
+    public AudioGroup levelUpSwordSound;
+    public AudioGroup tooMuchTimeInDangerzoneSound;
+
+    [Header("Event option hover sound")]
+    public AudioClip[] optionHoverSounds;
+
     [Header("Graph effects")]
     public AudioGroup smallGraphAppear;
     public AudioGroup smallGraphDisappear;
@@ -199,6 +210,13 @@ public class AudioControler : MonoBehaviour {
         
 
     }
+    public void PlayOptionHoverSound(int ID)
+    {
+        if(optionHoverSounds != null && optionHoverSounds.Length >= ID)
+        {
+            PlaySound(optionHoverSounds[ID], audioSourceType.main);
+        }
+    }
     public void PlayStartGameHover()
     {
         PlaySound(mainMenuNewGameHighlight);
@@ -293,7 +311,6 @@ public class AudioControler : MonoBehaviour {
 			battleSource.volume = defaultMusicVol;
         if (musicSource)
         {
-           // Debug.Log("hello i am music source at music volume: " + defaultMusicVol);
             musicSource.volume = defaultMusicVol;
         }
         if(UiEffects)
@@ -306,7 +323,7 @@ public class AudioControler : MonoBehaviour {
             particleSounds.volume = defaultSoundVol;
         if (emoGraphSource)
             emoGraphSource.volume = defaultMusicVol;
-        if (EventController.Instance.eventAudioSource)
+        if (EventController.Instance && EventController.Instance.eventAudioSource)
             EventController.Instance.eventAudioSource.volume = defaultSoundVol;
         if (spatialMusicSources.Count > 0)
         {
@@ -329,7 +346,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
 	public void PlaySound(AudioClip clip, audioSourceType sourceType)
 	{
-        Debug.Log("Playing sound: " + clip.name);
+        Debug.LogError("Playing sound: " + clip.name);
 		GetAudioSource(sourceType).pitch = 1f;
 		GetAudioSource(sourceType).PlayOneShot(clip);
 
@@ -381,6 +398,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 		{
 			return;
 		}
+        Debug.LogError("playing " + group.clips[0].name + " on source " + source.name);
 		source.PlayOneShot(group.clips[UnityEngine.Random.Range(0, group.clips.Length)],group.volume);
 	}
 	public AudioSource GetAudioSource(audioSourceType sourceType)
@@ -468,10 +486,12 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
         audioSources.Add(GetAudioSource(audioSourceType.battleSource));
         audioSources.Add(GetAudioSource(audioSourceType.graphMusic));
         audioSources.Add(GetAudioSource(audioSourceType.musicSource));
+        audioSources.Add(GetAudioSource(audioSourceType.ambient));
 
         AudioSource activeSource = GetAudioSource(sourceToActivate);
         audioSources.Remove(activeSource);
-        activeSource.Play();
+        if(!activeSource.isPlaying)
+            activeSource.Play();
         float t = 0;
         while(t < 1)
         {
@@ -480,13 +500,14 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
             activeSource.volume = Mathf.Max(activeSource.volume, t * defaultMusicVol);
             foreach(AudioSource source in audioSources)
             {
-                source.volume = Mathf.Min(source.volume, (1 - t) * defaultMusicVol);
+                source.volume = Mathf.Min(source.volume, (1.0f - t) * defaultMusicVol);
             }
             yield return null;
         }
         foreach (AudioSource source in audioSources)
         {
-            source.Stop();
+            if(source != musicSource)
+                source.Stop();
         }
     }
 
@@ -507,7 +528,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 	}
 	// Update is called once per frame
 	void Update () {
-		
+       // Debug.LogError("music distance: " + musicSource.time);
 	}
 	public void ClickSound()
 	{

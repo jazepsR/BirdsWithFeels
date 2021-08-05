@@ -149,10 +149,10 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: "Sophie, I\u2019m sure you can go back to being lonely after this
-    adventure is over if that\u2019s what you want. If you want to be a scholar,
-    I\u2019m sure you can be!\r\n"
-  selectionTooltip: Back to your origins (+3 Solitude)
+  selectionText: "I\u2019m sure you can go back to being lonely after this adventure
+    is over if that\u2019s what you want. If you want to be a scholar, I\u2019m sure
+    you can be!\r"
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: "Okay, yeah. I guess I can always try to go back to being lonely
     later. It\u2019ll probably work out. \r\n\r\n"
@@ -344,7 +344,7 @@ MonoBehaviour:
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Well, things change and one emotion can turn into another. I know
     you're used to being solitary, but the other emotions are pretty rad too!
-  selectionTooltip: Emotions always change (+3 Caution)
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: I know you're right, but it's still scary...
 --- !u!1 &160768644255483967
@@ -403,8 +403,20 @@ MonoBehaviour:
   - {fileID: 160768643096723902}
   - {fileID: 160768644209387183}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &160768644280138692
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,8 +461,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: "Well, you\u2019re not solitary anymore. You\u2019re not used to that, are
-    you?"
+  text: "Well, you\u2019ve been switching between emotions a lot recently. You\u2019re
+    not used to that, are you?"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &160768644357249845
@@ -497,8 +509,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "I\u2019m really not! I\u2019m not sure I like this feeling. What if I can\u2019t
-    become lonely again?\r\n"
+  text: "I\u2019m really not! I\u2019m not sure I like all these feelings. What if
+    I can\u2019t become lonely again?\r \n"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &160768644445472190

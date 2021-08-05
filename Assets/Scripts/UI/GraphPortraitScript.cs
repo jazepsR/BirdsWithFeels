@@ -18,6 +18,8 @@ public class GraphPortraitScript : MonoBehaviour {
 	float lastTickTime = 0;
 	bool shouldHaveSound = true;
 	Bird bird;
+	private float movePointTime = 0.55f;
+	private float waitPointTime = 0.3f;
 	void Starter () {
 		try
 		{
@@ -36,16 +38,23 @@ public class GraphPortraitScript : MonoBehaviour {
 			firstPos = new Vector3(transform.position.x, transform.position.y, 0);
 			lr.SetPosition(0, firstPos);
 			lr.SetPosition(1, firstPos);
-			if (Mathf.Abs(transform.localPosition.x / factor) > 12 || Mathf.Abs(transform.localPosition.y / factor) > 12)
+			if (Mathf.Abs(transform.localPosition.x / factor) > Var.DangerZoneStart || Mathf.Abs(transform.localPosition.y / factor) > Var.DangerZoneStart)
 				inDangerZone = true;
 			else
 				inDangerZone = false;
 			print("pos:" + transform.localPosition);
-            if (GetComponent<Animator>() != null)
+            if (GetComponent<Animator>() != null )
             {
-                GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+				if (Var.gameSettings.useMHP)
+				{
+					GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
+                }
+                else
+				{
+					GetComponent<Animator>().SetBool("dangerzone", false);
+				}
             }
-			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f).setOnComplete(()=>
+			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, movePointTime).setOnComplete(()=>
 			Graph.Instance.CheckIfCollectedSeed(bird));
 		}
 		catch
@@ -58,10 +67,10 @@ public class GraphPortraitScript : MonoBehaviour {
 	void Update () {
 		if (parent != null && parent.dangerZoneHighlight != null)
 			parent.dangerZoneHighlight.transform.position = transform.position;
-		if ((Mathf.Abs(transform.localPosition.x / factor) >= 12 || Mathf.Abs(transform.localPosition.y / factor) >= 12) && !inDangerZone)
+		if ((Mathf.Abs(transform.localPosition.x / factor) >= Var.DangerZoneStart || Mathf.Abs(transform.localPosition.y / factor) >= Var.DangerZoneStart) && !inDangerZone && Var.gameSettings.useMHP)
 		{
 			inDangerZone = true;
-			if (GuiContoler.Instance.dangerFollowHighlight.gameObject.activeSelf)
+			if (GuiContoler.Instance.dangerFollowHighlight.gameObject.activeSelf )
 			{
 				AudioControler.Instance.enterDangerZone.Play();
 			}
@@ -70,7 +79,7 @@ public class GraphPortraitScript : MonoBehaviour {
                 GetComponent<Animator>().SetBool("dangerzone", inDangerZone);
             }
 		}
-		if ((Mathf.Abs(transform.localPosition.x / factor) < 12 && Mathf.Abs(transform.localPosition.y / factor) < 12) && inDangerZone)
+		if ((Mathf.Abs(transform.localPosition.x / factor) < Var.DangerZoneStart && Mathf.Abs(transform.localPosition.y / factor) < Var.DangerZoneStart) && inDangerZone && Var.gameSettings.useMHP)
 		{
 			inDangerZone = false;
 			if (GuiContoler.Instance.dangerFollowHighlight.gameObject.activeSelf)
@@ -95,7 +104,7 @@ public class GraphPortraitScript : MonoBehaviour {
 		this.targetEmotion = targetEmotion;
 		ShowTooltip info =gameObject.AddComponent<ShowTooltip>();
 		finish = target * factor;
-		if (Mathf.Abs(transform.localPosition.x / factor) > 12 || Mathf.Abs(transform.localPosition.y / factor) > 12)
+		if (Mathf.Abs(transform.localPosition.x / factor) > Var.DangerZoneStart || Mathf.Abs(transform.localPosition.y / factor) > Var.DangerZoneStart)
 		{
 			info.tooltipText = "This bird is outside their <b>comfort zone</b>! Get them back in before they lose all mental HP and <b>take damage</b>!";
 		}
@@ -120,7 +129,7 @@ public class GraphPortraitScript : MonoBehaviour {
 		try
 		{
 			targetEmotion = Var.Em.finish;
-			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, 1.35f).setOnComplete(() =>
+			LeanTween.value(gameObject, MovePoint, transform.localPosition, finish, movePointTime).setOnComplete(() =>
 			Graph.Instance.CheckIfCollectedSeed(bird)); ;
 		}
 		catch { }
@@ -142,8 +151,8 @@ public class GraphPortraitScript : MonoBehaviour {
 			activeText.rectTransform.localScale = Vector3.one;
 			//heartt.transform.Find("bird_color").GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
 			//LeanTween.scale(activeText.gameObject.GetComponent<RectTransform>(), Vector3.one * 1.7f, 0.2f).setEase(LeanTweenType.linear).setOnComplete(scaleDownText);
-			LeanTween.color(transform.Find("bird_color").GetComponent<Image>().rectTransform, Helpers.Instance.GetEmotionColor(targetEmotion), 0.7f).setEaseInBack();                                
-			LeanTween.delayedCall(0.7f,ResumeMovement);
+			LeanTween.color(transform.Find("bird_color").GetComponent<Image>().rectTransform, Helpers.Instance.GetEmotionColor(targetEmotion), waitPointTime).setEaseInBack();                                
+			LeanTween.delayedCall(waitPointTime, ResumeMovement);
 		}else
 		{
 			transform.localPosition = new Vector3(pos.x, pos.y, 0);

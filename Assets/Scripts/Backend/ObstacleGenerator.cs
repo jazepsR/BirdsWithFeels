@@ -16,10 +16,12 @@ public class ObstacleGenerator : MonoBehaviour {
     public GameObject shieldTile;
     public GameObject BattleArea;
 	public List<GameObject> obstacles = new List<GameObject>();
+	private LevelTutorial lvlTut;
 	// Use this for initialization
 	void Awake()
 	{
 		Instance = this;
+		lvlTut = GetComponent<LevelTutorial>();
 	}
 	void Start () {
 		if(rock == null)
@@ -101,6 +103,7 @@ public class ObstacleGenerator : MonoBehaviour {
 						break;
 				}
 				GameObject powerObj = Instantiate(obj, pos, Quaternion.identity);
+				lvlTut.ShowEmoTileTutorial();
 				powerObj.transform.parent = BattleArea.transform;
 				tiles[i].power = powerObj.GetComponent<powerTile>();
 				powerObj.GetComponent<powerTile>().SetColor(emotion);
@@ -153,15 +156,18 @@ public class ObstacleGenerator : MonoBehaviour {
 							if (enemyInRow)
 							{
 								powerUp = Instantiate(dmgTile, pos, Quaternion.identity);
+								lvlTut.ShowSwordTutorial();
 							}
 							break;
 						case Var.PowerUps.heal:
 							powerUp = Instantiate(healthTile, pos, Quaternion.identity);
+							lvlTut.ShowHeartTutorial();
 							break;
                         case Var.PowerUps.shield:
 							if (enemyInRow)
 							{
 								powerUp = Instantiate(shieldTile, pos, Quaternion.identity);
+								lvlTut.ShowShieldTutorial();
 							}
                             break;
 

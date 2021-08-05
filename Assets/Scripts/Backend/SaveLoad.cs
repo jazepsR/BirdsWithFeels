@@ -7,6 +7,9 @@ using System;
 
 public class SaveLoad : MonoBehaviour
 {
+	public static int resolutionX = 1920;
+	public static int resolutionY = 1080;
+	public static bool fullscreen = true;
 	public static void Save(bool saveBirds = true)
 	{
 		DeleteSave();
@@ -32,6 +35,36 @@ public class SaveLoad : MonoBehaviour
 			}
 		}
 	}
+	public static void LoadResolution(bool apply)
+    {
+		resolutionX = PlayerPrefs.GetInt("resolutionX", 1920);
+		resolutionY = PlayerPrefs.GetInt("resolutionY", 1080);
+		fullscreen = PlayerPrefs.GetInt("fullscreen", 1) == 1 ? true : false;
+		if (apply)
+		{
+			ApplyResloution(resolutionX, resolutionY, fullscreen);
+		}
+	}
+
+	public static void SaveResoultion(int x, int y, bool fullScreen,bool apply)
+    {
+		resolutionX = x;
+		resolutionY = y;
+		fullscreen = fullScreen;
+		PlayerPrefs.SetInt("resolutionX", resolutionX);
+		PlayerPrefs.SetInt("resolutionY", resolutionY);
+		PlayerPrefs.SetInt("fullscreen", fullscreen ? 1 : 0);
+		PlayerPrefs.Save();
+		if(apply)
+        {
+			ApplyResloution(x, y, fullScreen);
+		}
+	}
+
+	public static void ApplyResloution(int x, int y, bool fullScreen)
+    {
+		Screen.SetResolution(x, y, fullScreen);
+    }
 	public static bool Load()
 	{
 		if (File.Exists(Application.persistentDataPath + "/" + Var.currentSaveSlot + "/saveGame.dat"))
@@ -61,7 +94,7 @@ public class SaveLoad : MonoBehaviour
         }
     }
 
-        public static void DeleteSave(string slotName = "")
+    public static void DeleteSave(string slotName = "")
 	{
 		string path;
 		if(slotName == "")
@@ -84,6 +117,7 @@ public class SaveLoad : MonoBehaviour
 		Var.SophieUnlocked = data.SophieUnlocked;
 		Var.KimUnlocked = data.KimUnlocked;
 		Var.isDragControls = data.isDragControls;
+		Var.maxLevel = data.maxLevel;
 		//List<Bird> activeBirds = new List<Bird>();
 		List<Bird> availableBirds = new List<Bird>();
 		foreach (BirdData birdData in data.availableBirds)
@@ -109,6 +143,7 @@ public class SaveData
 	public bool SophieUnlocked = false;
 	public bool KimUnlocked = false;
 	public bool isDragControls = true;
+	public int maxLevel = 2;
 	public SaveData()
 	{
 		SophieUnlocked = Var.SophieUnlocked;
@@ -120,6 +155,7 @@ public class SaveData
 		gameSettings = Var.gameSettings;
 		currentStageID = Var.currentStageID;
 		isDragControls = Var.isDragControls;
+		maxLevel = Var.maxLevel;
 		activeBirds = new List<BirdData>();
 		foreach(Bird bird in Var.activeBirds)
 		{
@@ -144,7 +180,7 @@ public class BirdData
 	public int friendliness =0;
 	public int confidence =0;
 	public int health=3;
-	public int mentalHealth=3;
+	public int mentalHealth=Var.maxMentalHealth;
 	public int maxHealth=3;
 	public bool injured= false;
 	public Var.Em preferredEmotion= Var.Em.Cautious;

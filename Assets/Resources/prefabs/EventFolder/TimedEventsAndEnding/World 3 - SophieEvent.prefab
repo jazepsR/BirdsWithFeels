@@ -124,7 +124,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4832075453004757192}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8017980252996837965
 MonoBehaviour:
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -150,7 +151,7 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300010, guid: b7029f9ef86eeec458bb956efa9df87b, type: 3}
   selectionText: Tell the others to let Sophie be alone for a while.
-  selectionTooltip: 
+  selectionTooltip: (this will skip a narrative event)
   conclusionHeading: let sophie be alone
   conclusionText: You rest for a while, trying to comprehend how many books, and
     how much knowledge, was lost today. Sophie sits by herself, writing in her diary.
@@ -183,7 +184,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4832075453004757192}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1161266591025206412
 MonoBehaviour:
@@ -198,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 8326298054760227856}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -588,6 +590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -824,8 +827,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6957214415907618375}
-  - {fileID: 6735499820753975979}
   - {fileID: 3190542642223952175}
+  - {fileID: 6735499820753975979}
   m_Father: {fileID: 9152556490700891741}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -841,6 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0400000002000000
   condition: 2
   magnitude: 0
@@ -851,8 +855,10 @@ MonoBehaviour:
   - {fileID: 8017980252996837965}
   - {fileID: 1161266591025206412}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 21300000, guid: 4b08e290b783b3040805f8c14ced45df, type: 3}
   useBgFog: 1
   useEventAudio: 0
@@ -918,6 +924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0200000004000000
   condition: 2
   magnitude: 0
@@ -927,8 +934,10 @@ MonoBehaviour:
   options:
   - {fileID: 5779822137874708375}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 21300000, guid: 4b08e290b783b3040805f8c14ced45df, type: 3}
   useBgFog: 1
   useEventAudio: 0
@@ -1276,6 +1285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0200000004000000
   condition: 2
   magnitude: 0
@@ -1285,8 +1295,10 @@ MonoBehaviour:
   options:
   - {fileID: 4105918947638637612}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 21300000, guid: 4b08e290b783b3040805f8c14ced45df, type: 3}
   useBgFog: 1
   useEventAudio: 0
@@ -1326,7 +1338,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9152556490357046890}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &903168647246296751
 MonoBehaviour:
@@ -1341,6 +1353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 4971726499731789775}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -1493,6 +1506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -2217,6 +2231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -2276,6 +2291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -2341,6 +2357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 010000000200000004000000
   condition: 2
   magnitude: 0
@@ -2350,8 +2367,10 @@ MonoBehaviour:
   options:
   - {fileID: 9152556490039032562}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -2406,6 +2425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -2466,6 +2486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -2771,6 +2792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 30000000000000000200000004000000
   condition: 2
   magnitude: 0
@@ -2780,8 +2802,10 @@ MonoBehaviour:
   options:
   - {fileID: 9152556490039032562}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -2821,8 +2845,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9152556490274087522}
-  - {fileID: 9152556491369720695}
   - {fileID: 5784529307234192066}
+  - {fileID: 9152556491369720695}
   m_Father: {fileID: 9152556490700891741}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2838,6 +2862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0400000002000000
   condition: 2
   magnitude: 0
@@ -2848,8 +2873,10 @@ MonoBehaviour:
   - {fileID: 9152556491369720694}
   - {fileID: 903168647246296751}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 21300000, guid: 4b08e290b783b3040805f8c14ced45df, type: 3}
   useBgFog: 1
   useEventAudio: 0
@@ -3245,7 +3272,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName: A fight for knowledge
   startArea: {fileID: 0}
-  startEvent: {fileID: 9152556491271971115}
   timeToComplete: 7
   endArea: {fileID: 0}
   activationEvent: {fileID: 9152556490990749356}
@@ -3259,6 +3285,7 @@ MonoBehaviour:
     completeBy: 0
     currentState: 0
     activationEventShown: 0
+    activationEventID: 0
 --- !u!1 &9152556490836240769
 GameObject:
   m_ObjectHideFlags: 0
@@ -3405,6 +3432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 02000000040000000100000009000000
   condition: 2
   magnitude: 0
@@ -3414,8 +3442,10 @@ MonoBehaviour:
   options:
   - {fileID: 9152556489970447122}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -3527,6 +3557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 1e0000000200000004000000
   condition: 2
   magnitude: 0
@@ -3536,8 +3567,10 @@ MonoBehaviour:
   options:
   - {fileID: 9152556489883261656}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -3718,7 +3751,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9152556490357046890}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9152556491369720694
 MonoBehaviour:
@@ -3733,6 +3766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -3744,7 +3778,7 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300010, guid: b7029f9ef86eeec458bb956efa9df87b, type: 3}
   selectionText: Tell the others to let Sophie be alone for a while.
-  selectionTooltip: 
+  selectionTooltip: (this will skip a narrative event)
   conclusionHeading: let sophie be alone
   conclusionText: You rest for a while, looking over some of the books you saved
     from the vultures. Sophie is reading as well, satisfied.

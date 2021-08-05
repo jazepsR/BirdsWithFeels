@@ -11,7 +11,9 @@ public class MapTutorial : MonoBehaviour {
 
     private bool shouldShowMapTutPopup = false;
     public GameObject mapTutPopup;
+    public GameObject mapTutPopup2;
     public static MapTutorial instance;
+    private int secondMapTutID = 11;
     // Use this for initialization
 
     private void Awake()
@@ -25,25 +27,36 @@ public class MapTutorial : MonoBehaviour {
 		{
 			tutorialHighlight.gameObject.SetActive(true);
 			DialogueControl.Instance.CreateParticularDialog(mapTutorialDialog);
+            mapPan.Instance.scrollingEnabled = false;
             shouldShowMapTutPopup = true;
 		}else
 		{
 			tutorialHighlight.gameObject.SetActive(false);
 
 		}
+       // Debug.LogError(Var.currentStageID);
+        if (!Var.gameSettings.shownMapTutorial2 && Var.currentStageID == secondMapTutID)
+        {
+            mapTutPopup2.SetActive(true);
+            Var.gameSettings.shownMapTutorial2 = true;
+            mapPan.Instance.scrollingEnabled = false;
+            SaveLoad.Save(false);
+        }
 	}
 
     public void Update()
     {
-        if(shouldShowMapTutPopup && !GuiContoler.Instance.speechBubbleObj.activeSelf)
+        if (shouldShowMapTutPopup && !GuiContoler.Instance.speechBubbleObj.activeSelf && Time.timeSinceLevelLoad > 0.5f)
         {
             shouldShowMapTutPopup = false;
             mapTutPopup.SetActive(true);
         }
+
+        
     }
     public void ShowDialog2()
 	{
-		DialogueControl.Instance.CreateParticularDialog(mapTutorialDialog2);
+		//DialogueControl.Instance.CreateParticularDialog(mapTutorialDialog2);
 		Var.gameSettings.shownMapTutorial = true;
 	}
 }

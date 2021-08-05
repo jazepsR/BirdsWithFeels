@@ -144,64 +144,6 @@ MonoBehaviour:
   text: "Well, I\u2026 I suppose I could come with you for a little bit. But I -\r"
   useCustomPic: 0
   customPic: {fileID: 0}
---- !u!1 &1705985087
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1705985088}
-  - component: {fileID: 1705985089}
-  m_Layer: 0
-  m_Name: Option1 (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1705985088
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1705985087}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4738139347531976}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1705985089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1705985087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onComplete: {fileID: 0}
-  applyToAll: 0
-  consequenceType1: 3
-  magnitude1: 1
-  consequenceType2: 3
-  magnitude2: 0
-  consequenceType3: 3
-  magnitude3: 0
-  useAutoExplanation: 1
-  AfterImage: {fileID: 21300002, guid: b7029f9ef86eeec458bb956efa9df87b, type: 3}
-  icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: Welcome to the team!
-  selectionTooltip: 
-  conclusionHeading: 
-  conclusionText: 'Alexander joined your party! '
 --- !u!1 &2025023133
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +554,6 @@ Transform:
   m_Children:
   - {fileID: 4667396642083248}
   - {fileID: 4108497404459264}
-  - {fileID: 1705985088}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -636,10 +577,11 @@ MonoBehaviour:
   parts: []
   options:
   - {fileID: 114188232827310592}
-  - {fileID: 1705985089}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0

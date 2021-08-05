@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
@@ -14,6 +15,7 @@ public class EventController : MonoBehaviour
 {
     [Range(0.0f, 1.0f)]
     public float eventFreq;
+    public EventScript defaultMapEvent;
     public static EventController Instance { get; private set; }
     [SerializeField] private Image eventBg;
     [SerializeField] private Image bgFog;
@@ -31,6 +33,8 @@ public class EventController : MonoBehaviour
     public Text text;
     public GameObject choice;
     public RectTransform choiceList;
+    public GameObject portraitParent;
+    public GameObject nameFieldParent;
     public Image portrait;
     public Image portraitFill;
     public Image customImage;
@@ -38,7 +42,7 @@ public class EventController : MonoBehaviour
     public Text nameText;
     EventScript currentEvent;
     GameObject currentPortrait;
-    Bird currentBird;
+    public Bird currentBird;
     List<GameObject> portraits;
     List<Color> colors;
     EventScript nextEvent = null;
@@ -75,11 +79,19 @@ public class EventController : MonoBehaviour
 
                 foreach (EventSegment segment in eventSegments)
                 {
-                    int id = Var.currentStageID % 1000;
-                    if (id >= segment.minID && id <= segment.maxID)
+                    if (Var.currentStageID == -1)
                     {
                         events.AddRange(segment.eventParent.GetComponentsInChildren<EventScript>());
-                        break;
+                    }
+                    else
+                    {
+
+                        int id = Var.currentStageID % 1000;
+                        if (id >= segment.minID && id <= segment.maxID)
+                        {
+                            events.AddRange(segment.eventParent.GetComponentsInChildren<EventScript>());
+                            break;
+                        }
                     }
                 }
                 LeanTween.delayedCall(0.25f, () => tryEvent()); //Event plays as soon as player enters scene
@@ -89,9 +101,6 @@ public class EventController : MonoBehaviour
         {
             CreateEvent(testEvent);
         }
-
-
-
         nextEvent = null;
     }
 
@@ -144,8 +153,21 @@ public class EventController : MonoBehaviour
             SetPortrait(currentText);
             return;
         }
+        if (currentEvent == null)
+        {
+            myEventGUIAnimator.SetTrigger("close"); //Hide GUI once it has finished animating closed
+            LeanTween.delayedCall(0.7f, () =>
+             eventObject.SetActive(false));
 
-        if (currentEvent != null && (currentText > currentEvent.parts.Count - 1)) //Has finished playing all parts in current event? 
+            if (inMap) //Update map icons once event has finished playing. 
+            {
+                DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
+                foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+                    icon.SetState();
+                
+            }
+        }
+            else if (currentEvent != null && (currentText > currentEvent.parts.Count - 1)) //Has finished playing all parts in current event? 
         {
             if (currentEvent.quitAfterLevel) //Go to main menu after current event? 
             {
@@ -164,6 +186,7 @@ public class EventController : MonoBehaviour
                 nextEvent.canShowMultipleTimes = true;
                 currentEvent = null;
                 CreateEvent(nextEvent);
+                nextEvent = null;
                 Debug.Log("playing next event");
                 return;
             }
@@ -191,11 +214,15 @@ public class EventController : MonoBehaviour
                 LeanTween.delayedCall(0.7f, () =>
                  eventObject.SetActive(false));
 
-                if (inMap) //Update map icons once event has finished playing. 
+                if (inMap) 
                 {
-                    DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
-                    foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
-                        icon.SetState();
+                    DialogueControl.Instance.TryDialogue(Dialogue.Location.map); 
+                    if (currentBird && MapControler.Instance.showGraphAfterEvent)
+                    {
+                        LeanTween.delayedCall(0.7f, () =>GuiContoler.Instance.OpenMapBigGraph(currentBird));
+                    }
+                    //foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+                    // icon.SetState();
                 }
                 else
                 {
@@ -206,12 +233,15 @@ public class EventController : MonoBehaviour
                     }
                 }
             }
+
             currentEvent = null;
             nextEvent = null;
         }
-
+       
 
     }
+
+   
 
     private IEnumerator WaitAndPrint(string printText, bool shouldShowContinue)
     {
@@ -279,7 +309,7 @@ public class EventController : MonoBehaviour
                     canCreateEvent = false;
                 else
                 {
-                    if (Var.shownEvents.Contains(ev.heading))
+                    if (ev.gameObject.name != "" && Var.shownEvents.Contains(ev.gameObject.name))
                         canCreateEvent = false;
                     if (ev.speakers.Contains(EventScript.Character.Alexander) && Var.availableBirds.Count < 4)
                         canCreateEvent = false;
@@ -302,16 +332,14 @@ public class EventController : MonoBehaviour
     }
     public void CreateEvent(EventScript eventData)
     {
-
+        Debug.Log("creating Event!");
         if (eventData.isCampFireScene && inMap)
         {
-
             try
             {
                 Transform campFire = eventObject.transform.Find("Campfire");
                 if (campFire != null)
                 {
-
                     foreach (Bird bird in FillPlayer.Instance.playerBirds)
                     {
 
@@ -350,8 +378,16 @@ public class EventController : MonoBehaviour
             {
 
                 Debug.Log("campfire can not be shown");
-            } 
-            
+            }
+
+        }
+        else
+        {
+            Transform campFire = eventObject.transform.Find("Campfire");
+            if (campFire != null)
+            {
+                campFire.gameObject.SetActive(false);
+            }
         }
         if (eventData.eventBackground != null)
         {
@@ -373,7 +409,7 @@ public class EventController : MonoBehaviour
 
         if (!eventData.canShowMultipleTimes)
         {
-            Var.shownEvents.Add(eventData.heading);
+            Var.shownEvents.Add(eventData.gameObject.name);
         }
         if (currentEvent != null)
         {
@@ -393,11 +429,22 @@ public class EventController : MonoBehaviour
         currentEvent.parts.AddRange(eventData.transform.GetComponentsInChildren<EventPart>());
         if (eventData.speakers[0] != EventScript.Character.None)
         {
-            try
+            if (currentEvent.affectedBird != EventScript.Character.None)
             {
-                currentBird = Helpers.Instance.GetBirdFromEnum(eventData.speakers[0]);
+                try
+                {
+                    currentBird = Helpers.Instance.GetBirdFromEnum(currentEvent.affectedBird);
+                }
+                catch { }
             }
-            catch { }
+            else
+            {
+                try
+                {
+                    currentBird = Helpers.Instance.GetBirdFromEnum(eventData.speakers[0]);
+                }
+                catch { }
+            }
             //currentPortrait = currentBird.portrait;
         }
         portraits = new List<GameObject>();
@@ -422,13 +469,11 @@ public class EventController : MonoBehaviour
         eventObject.SetActive(true);
         heading.text = Helpers.Instance.ApplyTitle(currentBird, eventData.heading);
         string text = Helpers.Instance.ApplyTitle(currentBird, eventData.parts[0].text);
-        //nameText.text = currentBird.charName;
         if (coroutine != null)
             StopCoroutine(coroutine);
         coroutine = WaitAndPrint(text, true);
         StartCoroutine(coroutine);
         SetPortrait(0);
-
         if (eventData.options.Length > 0 && eventData.parts.Count <= 1)
         {
             CreateChoices();
@@ -443,6 +488,8 @@ public class EventController : MonoBehaviour
 
     void SetPortrait(int id)
     {
+        portraitParent.SetActive(true);
+        nameFieldParent.SetActive(true);
         if (mouseOver)
         {
             mouseOver.tooltipText = "";
@@ -460,11 +507,7 @@ public class EventController : MonoBehaviour
             customImage.gameObject.SetActive(false);
             try
             {
-                //if (currentBird != null)
-                //	mouseOver.tooltipText = Helpers.Instance.GetStatInfo(currentBird.data.confidence, currentBird.data.friendliness);
                 portrait.transform.parent.gameObject.SetActive(true);
-
-
                 if (portraits[currentEvent.parts[currentText].speakerId].transform.Find("bg/bird_color").GetComponent<Image>().sprite == null)
                 {
                     portraitFill.gameObject.SetActive(false);
@@ -507,7 +550,8 @@ public class EventController : MonoBehaviour
             catch
             {
                 print("failed to show portrait");
-                portrait.transform.parent.gameObject.SetActive(false);
+                portraitParent.SetActive(false);
+                nameFieldParent.SetActive(false);
             }
         }
 
@@ -537,7 +581,7 @@ public class EventController : MonoBehaviour
     {
         if (hideEventButtonText)
         {
-            hideEventButtonText.text = "Hover to show battlefield";
+            hideEventButtonText.text = "Show Field";
         }
         myEventGUIAnimator.SetBool("showBattlefield", true);
     }
@@ -545,7 +589,7 @@ public class EventController : MonoBehaviour
     {
         if (hideEventButtonText)
         {
-            hideEventButtonText.text = "";
+            hideEventButtonText.text = "Show Field";
         }
         myEventGUIAnimator.SetBool("showBattlefield", false);
     }
@@ -566,9 +610,6 @@ public class EventController : MonoBehaviour
             }
             );
 
-
-            //Seb. Please add functionality to make the emo graph show the affected bird's emo graph! 
-
             bool ChoicesInfluenceEmotions = false;
             int myAmountOfChoices = 0;
 
@@ -579,7 +620,6 @@ public class EventController : MonoBehaviour
                 SetupChoice(choiceObj, i);
 
                 ChoicesInfluenceEmotions = DoesOptionIfluenceEmotions(currentEvent.options[i]);
-
                 i++;
             }
 
@@ -587,8 +627,16 @@ public class EventController : MonoBehaviour
             {
                 myEventGUIAnimator.SetBool("showingEmoGraph", true);
             }
-
             activeChoices = true;
+            if (currentBird)
+            {
+                currentBird.showText();
+                if(inMap)
+                {
+                    MapControler.Instance.charInfoAnim.SetBool("show", true);
+                    MapControler.Instance.charInfoAnim.SetBool("hide", false);
+                }
+            }
         }
         else
         {
@@ -620,7 +668,8 @@ public class EventController : MonoBehaviour
         AudioControler.Instance.PlayPaperSound();
         choiceList.gameObject.SetActive(false); 
         Helpers.Instance.HideTooltip();
-        string consequences = ApplyConsequences(ID);
+        ApplyConsequences(ID);
+        string consequences = GetEventConsequenceText(ID);
         if (currentBird != null)
         {
             try
@@ -655,14 +704,20 @@ public class EventController : MonoBehaviour
             portrait.gameObject.SetActive(false);
             customImage.sprite = currentEvent.options[ID].AfterImage;
         }
+        
+        if(currentEvent.options[ID].useNarration)
+        {
+            portraitParent.SetActive(false);
+            nameFieldParent.SetActive(false);
+        }
 
     }
 
-    string ApplyConsequences(int ID)
+    void ApplyConsequences(int ID)
     {
-        string ConsequenceText = ApplyConsequence(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1, currentEvent.options[ID].applyToAll);
-        ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2, currentEvent.options[ID].applyToAll);
-        ConsequenceText += "\n" + ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3, currentEvent.options[ID].applyToAll);
+        ApplyConsequence(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1, currentEvent.options[ID].applyToAll);
+        ApplyConsequence(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2, currentEvent.options[ID].applyToAll);
+        ApplyConsequence(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3, currentEvent.options[ID].applyToAll);
         if (currentBird != null)
             currentBird.SetEmotion();
         if (GameLogic.Instance)
@@ -673,10 +728,18 @@ public class EventController : MonoBehaviour
         {
             GuiContoler.Instance.GraphBlocker.SetActive(false);
         }
-        return ConsequenceText;
 
     }
-    string ApplyConsequence(ConsequenceType type, int magnitude, bool applyToAll)
+    public string GetEventConsequenceText(int ID)
+    {
+        string[] consequences = new string[] {
+        GetConsequenceText(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1, currentEvent.options[ID].applyToAll),
+            GetConsequenceText(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2, currentEvent.options[ID].applyToAll),
+            GetConsequenceText(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3, currentEvent.options[ID].applyToAll) };
+        return string.Join("\n",consequences.Where(s => !System.String.IsNullOrEmpty(s)));
+    }
+
+    public string GetConsequenceText(ConsequenceType type, int magnitude, bool applyToAll)
     {
         if (currentBird == null)
             return "";
@@ -696,38 +759,30 @@ public class EventController : MonoBehaviour
         string infoString = "";
         foreach (Bird bird in birdsToApply)
         {
-            if (bird != null)
-                bird.SetEmotion();
-
-            int clamp = Var.isEnding ? 12 : 15;
             switch (type)
             {
                 case ConsequenceType.Courage:
-                    bird.data.confidence = Mathf.Clamp(bird.data.confidence + magnitude, -clamp, clamp);
-                    bird.prevConf = Mathf.Clamp(bird.prevConf + magnitude, -clamp, clamp);
                     if (magnitude > 0)
                     {
-                        infoString += bird.charName + " gained " + magnitude + " confidence\n";
+                        infoString += bird.charName + " gains " + magnitude + " confidence\n";
                     }
                     else
                     {
-                        infoString += bird.charName + "'s caution increased by " + Mathf.Abs(magnitude) + "\n";
+                        infoString += bird.charName + "'s caution increases by " + Mathf.Abs(magnitude) + "\n";
                     }
                     break;
                 case ConsequenceType.Friendliness:
-                    bird.data.friendliness = Mathf.Clamp(bird.data.friendliness + magnitude, -clamp, clamp);
-                    bird.prevFriend = Mathf.Clamp(bird.prevFriend + magnitude, -clamp, clamp);
                     if (magnitude > 0)
                     {
-                        infoString += bird.charName + " gained " + magnitude + " social\n";
+                        infoString += bird.charName + " gains " + magnitude + " social\n";
                     }
                     else
                     {
-                        infoString += bird.charName + " gained " + Mathf.Abs(magnitude) + " solitude\n";
+                        infoString += bird.charName + " gains " + Mathf.Abs(magnitude) + " solitude\n";
                     }
+
                     break;
                 case ConsequenceType.Health:
-                    currentBird.ChageHealth(magnitude);
                     if (magnitude > 0)
                     {
                         infoString += bird.charName + " gained " + magnitude + " health\n";
@@ -742,6 +797,49 @@ public class EventController : MonoBehaviour
             }
         }
         return infoString;
+    }
+    void ApplyConsequence(ConsequenceType type, int magnitude, bool applyToAll)
+    {
+        if (currentBird == null)
+            return;
+        List<Bird> birdsToApply = new List<Bird>();
+        if (applyToAll)
+        {
+            foreach (Bird bird in Var.activeBirds)
+            {
+                birdsToApply.Add(bird);
+            }
+        }
+        else
+        {
+            birdsToApply.Add(currentBird);
+        }
+
+        string infoString = "";
+        foreach (Bird bird in birdsToApply)
+        {
+            if (bird != null)
+                bird.SetEmotion();
+
+            int clamp = Var.isEnding ? 13 : 15;
+            switch (type)
+            {
+                case ConsequenceType.Courage:
+                    bird.prevConf = bird.data.confidence;
+                    bird.data.confidence = Mathf.Clamp(bird.data.confidence + magnitude, -clamp, clamp);
+                    break;
+                case ConsequenceType.Friendliness:
+                    bird.prevFriend = bird.data.friendliness;
+                    bird.data.friendliness = Mathf.Clamp(bird.data.friendliness + magnitude, -clamp, clamp);
+
+                    break;
+                case ConsequenceType.Health:
+                    currentBird.ChageHealth(magnitude);
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
     void SetupChoice(GameObject choiceObj, int ID)
@@ -752,10 +850,21 @@ public class EventController : MonoBehaviour
         choiceObj.GetComponent<Button>().onClick.AddListener(delegate { DisplayChoiceResult(ID); });
         try
         {
+            var tooltip = choiceObj.GetComponentInChildren<ShowTooltip>();
+            choiceObj.GetComponentInChildren<EventOptionAudio>().Setup(ID);
             if (choiceData.selectionTooltip.Trim() != "")
             {
-                choiceObj.GetComponentInChildren<ShowTooltip>().tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
+                tooltip.tooltipText = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionTooltip);
+                if (choiceData.useAutoExplanation)
+                {
+                    tooltip.tooltipText += "\n" + GetEventConsequenceText(ID);
+                }
             }
+            else
+            {
+                tooltip.tooltipText = GetEventConsequenceText(ID);
+            }
+            
             Text myChoiceTest = myTransformToGetComponentsFrom.transform.Find("Description").GetComponent<Text>();
 
             myChoiceTest.text = Helpers.Instance.ApplyTitle(currentBird, choiceData.selectionText);

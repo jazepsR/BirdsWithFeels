@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+using UnityEngine.Analytics;
+#endif
 
 public class Tutorial : MonoBehaviour {
 	public static Tutorial Instance { get; private set; }
@@ -31,7 +34,7 @@ public class Tutorial : MonoBehaviour {
 	public Transform portraitPoint;
 	bool shouldShowFriendlyPopup = false;
 	bool shouldShowEmotionPopup = false;
-    bool shouldShowMHPTutorial = false;
+	bool shouldShowMHPTutorial = false;
 	bool shouldShowOutlines = true;
 	bool showedSecondBirdReportText = false;
 	bool showedThirdBirdReportText = false;
@@ -79,7 +82,7 @@ public class Tutorial : MonoBehaviour {
 			}
 		}
 		tutorialSetup.TutorialSetup.SetupBirds();
-		LeanTween.delayedCall(0.5f,()=> ShowtutorialStartingText(0));
+		ShowtutorialStartingText(0);
 		LeanTween.delayedCall(0.5f, () => GuiContoler.Instance.canPause(true));
 
 	}
@@ -130,6 +133,9 @@ public class Tutorial : MonoBehaviour {
             mHPTutorialPopup.SetActive(true);
             GuiContoler.Instance.GraphBlocker.SetActive(true);
             shouldShowMHPTutorial = false;
+			GuiContoler.Instance.clearSmallGraph();
+			Var.gameSettings.useMHP = true;
+			//SaveLoad.Save(false);
         }
 
     }
@@ -172,13 +178,16 @@ public class Tutorial : MonoBehaviour {
                 EventController.Instance.CreateEvent(introduction);
               //  DialogueControl.Instance.CreateDialogue(tutorialFirstDialogue);
                 DialogueControl.Instance.CreateParticularDialog(tutorialFirstDialogue);
-                /*GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), " Oh feathers, there are vultures here! In the city!", TerrySounds);
+				/*GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), " Oh feathers, there are vultures here! In the city!", TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Looks like that vulture is itching for a fight!!  ",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "Honestly, I don’t know anything bout’ fighting. I’m a peaceful bird!   ",TerrySounds);
 				GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "But..maybe I can talk to them? That vulture is <b>neutral</b>, so they should be easy to convince!  ",TerrySounds);
                 GuiContoler.Instance.ShowSpeechBubble(FillPlayer.Instance.playerBirds[0].GetMouthTransform(), "<b>Drag</b> me <b>anywhere</b> in front of them and I’ll try to convince them to not beat us up! ", TerrySounds);
         */
-                break;
+#if ENABLE_CLOUD_SERVICES_ANALYTICS
+				Analytics.CustomEvent("tutorialStarted");
+#endif
+				break;
 			case 1:
 
                 EventController.Instance.CreateEvent(AddRebeccaEvent);

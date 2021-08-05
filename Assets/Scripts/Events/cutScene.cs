@@ -33,7 +33,7 @@ public class cutScene : MonoBehaviour {
 		}
 		else
 		{
-			LeanTween.move(mainMenu, panToPoint, 11f).setOnComplete(startTexts).setEase(LeanTweenType.easeOutQuad);
+			LeanTween.move(mainMenu, panToPoint, 5f).setOnComplete(startTexts).setEase(LeanTweenType.easeOutQuad);
 		}
 
     }
@@ -67,10 +67,10 @@ public class cutScene : MonoBehaviour {
 					}
 					else
 					{
-						startBtn.SetActive(true);
-						textBox.SetActive(false);
+
 						canClick = false;
-					}
+                        StartLevel();
+                    }
                 }
             }
         }

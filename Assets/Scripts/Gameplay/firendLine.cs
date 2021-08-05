@@ -194,6 +194,7 @@ public class firendLine : MonoBehaviour {
                 }
 			}
 		}
+		//Debug.LogError(birdScript.charName + " clearing lines!");
 		activeLines.Clear();
 		if (lonelyParticleObj != null)
 			Destroy(lonelyParticleObj);

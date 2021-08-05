@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: Hello, auntie Judy.
+  text: Hello, auntie Judy
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &9112758547673512846
@@ -150,8 +150,20 @@ MonoBehaviour:
   - {fileID: 9112758549043122810}
   - {fileID: 9112758548496211224}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &9112758547927082987
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 3
-  text: "It\u2019s nice to meet you, ma\u2019am."
+  text: "It\u2019s nice to meet you, ma\u2019am"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &9112758548026002275
@@ -389,9 +401,9 @@ MonoBehaviour:
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Don't worry, ma'am, Terry is just trying out some different emotions
     right now. He'll go back to being neutral once this is all over.
-  selectionTooltip: ' Mixed Feelings (+3 Caution)'
+  selectionTooltip: 
   conclusionHeading: 
-  conclusionText: Uh, yeah. Sure.
+  conclusionText: 'Uh, yeah. Sure.. I''m just a neutral bird at the end of the day '
 --- !u!1 &9112758548741485218
 GameObject:
   m_ObjectHideFlags: 0
@@ -689,7 +701,7 @@ MonoBehaviour:
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "Hey, Terry can be any emotion he wants to be! There\u2019s nothing
     wrong with other emotions."
-  selectionTooltip: Show your feelings!  (+3 Confidence)
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: "Yeah! I haven\u2019t decided what emotion I\u2019d like to be
     yet. Maybe I\u2019ll be neutral and maybe I won\u2019t be, but that\u2019s my

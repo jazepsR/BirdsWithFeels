@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2408798457620755936}
   - component: {fileID: 5635620737427431491}
   m_Layer: 0
-  m_Name: post trial - In Time
+  m_Name: Rebecca_post trial - In Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2448504279741699119}
-  - {fileID: 4827397674945445539}
   - {fileID: 5743778595089889497}
+  - {fileID: 4827397674945445539}
   m_Father: {fileID: 1401116559564680906}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 01000000
   condition: 2
   magnitude: 0
@@ -53,14 +54,16 @@ MonoBehaviour:
   heading: After the Fight
   parts: []
   options:
-  - {fileID: 3689590340884107083}
   - {fileID: 3164723499131587239}
+  - {fileID: 3689590340884107083}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
-  eventBackground: {fileID: 21300000, guid: 4b08e290b783b3040805f8c14ced45df, type: 3}
+  isCampFireScene: 1
+  eventBackground: {fileID: 0}
   useBgFog: 1
-  useEventAudio: 0
+  useEventAudio: 1
   eventAudio:
     clips: []
     usePitchVariation: 0
@@ -127,7 +130,7 @@ GameObject:
   - component: {fileID: 1735142406207171801}
   - component: {fileID: 4299379943994937972}
   m_Layer: 0
-  m_Name: post trial - TOO LATE (after chat)
+  m_Name: Rebecca_post trial - TOO LATE (after chat)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,6 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0100000002000000
   condition: 2
   magnitude: 0
@@ -180,11 +184,13 @@ MonoBehaviour:
   options:
   - {fileID: 1987762325798082375}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
-  eventBackground: {fileID: 21300000, guid: 4b08e290b783b3040805f8c14ced45df, type: 3}
+  isCampFireScene: 1
+  eventBackground: {fileID: 0}
   useBgFog: 1
-  useEventAudio: 0
+  useEventAudio: 1
   eventAudio:
     clips: []
     usePitchVariation: 0
@@ -283,7 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 1
-  text: "I\u2019m sorry, Rebecca, it seems like this place has been abandoned. "
+  text: "I\u2019m sorry, Rebecca, it seems like we were too late - they probably
+    escaped"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1214817699888716586
@@ -333,6 +340,53 @@ MonoBehaviour:
   text: We will, thank you!
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!1 &1354428075857424266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 197210241252703047}
+  - component: {fileID: 3044697470954027658}
+  m_Layer: 0
+  m_Name: part9 (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &197210241252703047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354428075857424266}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1286184297452651939}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3044697470954027658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354428075857424266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 0
+  text: ...fine
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &1401116557869381132
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,7 +398,7 @@ GameObject:
   - component: {fileID: 1401116557869381135}
   - component: {fileID: 1401116557869381134}
   m_Layer: 0
-  m_Name: reachingTrialInTime
+  m_Name: Rebecca_reachingTrialInTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -389,7 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 000000001600000001000000
+  affectedBird: 6
+  speakers: 0400000016000000010000001d00000009000000
   condition: 2
   magnitude: 0
   targetEmotion: 0
@@ -398,8 +453,10 @@ MonoBehaviour:
   options:
   - {fileID: 1401116557995115891}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -501,7 +558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 1
-  text: ' ...'
+  text: ..yeah! I really hope so
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116557936605609
@@ -595,8 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: "Yes! I can\u2019t believe you guys are leaving! I\u2019m gonna miss you
-    so much!"
+  text: I don't care!! MOM, WHERE YOU AT?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116557995115889
@@ -643,6 +699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -650,61 +707,13 @@ MonoBehaviour:
   magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
-  useAutoExplanation: 1
+  useAutoExplanation: 0
   AfterImage: {fileID: 0}
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: 'We should get going now that Rebecca has said goodbye to her family. '
-  selectionTooltip: Back to the vulture king
-  conclusionHeading: Farewell
-  conclusionText: Rebecca's family left, with their trade wagons filled to the brim.
-    They will make a better home for themselves in the neighbouring country.
---- !u!1 &1401116558036667465
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1401116558036667464}
-  - component: {fileID: 1401116558036667467}
-  m_Layer: 0
-  m_Name: part8
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1401116558036667464
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401116558036667465}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1401116559147683174}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1401116558036667467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401116558036667465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerId: 1
-  text: " I\u2026 I didn\u2019t even get to say goodbye."
-  useCustomPic: 0
-  customPic: {fileID: 0}
+  selectionText: Let's talk some sense into them!
+  selectionTooltip: 
+  conclusionHeading: 
+  conclusionText: 
 --- !u!1 &1401116558058940338
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,7 +758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: "There\u2019s no way we\u2019ll be able to catch up to them."
+  text: We can still go there. Maybe they're still there, yeah?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116558090125907
@@ -795,55 +804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 2
-  text: 'I love you too, mom. '
-  useCustomPic: 0
-  customPic: {fileID: 0}
---- !u!1 &1401116558113573190
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1401116558113573185}
-  - component: {fileID: 1401116558113573184}
-  m_Layer: 0
-  m_Name: part7
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1401116558113573185
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401116558113573190}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1401116559147683174}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1401116558113573184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401116558113573190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerId: 0
-  text: "They\u2019re gone\u2026"
+  speakerId: 3
+  text: 'Shut your beak! Let''s get them yall! '
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116558115386170
@@ -936,9 +898,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 0
-  text: " My family has bought our supplies and seeds from your family. We\u2019re
-    gonna miss you too. "
+  speakerId: 3
+  text: A buncha' birds!! You guys, looks like we missed a couple birds!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116558252488256
@@ -970,7 +931,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1401116558678545227}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1401116558252488258
 MonoBehaviour:
@@ -985,18 +946,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
-  magnitude1: -5
+  magnitude1: 0
   consequenceType2: 3
-  magnitude2: -3
+  magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: Tell the others to let Rebecca be alone for a while.
-  selectionTooltip: A second too late
+  selectionText: 'Tell the others to let Rebecca be alone for a while. '
+  selectionTooltip: A second too late (this will skip a narrative event)
   conclusionHeading: Leaving
   conclusionText: 'You rest for a while, letting Rebecca have a rare moment alone
     to think about her parents. It will be some time before she will be able to see
@@ -1045,8 +1007,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 1
-  text: "No, I have to say goodbye! I have to see them one last time! No, please\u2026
-    come back\u2026  "
+  text: No, I have to say goodbye! I have to see them one last time! We have to go
+    to the Haven of Trading!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116558476196244
@@ -1098,66 +1060,6 @@ MonoBehaviour:
     of it."
   useCustomPic: 0
   customPic: {fileID: 0}
---- !u!1 &1401116558549398415
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1401116558549398414}
-  - component: {fileID: 1401116558549398409}
-  m_Layer: 0
-  m_Name: Option 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1401116558549398414
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401116558549398415}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.583815, y: 0.5304599, z: -1.03125}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1401116559233478805}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1401116558549398409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401116558549398415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f30d86a114dd7ba43b6de07945a15149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onComplete: {fileID: 0}
-  applyToAll: 0
-  consequenceType1: 3
-  magnitude1: 0
-  consequenceType2: 3
-  magnitude2: 0
-  consequenceType3: 3
-  magnitude3: 0
-  useAutoExplanation: 1
-  AfterImage: {fileID: 0}
-  icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: I'm sorry, Rebecca, but we don't have time for a detour. The mission
-    is more important.
-  selectionTooltip: Leave family behind
-  conclusionHeading: No time
-  conclusionText: Oh... You're right... I'll visit them someday. After all this is
-    over.
 --- !u!1 &1401116558625932404
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,7 +1167,7 @@ GameObject:
   - component: {fileID: 1401116558678545227}
   - component: {fileID: 1401116558678545226}
   m_Layer: 0
-  m_Name: post trial - TOO LATE
+  m_Name: Rebecca_post trial - TOO LATE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1283,8 +1185,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1401116560002785912}
-  - {fileID: 1401116558252488259}
   - {fileID: 3587530345768752636}
+  - {fileID: 1401116558252488259}
   m_Father: {fileID: 1401116559564680906}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1300,6 +1202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 01000000
   condition: 2
   magnitude: 0
@@ -1307,14 +1210,16 @@ MonoBehaviour:
   heading: Too Late
   parts: []
   options:
-  - {fileID: 1401116558252488258}
   - {fileID: 7176578099514563507}
+  - {fileID: 1401116558252488258}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
-  eventBackground: {fileID: 21300000, guid: 4b08e290b783b3040805f8c14ced45df, type: 3}
+  isCampFireScene: 1
+  eventBackground: {fileID: 0}
   useBgFog: 1
-  useEventAudio: 0
+  useEventAudio: 1
   eventAudio:
     clips: []
     usePitchVariation: 0
@@ -1366,7 +1271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: I know, but it still feels weird.
+  text: Oh feathers, vultures!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116558893650331
@@ -1460,7 +1365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: "Wait, Rebecca! They\u2019re too far away!"
+  text: I'm sorry Rebecca, we were too slow
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116558981586537
@@ -1506,9 +1411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: "Oh that\u2019s sweet of you, Terry! I can recommend some good businesses
-    to your family. I\u2019m sure you will be fine without us!"
+  speakerId: 4
+  text: Let's bunch them together with the others!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559016459497
@@ -1554,9 +1458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 2
-  text: "Thank you, mom, you\u2019re the best. I\u2019ll come visit once our quest
-    is over."
+  speakerId: 1
+  text: Rebecca?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559033348968
@@ -1603,6 +1506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -1613,10 +1517,9 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: Of course! This is important to you, you should get a chance to
-    say goodbye to your family.
+  selectionText: 'Ya! '
   selectionTooltip: Onwards to Family
-  conclusionHeading: Family first!
+  conclusionHeading: Let's go
   conclusionText: Thank you! I hope we reach them before they leave!
 --- !u!1 &1401116559055885696
 GameObject:
@@ -1662,7 +1565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: Mom!
+  text: Mom..? Mom, where are you?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559134981053
@@ -1708,8 +1611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 0
-  text: Halt! Who goes there?
+  speakerId: 2
+  text: Hey you! What brings you here?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559147683175
@@ -1723,7 +1626,7 @@ GameObject:
   - component: {fileID: 1401116559147683174}
   - component: {fileID: 1401116559147683169}
   m_Layer: 0
-  m_Name: 'timer runs out '
+  m_Name: 'Rebecca_timer runs out '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1746,8 +1649,6 @@ Transform:
   - {fileID: 1401116558411400324}
   - {fileID: 1401116558058940333}
   - {fileID: 1401116557896862047}
-  - {fileID: 1401116558113573185}
-  - {fileID: 1401116558036667464}
   - {fileID: 1401116559304230412}
   m_Father: {fileID: 1401116559564680906}
   m_RootOrder: 1
@@ -1764,6 +1665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 000000000100000004000000
   condition: 2
   magnitude: 0
@@ -1773,8 +1675,10 @@ MonoBehaviour:
   options:
   - {fileID: 1401116559304230415}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -1828,9 +1732,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: "Rebecca, sweetfeathers! Oh, I\u2019m so glad you made it here in time! Did
-    you get our letter?"
+  speakerId: 0
+  text: 'Hold up Rebecca, there''s something wrong. Isn''t the Haven usually bustling
+    with merchants? '
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559200114326
@@ -1877,9 +1781,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: "Yeah. They\u2019re leaving pretty soon too\u2026 I have to go visit them!
-    I have to say goodbye! Please, let\u2019s hurry so we can get there before they
-    leave!"
+  text: "Yeah. They\u2019re leaving pretty soon too\u2026 I have to go visit them
+    in the Haven of Trading! I have to say goodbye! Please, let\u2019s hurry so we
+    can get there before they leave!"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559233478810
@@ -1893,7 +1797,7 @@ GameObject:
   - component: {fileID: 1401116559233478805}
   - component: {fileID: 1401116559233478804}
   m_Layer: 0
-  m_Name: incitingEvent
+  m_Name: Rebecca_incitingEvent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1924,7 +1828,6 @@ Transform:
   - {fileID: 1401116558659309458}
   - {fileID: 1401116559200114321}
   - {fileID: 1401116559033348971}
-  - {fileID: 1401116558549398414}
   m_Father: {fileID: 1401116559564680906}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1940,6 +1843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 040000002a0000000100000000000000
   condition: 2
   magnitude: 0
@@ -1948,10 +1852,11 @@ MonoBehaviour:
   parts: []
   options:
   - {fileID: 1401116559033348970}
-  - {fileID: 1401116558549398409}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -1991,7 +1896,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1401116559147683174}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1401116559304230415
 MonoBehaviour:
@@ -2006,22 +1911,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
-  magnitude1: -5
+  magnitude1: 0
   consequenceType2: 3
-  magnitude2: -3
+  magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: " I\u2019m so sorry, Rebecca\u2026 We\u2019re going to have to keep
-    moving."
-  selectionTooltip: No final goodbyes
+  selectionText: Let's keep moving
+  selectionTooltip: 
   conclusionHeading: Leaving
-  conclusionText: The team give Rebecca a moment, but know that they have to continue
-    to their destination
+  conclusionText: 'You continue towards the Haven of Trading, unsure what awaits
+    you there.. '
 --- !u!1 &1401116559564680907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,7 +1951,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401116559564680907}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2075,7 +1980,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventName: Rebecca's family is leaving
   startArea: {fileID: 0}
-  startEvent: {fileID: 1401116559233478804}
   timeToComplete: 7
   endArea: {fileID: 0}
   activationEvent: {fileID: 1401116557869381134}
@@ -2089,6 +1993,7 @@ MonoBehaviour:
     completeBy: 0
     currentState: 0
     activationEventShown: 0
+    activationEventID: 0
 --- !u!1 &1401116559730020142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2133,7 +2038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: But what about me?
+  text: Oh snap..look, you seem like a reasonable birdson, let's just talk this out
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559742596451
@@ -2179,10 +2084,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: I know you have a very important quest from the Queen. I would never ask
-    you to abandon that to come with us, no matter how much I would like to have
-    you by my side.
+  speakerId: 3
+  text: 'HA! We''ll see about that! '
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559779548212
@@ -2228,9 +2131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: "Oh sweetfeathers, you can always come visit us! We\u2019re not going that
-    far.\r\n"
+  speakerId: 3
+  text: 'Huh? I am a mom! '
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559829884650
@@ -2324,7 +2226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 1
-  text: "Oh. Oh no, it\u2019s my parents!! They\u2019re leaving!"
+  text: Oh. Oh no, you're right!!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559912679460
@@ -2371,7 +2273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: Oh my beak, would you look at that caravan!
+  text: Wait.. this is the week your parents were fleeing the country, wasn't it?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116559956384125
@@ -2418,8 +2320,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 1
-  text: "Oh, excuse me! I\u2019m just a messenger, I don\u2019t mean you any harm.
-    Say, do any of you happen to be Rebecca Sparkbeak?"
+  text: "Oh, excuse me! I\u2019m a messenger.. Say, do any of you happen to be Rebecca
+    Sparkbeak?"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1401116560002785913
@@ -2516,6 +2418,55 @@ MonoBehaviour:
   text: "\u2026 Maybe in a bit. I just need to be alone right now. "
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!1 &1556165941055704109
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1317986480653540141}
+  - component: {fileID: 5743076574974141128}
+  m_Layer: 0
+  m_Name: part9 (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1317986480653540141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556165941055704109}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1286184297452651939}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5743076574974141128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556165941055704109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 2
+  text: Out of the question! I am not much of an adventurer. I am older then you,
+    and my emotions are slow to change. There's no way I could connect with the vultures
+    as well as you do
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &1718276920443169479
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,6 +2514,53 @@ MonoBehaviour:
   text: "\u2026 "
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!1 &1744127189564966153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2398568989361296402}
+  - component: {fileID: 2249835004673699175}
+  m_Layer: 0
+  m_Name: part9 (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2398568989361296402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744127189564966153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1286184297452651939}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2249835004673699175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744127189564966153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 0
+  text: Y-yeah. Love you mom
+  useCustomPic: 0
+  customPic: {fileID: 0}
 --- !u!1 &2001299064453021890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,8 +2604,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: Good luck, sweetfeathers. I love you.
+  speakerId: 2
+  text: 'Mom!! They''ve captured you? '
+  useCustomPic: 0
+  customPic: {fileID: 0}
+--- !u!1 &3287001351449526569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6039556909864674483}
+  - component: {fileID: 8525766003175945576}
+  m_Layer: 0
+  m_Name: part9 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6039556909864674483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3287001351449526569}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1286184297452651939}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8525766003175945576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3287001351449526569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 2
+  text: I'll see you on the other side of this ridiculous war, yes?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &3844363578309681100
@@ -2621,7 +2666,7 @@ GameObject:
   - component: {fileID: 1286184297452651939}
   - component: {fileID: 3393595197053433226}
   m_Layer: 0
-  m_Name: post trial - In Time (after chat)
+  m_Name: Rebecca_post trial - In Time (after chat)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2648,6 +2693,11 @@ Transform:
   - {fileID: 4679786758410919033}
   - {fileID: 2275827444221263046}
   - {fileID: 9073877000580574145}
+  - {fileID: 1317986480653540141}
+  - {fileID: 197210241252703047}
+  - {fileID: 6039556909864674483}
+  - {fileID: 2398568989361296402}
+  - {fileID: 4666031001357763426}
   - {fileID: 3431141869747914363}
   m_Father: {fileID: 1401116559564680906}
   m_RootOrder: 7
@@ -2664,7 +2714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 0100000002000000
+  affectedBird: 6
+  speakers: 01000000020000001600000000000000
   condition: 2
   magnitude: 0
   targetEmotion: 0
@@ -2673,11 +2724,13 @@ MonoBehaviour:
   options:
   - {fileID: 3784301437074939323}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
-  eventBackground: {fileID: 21300000, guid: 4b08e290b783b3040805f8c14ced45df, type: 3}
+  isCampFireScene: 1
+  eventBackground: {fileID: 0}
   useBgFog: 1
-  useEventAudio: 0
+  useEventAudio: 1
   eventAudio:
     clips: []
     usePitchVariation: 0
@@ -2823,9 +2876,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: "You can write letters and send gifts. Let someone know that you\u2019re
-    thinking of them even if you can\u2019t be with them right now. "
+  speakerId: 2
+  text: Yeah, they better! If you come out of this hurt by that queen's advisor I'm
+    gonna beat them up. Diplomacy can't save them then!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &4233884335055373460
@@ -2857,7 +2910,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1286184297452651939}
-  m_RootOrder: 10
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3784301437074939323
 MonoBehaviour:
@@ -2872,6 +2925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: -5
@@ -2882,12 +2936,11 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: "You\u2019re right, we should probably start with something a bit
-    simpler."
-  selectionTooltip: Start writing
-  conclusionHeading: Writing
-  conclusionText: Sophie and Rebecca spent the evening crafting the first of many
-    letters to Mr. and Mrs. Sparkbeak.
+  selectionText: Let's leave them to it and get some sleep
+  selectionTooltip: 
+  conclusionHeading: Sleepy time
+  conclusionText: Rebecca and her mom spent the evening catching up, before they
+    went seperate ways in the morning
 --- !u!1 &4255651076801091296
 GameObject:
   m_ObjectHideFlags: 0
@@ -2979,8 +3032,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 0
-  text: "I know, I get it\u2026 I\u2019m just really gonna miss them. "
+  speakerId: 2
+  text: ...nah. Sorry, king's orders
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &4382193847604339867
@@ -3073,9 +3126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: 'It seems to me that they thought you were strong enough to stay here on
-    your own. They probably wanted to protect their family and their business. '
+  speakerId: 0
+  text: Sorry, will you not beat us up if we call you by your names?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &4407716138008745887
@@ -3089,7 +3141,7 @@ GameObject:
   - component: {fileID: 4827397674945445539}
   - component: {fileID: 3689590340884107083}
   m_Layer: 0
-  m_Name: option 1
+  m_Name: option 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3107,7 +3159,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2408798457620755936}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3689590340884107083
 MonoBehaviour:
@@ -3122,18 +3174,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
-  magnitude1: -5
+  magnitude1: 0
   consequenceType2: 3
-  magnitude2: -3
+  magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: Tell the others to let Rebecca be alone for a while.
-  selectionTooltip: Leave Rebecca alone
+  selectionText: Let Rebecca be alone with her family
+  selectionTooltip: Leave Rebecca alone (this will skip a narrative event)
   conclusionHeading: Leaving
   conclusionText: You rest for a while, knowing that Rebecca got to say goodbye to
     her family before they left the country.
@@ -3182,6 +3235,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerId: 1
   text: "It\u2019s okay. If you want, I can help you write a letter to your parents. "
+  useCustomPic: 0
+  customPic: {fileID: 0}
+--- !u!1 &4546804682655891513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4666031001357763426}
+  - component: {fileID: 3384588866167565322}
+  m_Layer: 0
+  m_Name: part9 (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4666031001357763426
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546804682655891513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1286184297452651939}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3384588866167565322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4546804682655891513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerId: 2
+  text: Love you too sweetcheeks
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &4853028448177784255
@@ -3276,6 +3376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -3283,14 +3384,13 @@ MonoBehaviour:
   magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
-  useAutoExplanation: 1
+  useAutoExplanation: 0
   AfterImage: {fileID: 0}
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: "I know\u2026 let\u2019s get out of here. "
-  selectionTooltip: No last goodbye.
-  conclusionHeading: Farewell
-  conclusionText: The team give Rebecca a moment, but know that they have to keep
-    moving
+  selectionText: Oh snap!
+  selectionTooltip: 
+  conclusionHeading: 
+  conclusionText: 
 --- !u!1 &4882634014879174497
 GameObject:
   m_ObjectHideFlags: 0
@@ -3335,7 +3435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: I found a letter addressed to you. Here.
+  text: 'Say goodbye to whom? '
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &4904852981690447245
@@ -3349,7 +3449,7 @@ GameObject:
   - component: {fileID: 6875518125722311865}
   - component: {fileID: 7126875847335866078}
   m_Layer: 0
-  m_Name: reaching trial - TOO LATE
+  m_Name: Rebecca_reaching trial - TOO LATE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3391,7 +3491,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakers: 01000000040000000000000002000000
+  affectedBird: 6
+  speakers: 01000000040000001d0000000c000000
   condition: 2
   magnitude: 0
   targetEmotion: 0
@@ -3400,8 +3501,10 @@ MonoBehaviour:
   options:
   - {fileID: 6620744543043600660}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -3505,9 +3608,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "It\u2019s saying\u2026 that they had to leave. They couldn\u2019t stay any
-    longer, they were worried that the country\u2019s borders would close because
-    of the vulture threat."
+  text: A vulture!!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &5501614820969345377
@@ -3554,7 +3655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: Hello? Mom? Dad? Is anybirdy here?
+  text: Hello? Mom? Is anybirdy here?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &5779690294291777674
@@ -3648,8 +3749,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: "Uhhh\u2026 "
+  speakerId: 0
+  text: Y-yeah, of course. I'm gonna miss you. Are you sure you don't wanna come
+    with us?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &5811589642046070588
@@ -3695,8 +3797,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 0
-  text: "You\u2019re kind of solitary, right? Do you ever miss your parents?"
+  speakerId: 2
+  text: But what about you Rebecca? How are you feeling with this huge quest going
+    on?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &5995063504603953363
@@ -3742,9 +3845,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 3
-  text: "I\u2019m sure they wanted to say goodbye to you as much as you wanted to
-    say goodbye to them, Rebecca. "
+  speakerId: 2
+  text: Excuse me, "a vulture" ? I have a name you know, birdhole!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &5996135222811799444
@@ -3758,7 +3860,7 @@ GameObject:
   - component: {fileID: 5743778595089889497}
   - component: {fileID: 3164723499131587239}
   m_Layer: 0
-  m_Name: option 2
+  m_Name: option 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3776,7 +3878,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2408798457620755936}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3164723499131587239
 MonoBehaviour:
@@ -3791,20 +3893,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 3393595197053433226}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
-  magnitude1: -5
+  magnitude1: 0
   consequenceType2: 3
-  magnitude2: -3
+  magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: Urge the others to go talk to her.
-  selectionTooltip: Approach Rebecca.
-  conclusionHeading: Leaving
-  conclusionText: Hey, Rebecca. How are you feeling?
+  selectionText: Let's listen in!
+  selectionTooltip: It can't hurt to make sure they're OK, right?
+  conclusionHeading: 
+  conclusionText: The two of them are chirping intensely
 --- !u!1 &6145296575314094017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3848,8 +3951,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 2
-  text: "I\u2019m gonna miss your family too. "
+  speakerId: 3
+  text: Let's get them!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &6252499109407926748
@@ -3896,7 +3999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: Like what?
+  text: It is..but our leader does a great job taking care of us
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &6266670846906180256
@@ -3928,7 +4031,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1401116558678545227}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7176578099514563507
 MonoBehaviour:
@@ -3943,18 +4046,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 4299379943994937972}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
-  magnitude1: -5
+  magnitude1: 0
   consequenceType2: 3
-  magnitude2: -3
+  magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: Urge the others to go talk to her.
-  selectionTooltip: Talk to Rebecca
+  selectionText: Talk to her
+  selectionTooltip: 
   conclusionHeading: Leaving
   conclusionText: Hey, Rebecca. How are you feeling?
 --- !u!1 &6671092248720844820
@@ -4001,7 +4105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "That sounds nice\u2026 Hey, could you help me write a letter for my parents?"
+  text: 'MOM!! '
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &6726754572317329777
@@ -4048,8 +4152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "I don\u2019t know. Both relieved and sad I guess. I\u2019m glad I got to
-    see my parents one last time, but\u2026 I\u2019m really gonna miss them. "
+  text: So wait, Tomas is now with Stephen?? Weren't they always fighting?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &6928240969256351461
@@ -4096,7 +4199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: Rebecca is sitting alone by the campfire
+  text: Rebecca is sitting by the campfire together with her mom
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &7123928267798865422
@@ -4189,8 +4292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: Of course.
+  speakerId: 2
+  text: Yeah, thank the winds they finally got over themselves. Geez!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &7358163726879427902
@@ -4236,9 +4339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: Well yes, of course I do! But I enjoy being on my own. My family was never
-    very talkative, and we never spent that much time together.
+  speakerId: 0
+  text: I..I don't know. I'm constantly switching emotions and trying to connect
+    with other birds. It has been really intense
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &8065675233485862903
@@ -4285,11 +4388,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
-  magnitude1: -5
+  magnitude1: 0
   consequenceType2: 3
-  magnitude2: -3
+  magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
   useAutoExplanation: 1
@@ -4344,9 +4448,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: It would be my pleasure! Would you say your parents prefer a narrative style
-    of writing or an expository one?
+  speakerId: 2
+  text: I am serious. You guys have a big quest ahead of you. I will not question
+    the queen's decisions, but please make sure to stay safe and take care of each
+    other
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &8830601353804918754
@@ -4392,7 +4497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ef4bfc458c8b7643bc11d24d048816b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speakerId: 1
-  text: 'But there are other things you can do to show that you love someone. '
+  speakerId: 2
+  text: I can imagine! You always loved staying troughly social as a chick! This
+    must be a lot for you
   useCustomPic: 0
   customPic: {fileID: 0}

@@ -58,7 +58,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	public bool firstCompletion = true;
 	public Bird birdToAdd;
 	public EventScript birdToAddScript;
-	ShowTooltip tooltipInfo;
+	internal ShowTooltip tooltipInfo;
 	List<Var.Em> totalEmotions;
 	List<float> totalPercentages;
 	public Image unlockedRoad;
@@ -66,8 +66,6 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	bool useline;
 	public int trialID;
 	public Animator anim;
-	[HideInInspector]
-	public TimedEventControl timedEventTrigger;
 	bool birdAdded = false;
 	public EventScript firstCompleteEvent;
 	public Dialogue firstCompleteDialogue;
@@ -75,11 +73,11 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	bool eventShown = false;
 	bool dialogueShown = false;
 	[HideInInspector] public TimedEventControl timedEvent;
-  
+	public bool logTargetSearch = false;
 
     // Use this for initialization
 
-    private void Awake()
+    internal void Awake()
     {
         if(!anim)
         {
@@ -87,7 +85,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
-    void Start()
+    internal virtual void Start()
 	{
 		
 		if(MapControler.Instance.allIDs.Contains(ID))
@@ -100,27 +98,30 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		offset = transform.position- transform.parent.position;
 		if (isTrial)
 			trialID = ID;
-		else
-			trialID = GetTargetID(this);
+		else if(trialID == 0)
+			trialID = GetTargetID(this, logTargetSearch);
 		LoadSaveData();
 		//if (!Var.StartedNormally)
 			//available = true;
 
 
 		sr = GetComponent<Image>();
-        sr = this.transform.Find("mapIcon_art").GetComponent<Image>();
+        sr = this.transform.Find("mapIcon_parent").Find("mapIcon_art").GetComponent<Image>();
+		
 
-        //Seb. Kind of dirty way to get the "lock" gameobject even if it has not been set. In case the prefab connection breaks
-        if (LockedIcon == null)
+		//Seb. Kind of dirty way to get the "lock" gameobject even if it has not been set. In case the prefab connection breaks
+		if (LockedIcon == null)
         {
-            LockedIcon = this.transform.Find("lock").gameObject;
+            LockedIcon = this.transform.Find("mapIcon_parent").Find("Lock_parent").Find("lock").gameObject;
             
         }
 
 		if (isTrial)
 		{
-			sr.sprite = MapControler.Instance.trialSprite;
-			sr.color = Helpers.Instance.GetEmotionColor(type);
+			//sr.sprite = MapControler.Instance.trialSprite;
+			sr.sprite = Helpers.Instance.GetEmotionIconTrial(type);
+			//sr.color = Helpers.Instance.GetEmotionColor(type);
+			//Debug.LogError("trial: " + levelName + " color: " + sr.color);
 			if(fogObject)
 			{
 				fogObject.SetActive(!completed);
@@ -146,7 +147,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		}
 		//GetComponent<Button>().interactable = available;
 		CompleteIcon.SetActive(completed);
-		LockedIcon.SetActive(!available);        
+   
 		lr = GetComponent<LineRenderer>();
 		AddNewBird();
 		tooltipInfo = gameObject.AddComponent<ShowTooltip>();
@@ -195,15 +196,14 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		{
 			if (EventController.Instance.eventsToShow.Count == 0 && !GuiContoler.Instance.activeSpeechBubble.activeInHierarchy)
 				SetState();
-		});
-
-		
+		});		
 	}
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (MapControler.Instance.isViewingNode == false)
             anim.SetBool("hover", true);
+		AudioControler.Instance.nodeHoverSound.Play();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -213,8 +213,12 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
 
-	int GetTargetID(MapIcon data)
+	int GetTargetID(MapIcon data, bool logtargetSearch)
 	{
+		if (logtargetSearch)
+		{
+			Debug.LogError("starting search! ID: " + ID);
+		}
 		if (data.targets.Length == 0)
 		{
 			foreach (Transform child in data.transform.parent)
@@ -228,12 +232,24 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			return -1;
 		}
 		if (data.targets[0].isTrial)
+		{
+			if (logtargetSearch)
+			{
+				Debug.LogError("found trial! ID: " + data.targets[0].ID);
+			}
 			return data.targets[0].ID;
+		}
 		else
-			return GetTargetID(data.targets[0]);
+		{
+			if (logtargetSearch)
+			{
+				Debug.LogError("Brancing to ID: " + data.targets[0].ID);
+			}
+			return GetTargetID(data.targets[0], logtargetSearch);
+		}
 	}
 
-	public void SetState()
+	public virtual void SetState()
 	{
 		
 		if (available && !stateSet)
@@ -263,8 +279,11 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                     anim.SetInteger("state", 1);
 
                     float time = 0.8f;
-                    LeanTween.delayedCall(time, () => anim.SetTrigger("playCompleteAnim")); //Delay b4 playing unlock anim
-                    LeanTween.delayedCall(time, () => anim.SetInteger("state", 2));
+                    LeanTween.delayedCall(time, () => {
+						anim.SetTrigger("playCompleteAnim");
+						AudioControler.Instance.nodeCompleteSound.Play();
+						anim.SetInteger("state", 2);
+					}); //Delay b4 playing unlock anim
                     AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
 					if (unlockedRoad != null)
 					{
@@ -276,30 +295,27 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					{
 						LeanTween.delayedCall(2.7f, () => icon.anim.SetInteger("state", 1));
 					}
-					CenterMapNode();
+					CenterMapNode(false);
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
-					
+					tooltipInfo.tooltipText = GetTooltipText();
 				}
 				else
-				{
-
-                    
+				{                    
                     anim.SetInteger("state", 2); //set map icon to "completed" state instantly
-					
-
+					tooltipInfo.tooltipText = GetTooltipText();
 				}
 			}
             else
 			{
-
                 float time = 2f;
                 anim.SetInteger("state", 0);
-                LeanTween.delayedCall(time, () => anim.SetTrigger("playUnlockAnim"));  //Set map icon to "available" state after a delay
-                LeanTween.delayedCall(time, () => anim.SetInteger("state",1));
-				
-
-
+                LeanTween.delayedCall(time, () => {
+					anim.SetTrigger("playUnlockAnim");
+					AudioControler.Instance.nodeUnlockSound.Play();
+					anim.SetInteger("state", 1);
+					});  //Set map icon to "available" state after a delay
+				tooltipInfo.tooltipText = GetTooltipText();
 			}
 		}
         else
@@ -310,12 +326,13 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			
 
 		}
+
 		
 	}
-	public void CenterMapNode()
+	public void CenterMapNode(bool focusOnNext = true)
 	{
 		Vector2 dist = Camera.main.transform.position - transform.position;
-		if (targets.Length > 0)
+		if (targets.Length> 0 && focusOnNext)
 		{
 			dist = Camera.main.transform.position - targets[0].transform.position;
 		}
@@ -334,7 +351,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 	}
 		
-	void Validate(int id, MapBattleData data)
+	internal virtual void Validate(int id, MapBattleData data)
 	{
 		//Debug.LogError(levelName + " battle " + id + " starting validation");
 		if(data.emotionPercentage.Count==0 && data.emotionType.Count==0)
@@ -375,7 +392,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			}
 		}
 	}
-	string GetTooltip()
+	private string GetTooltip()
 	{
 
 		string tooltip = "";
@@ -403,14 +420,15 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		try
 		{
 		  
-			MapControler.Instance.pieChart[0].gameObject.GetComponent<ShowTooltip>().tooltipText = GetTooltip();
+			MapControler.Instance.pieChart[0].gameObject.GetComponent<ShowTooltip>().tooltipText =
+				"<b>Enemies in level:</b> \n"+ GetTooltip();
 		}
 		catch
 		{
 			print("Could not assign pie chart tooltip");
 		}
 	}
-	string GetTooltipText()
+	internal virtual string GetTooltipText()
 	{
 		string tooltipText ="";
 		if (isTrial)
@@ -445,7 +463,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					break;
 				}
 			}
-			if (canAdd && birdToAdd != null && birdToAddScript != null)
+			if (canAdd && birdToAdd != null && birdToAddScript != null && !Var.shownEvents.Contains(birdToAddScript.gameObject.name))
 			{
 				birdToAdd.gameObject.SetActive(true);
 				Var.availableBirds.Add(birdToAdd);
@@ -459,7 +477,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	}
 
 
-	void Update()
+	internal virtual void Update()
 	{
 		/*if(active)
 		{
@@ -512,33 +530,15 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	}
 	public void LoadSaveData(bool createNewSave = false)
 	{
-		bool SaveDataCreated = false;
-		foreach (MapSaveData data in Var.mapSaveData)
-		{
-			if (data.ID == ID)
-			{
-				if(createNewSave)
-                {
-					Var.mapSaveData.Remove(data);
-                }
-                else
-				{
-					SaveDataCreated = true;
-				}
-				break;
-			}
-		}
+		bool saveDataCreated = CheckIfSaveDataExists();
+		if(createNewSave)
+        {
+			RemoveSave();
+        }
 
-
-		if (!SaveDataCreated )
+		if (!saveDataCreated )
 		{
-			List<int> targIDs = new List<int>();
-			foreach (MapIcon targ in targets)
-			{
-				targIDs.Add(targ.ID);
-			}
-			mySaveData = new MapSaveData(completed, available,firstCompletion, ID, targIDs,type, trialID,levelName);
-			Var.mapSaveData.Add(mySaveData);
+			CreateSaveData();
 		}
 		else
 		{
@@ -554,9 +554,50 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			}
 		}
 	}
+	public void RemoveSave()
+    {
+		foreach (MapSaveData data in Var.mapSaveData)
+		{
+			if (data.ID == ID)
+			{
+				Var.mapSaveData.Remove(data);
+				break;
+			}
+		}
+	}
+	public void TryCreateNewSave()
+    {
+		RemoveSave();
+		if(!CheckIfSaveDataExists())
+        {
+			CreateSaveData();
+        }
+    }
+	public bool CheckIfSaveDataExists()
+    {
+		bool saveDataCreated =false;
+		foreach (MapSaveData data in Var.mapSaveData)
+		{
+			if (data.ID == ID)
+			{				
+				saveDataCreated = true;
+				break;
+			}
+		}
+		return saveDataCreated;
+	}
+	private void CreateSaveData()
+    {
+		List<int> targIDs = new List<int>();
+		foreach (MapIcon targ in targets)
+		{
+			targIDs.Add(targ.ID);
+		}
+		mySaveData = new MapSaveData(completed, available, firstCompletion, ID, targIDs, type, trialID, levelName);
+		Var.mapSaveData.Add(mySaveData);
+	}
 
-
-	public void mapBtnClick()
+	public virtual void mapBtnClick()
 	{
         if(!MapControler.Instance.isViewingNode)
         anim.SetTrigger("click");
@@ -574,9 +615,10 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (!Var.gameSettings.shownMapTutorial)
         {
             MapTutorial tut = FindObjectOfType<MapTutorial>();
-            tut.tutorialHighlight.SetTrigger("off");
-            DialogueControl.Instance.CreateParticularDialog(tut.mapTutorialDialog2);
+            tut.tutorialHighlight.SetTrigger("off"); 
+            //DialogueControl.Instance.CreateParticularDialog(tut.mapTutorialDialog2);
             Var.gameSettings.shownMapTutorial = true;
+			mapPan.Instance.scrollingEnabled = true;
         }
 
             SetupPieGraph();
@@ -589,24 +631,14 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		{
 			Var.selectedTimeEvent = timedEvent.data;
 		}
-			active = true;
+		active = true;
 
-            foreach (GuiMap map in FindObjectsOfType<GuiMap>())
-                map.Clear();
-            MapControler.Instance.SelectedIcon = null;
-            MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
-            //MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero; //seb
-            MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
-
-
-            ShowAreaDetails();
-
-            //LeanTween.value(gameObject, (float alpha) => MapControler.Instance.SelectionMenu.GetComponent<CanvasGroup>().alpha =alpha, 0,1, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-            //LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-
-
-            //LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position+(transform.parent.transform.position-transform.position), 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
-        
+        foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+            map.Clear();
+        MapControler.Instance.SelectedIcon = null;
+        //MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero; //seb
+        MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
+        ShowAreaDetails();
     }
 
 	public void ShowAreaDetails()
@@ -616,18 +648,33 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		MapControler.Instance.SelectionMenu.SetActive(true);
 		MapControler.Instance.SelectionTitle.text = levelName;
 		MapControler.Instance.SelectionText.text = ToString();
-		MapControler.Instance.SelectionDescription.text = levelDescription;
+		MapControler.Instance.enemyLevelText.text = "Average enemy level: " + birdLVL;
+		if (isTrial)
+		{
+			MapControler.Instance.SelectionDescription.text = MapControler.Instance.trialDescription + levelDescription;
+		}
+        else
+		{
+			MapControler.Instance.SelectionDescription.text =levelDescription;
+		}
 		AudioControler.Instance.ClickSound();
 		FindObjectOfType<GuiMap>().CreateMap(CreateMap());
        // LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeOutBack); //seb
         
         MapControler.Instance.ShowSelectionMenuAnimation();
+		MapControler.Instance.SetSelectionMenuIcons(this);
+		MapControler.Instance.SetSelectionMenuBG(isTrial);
 		MapControler.Instance.SelectedIcon = this;
 		if (available)
 		{
-			MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);            
-			MapControler.Instance.startLvlBtn.gameObject.SetActive(true);
-			
+			MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);
+			MapControler.Instance.startLvlBtn.interactable = true;
+			MapControler.Instance.startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "Start the adventure\nA week will pass";
+		}
+        else
+        {
+			MapControler.Instance.startLvlBtn.interactable = false;
+			MapControler.Instance.startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "Area locked!\nComplete previous adventures!";
 		}
 	}
 	bool CheckTargetsAvailable()
@@ -654,6 +701,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		if (available && MapControler.Instance.canFight)
 		{
 			AudioControler.Instance.ClickSound();
+			Var.isEnding = isBoss;
 			Var.isBoss = isBoss;
 			Var.fled = false;
 			Var.isTutorial = false;                       
@@ -773,13 +821,13 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			stageState = "completed";
 		if (available)
 			stageState = "available";
-		stageInfo += "Stage " + (ID + 1) + ": " + stageState;
+		//stageInfo += "Stage " + (ID + 1) + ": " + stageState;
 		/*string weakness = "All";
 		if (type == Var.Em.Random)
 			weakness = "Unpredictable";
 		else if (type != Var.Em.Neutral)
 			weakness = Helpers.Instance.GetWeakness(type).ToString();*/
-		stageInfo += ". Main ENEMY emotion: " + Helpers.Instance.GetHexColor(type) + type + "</color>.";
+		stageInfo += "Main ENEMY emotion: " + Helpers.Instance.GetHexColor(type) + type + "</color>";
 		   // " Weak to: " +	Helpers.Instance.GetHexColor(Helpers.Instance.GetWeakness(type)) + weakness + "</color>.";
 		/*stageInfo += "\nEnemies attack from the: ";
 		if (hasFrontEnemyRow)

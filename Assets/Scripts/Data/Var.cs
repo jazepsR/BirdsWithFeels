@@ -27,7 +27,9 @@ public static class Var {
 	public static int loadChapterID = -1;
 	public static GameObject dustCloud = null;
 	public static int MoveGraphBy = 1315;
-	public static int maxMentalHealth = 3;
+	public static int maxMentalHealth = 2;
+	public static int emPowerTileStrength = 3;
+	public static int DangerZoneStart = 14;
 	public static int lvl1 = 5;
 	public static bool fled = false;
 	public  static int lvl2 = 10;
@@ -74,15 +76,16 @@ public static class Var {
 	public static string[] maleNames = {"Noah", "Liam", "Mason", "Jacob", "William","Ethan", "James","Alexander","Michael","Benjamin","Elijah",
 		"Daniel", "Aiden", "Logan", "Matthew","Lucas","Jackson","David","Oliver","Jayden","Joseph","Gabriel","Samuel","Carter","Anthony","John",
 		"Dylan", "Luke", "Henry","Andrew","Isaac","Christopher","Joshua","Wyatt","Sebastian","Owen","Caleb","Nathan","Ryan","Jack","Hunter","Levi",
-		"Christian","Jaxon","Julian","Landon","Grayson","Jonathan","Isaiah","Charles"};
+		"Christian","Jaxon","Julian","Landon","Grayson","Jonathan","Isaiah","Charles","Rory", "Eric"};
 	public static string[] femaleNames = {"Emma","Olivia","Sophia","Ava","Isabella","Mia","Abigail","Emily", "Charlotte", "Harper","Madison", "Amelia",
-		"Elizabeth","Sofia","Evelyn","Chloe","Ella","Grace","Victoria","Aubrey","Scarlett","Zoey","Addison","Lily","Lillian","Natalie","Hannah","Aria","Layla"};
+		"Elizabeth","Sofia","Evelyn","Chloe","Ella","Grace","Victoria","Aubrey","Scarlett","Zoey","Addison","Lily","Lillian","Natalie","Hannah","Aria","Layla","Lulu"};
 	public static string[] deathSignoffs = { "Get well soon, <name>!", "Tis but a scratch!", "I'm sure <name> won't be down for long!" };
 	public static bool isDragControls = true;
 	public static bool freezeEmotions = false;
 	public static int eventTextCharLimit = 200;
-    /// Tutorial IDs
-    public static int battlePlanningTutorialID = 11;
+	public static int maxLevel = 2;
+	/// Tutorial IDs
+	public static int battlePlanningTutorialID = 13;
     public static int levelTutorialID = 21;
 	public static bool cheatsEnabled = true;
 	public static float levelPopupDelay = 0.3f;
@@ -91,17 +94,39 @@ public static class Var {
 [Serializable]
 public class Settings
 {
-   public bool shownFirstLevelUp = true;
-   public bool shownBattlePlanningTutorial = true;
-   public bool shownLevelTutorial = true;
-   public bool shownMapTutorial = true;
-   public Settings(bool tutorialsCompleted)
+	public bool shownFirstLevelUp = true;
+	public bool shownBattlePlanningTutorial = true;
+	public bool shownLevelTutorial = true;
+	public bool shownMapTutorial = true;
+	public bool shownMapTutorial2 = true;
+	// map feature tutorials
+	public bool shownSwordTutorial = true;
+	public bool shownShieldTutorial = true;
+	public bool shownEmoSquareTutorial = true;
+	public bool shownWizardTutorial = true;
+	public bool shownHeartTutorial = true;
+	public bool shownOneHealthTutorial = true;
+	public bool shownTrialTutorial = true;
+	public bool shownLevelCapTutorial = true;
+	public bool useMHP = true;
+	public Settings(bool tutorialsCompleted)
    {
         shownFirstLevelUp = tutorialsCompleted;
         shownBattlePlanningTutorial = tutorialsCompleted;
         shownLevelTutorial = tutorialsCompleted;
 		shownMapTutorial = tutorialsCompleted;
-}
+		shownMapTutorial2 = tutorialsCompleted;
+		// map feature tutorials
+		shownSwordTutorial =  tutorialsCompleted;
+		shownShieldTutorial = tutorialsCompleted;
+		shownEmoSquareTutorial = tutorialsCompleted;
+		shownWizardTutorial = tutorialsCompleted;		
+		shownHeartTutorial = tutorialsCompleted;
+		shownOneHealthTutorial = tutorialsCompleted;
+		shownTrialTutorial = tutorialsCompleted;
+		shownLevelCapTutorial = tutorialsCompleted;
+		useMHP = tutorialsCompleted;
+	}
 }
 
 

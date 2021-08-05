@@ -17,8 +17,10 @@ public class Graph : MonoBehaviour {
 	public bool isSmall;
 	public LevelBarScript levelBar;
 	public Image dangerZoneHighlight;
+	public GameObject dangerZoneParent;
 	public Image lockImage;
 	bool afterBattle = false;
+	private float seedMoveTime = 0.4f;
 	// Use this for initialization
 	void Start()
 	{
@@ -66,9 +68,15 @@ public class Graph : MonoBehaviour {
 		if (!GuiContoler.Instance.inMap && GuiContoler.Instance.winBanner.activeSelf)
 			return;
 		if (bird.data.health <= 0)
+		{
 			return;
+		}
 		if (isSmall && Var.freezeEmotions)
 			return;
+		if (dangerZoneParent)
+		{
+			dangerZoneParent.SetActive(Var.gameSettings.useMHP);
+		}
 		this.afterBattle = afterBattle;
 		//GameObject preHeart = PlotPoint(bird.prevFriend, bird.prevConf, prevHeart,false);
 		GameObject tempHeart;
@@ -91,6 +99,10 @@ public class Graph : MonoBehaviour {
 			Var.Em emotion = bird.emotion;
 			if (bird.prevEmotion == bird.emotion)
 				emotion = Var.Em.finish;
+
+			//Debug.LogError(bird.charName + " prevconf: " + bird.prevConf + " conf: " + bird.data.confidence);
+			//Debug.LogError(bird.charName + " prevfriend: " + bird.prevFriend + " friend: " + bird.data.friendliness);
+
 			portraitScript.StartGraph(secondPos, emotion, bird, this, shouldHaveSound);
 		}
 		if ((GuiContoler.Instance.currentGraph == 3 && afterBattle) || !Var.gameSettings.shownLevelTutorial)
@@ -141,20 +153,16 @@ public class Graph : MonoBehaviour {
 	}
 	void CreateLevelSeeds(Bird bird, bool afterBattle)
 	{
+		if(bird.data.level >= Var.maxLevel)
+        {
+			return;
+        }
 		Debug.Log("SEEDS ARE BEING CREATED");
 		float factor = isSmall ? 8 : 18;
 		if (!isSmall)
 		{
 			SetupLevelBar(bird);
 		}
-		/*if(!isSmall)
-		{
-			factor = 16;
-			SetupLevelBar(Var.Em.Cautious, Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.data.levelList),bird);
-			SetupLevelBar(Var.Em.Confident, Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.data.levelList), bird);
-			SetupLevelBar(Var.Em.Social, Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.data.levelList), bird);
-			SetupLevelBar(Var.Em.Solitary, Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.data.levelList), bird);
-		}*/
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
 		bird.data.level - 1)];
 
@@ -184,7 +192,7 @@ public class Graph : MonoBehaviour {
 	public void CheckIfCollectedSeed(Bird bird)
 	{
 		Debug.Log("SEEDS ARE BEING CHECKED IF COLLECTED");
-
+		GuiContoler.Instance.canChangeGraph = true;
 		if (graphParent.transform.childCount == 0)
 			return;
 		if (!afterBattle)
@@ -228,7 +236,7 @@ public class Graph : MonoBehaviour {
 		LeanTween.delayedCall(1.7f, () => levelBar.AddPoints(bird));
 		obj.GetComponent<Image>().color = Color.yellow;
 		bird.data.recievedSeeds.Add(bit.name);
-		LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, 0.7f).setEaseOutBack().setOnComplete(() =>
+		LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, seedMoveTime).setEaseOutBack().setOnComplete(() =>
 		{
 			LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
 			setEaseOutBack().setOnComplete(() => Destroy(obj));
@@ -236,6 +244,10 @@ public class Graph : MonoBehaviour {
 		}
 		));
 		GuiContoler.Instance.canChangeGraph = false;
+		if (GuiContoler.Instance.graphInteractTweenID != -1)
+		{
+			LeanTween.cancel(GuiContoler.Instance.graphInteractTweenID);
+		}
 		LeanTween.delayedCall(2.1f, () => GuiContoler.Instance.canChangeGraph = true);
 	}
 		

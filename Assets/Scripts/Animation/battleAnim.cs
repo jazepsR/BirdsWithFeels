@@ -4,18 +4,38 @@ using UnityEngine;
 
 public class battleAnim :MonoBehaviour {
 	public static battleAnim Instance { get; private set; }
-	List<battleData> battles = new List<battleData>();
-	float enemySpeed = 0.85f;
-	GameObject fightCloud;
-
-
+    public AnimationCurve vultureRunCurve;
+    public AnimationCurve vultureEnterCloudCurve;
+    List<battleData> battles = new List<battleData>();
+	float enemySpeed = 5f;
+    float enemySwitchToTalkOffset = 0.1f;
+    float enemyTalkBeforeSound = 1f;
+    float enemyTalkAfterSound = 1f;
+    float windUpDelay = 0.34f;
+    GameObject fightCloud;
+    
+    [Header("Camera animation")]
+    public AnimationCurve cameraZoomInCurve;
+    public AnimationCurve cameraYMovementCurve;
+    private float cameraZoomInTime = 0.3f;
+    private float cameraZoomOutTime = 0.8f;
+    private float cameraStartingSize;
+    private float cameraStartingY;
 	void Awake()
 	{
 		Instance = this;
 		fightCloud = Resources.Load<GameObject>("prefabs/fightcloud");
+        cameraStartingSize = Camera.main.orthographicSize;
+        cameraStartingY = Camera.main.transform.position.y;
 	}
-
-	public void AddData(Bird player, Bird enemy, int result)
+    private void Update()
+    {
+        if(Var.cheatsEnabled && Input.GetKeyDown(KeyCode.P))
+        {
+            DoQuickTransition();
+        }
+    }
+    public void AddData(Bird player, Bird enemy, int result)
 	{
 		battles.Add(new battleData(player, enemy, result));    
 	}
@@ -25,33 +45,54 @@ public class battleAnim :MonoBehaviour {
 		StartCoroutine(DoBattles(Helpers.Instance.winWaitTime, Helpers.Instance.loseWaitTime));
 	}
 
-
-	void StartBattle(Bird player,Bird enemy)
+	IEnumerator StartBattle(Bird player,Bird enemy)
 	{
-		enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
-		enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
+        enemy.GetComponentInChildren<Animator>().SetTrigger("walkprepare");
+        enemy.GetComponentInChildren<Animator>().SetBool("dead", false);
 		enemy.GetComponentInChildren<Animator>().SetBool("win", false);
-		AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
-        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position)*2, enemySpeed).setEase(LeanTweenType.easeInBack).setOnComplete(()=>
+        yield return new WaitForSeconds(windUpDelay);
+        enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
+        AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
+        float enemyMoveTime = Vector2.Distance(enemy.transform.position, player.transform.position + Helpers.Instance.dirToVector(enemy.position) * 2) / enemySpeed;
+        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position)*2, enemyMoveTime).setEase(vultureRunCurve).setOnComplete(()=>
 			enemy.GetComponentInChildren<Animator>().SetBool("walk", false)
-		); 
-	}
+		);
+    }
+    private IEnumerator CameraZoomInAnimation(float time)
+    {
+        float t = 0;
+        while(t<=1)
+        {
+            Camera.main.orthographicSize = cameraZoomInCurve.Evaluate(t) * cameraStartingSize;
+            Camera.main.transform.Translate(new Vector3(0, cameraYMovementCurve.Evaluate(t)*Time.deltaTime, 0));
+            t += Time.deltaTime / time;
+            yield return null;
+        }
+    }
 
-	IEnumerator DoBattles(float waitTime, float loseWaitTime)
+    public void CameraZoomOutAnimation(float time)
+    {
+        LeanTween.value(gameObject, (float val) => Camera.main.orthographicSize = val, Camera.main.orthographicSize, cameraStartingSize, time).setEaseInOutCubic(); 
+        LeanTween.moveY(Camera.main.gameObject, cameraStartingY, time).setEaseInOutCubic();
+
+    }
+    IEnumerator DoBattles(float waitTime, float loseWaitTime)
 	{
         GuiContoler.Instance.canPause(false);
-		yield return new WaitForSeconds(waitTime/3f);
-
+        StartCoroutine(CameraZoomInAnimation(cameraZoomInTime));
+        yield return new WaitForSeconds(waitTime/3f);
         //float extraWait = 0.8f;
         foreach (battleData battle in battles)
 		{
 
-			StartBattle(battle.player,battle.enemy);
-			StartCoroutine(ShowResult(battle, waitTime+1f));
+			StartCoroutine(StartBattle(battle.player,battle.enemy));
+			yield return StartCoroutine(ShowResult(battle, waitTime+1f));
+            
+            /*
 			if (battle.result != 1)
 				yield return new WaitForSeconds(loseWaitTime + 1);
 			else
-				yield return new WaitForSeconds(waitTime + 1f);
+				yield return new WaitForSeconds(waitTime + 1f);*/
 		}
 		battles = new List<battleData>();
 		bool canReroll = false;
@@ -61,23 +102,23 @@ public class battleAnim :MonoBehaviour {
 			//	canReroll = true;
 			
 		}
-		if (canReroll)
-		{
-			GuiContoler.Instance.rerollBox.SetActive(true);
-		}
-		else
-		{
-			yield return new WaitForSeconds((battles.Count+1)*0.2f);
-			foreach (Bird bird in FillPlayer.Instance.playerBirds)
-			{
-				if (bird.gameObject.activeSelf)
-				{
-					bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
-					bird.TryLevelUp();					
-					bird.AddRoundBonuses();
-					bird.SetEmotion(); 
-				}
-			}
+        if (canReroll)
+        {
+            GuiContoler.Instance.rerollBox.SetActive(true);
+        }
+        else
+        {
+            yield return new WaitForSeconds((battles.Count + 1) * 0.2f);
+            foreach (Bird bird in FillPlayer.Instance.playerBirds)
+            {
+                if (bird.gameObject.activeSelf)
+                {
+                    bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
+                    bird.TryLevelUp();
+                    bird.AddRoundBonuses();
+                    bird.SetEmotion();
+                }
+            }
 
             AudioControler.Instance.battleOver.Play();
             if (!Var.freezeEmotions)
@@ -91,65 +132,100 @@ public class battleAnim :MonoBehaviour {
             }
             yield return new WaitForSeconds(1.0f);
             foreach (Bird bird in Var.activeBirds)
-				bird.GetComponentInChildren<Animator>().SetBool("lose", false);
-			if (Var.isBoss)
-			{
-				GuiContoler.Instance.Reset();
-			}
-			else
-			{
-				if(Var.freezeEmotions)
-				{
+                bird.GetComponentInChildren<Animator>().SetBool("lose", false);
+            if (Var.isBoss)
+            {
+                GuiContoler.Instance.Reset();
+            }
+            else
+            {
+                if (Var.freezeEmotions)
+                {
                     //SHOW TARNSITION AND CREATE NEXT BATTLE
 
                     //Debug.Log("canplayBossTransition: " + GuiContoler.Instance.canplayBossTransition);
-                    if (GuiContoler.Instance.canplayBossTransition && (GuiContoler.Instance.nextNextMapArea != Var.Em.finish) && !Var.isEnding)
+                    if (GuiContoler.Instance.canplayBossTransition && !Var.isEnding)
                     {
-                        GuiContoler.Instance.bossTransition.GetComponent<Animator>().SetTrigger("TriggerTransition");
-                        //GuiContoler.Instance.canplayBossTransition = false;
-                        yield return new WaitForSeconds(.5f);
+                        if (GuiContoler.Instance.isActiveBirdInjured() && (GuiContoler.Instance.nextNextMapArea != Var.Em.finish))
+                        {
+                            GuiContoler.Instance.InitiateGraph();
+                            ProgressGUI.Instance.ActivateDeathSummaryScreen();
+                        }
+                        else
+                        {
+                            DoQuickTransition();
+                        }
                     }
-                    GuiContoler.Instance.CloseGraph();
-				}
+                    yield return new WaitForSeconds(0.5f);
+
+                }
 				else
 				{
 				GuiContoler.Instance.InitiateGraph(Var.activeBirds[0]);				
 				GuiContoler.Instance.CreateBattleReport();
-                
                 }
-			}
-            foreach(Bird enemy in Var.enemies)
+            }
+            CameraZoomOutAnimation(cameraZoomOutTime);
+            foreach (Bird enemy in Var.enemies)
             {
-                if(enemy != null)
+                if (enemy != null)
                     LeanTween.cancel(enemy.gameObject);
             }
-			if(Var.isTutorial)
-			{
-				yield return new WaitForSeconds(1.0f);
-				Tutorial.Instance.ShowTutorialFirstGridText(Tutorial.Instance.CurrentPos);
-			}
+            if (Var.isTutorial)
+            {
+                //Debug.Log("hello its me: " + Tutorial.Instance.showedSecondBirdReportText);
+                if (GuiContoler.Instance.GraphActive)
+                 {
+
+                     //GuiContoler.Instance.nextGraph.interactable = false;
+                 }
+
+                yield return new WaitForSeconds(1.0f);
+
+     
+                Tutorial.Instance.ShowTutorialFirstGridText(Tutorial.Instance.CurrentPos);
+            }
             if (Var.isEnding)
             {
+
+                //if (GuiContoler.Instance.GraphActive)
+                //{
+                  //  GuiContoler.Instance.nextGraph.interactable = false; //not sure if ending needs this but im going to put it here 
+                //}
+
                 yield return new WaitForSeconds(1.0f);
                 Ending.Instance.ShowEndingFirstGridText(Tutorial.Instance.CurrentPos);
             }
         }
 	}
 
+    private void DoQuickTransition()
+    {
+        if (GuiContoler.Instance.nextNextMapArea != Var.Em.finish)
+        {
+            GuiContoler.Instance.bossTransition.GetComponent<Animator>().SetTrigger("TriggerTransition");
+        }
+        LeanTween.delayedCall(0.5f,()=>
+        GuiContoler.Instance.CloseGraph());        
+    }
+
 	IEnumerator ShowResult(battleData battle,float waitTime)
-	{
+    {
+        float enemyMoveTime = Vector2.Distance(battle.enemy.transform.position, battle.player.transform.position) / enemySpeed;
         if (battle.player.data.injured)
         {
+            battle.enemy.GetComponentInChildren<Animator>().SetTrigger("walkprepare");
+            yield return new WaitForSeconds(windUpDelay);
             battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
             AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
-            LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
+            LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemyMoveTime).setEase(vultureRunCurve);
             Debug.Log("I moved");
         }
         else
         {
             AudioControler.Instance.PlaySound(AudioControler.Instance.enemyRun);
             battle.player.GetComponentInChildren<Animator>().SetBool("lose", false);
-            yield return new WaitForSeconds(enemySpeed);
+            yield return new WaitForSeconds(enemyMoveTime+ enemySwitchToTalkOffset);
             if (battle.enemy.position == Bird.dir.top)
                 battle.player.GetComponentInChildren<Animator>().SetTrigger("startTalking_up");
             else
@@ -162,13 +238,15 @@ public class battleAnim :MonoBehaviour {
 
             AudioControler.Instance.PlaySound(battle.player.birdSounds.birdBattleConversations);
 
-            yield return new WaitForSeconds(0.8f);
+            yield return new WaitForSeconds(enemyTalkBeforeSound);
             AudioControler.Instance.PlaySound(AudioControler.Instance.considerSound);
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(enemyTalkAfterSound);
             //lose
             if (battle.result != 1)
             {
                 AudioControler.Instance.PlaySound(AudioControler.Instance.fightCloudSound);
+                LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, 0.5f).setEase(vultureEnterCloudCurve);
+
                 Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
                 GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
                 if (!battle.player.hasShieldBonus)
@@ -181,29 +259,12 @@ public class battleAnim :MonoBehaviour {
                     battle.player.GetComponentInChildren<Animator>().SetTrigger("stopTalking");
                 }
                 battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
-                Destroy(fightCloudObj, waitTime - enemySpeed);
-                yield return new WaitForSeconds(waitTime - enemySpeed - 2.3f);
-
-
-
-
-                /*/if (!battle.player.hasShieldBonus)
-                {
-                    AudioControler.Instance.PlaySound(AudioControler.Instance.fightCloudSound);
-                    Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
-                    GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
-                    battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
-                    battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
-                    Destroy(fightCloudObj, waitTime - enemySpeed);
-                    yield return new WaitForSeconds(waitTime - enemySpeed - 2.3f);
-                }
-                else
-                {
-                    battle.player.GetComponentInChildren<Animator>().SetBool("rest", true);
-                    LeanTween.delayedCall(1.5f,()=>battle.player.GetComponentInChildren<Animator>().SetBool("rest", false));
-                }*/
+                Destroy(fightCloudObj, waitTime - enemyMoveTime);
+                yield return new WaitForSeconds(waitTime - enemyMoveTime - 2.3f);
+                battle.enemy.GetComponentInChildren<Animator>().SetTrigger("walkprepare");
+                yield return new WaitForSeconds(windUpDelay);
                 battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
-                LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemySpeed).setEase(LeanTweenType.easeOutQuad);
+                LeanTween.move(battle.enemy.transform.gameObject, battle.player.transform.position, enemyMoveTime).setEase(LeanTweenType.easeOutQuad);
             }
             else
             {

@@ -8,7 +8,7 @@ public class TimedEventControl : MonoBehaviour {
 	[Header("Start")]
 	public string eventName;
 	public MapIcon startArea;
-	public EventScript startEvent;
+	//public EventScript startEvent;
 	public int timeToComplete;
 	[Header("Resolution")]
 	public MapIcon endArea;
@@ -19,34 +19,43 @@ public class TimedEventControl : MonoBehaviour {
 	public EventScript initialFailEvent;
 	public EventScript completionAfterFailEvent;
 	public Text EventNotification;
+	[Header("Visuals")]
+	public List<GameObject> startingVisuals;
+	public List<GameObject> completedVisuals;
+	public List<GameObject> failedVisuals;
 	[HideInInspector]
 	public TimedEventData data = null;
 	Vector3 offset = new Vector3(-95, 30f, 0);
 	bool shouldTriggerBattle = false;
-	// Use this for initialization
-	
-	void Start () {
-			if (Helpers.Instance.VarContainsTimedEvent(eventName))
-			{
-				data = Helpers.Instance.GetTimedEvent(eventName);
-			}
-			else
-			{
-				if (startArea && startArea.completed)
-				{
-					data = new TimedEventData(eventName, Var.currentWeek + timeToComplete);
-					data.currentState = TimedEventData.state.active;
-					Var.timedEvents.Add(data);
-					EventController.Instance.CreateEvent(startEvent);
-					endArea.timedEventTrigger = this;
-				}
-			}
-		
-		if(MapControler.Instance)
+    // Use this for initialization
+    
+    void Start () {
+		if (Helpers.Instance.VarContainsTimedEvent(eventName))
+		{
+			data = Helpers.Instance.GetTimedEvent(eventName);
+		}
+		if (startArea)
+		{
+			startArea.timedEvent = this;
+		}
+		if (MapControler.Instance)
+		{
 			CheckStatus();
-		
+		}
 	}
 	
+	public void CheckIfTimedEvent()
+    {
+		if (startArea)
+		{
+			data = new TimedEventData(eventName, Var.currentWeek + timeToComplete, endArea.ID);
+			data.currentState = TimedEventData.state.active;
+			Var.timedEvents.Add(data);
+			CheckStatus();
+			//EventController.Instance.CreateEvent(startEvent);
+		}
+	}
+
 
 	public void CheckStatus()
 	{
@@ -60,22 +69,25 @@ public class TimedEventControl : MonoBehaviour {
 				EventNotification.transform.parent.parent = endArea.transform;
 				EventNotification.transform.parent.localPosition = offset;
 			}
-			if (endArea != null && endArea.completed)
+			if (endArea != null && endArea.completed && data.currentState != TimedEventData.state.completedSuccess &&
+				data.currentState != TimedEventData.state.completedFail)
 			{
 				if (Var.currentWeek<= data.completeBy)
 				{
 					data.currentState = TimedEventData.state.completedSuccess;
 					EventController.Instance.CreateEvent(completionEvent);
-                    data.currentState = TimedEventData.state.notStarted;
+					HealAllBirds();
+                   // data.currentState = TimedEventData.state.notStarted;
 				}else
 				{
 					data.currentState = TimedEventData.state.completedFail;
 					EventController.Instance.CreateEvent(completionAfterFailEvent);
-                    data.currentState = TimedEventData.state.notStarted;
-                }
-				
-			if(EventNotification != null)
-				EventNotification.transform.parent.gameObject.SetActive(false);
+                   // data.currentState = TimedEventData.state.notStarted;
+					//HealAllBirds();
+				}
+				Var.maxLevel++;
+				if(EventNotification != null)
+					EventNotification.transform.parent.gameObject.SetActive(false);
 			}
 			if (Var.currentWeek == data.completeBy)
 			{
@@ -97,9 +109,57 @@ public class TimedEventControl : MonoBehaviour {
 
 			
 				SetupTrialUI();
-		}	
+		}
+		SetMapVisuals();
 	}
 
+	private void SetMapVisuals()
+    {
+		//Debug.LogError("SETTING MAP VISUALS!");
+		ToggleObjects(startingVisuals, false);
+		ToggleObjects(failedVisuals, false);
+		ToggleObjects(completedVisuals, false);
+		if (data != null)
+		{
+			//Debug.LogError("GOT DATA! State: "+ data.currentState);
+			switch (data.currentState)
+			{
+				case TimedEventData.state.notStarted:
+					ToggleObjects(startingVisuals, true);
+					break;
+				case TimedEventData.state.active:
+					ToggleObjects(startingVisuals, true);
+					break;
+				case TimedEventData.state.failed:
+					ToggleObjects(failedVisuals, true);
+					break;
+				case TimedEventData.state.completedFail:
+					ToggleObjects(failedVisuals, true);
+					break;
+				case TimedEventData.state.completedSuccess:
+					ToggleObjects(completedVisuals, true);
+					break;
+				default:
+					break;
+			}
+		}
+    }
+
+	private void ToggleObjects(List<GameObject> objects, bool isActive)
+    {
+		foreach(GameObject gameObj in objects)
+        {
+			gameObj.SetActive(isActive);
+        }
+    }
+	private void HealAllBirds()
+    {
+		foreach(Bird bird in FillPlayer.Instance.playerBirds)
+        {
+			bird.HealFully(true);
+        }
+
+    }
 	void SetupTrialUI()
 	{
 		if (endArea.completed)
@@ -166,9 +226,11 @@ public class TimedEventData
 	public enum state { notStarted,active,failed,completedSuccess,completedFail};
 	public state currentState = state.notStarted;
 	public bool activationEventShown = false;
-	public TimedEventData(string eventName, int completeBy)
+	public int activationEventID = 0;
+	public TimedEventData(string eventName, int completeBy, int activationEventID)
 	{
 		this.eventName = eventName;
 		this.completeBy = completeBy;
+		this.activationEventID = activationEventID;
 	}
 }

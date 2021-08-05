@@ -13,9 +13,12 @@ public class fillEnemy : MonoBehaviour {
 	public bool hasWizardsDebug = false;
 	List<Bird> newBirds;
 	public static fillEnemy Instance;
+	public List<string> activeEnemyNames = new List<string>();
+	private LevelTutorial lvlTut;
 	void Awake()
 	{
 		Instance = this;
+		lvlTut = GetComponent<LevelTutorial>();
 	}
 	// Use this for initialization
 	void Start ()
@@ -81,7 +84,7 @@ public class fillEnemy : MonoBehaviour {
 			wizardChance = 0.5f;
 			drillChance = 0.5f;
 			hasDrills = hasDrillsDebug;
-			hasSuper = true;
+			//hasSuper = true;
 			superChance = 1f;
 		}
 		List<int> frontPos = new List<int>();
@@ -169,7 +172,10 @@ public class fillEnemy : MonoBehaviour {
 				CreateEnemy(enemy, enemyType.super);
 			}
 			else if (rand < wizardChance && hasWizards)
+			{
 				CreateEnemy(enemy, enemyType.wizard);
+				lvlTut.ShowWizardTutorial();
+			}
 			else
 				CreateEnemy(enemy);            
 			Enemies[enemyPos].gameObject.SetActive(true);
@@ -273,6 +279,7 @@ public class fillEnemy : MonoBehaviour {
 
 	public void Reset()
 	{
+		activeEnemyNames = new List<string>();
 		 foreach(Bird enemy in Enemies)
 		{
 			enemy.transform.localPosition = enemy.home;

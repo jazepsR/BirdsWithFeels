@@ -32,7 +32,8 @@ public class Helpers : MonoBehaviour {
 	Sprite emptyHeart;
 	Sprite emptyMentalHeart;
 	Sprite[] emotionIcons;
-    private Sprite[] myEmotionIconsVultures;
+	Sprite[] emotionIconsTrial;
+	private Sprite[] myEmotionIconsVultures;
 	public bool inMap;
 	List<Image> heartsToFill = new List<Image>();
 	public Transform relationshipDialogs;
@@ -59,7 +60,8 @@ public class Helpers : MonoBehaviour {
 		mentalHeart = Resources.Load<Sprite>("sprites/mentalHeart");
 		emptyMentalHeart = Resources.Load<Sprite>("sprites/mentalHeart_empty");
 		emotionIcons = Resources.LoadAll<Sprite>("Icons/emotional_icons");
-        myEmotionIconsVultures = Resources.LoadAll<Sprite>("Icons/emotional_icons_vultures");
+		emotionIconsTrial = Resources.LoadAll<Sprite>("Icons/emotional_icons_trial");
+		myEmotionIconsVultures = Resources.LoadAll<Sprite>("Icons/emotional_icons_vultures");
 		/*socialIcon = Resources.Load<Sprite>("Icons/emotional_icons_0");
 		solitaryIcon = Resources.Load<Sprite>("Icons/emotional_icons_2");
 		confidentIcon = Resources.Load<Sprite>("Icons/emotional_icons_1");
@@ -98,7 +100,24 @@ public class Helpers : MonoBehaviour {
 			return EventScript.Character.None;
 		}
 	}
-
+	public Sprite GetEmotionIconTrial(Var.Em emotion)
+	{
+		switch (emotion)
+		{
+			case Var.Em.Cautious:
+				return emotionIconsTrial[3];
+			case Var.Em.Confident:
+				return emotionIconsTrial[1];
+			case Var.Em.Social:
+				return emotionIconsTrial[0];
+			case Var.Em.Solitary:
+				return emotionIconsTrial[2];
+			case Var.Em.Random:
+				return emotionIconsTrial[5];
+			default:
+				return emotionIconsTrial[4];
+		}
+	}
 	public Sprite GetEmotionIcon(Var.Em emotion,bool aShowVultureEmo)
 	{
         if (!aShowVultureEmo)
@@ -140,8 +159,7 @@ public class Helpers : MonoBehaviour {
                     return myEmotionIconsVultures[4];
 
             }
-        }
-		
+        }		
 	}
 
 	public bool VarContainsTimedEvent(string evName)
@@ -486,10 +504,16 @@ public class Helpers : MonoBehaviour {
 	}
 	public string GetName(bool isMale)
 	{
-		if (isMale)
-			return Var.maleNames[UnityEngine.Random.Range(0, Var.maleNames.Length)];
-		else
-			return Var.femaleNames[UnityEngine.Random.Range(0, Var.femaleNames.Length)];
+		string name = "";
+        do
+		{
+			if (isMale)
+				name = Var.maleNames[UnityEngine.Random.Range(0, Var.maleNames.Length)];
+			else
+				name = Var.femaleNames[UnityEngine.Random.Range(0, Var.femaleNames.Length)];
+
+		} while (fillEnemy.Instance.activeEnemyNames.Contains(name));
+		return name;
 	}
 	void FillHearts(Sprite HeartSprite)
 	{
@@ -943,15 +967,8 @@ public class Helpers : MonoBehaviour {
 			return false;
 		}*/
 	}
-	private void Update()
-	{
-		if (Input.GetKey(KeyCode.LeftShift) && Var.cheatsEnabled)
-			Time.timeScale = 0.25f;
-		else if (Input.GetKey(KeyCode.RightShift) || Input.GetMouseButton(1) && Var.Infight && !GuiContoler.Instance.GraphActive)
-			Time.timeScale = 4f;
-		else
-			Time.timeScale = 1;
-	}
+
+
 
 	public string GetLevelUpDialogs(Levels.type type, EventScript.Character character)
 	{

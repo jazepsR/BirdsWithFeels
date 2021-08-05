@@ -9,7 +9,12 @@ public class MapControler : MonoBehaviour {
 	[HideInInspector]
 	public bool canFight= false;
 	[HideInInspector]
+	public bool showGraphAfterEvent = true;
+	[HideInInspector]
 	public bool canHeal = false;
+	[TextArea(3,10)]
+	public string trialDescription = "This is a <b>trial level!</b> In this level your <b>emotions are frozen</b>" +
+		"and won't change. In this level, mHP will not affect your birds";
 	GameObject healTrail;
 	public Text title;
 	public Transform centerPos;
@@ -50,13 +55,40 @@ public class MapControler : MonoBehaviour {
 	public Text trialTooLateText;
 	public Text trialNameText;
 	public int[] chapterIDs;
+
+	[Header("Map selection panel")]
+	public GameObject selectionPanelHealthIcon;
+	public GameObject selectionPanelEmoTiles;
+	public GameObject selectionPanelWizards;
+	public GameObject selectionPanelShields;
+	public GameObject selectionPanelSwords;
+	public Text enemyLevelText;
+	public GameObject selectionPanelBG;
+	public GameObject selectionPanelTitleBG;
+	public GameObject selectionPanelTrialBG;
+	public GameObject selectionPanelTrialTitleBG;
+
+
+
 	void Awake()
 	{
 		Instance = this;
 		Var.snapshot = null;
 		trialUiObject.SetActive(false);
 	}
+	public void FocusOnNodeAfterLoss()
+	{
 
+		MapIcon[] icons = FindObjectsOfType<MapIcon>();
+		foreach (MapIcon icon in icons)
+		{
+			if (icon.ID == Var.currentStageID)
+			{
+				icon.CenterMapNode(false);
+				return;
+			}
+		}
+	}
 	public void UnlockToChapter(int targetLevel)
 	{
 		if (Var.loadChapterID < 0)
@@ -108,10 +140,8 @@ public class MapControler : MonoBehaviour {
 		foreach(Bird bird in FillPlayer.Instance.playerBirds)
 		{
             if (bird.data.unlocked)
-            {
-               
-                count++;
-                
+            {               
+                count++;                
             }
 			bool wasActive = false;
 			foreach(Bird activeBird in Var.activeBirds)
@@ -124,6 +154,11 @@ public class MapControler : MonoBehaviour {
 			}
 			if (!wasActive && bird.gameObject.activeSelf)
 			{
+				if(bird.data.injured)
+                {
+					bird.DecreaseTurnsInjured();
+                }
+
 				if(bird.data.health<bird.data.maxHealth && !bird.data.injured)
 				{
 					GameObject healObj = Instantiate(bird.healParticle, bird.transform);
@@ -142,7 +177,7 @@ public class MapControler : MonoBehaviour {
 			{
 				if (bird.data.unlocked)
 				{
-					if (!bird.data.injured)
+					if (!bird.data.injured && bird.mapHighlight)
 					{
 						bird.mapHighlight.SetActive(true);
 						selectedBirds.Add(bird);
@@ -166,6 +201,12 @@ public class MapControler : MonoBehaviour {
 			LeanTween.delayedCall(0.05f, () =>
 			 UnlockToChapter(chapterIDs[Var.loadChapterID]));
 		}
+		if(Var.fled)
+		{
+			FocusOnNodeAfterLoss();
+		}
+
+
 		if (Var.currentWeek<3)
 			Var.shouldDoMapEvent = false;
 		//Var.shouldDoMapEvent = true;
@@ -200,7 +241,7 @@ public class MapControler : MonoBehaviour {
 		{
 			canFight = true;
 			startLvlBtn.interactable = true;            
-			startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "";
+			startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "Start the adventure\nA week will pass";
 		}
 		else
 		{
@@ -236,10 +277,11 @@ public class MapControler : MonoBehaviour {
             {
                 if (bird.data.unlocked)
                 {
-                    if (bird.data.health < bird.data.maxHealth || bird.data.injured)
+                    if (bird.data.health < bird.data.maxHealth || bird.data.injured || bird.data.mentalHealth < Var.maxMentalHealth)
                     {
-                        restButton.SetActive(true);
-                        restButtonBeam.SetActive(true);
+						restButton.GetComponent<Button>().interactable = true;
+						restButton.GetComponent<ShowTooltip>().tooltipText = "A week will pass. All your birds will heal one health, and your injured birds will be closer to recovery";
+
                     }
 
                     else
@@ -250,9 +292,9 @@ public class MapControler : MonoBehaviour {
                     if (birdsAtMaxHealth == count)
                     {
                         birdsAtMaxHealth = 0;
-                        restButton.SetActive(false);
-                        restButtonBeam.SetActive(false);
-                        Helpers.Instance.HideTooltip();
+						restButton.GetComponent<Button>().interactable = false;
+						restButton.GetComponent<ShowTooltip>().tooltipText = "All birds at full mental and physical health! You can continue the adventure, no need to rest";
+						 Helpers.Instance.HideTooltip();
                     }
                 }
 
@@ -284,16 +326,24 @@ public class MapControler : MonoBehaviour {
             if (bird.data.injured)
             {
                 bird.DecreaseTurnsInjured();
-                GameObject healObj = Instantiate(bird.healParticle, bird.transform);
-                Destroy(healObj, 1.5f);
             }
             else if (bird.data.health < bird.data.maxHealth)
             {
                 bird.data.health++;
                 GameObject healObj = Instantiate(bird.healParticle, bird.transform);
                 Destroy(healObj, 1.5f);
-
             }
+
+			if(bird.data.mentalHealth < Var.maxMentalHealth)
+            {
+				bird.data.mentalHealth = Mathf.Min(Var.maxMentalHealth, bird.data.mentalHealth + 1);
+				if (bird.MHPParticle)
+				{
+					GameObject healObj = Instantiate(bird.MHPParticle, bird.transform);
+					Destroy(healObj, 1.5f);
+				}
+			}
+			bird.SetBandages();
 		}
 
         canRest();
@@ -324,23 +374,66 @@ public class MapControler : MonoBehaviour {
 
 		canMove = true;
 
-        //this is seb taken off
-        /*
+		//this is seb taken off
+		/*
         	LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.zero, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
         LeanTween.value(gameObject, (float alpha) => MapControler.Instance.SelectionMenu.GetComponent<CanvasGroup>().alpha = alpha, 1, 0, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
        */
-         SelectionMenuAnimator.SetBool("active", false); //seb change 
+		if (SelectionMenuAnimator)
+		{
+			SelectionMenuAnimator.SetBool("active", false); //seb change 
+		}
         // SelectionMenuBlurAnimator.SetBool("active", false);
 
-        MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.zero);
-        
+        ScaleSelectedBirds(scaleTime, Vector3.zero);        
         foreach (GuiMap map in FindObjectsOfType<GuiMap>())
 			map.Clear();
-        MapControler.Instance.SelectedIcon = null;
-
+        SelectedIcon = null;
+		mapPan.Instance.scrollingEnabled = true;
     }
+	public void SetSelectionMenuIcons(MapIcon mapIcon)
+    {
+		selectionPanelHealthIcon.SetActive(mapIcon.hasHealthPowerUps);
+		SetEmotionTile(mapIcon);
+		selectionPanelWizards.SetActive(mapIcon.hasWizards);
+		selectionPanelShields.SetActive(mapIcon.hasShields);
+		selectionPanelSwords.SetActive(mapIcon.hasDMGPowerUps);
+	}
 
-    public void ShowSelectionMenuAnimation()
+	private void SetEmotionTile(MapIcon mapIcon)
+    {
+		bool hasEmos = (mapIcon.hasLonelyPwerUps
+			|| mapIcon.hasFirendlyPowerUps || mapIcon.hasScaredPowerUps || mapIcon.hasConfidentPowerUps);
+		selectionPanelEmoTiles.SetActive(hasEmos);
+		if (hasEmos)
+		{
+			selectionPanelEmoTiles.SetActive(hasEmos);
+			string tooltipString = "";
+			List<string> emotionsPresent = new List<string>();
+			if (mapIcon.hasLonelyPwerUps)
+				emotionsPresent.Add("solitary");
+			if (mapIcon.hasScaredPowerUps)
+				emotionsPresent.Add("cautious");
+			if (mapIcon.hasConfidentPowerUps)
+				emotionsPresent.Add("confident");
+			if (mapIcon.hasFirendlyPowerUps)
+				emotionsPresent.Add("friendly");
+			tooltipString += string.Join(", " ,emotionsPresent);
+			tooltipString = char.ToUpper(tooltipString[0]) + tooltipString.Substring(1);
+			tooltipString += " emotional tiles will spawn";
+			selectionPanelEmoTiles.GetComponentInChildren<ShowTooltip>().tooltipText = tooltipString;
+		}
+	}
+
+	public void SetSelectionMenuBG(bool isTrial)
+    {
+		selectionPanelTrialBG.SetActive(isTrial);
+		selectionPanelTrialTitleBG.SetActive(isTrial);
+		selectionPanelBG.SetActive(!isTrial);
+		selectionPanelTitleBG.SetActive(!isTrial);
+	}
+
+	public void ShowSelectionMenuAnimation()
     {
         SelectionMenuAnimator.SetBool("active", true);
         //      SelectionMenuBlurAnimator.SetBool("active", true);

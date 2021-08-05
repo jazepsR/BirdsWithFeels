@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "There are a lot of military birds here. I wonder what\u2019s going on..? "
+  text: "There are a lot of military birds in this forst town. I wonder what\u2019s
+    going on..? "
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &3015537072390836460
@@ -91,7 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: Alex, are you okay? You seem sad.
+  text: Alex, are you okay?
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &3015537072428380747
@@ -138,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: Bye.
+  text: Bye..
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &3015537072613013350
@@ -275,8 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 1
-  text: 'Hey! That sounds important, so I''m not gonna keep you. See you around!,
-    Alex
+  text: 'Hey! That sounds important, so I''m not gonna keep you. See you around!
 
 '
   useCustomPic: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
   onComplete: {fileID: 0}
   applyToAll: 0
   consequenceType1: 1
-  magnitude1: 3
+  magnitude1: 4
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
@@ -385,7 +385,7 @@ MonoBehaviour:
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: I'm sure Jerry and your old platoon will be there once we've finished
     our mission! Who wouldn't want to be friends with you?
-  selectionTooltip: F is for Friendship! (+3 Friendliness)
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: 'Heh. Thanks, I really appreciate it.
 
@@ -447,8 +447,20 @@ MonoBehaviour:
   - {fileID: 3015537073468066854}
   - {fileID: 3015537073652416804}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 6
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &3015537073652416858
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +507,7 @@ MonoBehaviour:
   onComplete: {fileID: 0}
   applyToAll: 0
   consequenceType1: 1
-  magnitude1: -3
+  magnitude1: -4
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
@@ -504,8 +516,8 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "Even if you\u2019re really good friends with someone, you might
-    still drift away from each other eventually. Being alone is fine too. "
-  selectionTooltip: Isolation is nice!  (+3 Solitude)
+    still drift away from each other eventually. It's tricky!"
+  selectionTooltip: 
   conclusionHeading: 
   conclusionText: "Yeah, I guess you\u2019re right. \r\n"
 --- !u!1 &3015537074111475251
@@ -694,7 +706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 1
-  text: 'See you around!, Alex
+  text: 'See you around!
 
 '
   useCustomPic: 0
