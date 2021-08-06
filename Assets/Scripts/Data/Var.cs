@@ -21,7 +21,7 @@ public static class Var {
 	public enum Em { Neutral,Solitary,SuperLonely, Social, SuperFriendly,Confident,SuperConfident,Cautious, SuperScared,finish,Random, Shield};
 	public enum PowerUps { heal,dmg,emotion,obstacle,shield};
 	public static bool isTutorial = false;
-    public static bool isEnding = false;
+    public static bool isEnding = true;
     public static bool tutorialCompleted = true;
 	public static bool isBoss = false;
 	public static int loadChapterID = -1;
@@ -81,7 +81,7 @@ public static class Var {
 		"Elizabeth","Sofia","Evelyn","Chloe","Ella","Grace","Victoria","Aubrey","Scarlett","Zoey","Addison","Lily","Lillian","Natalie","Hannah","Aria","Layla","Lulu"};
 	public static string[] deathSignoffs = { "Get well soon, <name>!", "Tis but a scratch!", "I'm sure <name> won't be down for long!" };
 	public static bool isDragControls = true;
-	public static bool freezeEmotions = false;
+	public static bool freezeEmotions = true;
 	public static int eventTextCharLimit = 200;
 	public static int maxLevel = 2;
 	public static int enemyMaxLevel = 5;

@@ -378,8 +378,12 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 			source.time = eventSound.startPoints[number];
 
 		}*/
-        source.PlayOneShot(source.clip,eventAudio.volume);
-        yield return new WaitForSeconds(source.clip.length + 0.15f);
+        if (source != null && source.clip != null)
+        {
+            source.PlayOneShot(source.clip, eventAudio.volume);
+            yield return new WaitForSeconds(source.clip.length + 0.15f);
+        }
+        yield return null;
         eventTalk = StartCoroutine(PlayNextBirdTalk(eventAudio));
     }
 	public void FadeOutBirdTalk()
