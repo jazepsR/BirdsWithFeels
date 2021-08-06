@@ -262,7 +262,7 @@ public class EventController : MonoBehaviour
         }
         printing = false;
         continueBtn.GetComponent<Animator>().SetBool("active", shouldShowContinue);
-        if (currentText == currentEvent.parts.Count - 1)
+        if (currentEvent && currentText == currentEvent.parts.Count - 1)
             CreateChoices();
         AudioControler.Instance.FadeOutBirdTalk();
     }
