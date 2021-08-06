@@ -58,7 +58,6 @@ public class EventController : MonoBehaviour
 
 
     public AudioSource eventAudioSource;
-    // Use this for initialization
     void Awake()
     {
         eventsToShow = new List<EventScript>();
@@ -164,7 +163,6 @@ public class EventController : MonoBehaviour
                 DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
                 foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
                     icon.SetState();
-                
             }
         }
             else if (currentEvent != null && (currentText > currentEvent.parts.Count - 1)) //Has finished playing all parts in current event? 
@@ -221,6 +219,9 @@ public class EventController : MonoBehaviour
                     {
                         LeanTween.delayedCall(0.7f, () =>GuiContoler.Instance.OpenMapBigGraph(currentBird));
                     }
+
+                    //Debug.LogError("ojvgeojegojgeojg");
+                    AudioControler.Instance.ActivateMusicSource(audioSourceType.musicSource);
                     //foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
                     // icon.SetState();
                 }
@@ -400,11 +401,18 @@ public class EventController : MonoBehaviour
         eventBg.gameObject.SetActive(eventData.eventBackground != null);
         bgFog.gameObject.SetActive(eventData.useBgFog);
 
-        if (eventData.useEventAudio && eventData.eventAudio.clips.Length > 0)
+        if(inMap && !eventData.isCampFireScene)
+        {
+            LeanTween.value(gameObject, (float vol) => eventAudioSource.volume = vol,
+                eventAudioSource.volume, AudioControler.Instance.defaultMusicVol, 0.3f);
+        }
+
+
+        /*if (eventData.useEventAudio && eventData.eventAudio.clips.Length > 0)
         {
             eventAudioSource.volume = 1f;
-            eventData.eventAudio.Play();
-        }
+            //eventData.eventAudio.Play();
+        }*/
 
 
         if (!eventData.canShowMultipleTimes)

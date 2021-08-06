@@ -117,6 +117,9 @@ public class AudioControler : MonoBehaviour {
     public AudioClip bossThinkingMusic;
     public AudioClip levelCompleteMusic;
     public AudioClip introCutSceneMusic;
+    public AudioGroup campfireHappyMusic;
+    public AudioGroup campfireSadMusic;
+    public AudioGroup narrativeBackingTrack;
     //public AudioClip emoChartMusic;
 
     [Header("Audio sources")]
@@ -323,8 +326,8 @@ public class AudioControler : MonoBehaviour {
             particleSounds.volume = defaultSoundVol;
         if (emoGraphSource)
             emoGraphSource.volume = defaultMusicVol;
-        if (EventController.Instance && EventController.Instance.eventAudioSource)
-            EventController.Instance.eventAudioSource.volume = defaultSoundVol;
+       // if (EventController.Instance && EventController.Instance.eventAudioSource)
+           // EventController.Instance.eventAudioSource.volume = defaultSoundVol;
         if (spatialMusicSources.Count > 0)
         {
             foreach (AudioSource spatialsound in spatialMusicSources)
@@ -346,7 +349,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
 	public void PlaySound(AudioClip clip, audioSourceType sourceType)
 	{
-        Debug.LogError("Playing sound: " + clip.name);
+       // Debug.LogError("Playing sound: " + clip.name);
 		GetAudioSource(sourceType).pitch = 1f;
 		GetAudioSource(sourceType).PlayOneShot(clip);
 
@@ -398,7 +401,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 		{
 			return;
 		}
-       // Debug.LogError("playing " + group.clips[0].name + " on source " + source.name);
+        //Debug.LogError("playing " + group.clips[0].name + " on source " + source.name);
 		source.PlayOneShot(group.clips[UnityEngine.Random.Range(0, group.clips.Length)],group.volume);
 	}
 	public AudioSource GetAudioSource(audioSourceType sourceType)
@@ -467,15 +470,15 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
         //LeanTween.value(gameObject, battleVolumeToggle, battleSource.volume, 1, 1f);
         musicSource.clip = levelCompleteMusic;
         //musicSource.loop = true; //loops victory music
-        AudioControler.Instance.ActivateMusicSource(audioSourceType.musicSource);
+        ActivateMusicSource(audioSourceType.musicSource);
         musicSource.Play();
     }
 
     public void ActivateMusicSource(audioSourceType sourceToActivate)
 	{
-        
-       // Debug.LogError("activate source: " + sourceToActivate);
-		if (sourceToActivate == audioSourceType.battleSource)
+
+        // Debug.LogError("activate source: " + sourceToActivate);
+        if (sourceToActivate == audioSourceType.battleSource && inBattle)
 			PlaySound(battleTracks);
         StartCoroutine(ToggleMusicSource(sourceToActivate, 0.5f));
 	}
