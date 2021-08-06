@@ -17160,6 +17160,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606360830}
   m_CullTransparentMesh: 0
+--- !u!21 &608830977
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.0026450756, y: 0.0026781433}
+        m_Offset: {x: 0.49529317, y: 3.6954985}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &617593810 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5060519416400859085, guid: 1021d4f7acba6a943b1a6c6a3340be03,
@@ -17747,46 +17787,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!21 &633828572
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.0026450756, y: 0.0026781433}
-        m_Offset: {x: 0.49529317, y: 3.6954985}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &635059637
 GameObject:
   m_ObjectHideFlags: 0
@@ -59289,6 +59289,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7281895733808635369, guid: 9b2283e68ae612f44809b620b05d9cef,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Seperate ways
+      objectReference: {fileID: 0}
+    - target: {fileID: 7281895734327522085, guid: 9b2283e68ae612f44809b620b05d9cef,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: 'Please don''t go! '
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b2283e68ae612f44809b620b05d9cef, type: 3}
 --- !u!4 &96376206513867709 stripped
@@ -59379,6 +59389,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 556507986}
     m_Modifications:
+    - target: {fileID: 6945488857348944877, guid: 79b89db5c021d8445994abe42e9fa4b1,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: 'Never change '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6945488857431177056, guid: 79b89db5c021d8445994abe42e9fa4b1,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: 'I love to feel! '
+      objectReference: {fileID: 0}
     - target: {fileID: 6945488858113848448, guid: 79b89db5c021d8445994abe42e9fa4b1,
         type: 3}
       propertyPath: m_RootOrder
@@ -59523,6 +59543,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 556507986}
     m_Modifications:
+    - target: {fileID: 8067995892801899254, guid: 75610853d0de66843a9a9a3ebf9f8c6d,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Long distance woes
+      objectReference: {fileID: 0}
     - target: {fileID: 8067995893564165138, guid: 75610853d0de66843a9a9a3ebf9f8c6d,
         type: 3}
       propertyPath: m_RootOrder
@@ -59582,6 +59607,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: mid_Terry's POT
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067995893860099816, guid: 75610853d0de66843a9a9a3ebf9f8c6d,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: 'Pot Promise '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75610853d0de66843a9a9a3ebf9f8c6d, type: 3}
@@ -59733,10 +59763,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8393798292742972641, guid: 20fb63e9df01b524f9d03e50482c6f4b,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Hurtful thoughts
+      objectReference: {fileID: 0}
     - target: {fileID: 8393798293078871545, guid: 20fb63e9df01b524f9d03e50482c6f4b,
         type: 3}
       propertyPath: magnitude1
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8393798293078871545, guid: 20fb63e9df01b524f9d03e50482c6f4b,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Be concerned
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20fb63e9df01b524f9d03e50482c6f4b, type: 3}
@@ -60948,7 +60988,7 @@ PrefabInstance:
     - target: {fileID: 5939425652766949905, guid: 41b76e1f79099f84e87f1096cd6dcae0,
         type: 3}
       propertyPath: selectionTooltip
-      value: Mistakes haunt you (+5 Caution)
+      value: 'Mistakes haunt you '
       objectReference: {fileID: 0}
     - target: {fileID: 5939425653330626524, guid: 41b76e1f79099f84e87f1096cd6dcae0,
         type: 3}
@@ -60959,7 +60999,7 @@ PrefabInstance:
     - target: {fileID: 5939425653330626524, guid: 41b76e1f79099f84e87f1096cd6dcae0,
         type: 3}
       propertyPath: selectionTooltip
-      value: Stepping up (+3 Confidence)
+      value: 'Stepping up '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41b76e1f79099f84e87f1096cd6dcae0, type: 3}
@@ -61039,12 +61079,17 @@ PrefabInstance:
     - target: {fileID: 5971394661427747215, guid: e4e6f8fcfa193554096622ef9cb1152c,
         type: 3}
       propertyPath: selectionTooltip
-      value: A part of the team! (+3 Confidence)
+      value: A part of the team!
       objectReference: {fileID: 0}
     - target: {fileID: 5971394662600170224, guid: e4e6f8fcfa193554096622ef9cb1152c,
         type: 3}
       propertyPath: conclusionText
       value: Oh, okay. Yeah, sure..
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971394662600170224, guid: e4e6f8fcfa193554096622ef9cb1152c,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: 'It''s where I belong '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4e6f8fcfa193554096622ef9cb1152c, type: 3}
@@ -61061,6 +61106,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 537681395}
     m_Modifications:
+    - target: {fileID: 6374784431005818429, guid: 882c68f9b0e9b1e4ea68d8c019e28f1c,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Abandon the vulture
+      objectReference: {fileID: 0}
+    - target: {fileID: 6374784431316927941, guid: 882c68f9b0e9b1e4ea68d8c019e28f1c,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Help the injured vulture
+      objectReference: {fileID: 0}
     - target: {fileID: 6374784431837585713, guid: 882c68f9b0e9b1e4ea68d8c019e28f1c,
         type: 3}
       propertyPath: m_RootOrder
@@ -61372,6 +61427,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: buildup_mid_Kim's BF
       objectReference: {fileID: 0}
+    - target: {fileID: 2735932305920244686, guid: e2be8c56483f3004193c0e9cb55190ee,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Priorties, huh?
+      objectReference: {fileID: 0}
+    - target: {fileID: 2735932306591881512, guid: e2be8c56483f3004193c0e9cb55190ee,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: With you all the way!
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2be8c56483f3004193c0e9cb55190ee, type: 3}
 --- !u!4 &4733252280842806823 stripped
@@ -61647,6 +61712,11 @@ PrefabInstance:
       propertyPath: useBgFog
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4817687425128643024, guid: 6fe31083cda61e6439887f3fdf415413,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Chirp to Terry
+      objectReference: {fileID: 0}
     - target: {fileID: 6314597668191840256, guid: 6fe31083cda61e6439887f3fdf415413,
         type: 3}
       propertyPath: useBgFog
@@ -61808,6 +61878,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1381410040}
     m_Modifications:
+    - target: {fileID: 3226154806475343212, guid: d3380c0653583684e9e5e96589a0eabf,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Every bird has problems
+      objectReference: {fileID: 0}
     - target: {fileID: 3226154807313777581, guid: d3380c0653583684e9e5e96589a0eabf,
         type: 3}
       propertyPath: m_RootOrder
@@ -61867,6 +61942,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NO_mid_event_Terry hungry vultures
+      objectReference: {fileID: 0}
+    - target: {fileID: 3226154807322131539, guid: d3380c0653583684e9e5e96589a0eabf,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: 'The way the bird flies '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3380c0653583684e9e5e96589a0eabf, type: 3}
@@ -62877,6 +62957,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Late_Sophie Friendly bullies
       objectReference: {fileID: 0}
+    - target: {fileID: 3465235001050394152, guid: 84e2d66c70df37b42baa704342b41102,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: 'Don''t belong '
+      objectReference: {fileID: 0}
+    - target: {fileID: 3465235001644017363, guid: 84e2d66c70df37b42baa704342b41102,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Support Sophie
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84e2d66c70df37b42baa704342b41102, type: 3}
 --- !u!4 &6075044664110246291 stripped
@@ -63168,6 +63258,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Late_Alex vulture territory
       objectReference: {fileID: 0}
+    - target: {fileID: 4506307749276132247, guid: e255cbd1be2bf4d4d80c9a5f6f57d339,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Too thoughtful
+      objectReference: {fileID: 0}
+    - target: {fileID: 4506307749374730598, guid: e255cbd1be2bf4d4d80c9a5f6f57d339,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: We have each of our backs
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e255cbd1be2bf4d4d80c9a5f6f57d339, type: 3}
 --- !u!4 &6544160395786223795 stripped
@@ -63242,6 +63342,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223135374328638022, guid: 72224141e31713a46b7733dd334251ba,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Be Supportive
+      objectReference: {fileID: 0}
+    - target: {fileID: 4223135374368976189, guid: 72224141e31713a46b7733dd334251ba,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Not one of us
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72224141e31713a46b7733dd334251ba, type: 3}
@@ -64266,6 +64376,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5941404}
     m_Modifications:
+    - target: {fileID: 801787969743986797, guid: 2f9815cfe8aaecc49bb3643189e5d086,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: Trust problems
+      objectReference: {fileID: 0}
+    - target: {fileID: 801787970029595423, guid: 2f9815cfe8aaecc49bb3643189e5d086,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: 'Hope on both sides '
+      objectReference: {fileID: 0}
     - target: {fileID: 801787970111643284, guid: 2f9815cfe8aaecc49bb3643189e5d086,
         type: 3}
       propertyPath: m_Name
@@ -64341,6 +64461,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 556507986}
     m_Modifications:
+    - target: {fileID: 1649831606268637265, guid: 69dedd0c8230ab648b3c85a6c1426cba,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: 'Do it! '
+      objectReference: {fileID: 0}
     - target: {fileID: 1649831606295428740, guid: 69dedd0c8230ab648b3c85a6c1426cba,
         type: 3}
       propertyPath: m_Name
@@ -64405,6 +64530,11 @@ PrefabInstance:
         type: 3}
       propertyPath: magnitude1
       value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1649831606440632233, guid: 69dedd0c8230ab648b3c85a6c1426cba,
+        type: 3}
+      propertyPath: selectionTooltip
+      value: 'Can''t fancy all '
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69dedd0c8230ab648b3c85a6c1426cba, type: 3}

@@ -132,6 +132,7 @@ public class levelPopupScript : MonoBehaviour {
 		try
 		{
 			GuiContoler.Instance.CreateGraph(GuiContoler.Instance.currentGraph);
+			Graph.Instance.SetupLevelBar(activeBird);
 		}
 		catch
 		{

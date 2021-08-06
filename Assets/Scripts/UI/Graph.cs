@@ -260,7 +260,7 @@ public class Graph : MonoBehaviour {
 		LeanTween.delayedCall(2.1f, () => GuiContoler.Instance.canChangeGraph = true);
 	}
 		
-	void SetupLevelBar(Bird bird)
+	public void SetupLevelBar(Bird bird)
 	{
 		levelBar.ClearPoints();
 		if (bird.data.level >= Var.maxLevel)
