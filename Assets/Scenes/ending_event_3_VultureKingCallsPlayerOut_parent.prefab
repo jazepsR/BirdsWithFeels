@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 06000000
   condition: 2
   magnitude: 0
@@ -132,8 +133,10 @@ MonoBehaviour:
   options:
   - {fileID: 7417989369359263427}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -399,6 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0200000001000000040000000d0000000e0000000f0000001000000013000000
   condition: 2
   magnitude: 0
@@ -411,8 +415,10 @@ MonoBehaviour:
   - {fileID: 7417989367766053285}
   - {fileID: 7417989368277272303}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -515,6 +521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 7417989369253795606}
+  useNarration: 0
   applyToAll: 1
   consequenceType1: 1
   magnitude1: -30
@@ -522,7 +529,7 @@ MonoBehaviour:
   magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
-  useAutoExplanation: 1
+  useAutoExplanation: 0
   AfterImage: {fileID: 0}
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "You\u2019re right, I did it for the greater good of birds and vultures. "
@@ -669,6 +676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 1
   consequenceType1: 1
   magnitude1: -30
@@ -774,6 +782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 7417989368278871790}
+  useNarration: 0
   applyToAll: 1
   consequenceType1: 2
   magnitude1: -30
@@ -781,7 +790,7 @@ MonoBehaviour:
   magnitude2: 0
   consequenceType3: 3
   magnitude3: 0
-  useAutoExplanation: 1
+  useAutoExplanation: 0
   AfterImage: {fileID: 0}
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: You need me to manipulate you to survive
@@ -832,6 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 06000000
   condition: 2
   magnitude: 0
@@ -841,8 +851,10 @@ MonoBehaviour:
   options:
   - {fileID: 7417989368642827105}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -939,6 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 06000000
   condition: 2
   magnitude: 0
@@ -948,8 +961,10 @@ MonoBehaviour:
   options:
   - {fileID: 7417989369015342767}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -1004,9 +1019,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 7417989367478207338}
+  useNarration: 0
   applyToAll: 1
-  consequenceType1: 3
-  magnitude1: 0
+  consequenceType1: 1
+  magnitude1: 30
   consequenceType2: 3
   magnitude2: 0
   consequenceType3: 3
@@ -1110,6 +1126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 1
   consequenceType1: 2
   magnitude1: -30
@@ -1215,6 +1232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 7417989368445237137}
+  useNarration: 0
   applyToAll: 1
   consequenceType1: 2
   magnitude1: 30
@@ -1402,6 +1420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 1
   consequenceType1: 2
   magnitude1: 30
@@ -1589,6 +1608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 06000000
   condition: 2
   magnitude: 0
@@ -1598,8 +1618,10 @@ MonoBehaviour:
   options:
   - {fileID: 7417989367870030939}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -1703,6 +1725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 1
   consequenceType1: 1
   magnitude1: 30

@@ -231,6 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0200000000000000090000001d000000
   condition: 0
   magnitude: 0
@@ -241,8 +242,20 @@ MonoBehaviour:
   - {fileID: 9030225565199087241}
   - {fileID: 9030225565934791126}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &9030225565199087247
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: -3
@@ -299,7 +313,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Sophie, we should keep moving. Leave the book here and maybe the
     vulture will come back for it.
-  selectionTooltip: Abandon the literature (+3 Solitude)
+  selectionTooltip: Abandon the literature
   conclusionHeading: 
   conclusionText: Oh... okay.
 --- !u!1 &9030225565392453898
@@ -488,6 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: 3
@@ -500,7 +515,7 @@ MonoBehaviour:
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "Sophie, we should keep moving. Hang onto the book and maybe we\u2019ll
     run into that vulture again so you can give it back!"
-  selectionTooltip: Grab the book (+3 Friendliness)
+  selectionTooltip: Grab the book
   conclusionHeading: 
   conclusionText: "Right! I wouldn\u2019t want that vulture to lose her favorite
     book!"

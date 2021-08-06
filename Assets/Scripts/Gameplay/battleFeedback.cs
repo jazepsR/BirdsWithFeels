@@ -27,15 +27,15 @@ public class battleFeedback : MonoBehaviour {
     {
         string text = "";
 		if(fb.PlayerEnemyBird.emotion == Var.Em.Neutral && fb.birdScript.emotion != Var.Em.Neutral)
-			text += "Emotion against neurtal: -40%\n";
+			text += "Neutral player vs emotional vulture: -40%\n";
 		if (fb.PlayerEnemyBird.emotion == fb.birdScript.emotion && fb.birdScript .emotion != Var.Em.Neutral)
-			text += "Winning emotion: +40%\n";
+			text += "Matching emotions: +40%\n";
 		if (fb.PlayerEnemyBird.emotion ==Helpers.Instance.GetOppositeEmotion(fb.birdScript.emotion))
-				text += "Losing emotion: -40%\n";
+				text += "Opposite emotions: -40%\n";
 		if (fb.PlayerEnemyBird.data.levelRollBonus >= 1)
-            text += "Player strength bonus +" + (fb.PlayerEnemyBird.data.levelRollBonus) * 10 + "%\n";
+            text += "Player level bonus +" + (fb.PlayerEnemyBird.data.levelRollBonus) * 10 + "%\n";
         if (fb.birdScript.data.levelRollBonus >= 1)
-            text += "Enemy strength bonus -" +(fb.birdScript.data.levelRollBonus) * 10 + "%\n";
+            text += "Vulture level bonus -" +(fb.birdScript.data.levelRollBonus) * 10 + "%\n";
         if (fb.birdScript.PlayerRollBonus != 0)
             text += "Enemy affected by player birds " + (-10*fb.birdScript.PlayerRollBonus).ToString("+#;-#;0") + "%\n";
         if (fb.PlayerEnemyBird.PlayerRollBonus != 0)

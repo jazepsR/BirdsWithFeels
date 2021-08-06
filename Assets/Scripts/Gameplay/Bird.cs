@@ -316,15 +316,16 @@ public class Bird : MonoBehaviour
 				{
 					Helpers.Instance.LoadLevelData();
 				}
-				for (int i = 0; i < data.level; i++)
+				for (int i = 0; i < data.level-1; i++)
 				{
 					levelList.Add(Helpers.Instance.levels[i]);
-					if (i + 1 == data.level)
+					if (i + 2 == data.level)
 					{
 						data.lastLevel = Helpers.Instance.levels[i];
 					}
 				}
 			}
+			//Debug.LogError(data.charName + " current level: " + data.level);
 		}
 		portraitOrder = Helpers.GetPortraitNumber(charName);
 		if (!isEnemy)
@@ -1517,7 +1518,7 @@ public class Bird : MonoBehaviour
 
 	public void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.P) && Var.cheatsEnabled)
+		if (Input.GetKeyDown(KeyCode.S) && Var.cheatsEnabled)
 		{
 			if (Var.selectedBird == gameObject)
 			{
@@ -1558,7 +1559,10 @@ public class Bird : MonoBehaviour
 	}
 	void drawLines()
 	{
-		lines.DrawLines();
+		if (!Var.freezeEmotions)
+		{
+			lines.DrawLines();
+		}
 
 		if (indicator)
 		{
@@ -1568,7 +1572,7 @@ public class Bird : MonoBehaviour
 			{
 				emo1 = Helpers.Instance.getFriendState(this) == Helpers.friendState.diagonal ? Var.Em.Neutral : Var.Em.Social;
 			}
-			Debug.Log("draw lines setting emotion: emo1: " + emo1 + "emo2: " + emo2);
+			//Debug.Log("draw lines setting emotion: emo1: " + emo1 + "emo2: " + emo2);
 			indicator.SetEmotions(emo1, emo2);
 		}
 	}
@@ -1589,8 +1593,8 @@ public class Bird : MonoBehaviour
 		dustObj.transform.localPosition = Vector3.zero;
 		Destroy(dustObj, 1.0f);
 		if (!inMap)
-		{
-			LeanTween.delayedCall(0.15f, drawLines);
+		{			
+			LeanTween.delayedCall(0.12f, drawLines);
 			birdSounds.dropBird.Play();
 			//lines.DrawLines();
 			showText();
@@ -1632,7 +1636,5 @@ public class Bird : MonoBehaviour
 		{
 			MapControler.Instance.CanLoadBattle();
 		}
-
-
 	}
 }

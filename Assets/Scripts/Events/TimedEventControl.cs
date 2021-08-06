@@ -19,6 +19,10 @@ public class TimedEventControl : MonoBehaviour {
 	public EventScript initialFailEvent;
 	public EventScript completionAfterFailEvent;
 	public Text EventNotification;
+	[Header("Visuals")]
+	public List<GameObject> startingVisuals;
+	public List<GameObject> completedVisuals;
+	public List<GameObject> failedVisuals;
 	[HideInInspector]
 	public TimedEventData data = null;
 	Vector3 offset = new Vector3(-95, 30f, 0);
@@ -37,7 +41,7 @@ public class TimedEventControl : MonoBehaviour {
 		if (MapControler.Instance)
 		{
 			CheckStatus();
-		}		
+		}
 	}
 	
 	public void CheckIfTimedEvent()
@@ -55,8 +59,7 @@ public class TimedEventControl : MonoBehaviour {
 
 	public void CheckStatus()
 	{
-		if (data.currentState == TimedEventData.state.active || data.currentState == TimedEventData.state.failed 
-			|| data.currentState == TimedEventData.state.completedFail)
+		if (data.currentState == TimedEventData.state.active || data.currentState == TimedEventData.state.failed)
 		{
 			if (EventNotification != null)
 			{
@@ -65,7 +68,8 @@ public class TimedEventControl : MonoBehaviour {
 				EventNotification.transform.parent.parent = endArea.transform;
 				EventNotification.transform.parent.localPosition = offset;
 			}
-			if (endArea != null && endArea.completed)
+			if (endArea != null && endArea.completed && data.currentState != TimedEventData.state.completedSuccess &&
+				data.currentState != TimedEventData.state.completedFail)
 			{
 				if (Var.currentWeek<= data.completeBy)
 				{
@@ -75,22 +79,25 @@ public class TimedEventControl : MonoBehaviour {
 
 
 					EventController.Instance.CreateEvent(completionEvent);
+					AudioControler.Instance.ActivateMusicSource(audioSourceType.battleSource);
+					AudioControler.Instance.campfireHappyMusic.Play();
 					HealAllBirds();
-                    data.currentState = TimedEventData.state.notStarted;
+
 				}else
 				{
 					data.currentState = TimedEventData.state.completedFail;
 					EventController.Instance.CreateEvent(completionAfterFailEvent);
-                    data.currentState = TimedEventData.state.notStarted;
-					//HealAllBirds();
+					AudioControler.Instance.ActivateMusicSource(audioSourceType.battleSource);
+					AudioControler.Instance.campfireSadMusic.Play();
+					HealAllBirds();
 				}
-				
-			if(EventNotification != null)
-				EventNotification.transform.parent.gameObject.SetActive(false);
+				Var.maxLevel++;
+				if(EventNotification != null)
+					EventNotification.transform.parent.gameObject.SetActive(false);
 			}
 			if (Var.currentWeek == data.completeBy)
 			{
-				data.currentState = TimedEventData.state.completedFail;
+				data.currentState = TimedEventData.state.failed;
 				EventController.Instance.CreateEvent(initialFailEvent);
 			}
 			if(Var.currentWeek >= data.completeBy)
@@ -108,8 +115,49 @@ public class TimedEventControl : MonoBehaviour {
 
 			
 				SetupTrialUI();
-		}	
+		}
+		SetMapVisuals();
 	}
+
+	private void SetMapVisuals()
+    {
+		//Debug.LogError("SETTING MAP VISUALS!");
+		ToggleObjects(startingVisuals, false);
+		ToggleObjects(failedVisuals, false);
+		ToggleObjects(completedVisuals, false);
+		if (data != null)
+		{
+			//Debug.LogError("GOT DATA! State: "+ data.currentState);
+			switch (data.currentState)
+			{
+				case TimedEventData.state.notStarted:
+					ToggleObjects(startingVisuals, true);
+					break;
+				case TimedEventData.state.active:
+					ToggleObjects(startingVisuals, true);
+					break;
+				case TimedEventData.state.failed:
+					ToggleObjects(failedVisuals, true);
+					break;
+				case TimedEventData.state.completedFail:
+					ToggleObjects(failedVisuals, true);
+					break;
+				case TimedEventData.state.completedSuccess:
+					ToggleObjects(completedVisuals, true);
+					break;
+				default:
+					break;
+			}
+		}
+    }
+
+	private void ToggleObjects(List<GameObject> objects, bool isActive)
+    {
+		foreach(GameObject gameObj in objects)
+        {
+			gameObj.SetActive(isActive);
+        }
+    }
 	private void HealAllBirds()
     {
 		foreach(Bird bird in FillPlayer.Instance.playerBirds)

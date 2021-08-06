@@ -282,6 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 1
   consequenceType1: 2
   magnitude1: 30
@@ -391,7 +392,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
-  applyToAll: 0
+  useNarration: 0
+  applyToAll: 1
   consequenceType1: 1
   magnitude1: 30
   consequenceType2: 3
@@ -501,6 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 1
   consequenceType1: 2
   magnitude1: -30
@@ -567,6 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 00000000030000000c0000000d0000000e0000000f0000001000000011000000120000001300000014000000
   condition: 2
   magnitude: 0
@@ -579,8 +583,10 @@ MonoBehaviour:
   - {fileID: 9011637763531625050}
   - {fileID: 9011637763668127415}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -682,6 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 1
   consequenceType1: 1
   magnitude1: -30

@@ -75,7 +75,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				AudioControler.Instance.mapPanGrab.Play();
 				MapControler.Instance.HideSelectionMenu();
 				MapControler.Instance.SelectedIcon = null;
-				MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
+				MapControler.Instance.startLvlBtn.interactable = false;
 				lastSoundPosition = lastPosition;
 			}
 
@@ -109,7 +109,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					{
 						temp.y +=1.5f;						
 					}*/
-				}
+	}
 				else
 				{
 					//temp = transform.position;
@@ -152,18 +152,19 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			if (temp.y + 0.5f > minY * transform.localScale.y / startingScale.y)
 			{
 				yChange = -adjustboundariesSpeed * Time.deltaTime;
+				//Debug.LogError("Too low! temp.y: " + temp.y + " minY: " + minY + " maxY: " + maxY);
 			}
 			else if (temp.y - 0.5f < maxY * transform.localScale.y / startingScale.y)
 			{
 				yChange = +adjustboundariesSpeed * Time.deltaTime;
+				//Debug.LogError("Too high! temp.y: " + temp.y + " minY: " + minY + " maxY: " + maxY);
 			}
-			//Debug.LogError("temp.y: " + temp.y + " minY: " + minY + " maxY: " + maxY);
-			temp.x = Mathf.Min(temp.x, minX * transform.localScale.x / startingScale.x);
+			//temp.x = Mathf.Min(temp.x, minX * transform.localScale.x / startingScale.x);
 			transform.Translate(0, yChange, 0);
 		}
 	}
 
-	private Vector3 FindMapBoundaries()
+	public Vector3 FindMapBoundaries()
 	{
 		float currentPointDist = -Mathf.Infinity;
 		Vector3 boundaryPos = Vector3.zero;

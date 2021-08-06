@@ -66,6 +66,8 @@ public class fillEnemy : MonoBehaviour {
 			}
 			index++;
 		}
+
+		ValidateEnemyPositions();
 	}
 
 
@@ -74,8 +76,8 @@ public class fillEnemy : MonoBehaviour {
 	{
 		Reset();
 		int index = 0;
-		float wizardChance = 0.2f;
-		float drillChance = 0.3f;
+		float wizardChance = 0.3f;
+		float drillChance = 0.2f;
 		float superChance = 0.5f;
 		//isDebug = true;
 		if (isDebug)
@@ -84,7 +86,7 @@ public class fillEnemy : MonoBehaviour {
 			wizardChance = 0.5f;
 			drillChance = 0.5f;
 			hasDrills = hasDrillsDebug;
-			hasSuper = true;
+			//hasSuper = true;
 			superChance = 1f;
 		}
 		List<int> frontPos = new List<int>();
@@ -96,14 +98,13 @@ public class fillEnemy : MonoBehaviour {
 		if (dirList.Count == 1 && dirList.Contains(Bird.dir.front))
 			max = (int)Mathf.Min( 3f,maxEnemies);
 		foreach(Bird enemy in Enemies)
-		{
-			
+		{			
 			Var.enemies[index] = enemy;
 			foreach (feedBack fb in enemy.gameObject.GetComponents<feedBack>())
 			{
 				fb.myIndex = index % 4;
 			}        
-			enemy.data.levelRollBonus = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL))-1;
+			enemy.data.levelRollBonus = (int)Mathf.Min(Var.enemyMaxLevel-1, Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL))-1);
 			enemy.inUse = false;
 			enemy.gameObject.SetActive(false);
 			index++;
@@ -192,9 +193,44 @@ public class fillEnemy : MonoBehaviour {
 				Enemies[id].GetComponent<Bird>().enemyType= enemyType.drill;
 			}
 		}
+		ValidateEnemyPositions();
+
 		foreach (Bird newBird in newBirds)
 			ApplyArt(newBird);
 	} 
+
+
+	void ValidateEnemyPositions()
+    {
+		int birdCount = 0;
+		for(int i = 0;i<4;i++)
+        {
+			if(Enemies[i].gameObject.activeSelf)
+            {
+				birdCount++;
+            }
+			if(birdCount==4)
+            {
+				Enemies[Random.Range(0, 4)].gameObject.SetActive(false);
+				Debug.LogError("4 top row birds!");
+			}
+
+        }
+
+		birdCount = 0;
+		for (int i = 4;i<8;i++)
+        {
+			if (Enemies[i].gameObject.activeSelf)
+			{
+				birdCount++;
+			}
+			if (birdCount == 4)
+			{
+				Enemies[Random.Range(4, 8)].gameObject.SetActive(false);
+				Debug.LogError("4 front row birds!");
+			}
+		}
+    }
 
 	void ApplyArt(Bird enemy)
 	{
@@ -280,28 +316,25 @@ public class fillEnemy : MonoBehaviour {
 	public void Reset()
 	{
 		activeEnemyNames = new List<string>();
-		 foreach(Bird enemy in Enemies)
+		foreach(Bird enemy in Enemies)
 		{
 			enemy.transform.localPosition = enemy.home;
 			enemy.gameObject.SetActive(false);
 			Debug.Log("resetting enemy "+ enemy.charName+ " pos: "+ enemy.transform.localPosition);
 		}
-	   foreach(Bird enemy in Var.enemies)
+		foreach(Bird enemy in Var.enemies)
 		{
 			if (enemy != null)
-			{
-				
+			{				
 				enemy.transform.localPosition = enemy.home;
 				if (enemy.inUse)
 				{
 					enemy.gameObject.SetActive(true);
-					//enemy.transform.localPosition = enemy.home;
 					enemy.GroundRollBonus = 0;					
 				}
 				if (enemy.EnemyArt != null)
 					Destroy(enemy.EnemyArt);
 			}
-
 		}
 	}
 }

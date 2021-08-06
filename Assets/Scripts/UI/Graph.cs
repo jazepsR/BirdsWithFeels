@@ -100,17 +100,21 @@ public class Graph : MonoBehaviour {
 			if (bird.prevEmotion == bird.emotion)
 				emotion = Var.Em.finish;
 
-			//Debug.LogError(bird.charName + " prevconf: " + bird.prevConf + " conf: " + bird.data.confidence);
+			//Debug.LogError("plot full "+bird.charName + " prevconf: " + bird.prevConf + " conf: " + bird.data.confidence);
 			//Debug.LogError(bird.charName + " prevfriend: " + bird.prevFriend + " friend: " + bird.data.friendliness);
 
 			portraitScript.StartGraph(secondPos, emotion, bird, this, shouldHaveSound);
 		}
-		if ((GuiContoler.Instance.currentGraph == 3 && afterBattle) || !Var.gameSettings.shownLevelTutorial)
+		if ((GuiContoler.Instance.currentGraph == 3 && afterBattle && !GuiContoler.Instance.inMap) || !Var.gameSettings.shownLevelTutorial)
 		{
-			Debug.Log("not going to create seeds");
+			Debug.Log("not going to create seeds! current graph: "+ GuiContoler.Instance.currentGraph);
 		}
 		else
+		{
 			CreateLevelSeeds(bird, afterBattle);
+
+		//	Debug.LogError("going to create seeds! current graph: " + GuiContoler.Instance.currentGraph);
+		}
 
 	}
 
@@ -153,20 +157,17 @@ public class Graph : MonoBehaviour {
 	}
 	void CreateLevelSeeds(Bird bird, bool afterBattle)
 	{
+		
 		Debug.Log("SEEDS ARE BEING CREATED");
 		float factor = isSmall ? 8 : 18;
 		if (!isSmall)
 		{
 			SetupLevelBar(bird);
 		}
-		/*if(!isSmall)
+		if (bird.data.level >= Var.maxLevel)
 		{
-			factor = 16;
-			SetupLevelBar(Var.Em.Cautious, Helpers.Instance.ListContainsLevel(Levels.type.Scared1, bird.data.levelList),bird);
-			SetupLevelBar(Var.Em.Confident, Helpers.Instance.ListContainsLevel(Levels.type.Brave1, bird.data.levelList), bird);
-			SetupLevelBar(Var.Em.Social, Helpers.Instance.ListContainsLevel(Levels.type.Friend1, bird.data.levelList), bird);
-			SetupLevelBar(Var.Em.Solitary, Helpers.Instance.ListContainsLevel(Levels.type.Lonely1, bird.data.levelList), bird);
-		}*/
+			return;
+		}
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
 		bird.data.level - 1)];
 
@@ -206,7 +207,11 @@ public class Graph : MonoBehaviour {
 		if (bird.data.injured)
 			return;
 		if (Var.isEnding || Var.isTutorial || Var.gameSettings.shownLevelTutorial == false)
+			return; 
+		if (bird.data.level >= Var.maxLevel)
+		{
 			return;
+		}
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1, bird.data.level - 1)];
 		foreach (LevelBits bit in level.levelBits)
 		{
@@ -220,6 +225,10 @@ public class Graph : MonoBehaviour {
 	}
 	public void CollectSeed(Bird bird, LevelBits bit)
 	{
+		if(bird.data.level >= Var.maxLevel)
+        {
+			return;
+        }
 		Debug.Log("SEEDS ARE BEING COLLECTED");
 		foreach (Transform seed in graphParent.transform)
 		{
@@ -242,9 +251,12 @@ public class Graph : MonoBehaviour {
 		bird.data.recievedSeeds.Add(bit.name);
 		LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, seedMoveTime).setEaseOutBack().setOnComplete(() =>
 		{
-			LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
-			setEaseOutBack().setOnComplete(() => Destroy(obj));
-			Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
+			if(obj)
+			{
+				LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
+				setEaseOutBack().setOnComplete(() => Destroy(obj));
+				Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
+			}
 		}
 		));
 		GuiContoler.Instance.canChangeGraph = false;
@@ -255,13 +267,21 @@ public class Graph : MonoBehaviour {
 		LeanTween.delayedCall(2.1f, () => GuiContoler.Instance.canChangeGraph = true);
 	}
 		
-	void SetupLevelBar(Bird bird)
+	public void SetupLevelBar(Bird bird)
 	{
 		levelBar.ClearPoints();
-		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
-			 bird.data.level - 1)];
-		levelBar.maxPoints = level.seedsNeeded;
-		levelBar.SetText(bird,level);
+		if (bird.data.level >= Var.maxLevel)
+		{
+			levelBar.gameObject.SetActive(false);
+		}
+		else
+		{
+			levelBar.gameObject.SetActive(true);
+			LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
+				 bird.data.level - 1)];
+			levelBar.maxPoints = level.seedsNeeded;
+			levelBar.SetText(bird, level);
+		}
 	}
 
 }

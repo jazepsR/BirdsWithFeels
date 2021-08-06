@@ -203,6 +203,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (MapControler.Instance.isViewingNode == false)
             anim.SetBool("hover", true);
+		AudioControler.Instance.nodeHoverSound.Play();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -278,8 +279,11 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                     anim.SetInteger("state", 1);
 
                     float time = 0.8f;
-                    LeanTween.delayedCall(time, () => anim.SetTrigger("playCompleteAnim")); //Delay b4 playing unlock anim
-                    LeanTween.delayedCall(time, () => anim.SetInteger("state", 2));
+                    LeanTween.delayedCall(time, () => {
+						anim.SetTrigger("playCompleteAnim");
+						AudioControler.Instance.nodeCompleteSound.Play();
+						anim.SetInteger("state", 2);
+					}); //Delay b4 playing unlock anim
                     AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
 					if (unlockedRoad != null)
 					{
@@ -291,7 +295,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					{
 						LeanTween.delayedCall(2.7f, () => icon.anim.SetInteger("state", 1));
 					}
-					CenterMapNode();
+					CenterMapNode(false);
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
 					tooltipInfo.tooltipText = GetTooltipText();
@@ -306,8 +310,11 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			{
                 float time = 2f;
                 anim.SetInteger("state", 0);
-                LeanTween.delayedCall(time, () => anim.SetTrigger("playUnlockAnim"));  //Set map icon to "available" state after a delay
-                LeanTween.delayedCall(time, () => anim.SetInteger("state",1));
+                LeanTween.delayedCall(time, () => {
+					anim.SetTrigger("playUnlockAnim");
+					AudioControler.Instance.nodeUnlockSound.Play();
+					anim.SetInteger("state", 1);
+					});  //Set map icon to "available" state after a delay
 				tooltipInfo.tooltipText = GetTooltipText();
 			}
 		}
@@ -332,6 +339,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		Vector3 temp = FindObjectOfType<mapPan>().transform.position;
 		temp += new Vector3(dist.x, dist.y, 0);
 		FindObjectOfType<mapPan>().transform.position = temp;
+		FindObjectOfType<mapPan>().FindMapBoundaries();
 	}
 	void ValidateAll()
 	{
@@ -624,24 +632,14 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		{
 			Var.selectedTimeEvent = timedEvent.data;
 		}
-			active = true;
+		active = true;
 
-            foreach (GuiMap map in FindObjectsOfType<GuiMap>())
-                map.Clear();
-            MapControler.Instance.SelectedIcon = null;
-            MapControler.Instance.startLvlBtn.gameObject.SetActive(false);
-            //MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero; //seb
-            MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
-
-
-            ShowAreaDetails();
-
-            //LeanTween.value(gameObject, (float alpha) => MapControler.Instance.SelectionMenu.GetComponent<CanvasGroup>().alpha =alpha, 0,1, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-            //LeanTween.scale(MapControler.Instance.SelectionMenu, Vector3.one, MapControler.Instance.scaleTime).setEase(LeanTweenType.easeInBack);
-
-
-            //LeanTween.move(transform.parent.gameObject, MapControler.Instance.centerPos.position+(transform.parent.transform.position-transform.position), 0.8f).setEase(LeanTweenType.easeInBack).setOnComplete(ShowAreaDetails);
-        
+        foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+            map.Clear();
+        MapControler.Instance.SelectedIcon = null;
+        //MapControler.Instance.SelectionMenu.transform.localScale = Vector3.zero; //seb
+        MapControler.Instance.ScaleSelectedBirds(0, Vector3.zero);
+        ShowAreaDetails();
     }
 
 	public void ShowAreaDetails()
@@ -670,9 +668,14 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		MapControler.Instance.SelectedIcon = this;
 		if (available)
 		{
-			MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);            
-			MapControler.Instance.startLvlBtn.gameObject.SetActive(true);
-			
+			MapControler.Instance.ScaleSelectedBirds(MapControler.Instance.scaleTime, Vector3.one * 0.25f);
+			MapControler.Instance.startLvlBtn.interactable = true;
+			MapControler.Instance.startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "Start the adventure\nA week will pass";
+		}
+        else
+        {
+			MapControler.Instance.startLvlBtn.interactable = false;
+			MapControler.Instance.startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "Area locked!\nComplete previous adventures!";
 		}
 	}
 	bool CheckTargetsAvailable()

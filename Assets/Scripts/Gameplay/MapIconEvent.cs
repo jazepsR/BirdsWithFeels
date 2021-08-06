@@ -52,8 +52,11 @@ public class MapIconEvent : MapIcon
                     firstCompletion = false;
                     anim.SetInteger("state", 1);
                     float time = 0.8f;
-                    LeanTween.delayedCall(time, () => anim.SetTrigger("playCompleteAnim")); //Delay b4 playing unlock anim
-                    LeanTween.delayedCall(time, () => anim.SetInteger("state", 2));
+                    LeanTween.delayedCall(time, () => {
+                        anim.SetTrigger("playCompleteAnim");
+                        AudioControler.Instance.nodeCompleteSound.Play();
+                        anim.SetInteger("state", 2);
+                    }); //Delay b4 playing unlock anim
                     AudioControler.Instance.PlaySound(AudioControler.Instance.mapNodeClick);
                     if (unlockedRoad != null)
                     {
@@ -86,7 +89,11 @@ public class MapIconEvent : MapIcon
             {
                 float time = 2f;
                 anim.SetInteger("state", 0);
-                LeanTween.delayedCall(time, () => anim.SetTrigger("playUnlockAnim"));  //Set map icon to "available" state after a delay
+                LeanTween.delayedCall(time, () => {
+                    anim.SetTrigger("playUnlockAnim");
+                    AudioControler.Instance.nodeUnlockSound.Play();
+                    anim.SetInteger("state", 1);
+                });  //Set map icon to "available" state after a delay
                 LeanTween.delayedCall(time, () => anim.SetInteger("state", 1));
                 tooltipInfo.tooltipText = GetTooltipText();
             }
@@ -105,7 +112,7 @@ public class MapIconEvent : MapIcon
         }
         if (completed)
         {
-            tooltipText += "<color=#E7CA21ff> -completed</color>";
+            tooltipText += "<color=#2bd617ff> -completed</color>";
         }
         tooltipText += "\n" + levelDescription +"\nThis node will not take a week";
         return tooltipText;

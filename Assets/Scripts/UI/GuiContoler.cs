@@ -425,7 +425,7 @@ public class GuiContoler : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape) && pauseBtn.activeSelf)
         {
-            if (EventController.Instance.eventObject.gameObject.activeSelf || GraphBlocker.gameObject.activeSelf || winBanner.activeSelf)
+            if ((EventController.Instance && EventController.Instance.eventObject.gameObject.activeSelf) || GraphBlocker.gameObject.activeSelf ||( winBanner && winBanner.activeSelf))
             {     
                 
             }
@@ -627,10 +627,7 @@ public class GuiContoler : MonoBehaviour {
         currentGraph = Mathf.Min(3, currentGraph);
         print("currentGraph : " + currentGraph);
         if (Var.isTutorial)
-        {
-
-
-            //GuiContoler.Instance.nextGraph.interactable = false;
+        {            //GuiContoler.Instance.nextGraph.interactable = false;
            Tutorial.Instance.ShowGraphSpeech(currentGraph);
         }
         foreach (Transform child in graph.transform.Find("GraphParts").transform)
@@ -662,9 +659,6 @@ public class GuiContoler : MonoBehaviour {
             });
             ProgressGUI.Instance.SetOnePortrait();
         }
-
-
-
     }
 
 
@@ -904,10 +898,7 @@ public class GuiContoler : MonoBehaviour {
         {
             //Normal case
             DialogueControl.Instance.TryDialogue(Dialogue.Location.graph, Helpers.Instance.GetCharEnum(BirdsToGraph[0]));
-           // EmotionChangeFeedback.gameObject.SetActive(true);
             CreateEmotionChangeText(BirdsToGraph[0], emoReportBitParent);
-            //EmotionChangeFeedback.text = changeText;
-            //EmotionChangeHeading.gameObject.SetActive(changeText != "");
             feelReport.SetActive(true);
         }
         else
@@ -921,7 +912,7 @@ public class GuiContoler : MonoBehaviour {
     public void CreateEmoBit(Transform par, int gain, Var.Em emo, string info)
     {
         emoReportBit bit = Instantiate(emoReportBit, par);
-        bit.SetEmoBit("+ " +Mathf.Abs((float)gain).ToString(), emo, info);
+        bit.SetEmoBit("+" +Mathf.Abs((float)gain).ToString(), emo, info);
         bit.transform.SetAsFirstSibling();
         bits.Add(bit);
     }
@@ -1119,6 +1110,7 @@ public class GuiContoler : MonoBehaviour {
         InitiateGraph(bird);
         CreateBattleReport();
         CheckGraphNavBtns();
+       // Graph.Instance.SetupLevelBar(bird);
     }
 
     void CloseTutorialText()
@@ -1604,7 +1596,7 @@ public class GuiContoler : MonoBehaviour {
     public void showVictoryScreen()
     {
         winBanner.SetActive(true);
-        WinScreen.Instance.SetupWinScreen(Var.availableBirds.Count > 0 ?Var.availableBirds: Var.activeBirds);//  new List<Bird>(FillPlayer.Instance.playerBirds));
+        WinScreen.Instance.SetupWinScreen(Var.availableBirds.Count > 0 ?Var.availableBirds: Var.activeBirds,Var.freezeEmotions,Var.currentStageID==18);//  new List<Bird>(FillPlayer.Instance.playerBirds));
         /* foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
          {
              child.transform.gameObject.SetActive(false);
