@@ -316,15 +316,16 @@ public class Bird : MonoBehaviour
 				{
 					Helpers.Instance.LoadLevelData();
 				}
-				for (int i = 0; i < data.level; i++)
+				for (int i = 0; i < data.level-1; i++)
 				{
 					levelList.Add(Helpers.Instance.levels[i]);
-					if (i + 1 == data.level)
+					if (i + 2 == data.level)
 					{
 						data.lastLevel = Helpers.Instance.levels[i];
 					}
 				}
 			}
+			//Debug.LogError(data.charName + " current level: " + data.level);
 		}
 		portraitOrder = Helpers.GetPortraitNumber(charName);
 		if (!isEnemy)

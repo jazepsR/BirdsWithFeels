@@ -81,7 +81,7 @@ public class EmoIndicator : MonoBehaviour
             SetIconEmotion(Var.Em.Neutral, icon1);
             SetIconEmotion(Var.Em.Neutral, icon2);
             heartIcon.transform.localPosition = icon1.transform.localPosition;
-            Debug.LogError("bird: " + bird.charName + " emo1: " + emo1 + " emo2: " + emo2 + " icon1 pos");
+           // Debug.LogError("bird: " + bird.charName + " emo1: " + emo1 + " emo2: " + emo2 + " icon1 pos");
             if (isResting)
             {
                 Show(emo1, emo2, false);

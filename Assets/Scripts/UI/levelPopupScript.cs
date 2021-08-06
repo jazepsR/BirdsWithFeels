@@ -161,8 +161,5 @@ public class levelPopupScript : MonoBehaviour {
 			SaveLoad.Save(false);
 		}
 	}
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	
 }

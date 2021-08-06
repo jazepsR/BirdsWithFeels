@@ -59,8 +59,7 @@ public class TimedEventControl : MonoBehaviour {
 
 	public void CheckStatus()
 	{
-		if (data.currentState == TimedEventData.state.active || data.currentState == TimedEventData.state.failed 
-			|| data.currentState == TimedEventData.state.completedFail)
+		if (data.currentState == TimedEventData.state.active || data.currentState == TimedEventData.state.failed)
 		{
 			if (EventNotification != null)
 			{
@@ -94,7 +93,7 @@ public class TimedEventControl : MonoBehaviour {
 			}
 			if (Var.currentWeek == data.completeBy)
 			{
-				data.currentState = TimedEventData.state.completedFail;
+				data.currentState = TimedEventData.state.failed;
 				EventController.Instance.CreateEvent(initialFailEvent);
 			}
 			if(Var.currentWeek >= data.completeBy)
