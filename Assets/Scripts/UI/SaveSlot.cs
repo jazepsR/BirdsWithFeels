@@ -41,6 +41,7 @@ public class SaveSlot : MonoBehaviour {
 		if (saveExtists)
 		{
 			lastDateText.text = "Last played: " + File.GetLastAccessTime(Application.persistentDataPath + "/" + saveSlot + "/saveGame.dat").ToShortDateString();
+			lastPlayedText.text = "Save: "+saveSlot;
 			background.color = fullSlotColor;
 			if (isNewGame)
 				bg.color = Color.white;

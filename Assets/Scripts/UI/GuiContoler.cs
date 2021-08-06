@@ -1110,7 +1110,7 @@ public class GuiContoler : MonoBehaviour {
         InitiateGraph(bird);
         CreateBattleReport();
         CheckGraphNavBtns();
-        Graph.Instance.SetupLevelBar(bird);
+       // Graph.Instance.SetupLevelBar(bird);
     }
 
     void CloseTutorialText()
