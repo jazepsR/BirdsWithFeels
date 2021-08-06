@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GuiMap : MonoBehaviour {
 	public bool inMap = false;
 	public GameObject mapIcon;
+	public Vector3 offset = Vector3.zero;
 	//public static GuiMap Instance { get; private set; }
 	public Transform start;
 	public Transform finish;
@@ -58,7 +59,7 @@ public class GuiMap : MonoBehaviour {
 		{
 			if (Var.map.Count == 0)
 			{
-				for (int i = 0; i < 2; i++)
+				for (int i = 0; i < 3; i++)
 				{
 					MapBattleData BattleStuff = new MapBattleData();
 					BattleStuff.emotionPercentage.Add(1);
@@ -122,8 +123,10 @@ public class GuiMap : MonoBehaviour {
 
 	public void MoveMapBird(int pos)
 	{
+		//Debug.LogError("moving map bird! pos: "+ pos);
 		//transform.localPosition = new Vector3(-578 + pos * 95,transform.localPosition.y,transform.localPosition.z);
-		transform.position = new Vector3(start.position.x + dist * pos, transform.position.y, start.position.z);
+		//transform.position = new Vector3(start.position.x + dist * pos, transform.position.y, start.position.z);
+		transform.position = nodeList[pos].transform.position+ offset;
 		for(int i=0;i<nodeList.Count;i++)
 		{
 			if(pos>i)
