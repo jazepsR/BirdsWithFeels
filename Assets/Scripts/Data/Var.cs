@@ -84,6 +84,7 @@ public static class Var {
 	public static bool freezeEmotions = false;
 	public static int eventTextCharLimit = 200;
 	public static int maxLevel = 2;
+	public static int enemyMaxLevel = 5;
 	/// Tutorial IDs
 	public static int battlePlanningTutorialID = 13;
     public static int levelTutorialID = 21;

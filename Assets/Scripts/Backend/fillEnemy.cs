@@ -104,7 +104,7 @@ public class fillEnemy : MonoBehaviour {
 			{
 				fb.myIndex = index % 4;
 			}        
-			enemy.data.levelRollBonus = (int)Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL))-1;
+			enemy.data.levelRollBonus = (int)Mathf.Min(Var.enemyMaxLevel-1, Mathf.Max(1,Helpers.Instance.RandGaussian(1, birdLVL))-1);
 			enemy.inUse = false;
 			enemy.gameObject.SetActive(false);
 			index++;
