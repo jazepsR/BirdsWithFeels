@@ -398,7 +398,7 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 		{
 			return;
 		}
-        Debug.LogError("playing " + group.clips[0].name + " on source " + source.name);
+       // Debug.LogError("playing " + group.clips[0].name + " on source " + source.name);
 		source.PlayOneShot(group.clips[UnityEngine.Random.Range(0, group.clips.Length)],group.volume);
 	}
 	public AudioSource GetAudioSource(audioSourceType sourceType)

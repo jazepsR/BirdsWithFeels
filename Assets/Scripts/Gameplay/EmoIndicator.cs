@@ -73,7 +73,7 @@ public class EmoIndicator : MonoBehaviour
             emo1 = Var.Em.Neutral;
             emo2 = Var.Em.Neutral;
         }
-        bool isResting = bird.GetComponentInChildren<Animator>().GetBool("rest");
+        bool isResting = bird.GetComponentInChildren<Animator>().GetBool("rest") || bird.healthBoost>0;
         heartIcon.SetActive(isResting);
         //Debug.LogError("setting emotions! bird: "+ bird.charName);
         if ((emo1 == Var.Em.Neutral && emo2 == Var.Em.Neutral) || bird.target == bird.home)
@@ -81,9 +81,14 @@ public class EmoIndicator : MonoBehaviour
             SetIconEmotion(Var.Em.Neutral, icon1);
             SetIconEmotion(Var.Em.Neutral, icon2);
             heartIcon.transform.localPosition = icon1.transform.localPosition;
+            Debug.LogError("bird: " + bird.charName + " emo1: " + emo1 + " emo2: " + emo2 + " icon1 pos");
             if (isResting)
             {
                 Show(emo1, emo2, false);
+            }
+            else
+            {
+                Hide();
             }
             // Hide();
         }
@@ -93,13 +98,19 @@ public class EmoIndicator : MonoBehaviour
             {
                 SetIconEmotion(emo2, icon1);
                 SetIconEmotion(Var.Em.Neutral, icon2);
+               // Debug.LogError("bird: " + bird.charName + " emo1: " + emo1 + " emo2: " + emo2 + " icon2 pos");
                 heartIcon.transform.localPosition = icon2.transform.localPosition;
             }
             else
             {
                 SetIconEmotion(emo1, icon1);
                 SetIconEmotion(emo2, icon2);
+              //  Debug.LogError("bird: " + bird.charName + " emo1: " + emo1 + " emo2: " + emo2 + " heart pos");
                 heartIcon.transform.localPosition = heartDefaultPosition.localPosition;
+            }
+            if (emo1 != Var.Em.Neutral && emo2 == Var.Em.Neutral)
+            {
+                heartIcon.transform.localPosition = icon2.transform.localPosition;
             }
             Show(emo1, emo2,false);
          }
