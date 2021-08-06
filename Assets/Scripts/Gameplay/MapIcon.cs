@@ -339,6 +339,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		Vector3 temp = FindObjectOfType<mapPan>().transform.position;
 		temp += new Vector3(dist.x, dist.y, 0);
 		FindObjectOfType<mapPan>().transform.position = temp;
+		FindObjectOfType<mapPan>().FindMapBoundaries();
 	}
 	void ValidateAll()
 	{
