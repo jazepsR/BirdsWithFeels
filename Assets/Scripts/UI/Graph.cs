@@ -100,17 +100,21 @@ public class Graph : MonoBehaviour {
 			if (bird.prevEmotion == bird.emotion)
 				emotion = Var.Em.finish;
 
-			//Debug.LogError(bird.charName + " prevconf: " + bird.prevConf + " conf: " + bird.data.confidence);
+			//Debug.LogError("plot full "+bird.charName + " prevconf: " + bird.prevConf + " conf: " + bird.data.confidence);
 			//Debug.LogError(bird.charName + " prevfriend: " + bird.prevFriend + " friend: " + bird.data.friendliness);
 
 			portraitScript.StartGraph(secondPos, emotion, bird, this, shouldHaveSound);
 		}
-		if ((GuiContoler.Instance.currentGraph == 3 && afterBattle) || !Var.gameSettings.shownLevelTutorial)
+		if ((GuiContoler.Instance.currentGraph == 3 && afterBattle && !GuiContoler.Instance.inMap) || !Var.gameSettings.shownLevelTutorial)
 		{
-			Debug.Log("not going to create seeds");
+			Debug.Log("not going to create seeds! current graph: "+ GuiContoler.Instance.currentGraph);
 		}
 		else
+		{
 			CreateLevelSeeds(bird, afterBattle);
+
+		//	Debug.LogError("going to create seeds! current graph: " + GuiContoler.Instance.currentGraph);
+		}
 
 	}
 
