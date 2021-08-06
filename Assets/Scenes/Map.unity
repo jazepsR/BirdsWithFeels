@@ -7291,46 +7291,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272417835}
   m_CullTransparentMesh: 0
---- !u!21 &273423781
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.0026450756, y: 0.0026781424}
-        m_Offset: {x: 0.49529317, y: 3.6954975}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &276294329
 Transform:
   m_ObjectHideFlags: 0
@@ -40914,6 +40874,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!21 &1449915232
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.002645075, y: 0.0026781429}
+        m_Offset: {x: 0.49529323, y: 3.6954985}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1450040057 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5272907934719478167, guid: f0eff861912a40c44bc8fbe02469eeef,
@@ -54007,6 +54007,12 @@ PrefabInstance:
       objectReference: {fileID: 749674326}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd877a5ad3252324883b3e1ec6efa003, type: 3}
+--- !u!1 &1943453702 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1764915599226638748, guid: cd877a5ad3252324883b3e1ec6efa003,
+    type: 3}
+  m_PrefabInstance: {fileID: 1943453701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1944351979
 GameObject:
   m_ObjectHideFlags: 0
@@ -64033,6 +64039,11 @@ PrefabInstance:
       objectReference: {fileID: 466420184}
     - target: {fileID: 7980923976523217090, guid: 97b43a4913123104da52901e06f99dc0,
         type: 3}
+      propertyPath: failedVisuals.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7980923976523217090, guid: 97b43a4913123104da52901e06f99dc0,
+        type: 3}
       propertyPath: startingVisuals.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -64041,6 +64052,11 @@ PrefabInstance:
       propertyPath: completedVisuals.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7980923976523217090, guid: 97b43a4913123104da52901e06f99dc0,
+        type: 3}
+      propertyPath: failedVisuals.Array.data[0]
+      value: 
+      objectReference: {fileID: 1943453702}
     - target: {fileID: 7980923976523217090, guid: 97b43a4913123104da52901e06f99dc0,
         type: 3}
       propertyPath: startingVisuals.Array.data[0]
