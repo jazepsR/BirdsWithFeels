@@ -138,28 +138,32 @@ public class feedBack : MonoBehaviour
         if (enemy.emotion == Var.Em.Neutral)
             return;              
         lineObj = Instantiate(WizardBirdsFeedbackline);
+        ApplyWizardEffect(player, enemy);
         SetupWizardLine(player, enemy, lineObj);
     }
-
-    private void SetupWizardLine(Bird player, Bird enemy, GameObject lineObj)
+    public void ApplyWizardEffect(Bird player, Bird enemy)
     {
         switch (enemy.emotion)
         {
             case Var.Em.Solitary:
-                player.wizardFrienBoos -= 4;
+                player.wizardFrienBoos -= Var.wizardEffectStrength;
                 break;
             case Var.Em.Social:
-                player.wizardFrienBoos += 4;
+                player.wizardFrienBoos += Var.wizardEffectStrength;
                 break;
             case Var.Em.Cautious:
-                player.wizardConfBoos -= 4;
+                player.wizardConfBoos -= Var.wizardEffectStrength;
                 break;
             case Var.Em.Confident:
-                player.wizardConfBoos += 4;
+                player.wizardConfBoos += Var.wizardEffectStrength;
                 break;
             default:
                 break;
         }
+    }
+    private void SetupWizardLine(Bird player, Bird enemy, GameObject lineObj)
+    {            
+        //Debug.LogError(player.charName +  " WIZARD EFFECT confidence: " + player.wizardConfBoos + " friend: " + player.wizardFrienBoos);
         LightningEffectSetup lightSetup = lineObj.GetComponentInChildren<LightningEffectSetup>();
         LineRenderer lr = lineObj.GetComponent<LineRenderer>();
         lr.sortingOrder = 0;

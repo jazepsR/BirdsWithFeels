@@ -912,7 +912,7 @@ public class GuiContoler : MonoBehaviour {
     public void CreateEmoBit(Transform par, int gain, Var.Em emo, string info)
     {
         emoReportBit bit = Instantiate(emoReportBit, par);
-        bit.SetEmoBit("+ " +Mathf.Abs((float)gain).ToString(), emo, info);
+        bit.SetEmoBit("+" +Mathf.Abs((float)gain).ToString(), emo, info);
         bit.transform.SetAsFirstSibling();
         bits.Add(bit);
     }
