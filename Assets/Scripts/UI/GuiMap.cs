@@ -52,7 +52,8 @@ public class GuiMap : MonoBehaviour {
             }
             Var.map.Add(new BattleData(Var.Em.finish, false, new List<Var.Em>(), null));
             nextAreaInfo.text = "";
-        }
+			trialObj.SetActive(false);
+		}
 		else
 		{
 			if (Var.map.Count == 0)
@@ -87,7 +88,7 @@ public class GuiMap : MonoBehaviour {
 				}
 
 			}
-			if (currentNode.trialID == currentNode.ID && trialObj != null)
+			if ((currentNode.trialID == currentNode.ID && trialObj != null))
 			{
 				trialObj.SetActive(false);
 			}
