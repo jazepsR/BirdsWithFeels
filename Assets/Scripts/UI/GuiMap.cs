@@ -126,8 +126,11 @@ public class GuiMap : MonoBehaviour {
 		//Debug.LogError("moving map bird! pos: "+ pos);
 		//transform.localPosition = new Vector3(-578 + pos * 95,transform.localPosition.y,transform.localPosition.z);
 		//transform.position = new Vector3(start.position.x + dist * pos, transform.position.y, start.position.z);
-		transform.position = nodeList[pos].transform.position+ offset;
-		for(int i=0;i<nodeList.Count;i++)
+		if (nodeList.Count < pos)
+		{
+			transform.position = nodeList[pos].transform.position+ offset;
+		}
+		for (int i=0;i<nodeList.Count;i++)
 		{
 			if(pos>i)
 			{

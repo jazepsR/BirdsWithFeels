@@ -247,9 +247,12 @@ public class Graph : MonoBehaviour {
 		bird.data.recievedSeeds.Add(bit.name);
 		LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, seedMoveTime).setEaseOutBack().setOnComplete(() =>
 		{
-			LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
-			setEaseOutBack().setOnComplete(() => Destroy(obj));
-			Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
+			if(obj)
+			{
+				LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
+				setEaseOutBack().setOnComplete(() => Destroy(obj));
+				Instantiate(Helpers.Instance.pickupExplosion, obj.transform.position, Quaternion.identity, obj.transform.parent);
+			}
 		}
 		));
 		GuiContoler.Instance.canChangeGraph = false;
