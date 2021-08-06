@@ -18581,6 +18581,46 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1532903329}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &673792452
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.002645075, y: 0.0026781429}
+        m_Offset: {x: 0.49529323, y: 3.6954985}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &674639088
 GameObject:
   m_ObjectHideFlags: 0
@@ -24659,7 +24699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxY: -18.6
-  minY: -24.7
+  minY: -26.05
   scale: 3.17
   startingY: 21.54
 --- !u!1 &882786780
@@ -26407,46 +26447,6 @@ RectTransform:
   m_AnchoredPosition: {x: -86.000015, y: 124}
   m_SizeDelta: {x: 86, y: 86}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!21 &952064889
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.002645075, y: 0.0026781429}
-        m_Offset: {x: 0.49529317, y: 3.6954985}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &952394806
 GameObject:
   m_ObjectHideFlags: 0
@@ -34749,7 +34749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxY: -17.5
-  minY: -24.7
+  minY: -26.4
   scale: 3.17
   startingY: 21.54
 --- !u!1 &1217529689
@@ -42683,7 +42683,7 @@ MonoBehaviour:
   minScale: 0.5
   minY: 10
   maxY: 25
-  minX: 6.5
+  minX: 8
   map: {fileID: 1513960782}
   activeFog: {fileID: 0}
   mapScrollPoints:
@@ -51487,7 +51487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxY: 8.94
-  minY: -24.7
+  minY: -26.6
   scale: 3.17
   startingY: 21.54
 --- !u!114 &1867383925 stripped
@@ -57637,7 +57637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1511, y: -1199}
+  m_AnchoredPosition: {x: -1762, y: -1199}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2100572962
@@ -59968,6 +59968,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 179608270}
     m_Modifications:
+    - target: {fileID: 2789629180305571044, guid: dbb63f8c8083ba44c8efad14476196fe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -87
+      objectReference: {fileID: 0}
+    - target: {fileID: 2789629180305571044, guid: dbb63f8c8083ba44c8efad14476196fe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -47
+      objectReference: {fileID: 0}
     - target: {fileID: 6502618791185279520, guid: dbb63f8c8083ba44c8efad14476196fe,
         type: 3}
       propertyPath: mapctrl
@@ -60112,6 +60122,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974321259753233292, guid: dbb63f8c8083ba44c8efad14476196fe,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 309.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974321259753233292, guid: dbb63f8c8083ba44c8efad14476196fe,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 126.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974321259753233292, guid: dbb63f8c8083ba44c8efad14476196fe,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974321259753233292, guid: dbb63f8c8083ba44c8efad14476196fe,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974321259753233292, guid: dbb63f8c8083ba44c8efad14476196fe,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974321259753233292, guid: dbb63f8c8083ba44c8efad14476196fe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 161.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8974321259753233292, guid: dbb63f8c8083ba44c8efad14476196fe,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 201.4
       objectReference: {fileID: 0}
     - target: {fileID: 8974321260562337733, guid: dbb63f8c8083ba44c8efad14476196fe,
         type: 3}
@@ -60942,6 +60987,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MAP tutorial PART 1 popup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6262084021370149210, guid: 7f6ba1c21be1d624fb2110a1c3931a8f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8005212344868475199, guid: 7f6ba1c21be1d624fb2110a1c3931a8f,
+        type: 3}
+      propertyPath: m_Text
+      value: Welcome to the map. Here, you can decide where to go next. [Click anywhere
+        to continue]
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f6ba1c21be1d624fb2110a1c3931a8f, type: 3}
