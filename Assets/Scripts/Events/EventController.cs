@@ -829,7 +829,7 @@ public class EventController : MonoBehaviour
             if (bird != null)
                 bird.SetEmotion();
 
-            int clamp = Var.isEnding ? 13 : 15;
+            int clamp = Var.isEnding ? 16 : 15;
             switch (type)
             {
                 case ConsequenceType.Courage:
