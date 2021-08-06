@@ -5,16 +5,16 @@ using UnityEngine;
 public class PlaySoundInAnimation : MonoBehaviour
 {
     public AudioGroup soundToPlay;
-    private Renderer renderer= null;
-
+    private Renderer rend= null;
+    public bool checkRenderer = true;
     private void Start()
     {
-        renderer = GetComponent<Renderer>();
+        rend = GetComponent<Renderer>();
     }
     // Start is called before the first frame update
     public void PlaySound()
     {
-        if (renderer != null && renderer.isVisible)
+        if (!checkRenderer || (rend != null && rend.isVisible))
         {
             AudioControler.Instance.PlaySound(soundToPlay);
         }
