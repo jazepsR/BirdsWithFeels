@@ -153,15 +153,16 @@ public class Graph : MonoBehaviour {
 	}
 	void CreateLevelSeeds(Bird bird, bool afterBattle)
 	{
-		if(bird.data.level >= Var.maxLevel)
-        {
-			return;
-        }
+		
 		Debug.Log("SEEDS ARE BEING CREATED");
 		float factor = isSmall ? 8 : 18;
 		if (!isSmall)
 		{
 			SetupLevelBar(bird);
+		}
+		if (bird.data.level >= Var.maxLevel)
+		{
+			return;
 		}
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
 		bird.data.level - 1)];
@@ -202,7 +203,11 @@ public class Graph : MonoBehaviour {
 		if (bird.data.injured)
 			return;
 		if (Var.isEnding || Var.isTutorial || Var.gameSettings.shownLevelTutorial == false)
+			return; 
+		if (bird.data.level >= Var.maxLevel)
+		{
 			return;
+		}
 		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1, bird.data.level - 1)];
 		foreach (LevelBits bit in level.levelBits)
 		{
@@ -216,6 +221,10 @@ public class Graph : MonoBehaviour {
 	}
 	public void CollectSeed(Bird bird, LevelBits bit)
 	{
+		if(bird.data.level >= Var.maxLevel)
+        {
+			return;
+        }
 		Debug.Log("SEEDS ARE BEING COLLECTED");
 		foreach (Transform seed in graphParent.transform)
 		{
@@ -254,10 +263,18 @@ public class Graph : MonoBehaviour {
 	void SetupLevelBar(Bird bird)
 	{
 		levelBar.ClearPoints();
-		LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
-			 bird.data.level - 1)];
-		levelBar.maxPoints = level.seedsNeeded;
-		levelBar.SetText(bird,level);
+		if (bird.data.level >= Var.maxLevel)
+		{
+			levelBar.gameObject.SetActive(false);
+		}
+		else
+		{
+			levelBar.gameObject.SetActive(true);
+			LevelDataScriptable level = Helpers.Instance.levels[Mathf.Min(Helpers.Instance.levels.Count - 1,
+				 bird.data.level - 1)];
+			levelBar.maxPoints = level.seedsNeeded;
+			levelBar.SetText(bird, level);
+		}
 	}
 
 }
