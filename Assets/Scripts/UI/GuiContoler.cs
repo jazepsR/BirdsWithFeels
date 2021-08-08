@@ -1596,8 +1596,6 @@ public class GuiContoler : MonoBehaviour {
     
     public void showVictoryScreen()
     {
-<<<<<<< HEAD
-=======
         if (Var.unlockedBirds == null)
         {
             foreach (Bird bird in FillPlayer.Instance.playerBirds)
@@ -1639,7 +1637,6 @@ public class GuiContoler : MonoBehaviour {
             }
         }
 
->>>>>>> a9f5d26559bffcbae9670e182ce719129bffce77
         winBanner.SetActive(true);
         WinScreen.Instance.SetupWinScreen(Var.availableBirds.Count > 0 ?Var.availableBirds: Var.activeBirds,Var.freezeEmotions,Var.currentStageID==18);//  new List<Bird>(FillPlayer.Instance.playerBirds));
         /* foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
