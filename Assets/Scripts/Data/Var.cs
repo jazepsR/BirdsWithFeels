@@ -68,6 +68,7 @@ public static class Var {
 	public static List<GameObject> sueprEnemySprites = null;
 	public static GameObject emotionParticles = null;
 	public static bool Infight = false;
+	public static List<Bird> unlockedBirds = new List<Bird>();
 	[HideInInspector]
 	public static TimedEventData selectedTimeEvent;
 	public static bool shouldDoMapEvent = false;

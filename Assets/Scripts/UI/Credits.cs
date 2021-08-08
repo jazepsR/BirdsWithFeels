@@ -60,6 +60,7 @@ public class Credits : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSecondsRealtime(waitTime);
-        SceneManager.LoadScene("mainMenu");
+        
+        SceneManager.LoadScene("Stats");
     }
 }

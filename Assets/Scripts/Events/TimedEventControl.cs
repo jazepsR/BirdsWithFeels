@@ -74,6 +74,10 @@ public class TimedEventControl : MonoBehaviour {
 				if (Var.currentWeek<= data.completeBy)
 				{
 					data.currentState = TimedEventData.state.completedSuccess;
+					
+					//complete time trial in time achievements
+
+
 					EventController.Instance.CreateEvent(completionEvent);
 					AudioControler.Instance.ActivateMusicSource(audioSourceType.battleSource);
 					AudioControler.Instance.campfireHappyMusic.Play();
