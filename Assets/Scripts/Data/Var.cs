@@ -91,6 +91,9 @@ public static class Var {
 	public static bool cheatsEnabled = true;
 	public static float levelPopupDelay = 0.3f;
 	public static int wizardEffectStrength = 6;
+
+	//for stats
+	public static int trialsSuccessfullCount = 0;
 }
 
 [Serializable]
