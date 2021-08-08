@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
+<<<<<<< HEAD
     public static Stats Instance { get; private set; }
+=======
+>>>>>>> 35c2331d07629f5beedb275a619334e5ed61b7f3
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +19,7 @@ public class Stats : MonoBehaviour
     {
         
     }
+<<<<<<< HEAD
 
    public void getTrialDetails(TimedEventData anEvent)
    {
@@ -74,4 +78,6 @@ public class Stats : MonoBehaviour
         
         Debug.Log(anEvent.eventName);
    }
+=======
+>>>>>>> 35c2331d07629f5beedb275a619334e5ed61b7f3
 }
