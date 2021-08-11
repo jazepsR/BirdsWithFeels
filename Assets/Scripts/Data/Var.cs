@@ -94,6 +94,15 @@ public static class Var {
 
 	//variables for stats
 	public static int trialsSuccessfullCount = 0;
+	public static bool birdInjuredInTrial = false;
+	public static int narrativeEventsCompleted = 0;
+	public static int levelsCompleted = 0;
+	public static int birdsMaxLevelCount = 0;
+	public static int TotalTimeSeconds = 0;
+	public static int TotalTimeDays = 0;
+	public static int TotalTimeMinutes = 0;
+	public static int TotalTimeHours = 0;
+	public static int TotalPlayTime = 0;
 }
 
 [Serializable]

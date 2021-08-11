@@ -18,6 +18,7 @@ public class deathScreenManager : MonoBehaviour {
         description.text = Helpers.Instance.GetDeathText(bird.charName);
         AudioControler.Instance.injuredBirdGraphSound.Play();
         print("showed death menu!");
+        Stats.birdDiedFirstTime();
         foreach (Transform child in Graph.Instance.graphArea.transform)
         {
             child.gameObject.SetActive(false);

@@ -299,6 +299,9 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
 					tooltipInfo.tooltipText = GetTooltipText();
+
+					Var.levelsCompleted++;
+					Stats.levelCompletionTracker();
 				}
 				else
 				{                    

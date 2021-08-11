@@ -503,6 +503,8 @@ public class Bird : MonoBehaviour
 		levelList.Add(levelData);
 		data.level = levelList.Count + 1;
 		levelUpText = null;
+
+		Stats.checkBirdLevelUp(this, false);
 	}
 	public float getBonus()
 	{

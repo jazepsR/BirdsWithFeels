@@ -249,6 +249,14 @@ public class battleAnim :MonoBehaviour {
 
                 Vector3 cloudpos = battle.player.transform.position / 2 + battle.player.transform.position / 2;
                 GameObject fightCloudObj = Instantiate(fightCloud, cloudpos, Quaternion.identity);
+
+                if (Var.freezeEmotions)
+                {
+                    //bird was injured in a trial
+                    //Stats.BirdInjuredInTrial(true);
+                    Var.birdInjuredInTrial = true;
+                }
+
                 if (!battle.player.hasShieldBonus)
                 {
                     battle.player.GetComponentInChildren<Animator>().SetBool("lose", true);
@@ -282,7 +290,7 @@ public class battleAnim :MonoBehaviour {
         {
             battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
             LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.transform.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
-                     , 2.75f).setEaseOutQuad());            
+                     , 2.75f).setEaseOutQuad());
         }
         else
         {

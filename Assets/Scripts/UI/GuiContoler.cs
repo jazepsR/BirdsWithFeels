@@ -150,6 +150,7 @@ public class GuiContoler : MonoBehaviour {
     }
     void Start()
     {
+        StartCoroutine("totalPlayTime");
         Var.Infight = false;
         if (Var.emotionParticles == null)
             Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
@@ -423,6 +424,8 @@ public class GuiContoler : MonoBehaviour {
 
     void Update()
     {
+        Debug.Log("hi" + Var.TotalPlayTime);
+        
         if (Input.GetKeyDown(KeyCode.Escape) && pauseBtn.activeSelf)
         {
             if ((EventController.Instance && EventController.Instance.eventObject.gameObject.activeSelf) || GraphBlocker.gameObject.activeSelf ||( winBanner && winBanner.activeSelf))
@@ -473,7 +476,6 @@ public class GuiContoler : MonoBehaviour {
             AudioControler.Instance.musicSource.time = 41.44f;
             AudioControler.Instance.musicSource.Play();
         }
-        
     }
     public void SpeechBubbleClicked()
     {
@@ -1367,7 +1369,7 @@ public class GuiContoler : MonoBehaviour {
 			}
 		}
 		Var.currentWeek++;
-		Var.shouldDoMapEvent = true;
+        Var.shouldDoMapEvent = true;
 		Var.CanShowHover = true;
 		LeanTween.cancelAll();
         AudioControler.Instance.SaveVolumeSettings();
@@ -1597,6 +1599,11 @@ public class GuiContoler : MonoBehaviour {
     {
         winBanner.SetActive(true);
         WinScreen.Instance.SetupWinScreen(Var.availableBirds.Count > 0 ?Var.availableBirds: Var.activeBirds,Var.freezeEmotions,Var.currentStageID==18);//  new List<Bird>(FillPlayer.Instance.playerBirds));
+
+        if (Var.freezeEmotions)
+        {
+            Stats.checkBirdInjuredInTrial(Var.birdInjuredInTrial);
+        }
         /* foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
          {
              child.transform.gameObject.SetActive(false);
@@ -1646,5 +1653,21 @@ public class GuiContoler : MonoBehaviour {
 		}
 
 	}
+
+    public static IEnumerator totalPlayTime()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            Var.TotalPlayTime += 1;
+            Var.TotalTimeSeconds = (Var.TotalPlayTime % 60);
+            Var.TotalTimeMinutes = (Var.TotalPlayTime / 60) % 60;
+            Var.TotalTimeHours = (Var.TotalPlayTime / 3600) % 24;
+            Var.TotalTimeDays = (Var.TotalPlayTime / 86400) % 365;
+
+            Debug.Log("Playtime: " + Var.TotalTimeDays.ToString() + " Days " +  Var.TotalTimeHours.ToString() + "Hours " + Var.TotalTimeMinutes.ToString() + " minutes " + Var.TotalTimeSeconds.ToString() + " seconds");
+
+        }
+    }
 }
 

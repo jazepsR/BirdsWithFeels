@@ -129,7 +129,8 @@ public class MapControler : MonoBehaviour {
 		timedEvents = FindObjectsOfType<TimedEventControl>();
 		Var.isBoss = false;
 		Var.freezeEmotions = false;
-		timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);		
+		timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);
+		Stats.amountOfWeeks(Var.currentWeek);
 		//SelectionMenu.transform.localScale = Vector3.zero;
 		canHeal = false;
 		if(ambientSounds.clips.Length>0)
@@ -167,6 +168,23 @@ public class MapControler : MonoBehaviour {
 				bird.data.health = Mathf.Min(bird.data.health + 1, bird.data.maxHealth);                
 				bird.data.mentalHealth = Mathf.Min(bird.data.mentalHealth + 1, Var.maxMentalHealth);
 			}
+
+			if (count == 5)
+			{
+				if (bird.data.level == Var.maxLevel)
+				{
+					if (Var.birdsMaxLevelCount == 5)
+					{
+
+					}
+					else
+					{
+						Var.birdsMaxLevelCount++;
+					}
+				}
+
+				Stats.checkBirdLevelUp(bird, true);
+			}
 		}
 
         canRest();
@@ -196,6 +214,8 @@ public class MapControler : MonoBehaviour {
 			}
 		}*/
 		SaveLoad.Save();
+
+		
 		if (Var.loadChapterID >= 0)
 		{
 			LeanTween.delayedCall(0.05f, () =>
@@ -349,6 +369,8 @@ public class MapControler : MonoBehaviour {
         canRest();
 		//foreach (TimedEventControl timedEvent in FindObjectsOfType<TimedEventControl>())
 		//	timedEvent.CheckStatus();
+
+		Stats.amountOfWeeks(Var.currentWeek);
 	}
 
 	public void HideSelectionMenu()

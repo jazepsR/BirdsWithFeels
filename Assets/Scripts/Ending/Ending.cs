@@ -77,6 +77,7 @@ public class Ending : MonoBehaviour
     {
         if (!Var.isEnding)
             return;
+
         kingAnimator.SetInteger("emotion", 0);
         tutorialSetup.TutorialSetup.SetupBirds();
         LeanTween.delayedCall(0.2f, () => ShowEndingStartingText(0));
@@ -130,6 +131,8 @@ public class Ending : MonoBehaviour
             }
             if(showedFinalEvent && !EventController.Instance.eventObject.activeSelf)
             {
+                Stats.vultureKingFightStatus(true);
+                Stats.BeatGameInTime();
                 SceneManager.LoadScene("Credits");
             }
         }
