@@ -424,7 +424,7 @@ public class GuiContoler : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log("hi" + Var.TotalPlayTime);
+        Debug.Log("hi" + Var.totalPlayTime);
         
         if (Input.GetKeyDown(KeyCode.Escape) && pauseBtn.activeSelf)
         {
@@ -1659,13 +1659,13 @@ public class GuiContoler : MonoBehaviour {
         while (true)
         {
             yield return new WaitForSeconds(1);
-            Var.TotalPlayTime += 1;
-            Var.TotalTimeSeconds = (Var.TotalPlayTime % 60);
-            Var.TotalTimeMinutes = (Var.TotalPlayTime / 60) % 60;
-            Var.TotalTimeHours = (Var.TotalPlayTime / 3600) % 24;
-            Var.TotalTimeDays = (Var.TotalPlayTime / 86400) % 365;
+            Var.totalPlayTime += 1;
+            Var.totalTimeSeconds = (Var.totalPlayTime % 60);
+            Var.totalTimeMinutes = (Var.totalPlayTime / 60) % 60;
+            Var.totalTimeHours = (Var.totalPlayTime / 3600) % 24;
+            Var.totalTimeDays = (Var.totalPlayTime / 86400) % 365;
 
-            Debug.Log("Playtime: " + Var.TotalTimeDays.ToString() + " Days " +  Var.TotalTimeHours.ToString() + "Hours " + Var.TotalTimeMinutes.ToString() + " minutes " + Var.TotalTimeSeconds.ToString() + " seconds");
+            Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + " Days " +  Var.totalTimeHours.ToString() + "Hours " + Var.totalTimeMinutes.ToString() + " minutes " + Var.totalTimeSeconds.ToString() + " seconds");
 
         }
     }

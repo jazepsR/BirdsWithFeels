@@ -98,11 +98,11 @@ public static class Var {
 	public static int narrativeEventsCompleted = 0;
 	public static int levelsCompleted = 0;
 	public static int birdsMaxLevelCount = 0;
-	public static int TotalTimeSeconds = 0;
-	public static int TotalTimeDays = 0;
-	public static int TotalTimeMinutes = 0;
-	public static int TotalTimeHours = 0;
-	public static int TotalPlayTime = 0;
+	public static int totalTimeSeconds = 0;
+	public static int totalTimeDays = 0;
+	public static int totalTimeMinutes = 0;
+	public static int totalTimeHours = 0;
+	public static int totalPlayTime = 0;
 }
 
 [Serializable]
@@ -167,3 +167,33 @@ public class MapSaveData
 		this.areaName = areaName;
 	}
 }
+/*
+[Serializable]
+public class StatSaveData
+{
+	public int trialsSuccessfullCount;
+	public bool birdInjuredInTrial;
+	public int narrativeEventsCompleted;
+	public int levelsCompleted;
+	public int birdsMaxLevelCount;
+	public int TotalTimeSeconds;
+	public int TotalTimeDays;
+	public int TotalTimeMinutes;
+	public int TotalTimeHours;
+	public int TotalPlayTime;
+
+	public StatSaveData(int succesCount, bool bInjureTrial, int narrEvent, int lvlCompleted, int birdsMax, int ttSeconds, int ttDays, int ttMins, int ttHours, int ttPlayTime)
+	{
+		this.trialsSuccessfullCount = succesCount;
+		this.birdInjuredInTrial = bInjureTrial;
+		this.narrativeEventsCompleted = narrEvent;
+		this.levelsCompleted = lvlCompleted;
+		this.birdsMaxLevelCount = birdsMax;
+		this.TotalTimeSeconds = ttSeconds;
+		this.TotalTimeDays = ttDays;
+		this.TotalTimeMinutes = ttMins;
+		this.TotalTimeHours =ttHours;
+		this.TotalPlayTime = ttPlayTime;
+	}
+} */
+

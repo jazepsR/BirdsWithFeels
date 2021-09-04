@@ -203,7 +203,7 @@ public static class Stats
 
     public static void BeatGameInTime()
     {
-        if (Var.TotalTimeHours <= 3)
+        if (Var.totalTimeHours <= 3)
         {
             /*Steamworks.SteamUserStats.SetStat("beat_game_in_hours", 1);
             bool gameBeatInTime = true;

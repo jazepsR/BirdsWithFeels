@@ -169,9 +169,9 @@ public class MapControler : MonoBehaviour {
 				bird.data.mentalHealth = Mathf.Min(bird.data.mentalHealth + 1, Var.maxMentalHealth);
 			}
 
-			if (count == 5)
+			if (count == 5) //if all 5 birds are unlocked
 			{
-				if (bird.data.level == Var.maxLevel)
+				if (Var.maxLevel == 5 && bird.data.level == Var.maxLevel)
 				{
 					if (Var.birdsMaxLevelCount == 5)
 					{

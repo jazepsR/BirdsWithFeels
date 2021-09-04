@@ -119,6 +119,16 @@ public class SaveLoad : MonoBehaviour
 		Var.isDragControls = data.isDragControls;
 		Var.maxLevel = data.maxLevel;
 		Var.currentWeek = data.currentWeek;
+		
+		Var.birdInjuredInTrial = data.birdInjuredInTrial;
+		Var.narrativeEventsCompleted = data.narrativeEventsCompleted;
+		Var.levelsCompleted = data.levelsCompleted;
+		Var.birdsMaxLevelCount = data.birdsMaxLevelCount;
+		Var.totalTimeSeconds = data.totalTimeSeconds;
+		Var.totalTimeDays = data.totalTimeDays;
+		Var.totalTimeMinutes = data.totalTimeMinutes;
+		Var.totalTimeHours = data.totalTimeHours;
+		Var.totalPlayTime = data.totalPlayTime;
 		//List<Bird> activeBirds = new List<Bird>();
 		List<Bird> availableBirds = new List<Bird>();
 		foreach (BirdData birdData in data.availableBirds)
@@ -146,6 +156,18 @@ public class SaveData
 	public bool isDragControls = true;
 	public int maxLevel = 2;
 	public int currentWeek = 0;
+	public int trialsSuccessfullCount = 0;
+	
+	/*for stats*/
+	public bool birdInjuredInTrial;
+	public int narrativeEventsCompleted;
+	public int levelsCompleted;
+	public int birdsMaxLevelCount;
+	public int totalTimeSeconds;
+	public int totalTimeDays;
+	public int totalTimeMinutes;
+	public int totalTimeHours;
+	public int totalPlayTime;
 	public SaveData()
 	{
 		SophieUnlocked = Var.SophieUnlocked;
@@ -159,7 +181,23 @@ public class SaveData
 		isDragControls = Var.isDragControls;
 		maxLevel = Var.maxLevel;
 		currentWeek = Var.currentWeek;
-		activeBirds = new List<BirdData>();
+		birdInjuredInTrial = Var.birdInjuredInTrial;
+		narrativeEventsCompleted = Var.narrativeEventsCompleted;
+		levelsCompleted = Var.levelsCompleted;
+		birdsMaxLevelCount = Var.birdsMaxLevelCount;
+
+		birdInjuredInTrial = Var.birdInjuredInTrial;
+		narrativeEventsCompleted = Var.narrativeEventsCompleted;
+		levelsCompleted = Var.levelsCompleted;
+		birdsMaxLevelCount= Var.birdsMaxLevelCount;
+		totalTimeSeconds = Var.totalTimeSeconds;
+		totalTimeDays = Var.totalTimeDays;
+		totalTimeMinutes = Var.totalTimeMinutes;
+		totalTimeHours = Var.totalTimeHours;
+		totalPlayTime = Var.totalPlayTime;
+
+
+	activeBirds = new List<BirdData>();
 		foreach(Bird bird in Var.activeBirds)
 		{
 			//activeBirds.Add(FillPlayer.SetupSaveBird(bird));
