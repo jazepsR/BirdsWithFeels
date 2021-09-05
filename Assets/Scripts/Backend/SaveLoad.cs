@@ -184,11 +184,6 @@ public class SaveData
 		birdInjuredInTrial = Var.birdInjuredInTrial;
 		narrativeEventsCompleted = Var.narrativeEventsCompleted;
 		levelsCompleted = Var.levelsCompleted;
-		birdsMaxLevelCount = Var.birdsMaxLevelCount;
-
-		birdInjuredInTrial = Var.birdInjuredInTrial;
-		narrativeEventsCompleted = Var.narrativeEventsCompleted;
-		levelsCompleted = Var.levelsCompleted;
 		birdsMaxLevelCount= Var.birdsMaxLevelCount;
 		totalTimeSeconds = Var.totalTimeSeconds;
 		totalTimeDays = Var.totalTimeDays;

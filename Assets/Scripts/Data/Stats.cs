@@ -73,8 +73,6 @@ public static class Stats
 
     public static void vultureKingFightStatus(bool isbeat)
     {
-
-
         if (isbeat == true)
         { /*Steamworks.SteamUserStats.SetStat("beat_vulture_king", 1);
            bool kingbeaten = true;
@@ -114,7 +112,8 @@ public static class Stats
                bool nobirdInjured = true;
                Steamworks.SteamUserStats.GetAchievement("trial_no_bird_injured", out nobirdInjured);
                Steamworks.SteamUserStats.SetAchievement("trial_no_bird_injured");*/
-            Debug.Log("ACHIEVEMENT UNLOCKED: trial_no_bird_injured");
+           // Debug.Log("ACHIEVEMENT UNLOCKED: trial_no_bird_injured");
+            SetAchievement("trial_no_bird_injured", "trial_no_bird_injured");
         }
 
         else
@@ -124,7 +123,25 @@ public static class Stats
 
         
     }
-
+    public static void SetAchievement(string achievementName, string statname= "")
+    {
+        if (statname != "")
+        {
+            Steamworks.SteamUserStats.SetStat(statname, 1);
+        }
+        bool completedAchievement = true;
+        Steamworks.SteamUserStats.GetAchievement(achievementName, out completedAchievement);
+        if (completedAchievement == false)
+        {
+            Steamworks.SteamUserStats.SetAchievement(achievementName);
+            Debug.Log("ACHIEVEMENT UNLOCKED: " + achievementName);
+            Steamworks.SteamUserStats.StoreStats();
+        }
+        else
+        {
+            Debug.Log("ACHIEVEMENT ALREADY CLAIMED: " + achievementName);
+        }
+    }
     public static void levelCompletionTracker()
     {
 

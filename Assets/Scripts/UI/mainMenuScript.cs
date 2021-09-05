@@ -268,7 +268,7 @@ public class mainMenuScript : MonoBehaviour {
         Var.totalTimeMinutes = 0;
         Var.totalTimeHours = 0;
         Var.totalPlayTime = 0;
-    DeleteSave("debug");
+        DeleteSave("debug");
     }
 }
 

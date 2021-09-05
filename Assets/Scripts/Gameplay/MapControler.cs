@@ -173,11 +173,7 @@ public class MapControler : MonoBehaviour {
 			{
 				if (Var.maxLevel == 5 && bird.data.level == Var.maxLevel)
 				{
-					if (Var.birdsMaxLevelCount == 5)
-					{
-
-					}
-					else
+					if (Var.birdsMaxLevelCount != 5)
 					{
 						Var.birdsMaxLevelCount++;
 					}
