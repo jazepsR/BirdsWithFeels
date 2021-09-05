@@ -16,19 +16,19 @@ public class FastForwardScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetIsInFight(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        Debug.Log(myIsInFight);
         if (Input.GetKey(KeyCode.LeftShift) && Var.cheatsEnabled) //Slow down time using cheats
         {
             Time.timeScale = 0.25f;
 
         }
-        else if (Input.GetKey(KeyCode.RightShift) || Input.GetMouseButton(1) || SpeedButtonIsHeld && Var.Infight && !GuiContoler.Instance.GraphActive )
+        else if ((Input.GetKey(KeyCode.RightShift) || Input.GetMouseButton(1) || SpeedButtonIsHeld) && (myIsInFight == true && !GuiContoler.Instance.GraphActive))
         {
             SetGameSpeedUp(true);
 
@@ -38,10 +38,10 @@ public class FastForwardScript : MonoBehaviour
             SetGameSpeedUp(false);
         }
 
-        if (myIsInFight&&!Var.Infight) //Checks every frame if the fight is over - there's probably a better way to do this 
+        /*if (myIsInFight) //Checks every frame if the fight is over - there's probably a better way to do this 
         {
             SetIsInFight(false);
-        }
+        }*/
     }
 
     private void SetGameSpeedUp(bool fast)

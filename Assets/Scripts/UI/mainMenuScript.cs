@@ -257,7 +257,18 @@ public class mainMenuScript : MonoBehaviour {
         ContinueBtn.interactable = false;
         Var.tutorialCompleted = false;   
         Var.gameSettings = new Settings(false);
-        DeleteSave("debug");
+
+        Var.trialsSuccessfullCount = 0;
+        Var.birdInjuredInTrial = false;
+        Var.narrativeEventsCompleted = 0;
+        Var.levelsCompleted = 0;
+        Var.birdsMaxLevelCount = 0;
+        Var.totalTimeSeconds = 0;
+        Var.totalTimeDays = 0;
+        Var.totalTimeMinutes = 0;
+        Var.totalTimeHours = 0;
+        Var.totalPlayTime = 0;
+    DeleteSave("debug");
     }
 }
 

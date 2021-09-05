@@ -218,6 +218,7 @@ public class EventController : MonoBehaviour
                     if (currentBird && MapControler.Instance.showGraphAfterEvent)
                     {
                         LeanTween.delayedCall(0.7f, () =>GuiContoler.Instance.OpenMapBigGraph(currentBird));
+                        
                     }
 
                     //Debug.LogError("ojvgeojegojgeojg");

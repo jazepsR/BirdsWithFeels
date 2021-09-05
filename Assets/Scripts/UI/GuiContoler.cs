@@ -150,7 +150,7 @@ public class GuiContoler : MonoBehaviour {
     }
     void Start()
     {
-        StartCoroutine("totalPlayTime");
+        //disableMapInteractivity(true);
         Var.Infight = false;
         if (Var.emotionParticles == null)
             Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
@@ -194,18 +194,24 @@ public class GuiContoler : MonoBehaviour {
                 control.TriggerActivationEvent();
 
             }
-        }
 
-      /*  if (showEmoGraphArrow != null)
-        {
-            if ((Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID) || Var.freezeEmotions || inMap || Var.isEnding)
-                showEmoGraphArrow.SetActive(false);
-            else
+            if (Var.freezeEmotions && !inMap)
             {
-                showEmoGraphArrow.SetActive(true);
+                statPanel.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false); //click for details
             }
-        }*/
-            
+        }
+        
+
+        /*  if (showEmoGraphArrow != null)
+          {
+              if ((Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID) || Var.freezeEmotions || inMap || Var.isEnding)
+                  showEmoGraphArrow.SetActive(false);
+              else
+              {
+                  showEmoGraphArrow.SetActive(true);
+              }
+          }*/
+        StartCoroutine(totalPlayTime());
     }
 
     void tryDialog()
@@ -424,7 +430,6 @@ public class GuiContoler : MonoBehaviour {
 
     void Update()
     {
-        Debug.Log("hi" + Var.totalPlayTime);
         
         if (Input.GetKeyDown(KeyCode.Escape) && pauseBtn.activeSelf)
         {
@@ -805,7 +810,14 @@ public class GuiContoler : MonoBehaviour {
         {
             activeBird.SetEmotion();
             activeBird.seedCollectedInRound = false;
-        }        
+        }
+
+        if (inMap && MapControler.Instance.showGraphAfterEvent)
+        {
+            Debug.Log("enabling stuff stuff");
+            //disableMapInteractivity(false);
+            MapControler.Instance.showGraphAfterEvent = false;
+        }
     }
     public void CloseBirdStats()
     {
@@ -1112,7 +1124,34 @@ public class GuiContoler : MonoBehaviour {
         InitiateGraph(bird);
         CreateBattleReport();
         CheckGraphNavBtns();
-       // Graph.Instance.SetupLevelBar(bird);
+        // Graph.Instance.SetupLevelBar(bird);
+
+        if (MapControler.Instance.showGraphAfterEvent && inMap)
+        {
+            Debug.Log("hello");
+            //GraphBlocker.SetActive(true);
+            //disableMapInteractivity(true);
+        }
+    }
+
+    public bool disableMapInteractivity(bool disable)
+    {
+
+        Debug.Log("disable stuff");
+        mapPan.Instance.scrollingEnabled = disable;
+        foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
+        {
+            icon.GetComponent<ShowTooltip>().enabled = disable;
+            icon.GetComponent<Button>().interactable = disable;
+            
+            if(disable)
+                icon.GetComponent<Button>().transition = Button.Transition.None;
+            else
+                icon.GetComponent<Button>().transition = Button.Transition.ColorTint;
+
+        }
+
+        return disable;
     }
 
     void CloseTutorialText()
@@ -1126,7 +1165,6 @@ public class GuiContoler : MonoBehaviour {
 		canChangeGraph = false;
 		if(inMap && minimap)
 			minimap.SetActive(false);
-
         if (bird)
         {
             int index = -1;
@@ -1416,6 +1454,14 @@ public class GuiContoler : MonoBehaviour {
 				if (activeBird.data.injured)
 				{
 					Time.timeScale = 0.0f;
+                    Debug.Log("Ending var:" + Var.isEnding + "Boss Var:" + Var.isBoss);
+                    if (Var.isEnding)
+                    {
+                        Var.isEnding = false;
+                        Var.isBoss = false;
+                    }
+
+
 					QuitToMap();
 					return false;
 				}
@@ -1651,8 +1697,7 @@ public class GuiContoler : MonoBehaviour {
 		{
 			messageText.text = messages[0];
 		}
-
-	}
+    }
 
     public static IEnumerator totalPlayTime()
     {
@@ -1665,9 +1710,13 @@ public class GuiContoler : MonoBehaviour {
             Var.totalTimeHours = (Var.totalPlayTime / 3600) % 24;
             Var.totalTimeDays = (Var.totalPlayTime / 86400) % 365;
 
-            Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + " Days " +  Var.totalTimeHours.ToString() + "Hours " + Var.totalTimeMinutes.ToString() + " minutes " + Var.totalTimeSeconds.ToString() + " seconds");
+            //Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
 
         }
+
+        
     }
+
+    
 }
 
