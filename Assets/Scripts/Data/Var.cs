@@ -103,6 +103,8 @@ public static class Var {
 	public static int totalTimeMinutes = 0;
 	public static int totalTimeHours = 0;
 	public static int totalPlayTime = 0;
+
+	[HideInInspector] public static bool runPlayTimeTimer = true;
 }
 
 [Serializable]

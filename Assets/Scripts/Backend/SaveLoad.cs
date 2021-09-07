@@ -125,10 +125,10 @@ public class SaveLoad : MonoBehaviour
 		Var.narrativeEventsCompleted = data.narrativeEventsCompleted;
 		Var.levelsCompleted = data.levelsCompleted;
 		Var.birdsMaxLevelCount = data.birdsMaxLevelCount;
-		Var.totalTimeSeconds = data.totalTimeSeconds;
-		Var.totalTimeDays = data.totalTimeDays;
-		Var.totalTimeMinutes = data.totalTimeMinutes;
-		Var.totalTimeHours = data.totalTimeHours;
+	    //Var.totalTimeSeconds = data.totalTimeSeconds;
+		//Var.totalTimeDays = data.totalTimeDays;
+		//Var.totalTimeMinutes = data.totalTimeMinutes;
+		//Var.totalTimeHours = data.totalTimeHours;
 		Var.totalPlayTime = data.totalPlayTime;
 		//List<Bird> activeBirds = new List<Bird>();
 		List<Bird> availableBirds = new List<Bird>();
@@ -165,10 +165,10 @@ public class SaveData
 	public int narrativeEventsCompleted;
 	public int levelsCompleted;
 	public int birdsMaxLevelCount;
-	public int totalTimeSeconds;
-	public int totalTimeDays;
-	public int totalTimeMinutes;
-	public int totalTimeHours;
+	//public int totalTimeSeconds;
+	//public int totalTimeDays;
+	//public int totalTimeMinutes;
+	//public int totalTimeHours;
 	public int totalPlayTime;
 	public SaveData()
 	{
@@ -187,10 +187,10 @@ public class SaveData
 		narrativeEventsCompleted = Var.narrativeEventsCompleted;
 		levelsCompleted = Var.levelsCompleted;
 		birdsMaxLevelCount= Var.birdsMaxLevelCount;
-		totalTimeSeconds = Var.totalTimeSeconds;
-		totalTimeDays = Var.totalTimeDays;
-		totalTimeMinutes = Var.totalTimeMinutes;
-		totalTimeHours = Var.totalTimeHours;
+		//totalTimeSeconds = Var.totalTimeSeconds;
+		//totalTimeDays = Var.totalTimeDays;
+		//totalTimeMinutes = Var.totalTimeMinutes;
+		//totalTimeHours = Var.totalTimeHours;
 		totalPlayTime = Var.totalPlayTime;
 		trialsSuccessfullCount = Var.trialsSuccessfullCount;
 

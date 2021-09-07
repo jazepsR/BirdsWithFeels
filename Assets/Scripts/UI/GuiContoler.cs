@@ -297,6 +297,7 @@ public class GuiContoler : MonoBehaviour {
                 MapControler.Instance.restBtnRaycaster.enabled = true;
             }
             GraphBlocker.SetActive(false);
+            Var.runPlayTimeTimer = true;
         }
         else
         {
@@ -314,6 +315,10 @@ public class GuiContoler : MonoBehaviour {
                 MapControler.Instance.canMove = false;
                 MapControler.Instance.restBtnRaycaster.enabled = false;
             }
+
+            Var.runPlayTimeTimer = false;
+
+
         }
     }
 
@@ -1701,22 +1706,25 @@ public class GuiContoler : MonoBehaviour {
 
     public static IEnumerator totalPlayTime()
     {
-        while (true)
+        while (Var.runPlayTimeTimer)
         {
             yield return new WaitForSeconds(1);
             Var.totalPlayTime += 1;
-            Var.totalTimeSeconds = (Var.totalPlayTime % 60);
-            Var.totalTimeMinutes = (Var.totalPlayTime / 60) % 60;
-            Var.totalTimeHours = (Var.totalPlayTime / 3600) % 24;
-            Var.totalTimeDays = (Var.totalPlayTime / 86400) % 365;
 
-            //Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
-
+            decodeTotalPlayTime();
         }
-
-        
     }
 
-    
+    public static void decodeTotalPlayTime()  //will use this when the stats and other appropiate places are displayed for total play time
+    {
+        
+        Var.totalTimeSeconds = (Var.totalPlayTime % 60);
+        Var.totalTimeMinutes = (Var.totalPlayTime / 60) % 60;
+        Var.totalTimeHours = (Var.totalPlayTime / 3600) % 24;
+        Var.totalTimeDays = (Var.totalPlayTime / 86400) % 365;
+        Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
+    }
+
+
 }
 
