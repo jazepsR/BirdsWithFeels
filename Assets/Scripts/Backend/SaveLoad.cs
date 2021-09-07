@@ -119,7 +119,8 @@ public class SaveLoad : MonoBehaviour
 		Var.isDragControls = data.isDragControls;
 		Var.maxLevel = data.maxLevel;
 		Var.currentWeek = data.currentWeek;
-		
+
+		Var.trialsSuccessfullCount = data.trialsSuccessfullCount;
 		Var.birdInjuredInTrial = data.birdInjuredInTrial;
 		Var.narrativeEventsCompleted = data.narrativeEventsCompleted;
 		Var.levelsCompleted = data.levelsCompleted;
@@ -156,9 +157,10 @@ public class SaveData
 	public bool isDragControls = true;
 	public int maxLevel = 2;
 	public int currentWeek = 0;
-	public int trialsSuccessfullCount = 0;
-	
+
+
 	/*for stats*/
+	public int trialsSuccessfullCount = 0;
 	public bool birdInjuredInTrial;
 	public int narrativeEventsCompleted;
 	public int levelsCompleted;
@@ -190,6 +192,8 @@ public class SaveData
 		totalTimeMinutes = Var.totalTimeMinutes;
 		totalTimeHours = Var.totalTimeHours;
 		totalPlayTime = Var.totalPlayTime;
+		trialsSuccessfullCount = Var.trialsSuccessfullCount;
+
 
 
 	activeBirds = new List<BirdData>();

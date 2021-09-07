@@ -93,7 +93,7 @@ public static class Var {
 	public static int wizardEffectStrength = 6;
 
 	//variables for stats
-	public static int trialsSuccessfullCount = 0;//Serialize this variable!
+	public static int trialsSuccessfullCount = 0;
 	public static bool birdInjuredInTrial = false;
 	public static int narrativeEventsCompleted = 0;
 	public static int levelsCompleted = 0;

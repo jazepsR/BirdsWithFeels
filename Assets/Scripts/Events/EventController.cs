@@ -337,6 +337,7 @@ public class EventController : MonoBehaviour
         Debug.Log("creating Event!");
         if (eventData.isCampFireScene && inMap)
         {
+
             try
             {
                 Transform campFire = eventObject.transform.Find("Campfire");

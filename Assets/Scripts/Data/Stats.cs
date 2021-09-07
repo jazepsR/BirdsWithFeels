@@ -4,7 +4,13 @@ using UnityEngine;
 
 public static class Stats
 {
-
+    public static int stats_total_trial_count = 5;
+    public static int max_bird_level_count = 5;
+    public static int hours_to_play = 3;
+    public static int weeks_to_beat_king =30;
+    public static int weeks_to_pass = 50;
+    public static int total_Narrative_Events = 24;
+    public static int total_Levels = 42;
     public static void Start()
     {  
     }
@@ -45,13 +51,8 @@ public static class Stats
             {
 
                 case TimedEventData.state.completedSuccess:
-                  /*  Steamworks.SteamUserStats.SetStat(steam_acheievements_trial_id, 1);
-                    bool trialDoneInTime = true;
-                    Steamworks.SteamUserStats.GetAchievement(steam_acheievements_trial_id, out trialDoneInTime);
-                    Steamworks.SteamUserStats.SetAchievement(steam_acheievements_trial_id);
-                    Steamworks.SteamUserStats.StoreStats();*/
                     Var.trialsSuccessfullCount++;
-                    Debug.Log("ACHIEVEMENT UNLOCKED: " + steam_acheievements_trial_id);
+                    SetAchievement(steam_acheievements_trial_id, "");
                     break;
                 case TimedEventData.state.completedFail:
                     break;
@@ -60,13 +61,9 @@ public static class Stats
             }
         }
 
-        if(Var.trialsSuccessfullCount == 5)
+        if(Var.trialsSuccessfullCount == stats_total_trial_count)
         {
-            /*Steamworks.SteamUserStats.SetStat("all_trials_complete_in_time", 1);
-            bool allTrialsSuccess = true;
-            Steamworks.SteamUserStats.GetAchievement("all_trials_complete_in_time", out allTrialsSuccess);
-            Steamworks.SteamUserStats.SetAchievement("all_trials_complete_in_time");*/
-            Debug.Log("ACHIEVEMENT UNLOCKED: all_trials_complete_in_time");
+            SetAchievement("all_trials_complete_in_time", "");
         }
         
    }
@@ -74,33 +71,23 @@ public static class Stats
     public static void vultureKingFightStatus(bool isbeat)
     {
         if (isbeat == true)
-        { /*Steamworks.SteamUserStats.SetStat("beat_vulture_king", 1);
-           bool kingbeaten = true;
-           Steamworks.SteamUserStats.GetAchievement("beat_vulture_king", out kingbeaten);
-           Steamworks.SteamUserStats.SetAchievement("beat_vulture_king");*/
-            Debug.Log("ACHIEVEMENT UNLOCKED: beat_vulture_king");
+        { 
+            SetAchievement("beat_vulture_king", "");
         }
         
     }
 
     public static void amountOfWeeks(int weeks)
     {
-        if (weeks >= 50)
-        { /*Steamworks.SteamUserStats.SetStat("reach_amount_of_weeks", 1);
-           bool amountOfWeeks = true;
-           Steamworks.SteamUserStats.GetAchievement("reach_amount_of_weeks", out amountOfWeeks);
-           Steamworks.SteamUserStats.SetAchievement("reach_amount_of_weeks");*/
-            Debug.Log("ACHIEVEMENT UNLOCKED: reach_amount_of_weeks");
+        if (weeks >= weeks_to_pass)
+        { 
+            SetAchievement("reach_amount_of_weeks", "");
         }
     }
 
     public static void birdDiedFirstTime()
     {
-        /*Steamworks.SteamUserStats.SetStat("birds_death", 1);
-           bool birddeath = true;
-           Steamworks.SteamUserStats.GetAchievement("birds_death", out birddeath);
-           Steamworks.SteamUserStats.SetAchievement("birds_death");*/
-        Debug.Log("ACHIEVEMENT UNLOCKED: birds_death");
+        SetAchievement("birds_death", "");
     }
 
     public static void checkBirdInjuredInTrial(bool isbirdInjured)
@@ -108,12 +95,7 @@ public static class Stats
 
         if (!isbirdInjured)
         {
-            /*Steamworks.SteamUserStats.SetStat("trial_no_bird_injured", 1);
-               bool nobirdInjured = true;
-               Steamworks.SteamUserStats.GetAchievement("trial_no_bird_injured", out nobirdInjured);
-               Steamworks.SteamUserStats.SetAchievement("trial_no_bird_injured");*/
-           // Debug.Log("ACHIEVEMENT UNLOCKED: trial_no_bird_injured");
-            SetAchievement("trial_no_bird_injured", "trial_no_bird_injured");
+            SetAchievement("trial_no_bird_injured", "");
         }
 
         else
@@ -146,26 +128,18 @@ public static class Stats
     {
 
         Debug.Log("Level Completed: " + Var.levelsCompleted + " out of 42");
-        if (Var.levelsCompleted == 42)
+        if (Var.levelsCompleted == total_Levels)
         {
-            /*Steamworks.SteamUserStats.SetStat("complete_all_levels", 1);
-            bool completedalllevels = true;
-            Steamworks.SteamUserStats.GetAchievement("complete_all_levels", out completedalllevels);
-            Steamworks.SteamUserStats.SetAchievement("complete_all_levels");*/
-            Debug.Log("ACHIEVEMENT UNLOCKED: narrative_events_unlocked");
+            SetAchievement("complete_all_levels","");
         }
     }
 
     public static void narrativeEventCompletionTracker()
     {
         Debug.Log("Narrative Events Completed: " + Var.narrativeEventsCompleted + " out of 24");
-        if (Var.narrativeEventsCompleted == 24)
+        if (Var.narrativeEventsCompleted == total_Narrative_Events)
         {
-            /*Steamworks.SteamUserStats.SetStat("narrative_events_unlocked", 1);
-            bool didAllNarEvents = true;
-            Steamworks.SteamUserStats.GetAchievement("narrative_events_unlocked", out didAllNarEvents);
-            Steamworks.SteamUserStats.SetAchievement("narrative_events_unlocked");*/
-            Debug.Log("ACHIEVEMENT UNLOCKED: narrative_events_unlocked");
+            SetAchievement("narrative_events_unlocked", "");
         }
     }
 
@@ -175,58 +149,37 @@ public static class Stats
         {
             if (bird.data.level > 1)
             {
-                /*Steamworks.SteamUserStats.SetStat("bird_level_up", 1);
-                bool birdlevelup = true;
-                Steamworks.SteamUserStats.GetAchievement("bird_level_up", out birdlevelup);
-                Steamworks.SteamUserStats.SetAchievement("bird_level_up");*/
-                Debug.Log("ACHIEVEMENT UNLOCKED: bird_level_up");
+                SetAchievement("bird_level_up", "");
             }
 
             if (bird.data.level == Var.maxLevel)
             {
-                /*Steamworks.SteamUserStats.SetStat("bird_level_up_max", 1);
-               bool birdMaxLevel = true;
-               Steamworks.SteamUserStats.GetAchievement("bird_level_up_max", out birdMaxLevel);
-               Steamworks.SteamUserStats.SetAchievement("bird_level_up_max");*/
-                Debug.Log("ACHIEVEMENT UNLOCKED: bird_level_up_max");
+                SetAchievement("bird_level_up_max", "");
             }
         }
 
         if (inMap == true)
         {
-            if (Var.birdsMaxLevelCount == 5)
+            if (Var.birdsMaxLevelCount == max_bird_level_count)
             {
-                /*Steamworks.SteamUserStats.SetStat("level_up_all_birds", 1);
-               bool birdsAllMaxLevel = true;
-               Steamworks.SteamUserStats.GetAchievement("level_up_all_birds", out birdsAllMaxLevel);
-               Steamworks.SteamUserStats.SetAchievement("level_up_all_birds");*/
-                Debug.Log("ACHIEVEMENT UNLOCKED: level_up_all_birds");
+                SetAchievement("level_up_all_birds", "");
             }
         }
     }
 
     public static void vulture_king_in_time()
     {
-        if (Var.currentWeek <= 30)
+        if (Var.currentWeek <= weeks_to_beat_king)
         {
-            /*Steamworks.SteamUserStats.SetStat("vulture_king_in_time", 1);
-            bool vultureKingInTime = true;
-            Steamworks.SteamUserStats.GetAchievement("vulture_king_in_time", out vultureKingInTime);
-            Steamworks.SteamUserStats.SetAchievement("vulture_king_in_time");*/
-            Debug.Log("ACHIEVEMENT UNLOCKED: vulture_king_in_time");
-            
+            SetAchievement("vulture_king_in_time", "");
         }
     }
 
     public static void BeatGameInTime()
     {
-        if (Var.totalTimeHours <= 3)
+        if (Var.totalTimeHours <= hours_to_play)
         {
-            /*Steamworks.SteamUserStats.SetStat("beat_game_in_hours", 1);
-            bool gameBeatInTime = true;
-            Steamworks.SteamUserStats.GetAchievement("beat_game_in_hours", out gameBeatInTime);
-            Steamworks.SteamUserStats.SetAchievement("beat_game_in_hours");*/
-            Debug.Log("ACHIEVEMENT UNLOCKED: beat_game_in_hours");
+            SetAchievement("beat_game_in_hours", "");
         }
     }
 }
