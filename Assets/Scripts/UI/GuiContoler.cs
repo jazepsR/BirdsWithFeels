@@ -1144,6 +1144,8 @@ public class GuiContoler : MonoBehaviour {
 
         Debug.Log("disable stuff");
         mapPan.Instance.scrollingEnabled = disable;
+        MapControler.Instance.canMove = disable;
+        MapControler.Instance.restBtnRaycaster.enabled = disable;
         foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
         {
             icon.GetComponent<ShowTooltip>().enabled = disable;
@@ -1722,7 +1724,7 @@ public class GuiContoler : MonoBehaviour {
         Var.totalTimeMinutes = (Var.totalPlayTime / 60) % 60;
         Var.totalTimeHours = (Var.totalPlayTime / 3600) % 24;
         Var.totalTimeDays = (Var.totalPlayTime / 86400) % 365;
-        Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
+       // Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
     }
 
 

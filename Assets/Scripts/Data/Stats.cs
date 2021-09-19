@@ -152,7 +152,7 @@ public static class Stats
                 SetAchievement("bird_level_up", "");
             }
 
-            if (bird.data.level == Var.maxLevel)
+            if (bird.data.level == max_bird_level_count)
             {
                 SetAchievement("bird_level_up_max", "");
             }
