@@ -55,9 +55,15 @@ public class Credits_special : MonoBehaviour
             }
             else
             {
-                Finished();
+                StartCoroutine("WaitAndContinue", 1.5f);
             }
         }
+    }
+
+     IEnumerator WaitAndContinue(float seconds)
+    {
+        yield return new WaitForSecondsRealtime(seconds);
+        Finished();
     }
 
     private List<Credits_person> shuffleList(List<Credits_person> team)
