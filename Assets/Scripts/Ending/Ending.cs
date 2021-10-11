@@ -131,8 +131,8 @@ public class Ending : MonoBehaviour
             }
             if(showedFinalEvent && !EventController.Instance.eventObject.activeSelf)
             {
-                Stats.vultureKingFightStatus(true);
-                Stats.BeatGameInTime();
+                Achievements.vultureKingFightStatus(true);
+                Achievements.BeatGameInTime();
                 SceneManager.LoadScene("Credits");
             }
         }

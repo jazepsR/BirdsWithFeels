@@ -1,185 +1,193 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public static class Stats
+public class Stats : MonoBehaviour
 {
-    public static int stats_total_trial_count = 5;
-    public static int max_bird_level_count = 5;
-    public static int hours_to_play = 3;
-    public static int weeks_to_beat_king =30;
-    public static int weeks_to_pass = 50;
-    public static int total_Narrative_Events = 24;
-    public static int total_Levels = 42;
-    public static void Start()
-    {  
-    }
+    public bool isShowingStatsMenu = false;
+    public GameObject statsMenu;
+    public int currentPage;
+    public int currentSection;
+    public List<GameObject> listOfSections;
+    public List<GameObject> listOfPagesInASection;
+    private bool isLastPage;
+    private bool isFirstPage;
 
-    /*void Update()
+    private GameObject sectionContainers;
+    
+
+
+    // Start is called before the first frame update
+    void Start()
     {
-    }*/
+        isShowingStatsMenu = true; //debug purposes
 
-   public static void getTrialDetails(TimedEventData anEvent)
-   {
-        var steam_acheievements_trial_id = "";
-        switch (anEvent.eventName)
+        if (statsMenu != null && isShowingStatsMenu)
         {
-            case "Terry's farm is in trouble":
-                steam_acheievements_trial_id = "terry_trial_in_time";
-                break;
-            case "Rebecca's family is leaving":
-                steam_acheievements_trial_id = "rebecca_trial_in_time";
-                break;
-            case "Talonport under siege":
-                steam_acheievements_trial_id = "alex_trial_in_time";
-                break;
-            case "Kim's boyfriend in peril":
-                steam_acheievements_trial_id = "kim_trial_in_time";
-                break;
-            case "A fight for knowledge":
-                steam_acheievements_trial_id = "sophie_trial_in_time";
-                break;
-            default:
-                steam_acheievements_trial_id = " ";
-                break;
-        }
-
-
-        if (steam_acheievements_trial_id != " ")
-        {
-            switch (anEvent.currentState)
+            foreach (Transform child in statsMenu.transform)
             {
+                if (child.name == "Sections")
+                {
+                    sectionContainers = child.gameObject;
+                    
+                    break;
+                }
 
-                case TimedEventData.state.completedSuccess:
-                    Var.trialsSuccessfullCount++;
-                    SetAchievement(steam_acheievements_trial_id, "");
-                    break;
-                case TimedEventData.state.completedFail:
-                    break;
-                case TimedEventData.state.failed:
-                    break;
             }
-        }
 
-        if(Var.trialsSuccessfullCount == stats_total_trial_count)
-        {
-            SetAchievement("all_trials_complete_in_time", "");
+            foreach (Transform child in sectionContainers.transform)
+            {
+                listOfSections.Add(child.gameObject); // sections
+            }
+
+            refreshPageList(currentSection);
+
+            goToPage(currentSection, currentPage); //first section, first page
+
+            
+
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         
-   }
+    }
 
-    public static void vultureKingFightStatus(bool isbeat)
+    public void ShowStatsMenu()
     {
-        if (isbeat == true)
-        { 
-            SetAchievement("beat_vulture_king", "");
-        }
+        isShowingStatsMenu = true;
+        statsMenu.SetActive(true);
+    }
+
+    public void HideStatsMenu()
+    {
+        isShowingStatsMenu = false;
+        statsMenu.SetActive(false);
         
     }
 
-    public static void amountOfWeeks(int weeks)
+    public void refreshPageList(int aSection)
     {
-        if (weeks >= weeks_to_pass)
-        { 
-            SetAchievement("reach_amount_of_weeks", "");
+        listOfPagesInASection.Clear();
+
+        foreach (Transform child in listOfSections[aSection].transform)
+        {
+            listOfPagesInASection.Add(child.gameObject); // pages in a section
         }
     }
-
-    public static void birdDiedFirstTime()
+    public void NextPage()
     {
-        SetAchievement("birds_death", "");
-    }
-
-    public static void checkBirdInjuredInTrial(bool isbirdInjured)
-    {
-
-        if (!isbirdInjured)
+        //check if last page of section, if so - go to next one, if not loop back to the start. 
+        if (currentPage == listOfPagesInASection.Count - 1)
         {
-            SetAchievement("trial_no_bird_injured", "");
+            try
+            {
+                listOfPagesInASection[currentPage].transform.gameObject.SetActive(false);
+                goToPage(currentSection + 1, 0);
+            }
+            catch {
+                listOfPagesInASection[currentPage].transform.gameObject.SetActive(false);
+                goToPage(0, 0); //reset to first section and page
+            }
         }
 
         else
         {
-            Var.birdInjuredInTrial = false;
+            //go to next page of section
+            listOfPagesInASection[currentPage].transform.gameObject.SetActive(false);
+            goToPage(currentSection, currentPage + 1);
+        }
+    }
+
+    public void PreviousPage()
+    {
+        Debug.Log("try previous");
+        if (currentPage == 0)
+        {
+
+            if (currentSection == listOfSections.Count - 1)
+            {
+                Debug.Log("LOL2");
+                refreshPageList(listOfSections.Count - 2);
+                goToPage(listOfSections.Count - 2, listOfPagesInASection.Count - 1);
+
+            }
+            else if (currentSection == 0) {
+                refreshPageList(listOfSections.Count - 1);
+                goToPage(listOfSections.Count - 1, listOfPagesInASection.Count - 1);
+            }
+            else {
+                    refreshPageList(currentSection - 1);
+                    goToPage(currentSection - 1, listOfPagesInASection.Count - 1);
+                }
+               
+         
+         
+               // refreshPageList(currentSection - 1);
+               // goToPage(listOfSections.Count - 1, listOfPagesInASection.Count - 1); 
+            
         }
 
-        
-    }
-    public static void SetAchievement(string achievementName, string statname= "")
-    {
-        if (statname != "")
-        {
-            Steamworks.SteamUserStats.SetStat(statname, 1);
-        }
-        bool completedAchievement = true;
-        Steamworks.SteamUserStats.GetAchievement(achievementName, out completedAchievement);
-        if (completedAchievement == false)
-        {
-            Steamworks.SteamUserStats.SetAchievement(achievementName);
-            Debug.Log("ACHIEVEMENT UNLOCKED: " + achievementName);
-            Steamworks.SteamUserStats.StoreStats();
-        }
         else
         {
-            Debug.Log("ACHIEVEMENT ALREADY CLAIMED: " + achievementName);
-        }
-    }
-    public static void levelCompletionTracker()
-    {
-
-        Debug.Log("Level Completed: " + Var.levelsCompleted + " out of 42");
-        if (Var.levelsCompleted == total_Levels)
-        {
-            SetAchievement("complete_all_levels","");
+            //go to previous page of section
+            Debug.Log("hello");
+            goToPage(currentSection, currentPage - 1);
         }
     }
 
-    public static void narrativeEventCompletionTracker()
+    public void exitStats()
     {
-        Debug.Log("Narrative Events Completed: " + Var.narrativeEventsCompleted + " out of 24");
-        if (Var.narrativeEventsCompleted == total_Narrative_Events)
+        if (SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
         {
-            SetAchievement("narrative_events_unlocked", "");
+            SceneManager.LoadScene("MainMenu");
+        }
+        else {
+            HideStatsMenu();
         }
     }
 
-    public static void checkBirdLevelUp(Bird bird, bool inMap)
+    public void goToPage(int section, int page)
     {
-        if (inMap == false)
-        {
-            if (bird.data.level > 1)
+        //disables other sections and their pages and enables selected section
+        
+        try {
+            
+            if (!listOfSections[section].activeSelf)
             {
-                SetAchievement("bird_level_up", "");
-            }
+                foreach (GameObject aSection in listOfSections)
+                {
+                    if (aSection != listOfSections[section])
+                    {
+                        aSection.SetActive(false);
 
-            if (bird.data.level == max_bird_level_count)
-            {
-                SetAchievement("bird_level_up_max", "");
-            }
-        }
+                        foreach (Transform aPage in aSection.transform)
+                        {
+                            aPage.gameObject.SetActive(false);
+                        }
+                    }
+                }
 
-        if (inMap == true)
-        {
-            if (Var.birdsMaxLevelCount == max_bird_level_count)
-            {
-                SetAchievement("level_up_all_birds", "");
+                listOfSections[section].SetActive(true);
             }
         }
-    }
 
-    public static void vulture_king_in_time()
-    {
-        if (Var.currentWeek <= weeks_to_beat_king)
-        {
-            SetAchievement("vulture_king_in_time", "");
-        }
-    }
+        catch { }
 
-    public static void BeatGameInTime()
-    {
-        if (Var.totalTimeHours <= hours_to_play)
-        {
-            SetAchievement("beat_game_in_hours", "");
-        }
+        //goes to select page
+        
+        listOfSections[section].transform.Find(listOfPagesInASection[page].name).gameObject.SetActive(true);
+
+        currentPage = page;
+        currentSection = section;
+
+        Debug.Log("current section:" + currentSection + " currentPage: " + currentPage);
+
+       
+
+
     }
 }

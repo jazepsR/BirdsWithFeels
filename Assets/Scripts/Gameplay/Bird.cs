@@ -278,7 +278,7 @@ public class Bird : MonoBehaviour
 			{
 				mapHighlight.SetActive(false);
 				MapControler.Instance.selectedBirds.Remove(this);
-				MapControler.Instance.CanLoadBattle();
+				//MapControler.Instance.CanLoadBattle();
 			}
 		}
 
@@ -504,7 +504,7 @@ public class Bird : MonoBehaviour
 		data.level = levelList.Count + 1;
 		levelUpText = null;
 
-		Stats.checkBirdLevelUp(this, false);
+		Achievements.checkBirdLevelUp(this, false);
 	}
 	public float getBonus()
 	{
@@ -860,7 +860,7 @@ public class Bird : MonoBehaviour
 					birdSounds.birdSelect.Play();
 					MapControler.Instance.selectedBirds.Add(this);
 				}
-				MapControler.Instance.CanLoadBattle();
+				//MapControler.Instance.CanLoadBattle();
 				return;
 				if (MapControler.Instance.canHeal)
 				{
@@ -1636,7 +1636,7 @@ public class Bird : MonoBehaviour
 		SetCoolDownRing(false);
 		if (inMap)
 		{
-			MapControler.Instance.CanLoadBattle();
+			//MapControler.Instance.CanLoadBattle();
 		}
 	}
 }
