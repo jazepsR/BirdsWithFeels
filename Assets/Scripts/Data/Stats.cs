@@ -15,7 +15,9 @@ public class Stats : MonoBehaviour
     private bool isFirstPage;
 
     private GameObject sectionContainers;
-    
+
+    [SerializeField]
+    private Animator myPageTurner;
 
 
     // Start is called before the first frame update
@@ -80,6 +82,12 @@ public class Stats : MonoBehaviour
     }
     public void NextPage()
     {
+
+        if (myPageTurner != null)
+        {
+            myPageTurner.SetTrigger("turnright");
+        }
+
         //check if last page of section, if so - go to next one, if not loop back to the start. 
         if (currentPage == listOfPagesInASection.Count - 1)
         {
@@ -102,9 +110,10 @@ public class Stats : MonoBehaviour
         }
     }
 
-    public void PreviousPage()
+     IEnumerator PreviousPageAfterDelay()
     {
-        Debug.Log("try previous");
+        yield return new WaitForSeconds(0.26f);
+
         if (currentPage == 0)
         {
 
@@ -115,20 +124,22 @@ public class Stats : MonoBehaviour
                 goToPage(listOfSections.Count - 2, listOfPagesInASection.Count - 1);
 
             }
-            else if (currentSection == 0) {
+            else if (currentSection == 0)
+            {
                 refreshPageList(listOfSections.Count - 1);
                 goToPage(listOfSections.Count - 1, listOfPagesInASection.Count - 1);
             }
-            else {
-                    refreshPageList(currentSection - 1);
-                    goToPage(currentSection - 1, listOfPagesInASection.Count - 1);
-                }
-               
-         
-         
-               // refreshPageList(currentSection - 1);
-               // goToPage(listOfSections.Count - 1, listOfPagesInASection.Count - 1); 
-            
+            else
+            {
+                refreshPageList(currentSection - 1);
+                goToPage(currentSection - 1, listOfPagesInASection.Count - 1);
+            }
+
+
+
+            // refreshPageList(currentSection - 1);
+            // goToPage(listOfSections.Count - 1, listOfPagesInASection.Count - 1); 
+
         }
 
         else
@@ -137,6 +148,20 @@ public class Stats : MonoBehaviour
             Debug.Log("hello");
             goToPage(currentSection, currentPage - 1);
         }
+
+    }
+
+    public void PreviousPage()
+    {
+        Debug.Log("try previous");
+
+        if (myPageTurner != null)
+        {
+            myPageTurner.SetTrigger("turnleft");
+        }
+
+        StartCoroutine("PreviousPageAfterDelay");
+      
     }
 
     public void exitStats()
