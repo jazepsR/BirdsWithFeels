@@ -245,20 +245,27 @@ public class EventController : MonoBehaviour
 
    
 
-    private IEnumerator WaitAndPrint(string printText, bool shouldShowContinue)
+    private IEnumerator WaitAndPrint(string printText, bool shouldShowContinue,bool fastprint = false)
     {
 
         continueBtn.GetComponent<Animator>().SetBool("active", false);
         text.text = "";
         printing = true;
-        foreach (char ch in printText)
+        if (fastprint)
         {
-            text.text += ch;
-            yield return null;
-            if (!printing)
+            text.text = printText;
+        }
+        else
+        {
+            foreach (char ch in printText)
             {
-                text.text = printText;
-                break;
+                text.text += ch;
+                yield return null;
+                if (!printing)
+                {
+                    text.text = printText;
+                    break;
+                }
             }
         }
         printing = false;
@@ -704,7 +711,7 @@ public class EventController : MonoBehaviour
             text += "\n" + consequences;
         if (coroutine != null)
             StopCoroutine(coroutine);
-        coroutine = WaitAndPrint(text, true);
+        coroutine = WaitAndPrint(text, true,true);
         StartCoroutine(coroutine);
         if (currentEvent.options[ID].AfterImage != null)
         {
@@ -746,7 +753,12 @@ public class EventController : MonoBehaviour
         GetConsequenceText(currentEvent.options[ID].consequenceType1, currentEvent.options[ID].magnitude1, currentEvent.options[ID].applyToAll),
             GetConsequenceText(currentEvent.options[ID].consequenceType2, currentEvent.options[ID].magnitude2, currentEvent.options[ID].applyToAll),
             GetConsequenceText(currentEvent.options[ID].consequenceType3, currentEvent.options[ID].magnitude3, currentEvent.options[ID].applyToAll) };
-        return string.Join("\n",consequences.Where(s => !System.String.IsNullOrEmpty(s)));
+       string consequenceText= string.Join("\n",consequences.Where(s => !System.String.IsNullOrEmpty(s)));
+      //  if(consequenceText.Length>0)
+        //{
+           //consequenceText = "\n\n-------------------------------------------------------------------- \n " + consequenceText;
+       // }
+        return consequenceText;
     }
 
     public string GetConsequenceText(ConsequenceType type, int magnitude, bool applyToAll)
@@ -774,21 +786,21 @@ public class EventController : MonoBehaviour
                 case ConsequenceType.Courage:
                     if (magnitude > 0)
                     {
-                        infoString += bird.charName + " gains " + magnitude + " confidence\n";
+                        infoString +="<b>"+ bird.charName + " gains "+Helpers.Instance.GetHexColor(Var.Em.Confident) + magnitude + " confidence</color></b>\n";
                     }
                     else
                     {
-                        infoString += bird.charName + "'s caution increases by " + Mathf.Abs(magnitude) + "\n";
+                        infoString += "<b>" + bird.charName + "'s"+Helpers.Instance.GetHexColor(Var.Em.Cautious) +" caution increases by " + Mathf.Abs(magnitude) + "</color></b>\n";
                     }
                     break;
                 case ConsequenceType.Friendliness:
                     if (magnitude > 0)
                     {
-                        infoString += bird.charName + " gains " + magnitude + " social\n";
+                        infoString += "<b>" + bird.charName+Helpers.Instance.GetHexColor(Var.Em.Social) + " gains " + magnitude + " social</color></b>\n";
                     }
                     else
                     {
-                        infoString += bird.charName + " gains " + Mathf.Abs(magnitude) + " solitude\n";
+                        infoString += "<b>" + bird.charName+Helpers.Instance.GetHexColor(Var.Em.Solitary) + " gains " + Mathf.Abs(magnitude) + " solitude</color></b>\n";
                     }
 
                     break;

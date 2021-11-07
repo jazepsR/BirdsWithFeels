@@ -62,7 +62,7 @@ public static class Stats
         }
 
         if(Var.trialsSuccessfullCount == stats_total_trial_count)
-        {
+        {           
             SetAchievement("all_trials_complete_in_time", "");
         }
         
@@ -107,21 +107,28 @@ public static class Stats
     }
     public static void SetAchievement(string achievementName, string statname= "")
     {
-        if (statname != "")
+        try
         {
-            Steamworks.SteamUserStats.SetStat(statname, 1);
+            if (statname != "")
+            {
+                Steamworks.SteamUserStats.SetStat(statname, 1);
+            }
+            bool completedAchievement = true;
+            Steamworks.SteamUserStats.GetAchievement(achievementName, out completedAchievement);
+            if (completedAchievement == false)
+            {
+                Steamworks.SteamUserStats.SetAchievement(achievementName);
+                Debug.Log("ACHIEVEMENT UNLOCKED: " + achievementName);
+                Steamworks.SteamUserStats.StoreStats();
+            }
+            else
+            {
+                Debug.Log("ACHIEVEMENT ALREADY CLAIMED: " + achievementName);
+            }
         }
-        bool completedAchievement = true;
-        Steamworks.SteamUserStats.GetAchievement(achievementName, out completedAchievement);
-        if (completedAchievement == false)
+        catch
         {
-            Steamworks.SteamUserStats.SetAchievement(achievementName);
-            Debug.Log("ACHIEVEMENT UNLOCKED: " + achievementName);
-            Steamworks.SteamUserStats.StoreStats();
-        }
-        else
-        {
-            Debug.Log("ACHIEVEMENT ALREADY CLAIMED: " + achievementName);
+            Debug.Log("ACHIEVEMENT FAILED: " + achievementName);
         }
     }
     public static void levelCompletionTracker()
