@@ -13,6 +13,7 @@ public class MapIconEvent : MapIcon
     public string headingName = "Narrative Event";
     public string description = "";
     private EventScript selectedEvent;
+    [HideInInspector] public bool isTimedEventStart = false;
 
     internal override void Start()
     {
@@ -109,7 +110,11 @@ public class MapIconEvent : MapIcon
     }
     internal override string GetTooltipText()
     {
-        string tooltipText = "<b>" + levelName + "</b>";
+        string tooltipText = "<b>" + levelName + "</b>"; 
+        if (isTimedEventStart)
+        {
+            tooltipText += Helpers.Instance.GetHexColor(Var.Em.Confident)+ "\n<b>This will start a timed event</b></color>";
+        }
         if (!available)
         {
             tooltipText += " -locked";
@@ -122,6 +127,7 @@ public class MapIconEvent : MapIcon
         {
             tooltipText += "\nThis event will affect: <b>"+ selectedEvent.speakers[0].ToString()+"</b>";
         }
+      
         tooltipText += "\nThis node will not take a week";
         return tooltipText;
     }

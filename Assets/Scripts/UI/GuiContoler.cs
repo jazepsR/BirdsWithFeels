@@ -10,6 +10,7 @@ using UnityEngine.Analytics;
 
 public class GuiContoler : MonoBehaviour {
     public static GuiContoler Instance { get; private set; }
+    public GameObject loadingSceen;
     public Image dangerFollowHighlight;
     public Image[] vingette;
     public GameObject kingMouth;
@@ -1417,12 +1418,19 @@ public class GuiContoler : MonoBehaviour {
 		Var.currentWeek++;
         Var.shouldDoMapEvent = true;
 		Var.CanShowHover = true;
-		LeanTween.cancelAll();
+        ShowLoadingScreen();
+        LeanTween.cancelAll();
         AudioControler.Instance.SaveVolumeSettings();
-		SaveLoad.Save();
+        SaveLoad.Save();
 		SceneManager.LoadScene("Map");
 	}
-
+    public void ShowLoadingScreen()
+    {
+        if(loadingSceen!=null)
+        {
+            loadingSceen.SetActive(true);
+        }
+    }
 	public void LoadMainMenu()
 	{
 		Time.timeScale = 1.0f;

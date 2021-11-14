@@ -733,7 +733,9 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				if (bird.gameObject.activeSelf)
 					Var.availableBirds.Add(bird);
 			}
+			GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
 			Var.freezeEmotions = isTrial;
+			GuiContoler.Instance.ShowLoadingScreen();
 			SaveLoad.Save();
 			SceneManager.LoadScene("NewMain");
 		}

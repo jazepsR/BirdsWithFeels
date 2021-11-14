@@ -273,8 +273,7 @@ public class MapControler : MonoBehaviour {
 		{
 			SelectedIcon.LoadBattleScene();
 			AudioControler.Instance.buttonSoundMap.Play();
-            //Debug.LogError(isViewingNode);
-
+			//Debug.LogError(isViewingNode);
 
         }
 	}
