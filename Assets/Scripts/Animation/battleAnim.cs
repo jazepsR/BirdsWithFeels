@@ -288,6 +288,11 @@ public class battleAnim :MonoBehaviour {
 
         if (battle.player.data.injured)
         {
+            if (Var.confrontFail < 999)
+            {
+                Var.confrontFail++;
+            }
+            
             battle.enemy.GetComponentInChildren<Animator>().SetBool("walk", true);
             LeanTween.delayedCall(0.1f, () => LeanTween.move(battle.enemy.transform.gameObject, battle.enemy.transform.position - 20 * Helpers.Instance.dirToVector(battle.enemy.position)
                      , 2.75f).setEaseOutQuad());
@@ -306,6 +311,10 @@ public class battleAnim :MonoBehaviour {
                 if (battle.player == GuiContoler.Instance.selectedBird)
                     battle.player.showText();
                 print(battle.player.charName + " won fight");
+                if (Var.confrontSuccess < 999)
+                {
+                    Var.confrontSuccess++;
+                }
             }
             else
             {
@@ -320,6 +329,10 @@ public class battleAnim :MonoBehaviour {
                 if (battle.player == GuiContoler.Instance.selectedBird)
                     battle.player.showText();
                 print(battle.player.charName + " lost fight");
+                if (Var.confrontFail < 999)
+                {
+                    Var.confrontFail++;
+                }
             }
         }
             battle.enemy.foughtInRound = true;

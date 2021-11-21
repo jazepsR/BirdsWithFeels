@@ -249,6 +249,9 @@ public class Graph : MonoBehaviour {
 		LeanTween.delayedCall(1.7f, () => levelBar.AddPoints(bird));
 		obj.GetComponent<Image>().color = Color.yellow;
 		bird.data.recievedSeeds.Add(bit.name);
+		
+		if(bird.data.emotionSeedsCollected < 99)
+			bird.data.emotionSeedsCollected++;
 		LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, seedMoveTime).setEaseOutBack().setOnComplete(() =>
 		{
 			if(obj)

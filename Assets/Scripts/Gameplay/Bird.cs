@@ -1260,6 +1260,9 @@ public class Bird : MonoBehaviour
 				//data.mentalHealth = 1;
 			}
 			data.mentalHealth = Math.Max(data.mentalHealth - 1, 0);
+			
+			if(data.turnsInDangerZone < 99)
+				data.turnsInDangerZone++;
 
 		}
 		else// if (Mathf.Abs(data.confidence) < Var.DangerZoneStart && Mathf.Abs(data.friendliness) < Var.DangerZoneStart && (Mathf.Abs(prevConf) < Var.DangerZoneStart && Mathf.Abs(prevFriend) < Var.DangerZoneStart))
@@ -1361,7 +1364,10 @@ public class Bird : MonoBehaviour
 		if (prevEmotion.Equals(Var.Em.finish))
 			prevEmotion = emotion;
 
-
+		if (data.emotionsChanged < 99)
+		{
+			data.emotionsChanged++;
+		}
 	}
 
 	public void SetAnimation(Var.Em emotionNum)

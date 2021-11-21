@@ -1720,7 +1720,6 @@ public class GuiContoler : MonoBehaviour {
         {
             yield return new WaitForSeconds(1);
             Var.totalPlayTime += 1;
-
             decodeTotalPlayTime();
         }
     }

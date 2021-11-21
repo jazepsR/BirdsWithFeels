@@ -238,9 +238,9 @@ public class MapControler : MonoBehaviour {
         //ProgressGUI.Instance.PortraitClick(Var.availableBirds[0]);
 
         SelectionMenuAnimator = SelectionMenu.GetComponent<Animator>();
-     
 
-    }
+
+	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {

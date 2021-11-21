@@ -12,6 +12,8 @@ public static class Achievements
     public static int total_Narrative_Events = 24;
     public static int total_Levels = 42;
 
+
+
     public static void Start()
     {  
     }
@@ -20,7 +22,7 @@ public static class Achievements
     {
     }*/
 
-   public static void getTrialDetails(TimedEventData anEvent)
+   public static void getTrialDetails(TimedEventData anEvent, bool forStats = false)
    {
         var steam_acheievements_trial_id = "";
         switch (anEvent.eventName)
@@ -46,24 +48,30 @@ public static class Achievements
         }
 
 
-       if (steam_acheievements_trial_id != "")
-        {
-            Debug.Log("event " + anEvent.currentState);
-            switch (anEvent.currentState)
+        
+            if (steam_acheievements_trial_id != "")
             {
-                case TimedEventData.state.completedSuccess:
-                    Var.trialsSuccessfullCount++;
-                    SetAchievement(steam_acheievements_trial_id, "");
-                    break;
-                case TimedEventData.state.completedFail:
-                    break;
-                case TimedEventData.state.failed:
-                    break;
-                default:
-                    Debug.Log("none can be found");
-                    break;
+                Debug.Log("event " + anEvent.currentState);
+                switch (anEvent.currentState)
+                {
+                    case TimedEventData.state.completedSuccess:
+
+                    if (!forStats)
+                    {
+                        Var.trialsSuccessfullCount++;
+                        SetAchievement(steam_acheievements_trial_id, "");
+                    }
+                        break;
+                    case TimedEventData.state.completedFail:
+                        break;
+                    case TimedEventData.state.failed:
+                        break;
+                    default:
+                        Debug.Log("none can be found");
+                        break;
+                }
             }
-        }
+        
 
         if(Var.trialsSuccessfullCount == stats_total_trial_count)
         {
