@@ -7,27 +7,8 @@ public class Ending : MonoBehaviour
 {
     public static Ending Instance { get; private set; }
     public Animator kingAnimator;
-    public Var.Em[] firstStageEnemies;
-    public Var.Em[] secondStageEnemies;
-    public Var.Em[] thirdStageEnemies;
-    public Var.Em[] forthStageEnemies;
-    public Var.Em[] fifthStageEnemies;
-    public Var.Em[] sixthStageEnemies;
-    //public Var.Em[] seventhStageEnemies;
-    //public Var.Em[] eightStageEnemies;
-    //public Var.Em[] ninethStageEnemies;
-    //public Var.Em[] tenthStageEnemies;
-    [Header("ENDING EVENTS")]
-    public EventScript EndingEvent0_Introduction;
-    public EventScript EndingEvent_PlayerManipulateEmotions1;
-    public EventScript EndingEvent_PlayerManipulateEmotions2;
-    public EventScript EndingEvent_VultureKingCallsPlayerOut;
-    public EventScript EndingEvent_PercySaysNo;
-    public EventScript EndingEvent4_FinalTalk; //Leads into "confront player" event as well
-    [Header("ENDING DIALOGUES")]
-    public Dialogue EndingDialogue1;
-    public Dialogue EndingDialogue2;
-    public Dialogue EndingDialogue3;
+
+    public List<EndingEventStructureScript> EndingBattles;
 
     public bossBattleVultureVisuals visuals;
 
@@ -57,16 +38,13 @@ public class Ending : MonoBehaviour
         if (!Var.isEnding)
             return;
         CurrentPos = 0;
-        AddEnemiesToList(firstStageEnemies);
-        AddEnemiesToList(secondStageEnemies);
-        AddEnemiesToList(thirdStageEnemies);
-        AddEnemiesToList(forthStageEnemies);
-        AddEnemiesToList(fifthStageEnemies);
-        AddEnemiesToList(sixthStageEnemies, false);
-        //AddEnemiesToList(seventhStageEnemies, false);
-      //  AddEnemiesToList(eightStageEnemies);
-       // AddEnemiesToList(ninethStageEnemies);
-       // AddEnemiesToList(tenthStageEnemies);
+
+        for(int i = 0; i < EndingBattles.Count; i++)
+        {
+            AddEnemiesToList(EndingBattles[i].EnemiesToSpawn);
+        }
+
+
         visuals.gameObject.SetActive(true);
         visuals.debugFinalBattleActive = true;
         visuals.setupLastBattle();
@@ -89,7 +67,7 @@ public class Ending : MonoBehaviour
     {
         if (Time.timeSinceLevelLoad > 0.5f && !settingStuffUp)
         {
-            if (showedFirstKingColor&& !showedSecondKingColor && !GuiContoler.Instance.speechBubbleObj.activeSelf)
+            if (showedFirstKingColor&& !showedSecondKingColor && !GuiContoler.Instance.speechBubbleObj.activeSelf) //This is a REALLY jank way to change the king's colors holy cow
             {
                 LeanTween.delayedCall(0.3f, () =>
                 {
@@ -129,13 +107,19 @@ public class Ending : MonoBehaviour
                // EventController.Instance.CreateEvent(EndingEvent4);
               //  showedFinalEvent = true;
             }
+
             if(showedFinalEvent && !EventController.Instance.eventObject.activeSelf)
             {
-                Achievements.vultureKingFightStatus(true);
-                Achievements.BeatGameInTime();
-                SceneManager.LoadScene("Credits");
+                ActivateEnding();
             }
         }
+    }
+
+    private void ActivateEnding()
+    {
+        Achievements.vultureKingFightStatus(true);
+        Achievements.BeatGameInTime();
+        SceneManager.LoadScene("Credits");
     }
 
     public void ShowSmallGraph(float waitTime)
@@ -183,51 +167,27 @@ public class Ending : MonoBehaviour
     public void ShowEndingStartingText(int stage)
     {
 
-        switch (stage)
-        {
-            case 0:
-                EventController.Instance.CreateEvent(EndingEvent0_Introduction);
-                break;
+        if (EndingBattles[stage].EventToPlayBeforeBattle!= null){
+            EventController.Instance.CreateEvent(EndingBattles[stage].EventToPlayBeforeBattle);
 
-            case 1:
-                LeanTween.delayedCall(0.2f,()=> DialogueControl.Instance.CreateParticularDialog(EndingDialogue1));
-                visuals.addVulturesToLeftSide();
-
-                break;
-
-            case 2:
-
-                visuals.addVulturesToLeftSide();
-                LeanTween.delayedCall(0.2f, () => DialogueControl.Instance.CreateParticularDialog(EndingDialogue2));
-
-                break;
-            case 3:
-                visuals.addVulturesToLeftSide();
-                //percy says no once birds have been placed
-
-                break;
-            case 4:
-                visuals.addVulturesToLeftSide();
-                //Nothing mayor happens here? 
-
-                //  LeanTween.delayedCall(0.2f, () => DialogueControl.Instance.CreateParticularDialog(EndingDialogue3));
-
-                break;
-            case 5:
-                showedFinalEvent = true;
-                EventController.Instance.CreateEvent(EndingEvent4_FinalTalk);
-                break;
-            case 6:
-                
-                /*if (!showedFirstKingColor)
-                {
-                  //  DialogueControl.Instance.CreateParticularDialog(EndingDialogue4a);
-                    showedFirstKingColor = true;
-                    kingAnimator.SetInteger("emotion", 1);
-                }*/
-
-                break;
         }
+
+        if (EndingBattles[stage].DialogueToPlayBeforeBattle != null)
+        {
+            LeanTween.delayedCall(0.2f, () => DialogueControl.Instance.CreateParticularDialog(EndingBattles[stage].DialogueToPlayBeforeBattle));
+        }
+
+        if (EndingBattles[stage].VulturesShouldGoToLeftSideThisTurn)
+        {
+            visuals.addVulturesToLeftSide();
+        }
+
+        if (EndingBattles[stage].isFinalBattle)
+        {
+            showedFinalEvent = true;
+        }
+
+
     }
     public void ShowEndingBeforeBattleText(int stage)
     {
@@ -235,36 +195,13 @@ public class Ending : MonoBehaviour
         if (shownMapInfos[stage] == true)
             return;
         shownMapInfos[stage] = true;
-        switch (stage)
+
+        if (EndingBattles[stage].EventToPlayOnceBirdsArePlaced != null)
         {
-            case 0:
+            LeanTween.delayedCall(0.2f, () => EventController.Instance.CreateEvent(EndingBattles[stage].EventToPlayOnceBirdsArePlaced));
 
-               
-                LeanTween.delayedCall(0.2f, () => EventController.Instance.CreateEvent(EndingEvent_PlayerManipulateEmotions1));
-
-                break;
-            case 1:
-                LeanTween.delayedCall(0.2f, () => EventController.Instance.CreateEvent(EndingEvent_PlayerManipulateEmotions2));
-
-                break;
-            case 2:
-                LeanTween.delayedCall(0.2f, () => EventController.Instance.CreateEvent(EndingEvent_VultureKingCallsPlayerOut));
-
-              
-                
-
-                break;
-            case 3:
-
-                LeanTween.delayedCall(0.2f, () => EventController.Instance.CreateEvent(EndingEvent_PercySaysNo));
-                
-                break;
-            case 4:
-                
-                break;
-            case 5:
-                break;
         }
+
     }
     public void ShowEndingFirstGridText(int stage)
     {

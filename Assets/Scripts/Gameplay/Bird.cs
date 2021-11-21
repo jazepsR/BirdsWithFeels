@@ -1260,6 +1260,9 @@ public class Bird : MonoBehaviour
 				//data.mentalHealth = 1;
 			}
 			data.mentalHealth = Math.Max(data.mentalHealth - 1, 0);
+			
+			if(data.turnsInDangerZone < 99)
+				data.turnsInDangerZone++;
 
 			if (data.turnsInDangerZone < 99)
 				data.turnsInDangerZone++;
