@@ -37,14 +37,14 @@ public class Stats : MonoBehaviour
 
             Var.runPlayTimeTimer = false;
         }
-        
+
 
         if (statsMenu != null && isShowingStatsMenu)
-        { 
-           goToPage(listOfPages, currentPage); //first section, first page
-           loadDataGeneralPage();
+        {
+            goToPage(listOfPages, currentPage); //first section, first page
+            loadDataGeneralPage();
 
-         if(SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
+            if (SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
             {
                 foreach (Bird bird in Var.activeBirds)
                 {
@@ -75,12 +75,12 @@ public class Stats : MonoBehaviour
                             break;
                     }
                 }
-            } 
+            }
         }
     }
 
     void loadDataGeneralPage()
-    { 
+    {
         generalPageStatDisplayers[0].GetComponent<Text>().text = (Var.totalTimeDays < 10 ? "0" + Var.totalTimeDays.ToString() : Var.totalTimeDays.ToString()) + " : " + (Var.totalTimeHours < 10 ? "0" + Var.totalTimeHours.ToString() : Var.totalTimeHours.ToString()) + " : " + (Var.totalTimeMinutes < 10 ? "0" + Var.totalTimeMinutes.ToString() : Var.totalTimeMinutes.ToString()) + " : " + (Var.totalTimeSeconds < 10 ? "0" + Var.totalTimeSeconds.ToString() : Var.totalTimeSeconds.ToString());
         generalPageStatDisplayers[1].GetComponent<Text>().text = (Var.currentWeek < 100 ? "00" + Var.currentWeek.ToString() : Var.currentWeek < 10 ? "0" + Var.currentWeek.ToString() : Var.currentWeek.ToString());
         generalPageStatDisplayers[2].GetComponent<Text>().text = (Var.confrontSuccess < 100 ? "00" + Var.confrontSuccess.ToString() : Var.confrontSuccess < 10 ? "0" + Var.confrontSuccess.ToString() : Var.confrontSuccess.ToString());
@@ -106,7 +106,7 @@ public class Stats : MonoBehaviour
         {
             terryPageStats[1].GetComponent<Text>().text = Helpers.Instance.ApplyTitle(bird, "Level " + bird.name + " up to get a title!");
         }
-   
+
         terryPageStats[2].GetComponent<Text>().text = (bird.data.level < 10 ? "0" + bird.data.level.ToString() : bird.data.level.ToString());
 
         //terryPageStats[3].GetComponent<Text>().text = "bird description can be changed here if you want to instead of in gui";
@@ -121,7 +121,7 @@ public class Stats : MonoBehaviour
         }
 
         terryPageStats[6].GetComponent<Text>().text = (bird.data.emotionsChanged < 100 ? "00" + bird.data.emotionsChanged.ToString() : bird.data.emotionsChanged < 10 ? "0" + bird.data.emotionsChanged.ToString() : bird.data.emotionsChanged.ToString());
-       
+
         terryPageStats[7].GetComponent<Text>().text = (bird.data.emotionSeedsCollected < 10 ? "0" + bird.data.emotionSeedsCollected.ToString() : bird.data.emotionSeedsCollected.ToString());
         terryPageStats[8].GetComponent<Text>().text = (bird.data.turnsInDangerZone < 100 ? "00" + bird.data.turnsInDangerZone.ToString() : bird.data.turnsInDangerZone < 10 ? "0" + bird.data.turnsInDangerZone.ToString() : bird.data.turnsInDangerZone.ToString());
         terryPageStats[9].GetComponent<Text>().text = (bird.data.powerUpHeartsUsed < 100 ? "00" + bird.data.powerUpHeartsUsed.ToString() : bird.data.powerUpHeartsUsed < 10 ? "0" + bird.data.powerUpHeartsUsed.ToString() : bird.data.powerUpHeartsUsed.ToString());
@@ -142,19 +142,19 @@ public class Stats : MonoBehaviour
     }
 
     void loadDataKim(Bird bird)
-    { 
-    
+    {
+
     }
 
     void loadDataSophie(Bird bird)
-    { 
-    
+    {
+
     }
 
     public void TerryEvent(TimedEventData data)
-    { 
-       try
-       {
+    {
+        try
+        {
 
             switch (data.currentState)
             {
@@ -173,11 +173,10 @@ public class Stats : MonoBehaviour
             }
         }
 
-<<<<<<< HEAD
-       catch
-       {
+        catch
+        {
             Debug.Log("Terry: Timed Event List size is: " + Var.timedEvents.Count);
-       }
+        }
     }
 
     void RebeccaEvent(TimedEventData data)
@@ -196,11 +195,6 @@ public class Stats : MonoBehaviour
                     Debug.Log("none can be found");
                     break;
             }
-=======
-        if(Var.trialsSuccessfullCount == stats_total_trial_count)
-        {           
-            SetAchievement("all_trials_complete_in_time", "");
->>>>>>> d30cc5859cf9f1901e2d2c0796820a25a93c5cce
         }
 
         catch
@@ -284,12 +278,11 @@ public class Stats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ShowStatsMenu()
     {
-<<<<<<< HEAD
         isShowingStatsMenu = true;
         statsMenu.SetActive(true);
 
@@ -323,8 +316,8 @@ public class Stats : MonoBehaviour
     {
         isShowingStatsMenu = false;
         statsMenu.SetActive(false);
-       // Debug.Log("hi");
-        
+        // Debug.Log("hi");
+
     }
 
     public void NextPage()
@@ -333,39 +326,15 @@ public class Stats : MonoBehaviour
         if (myPageTurner != null)
         {
             myPageTurner.SetTrigger("turnright");
-=======
-        try
-        {
-            if (statname != "")
-            {
-                Steamworks.SteamUserStats.SetStat(statname, 1);
-            }
-            bool completedAchievement = true;
-            Steamworks.SteamUserStats.GetAchievement(achievementName, out completedAchievement);
-            if (completedAchievement == false)
-            {
-                Steamworks.SteamUserStats.SetAchievement(achievementName);
-                Debug.Log("ACHIEVEMENT UNLOCKED: " + achievementName);
-                Steamworks.SteamUserStats.StoreStats();
-            }
-            else
-            {
-                Debug.Log("ACHIEVEMENT ALREADY CLAIMED: " + achievementName);
-            }
-        }
-        catch
-        {
-            Debug.Log("ACHIEVEMENT FAILED: " + achievementName);
->>>>>>> d30cc5859cf9f1901e2d2c0796820a25a93c5cce
         }
 
         Debug.Log("next page");
 
-     
-        goToPage(listOfPages, currentPage + 1); 
+
+        goToPage(listOfPages, currentPage + 1);
     }
 
-     IEnumerator PreviousPageAfterDelay()
+    IEnumerator PreviousPageAfterDelay()
     {
         yield return new WaitForSeconds(0.26f);
 
@@ -392,7 +361,8 @@ public class Stats : MonoBehaviour
         {
             SceneManager.LoadScene("MainMenu");
         }
-        else {
+        else
+        {
             HideStatsMenu();
         }
     }
@@ -416,11 +386,11 @@ public class Stats : MonoBehaviour
         }
 
         catch
-        { 
-            
+        {
+
         }
 
-        
+
 
     }
 }
