@@ -445,6 +445,8 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		if (available)
 			stageState = "<color=#2bd617ff>Available</color>";
 		tooltipText += stageState;
+		if (isTrial)
+			tooltipText += "\n<b>HARD LEVEL!</b>\nBird emotions don't change";
 		tooltipText += "\nLength: <b>" + length +"</b>";
 		tooltipText += "\nMain ENEMY emotion: "+ Helpers.Instance.GetHexColor(type) + type.ToString() +"</color>";
 
@@ -731,7 +733,9 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 				if (bird.gameObject.activeSelf)
 					Var.availableBirds.Add(bird);
 			}
+			GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
 			Var.freezeEmotions = isTrial;
+			GuiContoler.Instance.ShowLoadingScreen();
 			SaveLoad.Save();
 			SceneManager.LoadScene("NewMain");
 		}

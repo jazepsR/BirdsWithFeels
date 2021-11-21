@@ -34,13 +34,15 @@ public class TimedEventControl : MonoBehaviour {
 		{
 			data = Helpers.Instance.GetTimedEvent(eventName);
 		}
-		if (startArea)
-		{
-			startArea.timedEvent = this;
-		}
+		
 		if (MapControler.Instance)
 		{
 			CheckStatus();
+		}
+		if (startArea)
+		{
+			startArea.timedEvent = this;
+			((MapIconEvent)startArea).isTimedEventStart = true;
 		}
 	}
 	

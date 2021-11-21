@@ -173,6 +173,7 @@ public class Stats : MonoBehaviour
             }
         }
 
+<<<<<<< HEAD
        catch
        {
             Debug.Log("Terry: Timed Event List size is: " + Var.timedEvents.Count);
@@ -195,6 +196,11 @@ public class Stats : MonoBehaviour
                     Debug.Log("none can be found");
                     break;
             }
+=======
+        if(Var.trialsSuccessfullCount == stats_total_trial_count)
+        {           
+            SetAchievement("all_trials_complete_in_time", "");
+>>>>>>> d30cc5859cf9f1901e2d2c0796820a25a93c5cce
         }
 
         catch
@@ -283,6 +289,7 @@ public class Stats : MonoBehaviour
 
     public void ShowStatsMenu()
     {
+<<<<<<< HEAD
         isShowingStatsMenu = true;
         statsMenu.SetActive(true);
 
@@ -326,6 +333,30 @@ public class Stats : MonoBehaviour
         if (myPageTurner != null)
         {
             myPageTurner.SetTrigger("turnright");
+=======
+        try
+        {
+            if (statname != "")
+            {
+                Steamworks.SteamUserStats.SetStat(statname, 1);
+            }
+            bool completedAchievement = true;
+            Steamworks.SteamUserStats.GetAchievement(achievementName, out completedAchievement);
+            if (completedAchievement == false)
+            {
+                Steamworks.SteamUserStats.SetAchievement(achievementName);
+                Debug.Log("ACHIEVEMENT UNLOCKED: " + achievementName);
+                Steamworks.SteamUserStats.StoreStats();
+            }
+            else
+            {
+                Debug.Log("ACHIEVEMENT ALREADY CLAIMED: " + achievementName);
+            }
+        }
+        catch
+        {
+            Debug.Log("ACHIEVEMENT FAILED: " + achievementName);
+>>>>>>> d30cc5859cf9f1901e2d2c0796820a25a93c5cce
         }
 
         Debug.Log("next page");
