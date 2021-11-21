@@ -7,6 +7,7 @@ public class Ending : MonoBehaviour
 {
     public static Ending Instance { get; private set; }
     public Animator kingAnimator;
+    public static int endingEnemyLevel = 4;
     public Var.Em[] firstStageEnemies;
     public Var.Em[] secondStageEnemies;
     public Var.Em[] thirdStageEnemies;
