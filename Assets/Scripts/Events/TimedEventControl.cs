@@ -76,7 +76,7 @@ public class TimedEventControl : MonoBehaviour {
 				if (Var.currentWeek<= data.completeBy)
 				{
 					data.currentState = TimedEventData.state.completedSuccess;
-					Stats.getTrialDetails(data);
+					Achievements.getTrialDetails(data);
 					//Debug.Log(data.eventName);
 					EventController.Instance.CreateEvent(completionEvent);
 					AudioControler.Instance.ActivateMusicSource(audioSourceType.battleSource);
@@ -86,7 +86,7 @@ public class TimedEventControl : MonoBehaviour {
 				}else
 				{
 					data.currentState = TimedEventData.state.completedFail;
-					Stats.getTrialDetails(data);
+					Achievements.getTrialDetails(data);
 					//Debug.Log(data.eventName);
 					EventController.Instance.CreateEvent(completionAfterFailEvent);
 					AudioControler.Instance.ActivateMusicSource(audioSourceType.battleSource);
@@ -100,7 +100,7 @@ public class TimedEventControl : MonoBehaviour {
 			if (Var.currentWeek == data.completeBy)
 			{
 				data.currentState = TimedEventData.state.failed;
-				Stats.getTrialDetails(data);
+				Achievements.getTrialDetails(data);
 				//Debug.Log(data.eventName);
 				EventController.Instance.CreateEvent(initialFailEvent);
 			}

@@ -22,7 +22,7 @@ public class FastForwardScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(myIsInFight);
+        //         Debug.Log(myIsInFight);
         if (Input.GetKey(KeyCode.LeftShift) && Var.cheatsEnabled) //Slow down time using cheats
         {
             Time.timeScale = 0.25f;

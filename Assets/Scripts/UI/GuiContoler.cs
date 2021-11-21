@@ -135,6 +135,7 @@ public class GuiContoler : MonoBehaviour {
     [HideInInspector] public int graphInteractTweenID = -1;
     void Awake()
     {
+        
         //if (!Var.StartedNormally)
         //Var.gameSettings.shownLevelTutorial = true;
         LeanTween.init(1000);
@@ -478,14 +479,21 @@ public class GuiContoler : MonoBehaviour {
             else if (CloseBattleReport.gameObject.activeSelf)
                 CloseBattleReport.onClick.Invoke();
         }
-       
-        if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic)
-            AudioControler.Instance.musicSource.loop = false;
 
-        if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic && !AudioControler.Instance.musicSource.isPlaying)
-        {
-            AudioControler.Instance.musicSource.time = 41.44f;
-            AudioControler.Instance.musicSource.Play();
+        try{ 
+            if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic)
+                AudioControler.Instance.musicSource.loop = false;
+
+            if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic && !AudioControler.Instance.musicSource.isPlaying)
+            {
+                AudioControler.Instance.musicSource.time = 41.44f;
+                AudioControler.Instance.musicSource.Play();
+            } 
+        }
+
+        catch
+        { 
+        
         }
     }
     public void SpeechBubbleClicked()
@@ -1148,6 +1156,8 @@ public class GuiContoler : MonoBehaviour {
 
         Debug.Log("disable stuff");
         mapPan.Instance.scrollingEnabled = disable;
+        MapControler.Instance.canMove = disable;
+        MapControler.Instance.restBtnRaycaster.enabled = disable;
         foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
         {
             icon.GetComponent<ShowTooltip>().enabled = disable;
@@ -1664,7 +1674,7 @@ public class GuiContoler : MonoBehaviour {
 
         if (Var.freezeEmotions)
         {
-            Stats.checkBirdInjuredInTrial(Var.birdInjuredInTrial);
+            Achievements.checkBirdInjuredInTrial(Var.birdInjuredInTrial);
         }
         /* foreach (Transform child in winBanner.transform.GetChild(0).transform.GetChild(2))
          {
@@ -1733,9 +1743,12 @@ public class GuiContoler : MonoBehaviour {
         Var.totalTimeMinutes = (Var.totalPlayTime / 60) % 60;
         Var.totalTimeHours = (Var.totalPlayTime / 3600) % 24;
         Var.totalTimeDays = (Var.totalPlayTime / 86400) % 365;
-        Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
+       // Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
     }
 
+    //**Stat Menu Object**//
+
+    
 
 }
 

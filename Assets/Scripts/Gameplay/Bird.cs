@@ -11,23 +11,23 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class BirdSound
 {
 	public AudioGroup birdSelect;
-    public AudioGroup mouseOverBird;
+	public AudioGroup mouseOverBird;
 	public AudioGroup considerSound;
 	public AudioGroup BirdSitDown;
 	public AudioGroup pickupBird;
 	public AudioGroup dropBird;
 	public AudioGroup birdDialogueTalk;
-    public AudioGroup birdBattleConversations;
-    public AudioGroup birdSelectSound;
+	public AudioGroup birdBattleConversations;
+	public AudioGroup birdSelectSound;
 	public AudioGroup birdWinSound;
 	public EventAudio eventAudio;
-	
+
 
 	public AudioGroup GetTalkGroup(Var.Em emotion)
 	{
-		AudioGroup talkGroup = null;		
+		AudioGroup talkGroup = null;
 		talkGroup = birdDialogueTalk;
-		if(talkGroup.clips.Length == 0)
+		if (talkGroup.clips.Length == 0)
 		{
 			talkGroup = AudioControler.Instance.DefaultBirdSound.birdDialogueTalk;
 		}
@@ -278,7 +278,7 @@ public class Bird : MonoBehaviour
 			{
 				mapHighlight.SetActive(false);
 				MapControler.Instance.selectedBirds.Remove(this);
-				MapControler.Instance.CanLoadBattle();
+				//MapControler.Instance.CanLoadBattle();
 			}
 		}
 
@@ -316,7 +316,7 @@ public class Bird : MonoBehaviour
 				{
 					Helpers.Instance.LoadLevelData();
 				}
-				for (int i = 0; i < data.level-1; i++)
+				for (int i = 0; i < data.level - 1; i++)
 				{
 					levelList.Add(Helpers.Instance.levels[i]);
 					if (i + 2 == data.level)
@@ -364,7 +364,7 @@ public class Bird : MonoBehaviour
 	{
 		if (data.injured)
 		{
-			data.TurnsInjured-=reduceBy;
+			data.TurnsInjured -= reduceBy;
 			if (data.TurnsInjured <= 0)
 			{
 				data.injured = false;
@@ -504,7 +504,7 @@ public class Bird : MonoBehaviour
 		data.level = levelList.Count + 1;
 		levelUpText = null;
 
-		Stats.checkBirdLevelUp(this, false);
+		Achievements.checkBirdLevelUp(this, false);
 	}
 	public float getBonus()
 	{
@@ -860,7 +860,7 @@ public class Bird : MonoBehaviour
 					birdSounds.birdSelect.Play();
 					MapControler.Instance.selectedBirds.Add(this);
 				}
-				MapControler.Instance.CanLoadBattle();
+				//MapControler.Instance.CanLoadBattle();
 				return;
 				if (MapControler.Instance.canHeal)
 				{
@@ -1261,6 +1261,9 @@ public class Bird : MonoBehaviour
 			}
 			data.mentalHealth = Math.Max(data.mentalHealth - 1, 0);
 
+			if (data.turnsInDangerZone < 99)
+				data.turnsInDangerZone++;
+
 		}
 		else// if (Mathf.Abs(data.confidence) < Var.DangerZoneStart && Mathf.Abs(data.friendliness) < Var.DangerZoneStart && (Mathf.Abs(prevConf) < Var.DangerZoneStart && Mathf.Abs(prevFriend) < Var.DangerZoneStart))
 		{//In comfort zone
@@ -1361,7 +1364,10 @@ public class Bird : MonoBehaviour
 		if (prevEmotion.Equals(Var.Em.finish))
 			prevEmotion = emotion;
 
-
+		if (data.emotionsChanged < 99)
+		{
+			data.emotionsChanged++;
+		}
 	}
 
 	public void SetAnimation(Var.Em emotionNum)
@@ -1595,7 +1601,7 @@ public class Bird : MonoBehaviour
 		dustObj.transform.localPosition = Vector3.zero;
 		Destroy(dustObj, 1.0f);
 		if (!inMap)
-		{			
+		{
 			LeanTween.delayedCall(0.12f, drawLines);
 			birdSounds.dropBird.Play();
 			//lines.DrawLines();
@@ -1636,7 +1642,7 @@ public class Bird : MonoBehaviour
 		SetCoolDownRing(false);
 		if (inMap)
 		{
-			MapControler.Instance.CanLoadBattle();
+			//MapControler.Instance.CanLoadBattle();
 		}
 	}
 }

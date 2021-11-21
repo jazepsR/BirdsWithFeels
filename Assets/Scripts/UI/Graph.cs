@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Graph : MonoBehaviour {
+public class Graph : MonoBehaviour
+{
 	public Image graphArea;
 	public Image heart;
 	public GameObject prevHeart;
@@ -107,13 +108,13 @@ public class Graph : MonoBehaviour {
 		}
 		if ((GuiContoler.Instance.currentGraph == 3 && afterBattle && !GuiContoler.Instance.inMap) || !Var.gameSettings.shownLevelTutorial)
 		{
-			Debug.Log("not going to create seeds! current graph: "+ GuiContoler.Instance.currentGraph);
+			Debug.Log("not going to create seeds! current graph: " + GuiContoler.Instance.currentGraph);
 		}
 		else
 		{
 			CreateLevelSeeds(bird, afterBattle);
 
-		//	Debug.LogError("going to create seeds! current graph: " + GuiContoler.Instance.currentGraph);
+			//	Debug.LogError("going to create seeds! current graph: " + GuiContoler.Instance.currentGraph);
 		}
 
 	}
@@ -157,7 +158,7 @@ public class Graph : MonoBehaviour {
 	}
 	void CreateLevelSeeds(Bird bird, bool afterBattle)
 	{
-		
+
 		Debug.Log("SEEDS ARE BEING CREATED");
 		float factor = isSmall ? 8 : 18;
 		if (!isSmall)
@@ -207,7 +208,7 @@ public class Graph : MonoBehaviour {
 		if (bird.data.injured)
 			return;
 		if (Var.isEnding || Var.isTutorial || Var.gameSettings.shownLevelTutorial == false)
-			return; 
+			return;
 		if (bird.data.level >= Var.maxLevel)
 		{
 			return;
@@ -225,17 +226,17 @@ public class Graph : MonoBehaviour {
 	}
 	public void CollectSeed(Bird bird, LevelBits bit)
 	{
-		if(bird.data.level >= Var.maxLevel)
-        {
+		if (bird.data.level >= Var.maxLevel)
+		{
 			return;
-        }
+		}
 		Debug.Log("SEEDS ARE BEING COLLECTED");
 		foreach (Transform seed in graphParent.transform)
 		{
-			if(seed.name == bit.name)
-            {
+			if (seed.name == bit.name)
+			{
 				Destroy(seed.gameObject);
-            }
+			}
 		}
 
 		AudioControler.Instance.PlaySound(AudioControler.Instance.collectEmoSeed);
@@ -249,9 +250,12 @@ public class Graph : MonoBehaviour {
 		LeanTween.delayedCall(1.7f, () => levelBar.AddPoints(bird));
 		obj.GetComponent<Image>().color = Color.yellow;
 		bird.data.recievedSeeds.Add(bit.name);
+
+		if (bird.data.emotionSeedsCollected < 99)
+			bird.data.emotionSeedsCollected++;
 		LeanTween.delayedCall(1f, () => LeanTween.move(obj, levelBar.transform.position, seedMoveTime).setEaseOutBack().setOnComplete(() =>
 		{
-			if(obj)
+			if (obj)
 			{
 				LeanTween.value(gameObject, (float scale) => obj.transform.localScale = Vector3.one * scale, obj.transform.localScale.x, 0, 0.4f).
 				setEaseOutBack().setOnComplete(() => Destroy(obj));
@@ -266,7 +270,7 @@ public class Graph : MonoBehaviour {
 		}
 		LeanTween.delayedCall(2.1f, () => GuiContoler.Instance.canChangeGraph = true);
 	}
-		
+
 	public void SetupLevelBar(Bird bird)
 	{
 		levelBar.ClearPoints();
