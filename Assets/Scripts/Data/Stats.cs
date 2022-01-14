@@ -195,8 +195,11 @@ public class Stats : MonoBehaviour
                     Debug.Log("none can be found");
                     break;
             }
+            if (Var.trialsSuccessfullCount == Achievements.stats_total_trial_count)
+            {
+                Achievements.SetAchievement("all_trials_complete_in_time", "");
+            }
         }
-
         catch
         {
             Debug.Log("Rebecca: Timed Event List size is: " + Var.timedEvents.Count);
@@ -327,6 +330,29 @@ public class Stats : MonoBehaviour
         {
             myPageTurner.SetTrigger("turnright");
         }
+       /* try
+        {
+            if (statname != "")
+            {
+                Steamworks.SteamUserStats.SetStat(statname, 1);
+            }
+            bool completedAchievement = true;
+            Steamworks.SteamUserStats.GetAchievement(achievementName, out completedAchievement);
+            if (completedAchievement == false)
+            {
+                Steamworks.SteamUserStats.SetAchievement(achievementName);
+                Debug.Log("ACHIEVEMENT UNLOCKED: " + achievementName);
+                Steamworks.SteamUserStats.StoreStats();
+            }
+            else
+            {
+                Debug.Log("ACHIEVEMENT ALREADY CLAIMED: " + achievementName);
+            }
+        }
+        catch
+        {
+            Debug.Log("ACHIEVEMENT FAILED: " + achievementName);
+        }*/
 
         Debug.Log("next page");
 

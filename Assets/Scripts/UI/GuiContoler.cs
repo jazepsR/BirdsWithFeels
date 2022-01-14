@@ -10,6 +10,7 @@ using UnityEngine.Analytics;
 
 public class GuiContoler : MonoBehaviour {
     public static GuiContoler Instance { get; private set; }
+    public GameObject loadingSceen;
     public Image dangerFollowHighlight;
     public Image[] vingette;
     public GameObject kingMouth;
@@ -809,7 +810,9 @@ public class GuiContoler : MonoBehaviour {
         minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
         if (!Reset())
             return;
-        graphAnime.SetBool("open", false);
+        if (nextMapArea != Var.Em.finish)
+        {
+            graphAnime.SetBool("open", false);
         //LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
         foreach (Transform child in graph.transform.Find("GraphParts").transform)
         {
@@ -827,9 +830,10 @@ public class GuiContoler : MonoBehaviour {
 
         if (inMap && MapControler.Instance.showGraphAfterEvent)
         {
-            Debug.Log("enabling stuff stuff");
+            //Debug.Log("enabling stuff stuff");
             //disableMapInteractivity(false);
             MapControler.Instance.showGraphAfterEvent = false;
+            }
         }
     }
     public void CloseBirdStats()
@@ -1424,12 +1428,19 @@ public class GuiContoler : MonoBehaviour {
 		Var.currentWeek++;
         Var.shouldDoMapEvent = true;
 		Var.CanShowHover = true;
-		LeanTween.cancelAll();
+        ShowLoadingScreen();
+        LeanTween.cancelAll();
         AudioControler.Instance.SaveVolumeSettings();
-		SaveLoad.Save();
+        SaveLoad.Save();
 		SceneManager.LoadScene("Map");
 	}
-
+    public void ShowLoadingScreen()
+    {
+        if(loadingSceen!=null)
+        {
+            loadingSceen.SetActive(true);
+        }
+    }
 	public void LoadMainMenu()
 	{
 		Time.timeScale = 1.0f;
@@ -1644,9 +1655,9 @@ public class GuiContoler : MonoBehaviour {
             Var.tutorialCompleted = true;
             Var.isBoss = false;
             canplayBossTransition = false;
+            showVictoryScreen();
             LeanTween.delayedCall(0.2f, () =>
             {
-                showVictoryScreen();
                 AudioControler.Instance.PlayWinMusic();
             });
             GraphBlocker.SetActive(true);

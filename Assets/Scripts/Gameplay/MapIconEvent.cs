@@ -12,6 +12,8 @@ public class MapIconEvent : MapIcon
     public bool showGraph = true;
     public string headingName = "Narrative Event";
     public string description = "";
+    private EventScript selectedEvent;
+    [HideInInspector] public bool isTimedEventStart = false;
 
     internal override void Start()
     {
@@ -97,6 +99,7 @@ public class MapIconEvent : MapIcon
                     anim.SetInteger("state", 1);
                 });  //Set map icon to "available" state after a delay
                 LeanTween.delayedCall(time, () => anim.SetInteger("state", 1));
+                SetSelectedEvent();
                 tooltipInfo.tooltipText = GetTooltipText();
             }
         }
@@ -107,7 +110,11 @@ public class MapIconEvent : MapIcon
     }
     internal override string GetTooltipText()
     {
-        string tooltipText = "<b>" + levelName + "</b>";
+        string tooltipText = "<b>" + levelName + "</b>"; 
+        if (isTimedEventStart)
+        {
+            tooltipText += Helpers.Instance.GetHexColor(Var.Em.Confident)+ "\n<b>This will start a timed event</b></color>";
+        }
         if (!available)
         {
             tooltipText += " -locked";
@@ -116,7 +123,12 @@ public class MapIconEvent : MapIcon
         {
             tooltipText += "<color=#2bd617ff> -completed</color>";
         }
-        tooltipText += "\n" + levelDescription +"\nThis node will not take a week";
+        if (selectedEvent != null)
+        {
+            tooltipText += "\nThis event will affect: <b>"+ selectedEvent.speakers[0].ToString()+"</b>";
+        }
+      
+        tooltipText += "\nThis node will not take a week";
         return tooltipText;
     }
 
@@ -125,7 +137,11 @@ public class MapIconEvent : MapIcon
         if (available && !completed)
         {
             Var.currentStageID = ID;
-            EventController.Instance.CreateEvent(GetEventToDisplay());
+            if(selectedEvent == null)
+            {
+                SetSelectedEvent();
+            }
+            EventController.Instance.CreateEvent(selectedEvent);
             MapControler.Instance.showGraphAfterEvent = showGraph;
             eventActive = true;
             if(timedEvent)
@@ -135,8 +151,10 @@ public class MapIconEvent : MapIcon
         }
     }
 
-    private EventScript GetEventToDisplay()
+    private void SetSelectedEvent()
     {
+        if (selectedEvent != null)
+            return;
         bool eventFound = false;
         EventScript ev= null;
         while (possibleEvents.Count>0 && !eventFound)
@@ -151,12 +169,12 @@ public class MapIconEvent : MapIcon
         }
         if(eventFound)
         {
-            return ev;
+            selectedEvent= ev;
         }
         else
         {
             Debug.LogError("Had to use event node fallback event!");
-            return EventController.Instance.defaultMapEvent;
+            selectedEvent = EventController.Instance.defaultMapEvent;
         }
     }
 

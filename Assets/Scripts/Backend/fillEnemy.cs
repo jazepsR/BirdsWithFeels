@@ -45,7 +45,7 @@ public class fillEnemy : MonoBehaviour {
 			{
 				fb.myIndex = index % 4;
 			}
-			enemy.data.levelRollBonus = 0;
+			enemy.data.levelRollBonus = Var.isBoss? Ending.endingEnemyLevel :  0;
 			enemy.inUse = false;
 			enemy.gameObject.SetActive(false);
 			index++;
