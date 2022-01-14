@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class mainMenuScript : MonoBehaviour {
+public class mainMenuScript : MonoBehaviour
+{
     public Text title;
     public Color titleColor2;
     Color titleColor;
@@ -21,7 +22,7 @@ public class mainMenuScript : MonoBehaviour {
     public Text deleteSaveText;
     string toDelete = "debug";
     public static mainMenuScript Instance;
-	bool isDelete = false;
+    bool isDelete = false;
     bool tempFullscreen;
     int tempXResloution;
     int tempYResoultion;
@@ -32,7 +33,7 @@ public class mainMenuScript : MonoBehaviour {
     void Awake()
     {
         Instance = this;
-      //  PreloadMap();
+        //  PreloadMap();
     }
 
     void PreloadMap()
@@ -67,10 +68,10 @@ public class mainMenuScript : MonoBehaviour {
 
     private void SetResolutionSelection()
     {
-        for(int i = 0;i<resolutionDropdownOptions.Count;i++)
+        for (int i = 0; i < resolutionDropdownOptions.Count; i++)
         {
-           int x= int.Parse(resolutionDropdownOptions[i].text.Split(' ')[0]);
-            if(x == SaveLoad.resolutionX)
+            int x = int.Parse(resolutionDropdownOptions[i].text.Split(' ')[0]);
+            if (x == SaveLoad.resolutionX)
             {
                 resolutionDropdown.value = i;
                 break;
@@ -95,7 +96,7 @@ public class mainMenuScript : MonoBehaviour {
         for (int i = 0; i < 3; i++)
         {
             SaveSlot slot = Instantiate(saveSlotTemplate, saveSlotParent);
-            slot.Setup(isNewGame, "Save"+(i+1).ToString());
+            slot.Setup(isNewGame, "Save" + (i + 1).ToString());
         }
         buttonPanel.SetActive(false);
         saveSlotPanel.SetActive(true);
@@ -104,7 +105,7 @@ public class mainMenuScript : MonoBehaviour {
     }
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Quit();
         }
@@ -112,7 +113,7 @@ public class mainMenuScript : MonoBehaviour {
 
     public void SelectChapter(int chapterID)
     {
-        Var.loadChapterID = (chapterID-1);
+        Var.loadChapterID = (chapterID - 1);
         SceneManager.LoadScene("Map");
     }
 
@@ -192,7 +193,7 @@ public class mainMenuScript : MonoBehaviour {
     public void DeleteSave(string name)
     {
         SaveLoad.DeleteSave(name);
-        string path = Application.persistentDataPath + "/" +name+"/Terry.dat";
+        string path = Application.persistentDataPath + "/" + name + "/Terry.dat";
         if (System.IO.File.Exists(path))
             System.IO.File.Delete(path);
         path = Application.persistentDataPath + "/" + name + "/Kim.dat";
@@ -216,17 +217,17 @@ public class mainMenuScript : MonoBehaviour {
     {
         deleteSaveDialog.SetActive(true);
         toDelete = name;
-		if (isDelete)
-			deleteSaveText.text = "Are you sure you want to delete the save?";
-		else
-			deleteSaveText.text = "Are you sure you want to overwrite this save? All data will be lost";
+        if (isDelete)
+            deleteSaveText.text = "Are you sure you want to delete the save?";
+        else
+            deleteSaveText.text = "Are you sure you want to overwrite this save? All data will be lost";
 
 
-	}
+    }
     public void yesDelete()
     {
         DeleteSave(toDelete);
-		CloseDeleteDialog();
+        CloseDeleteDialog();
     }
     public void CloseDeleteDialog()
     {
@@ -255,7 +256,7 @@ public class mainMenuScript : MonoBehaviour {
         Var.isTutorial = false;
         Var.isBoss = false;
         ContinueBtn.interactable = false;
-        Var.tutorialCompleted = false;   
+        Var.tutorialCompleted = false;
         Var.gameSettings = new Settings(false);
 
         Var.trialsSuccessfullCount = 0;
@@ -263,10 +264,12 @@ public class mainMenuScript : MonoBehaviour {
         Var.narrativeEventsCompleted = 0;
         Var.levelsCompleted = 0;
         Var.birdsMaxLevelCount = 0;
+        Var.confrontSuccess = 0;
+        Var.confrontFail = 0;
         //Var.totalTimeSeconds = 0;
         //Var.totalTimeDays = 0;
-       // Var.totalTimeMinutes = 0;
-       // Var.totalTimeHours = 0;
+        // Var.totalTimeMinutes = 0;
+        // Var.totalTimeHours = 0;
         Var.totalPlayTime = 0;
         DeleteSave("debug");
     }

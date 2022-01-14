@@ -15,7 +15,7 @@ public class SaveLoad : MonoBehaviour
 		DeleteSave();
 		BinaryFormatter bf = new BinaryFormatter();
 		Directory.CreateDirectory(Application.persistentDataPath + "/" + Var.currentSaveSlot);
-		FileStream file = File.Create(Application.persistentDataPath +"/" +Var.currentSaveSlot + "/saveGame.dat");
+		FileStream file = File.Create(Application.persistentDataPath + "/" + Var.currentSaveSlot + "/saveGame.dat");
 		SaveData saveData = new SaveData();
 		bf.Serialize(file, saveData);
 		file.Close();
@@ -26,7 +26,7 @@ public class SaveLoad : MonoBehaviour
 				foreach (Bird bird in FillPlayer.Instance.playerBirds)
 					bird.SaveBirdData();
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Debug.LogError("BIG ERROR:" + ex.Message);
 				foreach (Bird bird in Var.activeBirds)
@@ -36,7 +36,7 @@ public class SaveLoad : MonoBehaviour
 		}
 	}
 	public static void LoadResolution(bool apply)
-    {
+	{
 		resolutionX = PlayerPrefs.GetInt("resolutionX", 1920);
 		resolutionY = PlayerPrefs.GetInt("resolutionY", 1080);
 		fullscreen = PlayerPrefs.GetInt("fullscreen", 1) == 1 ? true : false;
@@ -46,8 +46,8 @@ public class SaveLoad : MonoBehaviour
 		}
 	}
 
-	public static void SaveResoultion(int x, int y, bool fullScreen,bool apply)
-    {
+	public static void SaveResoultion(int x, int y, bool fullScreen, bool apply)
+	{
 		resolutionX = x;
 		resolutionY = y;
 		fullscreen = fullScreen;
@@ -55,16 +55,16 @@ public class SaveLoad : MonoBehaviour
 		PlayerPrefs.SetInt("resolutionY", resolutionY);
 		PlayerPrefs.SetInt("fullscreen", fullscreen ? 1 : 0);
 		PlayerPrefs.Save();
-		if(apply)
-        {
+		if (apply)
+		{
 			ApplyResloution(x, y, fullScreen);
 		}
 	}
 
 	public static void ApplyResloution(int x, int y, bool fullScreen)
-    {
+	{
 		Screen.SetResolution(x, y, fullScreen);
-    }
+	}
 	public static bool Load()
 	{
 		if (File.Exists(Application.persistentDataPath + "/" + Var.currentSaveSlot + "/saveGame.dat"))
@@ -82,25 +82,25 @@ public class SaveLoad : MonoBehaviour
 		}
 	}
 
-    public static bool CheckIfContinueAvailable()
-    {
-        if (File.Exists(Application.persistentDataPath + "/" + Var.currentSaveSlot + "/saveGame.dat"))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+	public static bool CheckIfContinueAvailable()
+	{
+		if (File.Exists(Application.persistentDataPath + "/" + Var.currentSaveSlot + "/saveGame.dat"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
-    public static void DeleteSave(string slotName = "")
+	public static void DeleteSave(string slotName = "")
 	{
 		string path;
-		if(slotName == "")
+		if (slotName == "")
 			path = Application.persistentDataPath + "/" + Var.currentSaveSlot + "/saveGame.dat";
 		else
-			path =Application.persistentDataPath + "/" + slotName + "/saveGame.dat";
+			path = Application.persistentDataPath + "/" + slotName + "/saveGame.dat";
 		if (File.Exists(path))
 			File.Delete(path);
 
@@ -125,7 +125,9 @@ public class SaveLoad : MonoBehaviour
 		Var.narrativeEventsCompleted = data.narrativeEventsCompleted;
 		Var.levelsCompleted = data.levelsCompleted;
 		Var.birdsMaxLevelCount = data.birdsMaxLevelCount;
-	    //Var.totalTimeSeconds = data.totalTimeSeconds;
+		Var.confrontSuccess = data.confrontSuccess;
+		Var.confrontFail = data.confrontFail;
+		//Var.totalTimeSeconds = data.totalTimeSeconds;
 		//Var.totalTimeDays = data.totalTimeDays;
 		//Var.totalTimeMinutes = data.totalTimeMinutes;
 		//Var.totalTimeHours = data.totalTimeHours;
@@ -170,6 +172,8 @@ public class SaveData
 	//public int totalTimeMinutes;
 	//public int totalTimeHours;
 	public int totalPlayTime;
+	public int confrontSuccess;
+	public int confrontFail;
 	public SaveData()
 	{
 		SophieUnlocked = Var.SophieUnlocked;
@@ -186,7 +190,9 @@ public class SaveData
 		birdInjuredInTrial = Var.birdInjuredInTrial;
 		narrativeEventsCompleted = Var.narrativeEventsCompleted;
 		levelsCompleted = Var.levelsCompleted;
-		birdsMaxLevelCount= Var.birdsMaxLevelCount;
+		confrontSuccess = Var.confrontSuccess;
+		confrontFail = Var.confrontFail;
+		birdsMaxLevelCount = Var.birdsMaxLevelCount;
 		//totalTimeSeconds = Var.totalTimeSeconds;
 		//totalTimeDays = Var.totalTimeDays;
 		//totalTimeMinutes = Var.totalTimeMinutes;
@@ -196,8 +202,8 @@ public class SaveData
 
 
 
-	activeBirds = new List<BirdData>();
-		foreach(Bird bird in Var.activeBirds)
+		activeBirds = new List<BirdData>();
+		foreach (Bird bird in Var.activeBirds)
 		{
 			//activeBirds.Add(FillPlayer.SetupSaveBird(bird));
 		}
@@ -206,35 +212,41 @@ public class SaveData
 		foreach (Bird bird in Var.availableBirds)
 		{
 			//availableBirds.Add(FillPlayer.SetupSaveBird(bird));
-		}        
+		}
 		map = Var.map;
 	}
 }
 [System.Serializable]
-public class BirdData 
+public class BirdData
 {
 	public bool unlocked = true;
-	public int TurnsInjured =0;
-	public int levelRollBonus=0;
+	public int TurnsInjured = 0;
+	public int levelRollBonus = 0;
 	public string charName;
-	public int friendliness =0;
-	public int confidence =0;
-	public int health=3;
-	public int mentalHealth=Var.maxMentalHealth;
-	public int maxHealth=3;
-	public bool injured= false;
-	public Var.Em preferredEmotion= Var.Em.Cautious;
+	public int friendliness = 0;
+	public int confidence = 0;
+	public int health = 3;
+	public int mentalHealth = Var.maxMentalHealth;
+	public int maxHealth = 3;
+	public bool injured = false;
+	public Var.Em preferredEmotion = Var.Em.Cautious;
 	public List<string> recievedSeeds = new List<string>();
 	[System.NonSerialized]
 	public LevelDataScriptable lastLevel = null;
-	public int level=1;
+	public int level = 1;
 	public string birdAbility;
-	public int consecutiveFightsWon =0;
-	public int roundsRested= 0;
-	public int AdventuresRested=0;
-	public int CoolDownLeft=0;
-	public int CoolDownLength=3;
-	
+	public int consecutiveFightsWon = 0;
+	public int roundsRested = 0;
+	public int AdventuresRested = 0;
+	public int CoolDownLeft = 0;
+	public int CoolDownLength = 3;
+	public int emotionsChanged = 0;
+	public int emotionSeedsCollected = 0;
+	public int turnsInDangerZone = 0;
+	public int powerUpSwordsUsed = 0;
+	public int powerUpShieldsUsed = 0;
+	public int powerUpHeartsUsed = 0;
+
 }
 
 

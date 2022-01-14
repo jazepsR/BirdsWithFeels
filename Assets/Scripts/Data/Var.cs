@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using System;
-public static class Var {
+public static class Var
+{
 	public static AudioGroup ambientSounds;
 	public static AudioMixerSnapshot snapshot;
 	public static Bird clickedBird;
@@ -14,15 +15,15 @@ public static class Var {
 	public static bool yesFinalChoice = false;
 	public static bool StartedNormally = false;
 	public static bool CanShowHover = true;
-	public static int currentWeek = 0;     
+	public static int currentWeek = 0;
 	public static int currentBG = 0;
 	public static List<string> shownDialogs = new List<string>();
 	public static List<string> shownEvents = new List<string>();
-	public enum Em { Neutral,Solitary,SuperLonely, Social, SuperFriendly,Confident,SuperConfident,Cautious, SuperScared,finish,Random, Shield};
-	public enum PowerUps { heal,dmg,emotion,obstacle,shield};
+	public enum Em { Neutral, Solitary, SuperLonely, Social, SuperFriendly, Confident, SuperConfident, Cautious, SuperScared, finish, Random, Shield };
+	public enum PowerUps { heal, dmg, emotion, obstacle, shield };
 	public static bool isTutorial = false;
-    public static bool isEnding = false;
-    public static bool tutorialCompleted = true;
+	public static bool isEnding = false;
+	public static bool tutorialCompleted = true;
 	public static bool isBoss = false;
 	public static int loadChapterID = -1;
 	public static GameObject dustCloud = null;
@@ -32,7 +33,7 @@ public static class Var {
 	public static int DangerZoneStart = 14;
 	public static int lvl1 = 5;
 	public static bool fled = false;
-	public  static int lvl2 = 10;
+	public static int lvl2 = 10;
 	public static int confLoseFight = -3;
 	public static int confWinFight = 2;
 	public static int confWinAll = 1;
@@ -43,7 +44,7 @@ public static class Var {
 	public static int friendDiagGain = 0;
 	public static int[] friendTable = new int[] { -2, 0, 2, 4, 6 };
 	public static Bird[] enemies = new Bird[8];
-	public static Bird[,] playerPos = new Bird[4,4];
+	public static Bird[,] playerPos = new Bird[4, 4];
 	public static Dictionary<string, Sprite> spriteDict = new Dictionary<string, Sprite>();
 	public static Text birdInfo;
 	public static Text birdInfoHeading;
@@ -52,12 +53,12 @@ public static class Var {
 	public static Text powerText;
 	public static int health = 3;
 	public static List<BattleData> map = new List<BattleData>();
-	public static List<MapSaveData>mapSaveData = new List<MapSaveData>();
+	public static List<MapSaveData> mapSaveData = new List<MapSaveData>();
 	public static GameObject selectedBird;
 	public static List<Bird> activeBirds = new List<Bird>();
 	public static List<Bird> availableBirds = new List<Bird>();
 	public static int currentStageID = -1;
-    public static int currentBackgroundProgressAnim = -1;
+	public static int currentBackgroundProgressAnim = -1;
 	public static Sprite[] lvlSprites = null;
 	public static Sprite[] skillIcons = null;
 	public static Sprite[] startingLvlSprites = null;
@@ -87,7 +88,7 @@ public static class Var {
 	public static int enemyMaxLevel = 5;
 	/// Tutorial IDs
 	public static int battlePlanningTutorialID = 13;
-    public static int levelTutorialID = 21;
+	public static int levelTutorialID = 21;
 	public static bool cheatsEnabled = true;
 	public static float levelPopupDelay = 0.3f;
 	public static int wizardEffectStrength = 6;
@@ -103,6 +104,8 @@ public static class Var {
 	public static int totalTimeMinutes = 0;
 	public static int totalTimeHours = 0;
 	public static int totalPlayTime = 0;
+	public static int confrontSuccess = 0;
+	public static int confrontFail = 0;
 
 	[HideInInspector] public static bool runPlayTimeTimer = true;
 }
@@ -126,17 +129,17 @@ public class Settings
 	public bool shownLevelCapTutorial = true;
 	public bool useMHP = true;
 	public Settings(bool tutorialsCompleted)
-   {
-        shownFirstLevelUp = tutorialsCompleted;
-        shownBattlePlanningTutorial = tutorialsCompleted;
-        shownLevelTutorial = tutorialsCompleted;
+	{
+		shownFirstLevelUp = tutorialsCompleted;
+		shownBattlePlanningTutorial = tutorialsCompleted;
+		shownLevelTutorial = tutorialsCompleted;
 		shownMapTutorial = tutorialsCompleted;
 		shownMapTutorial2 = tutorialsCompleted;
 		// map feature tutorials
-		shownSwordTutorial =  tutorialsCompleted;
+		shownSwordTutorial = tutorialsCompleted;
 		shownShieldTutorial = tutorialsCompleted;
 		shownEmoSquareTutorial = tutorialsCompleted;
-		shownWizardTutorial = tutorialsCompleted;		
+		shownWizardTutorial = tutorialsCompleted;
 		shownHeartTutorial = tutorialsCompleted;
 		shownOneHealthTutorial = tutorialsCompleted;
 		shownTrialTutorial = tutorialsCompleted;
@@ -157,7 +160,7 @@ public class MapSaveData
 	public bool available;
 	public Var.Em emotion;
 	public bool firstCompletion;
-	public MapSaveData(bool completed, bool available,bool firstCompletion, int ID, List<int> targets, Var.Em emotion, int trialID, string areaName)
+	public MapSaveData(bool completed, bool available, bool firstCompletion, int ID, List<int> targets, Var.Em emotion, int trialID, string areaName)
 	{
 		this.firstCompletion = firstCompletion;
 		this.completed = completed;
