@@ -36,16 +36,39 @@ public class Stats : MonoBehaviour
             isShowingStatsMenu = true;
 
             Var.runPlayTimeTimer = false;
+          
         }
         
 
         if (statsMenu != null && isShowingStatsMenu)
-        { 
+        {
+
+            if (Var.SophieUnlocked)
+            {
+                //all birds are unlocked do nothing
+            }
+            else if (Var.KimUnlocked)
+            {
+                //cut sophie page
+
+                listOfPages.RemoveAt(listOfPages.Count - 1);
+               // listOfPages.Sort();
+
+            }
+            else
+            {
+                listOfPages.RemoveAt(listOfPages.Count - 2);
+                //listOfPages.Sort();
+                listOfPages.RemoveAt(listOfPages.Count - 1);
+               // listOfPages.Sort();
+            }
+
            goToPage(listOfPages, currentPage); //first section, first page
            loadDataGeneralPage();
+            
 
-         if(SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
-            {
+         //if(SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
+           // {
                 foreach (Bird bird in Var.activeBirds)
                 {
                     //Debug.Log("hi" + bird.name);
@@ -75,7 +98,8 @@ public class Stats : MonoBehaviour
                             break;
                     }
                 }
-            } 
+          //  }
+
         }
     }
 
@@ -113,12 +137,14 @@ public class Stats : MonoBehaviour
 
         //terryPageStats[4].GetComponent<Text>().text = "epilogue hidden text can go here if you want to change instead of in gui";
 
-        if (SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
+        /*if (SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
         {
+            
             terryPageStats[3].GetComponent<Text>().enabled = false; //hides to make room for epilogue 
+            terryPageStats[3].GetComponent<Text>().text = "";
             terryPageStats[4].GetComponent<Text>().enabled = false; //hides hidden epilogue message
             terryPageStats[5].SetActive(true);
-        }
+        }*/
 
         terryPageStats[6].GetComponent<Text>().text = (bird.data.emotionsChanged < 100 ? "00" + bird.data.emotionsChanged.ToString() : bird.data.emotionsChanged < 10 ? "0" + bird.data.emotionsChanged.ToString() : bird.data.emotionsChanged.ToString());
        
@@ -330,29 +356,7 @@ public class Stats : MonoBehaviour
         {
             myPageTurner.SetTrigger("turnright");
         }
-       /* try
-        {
-            if (statname != "")
-            {
-                Steamworks.SteamUserStats.SetStat(statname, 1);
-            }
-            bool completedAchievement = true;
-            Steamworks.SteamUserStats.GetAchievement(achievementName, out completedAchievement);
-            if (completedAchievement == false)
-            {
-                Steamworks.SteamUserStats.SetAchievement(achievementName);
-                Debug.Log("ACHIEVEMENT UNLOCKED: " + achievementName);
-                Steamworks.SteamUserStats.StoreStats();
-            }
-            else
-            {
-                Debug.Log("ACHIEVEMENT ALREADY CLAIMED: " + achievementName);
-            }
-        }
-        catch
-        {
-            Debug.Log("ACHIEVEMENT FAILED: " + achievementName);
-        }*/
+       
 
         Debug.Log("next page");
 
@@ -377,8 +381,14 @@ public class Stats : MonoBehaviour
 
         StartCoroutine("PreviousPageAfterDelay");
 
-        goToPage(listOfPages, currentPage - 1);
-
+        if (currentPage != 0)
+        {
+            goToPage(listOfPages, currentPage - 1);
+        }
+        else
+        {
+            goToPage(listOfPages, listOfPages.Count - 1);
+        }
     }
 
     public void exitStats()
