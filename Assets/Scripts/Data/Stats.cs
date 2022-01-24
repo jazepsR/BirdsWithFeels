@@ -8,6 +8,7 @@ public class Stats : MonoBehaviour
 {
     public bool isShowingStatsMenu = false;
     public GameObject statsMenu;
+    public GameObject closeButton;
     public int currentPage = 0;
     //public int currentSection;
     public List<GameObject> listOfPages;
@@ -17,7 +18,6 @@ public class Stats : MonoBehaviour
     public List<GameObject> alexanderPageStats;
     public List<GameObject> kimPageStats;
     public List<GameObject> sophiePageStats;
-
 
 
 
@@ -36,9 +36,9 @@ public class Stats : MonoBehaviour
             isShowingStatsMenu = true;
 
             Var.runPlayTimeTimer = false;
-          
+
         }
-        
+
 
         if (statsMenu != null && isShowingStatsMenu)
         {
@@ -52,7 +52,7 @@ public class Stats : MonoBehaviour
                 //cut sophie page
 
                 listOfPages.RemoveAt(listOfPages.Count - 1);
-               // listOfPages.Sort();
+                // listOfPages.Sort();
 
             }
             else
@@ -60,51 +60,51 @@ public class Stats : MonoBehaviour
                 listOfPages.RemoveAt(listOfPages.Count - 2);
                 //listOfPages.Sort();
                 listOfPages.RemoveAt(listOfPages.Count - 1);
-               // listOfPages.Sort();
+                // listOfPages.Sort();
             }
 
-           goToPage(listOfPages, currentPage); //first section, first page
-           loadDataGeneralPage();
-            
+            goToPage(listOfPages, currentPage); //first section, first page
+            loadDataGeneralPage();
 
-         //if(SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
-           // {
-                foreach (Bird bird in Var.activeBirds)
+
+            //if(SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
+            // {
+            foreach (Bird bird in Var.activeBirds)
+            {
+                //Debug.Log("hi" + bird.name);
+
+
+                switch (bird.name)
                 {
-                    //Debug.Log("hi" + bird.name);
-
-
-                    switch (bird.name)
-                    {
-                        case "Terry":
-                            loadDataTerry(bird);
-                            TerryEvent(Var.timedEvents[0]);
-                            break;
-                        case "Rebecca":
-                            loadDataRebecca(bird);
-                            RebeccaEvent(Var.timedEvents[1]);
-                            break;
-                        case "Alexander":
-                            loadDataAlexander(bird);
-                            AlexanderEvent(Var.timedEvents[2]);
-                            break;
-                        case "Kim":
-                            loadDataKim(bird);
-                            KimEvent(Var.timedEvents[3]);
-                            break;
-                        case "Sophie":
-                            loadDataSophie(bird);
-                            SophieEvent(Var.timedEvents[4]);
-                            break;
-                    }
+                    case "Terry":
+                        loadDataTerry(bird);
+                        TerryEvent(Var.timedEvents[0]);
+                        break;
+                    case "Rebecca":
+                        loadDataRebecca(bird);
+                        RebeccaEvent(Var.timedEvents[1]);
+                        break;
+                    case "Alexander":
+                        loadDataAlexander(bird);
+                        AlexanderEvent(Var.timedEvents[2]);
+                        break;
+                    case "Kim":
+                        loadDataKim(bird);
+                        KimEvent(Var.timedEvents[3]);
+                        break;
+                    case "Sophie":
+                        loadDataSophie(bird);
+                        SophieEvent(Var.timedEvents[4]);
+                        break;
                 }
-          //  }
+            }
+            //  }
 
         }
     }
 
     void loadDataGeneralPage()
-    { 
+    {
         generalPageStatDisplayers[0].GetComponent<Text>().text = (Var.totalTimeDays < 10 ? "0" + Var.totalTimeDays.ToString() : Var.totalTimeDays.ToString()) + " : " + (Var.totalTimeHours < 10 ? "0" + Var.totalTimeHours.ToString() : Var.totalTimeHours.ToString()) + " : " + (Var.totalTimeMinutes < 10 ? "0" + Var.totalTimeMinutes.ToString() : Var.totalTimeMinutes.ToString()) + " : " + (Var.totalTimeSeconds < 10 ? "0" + Var.totalTimeSeconds.ToString() : Var.totalTimeSeconds.ToString());
         generalPageStatDisplayers[1].GetComponent<Text>().text = (Var.currentWeek < 100 ? "00" + Var.currentWeek.ToString() : Var.currentWeek < 10 ? "0" + Var.currentWeek.ToString() : Var.currentWeek.ToString());
         generalPageStatDisplayers[2].GetComponent<Text>().text = (Var.confrontSuccess < 100 ? "00" + Var.confrontSuccess.ToString() : Var.confrontSuccess < 10 ? "0" + Var.confrontSuccess.ToString() : Var.confrontSuccess.ToString());
@@ -130,7 +130,7 @@ public class Stats : MonoBehaviour
         {
             terryPageStats[1].GetComponent<Text>().text = Helpers.Instance.ApplyTitle(bird, "Level " + bird.name + " up to get a title!");
         }
-   
+
         terryPageStats[2].GetComponent<Text>().text = (bird.data.level < 10 ? "0" + bird.data.level.ToString() : bird.data.level.ToString());
 
         //terryPageStats[3].GetComponent<Text>().text = "bird description can be changed here if you want to instead of in gui";
@@ -147,7 +147,7 @@ public class Stats : MonoBehaviour
         }*/
 
         terryPageStats[6].GetComponent<Text>().text = (bird.data.emotionsChanged < 100 ? "00" + bird.data.emotionsChanged.ToString() : bird.data.emotionsChanged < 10 ? "0" + bird.data.emotionsChanged.ToString() : bird.data.emotionsChanged.ToString());
-       
+
         terryPageStats[7].GetComponent<Text>().text = (bird.data.emotionSeedsCollected < 10 ? "0" + bird.data.emotionSeedsCollected.ToString() : bird.data.emotionSeedsCollected.ToString());
         terryPageStats[8].GetComponent<Text>().text = (bird.data.turnsInDangerZone < 100 ? "00" + bird.data.turnsInDangerZone.ToString() : bird.data.turnsInDangerZone < 10 ? "0" + bird.data.turnsInDangerZone.ToString() : bird.data.turnsInDangerZone.ToString());
         terryPageStats[9].GetComponent<Text>().text = (bird.data.powerUpHeartsUsed < 100 ? "00" + bird.data.powerUpHeartsUsed.ToString() : bird.data.powerUpHeartsUsed < 10 ? "0" + bird.data.powerUpHeartsUsed.ToString() : bird.data.powerUpHeartsUsed.ToString());
@@ -168,19 +168,19 @@ public class Stats : MonoBehaviour
     }
 
     void loadDataKim(Bird bird)
-    { 
-    
+    {
+
     }
 
     void loadDataSophie(Bird bird)
-    { 
-    
+    {
+
     }
 
     public void TerryEvent(TimedEventData data)
-    { 
-       try
-       {
+    {
+        try
+        {
 
             switch (data.currentState)
             {
@@ -199,10 +199,10 @@ public class Stats : MonoBehaviour
             }
         }
 
-       catch
-       {
+        catch
+        {
             Debug.Log("Terry: Timed Event List size is: " + Var.timedEvents.Count);
-       }
+        }
     }
 
     void RebeccaEvent(TimedEventData data)
@@ -307,7 +307,7 @@ public class Stats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ShowStatsMenu()
@@ -343,10 +343,14 @@ public class Stats : MonoBehaviour
 
     public void HideStatsMenu()
     {
+        
+        
         isShowingStatsMenu = false;
         statsMenu.SetActive(false);
-       // Debug.Log("hi");
-        
+
+       
+        // Debug.Log("hi");
+
     }
 
     public void NextPage()
@@ -356,18 +360,36 @@ public class Stats : MonoBehaviour
         {
             myPageTurner.SetTrigger("turnright");
         }
-       
+
+        StartCoroutine("CloseButtonAfterDelay");
 
         Debug.Log("next page");
 
-     
-        goToPage(listOfPages, currentPage + 1); 
+
+        goToPage(listOfPages, currentPage + 1);
     }
 
-     IEnumerator PreviousPageAfterDelay()
+    IEnumerator PreviousPageAfterDelay()
     {
-        yield return new WaitForSeconds(0.26f);
+        yield return new WaitForSeconds(0.32f);
 
+        if (currentPage != 0)
+        {
+            goToPage(listOfPages, currentPage - 1);
+        }
+        else
+        {
+            goToPage(listOfPages, listOfPages.Count - 1);
+        }
+
+    }
+
+    IEnumerator CloseButtonAfterDelay()
+    {
+        closeButton.SetActive(false);
+        yield return new WaitForSeconds(0.32f);
+
+        closeButton.SetActive(true);
     }
 
     public void PreviousPage()
@@ -380,22 +402,15 @@ public class Stats : MonoBehaviour
         }
 
         StartCoroutine("PreviousPageAfterDelay");
+        StartCoroutine("CloseButtonAfterDelay");
 
-        if (currentPage != 0)
-        {
-            goToPage(listOfPages, currentPage - 1);
-        }
-        else
-        {
-            goToPage(listOfPages, listOfPages.Count - 1);
-        }
     }
 
     public void exitStats()
     {
         if (SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("mainMenu");
         }
         else {
             HideStatsMenu();
@@ -421,11 +436,12 @@ public class Stats : MonoBehaviour
         }
 
         catch
-        { 
-            
+        {
+
         }
 
-        
+
 
     }
+
 }
