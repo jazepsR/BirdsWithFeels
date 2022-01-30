@@ -511,7 +511,7 @@ public class EventController : MonoBehaviour
         {
             mouseOver.tooltipText = "";
         }
-        if (currentEvent.parts[id].useCustomPic && currentEvent.parts[id].customPic != null)
+        if (currentEvent.parts.Count <id && currentEvent.parts[id].useCustomPic && currentEvent.parts[id].customPic != null)
         {
             portrait.transform.parent.gameObject.SetActive(true);
             customImage.gameObject.SetActive(true);
@@ -822,7 +822,7 @@ public class EventController : MonoBehaviour
     }
     void ApplyConsequence(ConsequenceType type, int magnitude, bool applyToAll)
     {
-        if (currentBird == null)
+        if (currentBird == null && !applyToAll)
             return;
         List<Bird> birdsToApply = new List<Bird>();
         if (applyToAll)

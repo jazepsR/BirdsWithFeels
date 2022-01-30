@@ -139,7 +139,7 @@ public class Ending : MonoBehaviour
             {
                 Stats.vultureKingFightStatus(true);
                 Stats.BeatGameInTime();
-                SceneManager.LoadScene("Credits");
+                GuiContoler.Instance.ReturnToMap();
             }
         }
     }
