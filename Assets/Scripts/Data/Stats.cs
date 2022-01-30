@@ -22,7 +22,11 @@ public class Stats : MonoBehaviour
 
 
 
+
     //private GameObject sectionContainers;
+
+    [SerializeField]
+    private Animator myStatPageAnimator;
 
     [SerializeField]
     private Animator myPageTurner;
@@ -343,7 +347,7 @@ public class Stats : MonoBehaviour
 
     public void HideStatsMenu()
     {
-        
+
         
         isShowingStatsMenu = false;
         statsMenu.SetActive(false);
@@ -413,7 +417,10 @@ public class Stats : MonoBehaviour
             SceneManager.LoadScene("mainMenu");
         }
         else {
-            HideStatsMenu();
+            if (myStatPageAnimator != null) //animator will call the "hide stats menu" functionality after a delay
+            {
+                myStatPageAnimator.SetTrigger("close");
+            }
         }
     }
 
