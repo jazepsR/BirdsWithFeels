@@ -125,7 +125,9 @@ public class SaveLoad : MonoBehaviour
 		Var.narrativeEventsCompleted = data.narrativeEventsCompleted;
 		Var.levelsCompleted = data.levelsCompleted;
 		Var.birdsMaxLevelCount = data.birdsMaxLevelCount;
-	    //Var.totalTimeSeconds = data.totalTimeSeconds;
+		Var.confrontSuccess = data.confrontSuccess;
+		Var.confrontFail = data.confrontFail;
+		//Var.totalTimeSeconds = data.totalTimeSeconds;
 		//Var.totalTimeDays = data.totalTimeDays;
 		//Var.totalTimeMinutes = data.totalTimeMinutes;
 		//Var.totalTimeHours = data.totalTimeHours;
@@ -170,6 +172,8 @@ public class SaveData
 	//public int totalTimeMinutes;
 	//public int totalTimeHours;
 	public int totalPlayTime;
+	public int confrontSuccess;
+	public int confrontFail;
 	public SaveData()
 	{
 		SophieUnlocked = Var.SophieUnlocked;
@@ -186,7 +190,9 @@ public class SaveData
 		birdInjuredInTrial = Var.birdInjuredInTrial;
 		narrativeEventsCompleted = Var.narrativeEventsCompleted;
 		levelsCompleted = Var.levelsCompleted;
-		birdsMaxLevelCount= Var.birdsMaxLevelCount;
+		confrontSuccess = Var.confrontSuccess;
+		confrontFail = Var.confrontFail;
+		birdsMaxLevelCount = Var.birdsMaxLevelCount;
 		//totalTimeSeconds = Var.totalTimeSeconds;
 		//totalTimeDays = Var.totalTimeDays;
 		//totalTimeMinutes = Var.totalTimeMinutes;
@@ -234,7 +240,13 @@ public class BirdData
 	public int AdventuresRested=0;
 	public int CoolDownLeft=0;
 	public int CoolDownLength=3;
-	
+	public int emotionsChanged = 0;
+	public int emotionSeedsCollected = 0;
+	public int turnsInDangerZone = 0;
+	public int powerUpSwordsUsed = 0;
+	public int powerUpShieldsUsed = 0;
+	public int powerUpHeartsUsed = 0;
+
 }
 
 

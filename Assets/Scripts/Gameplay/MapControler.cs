@@ -126,11 +126,12 @@ public class MapControler : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
 		timedEvents = FindObjectsOfType<TimedEventControl>();
 		Var.isBoss = false;
 		Var.freezeEmotions = false;
 		timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);
-		Stats.amountOfWeeks(Var.currentWeek);
+		Achievements.amountOfWeeks(Var.currentWeek);
 		//SelectionMenu.transform.localScale = Vector3.zero;
 		canHeal = false;
 		if(ambientSounds.clips.Length>0)
@@ -179,7 +180,7 @@ public class MapControler : MonoBehaviour {
 					}
 				}
 
-				Stats.checkBirdLevelUp(bird, true);
+				Achievements.checkBirdLevelUp(bird, true);
 			}
 		}
 
@@ -237,9 +238,9 @@ public class MapControler : MonoBehaviour {
         //ProgressGUI.Instance.PortraitClick(Var.availableBirds[0]);
 
         SelectionMenuAnimator = SelectionMenu.GetComponent<Animator>();
-     
 
-    }
+
+	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -253,6 +254,8 @@ public class MapControler : MonoBehaviour {
 	}
 	public void CanLoadBattle()
 	{
+		Debug.Log("selected bird count:" + selectedBirds.Count);
+		
 		if (selectedBirds.Count == 3)
 		{
 			canFight = true;
@@ -365,7 +368,7 @@ public class MapControler : MonoBehaviour {
 		//foreach (TimedEventControl timedEvent in FindObjectsOfType<TimedEventControl>())
 		//	timedEvent.CheckStatus();
 
-		Stats.amountOfWeeks(Var.currentWeek);
+		Achievements.amountOfWeeks(Var.currentWeek);
 	}
 
 	public void HideSelectionMenu()

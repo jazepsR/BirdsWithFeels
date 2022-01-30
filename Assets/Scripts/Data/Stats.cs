@@ -1,192 +1,447 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public static class Stats
+public class Stats : MonoBehaviour
 {
-    public static int stats_total_trial_count = 5;
-    public static int max_bird_level_count = 5;
-    public static int hours_to_play = 3;
-    public static int weeks_to_beat_king =30;
-    public static int weeks_to_pass = 50;
-    public static int total_Narrative_Events = 24;
-    public static int total_Levels = 42;
-    public static void Start()
-    {  
-    }
+    public bool isShowingStatsMenu = false;
+    public GameObject statsMenu;
+    public GameObject closeButton;
+    public int currentPage = 0;
+    //public int currentSection;
+    public List<GameObject> listOfPages;
+    public List<GameObject> generalPageStatDisplayers;
+    public List<GameObject> terryPageStats;
+    public List<GameObject> rebeccaPageStats;
+    public List<GameObject> alexanderPageStats;
+    public List<GameObject> kimPageStats;
+    public List<GameObject> sophiePageStats;
 
-    /*void Update()
+
+
+
+    //private GameObject sectionContainers;
+
+    [SerializeField]
+    private Animator myPageTurner;
+
+
+    // Start is called before the first frame update
+    void Start()
     {
-    }*/
-
-   public static void getTrialDetails(TimedEventData anEvent)
-   {
-        var steam_acheievements_trial_id = "";
-        switch (anEvent.eventName)
+        if (SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
         {
-            case "Terry's farm is in trouble":
-                steam_acheievements_trial_id = "terry_trial_in_time";
-                break;
-            case "Rebecca's family is leaving":
-                steam_acheievements_trial_id = "rebecca_trial_in_time";
-                break;
-            case "Talonport under siege":
-                steam_acheievements_trial_id = "alex_trial_in_time";
-                break;
-            case "Kim's boyfriend in peril":
-                steam_acheievements_trial_id = "kim_trial_in_time";
-                break;
-            case "A fight for knowledge":
-                steam_acheievements_trial_id = "sophie_trial_in_time";
-                break;
-            default:
-                steam_acheievements_trial_id = " ";
-                break;
+            isShowingStatsMenu = true;
+
+            Var.runPlayTimeTimer = false;
+
         }
 
 
-        if (steam_acheievements_trial_id != " ")
+        if (statsMenu != null && isShowingStatsMenu)
         {
-            switch (anEvent.currentState)
-            {
 
+            if (Var.SophieUnlocked)
+            {
+                //all birds are unlocked do nothing
+            }
+            else if (Var.KimUnlocked)
+            {
+                //cut sophie page
+
+                listOfPages.RemoveAt(listOfPages.Count - 1);
+                // listOfPages.Sort();
+
+            }
+            else
+            {
+                listOfPages.RemoveAt(listOfPages.Count - 2);
+                //listOfPages.Sort();
+                listOfPages.RemoveAt(listOfPages.Count - 1);
+                // listOfPages.Sort();
+            }
+
+            goToPage(listOfPages, currentPage); //first section, first page
+            loadDataGeneralPage();
+
+
+            //if(SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
+            // {
+            foreach (Bird bird in Var.activeBirds)
+            {
+                //Debug.Log("hi" + bird.name);
+
+
+                switch (bird.name)
+                {
+                    case "Terry":
+                        loadDataTerry(bird);
+                        TerryEvent(Var.timedEvents[0]);
+                        break;
+                    case "Rebecca":
+                        loadDataRebecca(bird);
+                        RebeccaEvent(Var.timedEvents[1]);
+                        break;
+                    case "Alexander":
+                        loadDataAlexander(bird);
+                        AlexanderEvent(Var.timedEvents[2]);
+                        break;
+                    case "Kim":
+                        loadDataKim(bird);
+                        KimEvent(Var.timedEvents[3]);
+                        break;
+                    case "Sophie":
+                        loadDataSophie(bird);
+                        SophieEvent(Var.timedEvents[4]);
+                        break;
+                }
+            }
+            //  }
+
+        }
+    }
+
+    void loadDataGeneralPage()
+    {
+        generalPageStatDisplayers[0].GetComponent<Text>().text = (Var.totalTimeDays < 10 ? "0" + Var.totalTimeDays.ToString() : Var.totalTimeDays.ToString()) + " : " + (Var.totalTimeHours < 10 ? "0" + Var.totalTimeHours.ToString() : Var.totalTimeHours.ToString()) + " : " + (Var.totalTimeMinutes < 10 ? "0" + Var.totalTimeMinutes.ToString() : Var.totalTimeMinutes.ToString()) + " : " + (Var.totalTimeSeconds < 10 ? "0" + Var.totalTimeSeconds.ToString() : Var.totalTimeSeconds.ToString());
+        generalPageStatDisplayers[1].GetComponent<Text>().text = (Var.currentWeek < 100 ? "00" + Var.currentWeek.ToString() : Var.currentWeek < 10 ? "0" + Var.currentWeek.ToString() : Var.currentWeek.ToString());
+        generalPageStatDisplayers[2].GetComponent<Text>().text = (Var.confrontSuccess < 100 ? "00" + Var.confrontSuccess.ToString() : Var.confrontSuccess < 10 ? "0" + Var.confrontSuccess.ToString() : Var.confrontSuccess.ToString());
+        generalPageStatDisplayers[3].GetComponent<Text>().text = (Var.confrontFail < 100 ? "00" + Var.confrontFail.ToString() : Var.confrontFail < 10 ? "0" + Var.confrontFail.ToString() : Var.confrontFail.ToString());
+        generalPageStatDisplayers[4].GetComponent<Text>().text = Var.narrativeEventsCompleted < 10 ? "0" + Var.narrativeEventsCompleted.ToString() : Var.narrativeEventsCompleted.ToString();
+        generalPageStatDisplayers[5].GetComponent<Text>().text = Achievements.total_Narrative_Events < 10 ? "0" + Achievements.total_Narrative_Events.ToString() : Achievements.total_Narrative_Events.ToString();
+        generalPageStatDisplayers[6].GetComponent<Text>().text = Var.levelsCompleted < 10 ? "0" + Var.levelsCompleted.ToString() : Var.levelsCompleted.ToString();
+        generalPageStatDisplayers[7].GetComponent<Text>().text = Achievements.total_Levels < 10 ? "0" + Achievements.total_Levels.ToString() : Achievements.total_Levels.ToString();
+    }
+
+    void loadDataTerry(Bird bird, TimedEventData data = null)
+    {
+        //terryPageStats[0].GetComponent<Image>().color;
+
+
+        terryPageStats[0].GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(bird.emotion);
+        try
+        {
+            terryPageStats[1].GetComponent<Text>().text = Helpers.Instance.ApplyTitle(bird, bird.data.lastLevel.birdTitle);
+        }
+
+        catch
+        {
+            terryPageStats[1].GetComponent<Text>().text = Helpers.Instance.ApplyTitle(bird, "Level " + bird.name + " up to get a title!");
+        }
+
+        terryPageStats[2].GetComponent<Text>().text = (bird.data.level < 10 ? "0" + bird.data.level.ToString() : bird.data.level.ToString());
+
+        //terryPageStats[3].GetComponent<Text>().text = "bird description can be changed here if you want to instead of in gui";
+
+        //terryPageStats[4].GetComponent<Text>().text = "epilogue hidden text can go here if you want to change instead of in gui";
+
+        /*if (SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
+        {
+            
+            terryPageStats[3].GetComponent<Text>().enabled = false; //hides to make room for epilogue 
+            terryPageStats[3].GetComponent<Text>().text = "";
+            terryPageStats[4].GetComponent<Text>().enabled = false; //hides hidden epilogue message
+            terryPageStats[5].SetActive(true);
+        }*/
+
+        terryPageStats[6].GetComponent<Text>().text = (bird.data.emotionsChanged < 100 ? "00" + bird.data.emotionsChanged.ToString() : bird.data.emotionsChanged < 10 ? "0" + bird.data.emotionsChanged.ToString() : bird.data.emotionsChanged.ToString());
+
+        terryPageStats[7].GetComponent<Text>().text = (bird.data.emotionSeedsCollected < 10 ? "0" + bird.data.emotionSeedsCollected.ToString() : bird.data.emotionSeedsCollected.ToString());
+        terryPageStats[8].GetComponent<Text>().text = (bird.data.turnsInDangerZone < 100 ? "00" + bird.data.turnsInDangerZone.ToString() : bird.data.turnsInDangerZone < 10 ? "0" + bird.data.turnsInDangerZone.ToString() : bird.data.turnsInDangerZone.ToString());
+        terryPageStats[9].GetComponent<Text>().text = (bird.data.powerUpHeartsUsed < 100 ? "00" + bird.data.powerUpHeartsUsed.ToString() : bird.data.powerUpHeartsUsed < 10 ? "0" + bird.data.powerUpHeartsUsed.ToString() : bird.data.powerUpHeartsUsed.ToString());
+        terryPageStats[10].GetComponent<Text>().text = (bird.data.powerUpSwordsUsed < 100 ? "00" + bird.data.powerUpSwordsUsed.ToString() : bird.data.powerUpSwordsUsed < 10 ? "0" + bird.data.powerUpSwordsUsed.ToString() : bird.data.powerUpSwordsUsed.ToString());
+        terryPageStats[11].GetComponent<Text>().text = (bird.data.powerUpShieldsUsed < 100 ? "00" + bird.data.powerUpShieldsUsed.ToString() : bird.data.powerUpShieldsUsed < 10 ? "0" + bird.data.powerUpShieldsUsed.ToString() : bird.data.powerUpShieldsUsed.ToString());
+
+
+    }
+
+    void loadDataRebecca(Bird bird)
+    {
+
+    }
+
+    void loadDataAlexander(Bird bird)
+    {
+
+    }
+
+    void loadDataKim(Bird bird)
+    {
+
+    }
+
+    void loadDataSophie(Bird bird)
+    {
+
+    }
+
+    public void TerryEvent(TimedEventData data)
+    {
+        try
+        {
+
+            switch (data.currentState)
+            {
                 case TimedEventData.state.completedSuccess:
-                    Var.trialsSuccessfullCount++;
-                    SetAchievement(steam_acheievements_trial_id, "");
+                    terryPageStats[5].GetComponent<Text>().text = "terry did it!";
+                    break;
+                case TimedEventData.state.completedFail:
+                    terryPageStats[5].GetComponent<Text>().text = "terry made it in time but failed!";
+                    break;
+                case TimedEventData.state.failed:
+                    terryPageStats[5].GetComponent<Text>().text = "terry failed to make it in time!";
+                    break;
+                default:
+                    Debug.Log("none can be found");
+                    break;
+            }
+        }
+
+        catch
+        {
+            Debug.Log("Terry: Timed Event List size is: " + Var.timedEvents.Count);
+        }
+    }
+
+    void RebeccaEvent(TimedEventData data)
+    {
+        try
+        {
+            switch (data.currentState)
+            {
+                case TimedEventData.state.completedSuccess:
                     break;
                 case TimedEventData.state.completedFail:
                     break;
                 case TimedEventData.state.failed:
                     break;
+                default:
+                    Debug.Log("none can be found");
+                    break;
             }
-        }
-
-        if(Var.trialsSuccessfullCount == stats_total_trial_count)
-        {           
-            SetAchievement("all_trials_complete_in_time", "");
-        }
-        
-   }
-
-    public static void vultureKingFightStatus(bool isbeat)
-    {
-        if (isbeat == true)
-        { 
-            SetAchievement("beat_vulture_king", "");
-        }
-        
-    }
-
-    public static void amountOfWeeks(int weeks)
-    {
-        if (weeks >= weeks_to_pass)
-        { 
-            SetAchievement("reach_amount_of_weeks", "");
-        }
-    }
-
-    public static void birdDiedFirstTime()
-    {
-        SetAchievement("birds_death", "");
-    }
-
-    public static void checkBirdInjuredInTrial(bool isbirdInjured)
-    {
-
-        if (!isbirdInjured)
-        {
-            SetAchievement("trial_no_bird_injured", "");
-        }
-
-        else
-        {
-            Var.birdInjuredInTrial = false;
-        }
-
-        
-    }
-    public static void SetAchievement(string achievementName, string statname= "")
-    {
-        try
-        {
-            if (statname != "")
+            if (Var.trialsSuccessfullCount == Achievements.stats_total_trial_count)
             {
-                Steamworks.SteamUserStats.SetStat(statname, 1);
-            }
-            bool completedAchievement = true;
-            Steamworks.SteamUserStats.GetAchievement(achievementName, out completedAchievement);
-            if (completedAchievement == false)
-            {
-                Steamworks.SteamUserStats.SetAchievement(achievementName);
-                Debug.Log("ACHIEVEMENT UNLOCKED: " + achievementName);
-                Steamworks.SteamUserStats.StoreStats();
-            }
-            else
-            {
-                Debug.Log("ACHIEVEMENT ALREADY CLAIMED: " + achievementName);
+                Achievements.SetAchievement("all_trials_complete_in_time", "");
             }
         }
         catch
         {
-            Debug.Log("ACHIEVEMENT FAILED: " + achievementName);
-        }
-    }
-    public static void levelCompletionTracker()
-    {
-
-        Debug.Log("Level Completed: " + Var.levelsCompleted + " out of 42");
-        if (Var.levelsCompleted == total_Levels)
-        {
-            SetAchievement("complete_all_levels","");
+            Debug.Log("Rebecca: Timed Event List size is: " + Var.timedEvents.Count);
         }
     }
 
-    public static void narrativeEventCompletionTracker()
+    void AlexanderEvent(TimedEventData data)
     {
-        Debug.Log("Narrative Events Completed: " + Var.narrativeEventsCompleted + " out of 24");
-        if (Var.narrativeEventsCompleted == total_Narrative_Events)
+        try
         {
-            SetAchievement("narrative_events_unlocked", "");
-        }
-    }
-
-    public static void checkBirdLevelUp(Bird bird, bool inMap)
-    {
-        if (inMap == false)
-        {
-            if (bird.data.level > 1)
+            switch (data.currentState)
             {
-                SetAchievement("bird_level_up", "");
-            }
-
-            if (bird.data.level == Var.maxLevel)
-            {
-                SetAchievement("bird_level_up_max", "");
+                case TimedEventData.state.completedSuccess:
+                    break;
+                case TimedEventData.state.completedFail:
+                    break;
+                case TimedEventData.state.failed:
+                    break;
+                default:
+                    Debug.Log("none can be found");
+                    break;
             }
         }
 
-        if (inMap == true)
+        catch
         {
-            if (Var.birdsMaxLevelCount == max_bird_level_count)
+            Debug.Log("Alexander: Timed Event List size is: " + Var.timedEvents.Count);
+        }
+    }
+
+    void KimEvent(TimedEventData data)
+    {
+        try
+        {
+            switch (data.currentState)
             {
-                SetAchievement("level_up_all_birds", "");
+                case TimedEventData.state.completedSuccess:
+                    break;
+                case TimedEventData.state.completedFail:
+                    break;
+                case TimedEventData.state.failed:
+                    break;
+                default:
+                    Debug.Log("none can be found");
+                    break;
+            }
+        }
+
+        catch
+        {
+            Debug.Log("Kim: Timed Event List size is: " + Var.timedEvents.Count);
+        }
+    }
+
+    void SophieEvent(TimedEventData data)
+    {
+        try
+        {
+            switch (data.currentState)
+            {
+                case TimedEventData.state.completedSuccess:
+                    break;
+                case TimedEventData.state.completedFail:
+                    break;
+                case TimedEventData.state.failed:
+                    break;
+                default:
+                    Debug.Log("none can be found");
+                    break;
+            }
+        }
+
+        catch
+        {
+            Debug.Log("Sophie: Timed Event List size is: " + Var.timedEvents.Count);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void ShowStatsMenu()
+    {
+        isShowingStatsMenu = true;
+        statsMenu.SetActive(true);
+
+        foreach (Bird bird in Var.activeBirds)
+        {
+            //Debug.Log("hi" + bird.name);
+            loadDataGeneralPage();
+
+            switch (bird.name)
+            {
+                case "Terry":
+                    loadDataTerry(bird);
+                    break;
+                case "Rebecca":
+                    loadDataRebecca(bird);
+                    break;
+                case "Alexander":
+                    loadDataAlexander(bird);
+                    break;
+                case "Kim":
+                    loadDataKim(bird);
+                    break;
+                case "Sophie":
+                    loadDataSophie(bird);
+                    break;
             }
         }
     }
 
-    public static void vulture_king_in_time()
+    public void HideStatsMenu()
     {
-        if (Var.currentWeek <= weeks_to_beat_king)
+        
+        
+        isShowingStatsMenu = false;
+        statsMenu.SetActive(false);
+
+       
+        // Debug.Log("hi");
+
+    }
+
+    public void NextPage()
+    {
+
+        if (myPageTurner != null)
         {
-            SetAchievement("vulture_king_in_time", "");
+            myPageTurner.SetTrigger("turnright");
+        }
+
+        StartCoroutine("CloseButtonAfterDelay");
+
+        Debug.Log("next page");
+
+
+        goToPage(listOfPages, currentPage + 1);
+    }
+
+    IEnumerator PreviousPageAfterDelay()
+    {
+        yield return new WaitForSeconds(0.32f);
+
+        if (currentPage != 0)
+        {
+            goToPage(listOfPages, currentPage - 1);
+        }
+        else
+        {
+            goToPage(listOfPages, listOfPages.Count - 1);
+        }
+
+    }
+
+    IEnumerator CloseButtonAfterDelay()
+    {
+        closeButton.SetActive(false);
+        yield return new WaitForSeconds(0.32f);
+
+        closeButton.SetActive(true);
+    }
+
+    public void PreviousPage()
+    {
+        Debug.Log("try previous");
+
+        if (myPageTurner != null)
+        {
+            myPageTurner.SetTrigger("turnleft");
+        }
+
+        StartCoroutine("PreviousPageAfterDelay");
+        StartCoroutine("CloseButtonAfterDelay");
+
+    }
+
+    public void exitStats()
+    {
+        if (SceneManager.GetSceneByName("Stats") == SceneManager.GetActiveScene())
+        {
+            SceneManager.LoadScene("mainMenu");
+        }
+        else {
+            HideStatsMenu();
         }
     }
 
-    public static void BeatGameInTime()
+    public void goToPage(List<GameObject> pages, int number)
     {
-        if (Var.totalTimeHours <= hours_to_play)
+        try
         {
-            SetAchievement("beat_game_in_hours", "");
+            pages[currentPage].gameObject.SetActive(false);
+            if (number > pages.Count - 1 || number < 0)
+            {
+                pages[0].gameObject.SetActive(true);
+                currentPage = 0;
+            }
+
+            else
+            {
+                pages[number].SetActive(true);
+                currentPage = number;
+            }
         }
+
+        catch
+        {
+
+        }
+
+
+
     }
+
 }

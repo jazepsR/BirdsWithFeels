@@ -301,7 +301,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					tooltipInfo.tooltipText = GetTooltipText();
 
 					Var.levelsCompleted++;
-					Stats.levelCompletionTracker();
+					Achievements.levelCompletionTracker();
 				}
 				else
 				{                    

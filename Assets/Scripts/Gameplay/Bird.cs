@@ -278,7 +278,7 @@ public class Bird : MonoBehaviour
 			{
 				mapHighlight.SetActive(false);
 				MapControler.Instance.selectedBirds.Remove(this);
-				MapControler.Instance.CanLoadBattle();
+				//MapControler.Instance.CanLoadBattle();
 			}
 		}
 
@@ -504,7 +504,7 @@ public class Bird : MonoBehaviour
 		data.level = levelList.Count + 1;
 		levelUpText = null;
 
-		Stats.checkBirdLevelUp(this, false);
+		Achievements.checkBirdLevelUp(this, false);
 	}
 	public float getBonus()
 	{
@@ -860,7 +860,7 @@ public class Bird : MonoBehaviour
 					birdSounds.birdSelect.Play();
 					MapControler.Instance.selectedBirds.Add(this);
 				}
-				MapControler.Instance.CanLoadBattle();
+				//MapControler.Instance.CanLoadBattle();
 				return;
 				if (MapControler.Instance.canHeal)
 				{
@@ -1260,6 +1260,9 @@ public class Bird : MonoBehaviour
 				//data.mentalHealth = 1;
 			}
 			data.mentalHealth = Math.Max(data.mentalHealth - 1, 0);
+			
+			if(data.turnsInDangerZone < 999)
+				data.turnsInDangerZone++;
 
 		}
 		else// if (Mathf.Abs(data.confidence) < Var.DangerZoneStart && Mathf.Abs(data.friendliness) < Var.DangerZoneStart && (Mathf.Abs(prevConf) < Var.DangerZoneStart && Mathf.Abs(prevFriend) < Var.DangerZoneStart))
@@ -1361,7 +1364,10 @@ public class Bird : MonoBehaviour
 		if (prevEmotion.Equals(Var.Em.finish))
 			prevEmotion = emotion;
 
-
+		if (data.emotionsChanged < 999)
+		{
+			data.emotionsChanged++;
+		}
 	}
 
 	public void SetAnimation(Var.Em emotionNum)
@@ -1636,7 +1642,7 @@ public class Bird : MonoBehaviour
 		SetCoolDownRing(false);
 		if (inMap)
 		{
-			MapControler.Instance.CanLoadBattle();
+			//MapControler.Instance.CanLoadBattle();
 		}
 	}
 }
