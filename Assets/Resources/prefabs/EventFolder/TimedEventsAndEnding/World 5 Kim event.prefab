@@ -104,7 +104,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Tell the others to let her be alone for a while.
   selectionTooltip: (this will skip a narrative event)
-  conclusionHeading: finished post too late
+  conclusionHeading: 
   conclusionText: "You rest for a while, letting Kim grieve in peace. There\u2019s
     no way of knowing when she\u2019ll be able to meet her boyfriend again, or if
     she ever will."
@@ -259,7 +259,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "Anytime. Now let\u2019s go save your boyfriend!"
   selectionTooltip: 
-  conclusionHeading: post finished in time after chat
+  conclusionHeading: 
   conclusionText: Get some rest.
 --- !u!1 &950388701137619634
 GameObject:
@@ -460,7 +460,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Urge the others to go talk to her.
   selectionTooltip: 
-  conclusionHeading: finished post too late
+  conclusionHeading: 
   conclusionText: You talk to her.
 --- !u!1 &1891841717352368974
 GameObject:
@@ -876,7 +876,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Urge the others to go talk to them.
   selectionTooltip: 
-  conclusionHeading: finished in time
+  conclusionHeading: 
   conclusionText: You talk to them.
 --- !u!1 &3626734943250566379
 GameObject:
@@ -1192,9 +1192,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: "Oh! Oh, I know what he\u2019s talking about! I believe you, what you\u2019re
-    saying must be true! Please, we have to go save Percy! Show us where he will
-    be and we\u2019ll go there!\r"
+  text: "Oh! Oh, I know what he\u2019s talking about! I believe you! Please, we have
+    to go save Percy! Show us where he will be and we\u2019ll go there!\r"
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &5281689623053741113
@@ -1349,7 +1348,7 @@ MonoBehaviour:
   icon: {fileID: 21300004, guid: c3a1ac45abf2a0242b5aeb174e5c07bf, type: 3}
   selectionText: "I\u2019ll mark it on your map! Good luck!"
   selectionTooltip: 
-  conclusionHeading: Let's go!
+  conclusionHeading: 
   conclusionText: Off to save Percy!
 --- !u!1 &5281689623255960062
 GameObject:
@@ -1764,9 +1763,9 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: Eeep!
+  selectionText: Let's go!
   selectionTooltip: 
-  conclusionHeading: reaching trial in time
+  conclusionHeading: 
   conclusionText: The power of love and friendship compells you!
 --- !u!1 &5281689623792662526
 GameObject:
@@ -2219,7 +2218,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "Come now, let\u2019s rest before we continue our journey."
   selectionTooltip: 
-  conclusionHeading: too late
+  conclusionHeading: 
   conclusionText: You get some rest.
 --- !u!1 &5281689624021298575
 GameObject:
@@ -2504,7 +2503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 3
-  text: "Kim, I\u2019m so sorry"
+  text: "Kim, I\u2019m so sorry."
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &5281689624440308921
@@ -2847,7 +2846,7 @@ MonoBehaviour:
   icon: {fileID: 21300002, guid: c3a1ac45abf2a0242b5aeb174e5c07bf, type: 3}
   selectionText: "\u2026 Alright, if you say so."
   selectionTooltip: 
-  conclusionHeading: timer runs out
+  conclusionHeading: 
   conclusionText: Continue to the planned spot.
 --- !u!1 &5281689624803006098
 GameObject:
@@ -3079,6 +3078,9 @@ MonoBehaviour:
   initialFailEvent: {fileID: 5281689623954975576}
   completionAfterFailEvent: {fileID: 2403496446116815231}
   EventNotification: {fileID: 0}
+  startingVisuals: []
+  completedVisuals: []
+  failedVisuals: []
   data:
     eventName: 
     completeBy: 0
@@ -3383,7 +3385,7 @@ MonoBehaviour:
   selectionText: Well then, we better get a move on! The sooner we set out, the sooner
     you two can be together!
   selectionTooltip: 
-  conclusionHeading: post finished in time after chat
+  conclusionHeading: 
   conclusionText: 'Get a move on! '
 --- !u!1 &7127556853890019937
 GameObject:
@@ -3505,8 +3507,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "Miserable. I thought\u2026 I mean, we were so close. Percy was right here,
-    not that long ago, and we missed him."
+  text: "... Not great. I thought\u2026 I mean, we were so close. Percy was right
+    here, not that long ago, and we missed him."
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &7695007913046971464
@@ -3780,7 +3782,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Tell the others to let them be alone for a while.
   selectionTooltip: (this will skip a narrative event)
-  conclusionHeading: 'post trial - finished in time '
+  conclusionHeading: 
   conclusionText: "You rest for a while as Kim and Percy catch up on everything that\u2019s
     happened since they were separated. Percy will travel to Kim\u2019s parents and
     hide there while your team finishes its mission, since it\u2019s too dangerous
