@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: 'Um, I was a tailor, so I made all kinds of clothes.
+  text: 'Well, I was a tailor, so I made all kinds of clothes.
 
 '
   useCustomPic: 0
@@ -282,6 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: 3
@@ -294,7 +295,7 @@ MonoBehaviour:
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Hey, you'll never know if you don't try, right? I think it sounds
     like a great idea!
-  selectionTooltip: Do it! (+3 Confidence)
+  selectionTooltip: (+3 confidence)
   conclusionHeading: 
   conclusionText: Yeah, maybe you're right!
 --- !u!1 &1649831606295428740
@@ -343,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0300000001000000
   condition: 0
   magnitude: 0
@@ -353,8 +355,20 @@ MonoBehaviour:
   - {fileID: 1649831606268637265}
   - {fileID: 1649831606440632233}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &1649831606364067928
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: -1
@@ -446,9 +461,9 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: I don't think neutral birds would be interested, to be honest. clothes
+  selectionText: I don't think neutral birds would be interested, to be honest. Clothes
     are for fancy birds.
-  selectionTooltip: Can't fancy all (+1 Solitude)
+  selectionTooltip: (+1 solitary)
   conclusionHeading: 
   conclusionText: Yeah, you're right. It's a silly idea.
 --- !u!1 &1649831606601493891

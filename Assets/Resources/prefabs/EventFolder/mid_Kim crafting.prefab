@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "Of course! Before all of this, I used to work at a tailor. I mended things
+  text: "Of course! Before all of this, I used to work as a tailor. I mended things
     like this all the time. \r\n"
   useCustomPic: 0
   customPic: {fileID: 0}
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: 3
@@ -198,7 +199,7 @@ MonoBehaviour:
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Being a tailor is kind of a fancy job, but telling us what you do
     for a living isn't bragging, Kim! We'd love to hear more about it!
-  selectionTooltip: More about you! (+3 Friendliness)
+  selectionTooltip: (+3 social)
   conclusionHeading: 
   conclusionText: 'Oh, thank you! I know a bit about knitting and mending clothes,
     but my favorite thing to do is embroidery. I embroidered a jacket for the queen
@@ -383,6 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: -3
@@ -395,7 +397,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Being a tailor is kind of a fancy job, it's probably better if you
     don't talk about it. You wouldn't want anybirdy else to feel inferior, right?
-  selectionTooltip: No one cares (+3 Solitude)
+  selectionTooltip: (+3 solitary)
   conclusionHeading: 
   conclusionText: Oh, no, of course not.
 --- !u!1 &5734411113049748137
@@ -493,6 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 030000000400000001000000
   condition: 0
   magnitude: 0
@@ -503,8 +506,20 @@ MonoBehaviour:
   - {fileID: 5734411112366502729}
   - {fileID: 5734411113022976515}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &5734411113229250726
 GameObject:
   m_ObjectHideFlags: 0

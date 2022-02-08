@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0400000002000000000000000100000003000000
   condition: 2
   magnitude: 0
@@ -247,10 +248,20 @@ MonoBehaviour:
   - {fileID: 4506307749374730598}
   - {fileID: 4506307749276132247}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &4506307749276132245
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: -3
@@ -306,7 +318,7 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Oh, stop being such a worrywing! We'll be fine.
-  selectionTooltip: Too thoughtful (+3 Solitude)
+  selectionTooltip: (+3 solitary)
   conclusionHeading: 
   conclusionText: "Alright, alright. I\u2019m just trying to make sure you\u2019re
     all safe\u2026 \r"
@@ -354,6 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: 3
@@ -366,7 +379,7 @@ MonoBehaviour:
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "It's okay, Alex. We\u2019ll stick together and take care of each
     other. We\u2019re not gonna get hurt. \r\n"
-  selectionTooltip: We have each of our backs (+3 Confidence)
+  selectionTooltip: (+3 confidence)
   conclusionHeading: 
   conclusionText: "Alright, thank you. I\u2019m just worried about all of you. Stay
     close and we\u2019ll get through this!\r"

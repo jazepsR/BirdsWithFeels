@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: Hello, auntie Judy
+  text: Hello, auntie Judy.
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &9112758547673512846
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 00000000010000001800000004000000
   condition: 0
   magnitude: 0
@@ -208,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 3
-  text: "It\u2019s nice to meet you, ma\u2019am"
+  text: "It\u2019s nice to meet you, ma\u2019am."
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &9112758548026002275
@@ -389,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: -3
@@ -401,7 +403,7 @@ MonoBehaviour:
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Don't worry, ma'am, Terry is just trying out some different emotions
     right now. He'll go back to being neutral once this is all over.
-  selectionTooltip: 
+  selectionTooltip: (+3 caution)
   conclusionHeading: 
   conclusionText: 'Uh, yeah. Sure.. I''m just a neutral bird at the end of the day '
 --- !u!1 &9112758548741485218
@@ -496,8 +498,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 2
-  text: Terry! You don't want to stay at you parents' farm? Don't tell me you're
-    trying to become another emotion!
+  text: Terry! You don't want to stay at you parents' farm? Don't tell me you don't
+    want to be neutral!
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &9112758548869681717
@@ -689,6 +691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: 3
@@ -701,7 +704,7 @@ MonoBehaviour:
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "Hey, Terry can be any emotion he wants to be! There\u2019s nothing
     wrong with other emotions."
-  selectionTooltip: 
+  selectionTooltip: (+3 confidence)
   conclusionHeading: 
   conclusionText: "Yeah! I haven\u2019t decided what emotion I\u2019d like to be
     yet. Maybe I\u2019ll be neutral and maybe I won\u2019t be, but that\u2019s my

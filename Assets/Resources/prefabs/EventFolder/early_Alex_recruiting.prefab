@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: "There are a lot of military birds in this forst town. I wonder what\u2019s
-    going on..? "
+  text: "There are a lot of military birds here. I wonder what\u2019s going on? "
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &3015537072390836460
@@ -139,7 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: Bye..
+  text: Bye...
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &3015537072613013350
@@ -373,6 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: 4
@@ -385,7 +385,7 @@ MonoBehaviour:
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: I'm sure Jerry and your old platoon will be there once we've finished
     our mission! Who wouldn't want to be friends with you?
-  selectionTooltip: 
+  selectionTooltip: (+4 social)
   conclusionHeading: 
   conclusionText: 'Heh. Thanks, I really appreciate it.
 
@@ -437,6 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 040000001900000001000000
   condition: 0
   magnitude: 0
@@ -505,6 +506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: -4
@@ -517,7 +519,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "Even if you\u2019re really good friends with someone, you might
     still drift away from each other eventually. It's tricky!"
-  selectionTooltip: 
+  selectionTooltip: (+4 solitary)
   conclusionHeading: 
   conclusionText: "Yeah, I guess you\u2019re right. \r\n"
 --- !u!1 &3015537074111475251

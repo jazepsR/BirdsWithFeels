@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 010000002200000000000000040000001c000000
   condition: 0
   magnitude: 0
@@ -345,6 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: -3
@@ -356,10 +358,10 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: You might feel that way now, but if you change emotions you might
-    feel different. It's okay to change
-  selectionTooltip: 
+    feel different. You never know what the future holds!
+  selectionTooltip: (+3 caution)
   conclusionHeading: 
-  conclusionText: "Yeah. I guess we\u2019ll see, yikes"
+  conclusionText: Yeah...
 --- !u!1 &4381041336419032321
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: 3
@@ -511,7 +514,7 @@ MonoBehaviour:
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Hey, if you wanna be a merchant, you can be a merchant! You're one
     of the friendliest birds I've ever met!
-  selectionTooltip: 
+  selectionTooltip: (+3 social)
   conclusionHeading: 
   conclusionText: 'Thank you! I do like meeting and helping new people!
 

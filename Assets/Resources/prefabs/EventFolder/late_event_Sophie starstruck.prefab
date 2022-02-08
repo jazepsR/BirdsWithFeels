@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: -3
@@ -103,7 +104,7 @@ MonoBehaviour:
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "We should be careful. Even though these vultures seem friendly
     we can\u2019t assume that all who do have good intentions. We need to be vigilant."
-  selectionTooltip: Trust problems (+3 Caution)
+  selectionTooltip: (+3 caution)
   conclusionHeading: 
   conclusionText: Of course... there are still plenty of hostile vultures around.
 --- !u!1 &801787969779345625
@@ -342,6 +343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: 3
@@ -355,7 +357,7 @@ MonoBehaviour:
   selectionText: "Well, the vultures have been suffering and we\u2019re trying to
     help them. I guess both birds and vultures have been spreading the word about
     us."
-  selectionTooltip: Hope on both sides (+3 Confidence)
+  selectionTooltip: (+3 confidence)
   conclusionHeading: 
   conclusionText: 'That''s true! I hope vultures will begin to change their ways
     when they hear of our mission. '
@@ -446,6 +448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 020000000000000001000000090000001a000000
   condition: 0
   magnitude: 0
@@ -456,8 +459,20 @@ MonoBehaviour:
   - {fileID: 801787970029595423}
   - {fileID: 801787969743986797}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &801787970724760616
 GameObject:
   m_ObjectHideFlags: 0

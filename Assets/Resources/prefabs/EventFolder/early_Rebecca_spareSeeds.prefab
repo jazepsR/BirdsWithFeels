@@ -321,6 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: 4
@@ -333,7 +334,7 @@ MonoBehaviour:
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: I don't think you should give up those seeds, they're an investment
     in your future. These birds can find some other food!
-  selectionTooltip: 
+  selectionTooltip: (+4 confidence)
   conclusionHeading: 
   conclusionText: Yeah!
 --- !u!1 &8381512231847680873
@@ -573,6 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0100000000000000040000002300000024000000
   condition: 0
   magnitude: 0
@@ -641,6 +643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: 4
@@ -652,7 +655,7 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "Rebecca, these birds don\u2019t have anything else to eat. We can
-    have the queen get you some new seedlings once this is over"
-  selectionTooltip: 
+    get you some more seeds once this is over!"
+  selectionTooltip: (+4 social)
   conclusionHeading: 
   conclusionText: You're right, of course. Here you go.

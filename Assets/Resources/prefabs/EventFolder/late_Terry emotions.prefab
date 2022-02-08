@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: -3
@@ -199,7 +200,7 @@ MonoBehaviour:
   selectionText: Don't get ahead of yourself, Terry. Your family might not appreciate
     you saying stuff like that. I'm sure they would prefer it if you came back to
     them the same way you were before.
-  selectionTooltip: 'Never change (+3 Caution) '
+  selectionTooltip: (+3 caution)
   conclusionHeading: 
   conclusionText: Yeah, I guess you're right...
 --- !u!1 &6945488857431177058
@@ -246,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: 3
@@ -258,7 +260,7 @@ MonoBehaviour:
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "You\u2019re right, Terry! Emotions can be great, and I\u2019m glad
     you\u2019ve gotten to experience that!"
-  selectionTooltip: I love to feel! (+3 Confidence)
+  selectionTooltip: (+3 confidence)
   conclusionHeading: 
   conclusionText: "Yeah! When I get back I\u2019ll tell my parents about our adventure
     and all the emotions I\u2019ve experienced!\r\n\r\n"
@@ -393,6 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 000000000100000004000000
   condition: 0
   magnitude: 0
@@ -403,8 +406,20 @@ MonoBehaviour:
   - {fileID: 6945488857431177056}
   - {fileID: 6945488857348944877}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &6945488858314731375
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: -4
@@ -55,8 +56,9 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Sorry, Terry, but even if we do make it to the king there's no way
-    of knowing if we'll be able to change things. The king might not want to listen
-  selectionTooltip: 
+    of knowing if we'll be able to change things. This could turn into an all-out
+    war.
+  selectionTooltip: (+4 caution)
   conclusionHeading: 
   conclusionText: Right... of course.
 --- !u!1 &2927743873912507969
@@ -150,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: 3
@@ -160,10 +163,11 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
-  selectionText: 'Of course not, we are constantly befriending them! '
-  selectionTooltip: 
+  selectionText: Of course not, just think of all the vultures we've befriended so
+    far!
+  selectionTooltip: (+3 confidence)
   conclusionHeading: 
-  conclusionText: Hearing you say that makes me feel so much better!
+  conclusionText: Yeah, you're right!
 --- !u!1 &2927743874021090976
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 000000000400000001000000
   condition: 0
   magnitude: 0

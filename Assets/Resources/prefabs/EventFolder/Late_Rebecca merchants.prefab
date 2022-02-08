@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: 3
@@ -196,7 +197,7 @@ MonoBehaviour:
   AfterImage: {fileID: 0}
   icon: {fileID: 21300008, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Rebecca, maybe you can help them? You know about trading, right?
-  selectionTooltip: Share your knowledge! (+3 Friendliness)
+  selectionTooltip: (+3 social)
   conclusionHeading: 
   conclusionText: "Of course! Here, let me help you count that, I\u2019m sure we
     can figure out a way to work this out!\r\n"
@@ -291,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: -1
@@ -303,7 +305,7 @@ MonoBehaviour:
   icon: {fileID: 21300014, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: We'll leave these birds to take care of their own business, we've
     got bigger birds to fry!
-  selectionTooltip: Don't lend a wing  (+1 Caution)
+  selectionTooltip: (+1 caution)
   conclusionHeading: 
   conclusionText: Oh, okay.
 --- !u!1 &1688538386708768802
@@ -352,6 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 0100000000000000040000000900000027000000
   condition: 0
   magnitude: 0
@@ -362,8 +365,20 @@ MonoBehaviour:
   - {fileID: 1688538385711471415}
   - {fileID: 1688538386307968582}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &1688538386724279754
 GameObject:
   m_ObjectHideFlags: 0

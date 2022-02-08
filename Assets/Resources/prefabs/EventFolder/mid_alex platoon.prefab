@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 040000000000000001000000
   condition: 0
   magnitude: 0
@@ -56,8 +57,20 @@ MonoBehaviour:
   - {fileID: 5971394662600170224}
   - {fileID: 5971394661427747215}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
+  eventBackground: {fileID: 0}
+  useBgFog: 1
+  useEventAudio: 0
+  eventAudio:
+    clips: []
+    usePitchVariation: 0
+    sourceType: 0
+    volume: 1
+    minPitch: 1
+    maxPitch: 1
 --- !u!1 &5971394661320217952
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 2
   magnitude1: 3
@@ -162,7 +176,7 @@ MonoBehaviour:
   icon: {fileID: 21300010, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: "You\u2019re with us now! It's okay if you miss them but we\u2019re
     all in this together! We\u2019re a team, and nothing can stand in our way!"
-  selectionTooltip: A part of the team! (+3 Courage)
+  selectionTooltip: (+3 confidence)
   conclusionHeading: 
   conclusionText: "Yeah! You\u2019re right, together we\u2019ll show those vultures
     what\u2019s what!\r\n\r\n"
@@ -390,6 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 1
   magnitude1: -3
@@ -402,7 +417,7 @@ MonoBehaviour:
   icon: {fileID: 21300012, guid: 89e97c8863bd4be4c8460abd9126b10f, type: 3}
   selectionText: Well, once our mission is over you can go back to them. No reason
     for you to stick around with us.
-  selectionTooltip: It's where I belong (+3 Solitude)
+  selectionTooltip: (+3 solitary)
   conclusionHeading: 
   conclusionText: Oh, okay. Yeah, sure.
 --- !u!1 &5971394663102949433
