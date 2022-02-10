@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dcbb0f102636454eb687c8ae4d63841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedBird: 6
   speakers: 00000000010000000200000003000000040000000d0000000e0000000f0000001000000011000000130000001200000014000000
   condition: 2
   magnitude: 0
@@ -191,8 +192,10 @@ MonoBehaviour:
   options:
   - {fileID: 1732886606074941321}
   canShowMultipleTimes: 0
+  isCharacterJoinEvent: 0
   afterEventDialog: {fileID: 0}
   quitAfterLevel: 0
+  isCampFireScene: 0
   eventBackground: {fileID: 0}
   useBgFog: 1
   useEventAudio: 0
@@ -483,6 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onComplete: {fileID: 0}
+  useNarration: 0
   applyToAll: 0
   consequenceType1: 3
   magnitude1: 0
@@ -493,7 +497,7 @@ MonoBehaviour:
   useAutoExplanation: 1
   AfterImage: {fileID: 0}
   icon: {fileID: 21300000, guid: 6e4e71e2fb138408e84865d6ed3a0e0b, type: 3}
-  selectionText: Your team and the vultures manage to capture the king
+  selectionText: Together, you
   selectionTooltip: 
   conclusionHeading: 
   conclusionText: 
@@ -635,9 +639,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerId: 0
-  text: " I think you\u2019re going to have to come with us. I\u2019m sure you and
-    the Queen will have a good, long talk about the future of the vulture kingdom
-    and your subjects. "
+  text: "You\u2019re going to have to come with us. I\u2019m sure you and the Queen
+    will have a good, long talk about the future of the vulture kingdom and your
+    subjects. "
   useCustomPic: 0
   customPic: {fileID: 0}
 --- !u!1 &1732886606451007342

@@ -18234,6 +18234,46 @@ MonoBehaviour:
   text: merchant
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!21 &647472320
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.0026450756, y: 0.0026781438}
+        m_Offset: {x: 0.49529326, y: 3.6954994}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &648732635
 GameObject:
   m_ObjectHideFlags: 0
@@ -18899,8 +18939,8 @@ PrefabInstance:
     - target: {fileID: 114727846506153714, guid: 9f058c7db173d3e43a338bbc64ffc2fe,
         type: 3}
       propertyPath: text
-      value: Our party is growing! You must select which three birds will go on the
-        adventure.
+      value: Your party is growing! You must select which three birds will go on
+        the adventure.
       objectReference: {fileID: 0}
     - target: {fileID: 114727846506153714, guid: 9f058c7db173d3e43a338bbc64ffc2fe,
         type: 3}
@@ -34571,46 +34611,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179721865}
   m_CullTransparentMesh: 0
---- !u!21 &1182666800
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.0026450756, y: 0.0026781438}
-        m_Offset: {x: 0.49529326, y: 3.6954994}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1183966215 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4333098802895934, guid: e777ba048bee5404e97fc46ed5edbe6f,
@@ -41302,7 +41302,7 @@ PrefabInstance:
     - target: {fileID: 7087334621926111195, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -291.99997
+      value: -292
       objectReference: {fileID: 0}
     - target: {fileID: 7087334621926111195, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
@@ -46490,8 +46490,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speakerID: 1
-  text: We need to pass through it to exit the valley, but a group of lonely vultures
-    have set up camp there!
+  text: We need to pass through the cave to exit the valley, but a group of lonely
+    vultures have set up camp there!
 --- !u!114 &1613653534 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3341340896813250862, guid: f0eff861912a40c44bc8fbe02469eeef,
