@@ -10,6 +10,7 @@ public class MapControler : MonoBehaviour {
 	public bool canFight= false;
 	[HideInInspector]
 	public bool showGraphAfterEvent = true;
+	public bool goToCreditsAfterEvent = false;
 	[HideInInspector]
 	public bool canHeal = false;
 	[TextArea(3,10)]

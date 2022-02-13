@@ -10,6 +10,7 @@ public class MapIconEvent : MapIcon
     public Sprite NarrativeIcon;
     public Image iconToChange;
     public bool showGraph = true;
+    [SerializeField] private bool triggerCredits = false;
     public string headingName = "Narrative Event";
     public string description = "";
     private EventScript selectedEvent;
@@ -143,6 +144,7 @@ public class MapIconEvent : MapIcon
             }
             EventController.Instance.CreateEvent(selectedEvent);
             MapControler.Instance.showGraphAfterEvent = showGraph;
+            MapControler.Instance.goToCreditsAfterEvent = triggerCredits;
             eventActive = true;
             if(timedEvent)
             {

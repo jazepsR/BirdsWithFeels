@@ -218,7 +218,11 @@ public class EventController : MonoBehaviour
                     if (currentBird && MapControler.Instance.showGraphAfterEvent)
                     {
                         LeanTween.delayedCall(0.7f, () =>GuiContoler.Instance.OpenMapBigGraph(currentBird));
-                        
+                    }
+                    else if(MapControler.Instance.goToCreditsAfterEvent)
+                    {
+                        UnityEngine.SceneManagement.SceneManager.LoadScene("Credits");
+                        MapControler.Instance.goToCreditsAfterEvent = false;
                     }
 
                     //Debug.LogError("ojvgeojegojgeojg");

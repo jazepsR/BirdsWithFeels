@@ -111,6 +111,7 @@ public class AudioControler : MonoBehaviour {
     [Header("Ambient sounds")]
     public AudioGroup AmbientSounds;
     public AudioGroup battleTracks;
+    public AudioGroup battleTracksTrial;
     [Header("Music")]
     public AudioClip defaultThinkingMusic;
     public AudioClip TrialThinkingMusic;
@@ -190,19 +191,22 @@ public class AudioControler : MonoBehaviour {
 
 
 
-                if (Var.isBoss)
+                if (Var.isEnding || Var.isBoss)
                 {
                     musicSource.clip = bossThinkingMusic;
+                    battleSource.clip = battleTracksTrial.clips[0];
                 }
                 else if (Var.freezeEmotions)
 				{
                   
                     musicSource.clip = TrialThinkingMusic;
-                    
-				}
+                    battleSource.clip = battleTracksTrial.clips[0];
+
+                }
                 else
                 {
                     musicSource.clip = defaultThinkingMusic;
+                    battleSource.clip = battleTracks.clips[0];
                 }
 
                 
@@ -483,7 +487,17 @@ public void PlaySoundWithPitch(AudioClip clip, audioSourceType sourceType, int p
 
         // Debug.LogError("activate source: " + sourceToActivate);
         if (sourceToActivate == audioSourceType.battleSource && inBattle)
-			PlaySound(battleTracks);
+        {
+            if (Var.isEnding || Var.freezeEmotions)
+            {
+               // PlaySound(battleTracksTrial);
+            }
+            else
+            {
+               // PlaySound(battleTracks);
+            } 
+        }
+
         StartCoroutine(ToggleMusicSource(sourceToActivate, 0.5f));
 	}
 
