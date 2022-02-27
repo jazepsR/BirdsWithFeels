@@ -192,4 +192,14 @@ public class DebugMenu : MonoBehaviour {
 		}
 
 	}
+
+	public bool GetCameraIsControlled()
+    {
+		return cameraControl;
+    }
+
+	public bool GetUIHidden()
+    {
+		return UIHidden;
+    }
 }

@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
 #endif
 
-public class GuiContoler : MonoBehaviour {
+public class GuiContoler : MonoBehaviour
+{
     public static GuiContoler Instance { get; private set; }
     public GameObject loadingSceen;
     public Image dangerFollowHighlight;
@@ -51,8 +52,8 @@ public class GuiContoler : MonoBehaviour {
     public Transform[] battleTrag;
     public GameObject rerollBox;
     public FastForwardScript FastForwardScript;
-    Var.Em currentMapArea; 
-    public Var.Em nextMapArea; 
+    Var.Em currentMapArea;
+    public Var.Em nextMapArea;
     public Var.Em nextNextMapArea; //next spot on map
     public static int mapPos = 0;
     private int finalResult = 0;
@@ -111,7 +112,7 @@ public class GuiContoler : MonoBehaviour {
     public Graph smallGraph;
     int maxGraph = 3;
     public GameObject boss;
-    public GameObject bossTransition; 
+    public GameObject bossTransition;
     public bool canplayBossTransition = false; // make sure you are in a trial for this to work
     Transform lastSpeechPos = null;
     public Animator graphAnime;
@@ -133,9 +134,11 @@ public class GuiContoler : MonoBehaviour {
     public TimedEventControl control;
     [SerializeField] public TimedEventControl[] timedEventControllers;
     [HideInInspector] public int graphInteractTweenID = -1;
+    [SerializeField]
+    private DebugMenu MyDebugMenu;
     void Awake()
     {
-        
+
         //if (!Var.StartedNormally)
         //Var.gameSettings.shownLevelTutorial = true;
         LeanTween.init(1000);
@@ -148,7 +151,7 @@ public class GuiContoler : MonoBehaviour {
         Var.powerText = powerTextTemp;
         activeSpeechText = SpeechBubbleText;
         activeSpeechBubble = speechBubble;
-               
+
     }
     void Start()
     {
@@ -158,7 +161,7 @@ public class GuiContoler : MonoBehaviour {
             Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
         if (Var.isTutorial)
         {
-            
+
             try
             {
                 Tutorial.Instance.enabled = true;
@@ -182,7 +185,7 @@ public class GuiContoler : MonoBehaviour {
             GraphBlocker.SetActive(false);
 
             if (Var.selectedTimeEvent != null && Var.selectedTimeEvent.activationEventID == Var.currentStageID
-                && !Var.selectedTimeEvent.activationEventShown  && !Var.isEnding && !inMap)
+                && !Var.selectedTimeEvent.activationEventShown && !Var.isEnding && !inMap)
             {
                 foreach (TimedEventControl anEvent in timedEventControllers)
                 {
@@ -202,7 +205,7 @@ public class GuiContoler : MonoBehaviour {
                 statPanel.transform.GetChild(0).transform.GetChild(0).gameObject.SetActive(false); //click for details
             }
         }
-        
+
 
         /*  if (showEmoGraphArrow != null)
           {
@@ -226,7 +229,7 @@ public class GuiContoler : MonoBehaviour {
 
     public void StatToggle()
     {
-        
+
 
         if (relationshipPanel.activeSelf)
         {
@@ -234,7 +237,8 @@ public class GuiContoler : MonoBehaviour {
             statPanel.SetActive(true);
             ToggleRelationPanelText.text = "Relationships";
             Debug.Log("i am a relationship");
-        } else
+        }
+        else
         {
             relationshipPanel.SetActive(true);
             statPanel.SetActive(false);
@@ -252,7 +256,7 @@ public class GuiContoler : MonoBehaviour {
     }
     public void UnlockAllMap()
     {
-        if(!Var.cheatsEnabled)
+        if (!Var.cheatsEnabled)
         {
             return;
         }
@@ -293,7 +297,7 @@ public class GuiContoler : MonoBehaviour {
             pause.SetActive(false);
             Time.timeScale = 1.0f;
             AudioControler.Instance.SaveVolumeSettings();
-            if(inMap && MapControler.Instance)
+            if (inMap && MapControler.Instance)
             {
                 MapControler.Instance.canMove = true;
                 MapControler.Instance.restBtnRaycaster.enabled = true;
@@ -310,7 +314,7 @@ public class GuiContoler : MonoBehaviour {
             if ((Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID) && !Var.cheatsEnabled)
             {
                 mainMenuBtn.GetComponent<Button>().interactable = false;
-                toMapBtn.GetComponent<Button>().interactable = false;    
+                toMapBtn.GetComponent<Button>().interactable = false;
             }
             if (inMap && MapControler.Instance)
             {
@@ -341,9 +345,9 @@ public class GuiContoler : MonoBehaviour {
     public void QuitGame()
     {
         AudioControler.Instance.ClickSound();
-        if(Var.tutorialCompleted)
+        if (Var.tutorialCompleted)
         {
-           SaveLoad.Save();
+            SaveLoad.Save();
         }
         Application.Quit();
     }
@@ -376,7 +380,8 @@ public class GuiContoler : MonoBehaviour {
             LeanTween.cancelAll();
             SaveLoad.Save();
             SceneManager.LoadScene("Map");
-        } else
+        }
+        else
         {
             Time.timeScale = 1.0f;
             loseBanner.SetActive(true);
@@ -437,23 +442,32 @@ public class GuiContoler : MonoBehaviour {
 
     void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Escape) && pauseBtn.activeSelf)
         {
-            if ((EventController.Instance && EventController.Instance.eventObject.gameObject.activeSelf) || GraphBlocker.gameObject.activeSelf ||( winBanner && winBanner.activeSelf))
-            {     
-                
+            if ((EventController.Instance && EventController.Instance.eventObject.gameObject.activeSelf) || GraphBlocker.gameObject.activeSelf || (winBanner && winBanner.activeSelf))
+            {
+
             }
             else
             {
                 setPause();
             }
-           
+
         }
         if (Input.GetKeyDown(KeyCode.O) && Var.cheatsEnabled)
             ReturnToMap();
         if (Input.GetKeyDown(KeyCode.B) && Var.cheatsEnabled)
             GraphButton();
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if (MyDebugMenu.GetUIHidden())
+            {
+                Fight();
+            }
+
+        }
 
         if (DebugMenu.cameraControl && Var.cheatsEnabled)
         {
@@ -480,7 +494,8 @@ public class GuiContoler : MonoBehaviour {
                 CloseBattleReport.onClick.Invoke();
         }
 
-        try{ 
+        try
+        {
             if (AudioControler.Instance.musicSource.clip == AudioControler.Instance.levelCompleteMusic)
                 AudioControler.Instance.musicSource.loop = false;
 
@@ -488,12 +503,12 @@ public class GuiContoler : MonoBehaviour {
             {
                 AudioControler.Instance.musicSource.time = 41.44f;
                 AudioControler.Instance.musicSource.Play();
-            } 
+            }
         }
 
         catch
-        { 
-        
+        {
+
         }
     }
     public void SpeechBubbleClicked()
@@ -580,13 +595,14 @@ public class GuiContoler : MonoBehaviour {
 
     public void ShowSpeechBubble(Transform pos, string text, AudioGroup birdTalk, bool useFirst = true)
     {
-       // Debug.LogError("pos: " + pos.position);
-        if (speechBubbleObj.activeSelf) {
+        // Debug.LogError("pos: " + pos.position);
+        if (speechBubbleObj.activeSelf)
+        {
             speechTexts.Add(text);
             speechPos.Add(pos);
             speechPivotIsFirst.Add(useFirst);
             speechAudioGroup.Add(birdTalk);
-          //  speechAudioGroup[0].Play();
+            //  speechAudioGroup[0].Play();
             AudioControler.Instance.speechBubbleContinue.Play();
 
         }
@@ -606,7 +622,7 @@ public class GuiContoler : MonoBehaviour {
             activeSpeechText.text = text;
             activeSpeechBubble.GetComponent<UIFollow>().target = pos;
 
-            if(speechAudioGroup.Count == 0)
+            if (speechAudioGroup.Count == 0)
             {
                 speechAudioGroup.Add(birdTalk);
             }
@@ -649,7 +665,7 @@ public class GuiContoler : MonoBehaviour {
         print("currentGraph : " + currentGraph);
         if (Var.isTutorial)
         {            //GuiContoler.Instance.nextGraph.interactable = false;
-           Tutorial.Instance.ShowGraphSpeech(currentGraph);
+            Tutorial.Instance.ShowGraphSpeech(currentGraph);
         }
         foreach (Transform child in graph.transform.Find("GraphParts").transform)
         {
@@ -685,9 +701,9 @@ public class GuiContoler : MonoBehaviour {
 
     public bool isActiveBirdInjured()
     {
-        foreach(Bird bird in Var.activeBirds)
+        foreach (Bird bird in Var.activeBirds)
         {
-            if(bird.data.injured)
+            if (bird.data.injured)
             {
                 return true;
             }
@@ -813,32 +829,32 @@ public class GuiContoler : MonoBehaviour {
         if (nextMapArea != Var.Em.finish)
         {
             graphAnime.SetBool("open", false);
-        //LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
-        foreach (Transform child in graph.transform.Find("GraphParts").transform)
-        {
-            Destroy(child.gameObject);
-        }
-        closeReportBtn.SetActive(false);
-        HideSmallGraph.gameObject.SetActive(true);
-        Var.activeBirds[0].showText();
-        dangerFollowHighlight.gameObject.SetActive(false);
-        foreach (Bird activeBird in Var.activeBirds)
-        {
-            activeBird.SetEmotion();
-            activeBird.seedCollectedInRound = false;
-        }
+            //LeanTween.moveLocal(graph, new Vector3(0, -Var.MoveGraphBy, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack);		
+            foreach (Transform child in graph.transform.Find("GraphParts").transform)
+            {
+                Destroy(child.gameObject);
+            }
+            closeReportBtn.SetActive(false);
+            HideSmallGraph.gameObject.SetActive(true);
+            Var.activeBirds[0].showText();
+            dangerFollowHighlight.gameObject.SetActive(false);
+            foreach (Bird activeBird in Var.activeBirds)
+            {
+                activeBird.SetEmotion();
+                activeBird.seedCollectedInRound = false;
+            }
 
-        if (inMap && MapControler.Instance.showGraphAfterEvent)
-        {
-            //Debug.Log("enabling stuff stuff");
-            //disableMapInteractivity(false);
-            MapControler.Instance.showGraphAfterEvent = false;
+            if (inMap && MapControler.Instance.showGraphAfterEvent)
+            {
+                //Debug.Log("enabling stuff stuff");
+                //disableMapInteractivity(false);
+                MapControler.Instance.showGraphAfterEvent = false;
             }
         }
     }
     public void CloseBirdStats()
     {
-        if(minimap)
+        if (minimap)
             minimap.SetActive(Var.gameSettings.shownBattlePlanningTutorial);
         graphAnime.SetBool("open", false);
         GraphBlocker.SetActive(false);
@@ -866,7 +882,7 @@ public class GuiContoler : MonoBehaviour {
         //canChangeGraph = true;
         GraphBlocker.SetActive(true);
         Helpers.Instance.HideTooltip();
-        if(minimap)
+        if (minimap)
             minimap.SetActive(false);
         //nextGraph.interactable = !Var.isTutorial;
         //prevGraph.interactable = !Var.isTutorial;
@@ -878,12 +894,12 @@ public class GuiContoler : MonoBehaviour {
         dangerZoneBorder.SetActive(Var.gameSettings.useMHP);
         Graph.Instance.portraits = new List<GameObject>();
         List<Bird> BirdsToGraph;
-        if(graphInteractTweenID!= -1)
+        if (graphInteractTweenID != -1)
         {
             LeanTween.cancel(graphInteractTweenID);
         }
         //graphInteractTweenID= LeanTween.delayedCall(2f, () => canChangeGraph = true).id;
-        if(bird != null)
+        if (bird != null)
         {
             BirdsToGraph = new List<Bird>() { bird };
         }
@@ -910,7 +926,7 @@ public class GuiContoler : MonoBehaviour {
             if (!BirdsToGraph[i].data.injured || inMap)
             {
                 Helpers.Instance.NormalizeStats(BirdsToGraph[i]);
-                Graph.Instance.PlotFull(BirdsToGraph[i], afterBattle,i==0);
+                Graph.Instance.PlotFull(BirdsToGraph[i], afterBattle, i == 0);
             }
         }
 
@@ -936,45 +952,45 @@ public class GuiContoler : MonoBehaviour {
         {
             feelReport.SetActive(false);
             //Summary
-           // EmotionChangeFeedback.gameObject.SetActive(false);
+            // EmotionChangeFeedback.gameObject.SetActive(false);
 
         }
     }
     public void CreateEmoBit(Transform par, int gain, Var.Em emo, string info)
     {
         emoReportBit bit = Instantiate(emoReportBit, par);
-        bit.SetEmoBit("+" +Mathf.Abs((float)gain).ToString(), emo, info);
+        bit.SetEmoBit("+" + Mathf.Abs((float)gain).ToString(), emo, info);
         bit.transform.SetAsFirstSibling();
         bits.Add(bit);
     }
     public void SetupTotal(Transform parent, Var.Em emo1, Var.Em emo2, int amount, Image sprite, Text amountText)
     {
-       
+
         Var.Em emo = emo2;
-        if(amount>0)
+        if (amount > 0)
         {
             emo = emo1;
         }
-        if(amount == 0)
+        if (amount == 0)
         {
-          //  emo = Var.Em.Neutral;
+            //  emo = Var.Em.Neutral;
         }
         //Debug.LogError("Emo: " + emo + " amount: " + amount);
-       
-        
+
+
         sprite.gameObject.SetActive(true);
-        sprite.sprite = Helpers.Instance.GetEmotionIcon(emo,false);
-        
-        amountText.text ="+"+ Mathf.Abs((float)amount).ToString();//.ToString("+#;-#;0");
+        sprite.sprite = Helpers.Instance.GetEmotionIcon(emo, false);
+
+        amountText.text = "+" + Mathf.Abs((float)amount).ToString();//.ToString("+#;-#;0");
         amountText.color = Helpers.Instance.GetEmotionColor(emo);
     }
 
-	 public void CreateEmotionChangeText(Bird bird, Transform topParent)
-	{
-		//Debug.Log("CHANGE TEXT " + bird.charName + " gorund conf: " + bird.groundConfBoos + " ground friend: " + bird.groundFriendBoos);
+    public void CreateEmotionChangeText(Bird bird, Transform topParent)
+    {
+        //Debug.Log("CHANGE TEXT " + bird.charName + " gorund conf: " + bird.groundConfBoos + " ground friend: " + bird.groundFriendBoos);
         string fbText = "";
-		int ConfGainedInRound = bird.battleConfBoos + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
-		int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
+        int ConfGainedInRound = bird.battleConfBoos + bird.groundConfBoos + bird.wizardConfBoos + bird.levelConfBoos;
+        int FriendGainedInRound = bird.friendBoost + bird.wizardFrienBoos + bird.groundFriendBoos + bird.levelFriendBoos;
         SetupTotal(confTotalReportParent, Var.Em.Confident, Var.Em.Cautious, ConfGainedInRound, confTotalReportIcon, confTotalReportCount);
         SetupTotal(socialTotalReportParent, Var.Em.Social, Var.Em.Solitary, FriendGainedInRound, socialTotalReportIcon, socialTotalReportCount);
         //Confidence stuff
@@ -998,8 +1014,8 @@ public class GuiContoler : MonoBehaviour {
         //fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom combat: " + Mathf.Abs(bird.battleConfBoos).ToString("+#;-#;0") + " caution</color>";
         if (bird.data.injured && !inMap)
             CreateEmoBit(topParent, 5, Var.Em.Cautious, "Suffered injury");
-       // fbText += Helpers.Instance.ScaredHexColor + "\n\t(5 caution from injury)</color>";
-		if (bird.groundConfBoos > 0)
+        // fbText += Helpers.Instance.ScaredHexColor + "\n\t(5 caution from injury)</color>";
+        if (bird.groundConfBoos > 0)
             CreateEmoBit(topParent, bird.groundConfBoos, Var.Em.Confident, "Ground tiles");
         //fbText += Helpers.Instance.BraveHexColor + "\n\tFrom tiles: " + bird.groundConfBoos.ToString("+#;-#;0") + " confidence</color>";
         if (bird.groundConfBoos < 0)
@@ -1012,10 +1028,10 @@ public class GuiContoler : MonoBehaviour {
         if (bird.levelConfBoos < 0)
             CreateEmoBit(topParent, bird.levelConfBoos, Var.Em.Cautious, "Friendly bird skills");
         //fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom level abilities: " + Mathf.Abs(bird.levelConfBoos).ToString("+#;-#;0") + " caution</color>";
-		if (bird.wizardConfBoos > 0)
+        if (bird.wizardConfBoos > 0)
             CreateEmoBit(topParent, bird.wizardConfBoos, Var.Em.Confident, "Enemy wizard influence");
-       // fbText += Helpers.Instance.BraveHexColor + "\n\tFrom enemies: " + bird.wizardConfBoos.ToString("+#;-#;0") + " confidence</color>";
-		if (bird.wizardConfBoos < 0)
+        // fbText += Helpers.Instance.BraveHexColor + "\n\tFrom enemies: " + bird.wizardConfBoos.ToString("+#;-#;0") + " confidence</color>";
+        if (bird.wizardConfBoos < 0)
             CreateEmoBit(topParent, bird.wizardConfBoos, Var.Em.Cautious, "Enemy wizard influence");
         //fbText += Helpers.Instance.ScaredHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardConfBoos).ToString("+#;-#;0") + " caution</color>";
 
@@ -1024,41 +1040,41 @@ public class GuiContoler : MonoBehaviour {
 
 
 
-		//Friendship stuff
-		if (FriendGainedInRound > 0)
-			fbText += "\n" + Helpers.Instance.FriendlyHexColor + "<b>Social gained: " + FriendGainedInRound + "</b></color>";
-		if (FriendGainedInRound < 0)
-			fbText += "\n" + Helpers.Instance.LonelyHexColor + "<b>Solitude gained: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
-		if (bird.friendBoost > 0)
+        //Friendship stuff
+        if (FriendGainedInRound > 0)
+            fbText += "\n" + Helpers.Instance.FriendlyHexColor + "<b>Social gained: " + FriendGainedInRound + "</b></color>";
+        if (FriendGainedInRound < 0)
+            fbText += "\n" + Helpers.Instance.LonelyHexColor + "<b>Solitude gained: " + Mathf.Abs(FriendGainedInRound) + "</b></color>";
+        if (bird.friendBoost > 0)
             CreateEmoBit(topParent, bird.friendBoost, Var.Em.Social, "Spending time with friends");
-       // fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom interactions: " + bird.friendBoost.ToString("+#;-#;0") + " social</color>";
-		if (bird.friendBoost < 0)
+        // fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom interactions: " + bird.friendBoost.ToString("+#;-#;0") + " social</color>";
+        if (bird.friendBoost < 0)
             CreateEmoBit(topParent, bird.friendBoost, Var.Em.Solitary, "Spent time alone");
-       // fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom interactions: " + Mathf.Abs(bird.friendBoost).ToString("+#;-#;0") + " solitude</color>";
-		if (bird.groundFriendBoos > 0)
+        // fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom interactions: " + Mathf.Abs(bird.friendBoost).ToString("+#;-#;0") + " solitude</color>";
+        if (bird.groundFriendBoos > 0)
             CreateEmoBit(topParent, bird.groundFriendBoos, Var.Em.Social, "Ground tiles");
-       // fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom tiles: " + bird.groundFriendBoos.ToString("+#;-#;0") + " social</color>";
-		if (bird.groundFriendBoos < 0)
+        // fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom tiles: " + bird.groundFriendBoos.ToString("+#;-#;0") + " social</color>";
+        if (bird.groundFriendBoos < 0)
             CreateEmoBit(topParent, bird.groundFriendBoos, Var.Em.Solitary, "Ground tiles");
-       // fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundFriendBoos).ToString("+#;-#;0") + " solitude</color>";
-		if (bird.levelFriendBoos > 0)
+        // fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom tiles: " + Mathf.Abs(bird.groundFriendBoos).ToString("+#;-#;0") + " solitude</color>";
+        if (bird.levelFriendBoos > 0)
             CreateEmoBit(topParent, bird.levelFriendBoos, Var.Em.Social, "Friendly bird skills");
         //fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom level abilities: " + bird.levelFriendBoos.ToString("+#;-#;0") + " social</color>";
-		if (bird.levelFriendBoos < 0)
+        if (bird.levelFriendBoos < 0)
             CreateEmoBit(topParent, bird.levelFriendBoos, Var.Em.Solitary, "Friendly bird skills");
-       // fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom level abilities: " + Mathf.Abs(bird.levelFriendBoos).ToString("+#;-#;0") + " solitude</color>";
-		if (bird.wizardFrienBoos > 0)
+        // fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom level abilities: " + Mathf.Abs(bird.levelFriendBoos).ToString("+#;-#;0") + " solitude</color>";
+        if (bird.wizardFrienBoos > 0)
             CreateEmoBit(topParent, bird.wizardFrienBoos, Var.Em.Social, "Enemy wizard influence");
-       // fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom enemies: " + bird.wizardFrienBoos.ToString("+#;-#;0") + " social</color>";
-		if (bird.wizardFrienBoos < 0)
+        // fbText += Helpers.Instance.FriendlyHexColor + "\n\tFrom enemies: " + bird.wizardFrienBoos.ToString("+#;-#;0") + " social</color>";
+        if (bird.wizardFrienBoos < 0)
             CreateEmoBit(topParent, bird.wizardFrienBoos, Var.Em.Solitary, "Enemy wizard influence");
-       // fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardFrienBoos).ToString("+#;-#;0") + " solitude</color>";
-		//return fbText;
-	}
+        // fbText += Helpers.Instance.LonelyHexColor + "\n\tFrom enemies: " + Mathf.Abs(bird.wizardFrienBoos).ToString("+#;-#;0") + " solitude</color>";
+        //return fbText;
+    }
 
 
 
-	/*void CreateRelationshipEvent(int birdNum)
+    /*void CreateRelationshipEvent(int birdNum)
 	{
 		if (Var.activeBirds[birdNum].newRelationship)
 		{
@@ -1091,47 +1107,47 @@ public class GuiContoler : MonoBehaviour {
 			Var.activeBirds[birdNum].newRelationship = false;
 		}
 	}*/
-	void CheckGraphNavBtns()
-	{
-		
-		if (Var.isTutorial)
-			maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos]-1;		
-		nextGraph.interactable = (currentGraph <= maxGraph);
-		prevGraph.interactable = (currentGraph > 0);
-		//CloseBattleReport.interactable = (currentGraph == maxGraph);
-		
-	}
-	public void FightButtonMouseOver()
-	{
-		feedBack[] feedBack = FindObjectsOfType<feedBack>();
-		foreach (feedBack fb in feedBack)
-		{
-			if (fb.isMain)
-			{
-				if (!fb.CheckOpponent())
-				{
-					fb.HighlightEnemy();
-				}
-			}
-		}
+    void CheckGraphNavBtns()
+    {
 
-	}
-        
+        if (Var.isTutorial)
+            maxGraph = Tutorial.Instance.BirdCount[Tutorial.Instance.CurrentPos] - 1;
+        nextGraph.interactable = (currentGraph <= maxGraph);
+        prevGraph.interactable = (currentGraph > 0);
+        //CloseBattleReport.interactable = (currentGraph == maxGraph);
 
-	public void GraphButton()
-	{
+    }
+    public void FightButtonMouseOver()
+    {
+        feedBack[] feedBack = FindObjectsOfType<feedBack>();
+        foreach (feedBack fb in feedBack)
+        {
+            if (fb.isMain)
+            {
+                if (!fb.CheckOpponent())
+                {
+                    fb.HighlightEnemy();
+                }
+            }
+        }
+
+    }
+
+
+    public void GraphButton()
+    {
         if (GraphActive || selectedBird.dragged || EventController.Instance.eventObject.activeSelf || Var.Infight)
             return;
 
         clearSmallGraph();
-		if (LevelTutorial.shouldShowFirstBattleDialog)
-		{
-			LevelTutorial.shouldShowFirstBattleDialog = false;
-			LeanTween.delayedCall(0.05f, CloseTutorialText);
-		}               
-		InitiateGraph(selectedBird,false);
-		AudioControler.Instance.PlaySound(AudioControler.Instance.notebookOpen);
-        
+        if (LevelTutorial.shouldShowFirstBattleDialog)
+        {
+            LevelTutorial.shouldShowFirstBattleDialog = false;
+            LeanTween.delayedCall(0.05f, CloseTutorialText);
+        }
+        InitiateGraph(selectedBird, false);
+        AudioControler.Instance.PlaySound(AudioControler.Instance.notebookOpen);
+
     }
 
     public void OpenMapBigGraph(Bird bird)
@@ -1162,8 +1178,8 @@ public class GuiContoler : MonoBehaviour {
         {
             icon.GetComponent<ShowTooltip>().enabled = disable;
             icon.GetComponent<Button>().interactable = disable;
-            
-            if(disable)
+
+            if (disable)
                 icon.GetComponent<Button>().transition = Button.Transition.None;
             else
                 icon.GetComponent<Button>().transition = Button.Transition.ColorTint;
@@ -1174,16 +1190,16 @@ public class GuiContoler : MonoBehaviour {
     }
 
     void CloseTutorialText()
-	{
-		speechBubbleObj.SetActive(false);       
-	}
-	public void InitiateGraph(Bird bird= null,bool afterBattle = true)
-	{
-		if (!canChangeGraph)
-			return;
-		canChangeGraph = false;
-		if(inMap && minimap)
-			minimap.SetActive(false);
+    {
+        speechBubbleObj.SetActive(false);
+    }
+    public void InitiateGraph(Bird bird = null, bool afterBattle = true)
+    {
+        if (!canChangeGraph)
+            return;
+        canChangeGraph = false;
+        if (inMap && minimap)
+            minimap.SetActive(false);
         if (bird)
         {
             int index = -1;
@@ -1206,161 +1222,162 @@ public class GuiContoler : MonoBehaviour {
             currentGraph = 3;
             CreateBattleReport();
         }
-	   // });
-		ProgressGUI.Instance.skillArea.SetActive(false);
-		//LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
-		graphAnime.SetBool("open", true);
-	}
-	public void CreateBattleReport() //triggers upon finishing battles in bossless adventures
+        // });
+        ProgressGUI.Instance.skillArea.SetActive(false);
+        //LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
+        graphAnime.SetBool("open", true);
+    }
+    public void CreateBattleReport() //triggers upon finishing battles in bossless adventures
     {
         if (FastForwardScript)
         {
             FastForwardScript.SetIsInFight(false);
         }
-        
+
 
         clearSmallGraph();
-        if(!inMap)
-		    closeReportBtn.SetActive(true);
+        if (!inMap)
+            closeReportBtn.SetActive(true);
         if (HideSmallGraph)
         {
             HideSmallGraph.gameObject.SetActive(false);
         }
-		if (finalResult < 0)
-		{
-			UpdateHearts(--Var.health);
-		}
-	}
+        if (finalResult < 0)
+        {
+            UpdateHearts(--Var.health);
+        }
+    }
 
 
 
-	public void PortraitControl(int portNr,Var.Em color)
-	{
-		activePortrait = portNr;
-		for (int i = 0; i < portraits.Length; i++)
-		{
-			if (i == portNr)
-			{
-				portraits[i].SetActive(true);
-				GameObject colorObj= portraits[i].gameObject.transform.Find("bird_color").gameObject;
-				colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(color);
-			}else
-			{
-				portraits[i].SetActive(false);
-			}
-		}
-	}
-	
-	public void Fight()
-	{
-		GameLogic.Instance.FightButton.interactable = false;
+    public void PortraitControl(int portNr, Var.Em color)
+    {
+        activePortrait = portNr;
+        for (int i = 0; i < portraits.Length; i++)
+        {
+            if (i == portNr)
+            {
+                portraits[i].SetActive(true);
+                GameObject colorObj = portraits[i].gameObject.transform.Find("bird_color").gameObject;
+                colorObj.GetComponent<Image>().color = Helpers.Instance.GetEmotionColor(color);
+            }
+            else
+            {
+                portraits[i].SetActive(false);
+            }
+        }
+    }
+
+    public void Fight()
+    {
+        GameLogic.Instance.FightButton.interactable = false;
         GameLogic.Instance.FightButton.GetComponent<Animator>().SetBool("fight", true);
         AudioControler.Instance.ClickSound();
         AudioControler.Instance.ActivateMusicSource(audioSourceType.battleSource);
-		AudioControler.Instance.PlaySound(AudioControler.Instance.clicks);
-		feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
+        AudioControler.Instance.PlaySound(AudioControler.Instance.clicks);
+        feedBack[] feedBackObj = FindObjectsOfType(typeof(feedBack)) as feedBack[];
         FastForwardScript.SetIsInFight(true);
 
-		foreach (feedBack fb in feedBackObj)
-		{
-			fb.HideFeedBack(true);
-		}
-        if(Var.isEnding)
+        foreach (feedBack fb in feedBackObj)
+        {
+            fb.HideFeedBack(true);
+        }
+        if (Var.isEnding)
         {
             Ending.Instance.visuals.vultureKingFistPumps();
         }
         Debug.Log("Fight selected");
-		int result = 0;
-		Var.Infight = true;
-		Bird playerBird = null;
-		Bird secondPlayerBird = null;
-	
-	   
-
-	   for (int i = 0; i <Var.enemies.Length; i++)
-	   {
-			if (Var.enemies[i].inUse)
-			{
-				for (int j = 0; j < 4; j++)
-				{
-
-					if (Var.enemies[i].position == Bird.dir.front)
-					{
-						if (Var.playerPos[3-j, i%4] != null)
-						{
-							if (!Var.playerPos[3 - j, i % 4].isHiding)
-							{
-								if (playerBird == null)
-								{
-									playerBird = Var.playerPos[3 - j, i % 4];
-									if (Var.enemies[i].enemyType != fillEnemy.enemyType.drill)
-										break;
-								}
-								else
-								{
-									secondPlayerBird = Var.playerPos[3 - j, i % 4];
-									break;
-								}
-								
-							}
-						}
-					}
-					if (Var.enemies[i].position == Bird.dir.top)
-					{
-						if (Var.playerPos[i%4, j] != null)
-						{
-							if (!Var.playerPos[i % 4, j].isHiding)
-							{
-								if (playerBird == null)
-								{
-									playerBird = Var.playerPos[i % 4, j];
-									if (Var.enemies[i].enemyType != fillEnemy.enemyType.drill)
-										break;
-								}
-								else
-								{
-									secondPlayerBird = Var.playerPos[i % 4, j];
-									break;
-								}
-							}
-						}
-
-					}
-				}
-				// Fight Logic
-				playerBird.foughtInRound = true;
-				int resultOfBattle = GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
-				battleAnim.Instance.AddData(playerBird, Var.enemies[i], resultOfBattle);
-				result += resultOfBattle;
-				if (secondPlayerBird != null)
-				{
-					secondPlayerBird.foughtInRound = true;
-					int resultOfSecondBattle = GameLogic.Instance.Fight(secondPlayerBird, Var.enemies[i]);
-					battleAnim.Instance.AddData(secondPlayerBird, Var.enemies[i], resultOfSecondBattle);
-					result += resultOfSecondBattle;
-				}
-				playerBird = null;
-				secondPlayerBird = null;
-				
+        int result = 0;
+        Var.Infight = true;
+        Bird playerBird = null;
+        Bird secondPlayerBird = null;
 
 
-			}
 
-		}
-		Bird[] birds = FindObjectsOfType(typeof(Bird)) as Bird[];
-		foreach(Bird bird in birds)
-		{
+        for (int i = 0; i < Var.enemies.Length; i++)
+        {
+            if (Var.enemies[i].inUse)
+            {
+                for (int j = 0; j < 4; j++)
+                {
 
-			if (!bird.isEnemy && !bird.data.injured)
-			{				
-				players.Add(bird);
-			}
-		}
-	   foreach(Bird bird in players)
-		{
-			int friendGain = Helpers.Instance.Findfirendlieness(bird);
-			if (friendGain > 0)
-			{
+                    if (Var.enemies[i].position == Bird.dir.front)
+                    {
+                        if (Var.playerPos[3 - j, i % 4] != null)
+                        {
+                            if (!Var.playerPos[3 - j, i % 4].isHiding)
+                            {
+                                if (playerBird == null)
+                                {
+                                    playerBird = Var.playerPos[3 - j, i % 4];
+                                    if (Var.enemies[i].enemyType != fillEnemy.enemyType.drill)
+                                        break;
+                                }
+                                else
+                                {
+                                    secondPlayerBird = Var.playerPos[3 - j, i % 4];
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+                    if (Var.enemies[i].position == Bird.dir.top)
+                    {
+                        if (Var.playerPos[i % 4, j] != null)
+                        {
+                            if (!Var.playerPos[i % 4, j].isHiding)
+                            {
+                                if (playerBird == null)
+                                {
+                                    playerBird = Var.playerPos[i % 4, j];
+                                    if (Var.enemies[i].enemyType != fillEnemy.enemyType.drill)
+                                        break;
+                                }
+                                else
+                                {
+                                    secondPlayerBird = Var.playerPos[i % 4, j];
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                // Fight Logic
+                playerBird.foughtInRound = true;
+                int resultOfBattle = GameLogic.Instance.Fight(playerBird, Var.enemies[i]);
+                battleAnim.Instance.AddData(playerBird, Var.enemies[i], resultOfBattle);
+                result += resultOfBattle;
+                if (secondPlayerBird != null)
+                {
+                    secondPlayerBird.foughtInRound = true;
+                    int resultOfSecondBattle = GameLogic.Instance.Fight(secondPlayerBird, Var.enemies[i]);
+                    battleAnim.Instance.AddData(secondPlayerBird, Var.enemies[i], resultOfSecondBattle);
+                    result += resultOfSecondBattle;
+                }
+                playerBird = null;
+                secondPlayerBird = null;
+
+
+
+            }
+
+        }
+        Bird[] birds = FindObjectsOfType(typeof(Bird)) as Bird[];
+        foreach (Bird bird in birds)
+        {
+
+            if (!bird.isEnemy && !bird.data.injured)
+            {
+                players.Add(bird);
+            }
+        }
+        foreach (Bird bird in players)
+        {
+            int friendGain = Helpers.Instance.Findfirendlieness(bird);
+            if (friendGain > 0)
+            {
                 if (friendGain > 2)
                 {
                     Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social, true, 2);
@@ -1370,116 +1387,120 @@ public class GuiContoler : MonoBehaviour {
                     Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Social);
 
                 }
-				AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
-			}
-			if (friendGain < 0)
-			{
-				Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Solitary);
                 AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
-			}
+            }
+            if (friendGain < 0)
+            {
+                Helpers.Instance.EmitEmotionParticles(bird.transform, Var.Em.Solitary);
+                AudioControler.Instance.PlaySound(AudioControler.Instance.SocialInfoAppear);
+            }
 
-			bird.friendBoost += friendGain;			
-			bird.gameObject.GetComponent<firendLine>().RemoveLines();
+            bird.friendBoost += friendGain;
+            bird.gameObject.GetComponent<firendLine>().RemoveLines();
 
             bird.indicator.SetEmotions(Var.Em.Neutral, Var.Em.Neutral);
             bird.indicator.Hide();
         }
 
 
+        bool ShouldZoom = true;
+        if (MyDebugMenu != null)
+        {
+            ShouldZoom = !MyDebugMenu.GetCameraIsControlled();
+        }
+        battleAnim.Instance.Battle(ShouldZoom);
+        finalResult = result;
 
-		battleAnim.Instance.Battle();        
-		finalResult = result;
-		
-		
 
-	}
 
-	
-	public void ReturnToMap()
-	{
-		foreach (Bird bird in Var.availableBirds)
-		{
-			bird.AddRoundBonuses();
-			bird.DecreaseTurnsInjured();
-		}
-		if(Var.currentStageID != -1)
-		{
-			foreach(MapSaveData data in Var.mapSaveData)
-			{
-				if(data.ID == Var.currentStageID)
-				{
-					data.completed = true;
-					foreach(int id in data.targets)
-					{
-						foreach(MapSaveData targ in Var.mapSaveData)
-						{
-							if(targ.ID == id)
-							{
-								targ.available = true;
-								break;
-							}
-						}
-						
-					}
-					break;
-				}
-			}
-		}
-		Var.currentWeek++;
+    }
+
+
+    public void ReturnToMap()
+    {
+        foreach (Bird bird in Var.availableBirds)
+        {
+            bird.AddRoundBonuses();
+            bird.DecreaseTurnsInjured();
+        }
+        if (Var.currentStageID != -1)
+        {
+            foreach (MapSaveData data in Var.mapSaveData)
+            {
+                if (data.ID == Var.currentStageID)
+                {
+                    data.completed = true;
+                    foreach (int id in data.targets)
+                    {
+                        foreach (MapSaveData targ in Var.mapSaveData)
+                        {
+                            if (targ.ID == id)
+                            {
+                                targ.available = true;
+                                break;
+                            }
+                        }
+
+                    }
+                    break;
+                }
+            }
+        }
+        Var.currentWeek++;
         Var.shouldDoMapEvent = true;
-		Var.CanShowHover = true;
+        Var.CanShowHover = true;
         ShowLoadingScreen();
         LeanTween.cancelAll();
         AudioControler.Instance.SaveVolumeSettings();
         SaveLoad.Save();
-		SceneManager.LoadScene("Map");
-	}
+        SceneManager.LoadScene("Map");
+    }
     public void ShowLoadingScreen()
     {
-        if(loadingSceen!=null)
+        if (loadingSceen != null)
         {
             loadingSceen.SetActive(true);
         }
     }
-	public void LoadMainMenu()
-	{
-		Time.timeScale = 1.0f;
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1.0f;
         AudioControler.Instance.SaveVolumeSettings();
         if (Var.tutorialCompleted)
         {
-           SaveLoad.Save();
+            SaveLoad.Save();
         }
-		AudioControler.Instance.ClickSound();
-		SceneManager.LoadScene("MainMenu");
+        AudioControler.Instance.ClickSound();
+        SceneManager.LoadScene("MainMenu");
 
-	}
+    }
     public void ResetAfterMapEvent()
     {
         foreach (Bird bird in FillPlayer.Instance.playerBirds)
         {
-           // Var.availableBirds[0].ToString();
-          //  Var.activeBirds[0].ToString();
-           // EventController.Instance.currentBird.ToString();
+            // Var.availableBirds[0].ToString();
+            //  Var.activeBirds[0].ToString();
+            // EventController.Instance.currentBird.ToString();
             bird.prevConf = bird.data.confidence;
             bird.prevFriend = bird.data.friendliness;
             bird.ResetAfterLevel();
         }
     }
 
-	public bool Reset()
-	{
+    public bool Reset()
+    {
         //Debug.LogError("Resetting!");
         Var.enemies = new Bird[8];
-		Var.Infight = false;		
-		ProgressGUI.Instance.SetOnePortrait();       
-		foreach (Bird bird in players)
-		{
-			bird.ResetBonuses(); 
+        Var.Infight = false;
+        ProgressGUI.Instance.SetOnePortrait();
+        foreach (Bird bird in players)
+        {
+            bird.ResetBonuses();
             foreach (Bird activeBird in Var.activeBirds)
-			{
-				if (activeBird.data.injured)
-				{
-					Time.timeScale = 0.0f;
+            {
+                if (activeBird.data.injured)
+                {
+                    Time.timeScale = 0.0f;
                     Debug.Log("Ending var:" + Var.isEnding + "Boss Var:" + Var.isBoss);
                     if (Var.isEnding)
                     {
@@ -1488,76 +1509,76 @@ public class GuiContoler : MonoBehaviour {
                     }
 
 
-					QuitToMap();
-					return false;
-				}
-			}
-			//bird.gameObject.GetComponentInChildren<Animator>().SetBool("iswalking", false);
-			//bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
-			//bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
-			bird.target = bird.home;
-			bird.transform.position = bird.home;
-			bird.prevConf = bird.data.confidence;
-			bird.prevFriend = bird.data.friendliness;
-			bird.totalConfidence += bird.data.confidence;
-			bird.totalFriendliness += bird.totalFriendliness;
-			bird.ResetBonuses();
-			bird.GroundBonus.SetActive(false);
+                    QuitToMap();
+                    return false;
+                }
+            }
+            //bird.gameObject.GetComponentInChildren<Animator>().SetBool("iswalking", false);
+            //bird.gameObject.GetComponent<Animator>().SetBool("lose", false);
+            //bird.gameObject.GetComponent<Animator>().SetBool("victory", false);
+            bird.target = bird.home;
+            bird.transform.position = bird.home;
+            bird.prevConf = bird.data.confidence;
+            bird.prevFriend = bird.data.friendliness;
+            bird.totalConfidence += bird.data.confidence;
+            bird.totalFriendliness += bird.totalFriendliness;
+            bird.ResetBonuses();
+            bird.GroundBonus.SetActive(false);
             bird.SetBandages();
-            if(bird.data.health==1 && LevelTutorial.Instance)
+            if (bird.data.health == 1 && LevelTutorial.Instance)
             {
                 LevelTutorial.Instance.ShowOneHealthTutorial();
             }
-		}
-		//After applying levels;
-		/*GuiContoler.Instance.relationshipPanel.SetActive(false);
+        }
+        //After applying levels;
+        /*GuiContoler.Instance.relationshipPanel.SetActive(false);
 		GuiContoler.Instance.statPanel.SetActive(true);
 		GuiContoler.Instance.ToggleRelationPanelText.text = "Relationships";*/
-		foreach (Bird bird in players)
-		{
-			bird.ResetAfterLevel();
-		}
-		Var.playerPos = new Bird[4, 4];
-		foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
-		{
-			tile.gameObject.SetActive(true);
-			tile.Reset();
-		}
+        foreach (Bird bird in players)
+        {
+            bird.ResetAfterLevel();
+        }
+        Var.playerPos = new Bird[4, 4];
+        foreach (LayoutButton tile in ObstacleGenerator.Instance.tiles)
+        {
+            tile.gameObject.SetActive(true);
+            tile.Reset();
+        }
 
-		finalResult = 0;
-		players = new List<Bird>();
-		moveInMap();
-		mapPos++;
-		foreach(GuiMap map in FindObjectsOfType<GuiMap>())
-			map.MoveMapBird(mapPos);
-		
-		if (Var.isTutorial)
-		{
-			for (int i = 0; i < FillPlayer.Instance.playerBirds.Length; i++)
-			{
-				if (i < Tutorial.Instance.BirdCount[mapPos])
-				{
-					FillPlayer.Instance.playerBirds[i].gameObject.SetActive(true);
-				}
-				else
-				{
-					FillPlayer.Instance.playerBirds[i].gameObject.SetActive(false);
-				}
-			}
-			Tutorial.Instance.ShowtutorialStartingText(mapPos);
-		}
-        if(Var.isEnding)
+        finalResult = 0;
+        players = new List<Bird>();
+        moveInMap();
+        mapPos++;
+        foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+            map.MoveMapBird(mapPos);
+
+        if (Var.isTutorial)
+        {
+            for (int i = 0; i < FillPlayer.Instance.playerBirds.Length; i++)
+            {
+                if (i < Tutorial.Instance.BirdCount[mapPos])
+                {
+                    FillPlayer.Instance.playerBirds[i].gameObject.SetActive(true);
+                }
+                else
+                {
+                    FillPlayer.Instance.playerBirds[i].gameObject.SetActive(false);
+                }
+            }
+            Tutorial.Instance.ShowtutorialStartingText(mapPos);
+        }
+        if (Var.isEnding)
         {
             Ending.Instance.ShowEndingStartingText(mapPos);
         }
         BattleData Area = Var.map[mapPos];
-		if (Area.type != Var.Em.finish)
-		{
-			if (Var.isTutorial)
-			{				
-				Tutorial.Instance.SetCurrenPos(mapPos);
-				GetComponent<fillEnemy>().CreateTutorialEnemies(Tutorial.Instance.TutorialMap[mapPos]);
-			}
+        if (Area.type != Var.Em.finish)
+        {
+            if (Var.isTutorial)
+            {
+                Tutorial.Instance.SetCurrenPos(mapPos);
+                GetComponent<fillEnemy>().CreateTutorialEnemies(Tutorial.Instance.TutorialMap[mapPos]);
+            }
             else
             {
                 Ending.Instance.SetCurrenPos(mapPos);
@@ -1569,79 +1590,81 @@ public class GuiContoler : MonoBehaviour {
                 {
                     GetComponent<fillEnemy>().CreateEnemies(Area.battleData, Area.birdLVL, Area.dirs, Area.minEnemies, Area.maxEnemies);
                 }
-				//if (!EventController.Instance.tryEvent())
-				DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
-			}
-			ObstacleGenerator.Instance.clearObstacles();
-			ObstacleGenerator.Instance.GenerateObstacles();
-			GameLogic.Instance.CanWeFight();
-			
-		}
-		return true;
-	}
+                //if (!EventController.Instance.tryEvent())
+                DialogueControl.Instance.TryDialogue(Dialogue.Location.battle);
+            }
+            ObstacleGenerator.Instance.clearObstacles();
+            ObstacleGenerator.Instance.GenerateObstacles();
+            GameLogic.Instance.CanWeFight();
 
-	public void UpdateBirdSave(Bird bird)
-	{
-		for (int i = 0; i < Var.activeBirds.Count; i++)
-		{
-			if (Var.activeBirds[i].charName == bird.charName)
-			{
-				Var.activeBirds[i] = bird;
-				break;
-			}
-		}
+        }
+        return true;
+    }
 
-		if (Var.availableBirds.Count > 0)
-		{
-			for (int i = 0; i < Var.availableBirds.Count; i++)
-			{
-				if (Var.availableBirds[i].charName == bird.charName)
-				{
-					Var.availableBirds[i] = bird;
-					break;
-				}
-			}
-		}else
-		{
-			Var.availableBirds.AddRange(FillPlayer.Instance.playerBirds);
-		}
-	}
+    public void UpdateBirdSave(Bird bird)
+    {
+        for (int i = 0; i < Var.activeBirds.Count; i++)
+        {
+            if (Var.activeBirds[i].charName == bird.charName)
+            {
+                Var.activeBirds[i] = bird;
+                break;
+            }
+        }
+
+        if (Var.availableBirds.Count > 0)
+        {
+            for (int i = 0; i < Var.availableBirds.Count; i++)
+            {
+                if (Var.availableBirds[i].charName == bird.charName)
+                {
+                    Var.availableBirds[i] = bird;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            Var.availableBirds.AddRange(FillPlayer.Instance.playerBirds);
+        }
+    }
 
 
-	void setMapLocation(int index)
-	{
-		try
-		{
-			currentMapArea = Var.map[index].type;
-		}
-		catch { }
+    void setMapLocation(int index)
+    {
+        try
+        {
+            currentMapArea = Var.map[index].type;
+        }
+        catch { }
         try
         {
             nextNextMapArea = Var.map[index + 2].type;
         }
 
-        catch {
+        catch
+        {
 
         }
-		try
-		{
-			nextMapArea = Var.map[index + 1].type;
-		}
-		catch
-		{
-			nextMapArea = Var.Em.finish;
-		}
-		
-	}
+        try
+        {
+            nextMapArea = Var.map[index + 1].type;
+        }
+        catch
+        {
+            nextMapArea = Var.Em.finish;
+        }
 
-    
-	void moveInMap()
-	{
+    }
+
+
+    void moveInMap()
+    {
         setMapLocation(mapPos);
         GuiContoler.Instance.canPause(true);
         if (nextMapArea == Var.Em.finish)
         {
-            
+
             mapPos = 0;
             if (Var.isTutorial)
             {
@@ -1663,14 +1686,14 @@ public class GuiContoler : MonoBehaviour {
             GraphBlocker.SetActive(true);
             clearSmallGraph();
         }
-  
+
 
     }
-    
+
     public void showVictoryScreen()
     {
         winBanner.SetActive(true);
-        WinScreen.Instance.SetupWinScreen(Var.availableBirds.Count > 0 ?Var.availableBirds: Var.activeBirds,Var.freezeEmotions,Var.currentStageID==18);//  new List<Bird>(FillPlayer.Instance.playerBirds));
+        WinScreen.Instance.SetupWinScreen(Var.availableBirds.Count > 0 ? Var.availableBirds : Var.activeBirds, Var.freezeEmotions, Var.currentStageID == 18);//  new List<Bird>(FillPlayer.Instance.playerBirds));
 
         if (Var.freezeEmotions)
         {
@@ -1701,28 +1724,29 @@ public class GuiContoler : MonoBehaviour {
 
          winBanner.SetActive(true);*/
     }
-	
-	public void ShowMessage(string message)
-	{
-		messages.Add(message);
-		if (!messageBox.activeSelf)
-		{
-			messageText.text = message;
-		}
-		messageBox.SetActive(true);
 
-	}	
-	public void HideMessage()
-	{
-		messages.RemoveAt(0);
-		if (messages.Count == 0)
-		{
-			messageText.text = "";
-			messageBox.SetActive(false);
-		}else
-		{
-			messageText.text = messages[0];
-		}
+    public void ShowMessage(string message)
+    {
+        messages.Add(message);
+        if (!messageBox.activeSelf)
+        {
+            messageText.text = message;
+        }
+        messageBox.SetActive(true);
+
+    }
+    public void HideMessage()
+    {
+        messages.RemoveAt(0);
+        if (messages.Count == 0)
+        {
+            messageText.text = "";
+            messageBox.SetActive(false);
+        }
+        else
+        {
+            messageText.text = messages[0];
+        }
     }
 
     public static IEnumerator totalPlayTime()
@@ -1737,17 +1761,17 @@ public class GuiContoler : MonoBehaviour {
 
     public static void decodeTotalPlayTime()  //will use this when the stats and other appropiate places are displayed for total play time
     {
-        
+
         Var.totalTimeSeconds = (Var.totalPlayTime % 60);
         Var.totalTimeMinutes = (Var.totalPlayTime / 60) % 60;
         Var.totalTimeHours = (Var.totalPlayTime / 3600) % 24;
         Var.totalTimeDays = (Var.totalPlayTime / 86400) % 365;
-       // Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
+        // Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
     }
 
     //**Stat Menu Object**//
 
-    
+
 
 }
 
