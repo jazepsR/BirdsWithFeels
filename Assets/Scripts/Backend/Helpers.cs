@@ -1308,7 +1308,7 @@ public class Helpers : MonoBehaviour {
 	   // LeanTween.moveLocalZ(text.gameObject, 55.0f, 1f);
 	   // LeanTween.scale(text.gameObject, Vector3.one * 2f, 1.2f);
 	 //   LeanTween.alphaText(text.rectTransform, 0.0f, 1.2f);
-		Destroy(emParticleObject, 1.7f);
+		Destroy(emParticleObject, 2.1f);
 	}
 
 

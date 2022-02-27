@@ -17,9 +17,14 @@ public class emoParticleController : MonoBehaviour {
     public Sprite shieldSprite;
   
     public Image emotionImage;
+	[SerializeField]
+	private Vector3 offset;
 
     // Use this for initialization
-    void Start () {
+    void Start () 
+	{
+		this.transform.localPosition += offset;
+
 	}
 	
 	// Update is called once per frame
@@ -92,4 +97,6 @@ public class emoParticleController : MonoBehaviour {
 		return 0;
 
 	}
+
+
 }
