@@ -168,14 +168,17 @@ public class powerTile : MonoBehaviour {
 		if( type == Var.PowerUps.heal)
 		{
 			bird.healthBoost = 1*bird.groundMultiplier;
+			//Debug.Log("i am heart");
 		}
 		if (type == Var.PowerUps.dmg)
 		{
 			bird.GroundRollBonus = 1 * bird.groundMultiplier;
+			//Debug.Log("i am sword");
 		}
         if(type == Var.PowerUps.shield)
         {
             bird.hasShieldBonus = true;
-        }
+			//Debug.Log("i am shield");
+		}
 	}
 }

@@ -133,6 +133,7 @@ public class GuiContoler : MonoBehaviour {
     public TimedEventControl control;
     [SerializeField] public TimedEventControl[] timedEventControllers;
     [HideInInspector] public int graphInteractTweenID = -1;
+
     void Awake()
     {
         
@@ -153,6 +154,7 @@ public class GuiContoler : MonoBehaviour {
     void Start()
     {
         //disableMapInteractivity(true);
+
         Var.Infight = false;
         if (Var.emotionParticles == null)
             Var.emotionParticles = Resources.Load("EmotionParticle") as GameObject;
@@ -1383,6 +1385,8 @@ public class GuiContoler : MonoBehaviour {
 
             bird.indicator.SetEmotions(Var.Em.Neutral, Var.Em.Neutral);
             bird.indicator.Hide();
+
+            bird.verifyPowerUp();
         }
 
 
@@ -1732,6 +1736,7 @@ public class GuiContoler : MonoBehaviour {
             yield return new WaitForSeconds(1);
             Var.totalPlayTime += 1;
             decodeTotalPlayTime();
+            
         }
     }
 
@@ -1742,7 +1747,7 @@ public class GuiContoler : MonoBehaviour {
         Var.totalTimeMinutes = (Var.totalPlayTime / 60) % 60;
         Var.totalTimeHours = (Var.totalPlayTime / 3600) % 24;
         Var.totalTimeDays = (Var.totalPlayTime / 86400) % 365;
-       // Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
+       //Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
     }
 
     //**Stat Menu Object**//

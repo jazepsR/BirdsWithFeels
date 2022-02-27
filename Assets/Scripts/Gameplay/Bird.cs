@@ -535,6 +535,29 @@ public class Bird : MonoBehaviour
 
 	}
 
+	public void verifyPowerUp()
+	{
+		
+		if (GroundRollBonus != 0)
+		{
+			if (data.powerUpSwordsUsed <= 999)
+			{
+				data.powerUpSwordsUsed++;
+				Debug.Log(charName + " " + "Ground roll bonus: " + GroundRollBonus);
+				Debug.Log("Sword used");
+			}
+		}
+		if (healthBoost != 0)
+		{
+			Debug.Log(charName + " " + "Health boost: " + healthBoost);
+			if (data.powerUpHeartsUsed <= 999)
+			{
+				data.powerUpHeartsUsed++;
+				Debug.Log("Heart used");
+			}
+		}
+	}
+
 
 	/*public int GetRelationshipBonus()
 	{
@@ -607,6 +630,7 @@ public class Bird : MonoBehaviour
 			friendliness = savedData.friendliness;*/
 		}
 	}
+
 
 	public void ResetBonuses()
 	{
@@ -1645,4 +1669,5 @@ public class Bird : MonoBehaviour
 			//MapControler.Instance.CanLoadBattle();
 		}
 	}
+
 }
