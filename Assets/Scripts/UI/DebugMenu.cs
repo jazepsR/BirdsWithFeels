@@ -16,8 +16,14 @@ public class DebugMenu : MonoBehaviour {
     private float secondsWaitTime = 200;
     private bool resetGame = true;
 	public Toggle freezeToggle;
-    
-    private void Update()
+	private bool UIHidden;
+
+	[SerializeField]
+	private CanvasGroup[] CanvasGroupsToHideWhenDebugging;
+	[SerializeField]
+	private GameObject[] GameObjectsToHideWhenDebugging;
+
+	private void Update()
     {
         if (resetGame && Vector3.Distance(Input.mousePosition, mousePos) > 50f)
         {
@@ -163,5 +169,27 @@ public class DebugMenu : MonoBehaviour {
 		{
 			graph.CheckEmotionLock();
 		}
+	}
+
+	public void ToggleHideUI()
+    {
+		UIHidden = !UIHidden;
+
+		float alpha = 1;
+        if (UIHidden)
+        {
+			alpha = 0;
+        }
+
+		for(int i = 0; i < CanvasGroupsToHideWhenDebugging.Length; i++)
+        {
+			CanvasGroupsToHideWhenDebugging[i].alpha = alpha;
+        }
+
+		for (int i = 0; i < GameObjectsToHideWhenDebugging.Length; i++)
+		{
+			GameObjectsToHideWhenDebugging[i].SetActive(!UIHidden);
+		}
+
 	}
 }
