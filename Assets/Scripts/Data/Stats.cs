@@ -19,7 +19,7 @@ public class Stats : MonoBehaviour
     public List<GameObject> kimPageStats;
     public List<GameObject> sophiePageStats;
 
-
+    [SerializeField] private List<Bird> birds;
 
 
 
@@ -41,8 +41,8 @@ public class Stats : MonoBehaviour
 
             Var.runPlayTimeTimer = false;
 
+            Var.activeBirds = new List<Bird>(birds);
             ShowStatsMenu();
-
             
             
         }
