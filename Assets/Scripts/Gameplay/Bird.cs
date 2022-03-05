@@ -179,7 +179,10 @@ public class Bird : MonoBehaviour
 		{
 			portrait = Resources.Load<GameObject>("prefabs/portraits/portrait_" + charName);
 			portraitTiny = Resources.Load<GameObject>("prefabs/portraits/tiny_portrait_" + charName);
-			birdSounds = AudioControler.Instance.GetBirdSoundGroup(charName);
+			if (AudioControler.Instance != null)
+			{
+				birdSounds = AudioControler.Instance.GetBirdSoundGroup(charName);
+			}
 
 		}
 		if (isEnemy)
@@ -289,7 +292,10 @@ public class Bird : MonoBehaviour
 
 		if (data.recievedSeeds == null)
 			data.recievedSeeds = new List<string>();
-		showText();
+		if (GuiContoler.Instance != null)
+		{
+			showText();
+		}
 
 		gameObject.SetActive(data.unlocked);
 		portraitOrder = Helpers.GetPortraitNumber(charName);
@@ -535,6 +541,29 @@ public class Bird : MonoBehaviour
 
 	}
 
+	public void verifyPowerUp()
+	{
+		
+		if (GroundRollBonus != 0)
+		{
+			if (data.powerUpSwordsUsed <= 999)
+			{
+				data.powerUpSwordsUsed++;
+				Debug.Log(charName + " " + "Ground roll bonus: " + GroundRollBonus);
+				Debug.Log("Sword used");
+			}
+		}
+		if (healthBoost != 0)
+		{
+			Debug.Log(charName + " " + "Health boost: " + healthBoost);
+			if (data.powerUpHeartsUsed <= 999)
+			{
+				data.powerUpHeartsUsed++;
+				Debug.Log("Heart used");
+			}
+		}
+	}
+
 
 	/*public int GetRelationshipBonus()
 	{
@@ -607,6 +636,7 @@ public class Bird : MonoBehaviour
 			friendliness = savedData.friendliness;*/
 		}
 	}
+
 
 	public void ResetBonuses()
 	{
@@ -1645,4 +1675,5 @@ public class Bird : MonoBehaviour
 			//MapControler.Instance.CanLoadBattle();
 		}
 	}
+
 }

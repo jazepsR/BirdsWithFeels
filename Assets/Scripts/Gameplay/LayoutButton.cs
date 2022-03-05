@@ -142,6 +142,7 @@ public class LayoutButton : MonoBehaviour
 			try
 			{
 				power.ApplyPower(birdObj);
+				Debug.Log("applypowerbirdobj");
 			}
 			catch
 			{

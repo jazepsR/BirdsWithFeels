@@ -58,6 +58,11 @@ public class battleAnim : MonoBehaviour
         LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position) * 2, enemyMoveTime).setEase(vultureRunCurve).setOnComplete(() =>
               enemy.GetComponentInChildren<Animator>().SetBool("walk", false)
         );
+        LeanTween.move(enemy.transform.gameObject, player.transform.position + Helpers.Instance.dirToVector(enemy.position)*2, enemyMoveTime).setEase(vultureRunCurve).setOnComplete(()=>
+			enemy.GetComponentInChildren<Animator>().SetBool("walk", false)
+		);
+
+
     }
     private IEnumerator CameraZoomInAnimation(float time)
     {
@@ -121,7 +126,10 @@ public class battleAnim : MonoBehaviour
                 {
                     bird.gameObject.GetComponentInChildren<Animator>().SetBool("rest", false);
                     bird.TryLevelUp();
-                    bird.AddRoundBonuses();
+                    
+                
+                bird.AddRoundBonuses();
+
                     bird.SetEmotion();
                 }
             }
@@ -274,8 +282,15 @@ public class battleAnim : MonoBehaviour
                 else
                 {
                     Helpers.Instance.EmitEmotionParticles(battle.player.transform, Var.Em.Shield);
+                    if (battle.player.data.powerUpShieldsUsed <= 999)
+                    {
+                        battle.player.data.powerUpShieldsUsed++;
+                        Debug.Log("shield used");
+                    }
                     battle.player.GetComponentInChildren<Animator>().SetTrigger("stopTalking");
                 }
+
+               
                 battle.enemy.GetComponentInChildren<Animator>().SetBool("win", true);
                 Destroy(fightCloudObj, waitTime - enemyMoveTime);
                 yield return new WaitForSeconds(waitTime - enemyMoveTime - 2.3f);
