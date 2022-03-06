@@ -56,7 +56,6 @@ public static class Var {
 	public static GameObject selectedBird;
 	public static List<Bird> activeBirds = new List<Bird>();
 	public static List<Bird> availableBirds = new List<Bird>();
-	public static List<Bird> birdTeam = activeBirds;
 	public static int currentStageID = -1;
     public static int currentBackgroundProgressAnim = -1;
 	public static Sprite[] lvlSprites = null;
@@ -107,7 +106,7 @@ public static class Var {
 	public static int confrontSuccess = 0;
 	public static int confrontFail = 0;
 
-	public static List<BirdData> stats_bird_data= null;
+	public static List<int> stats_bird_data= null;
 
 	[HideInInspector] public static bool runPlayTimeTimer = true;
 }
