@@ -196,7 +196,9 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 		{
 			if (EventController.Instance.eventsToShow.Count == 0 && !GuiContoler.Instance.activeSpeechBubble.activeInHierarchy)
 				SetState();
-		});		
+		});
+
+		
 	}
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -300,8 +302,22 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
 					tooltipInfo.tooltipText = GetTooltipText();
 
-					Var.levelsCompleted++;
-					Achievements.levelCompletionTracker();
+					try
+					{
+						MapIconEvent narrativeEvent = (MapIconEvent)this;
+						Debug.Log("This is a narrative event.");
+
+						Var.narrativeEventsCompleted++;
+						Achievements.narrativeEventCompletionTracker();
+					}
+					catch
+					{
+						Var.levelsCompleted++;
+						Achievements.levelCompletionTracker();
+						Debug.Log("This is a level.");
+					}
+
+					
 				}
 				else
 				{                    

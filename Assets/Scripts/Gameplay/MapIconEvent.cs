@@ -51,8 +51,6 @@ public class MapIconEvent : MapIcon
             {
                 if (firstCompletion) //Stuff that happens the FIRST time user completes level
                 {
-                    Var.narrativeEventsCompleted++;
-                    Achievements.narrativeEventCompletionTracker();
                     stateSet = true;
                     firstCompletion = false;
                     anim.SetInteger("state", 1);

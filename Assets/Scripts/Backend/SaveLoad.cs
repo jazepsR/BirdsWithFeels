@@ -231,7 +231,14 @@ public class BirdData
 	public bool injured= false;
 	public Var.Em preferredEmotion= Var.Em.Cautious;
 	public List<string> recievedSeeds = new List<string>();
-	[System.NonSerialized]
+	public int emotionsChanged = 0;
+	public int emotionSeedsCollected = 0;
+	public int turnsInDangerZone = 0;
+	public int powerUpSwordsUsed = 0;
+	public int powerUpShieldsUsed = 0;
+	public int powerUpHeartsUsed = 0;
+	public TimedEventData.state birdEventState = TimedEventData.state.notStarted;
+	[NonSerialized]
 	public LevelDataScriptable lastLevel = null;
 	public int level=1;
 	public string birdAbility;
@@ -240,13 +247,7 @@ public class BirdData
 	public int AdventuresRested=0;
 	public int CoolDownLeft=0;
 	public int CoolDownLength=3;
-	public int emotionsChanged = 0;
-	public int emotionSeedsCollected = 0;
-	public int turnsInDangerZone = 0;
-	public int powerUpSwordsUsed = 0;
-	public int powerUpShieldsUsed = 0;
-	public int powerUpHeartsUsed = 0;
-
+	
 }
 
 
