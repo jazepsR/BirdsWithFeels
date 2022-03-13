@@ -163,6 +163,7 @@ public class EventController : MonoBehaviour
                 DialogueControl.Instance.TryDialogue(Dialogue.Location.map);
                 foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
                     icon.SetState();
+
             }
         }
             else if (currentEvent != null && (currentText > currentEvent.parts.Count - 1)) //Has finished playing all parts in current event? 
@@ -225,6 +226,7 @@ public class EventController : MonoBehaviour
                         MapControler.Instance.goToCreditsAfterEvent = false;
                     }
 
+                    mapPan.Instance.scrollingEnabled = true;
                     //Debug.LogError("ojvgeojegojgeojg");
                     AudioControler.Instance.ActivateMusicSource(audioSourceType.musicSource);
                     //foreach (MapIcon icon in FindObjectsOfType<MapIcon>())
@@ -420,6 +422,10 @@ public class EventController : MonoBehaviour
                 eventAudioSource.volume, AudioControler.Instance.defaultMusicVol, 0.3f);
         }
 
+        if(inMap)
+        {
+            mapPan.Instance.scrollingEnabled = false;
+        }
 
         /*if (eventData.useEventAudio && eventData.eventAudio.clips.Length > 0)
         {

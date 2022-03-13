@@ -259,7 +259,7 @@ public class MapControler : MonoBehaviour
     }
     public void CanLoadBattle()
     {
-        Debug.Log("selected bird count:" + selectedBirds.Count);
+       // Debug.Log("selected bird count:" + selectedBirds.Count);
 
         if (selectedBirds.Count == 3)
         {

@@ -228,7 +228,13 @@ public class LayoutButton : MonoBehaviour
 
 		hasBird = (currentBird != null);
 		if (Input.GetMouseButtonUp(0))
+		{
 			DestroySelectionEffect();
+			if (inMap)
+			{
+				MapControler.Instance.CanLoadBattle();
+			}
+		}
 
 		if (currentBird != null && currentBird.dragged && selectionEffect == null && index.x >= 0)
 			selectionEffect = Instantiate(Helpers.Instance.selectionEffectGround, transform);

@@ -1775,7 +1775,7 @@ public class GuiContoler : MonoBehaviour
 
         // Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
 
-       Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
+      // Debug.Log("Playtime: " + Var.totalTimeDays.ToString() + "Days " +  Var.totalTimeHours.ToString() +  " Hours " + Var.totalTimeMinutes.ToString() + " Minutes " + Var.totalTimeSeconds.ToString() + " Seconds");
 
     }
 

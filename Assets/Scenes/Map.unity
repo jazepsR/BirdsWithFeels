@@ -750,46 +750,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000015258789, y: 154.09738}
   m_SizeDelta: {x: 180, y: -68}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!21 &36137698
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.0026450756, y: 0.0026781433}
-        m_Offset: {x: 0.49529317, y: 3.6954985}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &40468708
 GameObject:
   m_ObjectHideFlags: 0
@@ -4244,6 +4204,13 @@ MonoBehaviour:
     injured: 0
     preferredEmotion: 7
     recievedSeeds: []
+    emotionsChanged: 0
+    emotionSeedsCollected: 0
+    turnsInDangerZone: 0
+    powerUpSwordsUsed: 0
+    powerUpShieldsUsed: 0
+    powerUpHeartsUsed: 0
+    birdEventState: 0
     level: 1
     birdAbility: 
     consecutiveFightsWon: 0
@@ -4251,12 +4218,6 @@ MonoBehaviour:
     AdventuresRested: 0
     CoolDownLeft: 0
     CoolDownLength: 3
-    emotionsChanged: 0
-    emotionSeedsCollected: 0
-    turnsInDangerZone: 0
-    powerUpSwordsUsed: 0
-    powerUpShieldsUsed: 0
-    powerUpHeartsUsed: 0
   birdBio: Tova is tough and resourceful, so this adventure will be a piece of cake
     for her
   prevConf: 0
@@ -9676,6 +9637,13 @@ MonoBehaviour:
     injured: 0
     preferredEmotion: 7
     recievedSeeds: []
+    emotionsChanged: 0
+    emotionSeedsCollected: 0
+    turnsInDangerZone: 0
+    powerUpSwordsUsed: 0
+    powerUpShieldsUsed: 0
+    powerUpHeartsUsed: 0
+    birdEventState: 0
     level: 1
     birdAbility: 
     consecutiveFightsWon: 0
@@ -9683,12 +9651,6 @@ MonoBehaviour:
     AdventuresRested: 0
     CoolDownLeft: 0
     CoolDownLength: 3
-    emotionsChanged: 0
-    emotionSeedsCollected: 0
-    turnsInDangerZone: 0
-    powerUpSwordsUsed: 0
-    powerUpShieldsUsed: 0
-    powerUpHeartsUsed: 0
   birdBio: Toby is a very wealthy bird and hopes to find more riches in this adventure
   prevConf: 0
   prevFriend: 0
@@ -27645,6 +27607,13 @@ MonoBehaviour:
     injured: 0
     preferredEmotion: 7
     recievedSeeds: []
+    emotionsChanged: 0
+    emotionSeedsCollected: 0
+    turnsInDangerZone: 0
+    powerUpSwordsUsed: 0
+    powerUpShieldsUsed: 0
+    powerUpHeartsUsed: 0
+    birdEventState: 0
     level: 1
     birdAbility: 
     consecutiveFightsWon: 0
@@ -27652,12 +27621,6 @@ MonoBehaviour:
     AdventuresRested: 0
     CoolDownLeft: 0
     CoolDownLength: 3
-    emotionsChanged: 0
-    emotionSeedsCollected: 0
-    turnsInDangerZone: 0
-    powerUpSwordsUsed: 0
-    powerUpShieldsUsed: 0
-    powerUpHeartsUsed: 0
   birdBio: Rebecca is just along for the ride. Also, she thinks Toby is cute.
   prevConf: 0
   prevFriend: 0
@@ -27996,6 +27959,13 @@ MonoBehaviour:
     injured: 0
     preferredEmotion: 7
     recievedSeeds: []
+    emotionsChanged: 0
+    emotionSeedsCollected: 0
+    turnsInDangerZone: 0
+    powerUpSwordsUsed: 0
+    powerUpShieldsUsed: 0
+    powerUpHeartsUsed: 0
+    birdEventState: 0
     level: 1
     birdAbility: 
     consecutiveFightsWon: 0
@@ -28003,12 +27973,6 @@ MonoBehaviour:
     AdventuresRested: 0
     CoolDownLeft: 0
     CoolDownLength: 3
-    emotionsChanged: 0
-    emotionSeedsCollected: 0
-    turnsInDangerZone: 0
-    powerUpSwordsUsed: 0
-    powerUpShieldsUsed: 0
-    powerUpHeartsUsed: 0
   birdBio: Terry is excited to see new things and make friends with new birds!
   prevConf: 0
   prevFriend: 0
@@ -39101,6 +39065,13 @@ MonoBehaviour:
     injured: 0
     preferredEmotion: 7
     recievedSeeds: []
+    emotionsChanged: 0
+    emotionSeedsCollected: 0
+    turnsInDangerZone: 0
+    powerUpSwordsUsed: 0
+    powerUpShieldsUsed: 0
+    powerUpHeartsUsed: 0
+    birdEventState: 0
     level: 1
     birdAbility: 
     consecutiveFightsWon: 0
@@ -39108,12 +39079,6 @@ MonoBehaviour:
     AdventuresRested: 0
     CoolDownLeft: 0
     CoolDownLength: 3
-    emotionsChanged: 0
-    emotionSeedsCollected: 0
-    turnsInDangerZone: 0
-    powerUpSwordsUsed: 0
-    powerUpShieldsUsed: 0
-    powerUpHeartsUsed: 0
   birdBio: Kim grew up in a bustling city. She craves adventure
   prevConf: 0
   prevFriend: 0
@@ -60004,6 +59969,46 @@ MonoBehaviour:
     volume: 1
     minPitch: 1
     maxPitch: 1
+--- !u!21 &2127566468
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.002645075, y: 0.0026781422}
+        m_Offset: {x: 0.49529317, y: 3.6954978}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2130635182
 GameObject:
   m_ObjectHideFlags: 0
@@ -66617,7 +66622,7 @@ PrefabInstance:
     - target: {fileID: 858305127977642431, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2303984824736417923, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
@@ -66762,7 +66767,7 @@ PrefabInstance:
     - target: {fileID: 7593345429866064528, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7680852223011736287, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
@@ -66972,7 +66977,7 @@ PrefabInstance:
     - target: {fileID: 8862292613127690640, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 9215546649038804790, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}

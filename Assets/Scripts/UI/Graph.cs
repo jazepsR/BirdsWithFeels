@@ -158,7 +158,7 @@ public class Graph : MonoBehaviour {
 	void CreateLevelSeeds(Bird bird, bool afterBattle)
 	{
 		
-		Debug.Log("SEEDS ARE BEING CREATED");
+		//Debug.Log("SEEDS ARE BEING CREATED");
 		float factor = isSmall ? 8 : 18;
 		if (!isSmall)
 		{
