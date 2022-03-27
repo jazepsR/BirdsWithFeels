@@ -52,7 +52,7 @@ public class LayoutButton : MonoBehaviour
 	}
 	void OnTriggerEnter2D(Collider2D other)
 	{
-	    Debug.Log("entered!");
+	   // Debug.Log("entered!");
 		if (isActive && other.transform.parent.GetComponent<Bird>().dragged)
 		{
 			if (selectionEffect == null && index.x >= 0)

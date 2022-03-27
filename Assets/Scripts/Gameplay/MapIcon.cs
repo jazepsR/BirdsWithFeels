@@ -751,7 +751,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			}
 			GuiContoler.Instance.tooltipText.transform.parent.gameObject.SetActive(false);
 			Var.freezeEmotions = isTrial;
-			GuiContoler.Instance.ShowLoadingScreen();
+			GuiContoler.Instance.ShowLoadingScreen(true);
 			SaveLoad.Save();
 			SceneManager.LoadScene("NewMain");
 		}

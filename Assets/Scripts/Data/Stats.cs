@@ -43,8 +43,7 @@ public class Stats : MonoBehaviour
 
             Var.activeBirds = new List<Bird>(birds);
             Var.availableBirds = new List<Bird>(birds);
-            ShowStatsMenu();
-            
+            ShowStatsMenu();         
             
         }
 
@@ -521,13 +520,16 @@ public class Stats : MonoBehaviour
             listOfPages.RemoveAt(listOfPages.Count - 1);
             // listOfPages.Sort();
         }
+        //var birdList = Var.activeBirds.Count != 0 ? Var.activeBirds : Var.availableBirds;
 
-        foreach (Bird bird in Var.activeBirds)
+        var birdList =  Var.activeBirds;
+
+        foreach (Bird bird in birdList)
         {
 
-            if (bird != null)
+            try
             {
-                switch (bird.name)
+                switch (bird.charName)
                 {
                     case "Terry":
                         Debug.Log("hello terry");
@@ -563,9 +565,9 @@ public class Stats : MonoBehaviour
 
                 }
             }
-            else
+            catch(System.Exception ex)
             {
-                Debug.Log("i am null " + Var.activeBirds.Count);
+                Debug.Log("i am null " + Var.activeBirds.Count +" Exception: " + ex.Message);
             }
         }
 

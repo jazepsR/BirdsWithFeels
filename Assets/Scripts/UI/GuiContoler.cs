@@ -12,6 +12,7 @@ public class GuiContoler : MonoBehaviour
 {
     public static GuiContoler Instance { get; private set; }
     public GameObject loadingSceen;
+    public GameObject[] loadingElements;
     public Image dangerFollowHighlight;
     public Image[] vingette;
     public GameObject kingMouth;
@@ -459,7 +460,7 @@ public class GuiContoler : MonoBehaviour
 
         }
         if (Input.GetKeyDown(KeyCode.O) && Var.cheatsEnabled)
-            ReturnToMap();
+            ReturnToMap(true);
         if (Input.GetKeyDown(KeyCode.B) && Var.cheatsEnabled)
             GraphButton();
 
@@ -1421,7 +1422,7 @@ public class GuiContoler : MonoBehaviour
     }
 
 
-    public void ReturnToMap()
+    public void ReturnToMap(bool fullLoading)
     {
         foreach (Bird bird in Var.availableBirds)
         {
@@ -1454,17 +1455,24 @@ public class GuiContoler : MonoBehaviour
         Var.currentWeek++;
         Var.shouldDoMapEvent = true;
         Var.CanShowHover = true;
-        ShowLoadingScreen();
+        ShowLoadingScreen(fullLoading);
         LeanTween.cancelAll();
         AudioControler.Instance.SaveVolumeSettings();
         SaveLoad.Save();
         SceneManager.LoadScene("Map");
     }
-    public void ShowLoadingScreen()
+    public void ShowLoadingScreen(bool fullLoading)
     {
         if (loadingSceen != null)
         {
             loadingSceen.SetActive(true);
+            if (loadingElements.Length >0)
+                {
+                foreach (GameObject loadingElement in loadingElements)
+                {
+                    loadingElement.SetActive(fullLoading);
+                }
+            }
         }
     }
     public void LoadMainMenu()
@@ -1632,6 +1640,7 @@ public class GuiContoler : MonoBehaviour
         {
             Var.availableBirds.AddRange(FillPlayer.Instance.playerBirds);
         }
+       // Debug.LogError("updating bird save");
     }
 
 

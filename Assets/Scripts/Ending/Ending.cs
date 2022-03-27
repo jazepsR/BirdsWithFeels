@@ -139,7 +139,7 @@ public class Ending : MonoBehaviour
             {
               //  Stats.vultureKingFightStatus(true);
                // Stats.BeatGameInTime();
-                GuiContoler.Instance.ReturnToMap();
+                GuiContoler.Instance.ReturnToMap(true);
                 Achievements.vultureKingFightStatus(true);
                 Achievements.BeatGameInTime();
                 SceneManager.LoadScene("Credits");
