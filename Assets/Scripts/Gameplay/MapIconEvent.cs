@@ -42,7 +42,7 @@ public class MapIconEvent : MapIcon
     }
     public override void SetState()
     {
-        if (available && !stateSet)
+        if (available && !stateSet && anim != null)
         {
             ExcelExport.CreateExportTable();
             ExcelExport.AddMapNode(this);

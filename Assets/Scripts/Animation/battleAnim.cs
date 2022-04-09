@@ -168,6 +168,10 @@ public class battleAnim : MonoBehaviour
                         else
                         {
                             DoQuickTransition();
+                            if (GuiContoler.Instance.FastForwardScript)
+                            {
+                                GuiContoler.Instance.FastForwardScript.SetIsInFight(false);
+                            }
                         }
                     }
                     yield return new WaitForSeconds(0.5f);

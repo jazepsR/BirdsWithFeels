@@ -35,7 +35,7 @@ public class MapControler : MonoBehaviour
     //  public Animator SelectionMenuBlurAnimator;
     [HideInInspector]
     public bool isViewingNode = false;
-    [HideInInspector]
+   // [HideInInspector]
     public MapIcon SelectedIcon;
     public Text timerText;
     public List<Bird> selectedBirds;
@@ -259,9 +259,13 @@ public class MapControler : MonoBehaviour
     }
     public void CanLoadBattle()
     {
-       // Debug.Log("selected bird count:" + selectedBirds.Count);
-
-        if (selectedBirds.Count == 3)
+        // Debug.Log("selected bird count:" + selectedBirds.Count);
+       if (SelectedIcon != null && SelectedIcon.available == false) 
+        {
+            canFight = false;
+            startLvlBtn.interactable = false;
+            startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "You need to unlock this adventure";
+        }else if(selectedBirds.Count == 3)
         {
             canFight = true;
             startLvlBtn.interactable = true;
@@ -273,7 +277,6 @@ public class MapControler : MonoBehaviour
             startLvlBtn.interactable = false;
             startLvlBtn.GetComponent<ShowTooltip>().tooltipText = "You must select 3 birds for the fight";
         }
-
     }
     public void StartLevel()
     {

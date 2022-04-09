@@ -75,7 +75,7 @@ public class Ending : MonoBehaviour
         visuals.gameObject.SetActive(true);
         visuals.debugFinalBattleActive = true;
         visuals.setupLastBattle();
-        Var.currentBG = 13;
+        Var.currentBG = 12;
 
     }
     void Start()

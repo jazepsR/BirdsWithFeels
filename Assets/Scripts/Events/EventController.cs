@@ -211,8 +211,13 @@ public class EventController : MonoBehaviour
                 Debug.Log("i am closing now");
                 myEventGUIAnimator.SetTrigger("close"); //Hide GUI once it has finished animating closed
                 LeanTween.delayedCall(0.7f, () =>
-                 eventObject.SetActive(false));
-
+                {
+                    if (eventObject)
+                    {
+                        eventObject.SetActive(false);
+                    }
+                    });
+            
                 if (inMap) 
                 {
                     DialogueControl.Instance.TryDialogue(Dialogue.Location.map); 

@@ -328,6 +328,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             else
 			{
                 float time = 2f;
+				
                 anim.SetInteger("state", 0);
                 LeanTween.delayedCall(time, () => {
 					anim.SetTrigger("playUnlockAnim");
