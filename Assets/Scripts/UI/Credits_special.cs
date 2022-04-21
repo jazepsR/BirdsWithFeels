@@ -49,9 +49,17 @@ public class Credits_special : MonoBehaviour
             teamMembers[activePerson].HidePerson();
             activePerson++;
 
+           
+
             if (activePerson < teamMembers.Count)
             {
                 teamMembers[activePerson].ShowPerson(this);
+
+                if (teamMembers[activePerson].GetProgressText() != null)
+                {
+                    teamMembers[activePerson].GetProgressText().gameObject.SetActive(true);
+                    teamMembers[activePerson].GetProgressText().text = activePerson.ToString() + "/6";
+                }
             }
             else
             {

@@ -9,6 +9,7 @@ public class Credits_person : MonoBehaviour
     Credits_special credits;
     private Animator animator;
     public Text buttonText;
+    public Text progressText;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,17 @@ public class Credits_person : MonoBehaviour
 
 
         animator = GetComponent<Animator>();
+    }
+    public Text GetProgressText()
+    {
+        if (progressText != null)
+        {
+            return progressText;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public void ShowPerson(Credits_special aCredits)
