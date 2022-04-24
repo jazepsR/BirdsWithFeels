@@ -174,6 +174,7 @@ public class battleAnim : MonoBehaviour
                             }
                         }
                     }
+
                     yield return new WaitForSeconds(0.5f);
 
                 }

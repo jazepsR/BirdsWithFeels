@@ -210,8 +210,11 @@ public class Ending : MonoBehaviour
         {
             showedFinalEvent = true;
         }
+        if (GuiContoler.Instance.FastForwardScript)
+        {
+            GuiContoler.Instance.FastForwardScript.SetIsInFight(false);
+        }
 
-    
         //switch (stage)
         //{
         //    case 0:
@@ -248,7 +251,7 @@ public class Ending : MonoBehaviour
         //        break;
 
         //}
-    
+
     }
     public void ShowEndingBeforeBattleText(int stage)
     {

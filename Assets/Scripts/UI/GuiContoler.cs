@@ -317,7 +317,10 @@ public class GuiContoler : MonoBehaviour
             GraphBlocker.SetActive(true);
             if ((Var.isTutorial || Var.currentStageID == Var.battlePlanningTutorialID) && !Var.cheatsEnabled)
             {
-                mainMenuBtn.GetComponent<Button>().interactable = false;
+                if (mainMenuBtn)
+                {
+                    mainMenuBtn.GetComponent<Button>().interactable = false;
+                }
                 toMapBtn.GetComponent<Button>().interactable = false;
             }
             if (inMap && MapControler.Instance)
