@@ -77,8 +77,9 @@ public class MapIconEvent : MapIcon
                             icon.SetState();
                             icon.TryCreateNewSave();
                     }
-                    TryCreateNewSave();
-                    SaveLoad.Save();
+
+                        TryCreateNewSave();
+                        SaveLoad.Save();
                     });
                     tooltipInfo.tooltipText = GetTooltipText();
                 }
@@ -148,6 +149,8 @@ public class MapIconEvent : MapIcon
             {
                 timedEvent.CheckIfTimedEvent();
             }
+            Var.narrativeEventsCompleted++;
+            Achievements.narrativeEventCompletionTracker();
         }
     }
 

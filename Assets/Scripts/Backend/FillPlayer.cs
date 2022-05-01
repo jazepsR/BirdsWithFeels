@@ -12,12 +12,15 @@ public class FillPlayer : MonoBehaviour {
 	{
 		LoadSprites();
 		Instance = this;
-		Var.activeBirds = new List<Bird>();
+		if (inMap)
+		{
+			Var.activeBirds = new List<Bird>();
+		}
 		if (Var.activeBirds.Count < 1)
 		{
 			Var.activeBirds.AddRange(playerBirds);
 		}
-			else if(!inMap)
+		else if(!inMap)
 		{
 			for (int i = 0; i < 3; i++)
 			{

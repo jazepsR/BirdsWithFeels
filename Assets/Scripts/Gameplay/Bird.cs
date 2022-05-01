@@ -1394,10 +1394,7 @@ public class Bird : MonoBehaviour
 		if (prevEmotion.Equals(Var.Em.finish))
 			prevEmotion = emotion;
 
-		if (data.emotionsChanged < 999)
-		{
-			data.emotionsChanged++;
-		}
+		
 	}
 
 	public void SetAnimation(Var.Em emotionNum)

@@ -1565,8 +1565,11 @@ public class GuiContoler : MonoBehaviour
         players = new List<Bird>();
         moveInMap();
         mapPos++;
-        foreach (GuiMap map in FindObjectsOfType<GuiMap>())
-            map.MoveMapBird(mapPos);
+        if (nextMapArea != Var.Em.finish)
+        {
+            foreach (GuiMap map in FindObjectsOfType<GuiMap>())
+                map.MoveMapBird(mapPos);
+        }
 
         if (Var.isTutorial)
         {

@@ -300,24 +300,9 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					CenterMapNode(false);
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
-					tooltipInfo.tooltipText = GetTooltipText();
-
-					try
-					{
-						MapIconEvent narrativeEvent = (MapIconEvent)this;
-						Debug.Log("This is a narrative event.");
-
-						Var.narrativeEventsCompleted++;
-						Achievements.narrativeEventCompletionTracker();
-					}
-					catch
-					{
-						Var.levelsCompleted++;
-						Achievements.levelCompletionTracker();
-						Debug.Log("This is a level.");
-					}
-
-					
+					tooltipInfo.tooltipText = GetTooltipText();					
+					Var.levelsCompleted++;
+					Achievements.levelCompletionTracker();					
 				}
 				else
 				{                    

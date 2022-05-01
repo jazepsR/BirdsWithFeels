@@ -276,7 +276,10 @@ public class ProgressGUI : MonoBehaviour {
                     newEmotion[portraitNum].color = Helpers.Instance.GetEmotionColor(bird.emotion);
                     newEmotion[portraitNum].rectTransform.localScale = Vector3.one;
                 }
-
+                if (bird.data.emotionsChanged < 999)
+                {
+                    bird.data.emotionsChanged++;
+                }
             }
             else
             {
