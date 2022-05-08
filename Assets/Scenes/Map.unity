@@ -18971,6 +18971,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c22544437e26246a1acb9fea0dccc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!21 &671857594
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.0026450758, y: 0.0026781433}
+        m_Offset: {x: 0.49529323, y: 3.6954985}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &671953245
 GameObject:
   m_ObjectHideFlags: 0
@@ -22953,6 +22993,11 @@ PrefabInstance:
         type: 3}
       propertyPath: LockedIcon
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7465752798633938537, guid: e8c06d92a7356bd4a9cd4fb4f7a841c9,
+        type: 3}
+      propertyPath: background
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7465752798633938537, guid: e8c06d92a7356bd4a9cd4fb4f7a841c9,
         type: 3}
@@ -41369,12 +41414,12 @@ PrefabInstance:
     - target: {fileID: 7087334621926111195, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -292.00003
+      value: -292
       objectReference: {fileID: 0}
     - target: {fileID: 7087334621926111195, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -266.00003
+      value: -266
       objectReference: {fileID: 0}
     - target: {fileID: 7216939578717817949, guid: 9640144b0402f6e49ae177bef4b08adc,
         type: 3}
@@ -44255,46 +44300,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!21 &1528421756
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.002645075, y: 0.0026781429}
-        m_Offset: {x: 0.49529317, y: 3.6954985}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1530821485
 GameObject:
   m_ObjectHideFlags: 0
@@ -54991,6 +54996,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 72117238066028884, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
+      propertyPath: background
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 72117238066028884, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: bgProgressAnim
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 72117238066028884, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
       propertyPath: battles.Array.size
       value: 12
       objectReference: {fileID: 0}
@@ -55264,6 +55279,11 @@ PrefabInstance:
       propertyPath: possibleEvents.Array.data[0]
       value: 
       objectReference: {fileID: 883574107}
+    - target: {fileID: 7739113535118138215, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
+      propertyPath: background
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7739113535118138215, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
       propertyPath: battles.Array.size
@@ -66829,6 +66849,16 @@ PrefabInstance:
     - target: {fileID: 8679887016570115189, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: trialID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679887016570115189, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: hasLonelyPwerUps
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679887016570115189, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: hasFirendlyPowerUps
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8679887016917171427, guid: 1021d4f7acba6a943b1a6c6a3340be03,
