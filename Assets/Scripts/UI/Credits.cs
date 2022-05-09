@@ -12,6 +12,8 @@ public class Credits : MonoBehaviour
     public float FastSpeed;
     public float endPos;
     float acceleration =1f;
+    public Transform ElementToEndCreditsWith;
+    public Transform StaticElementToCompareWith;
 
     float currentSpeed = 0;
     // Start is called before the first frame update
@@ -52,8 +54,10 @@ public class Credits : MonoBehaviour
     IEnumerator ScrollCredits()
     {
         yield return new WaitForSecondsRealtime(waitTime);
-        while(rect.position.y<endPos)
+        //while(rect.position.y<endPos)
+        while (StaticElementToCompareWith.position.y > ElementToEndCreditsWith.position.y)
         {
+
             float posY = rect.position.y;
             posY += currentSpeed * Time.deltaTime;
             rect.position = new Vector3(rect.position.x, posY);
