@@ -501,11 +501,21 @@ public class Stats : MonoBehaviour
   
             loadDataGeneralPage();
 
-        if (Var.SophieUnlocked)
+        var birdList = Var.activeBirds;
+        int birdCount = 0;
+        foreach(Bird bird in Var.activeBirds)
+        {
+            if(bird.gameObject.activeSelf)
+            {
+                birdCount++;
+            }
+
+        }
+        if (birdCount == 5)
         {
             //all birds are unlocked do nothing
         }
-        else if (Var.KimUnlocked)
+        else if (birdCount == 4)
         {
             //cut sophie page
 
@@ -522,7 +532,6 @@ public class Stats : MonoBehaviour
         }
         //var birdList = Var.activeBirds.Count != 0 ? Var.activeBirds : Var.availableBirds;
 
-        var birdList =  Var.activeBirds;
 
         foreach (Bird bird in birdList)
         {

@@ -16,6 +16,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	public float maxY;
     public float minX;
     public RectTransform map;
+	public GameObject statButton;
 	//[HideInInspector]
 	public Transform activeFog;
 	public static mapPan Instance;
@@ -48,6 +49,7 @@ public class mapPan : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 	void Update()
 	{
+		statButton.SetActive(scrollingEnabled);
 		if (GuiContoler.Instance.speechBubbleObj.activeSelf)
 			return;
         if (!scrollingEnabled)
