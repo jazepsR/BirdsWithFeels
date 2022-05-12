@@ -18,6 +18,7 @@ public class mainMenuScript : MonoBehaviour {
     public GameObject quitGameButton;
     public GameObject selectChapterButton;
     public GameObject chapterPanel;
+    public GameObject discordButton;
     public Text deleteSaveText;
     string toDelete = "debug";
     public static mainMenuScript Instance;
@@ -169,6 +170,11 @@ public class mainMenuScript : MonoBehaviour {
         ResetGame();
         Var.isTutorial = true;
         AudioControler.Instance.PlaySound(AudioControler.Instance.mainMenuFreeSaveBtnClick);
+        buttonPanel.SetActive(false);
+        chapterPanel.SetActive(false);
+        saveSlotPanel.SetActive(false);
+        discordButton.SetActive(false);
+
         cutsceneScript.StartCutscene();
         Steamworks.SteamUserStats.SetStat("start_game", 1);
         bool tutorialCompleted;
