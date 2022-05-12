@@ -142,7 +142,7 @@ public class Ending : MonoBehaviour
                 GuiContoler.Instance.ReturnToMap(true);
                 Achievements.vultureKingFightStatus(true);
                 Achievements.BeatGameInTime();
-                SceneManager.LoadScene("Credits");
+               // SceneManager.LoadScene("Credits");
             }
         }
     }
@@ -184,9 +184,13 @@ public class Ending : MonoBehaviour
             }
         }
         TutorialMap.Add(list);
-        if (addToMap)
+       // if (addToMap)
         {
             map.Add(new BattleData(lastEmotion, false, new List<Var.Em>(), new MapBattleData()));
+        }
+        //else
+        {
+          //  map.Add(null);
         }
     }
     public void ShowEndingStartingText(int stage)
