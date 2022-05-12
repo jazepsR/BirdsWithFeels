@@ -14616,46 +14616,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!21 &505629378
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: UI Extensions/SoftMaskShader
-  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaMask:
-        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
-        m_Scale: {x: 0.002645075, y: 0.0026781429}
-        m_Offset: {x: 0.49529317, y: 3.6954985}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - _ColorMask: 15
-    - _CutOff: 0
-    - _FlipAlphaMask: 0
-    - _HardBlend: 0
-    - _NoOuterClip: 0
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &507064751
 GameObject:
   m_ObjectHideFlags: 0
@@ -23097,7 +23057,7 @@ PrefabInstance:
     - target: {fileID: 7465752798633938537, guid: e8c06d92a7356bd4a9cd4fb4f7a841c9,
         type: 3}
       propertyPath: battles.Array.size
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7465752798633938537, guid: e8c06d92a7356bd4a9cd4fb4f7a841c9,
         type: 3}
@@ -25902,6 +25862,46 @@ MonoBehaviour:
   text: What are they doing with all those books?
   useCustomPic: 0
   customPic: {fileID: 0}
+--- !u!21 &906752544
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI Extensions/SoftMaskShader
+  m_Shader: {fileID: 4800000, guid: 947afae4d36f1274ea2e4098262ceef6, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaMask:
+        m_Texture: {fileID: 2800000, guid: 5c4b7b36b856c4a44b403afe578d3c41, type: 3}
+        m_Scale: {x: 0.0026450758, y: 0.0026781433}
+        m_Offset: {x: 0.49529323, y: 3.6954985}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CutOff: 0
+    - _FlipAlphaMask: 0
+    - _HardBlend: 0
+    - _NoOuterClip: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &906877398
 GameObject:
   m_ObjectHideFlags: 0
@@ -55100,6 +55100,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 72117238066028884, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
+      propertyPath: birdLVL
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 72117238066028884, guid: cd877a5ad3252324883b3e1ec6efa003,
+        type: 3}
       propertyPath: hasDrills
       value: 0
       objectReference: {fileID: 0}
@@ -55116,7 +55121,7 @@ PrefabInstance:
     - target: {fileID: 72117238066028884, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
       propertyPath: battles.Array.size
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 72117238066028884, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
@@ -55396,7 +55401,7 @@ PrefabInstance:
     - target: {fileID: 7739113535118138215, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
       propertyPath: battles.Array.size
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7739113535118138215, guid: cd877a5ad3252324883b3e1ec6efa003,
         type: 3}
@@ -63574,7 +63579,7 @@ PrefabInstance:
     - target: {fileID: 4759541389018058447, guid: 6fe31083cda61e6439887f3fdf415413,
         type: 3}
       propertyPath: timeToComplete
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4759541389018058447, guid: 6fe31083cda61e6439887f3fdf415413,
         type: 3}
@@ -66888,6 +66893,11 @@ PrefabInstance:
     - target: {fileID: 7988385120426662864, guid: 1021d4f7acba6a943b1a6c6a3340be03,
         type: 3}
       propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8401792176774067824, guid: 1021d4f7acba6a943b1a6c6a3340be03,
+        type: 3}
+      propertyPath: birdLVL
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8401792176774067824, guid: 1021d4f7acba6a943b1a6c6a3340be03,
