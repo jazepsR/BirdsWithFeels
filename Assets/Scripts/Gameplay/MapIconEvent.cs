@@ -49,6 +49,7 @@ public class MapIconEvent : MapIcon
             //Debug.LogError("SETTING STATE! ID: "+ ID);
             if (completed)
             {
+                Var.narrativeEventsCompleted++;
                 if (firstCompletion) //Stuff that happens the FIRST time user completes level
                 {
                     stateSet = true;
@@ -149,7 +150,6 @@ public class MapIconEvent : MapIcon
             {
                 timedEvent.CheckIfTimedEvent();
             }
-            Var.narrativeEventsCompleted++;
             Achievements.narrativeEventCompletionTracker();
         }
     }

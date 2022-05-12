@@ -122,8 +122,8 @@ public class SaveLoad : MonoBehaviour
 
 		Var.trialsSuccessfullCount = data.trialsSuccessfullCount;
 		Var.birdInjuredInTrial = data.birdInjuredInTrial;
-		Var.narrativeEventsCompleted = data.narrativeEventsCompleted;
-		Var.levelsCompleted = data.levelsCompleted;
+		//Var.narrativeEventsCompleted = data.narrativeEventsCompleted;
+		//Var.levelsCompleted = data.levelsCompleted;
 		Var.birdsMaxLevelCount = data.birdsMaxLevelCount;
 		Var.confrontSuccess = data.confrontSuccess;
 		Var.confrontFail = data.confrontFail;
@@ -188,8 +188,8 @@ public class SaveData
 		maxLevel = Var.maxLevel;
 		currentWeek = Var.currentWeek;
 		birdInjuredInTrial = Var.birdInjuredInTrial;
-		narrativeEventsCompleted = Var.narrativeEventsCompleted;
-		levelsCompleted = Var.levelsCompleted;
+		//narrativeEventsCompleted = Var.narrativeEventsCompleted;
+		//levelsCompleted = Var.levelsCompleted;
 		confrontSuccess = Var.confrontSuccess;
 		confrontFail = Var.confrontFail;
 		birdsMaxLevelCount = Var.birdsMaxLevelCount;

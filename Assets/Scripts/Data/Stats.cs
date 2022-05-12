@@ -167,7 +167,6 @@ public class Stats : MonoBehaviour
         }
 
         terryPageStats[6].GetComponent<Text>().text = (bird.data.emotionsChanged < 100 ? "0" + bird.data.emotionsChanged.ToString() : bird.data.emotionsChanged < 10 ? "0" + bird.data.emotionsChanged.ToString() : bird.data.emotionsChanged.ToString());
-
         terryPageStats[7].GetComponent<Text>().text = (bird.data.emotionSeedsCollected < 10 ? "0" + bird.data.emotionSeedsCollected.ToString() : bird.data.emotionSeedsCollected.ToString());
         terryPageStats[8].GetComponent<Text>().text = (bird.data.turnsInDangerZone < 10 ? "00" + bird.data.turnsInDangerZone.ToString() : bird.data.turnsInDangerZone < 10 ? "0" + bird.data.turnsInDangerZone.ToString() : bird.data.turnsInDangerZone.ToString());
         terryPageStats[9].GetComponent<Text>().text = (bird.data.powerUpHeartsUsed < 100 ? "00" + bird.data.powerUpHeartsUsed.ToString() : bird.data.powerUpHeartsUsed < 10 ? "0" + bird.data.powerUpHeartsUsed.ToString() : bird.data.powerUpHeartsUsed.ToString());
@@ -554,19 +553,12 @@ public class Stats : MonoBehaviour
                       //  AlexanderEvent(Var.timedEvents[2]);
                         break;
                     case "Kim":
-                        if (Var.KimUnlocked)
-                        {
                             loadDataKim(bird);
-                            //KimEvent(Var.timedEvents[3]);
-                        }
+                            //KimEvent(Var.timedEvents[3]);                     
                         break;
                     case "Sophie":
-
-                        if (Var.SophieUnlocked)
-                        {
                             loadDataSophie(bird);
                            // SophieEvent(Var.timedEvents[4]);
-                        }
                         break;
                     default:
                         Debug.Log("cant find bird");

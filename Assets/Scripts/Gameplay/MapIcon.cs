@@ -300,15 +300,17 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					CenterMapNode(false);
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);
 					LeanTween.delayedCall(3f,()=>SaveLoad.Save());
-					tooltipInfo.tooltipText = GetTooltipText();					
-					Var.levelsCompleted++;
-					Achievements.levelCompletionTracker();					
+					tooltipInfo.tooltipText = GetTooltipText();		
+					Achievements.levelCompletionTracker();
+					//Debug.LogError("FIRST COMPLETION: " + ID);
 				}
 				else
-				{                    
-                    anim.SetInteger("state", 2); //set map icon to "completed" state instantly
+				{
+					//Debug.LogError("REGULAR COMPLETION: "+ ID);
+					anim.SetInteger("state", 2); //set map icon to "completed" state instantly
 					tooltipInfo.tooltipText = GetTooltipText();
 				}
+				Var.levelsCompleted++;
 			}
             else
 			{
@@ -479,6 +481,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 			}
 
 			birdToAdd.SaveBirdData();
+			mapPan.Instance.scrollingEnabled = true;
 		}
 
 

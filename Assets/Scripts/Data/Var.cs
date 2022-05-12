@@ -88,7 +88,7 @@ public static class Var {
 	/// Tutorial IDs
 	public static int battlePlanningTutorialID = 13;
     public static int levelTutorialID = 21;
-	public static bool cheatsEnabled = false;
+	public static bool cheatsEnabled = true;
 	public static float levelPopupDelay = 0.3f;
 	public static int wizardEffectStrength = 6;
 

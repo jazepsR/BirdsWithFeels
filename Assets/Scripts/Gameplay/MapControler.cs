@@ -77,6 +77,8 @@ public class MapControler : MonoBehaviour
         Instance = this;
         Var.snapshot = null;
         trialUiObject.SetActive(false);
+        Var.narrativeEventsCompleted = 0;
+        Var.levelsCompleted = 0;
     }
     public void FocusOnNodeAfterLoss()
     {

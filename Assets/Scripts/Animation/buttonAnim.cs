@@ -31,6 +31,7 @@ public class buttonAnim : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        anim.SetTrigger("click");
+        if (GetComponent<Button>() != null && GetComponent<Button>().interactable)
+            anim.SetTrigger("click");
     }
     }
