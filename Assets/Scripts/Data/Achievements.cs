@@ -7,7 +7,7 @@ public static class Achievements
     public static int stats_total_trial_count = 5;
     public static int max_bird_level_count = 5;
     public static int hours_to_play = 3;
-    public static int weeks_to_beat_king =30;
+    public static int weeks_to_beat_king =80;
     public static int weeks_to_pass = 50;
     public static int total_Narrative_Events = 24;
     public static int total_Levels = 42;
@@ -15,7 +15,9 @@ public static class Achievements
 
 
     public static void Start()
-    {  
+    {
+
+        
     }
 
     /*void Update()
@@ -121,6 +123,7 @@ public static class Achievements
     {
         if (Debug.isDebugBuild)
         {
+            Debug.Log("------Achievement triggered: " + achievementName + " stat name: " + statname);
             return;
         }
         
