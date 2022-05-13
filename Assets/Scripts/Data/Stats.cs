@@ -347,7 +347,7 @@ public class Stats : MonoBehaviour
                     terryPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Terry returned to his family farm and helped repair the damage the vultures had done to it. He stayed there for some time before leaving the farm and heading out to travel the country.";
                     break;
                 case TimedEventData.state.completedFail:
-                    terryPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Terry made it in time but failed!";
+                    terryPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Terry went to see his Uncle Keith where his parents had gone after the vultures destroyed their farm. Together they found a new patch of land where they built a new house, and Terry stayed there to farm the land like his father before him.";
                     break;
                 case TimedEventData.state.failed:
                     terryPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Terry went to see his Uncle Keith where his parents had gone after the vultures destroyed their farm. Together they found a new patch of land where they built a new house, and Terry stayed there to farm the land like his father before him.";
@@ -376,7 +376,7 @@ public class Stats : MonoBehaviour
                     rebeccaPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Rebecca left the country to find her parents, who had set up a new shop far away from the vultures. She learned about trading before becoming a travelling merchant, journeying across the country to sell her wares.";
                     break;
                 case TimedEventData.state.completedFail:
-                    rebeccaPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Rebecca made it in time but failed!";
+                    rebeccaPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Rebecca left the country to find her parents, who had set up a new shop far away from the vultures. She learned the merchant trade and stayed with her family business.";
                     break;
                 case TimedEventData.state.failed:
                     rebeccaPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Rebecca left the country to find her parents, who had set up a new shop far away from the vultures. She learned the merchant trade and stayed with her family business.";
@@ -404,7 +404,7 @@ public class Stats : MonoBehaviour
                     alexanderPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Alex went back to Talonport, where he was greeted as a hero. He stayed there for some time to rebuild the army before traveling to the vulture kingdom to help organize the restoration of the vulture military.";
                     break;
                 case TimedEventData.state.completedFail:
-                    alexanderPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Alexander made it in time but failed!";
+                    alexanderPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Alex never went back to Talonport, even after the defeat of the vulture king and the military birds managed to take back the city. Instead he traveled to the vulture kingdom to seek out and convert any vulture king sympathizers still hiding.";
                     break;
                 case TimedEventData.state.failed:
                     alexanderPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Alex never went back to Talonport, even after the defeat of the vulture king and the military birds managed to take back the city. Instead he traveled to the vulture kingdom to seek out and convert any vulture king sympathizers still hiding.";
@@ -433,7 +433,7 @@ public class Stats : MonoBehaviour
                     kimPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Kim traveled to her parents, where Percy was waiting for her. Together they moved back to their house at the border between the bird and the vulture kingdom, where they could run their hat shop together.";
                     break;
                 case TimedEventData.state.completedFail:
-                    kimPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Kim made it in time but failed!";
+                    kimPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Kim left in search of her boyfriend, Percy. Once the vulture king was defeated, the birds and vultures he imprisoned were released, and among them were Percy. He and Kim left the country, traveling far away to a place where they would both be accepted.";
                     break;
                 case TimedEventData.state.failed:
                     kimPageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Kim left in search of her boyfriend, Percy. Once the vulture king was defeated, the birds and vultures he imprisoned were released, and among them were Percy. He and Kim left the country, traveling far away to a place where they would both be accepted.";
@@ -462,7 +462,7 @@ public class Stats : MonoBehaviour
                     sophiePageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Sophie returned to Lonely Peaks to ensure that the library was safe and protected. She then travelled to the vulture kingdom to help the vultures find their true emotions again and restore the balance within the kingdom.";
                     break;
                 case TimedEventData.state.completedFail:
-                    sophiePageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Sophie made it in time but failed!";
+                    sophiePageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Sophie returned to Lonely Peaks to help rebuild the library and rewrite the books that had been destroyed. It was a long and arduous task, one which would likely take the rest of Sophie’s life to complete.";
                     break;
                 case TimedEventData.state.failed:
                     sophiePageStats[5].transform.GetChild(2).GetComponent<Text>().text = "Sophie returned to Lonely Peaks to help rebuild the library and rewrite the books that had been destroyed. It was a long and arduous task, one which would likely take the rest of Sophie’s life to complete.";
