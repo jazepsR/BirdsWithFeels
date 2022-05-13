@@ -27,6 +27,7 @@ public class TimedEventControl : MonoBehaviour {
 	public TimedEventData data = null;
 	Vector3 offset = new Vector3(-95, 30f, 0);
 	bool shouldTriggerBattle = false;
+	public EventScript.Character character;
     // Use this for initialization
     
     void Start () {
@@ -54,6 +55,7 @@ public class TimedEventControl : MonoBehaviour {
 			data.currentState = TimedEventData.state.active;
 			Var.timedEvents.Add(data);
 			CheckStatus();
+			Helpers.Instance.GetBirdFromEnum(character).data.birdEventState = TimedEventData.state.active;
 			//EventController.Instance.CreateEvent(startEvent);
 		}
 	}
@@ -81,6 +83,7 @@ public class TimedEventControl : MonoBehaviour {
 					EventController.Instance.CreateEvent(completionEvent);
 					AudioControler.Instance.ActivateMusicSource(audioSourceType.battleSource);
 					AudioControler.Instance.campfireHappyMusic.Play();
+					Helpers.Instance.GetBirdFromEnum(character).data.birdEventState = TimedEventData.state.completedSuccess;
 					HealAllBirds();
 
 				}else
@@ -91,6 +94,7 @@ public class TimedEventControl : MonoBehaviour {
 					EventController.Instance.CreateEvent(completionAfterFailEvent);
 					AudioControler.Instance.ActivateMusicSource(audioSourceType.battleSource);
 					AudioControler.Instance.campfireSadMusic.Play();
+					Helpers.Instance.GetBirdFromEnum(character).data.birdEventState = TimedEventData.state.completedFail;
 					HealAllBirds();
 				}
 				Var.maxLevel++;
@@ -100,6 +104,7 @@ public class TimedEventControl : MonoBehaviour {
 			if (Var.currentWeek == data.completeBy)
 			{
 				data.currentState = TimedEventData.state.failed;
+				Helpers.Instance.GetBirdFromEnum(character).data.birdEventState = TimedEventData.state.failed;
 				Achievements.getTrialDetails(data);
 				//Debug.Log(data.eventName);
 				EventController.Instance.CreateEvent(initialFailEvent);
