@@ -1204,6 +1204,7 @@ public class GuiContoler : MonoBehaviour
     {
         if (!canChangeGraph)
             return;
+        //Debug.Log("starting graph");
         canChangeGraph = false;
         if (inMap && minimap)
             minimap.SetActive(false);
@@ -1220,7 +1221,7 @@ public class GuiContoler : MonoBehaviour
             }
             //LeanTween.delayedCall(0.7f, () =>
             // {
-            //Debug.Log("doing graph! " + bird.charName + " index: " + index);
+           // Debug.Log("doing graph! " + bird.charName + " index: " + index);
             CreateGraph(index, afterBattle, bird);
             ProgressGUI.Instance.PortraitClick(bird);
         }
@@ -1233,6 +1234,7 @@ public class GuiContoler : MonoBehaviour
         ProgressGUI.Instance.skillArea.SetActive(false);
         //LeanTween.moveLocal(graph, new Vector3(0, 0, graph.transform.position.z), 0.7f).setEase(LeanTweenType.easeOutBack).setOnComplete(CreateGraph).setOnCompleteParam(index as object);
         graphAnime.SetBool("open", true);
+      //  Debug.Log("finished graph");
     }
     public void CreateBattleReport() //triggers upon finishing battles in bossless adventures
     {
@@ -1281,6 +1283,7 @@ public class GuiContoler : MonoBehaviour
         {
             return;
         }
+        canChangeGraph = true;
         GameLogic.Instance.FightButton.interactable = false;
         GameLogic.Instance.FightButton.GetComponent<Animator>().SetBool("fight", true);
         AudioControler.Instance.ClickSound();

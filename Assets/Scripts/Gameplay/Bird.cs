@@ -904,6 +904,7 @@ public class Bird : MonoBehaviour
 			if (Var.isDragControls && canGrab)
 			{
 				birdSounds.pickupBird.Play();
+				GuiContoler.Instance.canChangeGraph = true;
 				GetComponentInChildren<Animator>().SetBool("lift", true);
 				foreach (SpriteRenderer child in transform.GetComponentsInChildren<SpriteRenderer>(true))
 				{
