@@ -83,6 +83,7 @@ public class Ending : MonoBehaviour
         if (!Var.isEnding)
             return;
 
+        Achievements.vulture_king_in_time();
         kingAnimator.SetInteger("emotion", 0);
         tutorialSetup.TutorialSetup.SetupBirds();
         LeanTween.delayedCall(0.2f, () => ShowEndingStartingText(0));
