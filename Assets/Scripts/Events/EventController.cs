@@ -858,17 +858,24 @@ public class EventController : MonoBehaviour
             if (bird != null)
                 bird.SetEmotion();
 
-            int clamp = Var.isEnding ? 16 : 15;
+            int clamp = Var.isEnding ? 12 : 15;
             switch (type)
             {
                 case ConsequenceType.Courage:
                     bird.prevConf = bird.data.confidence;
-                    bird.data.confidence = Mathf.Clamp(bird.data.confidence + magnitude, -clamp, clamp);
+                    bird.data.confidence = Mathf.Clamp(bird.data.confidence, -clamp, clamp);
+                    bird.data.friendliness = Mathf.Clamp(bird.data.friendliness, -clamp, clamp);
+                   // Debug.LogError("CURRENT " + bird.charName + " conf: " + bird.data.confidence + " friendliness: " + bird.data.friendliness);
+                    bird.data.confidence = Mathf.Clamp(bird.data.confidence + magnitude, -15, 15);
+                  //  Debug.LogError("COMPLETE " + bird.charName + " conf: " + bird.data.confidence + " friendliness: " + bird.data.friendliness);
                     break;
                 case ConsequenceType.Friendliness:
                     bird.prevFriend = bird.data.friendliness;
-                    bird.data.friendliness = Mathf.Clamp(bird.data.friendliness + magnitude, -clamp, clamp);
-
+                    bird.data.confidence = Mathf.Clamp(bird.data.confidence, -clamp, clamp);
+                    bird.data.friendliness = Mathf.Clamp(bird.data.friendliness, -clamp, clamp);
+                   // Debug.LogError("CURRENT " + bird.charName + " conf: " + bird.data.confidence + " friendliness: " + bird.data.friendliness);
+                    bird.data.friendliness = Mathf.Clamp(bird.data.friendliness + magnitude, -15, 15);
+                    //Debug.LogError("COMPLETE " + bird.charName + " conf: " + bird.data.confidence + " friendliness: " + bird.data.friendliness);
                     break;
                 case ConsequenceType.Health:
                     currentBird.ChageHealth(magnitude);

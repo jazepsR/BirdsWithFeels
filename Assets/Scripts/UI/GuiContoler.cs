@@ -1277,6 +1277,10 @@ public class GuiContoler : MonoBehaviour
 
     public void Fight()
     {
+        if(EventController.Instance.eventObject.activeSelf)
+        {
+            return;
+        }
         GameLogic.Instance.FightButton.interactable = false;
         GameLogic.Instance.FightButton.GetComponent<Animator>().SetBool("fight", true);
         AudioControler.Instance.ClickSound();
