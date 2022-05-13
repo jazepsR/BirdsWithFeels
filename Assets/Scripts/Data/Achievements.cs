@@ -150,7 +150,7 @@ public static class Achievements
         Debug.Log("Level Completed: " + Var.levelsCompleted + " out of 42");
         if (Var.levelsCompleted == total_Levels)
         {
-            SetAchievement("complete_all_levels","");
+           // SetAchievement("complete_all_levels","");
         }
     }
 
@@ -159,7 +159,7 @@ public static class Achievements
         Debug.Log("Narrative Events Completed: " + Var.narrativeEventsCompleted + " out of 24");
         if (Var.narrativeEventsCompleted == total_Narrative_Events)
         {
-            SetAchievement("narrative_events_unlocked", "");
+           // SetAchievement("narrative_events_unlocked", "");
         }
     }
 
@@ -199,7 +199,7 @@ public static class Achievements
     {
         if (Var.totalTimeHours <= hours_to_play)
         {
-            SetAchievement("beat_game_in_hours", "");
+           // SetAchievement("beat_game_in_hours", "");
         }
     }
 
