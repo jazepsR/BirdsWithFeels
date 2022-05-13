@@ -21,7 +21,7 @@ public static class Var {
 	public enum Em { Neutral,Solitary,SuperLonely, Social, SuperFriendly,Confident,SuperConfident,Cautious, SuperScared,finish,Random, Shield};
 	public enum PowerUps { heal,dmg,emotion,obstacle,shield};
 	public static bool isTutorial = false;
-    public static bool isEnding = true;
+    public static bool isEnding = false;
     public static bool tutorialCompleted = true;
 	public static bool isBoss = false;
 	public static int loadChapterID = -1;
@@ -88,7 +88,7 @@ public static class Var {
 	/// Tutorial IDs
 	public static int battlePlanningTutorialID = 13;
     public static int levelTutorialID = 21;
-	public static bool cheatsEnabled = true;
+	public static bool cheatsEnabled = false;
 	public static float levelPopupDelay = 0.3f;
 	public static int wizardEffectStrength = 6;
 
