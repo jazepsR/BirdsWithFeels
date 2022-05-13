@@ -177,6 +177,8 @@ public class MapControler : MonoBehaviour
 
             if (count == 5) //if all 5 birds are unlocked
             {
+                Var.birdsMaxLevelCount = 0; //resets count per map visit
+                
                 if (Var.maxLevel == 5 && bird.data.level == Var.maxLevel)
                 {
                     if (Var.birdsMaxLevelCount != 5)
