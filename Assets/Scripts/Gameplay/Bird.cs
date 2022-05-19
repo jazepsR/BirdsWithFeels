@@ -1047,26 +1047,8 @@ public class Bird : MonoBehaviour
 	{
 
 		fighting = false;
-		/*if (Helpers.Instance.ListContainsLevel(Levels.type.Sophie, data.levelList) )
-		{
-			if (GameLogic.Instance.CheckIfResting(this)&&!dragged)
-			{
-				levelControler.ApplyLevelOnDrop(this, data.levelList);
-			   
-			}
-			else
-			{
-				Debug.Log("not resting " + charName);
-				levelControler.ApplyLevelOnPickup(this, data.levelList);
-				if (cautiousParticleObj != null)
-					Destroy(cautiousParticleObj);
-
-			}
-		}*/
-
 		if (indicator)
 		{
-
 			if (dragged || (target == home && !isEnemy))
 			{
 				indicator.Hide();
@@ -1075,11 +1057,9 @@ public class Bird : MonoBehaviour
 			{
 				GetFriendlinessBonus();
 				GetConfBoost();
-
 			}
 		}
 		GameLogic.Instance.UpdateFeedback();
-
 	}
 	public Bird(string name, int confidence = 0, int friendliness = 0)
 	{

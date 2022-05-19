@@ -295,7 +295,10 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					}
 					foreach(MapIcon icon in targets)
 					{
-						LeanTween.delayedCall(2.7f, () => icon.anim.SetInteger("state", 1));
+						if (!icon.available)
+						{
+							LeanTween.delayedCall(2.7f, () => icon.anim.SetInteger("state", 1));
+						}
 					}
 					CenterMapNode(false);
 					//Debug.LogError(" moving to point: " + temp + " map can move: " + MapControler.Instance.canMove);

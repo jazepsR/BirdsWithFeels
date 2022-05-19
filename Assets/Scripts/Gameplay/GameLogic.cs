@@ -79,13 +79,12 @@ public class GameLogic : MonoBehaviour {
 	{
 		feedBack[] feedBack = FindObjectsOfType<feedBack>();
 		//print("updateCall");
-		foreach(feedBack fb in feedBack)
+		foreach (feedBack fb in feedBack)
 		{
 			fb.RefreshFeedback();
 			if (Var.isTutorial)
 				fb.HighlightTutorialTiles();
 		}
-
 	}
 	public bool CheckIfResting(Bird bird)
 	{

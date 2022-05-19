@@ -306,6 +306,7 @@ public class LayoutButton : MonoBehaviour
 				currentBird.OnLevelPickup();
 				currentBird.ReleaseBird(swapBird.x, swapBird.y);
 				currentBird.GroundRollBonus = 0;
+				swapBird.GroundRollBonus = 0;
 				currentBird = swapBird;
 				currentBird.target = new Vector3(transform.position.x, transform.position.y + 0.5f, 0);
 				foreach(Bird bird in Var.activeBirds)

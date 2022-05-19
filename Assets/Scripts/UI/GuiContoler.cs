@@ -810,7 +810,6 @@ public class GuiContoler : MonoBehaviour
         GameLogic.Instance.CanWeFight();
         GameLogic.Instance.UpdateFeedback();
         rerollBox.SetActive(false);
-
     }
 
 
