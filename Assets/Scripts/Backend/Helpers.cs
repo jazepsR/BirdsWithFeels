@@ -535,7 +535,7 @@ public class Helpers : MonoBehaviour {
 		}
 		for (int i = 0; i < hearts.Length; i++)
 		{
-			if (i < currentHP)
+			if (i < currentHP && i <MaxHP)
 			{
 				hearts[i].gameObject.SetActive(true);
 				if (i >= prevRoundHealth && prevRoundHealth != -1)

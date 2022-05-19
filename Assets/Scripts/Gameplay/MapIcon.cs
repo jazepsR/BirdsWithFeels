@@ -274,7 +274,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 						DialogueControl.Instance.CreateParticularDialog(firstCompleteDialogue);
 						return;
 					}
-
+					//Debug.LogError("FIRST UNLOCK! ID: " + ID);
 					stateSet = true;
 					firstCompletion = false;
 

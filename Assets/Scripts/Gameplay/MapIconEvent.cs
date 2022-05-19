@@ -50,7 +50,7 @@ public class MapIconEvent : MapIcon
             if (completed)
             {
                 Var.narrativeEventsCompleted++;
-                if (firstCompletion) //Stuff that happens the FIRST time user completes level
+                if (ID == Var.currentStageID && firstCompletion) //Stuff that happens the FIRST time user completes level
                 {
                     stateSet = true;
                     firstCompletion = false;
@@ -83,9 +83,11 @@ public class MapIconEvent : MapIcon
                         SaveLoad.Save();
                     });
                     tooltipInfo.tooltipText = GetTooltipText();
+                   // Debug.LogError("FIRST COMPLETION NARRATIVE: " + ID);
                 }
                 else
                 {
+                   // Debug.LogError("REGULAR COMPLETION NARRATIVE: " + ID);
                     anim.SetInteger("state", 2); //set map icon to "completed" state instantly
                     tooltipInfo.tooltipText = GetTooltipText();
                 }
