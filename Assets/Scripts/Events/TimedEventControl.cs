@@ -53,6 +53,7 @@ public class TimedEventControl : MonoBehaviour {
 		{
 			data = new TimedEventData(eventName, Var.currentWeek + timeToComplete, endArea.ID);
 			data.currentState = TimedEventData.state.active;
+			//Debug.LogError(" event: " + eventName);
 			Var.timedEvents.Add(data);
 			CheckStatus();
 			Helpers.Instance.GetBirdFromEnum(character).data.birdEventState = TimedEventData.state.active;
@@ -101,7 +102,7 @@ public class TimedEventControl : MonoBehaviour {
 				if(EventNotification != null)
 					EventNotification.transform.parent.gameObject.SetActive(false);
 			}
-			if (Var.currentWeek == data.completeBy)
+			if (Var.currentWeek == data.completeBy && data.currentState != TimedEventData.state.completedSuccess)
 			{
 				data.currentState = TimedEventData.state.failed;
 				Helpers.Instance.GetBirdFromEnum(character).data.birdEventState = TimedEventData.state.failed;
@@ -136,7 +137,7 @@ public class TimedEventControl : MonoBehaviour {
 		ToggleObjects(completedVisuals, false);
 		if (data != null)
 		{
-			//Debug.LogError("GOT DATA! State: "+ data.currentState);
+			//Debug.LogError("GOT DATA! State: "+ data.currentState +" name: " + name);
 			switch (data.currentState)
 			{
 				case TimedEventData.state.notStarted:
