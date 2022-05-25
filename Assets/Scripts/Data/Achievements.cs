@@ -5,6 +5,7 @@ using UnityEngine;
 public static class Achievements
 {
     public static int stats_total_trial_count = 5;
+    public static int max_bird_level = 6;
     public static int max_bird_level_count = 5;
     public static int hours_to_play = 3;
     public static int weeks_to_beat_king =80;
@@ -169,10 +170,11 @@ public static class Achievements
         {
             if (bird.data.level > 1)
             {
+               
                 SetAchievement("bird_level_up", "");
             }
 
-            if (bird.data.level == max_bird_level_count)
+            if (bird.data.level == max_bird_level)
             {
                 SetAchievement("bird_level_up_max", "");
             }
@@ -180,6 +182,8 @@ public static class Achievements
 
         if (inMap == true)
         {
+            Debug.Log(Var.birdsMaxLevelCount);
+            
             if (Var.birdsMaxLevelCount == max_bird_level_count)
             {
                 SetAchievement("level_up_all_birds", "");

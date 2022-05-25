@@ -135,6 +135,7 @@ public class MapControler : MonoBehaviour
         timedEvents = FindObjectsOfType<TimedEventControl>();
         Var.isBoss = false;
         Var.freezeEmotions = false;
+        Var.birdsMaxLevelCount = 0; //resets count per map visit
         timerText.text = "Week: " + Mathf.Max(0, Var.currentWeek);
         Achievements.amountOfWeeks(Var.currentWeek);
         //SelectionMenu.transform.localScale = Vector3.zero;
@@ -175,11 +176,16 @@ public class MapControler : MonoBehaviour
                 bird.data.mentalHealth = Mathf.Min(bird.data.mentalHealth + 1, Var.maxMentalHealth);
             }
 
+           
+        }
+
+        foreach (Bird bird in FillPlayer.Instance.playerBirds)
+        {
             if (count == 5) //if all 5 birds are unlocked
             {
-                Var.birdsMaxLevelCount = 0; //resets count per map visit
-                
-                if (Var.maxLevel == 5 && bird.data.level == Var.maxLevel)
+
+                Debug.Log("hello: Bird Data -  " + bird.data.level + "max bird level:" + Achievements.max_bird_level);
+                if (bird.data.level == Achievements.max_bird_level)
                 {
                     if (Var.birdsMaxLevelCount != 5)
                     {
@@ -189,6 +195,10 @@ public class MapControler : MonoBehaviour
 
                 Achievements.checkBirdLevelUp(bird, true);
             }
+
+
+            Debug.Log(bird.name);
+
         }
 
         canRest();
