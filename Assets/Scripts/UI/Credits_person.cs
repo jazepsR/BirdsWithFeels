@@ -7,7 +7,7 @@ public class Credits_person : MonoBehaviour
 {
     public string ContinueButtonLine;
     Credits_special credits;
-    private Animator animator;
+    [SerializeField] private Animator animator;
     public Text buttonText;
     public Text progressText;
 
@@ -24,7 +24,7 @@ public class Credits_person : MonoBehaviour
         }
 
 
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
     public Text GetProgressText()
     {
