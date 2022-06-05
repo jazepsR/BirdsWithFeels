@@ -158,6 +158,7 @@ public class GuiContoler : MonoBehaviour
     }
     void Start()
     {
+        Var.runPlayTimeTimer = true;
         //disableMapInteractivity(true);
 
         Var.Infight = false;

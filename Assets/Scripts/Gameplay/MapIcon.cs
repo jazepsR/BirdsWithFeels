@@ -74,7 +74,7 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	bool dialogueShown = false;
 	[HideInInspector] public TimedEventControl timedEvent;
 	public bool logTargetSearch = false;
-
+	bool addedToCount = false;
     // Use this for initialization
 
     internal void Awake()
@@ -313,7 +313,11 @@ public class MapIcon : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 					anim.SetInteger("state", 2); //set map icon to "completed" state instantly
 					tooltipInfo.tooltipText = GetTooltipText();
 				}
-				Var.levelsCompleted++;
+				if (!addedToCount)
+				{
+					Var.levelsCompleted++;
+					addedToCount = true;
+				}
 			}
             else
 			{

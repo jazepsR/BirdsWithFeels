@@ -15,7 +15,7 @@ public class MapIconEvent : MapIcon
     public string description = "";
     private EventScript selectedEvent;
     [HideInInspector] public bool isTimedEventStart = false;
-
+    bool addedToCount = false;
     internal override void Start()
     {
         base.Start();
@@ -49,7 +49,11 @@ public class MapIconEvent : MapIcon
             //Debug.LogError("SETTING STATE! ID: "+ ID);
             if (completed)
             {
-                Var.narrativeEventsCompleted++;
+                if (!addedToCount)
+                {
+                    Var.narrativeEventsCompleted++;
+                    addedToCount = true;
+                }
                 if (ID == Var.currentStageID && firstCompletion) //Stuff that happens the FIRST time user completes level
                 {
                     stateSet = true;
